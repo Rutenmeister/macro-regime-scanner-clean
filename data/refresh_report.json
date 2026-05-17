@@ -1,8 +1,8 @@
 {
-  "pipelineVersion": "0.32",
-  "startedAt": "2026-05-17T04:02:25.130706+00:00",
-  "finishedAt": "2026-05-17T04:02:25.132748+00:00",
-  "dryRun": true,
+  "pipelineVersion": "0.33",
+  "startedAt": "2026-05-17T04:11:10.961712+00:00",
+  "finishedAt": "2026-05-17T04:12:03.201609+00:00",
+  "dryRun": false,
   "selectedLanes": "all enabled",
   "lanes": [
     {
@@ -11,16 +11,20 @@
       "steps": [
         {
           "script": "scripts/sources/fetch_treasury_yields.py",
-          "status": "dry_run",
-          "returncode": 0
+          "status": "ok",
+          "returncode": 0,
+          "stdoutTail": "Fetched Treasury yields through 2026-05-15\n",
+          "stderrTail": ""
         },
         {
           "script": "scripts/apply_treasury_lane.py",
-          "status": "dry_run",
-          "returncode": 0
+          "status": "ok",
+          "returncode": 0,
+          "stdoutTail": "Applied Treasury lane through 2026-05-15\n",
+          "stderrTail": ""
         }
       ],
-      "status": "dry_run"
+      "status": "ok"
     },
     {
       "id": "cftc_cot",
@@ -28,16 +32,20 @@
       "steps": [
         {
           "script": "scripts/sources/fetch_cftc_cot.py",
-          "status": "dry_run",
-          "returncode": 0
+          "status": "ok",
+          "returncode": 0,
+          "stdoutTail": "Fetched CFTC COT observations: 27 assets; latest report date: 2026-05-12\n",
+          "stderrTail": ""
         },
         {
           "script": "scripts/apply_cot_lane.py",
-          "status": "dry_run",
-          "returncode": 0
+          "status": "ok",
+          "returncode": 0,
+          "stdoutTail": "Applied upgraded CFTC COT interpretation to 27 assets\n",
+          "stderrTail": ""
         }
       ],
-      "status": "dry_run"
+      "status": "ok"
     },
     {
       "id": "eia",
@@ -45,16 +53,20 @@
       "steps": [
         {
           "script": "scripts/sources/fetch_eia_energy.py",
-          "status": "dry_run",
-          "returncode": 0
+          "status": "ok",
+          "returncode": 0,
+          "stdoutTail": "Fetched EIA energy fundamentals for 11 series; latest date 2026-05-08\n",
+          "stderrTail": ""
         },
         {
           "script": "scripts/apply_eia_lane.py",
-          "status": "dry_run",
-          "returncode": 0
+          "status": "ok",
+          "returncode": 0,
+          "stdoutTail": "Applied EIA energy lane to 24 assets\n",
+          "stderrTail": ""
         }
       ],
-      "status": "dry_run"
+      "status": "ok"
     },
     {
       "id": "usda",
@@ -62,16 +74,20 @@
       "steps": [
         {
           "script": "scripts/sources/fetch_usda_agriculture.py",
-          "status": "dry_run",
-          "returncode": 0
+          "status": "ok",
+          "returncode": 0,
+          "stdoutTail": "Wrote USDA/NASS agriculture lane with 12 observations; latest=2026\n",
+          "stderrTail": ""
         },
         {
           "script": "scripts/apply_usda_lane.py",
-          "status": "dry_run",
-          "returncode": 0
+          "status": "ok",
+          "returncode": 0,
+          "stdoutTail": "Applied USDA/NASS agriculture lane to 5 assets\n",
+          "stderrTail": ""
         }
       ],
-      "status": "dry_run"
+      "status": "ok"
     },
     {
       "id": "bls",
@@ -79,16 +95,20 @@
       "steps": [
         {
           "script": "scripts/sources/fetch_bls_macro.py",
-          "status": "dry_run",
-          "returncode": 0
+          "status": "ok",
+          "returncode": 0,
+          "stdoutTail": "Fetched BLS macro data for 13 series; latest_date=2026-04-01\n",
+          "stderrTail": ""
         },
         {
           "script": "scripts/apply_bls_lane.py",
-          "status": "dry_run",
-          "returncode": 0
+          "status": "ok",
+          "returncode": 0,
+          "stdoutTail": "Applied BLS inflation/labor lane to 49 assets\n",
+          "stderrTail": ""
         }
       ],
-      "status": "dry_run"
+      "status": "ok"
     },
     {
       "id": "bea",
@@ -96,16 +116,20 @@
       "steps": [
         {
           "script": "scripts/sources/fetch_bea_macro.py",
-          "status": "dry_run",
-          "returncode": 0
+          "status": "ok",
+          "returncode": 0,
+          "stdoutTail": "Fetched BEA macro lane with 4 observations\nBEA warnings: 1 issue(s); see data/raw/bea/bea_macro_compact_audit.json\n",
+          "stderrTail": ""
         },
         {
           "script": "scripts/apply_bea_lane.py",
-          "status": "dry_run",
-          "returncode": 0
+          "status": "ok",
+          "returncode": 0,
+          "stdoutTail": "Applied BEA macro lane to 49 assets\n",
+          "stderrTail": ""
         }
       ],
-      "status": "dry_run"
+      "status": "ok"
     },
     {
       "id": "federal_reserve",
@@ -113,16 +137,20 @@
       "steps": [
         {
           "script": "scripts/sources/fetch_fed_macro.py",
-          "status": "dry_run",
-          "returncode": 0
+          "status": "ok",
+          "returncode": 0,
+          "stdoutTail": "Wrote data/normalized/fed_macro.json with 5 observations\nWrote data/raw/fed/fed_macro_compact_audit.json\n",
+          "stderrTail": ""
         },
         {
           "script": "scripts/apply_fed_lane.py",
-          "status": "dry_run",
-          "returncode": 0
+          "status": "ok",
+          "returncode": 0,
+          "stdoutTail": "Applied Federal Reserve/FRED liquidity lane to 49 assets\n",
+          "stderrTail": ""
         }
       ],
-      "status": "dry_run"
+      "status": "ok"
     },
     {
       "id": "census",
@@ -130,16 +158,20 @@
       "steps": [
         {
           "script": "scripts/sources/fetch_census_macro.py",
-          "status": "dry_run",
-          "returncode": 0
+          "status": "ok",
+          "returncode": 0,
+          "stdoutTail": "Wrote data/normalized/census_macro.json with 7 observations\nWrote data/raw/census/census_macro_compact_audit.json\n",
+          "stderrTail": ""
         },
         {
           "script": "scripts/apply_census_lane.py",
-          "status": "dry_run",
-          "returncode": 0
+          "status": "ok",
+          "returncode": 0,
+          "stdoutTail": "Applied Census macro lane to 49 assets\n",
+          "stderrTail": ""
         }
       ],
-      "status": "dry_run"
+      "status": "ok"
     },
     {
       "id": "financial_stress",
@@ -147,16 +179,20 @@
       "steps": [
         {
           "script": "scripts/sources/fetch_financial_stress.py",
-          "status": "dry_run",
-          "returncode": 0
+          "status": "ok",
+          "returncode": 0,
+          "stdoutTail": "Wrote data/normalized/financial_stress.json with 6 observations\n",
+          "stderrTail": ""
         },
         {
           "script": "scripts/apply_financial_stress_lane.py",
-          "status": "dry_run",
-          "returncode": 0
+          "status": "ok",
+          "returncode": 0,
+          "stdoutTail": "Applied credit/financial stress lane to 49 assets\n",
+          "stderrTail": ""
         }
       ],
-      "status": "dry_run"
+      "status": "ok"
     },
     {
       "id": "noaa_weather",
@@ -164,32 +200,42 @@
       "steps": [
         {
           "script": "scripts/sources/fetch_noaa_weather.py",
-          "status": "dry_run",
-          "returncode": 0
+          "status": "ok",
+          "returncode": 0,
+          "stdoutTail": "Wrote data/normalized/noaa_weather.json with 9 NOAA/NWS weather observations\nWrote data/raw/noaa/noaa_weather_compact_audit.json\n",
+          "stderrTail": ""
         },
         {
           "script": "scripts/apply_noaa_weather_lane.py",
-          "status": "dry_run",
-          "returncode": 0
+          "status": "ok",
+          "returncode": 0,
+          "stdoutTail": "Applied NOAA/NWS weather lane to 49 assets\n",
+          "stderrTail": ""
         }
       ],
-      "status": "dry_run"
+      "status": "ok"
     }
   ],
   "validation": {
     "script": "scripts/validate_data.py",
-    "status": "dry_run",
-    "returncode": 0
+    "status": "ok",
+    "returncode": 0,
+    "stdoutTail": "VALIDATION PASSED: 49 assets\n",
+    "stderrTail": ""
   },
-  "status": "dry_run_ok",
+  "status": "ok",
   "scoreRecompute": {
     "script": "scripts/recompute_live_scores.py",
-    "status": "dry_run",
-    "returncode": 0
+    "status": "ok",
+    "returncode": 0,
+    "stdoutTail": "Recomputed live weighted scores for 49 assets.\n",
+    "stderrTail": ""
   },
   "releaseCalendar": {
     "script": "scripts/generate_release_calendar.py",
-    "status": "dry_run",
-    "returncode": 0
+    "status": "ok",
+    "returncode": 0,
+    "stdoutTail": "Generated data/release_calendar.json with 16 upcoming report events.\n",
+    "stderrTail": ""
   }
 }
