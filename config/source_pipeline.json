@@ -78,14 +78,14 @@
     },
     {
       "id": "census",
-      "enabled": false,
+      "enabled": true,
       "sourceId": "CENSUS_PUBLIC",
       "fetch": "scripts/sources/fetch_census_macro.py",
       "apply": "scripts/apply_census_lane.py",
       "requiresSecrets": [
         "CENSUS_API_KEY"
       ],
-      "status": "planned"
+      "status": "live"
     }
   ]
 }
