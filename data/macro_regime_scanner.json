@@ -16,7 +16,7 @@
       "confidence": 83,
       "conflict": "Medium",
       "freshness": "Mixed",
-      "coverage": "public-source prototype | EIA energy fundamentals | BLS inflation/labor",
+      "coverage": "public-source prototype | EIA energy fundamentals | BLS inflation/labor | EIA energy fundamentals | BLS inflation/labor",
       "topDriver": "Rates / BLS macro / COT",
       "mainConflict": "Inflation and labor must be read with Treasury pressure and positioning",
       "watchNext": [
@@ -3915,7 +3915,7 @@
       "confidence": 65,
       "conflict": "Medium",
       "freshness": "Mixed",
-      "coverage": "public-source prototype | BLS inflation/labor",
+      "coverage": "public-source prototype | BLS inflation/labor | BLS inflation/labor",
       "topDriver": "Rates / BLS macro / COT",
       "mainConflict": "Inflation and labor must be read with Treasury pressure and positioning",
       "watchNext": [
@@ -4494,7 +4494,7 @@
       "confidence": 61,
       "conflict": "Medium",
       "freshness": "Mixed",
-      "coverage": "public-source prototype | BLS inflation/labor",
+      "coverage": "public-source prototype | BLS inflation/labor | BLS inflation/labor",
       "topDriver": "Rates / BLS macro / COT",
       "mainConflict": "Inflation and labor must be read with Treasury pressure and positioning",
       "watchNext": [
@@ -5073,7 +5073,7 @@
       "confidence": 71,
       "conflict": "Medium",
       "freshness": "Mixed",
-      "coverage": "public-source prototype | BLS inflation/labor",
+      "coverage": "public-source prototype | BLS inflation/labor | BLS inflation/labor",
       "topDriver": "Rates / BLS macro / COT",
       "mainConflict": "Inflation and labor must be read with Treasury pressure and positioning",
       "watchNext": [
@@ -5652,7 +5652,7 @@
       "confidence": 73,
       "conflict": "High",
       "freshness": "Mixed",
-      "coverage": "public-source prototype | BLS inflation/labor",
+      "coverage": "public-source prototype | BLS inflation/labor | BLS inflation/labor",
       "topDriver": "Rates / BLS macro / COT",
       "mainConflict": "Inflation and labor must be read with Treasury pressure and positioning",
       "watchNext": [
@@ -6231,7 +6231,7 @@
       "confidence": 67,
       "conflict": "Medium",
       "freshness": "Mixed",
-      "coverage": "public-source prototype | BLS inflation/labor",
+      "coverage": "public-source prototype | BLS inflation/labor | BLS inflation/labor",
       "topDriver": "Rates / BLS macro / COT",
       "mainConflict": "Inflation and labor must be read with Treasury pressure and positioning",
       "watchNext": [
@@ -6805,7 +6805,7 @@
       "subgroup": "U.S. Rates",
       "rankType": "anchor",
       "score": 1,
-      "previousScore": 5,
+      "previousScore": 1,
       "bias": "Yield Pressure Mildly Rising",
       "confidence": 92,
       "conflict": "Low",
@@ -7362,7 +7362,7 @@
       "subgroup": "U.S. Rates",
       "rankType": "anchor",
       "score": 2,
-      "previousScore": 4,
+      "previousScore": 2,
       "bias": "Yield Pressure Rising",
       "confidence": 92,
       "conflict": "Low",
@@ -7930,7 +7930,7 @@
       "subgroup": "U.S. Rates",
       "rankType": "anchor",
       "score": 2,
-      "previousScore": 6,
+      "previousScore": 2,
       "bias": "Yield Pressure Rising",
       "confidence": 92,
       "conflict": "Low",
@@ -8487,7 +8487,7 @@
       "subgroup": "U.S. Rates",
       "rankType": "anchor",
       "score": 2,
-      "previousScore": 3,
+      "previousScore": 2,
       "bias": "Yield Pressure Rising",
       "confidence": 92,
       "conflict": "Low",
@@ -9055,7 +9055,7 @@
       "subgroup": "Yield Curves",
       "rankType": "anchor",
       "score": 1,
-      "previousScore": -1,
+      "previousScore": 1,
       "bias": "Curve Mildly Steepening",
       "confidence": 90,
       "conflict": "Low",
@@ -9634,7 +9634,7 @@
       "subgroup": "Yield Curves",
       "rankType": "anchor",
       "score": -1,
-      "previousScore": 1,
+      "previousScore": -1,
       "bias": "Curve Mildly Flattening",
       "confidence": 90,
       "conflict": "Low",
@@ -10218,7 +10218,7 @@
       "confidence": 80,
       "conflict": "Medium",
       "freshness": "Mixed",
-      "coverage": "public-source prototype | EIA energy fundamentals | BLS inflation/labor",
+      "coverage": "public-source prototype | EIA energy fundamentals | BLS inflation/labor | EIA energy fundamentals | BLS inflation/labor",
       "topDriver": "Rates / BLS macro / COT",
       "mainConflict": "Inflation and labor must be read with Treasury pressure and positioning",
       "watchNext": [
@@ -10786,7 +10786,7 @@
       "confidence": 68,
       "conflict": "Medium",
       "freshness": "Mixed",
-      "coverage": "public-source prototype | EIA energy fundamentals | BLS inflation/labor",
+      "coverage": "public-source prototype | EIA energy fundamentals | BLS inflation/labor | EIA energy fundamentals | BLS inflation/labor",
       "topDriver": "Rates / BLS macro / COT",
       "mainConflict": "Inflation and labor must be read with Treasury pressure and positioning",
       "watchNext": [
@@ -11354,7 +11354,7 @@
       "confidence": 69,
       "conflict": "Medium",
       "freshness": "Mixed",
-      "coverage": "public-source prototype | EIA energy fundamentals | BLS inflation/labor",
+      "coverage": "public-source prototype | EIA energy fundamentals | BLS inflation/labor | EIA energy fundamentals | BLS inflation/labor",
       "topDriver": "Rates / BLS macro / COT",
       "mainConflict": "Inflation and labor must be read with Treasury pressure and positioning",
       "watchNext": [
@@ -14106,7 +14106,7 @@
       "confidence": 67,
       "conflict": "Medium",
       "freshness": "Mixed",
-      "coverage": "public-source prototype | BLS inflation/labor",
+      "coverage": "public-source prototype | BLS inflation/labor | BLS inflation/labor",
       "topDriver": "BLS macro / rates pressure",
       "mainConflict": "Strong growth can support risk, but hot inflation/labor can keep rates restrictive",
       "watchNext": [
@@ -14685,7 +14685,7 @@
       "confidence": 63,
       "conflict": "Medium",
       "freshness": "Mixed",
-      "coverage": "public-source prototype | BLS inflation/labor",
+      "coverage": "public-source prototype | BLS inflation/labor | BLS inflation/labor",
       "topDriver": "BLS macro / rates pressure",
       "mainConflict": "Strong growth can support risk, but hot inflation/labor can keep rates restrictive",
       "watchNext": [
@@ -15264,7 +15264,7 @@
       "confidence": 72,
       "conflict": "Medium",
       "freshness": "Mixed",
-      "coverage": "public-source prototype | BLS inflation/labor",
+      "coverage": "public-source prototype | BLS inflation/labor | BLS inflation/labor",
       "topDriver": "BLS macro / rates pressure",
       "mainConflict": "Strong growth can support risk, but hot inflation/labor can keep rates restrictive",
       "watchNext": [
@@ -15843,7 +15843,7 @@
       "confidence": 68,
       "conflict": "High",
       "freshness": "Mixed",
-      "coverage": "public-source prototype | BLS inflation/labor",
+      "coverage": "public-source prototype | BLS inflation/labor | BLS inflation/labor",
       "topDriver": "BLS macro / rates pressure",
       "mainConflict": "Strong growth can support risk, but hot inflation/labor can keep rates restrictive",
       "watchNext": [
@@ -16422,7 +16422,7 @@
       "confidence": 65,
       "conflict": "High",
       "freshness": "Mixed",
-      "coverage": "public-source prototype | BLS inflation/labor",
+      "coverage": "public-source prototype | BLS inflation/labor | BLS inflation/labor",
       "topDriver": "BLS macro / rates pressure",
       "mainConflict": "Strong growth can support risk, but hot inflation/labor can keep rates restrictive",
       "watchNext": [
@@ -17001,7 +17001,7 @@
       "confidence": 66,
       "conflict": "Medium",
       "freshness": "Mixed",
-      "coverage": "public-source prototype | BLS inflation/labor",
+      "coverage": "public-source prototype | BLS inflation/labor | BLS inflation/labor",
       "topDriver": "BLS macro / rates pressure",
       "mainConflict": "Strong growth can support risk, but hot inflation/labor can keep rates restrictive",
       "watchNext": [
@@ -17580,7 +17580,7 @@
       "confidence": 72,
       "conflict": "Medium",
       "freshness": "Mixed",
-      "coverage": "public-source prototype | BLS inflation/labor",
+      "coverage": "public-source prototype | BLS inflation/labor | BLS inflation/labor",
       "topDriver": "BLS macro / rates pressure",
       "mainConflict": "Strong growth can support risk, but hot inflation/labor can keep rates restrictive",
       "watchNext": [
@@ -18159,7 +18159,7 @@
       "confidence": 68,
       "conflict": "Medium",
       "freshness": "Mixed",
-      "coverage": "public-source prototype | BLS inflation/labor",
+      "coverage": "public-source prototype | BLS inflation/labor | BLS inflation/labor",
       "topDriver": "BLS macro / rates pressure",
       "mainConflict": "Strong growth can support risk, but hot inflation/labor can keep rates restrictive",
       "watchNext": [
@@ -18738,7 +18738,7 @@
       "confidence": 61,
       "conflict": "Medium",
       "freshness": "Mixed",
-      "coverage": "public-source prototype | BLS inflation/labor",
+      "coverage": "public-source prototype | BLS inflation/labor | BLS inflation/labor",
       "topDriver": "BLS macro / rates pressure",
       "mainConflict": "Strong growth can support risk, but hot inflation/labor can keep rates restrictive",
       "watchNext": [
@@ -24202,7 +24202,7 @@
       "confidence": 70,
       "conflict": "Medium",
       "freshness": "Mixed",
-      "coverage": "public-source prototype | EIA energy fundamentals | USDA agriculture fundamentals | BLS inflation/labor",
+      "coverage": "public-source prototype | EIA energy fundamentals | USDA agriculture fundamentals | BLS inflation/labor | EIA energy fundamentals | USDA agriculture fundamentals | BLS inflation/labor",
       "topDriver": "Public commodity fundamentals",
       "mainConflict": "Macro evidence mixed",
       "watchNext": [
@@ -24792,7 +24792,7 @@
       "confidence": 69,
       "conflict": "Medium",
       "freshness": "Mixed",
-      "coverage": "public-source prototype | EIA energy fundamentals | USDA agriculture fundamentals | BLS inflation/labor",
+      "coverage": "public-source prototype | EIA energy fundamentals | USDA agriculture fundamentals | BLS inflation/labor | EIA energy fundamentals | USDA agriculture fundamentals | BLS inflation/labor",
       "topDriver": "USDA crop condition / production",
       "mainConflict": "Read USDA supply signals with COT positioning and energy/input-cost context",
       "watchNext": [
@@ -28390,7 +28390,7 @@
     "TREASURY_OFFICIAL": {
       "status": "live_lane_ready",
       "latest_date": "2026-05-15",
-      "retrieved_at": "2026-05-17T01:04:37Z",
+      "retrieved_at": "2026-05-17T01:18:44Z",
       "note": "Official U.S. Treasury yield curve data. Rates are percentages and this lane is used as public-source rate pressure, not trade timing data."
     },
     "BLS_PUBLIC": {
@@ -28434,5 +28434,5 @@
       "note": "Use for public growth/consumer/trade context after higher-priority lanes."
     }
   },
-  "updated_at": "2026-05-17T01:04:37Z"
+  "updated_at": "2026-05-17T01:18:44Z"
 }
