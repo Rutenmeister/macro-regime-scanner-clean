@@ -30,6 +30,8 @@ jobs:
           EIA_API_KEY: ${{ secrets.EIA_API_KEY }}
           USDA_API_KEY: ${{ secrets.USDA_API_KEY }}
           BEA_API_KEY: ${{ secrets.BEA_API_KEY }}
+          CENSUS_API_KEY: ${{ secrets.CENSUS_API_KEY }}
+          FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
         run: python scripts/refresh_all_sources.py
 
       - name: Commit refreshed public-source data
