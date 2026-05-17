@@ -105,7 +105,11 @@ def compute_curves(latest_rates: dict[str, float | None]) -> dict[str, float | N
     # Convention used here: long minus short, in percentage points.
     return {
         "10Y minus 2Y": spread("10 Yr", "2 Yr"),
+        "10Y minus 3M": spread("10 Yr", "3 Mo"),
         "30Y minus 5Y": spread("30 Yr", "5 Yr"),
+        "5Y minus 2Y": spread("5 Yr", "2 Yr"),
+        "30Y minus 2Y": spread("30 Yr", "2 Yr"),
+        "2Y minus 3M": spread("2 Yr", "3 Mo"),
     }
 
 
@@ -131,6 +135,21 @@ def main() -> int:
     latest = records[-1]
     previous = records[-2]
 
+    # Pre-compute latest/previous point changes for the whole curve so downstream
+    # scripts can use a single normalized contract rather than re-parsing XML.
+    rate_changes = {}
+    for label in TREASURY_FIELD_MAP:
+        lv = latest["rates"].get(label)
+        pv = previous["rates"].get(label)
+        rate_changes[label] = None if lv is None or pv is None else round(lv - pv, 3)
+
+    latest_curves = compute_curves(latest["rates"])
+    previous_curves = compute_curves(previous["rates"])
+    curve_changes = {}
+    for key, lv in latest_curves.items():
+        pv = previous_curves.get(key)
+        curve_changes[key] = None if lv is None or pv is None else round(lv - pv, 3)
+
     normalized = {
         "source_id": "TREASURY_OFFICIAL",
         "source_name": "U.S. Treasury Daily Treasury Par Yield Curve Rates",
@@ -139,11 +158,15 @@ def main() -> int:
         "previous_date": previous["date"],
         "latest_rates": latest["rates"],
         "previous_rates": previous["rates"],
-        "curve_spreads": compute_curves(latest["rates"]),
-        "records_tail": records[-10:],
+        "curve_spreads": latest_curves,
+        "previous_curve_spreads": previous_curves,
+        "rate_changes": rate_changes,
+        "curve_changes": curve_changes,
+        "records_tail": records[-30:],
         "notes": [
             "Official U.S. Treasury public yield curve feed.",
             "Rates are percentages, not prices.",
+            "v0.26D deep extraction includes the full public Treasury curve, major curve spreads, and prior-observation changes.",
             "This lane intentionally avoids price-derived trend, momentum, and moving-average inputs.",
         ],
     }

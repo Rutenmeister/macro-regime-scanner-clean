@@ -1,8 +1,8 @@
 {
-  "pipelineVersion": "0.25F",
-  "startedAt": "2026-05-17T00:52:40.388627+00:00",
-  "finishedAt": "2026-05-17T00:53:05.394357+00:00",
-  "dryRun": false,
+  "pipelineVersion": "0.26D",
+  "startedAt": "2026-05-17T00:58:14.664769+00:00",
+  "finishedAt": "2026-05-17T00:58:14.666325+00:00",
+  "dryRun": true,
   "selectedLanes": "all enabled",
   "lanes": [
     {
@@ -11,20 +11,16 @@
       "steps": [
         {
           "script": "scripts/sources/fetch_treasury_yields.py",
-          "status": "ok",
-          "returncode": 0,
-          "stdoutTail": "Fetched Treasury yields through 2026-05-15\n",
-          "stderrTail": ""
+          "status": "dry_run",
+          "returncode": 0
         },
         {
           "script": "scripts/apply_treasury_lane.py",
-          "status": "ok",
-          "returncode": 0,
-          "stdoutTail": "Applied Treasury lane through 2026-05-15\n",
-          "stderrTail": ""
+          "status": "dry_run",
+          "returncode": 0
         }
       ],
-      "status": "ok"
+      "status": "dry_run"
     },
     {
       "id": "cftc_cot",
@@ -32,20 +28,16 @@
       "steps": [
         {
           "script": "scripts/sources/fetch_cftc_cot.py",
-          "status": "ok",
-          "returncode": 0,
-          "stdoutTail": "Fetched CFTC COT observations: 27 assets; latest report date: 2026-05-12\n",
-          "stderrTail": ""
+          "status": "dry_run",
+          "returncode": 0
         },
         {
           "script": "scripts/apply_cot_lane.py",
-          "status": "ok",
-          "returncode": 0,
-          "stdoutTail": "Applied upgraded CFTC COT interpretation to 27 assets\n",
-          "stderrTail": ""
+          "status": "dry_run",
+          "returncode": 0
         }
       ],
-      "status": "ok"
+      "status": "dry_run"
     },
     {
       "id": "eia",
@@ -53,20 +45,16 @@
       "steps": [
         {
           "script": "scripts/sources/fetch_eia_energy.py",
-          "status": "ok",
-          "returncode": 0,
-          "stdoutTail": "Fetched EIA energy fundamentals for 5 series; latest date 2026-05-08\n",
-          "stderrTail": ""
+          "status": "dry_run",
+          "returncode": 0
         },
         {
           "script": "scripts/apply_eia_lane.py",
-          "status": "ok",
-          "returncode": 0,
-          "stdoutTail": "Applied EIA energy lane to 24 assets\n",
-          "stderrTail": ""
+          "status": "dry_run",
+          "returncode": 0
         }
       ],
-      "status": "ok"
+      "status": "dry_run"
     },
     {
       "id": "usda",
@@ -74,20 +62,16 @@
       "steps": [
         {
           "script": "scripts/sources/fetch_usda_agriculture.py",
-          "status": "ok",
-          "returncode": 0,
-          "stdoutTail": "Wrote USDA/NASS agriculture lane with 12 observations; latest=2026\n",
-          "stderrTail": ""
+          "status": "dry_run",
+          "returncode": 0
         },
         {
           "script": "scripts/apply_usda_lane.py",
-          "status": "ok",
-          "returncode": 0,
-          "stdoutTail": "Applied USDA/NASS agriculture lane to 5 assets\n",
-          "stderrTail": ""
+          "status": "dry_run",
+          "returncode": 0
         }
       ],
-      "status": "ok"
+      "status": "dry_run"
     },
     {
       "id": "bls",
@@ -95,20 +79,16 @@
       "steps": [
         {
           "script": "scripts/sources/fetch_bls_macro.py",
-          "status": "ok",
-          "returncode": 0,
-          "stdoutTail": "Fetched BLS macro data for 6 series; latest_date=2026-04-01\n",
-          "stderrTail": ""
+          "status": "dry_run",
+          "returncode": 0
         },
         {
           "script": "scripts/apply_bls_lane.py",
-          "status": "ok",
-          "returncode": 0,
-          "stdoutTail": "Applied BLS inflation/labor lane to 49 assets\n",
-          "stderrTail": ""
+          "status": "dry_run",
+          "returncode": 0
         }
       ],
-      "status": "ok"
+      "status": "dry_run"
     },
     {
       "id": "bea",
@@ -125,10 +105,8 @@
   ],
   "validation": {
     "script": "scripts/validate_data.py",
-    "status": "ok",
-    "returncode": 0,
-    "stdoutTail": "VALIDATION PASSED: 49 assets\n",
-    "stderrTail": ""
+    "status": "dry_run",
+    "returncode": 0
   },
-  "status": "ok"
+  "status": "dry_run_ok"
 }

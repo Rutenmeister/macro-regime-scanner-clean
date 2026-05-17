@@ -10,6 +10,10 @@ No API key is required for the public BLS API at this request size.
 Outputs:
   data/raw/bls/bls_macro_compact_audit.json
   data/normalized/bls_macro.json
+
+v0.26D deep extraction expands the BLS lane beyond headline CPI/PPI/labor
+into CPI shelter/energy/food/services, core PPI, labor-force participation,
+and U-6 unemployment.
 """
 from __future__ import annotations
 
@@ -44,10 +48,45 @@ SERIES = {
         "unit": "index",
         "kind": "inflation_index",
     },
+    "CPI_SHELTER": {
+        "series_id": "CUSR0000SAH1",
+        "label": "CPI shelter",
+        "input": "BLS CPI shelter pressure",
+        "unit": "index",
+        "kind": "inflation_index",
+    },
+    "CPI_ENERGY": {
+        "series_id": "CUSR0000SA0E",
+        "label": "CPI energy",
+        "input": "BLS CPI energy pressure",
+        "unit": "index",
+        "kind": "inflation_index",
+    },
+    "CPI_FOOD": {
+        "series_id": "CUSR0000SAF1",
+        "label": "CPI food",
+        "input": "BLS CPI food pressure",
+        "unit": "index",
+        "kind": "inflation_index",
+    },
+    "CPI_SERVICES_LESS_ENERGY": {
+        "series_id": "CUSR0000SASLE",
+        "label": "CPI services less energy services",
+        "input": "BLS services inflation pressure",
+        "unit": "index",
+        "kind": "inflation_index",
+    },
     "PPI_FINAL_DEMAND": {
         "series_id": "WPUFD4",
         "label": "PPI final demand",
         "input": "BLS PPI pressure",
+        "unit": "index",
+        "kind": "inflation_index",
+    },
+    "PPI_CORE_FINAL_DEMAND": {
+        "series_id": "WPUFD49116",
+        "label": "PPI final demand less foods, energy, and trade services",
+        "input": "BLS core PPI pressure",
         "unit": "index",
         "kind": "inflation_index",
     },
@@ -71,6 +110,20 @@ SERIES = {
         "input": "BLS wage pressure",
         "unit": "dollars/hour",
         "kind": "wage_index",
+    },
+    "LABOR_FORCE_PARTICIPATION": {
+        "series_id": "LNS11300000",
+        "label": "Labor force participation rate",
+        "input": "BLS labor participation",
+        "unit": "percent",
+        "kind": "level",
+    },
+    "U6_UNEMPLOYMENT": {
+        "series_id": "LNS13327709",
+        "label": "U-6 unemployment rate",
+        "input": "BLS U-6 unemployment",
+        "unit": "percent",
+        "kind": "level",
     },
 }
 

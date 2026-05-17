@@ -108,6 +108,20 @@ def petroleum_balance_factor(asset: dict[str, Any], relevance: str, observations
     return factor("EIA petroleum inventory balance", relevance, score, status_from_score(score), derived, effect)
 
 
+
+
+def deep_eia_factor(name: str, relevance: str, observation: dict[str, Any], effect: str, use_score: bool = True) -> dict[str, Any]:
+    if not observation:
+        return factor(name, relevance, None, "Missing", "EIA deep variable missing from normalized energy lane.", effect)
+    score = observation.get("score") if use_score else 0
+    status = observation.get("status") if use_score else "Neutral"
+    return factor(name, relevance, score, status, derived_from(observation), effect)
+
+
+def present(eia: dict[str, Any], key: str) -> bool:
+    o = obs(eia, key)
+    return bool(o and o.get("latest_value") is not None)
+
 def update_energy_asset(asset: dict[str, Any], eia: dict[str, Any]) -> list[dict[str, Any]]:
     aid = asset.get("id")
     crude = obs(eia, "CRUDE_STOCKS")
@@ -123,6 +137,10 @@ def update_energy_asset(asset: dict[str, Any], eia: dict[str, Any]) -> list[dict
             inv_factor("EIA gasoline inventories", "Secondary", gasoline, "Secondary effect: gasoline draws can support crude by implying stronger refinery/product demand; builds can weaken crude demand context."),
             inv_factor("EIA distillate inventories", "Secondary", dist, "Secondary effect: distillate draws can support crude through broader product tightness; builds can pressure the energy complex."),
             natgas_factor("Low relevance", ngs, "Low direct effect: natural gas storage does not normally drive WTI, but it can affect the broader energy/inflation backdrop.", use_score=False),
+            deep_eia_factor("EIA refinery utilization", "Primary", obs(eia, "REFINERY_UTILIZATION"), "Direct effect: higher refinery utilization usually supports crude demand; lower utilization weakens crude demand context."),
+            deep_eia_factor("EIA crude production", "Primary", obs(eia, "CRUDE_PRODUCTION"), "Direct effect: rising U.S. crude production adds supply and pressures WTI; falling production supports WTI."),
+            deep_eia_factor("EIA crude imports", "Secondary", obs(eia, "CRUDE_IMPORTS"), "Secondary effect: higher crude imports add U.S. supply and can pressure WTI; lower imports tighten the U.S. balance."),
+            deep_eia_factor("EIA crude exports", "Secondary", obs(eia, "CRUDE_EXPORTS"), "Secondary effect: higher crude exports can tighten domestic supply and support WTI; lower exports reduce that support."),
         ]
     if aid == "BRENT":
         return [
@@ -131,6 +149,8 @@ def update_energy_asset(asset: dict[str, Any], eia: dict[str, Any]) -> list[dict
             inv_factor("EIA gasoline inventories", "Contextual", gasoline, "Contextual effect: U.S. gasoline draws can support oil demand sentiment; builds can weaken product-demand context."),
             inv_factor("EIA distillate inventories", "Contextual", dist, "Contextual effect: distillate tightness supports the global oil-products backdrop; builds reduce that support."),
             natgas_factor("Low relevance", ngs, "Low direct effect: natural gas storage is not a direct Brent input except through broad energy/inflation conditions.", use_score=False),
+            deep_eia_factor("EIA crude production", "Contextual", obs(eia, "CRUDE_PRODUCTION"), "Contextual effect: U.S. crude production affects global crude supply but Brent also needs non-U.S. supply/demand context."),
+            deep_eia_factor("EIA crude exports", "Contextual", obs(eia, "CRUDE_EXPORTS"), "Contextual effect: higher U.S. crude exports can tighten U.S. supply and add global-flow context for Brent."),
         ]
     if aid == "GASOLINE":
         return [
@@ -138,6 +158,8 @@ def update_energy_asset(asset: dict[str, Any], eia: dict[str, Any]) -> list[dict
             inv_factor("EIA crude inventories", "Secondary", crude, "Secondary effect: crude draws can support input-cost and energy-complex context, but gasoline stocks are the more direct input."),
             inv_factor("EIA Cushing inventories", "Low relevance", cushing, "Low direct effect: Cushing is crude-specific; it matters for gasoline only through crude-market context."),
             inv_factor("EIA distillate inventories", "Contextual", dist, "Contextual effect: distillate stocks help read overall refined-product tightness but are not the main gasoline driver."),
+            deep_eia_factor("EIA gasoline product supplied", "Primary", obs(eia, "GASOLINE_PRODUCT_SUPPLIED"), "Direct effect: stronger gasoline product supplied is a demand proxy that supports gasoline; weaker product supplied pressures demand context."),
+            deep_eia_factor("EIA refinery utilization", "Secondary", obs(eia, "REFINERY_UTILIZATION"), "Secondary effect: higher refinery utilization can add product supply, but also indicates stronger refinery demand for crude."),
         ]
     if aid == "HEATING":
         return [
@@ -145,6 +167,8 @@ def update_energy_asset(asset: dict[str, Any], eia: dict[str, Any]) -> list[dict
             inv_factor("EIA crude inventories", "Secondary", crude, "Secondary effect: crude draws can support the broader refinery/input-cost backdrop, but distillate stocks are more direct."),
             inv_factor("EIA gasoline inventories", "Contextual", gasoline, "Contextual effect: gasoline stocks help read product-market balance but are not the main distillate driver."),
             natgas_factor("Contextual", ngs, "Contextual effect: natural gas storage can affect winter heating-energy sentiment, but distillate inventories remain the direct input."),
+            deep_eia_factor("EIA distillate product supplied", "Primary", obs(eia, "DISTILLATE_PRODUCT_SUPPLIED"), "Direct effect: stronger distillate product supplied supports heating oil/distillates through demand; weaker product supplied pressures demand context."),
+            deep_eia_factor("EIA refinery utilization", "Secondary", obs(eia, "REFINERY_UTILIZATION"), "Secondary effect: refinery utilization affects product supply and crude throughput; read with distillate inventories."),
         ]
     if aid == "NG":
         return [
@@ -152,6 +176,7 @@ def update_energy_asset(asset: dict[str, Any], eia: dict[str, Any]) -> list[dict
             inv_factor("EIA crude inventories", "Low relevance", crude, "Low direct effect: crude inventories do not normally drive natural gas. They matter only through broad energy/inflation context."),
             inv_factor("EIA gasoline inventories", "Low relevance", gasoline, "Low direct effect: gasoline stocks do not normally drive natural gas except through broad energy-complex context."),
             inv_factor("EIA distillate inventories", "Contextual", dist, "Contextual effect: distillate tightness can matter during winter heating stress, but gas storage is the primary input."),
+            deep_eia_factor("EIA crude production", "Low relevance", obs(eia, "CRUDE_PRODUCTION"), "Low direct effect: crude production is not a normal natural gas driver except through broad energy-sector context.", use_score=False),
         ]
     return []
 
@@ -236,7 +261,7 @@ def main() -> int:
         if len(asset.get("factors", [])) != before or any(str(f.get("source", "")).startswith("U.S. Energy Information Administration") for f in asset.get("factors", [])):
             applied += 1
 
-    data["schema_version"] = "0.22"
+    data["schema_version"] = "0.26D"
     data["notice"] = "Macro Regime Scanner v0.22 public-source data contract. Treasury, CFTC COT, and EIA energy lanes are live/workflow-ready. EIA adds public energy fundamentals with explicit relevance for direct, contextual, low, and indirect asset effects. Price-derived lanes remain excluded."
     data["data_mode"] = "public-source-treasury-cot-eia"
     status = data.setdefault("source_status", {})

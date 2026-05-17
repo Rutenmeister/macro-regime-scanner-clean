@@ -72,6 +72,67 @@ PETROLEUM_SERIES = {
         "threshold": 750,
         "strong_threshold": 2500,
     },
+
+    "REFINERY_UTILIZATION": {
+        "route": "petroleum/sum/sndw",
+        "series": "WPULEUS3",
+        "label": "U.S. refinery utilization rate",
+        "unit": "percent",
+        "kind": "utilization",
+        "threshold": 1.0,
+        "strong_threshold": 3.0,
+        "optional": True,
+    },
+    "CRUDE_PRODUCTION": {
+        "route": "petroleum/sum/sndw",
+        "series": "WCRFPUS2",
+        "label": "U.S. field production of crude oil",
+        "unit": "thousand barrels per day",
+        "kind": "production",
+        "threshold": 100,
+        "strong_threshold": 300,
+        "optional": True,
+    },
+    "CRUDE_IMPORTS": {
+        "route": "petroleum/sum/sndw",
+        "series": "WCRIMUS2",
+        "label": "U.S. crude oil imports",
+        "unit": "thousand barrels per day",
+        "kind": "flow",
+        "threshold": 250,
+        "strong_threshold": 750,
+        "optional": True,
+    },
+    "CRUDE_EXPORTS": {
+        "route": "petroleum/sum/sndw",
+        "series": "WCREXUS2",
+        "label": "U.S. crude oil exports",
+        "unit": "thousand barrels per day",
+        "kind": "flow",
+        "threshold": 250,
+        "strong_threshold": 750,
+        "optional": True,
+    },
+    "GASOLINE_PRODUCT_SUPPLIED": {
+        "route": "petroleum/sum/sndw",
+        "series": "WGFUPUS2",
+        "label": "U.S. finished motor gasoline product supplied",
+        "unit": "thousand barrels per day",
+        "kind": "demand_proxy",
+        "threshold": 250,
+        "strong_threshold": 750,
+        "optional": True,
+    },
+    "DISTILLATE_PRODUCT_SUPPLIED": {
+        "route": "petroleum/sum/sndw",
+        "series": "WDIUPUS2",
+        "label": "U.S. distillate fuel oil product supplied",
+        "unit": "thousand barrels per day",
+        "kind": "demand_proxy",
+        "threshold": 150,
+        "strong_threshold": 500,
+        "optional": True,
+    },
 }
 
 
@@ -145,13 +206,47 @@ def score_inventory_change(change: float | None, threshold: float, strong_thresh
     return 0, "Neutral", "EIA inventory change was small, so the physical-balance signal is neutral."
 
 
+def score_non_inventory_change(change: float | None, threshold: float, strong_threshold: float, kind: str) -> tuple[int, str, str]:
+    if change is None:
+        return 0, "Neutral", "EIA series returned only one usable observation, so weekly change could not be scored."
+    # Demand/refinery-utilization/export increases are generally supportive for product/crude balance;
+    # production/import increases add supply and are usually pressure for crude balance.
+    supply_kinds = {"production", "flow_import_supply"}
+    if kind in supply_kinds:
+        if change >= strong_threshold:
+            return -2, "Strong pressure", "Large EIA supply increase: higher visible supply pressures the related energy market."
+        if change >= threshold:
+            return -1, "Pressure", "EIA supply increase: higher visible supply pressures the related energy market."
+        if change <= -strong_threshold:
+            return 2, "Strong support", "Large EIA supply decline: lower visible supply supports the related energy market."
+        if change <= -threshold:
+            return 1, "Support", "EIA supply decline: lower visible supply supports the related energy market."
+        return 0, "Neutral", "EIA supply change was small, so the physical-balance signal is neutral."
+    # For demand proxy, exports and utilization, higher values normally tighten balance.
+    if change >= strong_threshold:
+        return 2, "Strong support", "Large EIA demand/utilization increase: stronger throughput or product demand supports the related energy market."
+    if change >= threshold:
+        return 1, "Support", "EIA demand/utilization increase: stronger throughput or product demand supports the related energy market."
+    if change <= -strong_threshold:
+        return -2, "Strong pressure", "Large EIA demand/utilization decline: weaker throughput or product demand pressures the related energy market."
+    if change <= -threshold:
+        return -1, "Pressure", "EIA demand/utilization decline: weaker throughput or product demand pressures the related energy market."
+    return 0, "Neutral", "EIA demand/utilization change was small, so the signal is neutral."
+
+
 def build_petroleum_observation(key: str, meta: dict[str, Any], rows: list[dict[str, Any]]) -> dict[str, Any]:
     latest = rows[0] if rows else None
     previous = rows[1] if len(rows) > 1 else None
     latest_value = latest.get("value") if latest else None
     prev_value = previous.get("value") if previous else None
     change = None if latest_value is None or prev_value is None else latest_value - prev_value
-    score, status, interpretation = score_inventory_change(change, float(meta["threshold"]), float(meta["strong_threshold"]))
+    kind = str(meta.get("kind", "inventory"))
+    if kind == "inventory":
+        score, status, interpretation = score_inventory_change(change, float(meta["threshold"]), float(meta["strong_threshold"]))
+    elif key == "CRUDE_IMPORTS":
+        score, status, interpretation = score_non_inventory_change(change, float(meta["threshold"]), float(meta["strong_threshold"]), "flow_import_supply")
+    else:
+        score, status, interpretation = score_non_inventory_change(change, float(meta["threshold"]), float(meta["strong_threshold"]), kind)
     return {
         "id": key,
         "label": meta["label"],
@@ -162,6 +257,7 @@ def build_petroleum_observation(key: str, meta: dict[str, Any], rows: list[dict[
         "previous_value": prev_value,
         "weekly_change": change,
         "unit": meta["unit"],
+        "kind": meta.get("kind", "inventory"),
         "score": score,
         "status": status,
         "interpretation": interpretation,
@@ -227,6 +323,7 @@ def fetch_natural_gas_storage() -> dict[str, Any]:
         "pct_vs_5yr_avg": pct_5yr,
         "five_year_avg": total.get("calculated", {}).get("5yr-avg"),
         "unit": total.get("unitsshort") or total.get("units") or "bcf",
+        "kind": meta.get("kind", "inventory"),
         "score": score,
         "status": status,
         "interpretation": interpretation,

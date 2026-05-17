@@ -24,10 +24,17 @@ BLS_FACTOR_NAMES = {
     "Labor strength",
     "BLS CPI pressure",
     "BLS core CPI pressure",
+    "BLS CPI shelter pressure",
+    "BLS CPI energy pressure",
+    "BLS CPI food pressure",
+    "BLS services inflation pressure",
     "BLS PPI pressure",
+    "BLS core PPI pressure",
     "BLS unemployment rate",
     "BLS payroll growth",
     "BLS wage pressure",
+    "BLS labor participation",
+    "BLS U-6 unemployment",
 }
 
 FX_USD_BASE = {"USDJPY", "USDCHF", "USDCAD"}
@@ -260,17 +267,31 @@ def update_asset(asset: dict[str, Any], bls: dict[str, Any]) -> None:
     ]
     cpi = obs(bls, "CPI_HEADLINE")
     core_cpi = obs(bls, "CPI_CORE")
+    shelter = obs(bls, "CPI_SHELTER")
+    energy_cpi = obs(bls, "CPI_ENERGY")
+    food_cpi = obs(bls, "CPI_FOOD")
+    services = obs(bls, "CPI_SERVICES_LESS_ENERGY")
     ppi = obs(bls, "PPI_FINAL_DEMAND")
+    core_ppi = obs(bls, "PPI_CORE_FINAL_DEMAND")
     unemp = obs(bls, "UNEMPLOYMENT_RATE")
     payrolls = obs(bls, "NONFARM_PAYROLLS")
     wages = obs(bls, "AVG_HOURLY_EARNINGS")
+    participation = obs(bls, "LABOR_FORCE_PARTICIPATION")
+    u6 = obs(bls, "U6_UNEMPLOYMENT")
     new = [
         make_inflation_factor(asset, cpi, "BLS CPI pressure"),
         make_inflation_factor(asset, core_cpi, "BLS core CPI pressure"),
+        make_inflation_factor(asset, shelter, "BLS CPI shelter pressure"),
+        make_inflation_factor(asset, energy_cpi, "BLS CPI energy pressure"),
+        make_inflation_factor(asset, food_cpi, "BLS CPI food pressure"),
+        make_inflation_factor(asset, services, "BLS services inflation pressure"),
         make_inflation_factor(asset, ppi, "BLS PPI pressure"),
+        make_inflation_factor(asset, core_ppi, "BLS core PPI pressure"),
         make_labor_factor(asset, unemp, "BLS unemployment rate"),
         make_labor_factor(asset, payrolls, "BLS payroll growth"),
         make_labor_factor(asset, wages, "BLS wage pressure"),
+        make_labor_factor(asset, participation, "BLS labor participation"),
+        make_labor_factor(asset, u6, "BLS U-6 unemployment"),
     ]
     asset["factors"] = old + new
     if asset.get("freshness") == "Sample":
@@ -302,8 +323,8 @@ def main() -> int:
         after_names = [f.get("name") for f in asset.get("factors", [])]
         if before_names != after_names or any(str(f.get("source", "")).startswith("U.S. Bureau of Labor Statistics") for f in asset.get("factors", [])):
             applied += 1
-    data["schema_version"] = "0.24"
-    data["notice"] = "Macro Regime Scanner v0.24 public-source data contract. Treasury, CFTC COT, EIA energy, USDA/NASS agriculture, and BLS inflation/labor lanes are live/workflow-ready. Price-derived lanes remain excluded."
+    data["schema_version"] = "0.26D"
+    data["notice"] = "Macro Regime Scanner v0.26D public-source data contract. Existing live lanes are deepened according to the source extraction manifest while price-derived lanes remain excluded."
     data["data_mode"] = "public-source-treasury-cot-eia-usda-bls"
     status = data.setdefault("source_status", {})
     status["BLS_PUBLIC"] = {

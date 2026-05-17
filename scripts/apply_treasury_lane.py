@@ -26,6 +26,7 @@ CURVE_ASSET_MAP = {
     "CURVE2S10": "10Y minus 2Y",
     "CURVE5S30": "30Y minus 5Y",
 }
+DEEP_CURVE_KEYS = ["10Y minus 2Y", "10Y minus 3M", "30Y minus 5Y", "5Y minus 2Y", "30Y minus 2Y", "2Y minus 3M"]
 
 
 def load_json(path: Path) -> Any:
@@ -134,13 +135,20 @@ def latest_rate(treasury: dict[str, Any], label: str) -> float | None:
 
 
 def previous_curve(treasury: dict[str, Any], key: str) -> float | None:
+    if "previous_curve_spreads" in treasury:
+        return treasury.get("previous_curve_spreads", {}).get(key)
     previous_rates = treasury.get("previous_rates", {})
-    if key == "10Y minus 2Y":
-        a = previous_rates.get("10 Yr")
-        b = previous_rates.get("2 Yr")
-    else:
-        a = previous_rates.get("30 Yr")
-        b = previous_rates.get("5 Yr")
+    pairs = {
+        "10Y minus 2Y": ("10 Yr", "2 Yr"),
+        "10Y minus 3M": ("10 Yr", "3 Mo"),
+        "30Y minus 5Y": ("30 Yr", "5 Yr"),
+        "5Y minus 2Y": ("5 Yr", "2 Yr"),
+        "30Y minus 2Y": ("30 Yr", "2 Yr"),
+        "2Y minus 3M": ("2 Yr", "3 Mo"),
+    }
+    a_key, b_key = pairs.get(key, (None, None))
+    a = previous_rates.get(a_key) if a_key else None
+    b = previous_rates.get(b_key) if b_key else None
     if a is None or b is None:
         return None
     return round(a - b, 3)
@@ -233,7 +241,8 @@ def apply_contextual_treasury_factors(asset: dict[str, Any], treasury: dict[str,
                 factor["status"] = status_10y
         elif name == "Yield curve":
             curve = treasury.get("curve_spreads", {}).get("10Y minus 2Y")
-            factor["derived"] = f"Official Treasury 10Y minus 2Y curve spread: {spread_text(curve)} on {latest_date}"
+            curve3m = treasury.get("curve_spreads", {}).get("10Y minus 3M")
+            factor["derived"] = f"Official Treasury curve spreads on {latest_date}: 10Y-2Y {spread_text(curve)}; 10Y-3M {spread_text(curve3m)}."
             factor["source"] = "U.S. Treasury official Daily Treasury Par Yield Curve Rates"
             factor["freshness"] = freshness
 
@@ -251,8 +260,8 @@ def main() -> int:
         else:
             apply_contextual_treasury_factors(asset, treasury)
 
-    dashboard["schema_version"] = "0.19"
-    dashboard["notice"] = "Macro Regime Scanner v0.19. Public-source fundamental pressure structure with official Treasury yield lane, CFTC COT scaffold, and source-health status. Other lanes remain prototype/public-source candidates until connected."
+    dashboard["schema_version"] = "0.26D"
+    dashboard["notice"] = "Macro Regime Scanner v0.26D. Public-source terminal with deepened Treasury/COT/EIA/USDA/BLS extraction foundation and orchestrator-based refresh."
     dashboard["data_mode"] = "public-source-treasury-lane"
     dashboard["updated_at"] = dt.datetime.utcnow().replace(microsecond=0).isoformat() + "Z"
     source_status = dashboard.get("source_status") or {}

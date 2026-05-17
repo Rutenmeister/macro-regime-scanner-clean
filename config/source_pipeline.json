@@ -1,6 +1,6 @@
 {
-  "pipelineVersion": "0.25F",
-  "purpose": "Stable pipeline config read by scripts/refresh_all_sources.py. Add new lanes here after scripts exist; do not rewrite the GitHub workflow for every source.",
+  "pipelineVersion": "0.26D",
+  "purpose": "Stable orchestrator pipeline. v0.26D deepens enabled source extraction through scripts/config without requiring master workflow edits.",
   "global": {
     "runValidation": true,
     "stopOnFailure": true,

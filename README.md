@@ -71,3 +71,8 @@ python scripts/validate_data.py
 ## Project principle
 
 No placeholder scoring should be treated as truth. Live source data, normalized variables, asset relevance, and scoring methodology are separate layers.
+
+
+## v0.26D Deep Variable Extraction Upgrade
+
+Deepens existing live lanes from the v0.25F foundation. The master workflow remains orchestrator-based through `scripts/refresh_all_sources.py`; do not rewrite GitHub workflow YAML for source-variable expansion.

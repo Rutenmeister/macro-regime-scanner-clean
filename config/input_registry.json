@@ -48,7 +48,7 @@
         "FCI"
       ],
       "scoreEligible": true,
-      "status": "planned",
+      "status": "implemented_v0.26D",
       "description": "Official U.S. Treasury 1M par yield; used directly for rate assets and contextually for FX, risk assets, and metals.",
       "derivedFields": [
         "level",
@@ -107,7 +107,7 @@
         "FCI"
       ],
       "scoreEligible": true,
-      "status": "planned",
+      "status": "implemented_v0.26D",
       "description": "Official U.S. Treasury 2M par yield; used directly for rate assets and contextually for FX, risk assets, and metals.",
       "derivedFields": [
         "level",
@@ -166,7 +166,7 @@
         "FCI"
       ],
       "scoreEligible": true,
-      "status": "planned",
+      "status": "implemented_v0.26D",
       "description": "Official U.S. Treasury 3M par yield; used directly for rate assets and contextually for FX, risk assets, and metals.",
       "derivedFields": [
         "level",
@@ -225,7 +225,7 @@
         "FCI"
       ],
       "scoreEligible": true,
-      "status": "planned",
+      "status": "implemented_v0.26D",
       "description": "Official U.S. Treasury 4M par yield; used directly for rate assets and contextually for FX, risk assets, and metals.",
       "derivedFields": [
         "level",
@@ -284,7 +284,7 @@
         "FCI"
       ],
       "scoreEligible": true,
-      "status": "planned",
+      "status": "implemented_v0.26D",
       "description": "Official U.S. Treasury 6M par yield; used directly for rate assets and contextually for FX, risk assets, and metals.",
       "derivedFields": [
         "level",
@@ -343,7 +343,7 @@
         "FCI"
       ],
       "scoreEligible": true,
-      "status": "planned",
+      "status": "implemented_v0.26D",
       "description": "Official U.S. Treasury 1Y par yield; used directly for rate assets and contextually for FX, risk assets, and metals.",
       "derivedFields": [
         "level",
@@ -404,7 +404,7 @@
         "FCI"
       ],
       "scoreEligible": true,
-      "status": "live",
+      "status": "implemented_v0.26D",
       "description": "Official U.S. Treasury 2Y par yield; used directly for rate assets and contextually for FX, risk assets, and metals.",
       "derivedFields": [
         "level",
@@ -463,7 +463,7 @@
         "FCI"
       ],
       "scoreEligible": true,
-      "status": "planned",
+      "status": "implemented_v0.26D",
       "description": "Official U.S. Treasury 3Y par yield; used directly for rate assets and contextually for FX, risk assets, and metals.",
       "derivedFields": [
         "level",
@@ -524,7 +524,7 @@
         "FCI"
       ],
       "scoreEligible": true,
-      "status": "live",
+      "status": "implemented_v0.26D",
       "description": "Official U.S. Treasury 5Y par yield; used directly for rate assets and contextually for FX, risk assets, and metals.",
       "derivedFields": [
         "level",
@@ -583,7 +583,7 @@
         "FCI"
       ],
       "scoreEligible": true,
-      "status": "planned",
+      "status": "implemented_v0.26D",
       "description": "Official U.S. Treasury 7Y par yield; used directly for rate assets and contextually for FX, risk assets, and metals.",
       "derivedFields": [
         "level",
@@ -644,7 +644,7 @@
         "FCI"
       ],
       "scoreEligible": true,
-      "status": "live",
+      "status": "implemented_v0.26D",
       "description": "Official U.S. Treasury 10Y par yield; used directly for rate assets and contextually for FX, risk assets, and metals.",
       "derivedFields": [
         "level",
@@ -703,7 +703,7 @@
         "FCI"
       ],
       "scoreEligible": true,
-      "status": "planned",
+      "status": "implemented_v0.26D",
       "description": "Official U.S. Treasury 20Y par yield; used directly for rate assets and contextually for FX, risk assets, and metals.",
       "derivedFields": [
         "level",
@@ -764,7 +764,7 @@
         "FCI"
       ],
       "scoreEligible": true,
-      "status": "live",
+      "status": "implemented_v0.26D",
       "description": "Official U.S. Treasury 30Y par yield; used directly for rate assets and contextually for FX, risk assets, and metals.",
       "derivedFields": [
         "level",
@@ -825,7 +825,7 @@
         "COPPER"
       ],
       "scoreEligible": true,
-      "status": "planned",
+      "status": "implemented_v0.26D",
       "description": "Treasury curve spread used to interpret growth, policy, recession, and duration pressure.",
       "derivedFields": [
         "spread_level",
@@ -885,7 +885,7 @@
         "COPPER"
       ],
       "scoreEligible": true,
-      "status": "planned",
+      "status": "implemented_v0.26D",
       "description": "Treasury curve spread used to interpret growth, policy, recession, and duration pressure.",
       "derivedFields": [
         "spread_level",
@@ -945,7 +945,7 @@
         "COPPER"
       ],
       "scoreEligible": true,
-      "status": "planned",
+      "status": "implemented_v0.26D",
       "description": "Treasury curve spread used to interpret growth, policy, recession, and duration pressure.",
       "derivedFields": [
         "spread_level",
@@ -1005,7 +1005,7 @@
         "COPPER"
       ],
       "scoreEligible": true,
-      "status": "planned",
+      "status": "implemented_v0.26D",
       "description": "Treasury curve spread used to interpret growth, policy, recession, and duration pressure.",
       "derivedFields": [
         "spread_level",
@@ -1913,7 +1913,7 @@
         "BCOM"
       ],
       "scoreEligible": true,
-      "status": "planned",
+      "status": "implemented_v0.26D",
       "description": "Official EIA energy fundamental variable. Direct for energy contracts; contextual inflation/cost input for other assets.",
       "derivedFields": [
         "latest",
@@ -1981,7 +1981,7 @@
         "BCOM"
       ],
       "scoreEligible": true,
-      "status": "planned",
+      "status": "implemented_v0.26D",
       "description": "Official EIA energy fundamental variable. Direct for energy contracts; contextual inflation/cost input for other assets.",
       "derivedFields": [
         "latest",
@@ -2049,7 +2049,7 @@
         "BCOM"
       ],
       "scoreEligible": true,
-      "status": "planned",
+      "status": "implemented_v0.26D",
       "description": "Official EIA energy fundamental variable. Direct for energy contracts; contextual inflation/cost input for other assets.",
       "derivedFields": [
         "latest",
@@ -2117,7 +2117,7 @@
         "BCOM"
       ],
       "scoreEligible": true,
-      "status": "planned",
+      "status": "implemented_v0.26D",
       "description": "Official EIA energy fundamental variable. Direct for energy contracts; contextual inflation/cost input for other assets.",
       "derivedFields": [
         "latest",
@@ -3520,7 +3520,7 @@
         "BCOM"
       ],
       "scoreEligible": true,
-      "status": "planned",
+      "status": "implemented_v0.26D",
       "description": "Official BLS macro input. Inflation/labor data affects rates, Fed pressure, risk appetite, USD, and commodity inflation context.",
       "derivedFields": [
         "level",
@@ -3603,7 +3603,7 @@
         "BCOM"
       ],
       "scoreEligible": true,
-      "status": "planned",
+      "status": "implemented_v0.26D",
       "description": "Official BLS macro input. Inflation/labor data affects rates, Fed pressure, risk appetite, USD, and commodity inflation context.",
       "derivedFields": [
         "level",
@@ -3686,7 +3686,7 @@
         "BCOM"
       ],
       "scoreEligible": true,
-      "status": "planned",
+      "status": "implemented_v0.26D",
       "description": "Official BLS macro input. Inflation/labor data affects rates, Fed pressure, risk appetite, USD, and commodity inflation context.",
       "derivedFields": [
         "level",
@@ -3935,7 +3935,7 @@
         "BCOM"
       ],
       "scoreEligible": true,
-      "status": "planned",
+      "status": "implemented_v0.26D",
       "description": "Official BLS macro input. Inflation/labor data affects rates, Fed pressure, risk appetite, USD, and commodity inflation context.",
       "derivedFields": [
         "level",
@@ -4267,7 +4267,7 @@
         "BCOM"
       ],
       "scoreEligible": true,
-      "status": "planned",
+      "status": "implemented_v0.26D",
       "description": "Official BLS macro input. Inflation/labor data affects rates, Fed pressure, risk appetite, USD, and commodity inflation context.",
       "derivedFields": [
         "level",
@@ -4350,7 +4350,7 @@
         "BCOM"
       ],
       "scoreEligible": true,
-      "status": "planned",
+      "status": "implemented_v0.26D",
       "description": "Official BLS macro input. Inflation/labor data affects rates, Fed pressure, risk appetite, USD, and commodity inflation context.",
       "derivedFields": [
         "level",
@@ -6175,6 +6175,122 @@
         "level",
         "change",
         "revision"
+      ],
+      "requiredNormalizedFields": [
+        "sourceId",
+        "seriesId",
+        "latestValue",
+        "previousValue",
+        "change",
+        "unit",
+        "period",
+        "releaseDate",
+        "retrievedAt",
+        "frequency"
+      ]
+    },
+    {
+      "inputId": "treasury_30y_2y_spread",
+      "name": "Treasury 30Y-2Y curve spread",
+      "sourceLane": "treasury",
+      "category": "Rates / Yield Curve",
+      "frequency": "daily",
+      "unit": "percentage points",
+      "directAssets": [],
+      "contextAssets": [],
+      "scoreEligible": true,
+      "status": "implemented_v0.26D",
+      "description": "Official Treasury 30Y minus 2Y curve spread.",
+      "derivedFields": [
+        "level",
+        "change"
+      ],
+      "requiredNormalizedFields": [
+        "sourceId",
+        "seriesId",
+        "latestValue",
+        "previousValue",
+        "change",
+        "unit",
+        "period",
+        "releaseDate",
+        "retrievedAt",
+        "frequency"
+      ]
+    },
+    {
+      "inputId": "treasury_2y_3m_spread",
+      "name": "Treasury 2Y-3M curve spread",
+      "sourceLane": "treasury",
+      "category": "Rates / Yield Curve",
+      "frequency": "daily",
+      "unit": "percentage points",
+      "directAssets": [],
+      "contextAssets": [],
+      "scoreEligible": true,
+      "status": "implemented_v0.26D",
+      "description": "Official Treasury 2Y minus 3M curve spread.",
+      "derivedFields": [
+        "level",
+        "change"
+      ],
+      "requiredNormalizedFields": [
+        "sourceId",
+        "seriesId",
+        "latestValue",
+        "previousValue",
+        "change",
+        "unit",
+        "period",
+        "releaseDate",
+        "retrievedAt",
+        "frequency"
+      ]
+    },
+    {
+      "inputId": "eia_gasoline_product_supplied",
+      "name": "EIA gasoline product supplied",
+      "sourceLane": "eia",
+      "category": "Energy Demand",
+      "frequency": "weekly",
+      "unit": "thousand barrels per day",
+      "directAssets": [],
+      "contextAssets": [],
+      "scoreEligible": true,
+      "status": "implemented_v0.26D",
+      "description": "EIA gasoline product supplied demand proxy.",
+      "derivedFields": [
+        "level",
+        "change"
+      ],
+      "requiredNormalizedFields": [
+        "sourceId",
+        "seriesId",
+        "latestValue",
+        "previousValue",
+        "change",
+        "unit",
+        "period",
+        "releaseDate",
+        "retrievedAt",
+        "frequency"
+      ]
+    },
+    {
+      "inputId": "eia_distillate_product_supplied",
+      "name": "EIA distillate product supplied",
+      "sourceLane": "eia",
+      "category": "Energy Demand",
+      "frequency": "weekly",
+      "unit": "thousand barrels per day",
+      "directAssets": [],
+      "contextAssets": [],
+      "scoreEligible": true,
+      "status": "implemented_v0.26D",
+      "description": "EIA distillate product supplied demand proxy.",
+      "derivedFields": [
+        "level",
+        "change"
       ],
       "requiredNormalizedFields": [
         "sourceId",
