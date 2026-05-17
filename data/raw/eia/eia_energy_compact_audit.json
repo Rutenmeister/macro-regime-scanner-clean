@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-05-17T00:52:57+00:00",
+  "fetched_at": "2026-05-17T01:04:46+00:00",
   "source": "U.S. Energy Information Administration open data/API",
   "petroleum_series_requested": {
     "CRUDE_STOCKS": {
@@ -37,6 +37,66 @@
       "kind": "inventory",
       "threshold": 750,
       "strong_threshold": 2500
+    },
+    "REFINERY_UTILIZATION": {
+      "route": "petroleum/sum/sndw",
+      "series": "WPULEUS3",
+      "label": "U.S. refinery utilization rate",
+      "unit": "percent",
+      "kind": "utilization",
+      "threshold": 1.0,
+      "strong_threshold": 3.0,
+      "optional": true
+    },
+    "CRUDE_PRODUCTION": {
+      "route": "petroleum/sum/sndw",
+      "series": "WCRFPUS2",
+      "label": "U.S. field production of crude oil",
+      "unit": "thousand barrels per day",
+      "kind": "production",
+      "threshold": 100,
+      "strong_threshold": 300,
+      "optional": true
+    },
+    "CRUDE_IMPORTS": {
+      "route": "petroleum/sum/sndw",
+      "series": "WCRIMUS2",
+      "label": "U.S. crude oil imports",
+      "unit": "thousand barrels per day",
+      "kind": "flow",
+      "threshold": 250,
+      "strong_threshold": 750,
+      "optional": true
+    },
+    "CRUDE_EXPORTS": {
+      "route": "petroleum/sum/sndw",
+      "series": "WCREXUS2",
+      "label": "U.S. crude oil exports",
+      "unit": "thousand barrels per day",
+      "kind": "flow",
+      "threshold": 250,
+      "strong_threshold": 750,
+      "optional": true
+    },
+    "GASOLINE_PRODUCT_SUPPLIED": {
+      "route": "petroleum/sum/sndw",
+      "series": "WGFUPUS2",
+      "label": "U.S. finished motor gasoline product supplied",
+      "unit": "thousand barrels per day",
+      "kind": "demand_proxy",
+      "threshold": 250,
+      "strong_threshold": 750,
+      "optional": true
+    },
+    "DISTILLATE_PRODUCT_SUPPLIED": {
+      "route": "petroleum/sum/sndw",
+      "series": "WDIUPUS2",
+      "label": "U.S. distillate fuel oil product supplied",
+      "unit": "thousand barrels per day",
+      "kind": "demand_proxy",
+      "threshold": 150,
+      "strong_threshold": 500,
+      "optional": true
     }
   },
   "notes": "Compact audit only; raw API payloads are not committed to avoid large files.",
@@ -75,6 +135,60 @@
       "previous_period": null,
       "latest_value": null,
       "weekly_change": null,
+      "status": "Neutral"
+    },
+    "REFINERY_UTILIZATION": {
+      "label": "U.S. refinery utilization rate",
+      "series": "WPULEUS3",
+      "latest_period": "2026-05-08",
+      "previous_period": "2026-05-01",
+      "latest_value": 91.7,
+      "weekly_change": 1.6000000000000085,
+      "status": "Support"
+    },
+    "CRUDE_PRODUCTION": {
+      "label": "U.S. field production of crude oil",
+      "series": "WCRFPUS2",
+      "latest_period": "2026-05-08",
+      "previous_period": "2026-05-01",
+      "latest_value": 13710.0,
+      "weekly_change": 137.0,
+      "status": "Pressure"
+    },
+    "CRUDE_IMPORTS": {
+      "label": "U.S. crude oil imports",
+      "series": "WCRIMUS2",
+      "latest_period": "2026-05-08",
+      "previous_period": "2026-05-01",
+      "latest_value": 5901.0,
+      "weekly_change": 424.0,
+      "status": "Pressure"
+    },
+    "CRUDE_EXPORTS": {
+      "label": "U.S. crude oil exports",
+      "series": "WCREXUS2",
+      "latest_period": "2026-05-08",
+      "previous_period": "2026-05-01",
+      "latest_value": 5492.0,
+      "weekly_change": 742.0,
+      "status": "Support"
+    },
+    "GASOLINE_PRODUCT_SUPPLIED": {
+      "label": "U.S. finished motor gasoline product supplied",
+      "series": "WGFUPUS2",
+      "latest_period": "2026-05-08",
+      "previous_period": "2026-05-01",
+      "latest_value": 8754.0,
+      "weekly_change": -59.0,
+      "status": "Neutral"
+    },
+    "DISTILLATE_PRODUCT_SUPPLIED": {
+      "label": "U.S. distillate fuel oil product supplied",
+      "series": "WDIUPUS2",
+      "latest_period": "2026-05-08",
+      "previous_period": "2026-05-01",
+      "latest_value": 3428.0,
+      "weekly_change": 66.0,
       "status": "Neutral"
     },
     "NATGAS_STORAGE": {

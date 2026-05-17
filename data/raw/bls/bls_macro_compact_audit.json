@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-05-17T00:53:05+00:00",
+  "fetched_at": "2026-05-17T01:05:03+00:00",
   "source": "BLS public API v2",
   "series_requested": {
     "CPI_HEADLINE": {
@@ -16,10 +16,45 @@
       "unit": "index",
       "kind": "inflation_index"
     },
+    "CPI_SHELTER": {
+      "series_id": "CUSR0000SAH1",
+      "label": "CPI shelter",
+      "input": "BLS CPI shelter pressure",
+      "unit": "index",
+      "kind": "inflation_index"
+    },
+    "CPI_ENERGY": {
+      "series_id": "CUSR0000SA0E",
+      "label": "CPI energy",
+      "input": "BLS CPI energy pressure",
+      "unit": "index",
+      "kind": "inflation_index"
+    },
+    "CPI_FOOD": {
+      "series_id": "CUSR0000SAF1",
+      "label": "CPI food",
+      "input": "BLS CPI food pressure",
+      "unit": "index",
+      "kind": "inflation_index"
+    },
+    "CPI_SERVICES_LESS_ENERGY": {
+      "series_id": "CUSR0000SASLE",
+      "label": "CPI services less energy services",
+      "input": "BLS services inflation pressure",
+      "unit": "index",
+      "kind": "inflation_index"
+    },
     "PPI_FINAL_DEMAND": {
       "series_id": "WPUFD4",
       "label": "PPI final demand",
       "input": "BLS PPI pressure",
+      "unit": "index",
+      "kind": "inflation_index"
+    },
+    "PPI_CORE_FINAL_DEMAND": {
+      "series_id": "WPUFD49116",
+      "label": "PPI final demand less foods, energy, and trade services",
+      "input": "BLS core PPI pressure",
       "unit": "index",
       "kind": "inflation_index"
     },
@@ -43,6 +78,20 @@
       "input": "BLS wage pressure",
       "unit": "dollars/hour",
       "kind": "wage_index"
+    },
+    "LABOR_FORCE_PARTICIPATION": {
+      "series_id": "LNS11300000",
+      "label": "Labor force participation rate",
+      "input": "BLS labor participation",
+      "unit": "percent",
+      "kind": "level"
+    },
+    "U6_UNEMPLOYMENT": {
+      "series_id": "LNS13327709",
+      "label": "U-6 unemployment rate",
+      "input": "BLS U-6 unemployment",
+      "unit": "percent",
+      "kind": "level"
     }
   },
   "status": "REQUEST_SUCCEEDED",
@@ -66,11 +115,56 @@
       "score": 1,
       "status": "Support"
     },
+    "CPI_SHELTER": {
+      "series_id": "CUSR0000SAH1",
+      "label": "CPI shelter",
+      "latest_date": "2026-04-01",
+      "latest_value": 426.642,
+      "observations": 51,
+      "score": 1,
+      "status": "Support"
+    },
+    "CPI_ENERGY": {
+      "series_id": "CUSR0000SA0E",
+      "label": "CPI energy",
+      "latest_date": "2026-04-01",
+      "latest_value": 325.978,
+      "observations": 51,
+      "score": 2,
+      "status": "Strong support"
+    },
+    "CPI_FOOD": {
+      "series_id": "CUSR0000SAF1",
+      "label": "CPI food",
+      "latest_date": "2026-04-01",
+      "latest_value": 348.349,
+      "observations": 51,
+      "score": 1,
+      "status": "Support"
+    },
+    "CPI_SERVICES_LESS_ENERGY": {
+      "series_id": "CUSR0000SASLE",
+      "label": "CPI services less energy services",
+      "latest_date": "2026-04-01",
+      "latest_value": 443.154,
+      "observations": 51,
+      "score": 1,
+      "status": "Support"
+    },
     "PPI_FINAL_DEMAND": {
       "series_id": "WPUFD4",
       "label": "PPI final demand",
       "latest_date": "2026-04-01",
       "latest_value": 156.878,
+      "observations": 52,
+      "score": 2,
+      "status": "Strong support"
+    },
+    "PPI_CORE_FINAL_DEMAND": {
+      "series_id": "WPUFD49116",
+      "label": "PPI final demand less foods, energy, and trade services",
+      "latest_date": "2026-04-01",
+      "latest_value": 141.379,
       "observations": 52,
       "score": 2,
       "status": "Strong support"
@@ -101,6 +195,24 @@
       "observations": 52,
       "score": 1,
       "status": "Support"
+    },
+    "LABOR_FORCE_PARTICIPATION": {
+      "series_id": "LNS11300000",
+      "label": "Labor force participation rate",
+      "latest_date": "2026-04-01",
+      "latest_value": 61.8,
+      "observations": 51,
+      "score": null,
+      "status": null
+    },
+    "U6_UNEMPLOYMENT": {
+      "series_id": "LNS13327709",
+      "label": "U-6 unemployment rate",
+      "latest_date": "2026-04-01",
+      "latest_value": 8.2,
+      "observations": 51,
+      "score": null,
+      "status": null
     }
   }
 }
