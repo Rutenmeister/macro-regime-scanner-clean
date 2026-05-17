@@ -1,6 +1,6 @@
 {
-  "pipelineVersion": "0.26D",
-  "purpose": "Stable orchestrator pipeline. v0.26D deepens enabled source extraction through scripts/config without requiring master workflow edits.",
+  "pipelineVersion": "0.27",
+  "purpose": "Stable orchestrator pipeline. v0.27 adds enabled BEA macro lane through scripts/config without changing the GitHub workflow.",
   "global": {
     "runValidation": true,
     "stopOnFailure": true,
