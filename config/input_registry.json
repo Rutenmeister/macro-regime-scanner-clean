@@ -1,5 +1,5 @@
 {
-  "registryVersion": "0.28",
+  "registryVersion": "0.31",
   "purpose": "Foundational variable registry. Defines target public-source variables before scoring. Status live means the clean v0.24 scripts already fetch at least a starter version; planned means explicitly designed but not yet implemented.",
   "principles": [
     "No sample rows in final scoring",
@@ -6564,6 +6564,105 @@
       "unit": "index",
       "scoreEligibility": "live_scored_candidate",
       "status": "live"
+    },
+    {
+      "inputId": "noaa_active_weather_hazards",
+      "name": "NOAA active weather hazards",
+      "sourceLane": "noaa_weather",
+      "category": "weather_physical_disruption",
+      "frequency": "intraday",
+      "unit": "alerts",
+      "scoreEligible": "context_candidate",
+      "status": "live",
+      "description": "National NOAA/NWS active alert load as broad physical-disruption context."
+    },
+    {
+      "inputId": "noaa_heat_stress",
+      "name": "NOAA heat stress",
+      "sourceLane": "noaa_weather",
+      "category": "weather_energy_agriculture",
+      "frequency": "intraday",
+      "unit": "alerts",
+      "scoreEligible": "energy_agriculture_candidate",
+      "status": "live",
+      "description": "Heat alerts as cooling-demand and crop heat-stress context."
+    },
+    {
+      "inputId": "noaa_cold_freeze_stress",
+      "name": "NOAA cold / freeze stress",
+      "sourceLane": "noaa_weather",
+      "category": "weather_energy_agriculture",
+      "frequency": "intraday",
+      "unit": "alerts",
+      "scoreEligible": "energy_agriculture_candidate",
+      "status": "live",
+      "description": "Cold/freeze alerts as heating-demand and crop-freeze context."
+    },
+    {
+      "inputId": "noaa_winter_storm_stress",
+      "name": "NOAA winter storm stress",
+      "sourceLane": "noaa_weather",
+      "category": "weather_energy_logistics",
+      "frequency": "intraday",
+      "unit": "alerts",
+      "scoreEligible": "energy_context_candidate",
+      "status": "live",
+      "description": "Winter storm alerts as heating-demand and logistics-disruption context."
+    },
+    {
+      "inputId": "noaa_flood_stress",
+      "name": "NOAA flood stress",
+      "sourceLane": "noaa_weather",
+      "category": "weather_agriculture_logistics",
+      "frequency": "intraday",
+      "unit": "alerts",
+      "scoreEligible": "agriculture_context_candidate",
+      "status": "live",
+      "description": "Flood alerts as agriculture, logistics, and infrastructure disruption context."
+    },
+    {
+      "inputId": "noaa_severe_convective_stress",
+      "name": "NOAA severe storm / tornado stress",
+      "sourceLane": "noaa_weather",
+      "category": "weather_disruption",
+      "frequency": "intraday",
+      "unit": "alerts",
+      "scoreEligible": "context_candidate",
+      "status": "live",
+      "description": "Severe thunderstorm/tornado alerts as local activity and infrastructure-disruption context."
+    },
+    {
+      "inputId": "noaa_tropical_storm_stress",
+      "name": "NOAA tropical storm / hurricane stress",
+      "sourceLane": "noaa_weather",
+      "category": "weather_energy_logistics",
+      "frequency": "intraday",
+      "unit": "alerts",
+      "scoreEligible": "energy_context_candidate",
+      "status": "live",
+      "description": "Tropical alerts as Gulf energy, port, refinery, and transport disruption context."
+    },
+    {
+      "inputId": "noaa_fire_weather_stress",
+      "name": "NOAA fire weather stress",
+      "sourceLane": "noaa_weather",
+      "category": "weather_agriculture_power",
+      "frequency": "intraday",
+      "unit": "alerts",
+      "scoreEligible": "context_candidate",
+      "status": "live",
+      "description": "Fire-weather alerts as crop, power infrastructure, insurance, and regional disruption context."
+    },
+    {
+      "inputId": "noaa_drought_alert_context",
+      "name": "NOAA drought alert context",
+      "sourceLane": "noaa_weather",
+      "category": "weather_agriculture",
+      "frequency": "intraday sparse",
+      "unit": "alerts",
+      "scoreEligible": "display_context_until_drought_monitor_added",
+      "status": "live",
+      "description": "Drought wording in active alerts; not a complete drought monitor feed."
     }
   ]
 }

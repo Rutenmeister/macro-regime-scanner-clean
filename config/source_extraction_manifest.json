@@ -1,5 +1,5 @@
 {
-  "manifestVersion": "0.28",
+  "manifestVersion": "0.31",
   "project": "Macro Regime Scanner",
   "purpose": "Deep source-extraction blueprint for official/public-source macro, positioning, energy, agriculture, inflation/labor, growth, policy, and activity variables before further scoring work.",
   "principles": [
@@ -988,6 +988,110 @@
         "Wider credit spreads and higher stress indexes are pressure for equities/credit and usually support USD stress demand.",
         "Easier credit conditions support risk assets and reduce stress-driven USD demand.",
         "Gold/precious metals use stress as mixed defensive context because USD and liquidity channels can conflict."
+      ]
+    },
+    {
+      "sourceId": "noaa_nws_active_alerts",
+      "sourceName": "NOAA / National Weather Service active public alerts",
+      "status": "live",
+      "access": "official public API; no key required",
+      "officialUrl": "https://api.weather.gov/alerts/active",
+      "primaryUse": "live U.S. weather-hazard context for energy demand, agriculture/crop stress, logistics disruption, and broad physical-economy risk",
+      "variables": [
+        {
+          "id": "noaa_active_alerts",
+          "label": "NOAA/NWS active weather alerts",
+          "frequency": "intraday",
+          "transformations": [
+            "national_count",
+            "severity_weighted_count"
+          ],
+          "assetUse": "broad physical-disruption context",
+          "scoringEligibility": "live_context_candidate"
+        },
+        {
+          "id": "noaa_heat_stress",
+          "label": "NOAA heat stress alerts",
+          "frequency": "intraday",
+          "transformations": [
+            "event_count",
+            "severity_weighted_count"
+          ],
+          "assetUse": "cooling demand, power load, crop heat stress",
+          "scoringEligibility": "live_scored_candidate_for_energy_agriculture"
+        },
+        {
+          "id": "noaa_cold_freeze_stress",
+          "label": "NOAA cold/freeze alerts",
+          "frequency": "intraday",
+          "transformations": [
+            "event_count",
+            "severity_weighted_count"
+          ],
+          "assetUse": "heating demand, natural gas use, crop/freeze risk",
+          "scoringEligibility": "live_scored_candidate_for_energy_agriculture"
+        },
+        {
+          "id": "noaa_winter_storm_stress",
+          "label": "NOAA winter storm alerts",
+          "frequency": "intraday",
+          "transformations": [
+            "event_count",
+            "severity_weighted_count"
+          ],
+          "assetUse": "heating demand and logistics disruption",
+          "scoringEligibility": "live_scored_candidate_for_energy_context"
+        },
+        {
+          "id": "noaa_flood_stress",
+          "label": "NOAA flood alerts",
+          "frequency": "intraday",
+          "transformations": [
+            "event_count",
+            "severity_weighted_count"
+          ],
+          "assetUse": "crop disruption, transport disruption, regional economic impact",
+          "scoringEligibility": "live_scored_candidate_for_agriculture_context"
+        },
+        {
+          "id": "noaa_tropical_storm_stress",
+          "label": "NOAA tropical storm / hurricane alerts",
+          "frequency": "intraday",
+          "transformations": [
+            "event_count",
+            "severity_weighted_count"
+          ],
+          "assetUse": "Gulf energy infrastructure, ports, refinery/transport risk",
+          "scoringEligibility": "live_scored_candidate_for_energy_context"
+        },
+        {
+          "id": "noaa_fire_weather_stress",
+          "label": "NOAA fire weather alerts",
+          "frequency": "intraday",
+          "transformations": [
+            "event_count",
+            "severity_weighted_count"
+          ],
+          "assetUse": "crop, power infrastructure, timber/soft commodity, and regional disruption risk",
+          "scoringEligibility": "live_context_candidate"
+        },
+        {
+          "id": "noaa_drought_stress",
+          "label": "NOAA drought alert context",
+          "frequency": "intraday but sparse in active alerts",
+          "transformations": [
+            "event_count",
+            "severity_weighted_count"
+          ],
+          "assetUse": "crop/weather stress context when present; not a substitute for full drought monitor",
+          "scoringEligibility": "display_context_until_drought_monitor_added"
+        }
+      ],
+      "directionRules": [
+        "Raw NOAA score convention: positive means calm/low active hazard load; negative means elevated weather disruption.",
+        "For energy and agriculture, elevated weather stress can be supportive for commodity price pressure through demand/supply disruption.",
+        "For equities and broad risk, elevated weather stress is generally a contextual pressure through activity/logistics/insurance channels.",
+        "For FX/rates/gold, NOAA weather is contextual and should not dominate macro scoring."
       ]
     }
   ],

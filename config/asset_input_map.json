@@ -1,5 +1,5 @@
 {
-  "mapVersion": "0.25F",
+  "mapVersion": "0.31",
   "purpose": "Defines which planned inputs can apply to each asset before scoring. This is not final methodology; it prevents lazy everything-affects-everything logic by separating direct, context, and not-applicable buckets.",
   "assets": {
     "DXY": {
@@ -3760,5 +3760,8 @@
   },
   "_notes": [
     "v0.30 financial_stress lane adds credit and financial-condition inputs to credit, equity, rates, FX, precious metals, and commodity assets."
+  ],
+  "notes": [
+    "v0.31 adds NOAA/NWS weather-hazard inputs as primary for energy/agriculture and contextual for macro/risk assets."
   ]
 }

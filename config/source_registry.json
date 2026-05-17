@@ -1,5 +1,5 @@
 {
-  "notice": "v0.30 source registry. Treasury, CFTC COT, EIA, USDA/NASS, BLS, BEA, Federal Reserve/FRED, Census, and credit/financial stress lanes are live/workflow-ready.",
+  "notice": "v0.31 source registry. Treasury, CFTC COT, EIA, USDA/NASS, BLS, BEA, Federal Reserve/FRED, Census, credit/financial stress, and NOAA/NWS weather lanes are live/workflow-ready.",
   "policy": {
     "no_price_derived_inputs": true,
     "no_scraping_restricted_sites": true,
@@ -149,22 +149,27 @@
     },
     {
       "id": "NOAA_NWS",
-      "name": "NOAA/NWS public weather lane",
-      "status": "candidate",
-      "public_access": "official public APIs/reports",
-      "requires_key": "varies",
+      "name": "NOAA/National Weather Service public weather lane",
+      "status": "live",
+      "public_access": "official public NOAA/NWS API",
+      "requires_key": false,
       "primary_uses": [
-        "weather risk",
-        "drought",
-        "heating/cooling demand context",
-        "crop/weather stress"
+        "active weather hazards",
+        "heat/cold demand context",
+        "crop/weather stress",
+        "storm/flood/fire disruption context"
       ],
       "asset_classes": [
-        "Commodities"
+        "Commodities",
+        "Energy",
+        "Agriculture",
+        "Equity Indices",
+        "FX",
+        "Rates"
       ],
-      "expected_frequency": "daily/intraday depending endpoint",
-      "attribution_note": "Attribute NOAA/NWS where used.",
-      "production_note": "Keep weather context simple at first; avoid paid model data."
+      "expected_frequency": "intraday for active alerts endpoint",
+      "attribution_note": "Attribute NOAA/National Weather Service where used; do not imply NOAA endorsement.",
+      "production_note": "v0.31 adds NOAA/NWS active-alerts lane using api.weather.gov. This is live weather-hazard context, not a full drought monitor, seasonal forecast, or paid model-data feed."
     },
     {
       "id": "FED_FRED_SELECTED",

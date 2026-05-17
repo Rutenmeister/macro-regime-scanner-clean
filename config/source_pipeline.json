@@ -1,6 +1,6 @@
 {
-  "pipelineVersion": "0.30",
-  "purpose": "Stable orchestrator pipeline. v0.30 adds credit-spread and financial-stress lane through scripts/config without changing the GitHub workflow.",
+  "pipelineVersion": "0.31",
+  "purpose": "Stable orchestrator pipeline. v0.31 adds NOAA/NWS weather-hazard lane through scripts/config without changing the GitHub workflow.",
   "global": {
     "runValidation": true,
     "stopOnFailure": true,
@@ -91,6 +91,15 @@
       "sourceId": "FINANCIAL_STRESS_FRED",
       "fetch": "scripts/sources/fetch_financial_stress.py",
       "apply": "scripts/apply_financial_stress_lane.py",
+      "requiresSecrets": [],
+      "status": "live"
+    },
+    {
+      "id": "noaa_weather",
+      "enabled": true,
+      "sourceId": "NOAA_NWS",
+      "fetch": "scripts/sources/fetch_noaa_weather.py",
+      "apply": "scripts/apply_noaa_weather_lane.py",
       "requiresSecrets": [],
       "status": "live"
     }

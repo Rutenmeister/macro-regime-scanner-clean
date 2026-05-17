@@ -91,3 +91,8 @@ Adds Federal Reserve/FRED public policy and liquidity data: EFFR, total assets, 
 ## v0.30 Credit / Financial Stress Lane
 
 Adds a public FRED-based credit and financial-stress lane with high-yield OAS, investment-grade OAS, BBB OAS, NFCI, ANFCI, and STLFSI4. No new API secret is required. The existing orchestrator workflow continues to run `scripts/refresh_all_sources.py`.
+
+
+## v0.31 NOAA/NWS Weather Hazard Lane
+
+Adds a NOAA/National Weather Service public active-alerts lane for live weather-hazard context. No API key is required. This lane captures active hazard counts for heat, cold/freeze, winter storms, floods, severe storms/tornadoes, tropical storms/hurricanes, fire weather, and sparse drought wording. It is useful for energy-demand, agriculture/crop stress, logistics, and physical-disruption context, but it is not a full drought monitor, seasonal forecast, or paid weather-model feed.
