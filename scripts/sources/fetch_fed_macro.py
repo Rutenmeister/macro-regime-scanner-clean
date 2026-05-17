@@ -1,17 +1,11 @@
 #!/usr/bin/env python3
 """Fetch Federal Reserve / liquidity data for Macro Regime Scanner.
 
-This lane intentionally uses public FRED CSV endpoints for Federal Reserve and
-New York Fed series, so it does not require a GitHub secret in v0.28.
+Uses public FRED endpoints with two fallback formats:
+1) graph/fredgraph.csv?id=SERIES
+2) data/SERIES plain text table
 
-Series used:
-- EFFR: Effective Federal Funds Rate
-- WALCL: Fed total assets, H.4.1, millions USD
-- WRESBAL: Reserve balances with Federal Reserve Banks, H.4.1, millions USD
-- RRPONTSYD: Overnight reverse repo facility, billions USD
-- WTREGEN: Treasury General Account at the Fed, H.4.1, millions USD
-
-FRED/Federal Reserve attribution is preserved in raw audit and normalized output.
+No API key is required for this v0.28 Fed liquidity lane.
 """
 from __future__ import annotations
 
@@ -32,6 +26,7 @@ AUDIT_PATH = RAW_DIR / "fed_macro_compact_audit.json"
 SOURCE_ID = "FED_FRED_SELECTED"
 SOURCE_NAME = "Federal Reserve / FRED public data"
 FRED_CSV = "https://fred.stlouisfed.org/graph/fredgraph.csv?id={series_id}"
+FRED_DATA = "https://fred.stlouisfed.org/data/{series_id}"
 
 SERIES = [
     {
@@ -51,7 +46,7 @@ SERIES = [
         "kind": "liquidity_supply",
         "unit": "billions USD",
         "frequency": "weekly",
-        "valueScale": 0.001,  # FRED series is millions USD.
+        "valueScale": 0.001,
         "sourceNote": "Board of Governors H.4.1 total assets via FRED; converted from millions to billions USD.",
     },
     {
@@ -61,7 +56,7 @@ SERIES = [
         "kind": "liquidity_supply",
         "unit": "billions USD",
         "frequency": "weekly",
-        "valueScale": 0.001,  # FRED series is millions USD.
+        "valueScale": 0.001,
         "sourceNote": "Board of Governors H.4.1 reserve balances via FRED; converted from millions to billions USD.",
     },
     {
@@ -81,7 +76,7 @@ SERIES = [
         "kind": "liquidity_drain",
         "unit": "billions USD",
         "frequency": "weekly",
-        "valueScale": 0.001,  # FRED series is millions USD.
+        "valueScale": 0.001,
         "sourceNote": "Board of Governors H.4.1 Treasury General Account via FRED; converted from millions to billions USD.",
     },
 ]
@@ -103,20 +98,58 @@ def parse_float(value: str | None) -> float | None:
         return None
 
 
-def fetch_csv(series_id: str) -> list[dict[str, str]]:
-    url = FRED_CSV.format(series_id=series_id)
-    req = urllib.request.Request(url, headers={"User-Agent": "MacroRegimeScanner/0.28"})
-    with urllib.request.urlopen(req, timeout=30) as resp:
-        text = resp.read().decode("utf-8")
+def fetch_url(url: str) -> str:
+    req = urllib.request.Request(
+        url,
+        headers={
+            "User-Agent": "Mozilla/5.0 MacroRegimeScanner/0.28",
+            "Accept": "text/csv,text/plain,*/*",
+        },
+    )
+    with urllib.request.urlopen(req, timeout=40) as resp:
+        return resp.read().decode("utf-8", errors="replace")
+
+
+def rows_from_graph_csv(series_id: str) -> list[dict[str, str]]:
+    text = fetch_url(FRED_CSV.format(series_id=series_id))
     reader = csv.DictReader(io.StringIO(text))
     return list(reader)
+
+
+def rows_from_data_txt(series_id: str) -> list[dict[str, str]]:
+    text = fetch_url(FRED_DATA.format(series_id=series_id))
+    rows: list[dict[str, str]] = []
+    for line in text.splitlines():
+        stripped = line.strip()
+        if not stripped or stripped.startswith("#"):
+            continue
+        parts = stripped.split()
+        if len(parts) >= 2 and parts[0].count("-") == 2:
+            rows.append({"DATE": parts[0], series_id: parts[1], "VALUE": parts[1]})
+    return rows
+
+
+def fetch_rows(series_id: str, audit: dict[str, Any]) -> list[dict[str, str]]:
+    errors: list[str] = []
+    for method_name, fn in (("fredgraph_csv", rows_from_graph_csv), ("fred_data_txt", rows_from_data_txt)):
+        try:
+            rows = fn(series_id)
+            audit.setdefault("fetchAttempts", []).append({"method": method_name, "rows": len(rows)})
+            if rows:
+                return rows
+        except Exception as exc:  # noqa: BLE001
+            errors.append(f"{method_name}: {exc}")
+            audit.setdefault("fetchAttempts", []).append({"method": method_name, "error": str(exc)})
+    if errors:
+        audit["fetchErrors"] = errors
+    return []
 
 
 def latest_two(rows: list[dict[str, str]], series_id: str, scale: float) -> tuple[dict[str, Any] | None, dict[str, Any] | None]:
     points: list[dict[str, Any]] = []
     for row in rows:
         date = row.get("observation_date") or row.get("DATE") or row.get("date")
-        raw = row.get(series_id) or row.get("VALUE") or row.get("value")
+        raw = row.get(series_id) or row.get(series_id.lower()) or row.get(series_id.upper()) or row.get("VALUE") or row.get("value")
         value = parse_float(raw)
         if date and value is not None and math.isfinite(value):
             points.append({"date": date, "value": value * scale, "rawValue": value})
@@ -149,8 +182,6 @@ def score_policy_rate(latest: float | None, change: float | None) -> int | None:
 def score_liquidity(kind: str, change: float | None) -> int | None:
     if change is None:
         return None
-    # For supply series, rising = easier liquidity; falling = tightening.
-    # For drain series (RRP/TGA), falling drain = easier liquidity; rising drain = tightening.
     if kind == "liquidity_supply":
         if change >= 50:
             return 2
@@ -178,7 +209,7 @@ def build_observation(spec: dict[str, Any]) -> tuple[dict[str, Any] | None, dict
     series_id = spec["seriesId"]
     audit: dict[str, Any] = {"seriesId": series_id, "label": spec["label"], "status": "started"}
     try:
-        rows = fetch_csv(series_id)
+        rows = fetch_rows(series_id, audit)
         latest, previous = latest_two(rows, series_id, float(spec.get("valueScale", 1.0)))
         audit["rowsFetched"] = len(rows)
         if not latest:
@@ -228,31 +259,31 @@ def main() -> int:
         audits.append(audit)
         if observation:
             observations[spec["key"]] = observation
+    audit_doc = {
+        "schemaVersion": "0.28.1",
+        "sourceId": SOURCE_ID,
+        "retrievedAt": now_iso(),
+        "seriesAudits": audits,
+        "observationCount": len(observations),
+    }
+    AUDIT_PATH.write_text(json.dumps(audit_doc, indent=2) + "\n", encoding="utf-8")
     if not observations:
-        raise SystemExit("Fed/FRED fetch did not produce any normalized observations.")
+        raise SystemExit("Fed/FRED fetch did not produce any normalized observations. See data/raw/fed/fed_macro_compact_audit.json for series-level fetch details.")
     latest_dates = [o["period"] for o in observations.values() if o.get("period")]
     normalized = {
-        "schemaVersion": "0.28",
+        "schemaVersion": "0.28.1",
         "sourceId": SOURCE_ID,
         "sourceName": SOURCE_NAME,
         "retrievedAt": now_iso(),
         "latestDate": max(latest_dates) if latest_dates else None,
         "observations": observations,
         "notes": [
-            "Public Federal Reserve/FRED liquidity lane. No API key required in v0.28.",
-            "FRED graph CSV endpoint is used for selected Federal Reserve and New York Fed series.",
+            "Public Federal Reserve/FRED liquidity lane. No API key required in v0.28.1.",
+            "Uses FRED graph CSV with a FRED plain-text data fallback for selected Federal Reserve and New York Fed series.",
             "Balance sheet/TGA/reserve series from H.4.1 are converted from millions to billions USD where needed.",
         ],
     }
-    audit_doc = {
-        "schemaVersion": "0.28",
-        "sourceId": SOURCE_ID,
-        "retrievedAt": now_iso(),
-        "seriesAudits": audits,
-        "observationCount": len(observations),
-    }
     NORM_PATH.write_text(json.dumps(normalized, indent=2) + "\n", encoding="utf-8")
-    AUDIT_PATH.write_text(json.dumps(audit_doc, indent=2) + "\n", encoding="utf-8")
     print(f"Wrote {NORM_PATH.relative_to(ROOT)} with {len(observations)} observations")
     print(f"Wrote {AUDIT_PATH.relative_to(ROOT)}")
     return 0
