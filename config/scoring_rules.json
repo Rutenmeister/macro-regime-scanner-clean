@@ -1,0 +1,12 @@
+{
+  "notice": "Draft placeholders only. Do not treat as final methodology.",
+  "scale": {
+    "+2": "strongly supportive",
+    "+1": "supportive",
+    "0": "neutral",
+    "-1": "negative",
+    "-2": "strongly negative",
+    "null": "missing/unavailable"
+  },
+  "rules": []
+}

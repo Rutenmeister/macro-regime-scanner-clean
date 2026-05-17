@@ -1,0 +1,214 @@
+{
+  "notice": "v0.24 source registry. Treasury, CFTC COT, EIA energy, USDA/NASS agriculture, and BLS inflation/labor lanes are live/workflow-ready.",
+  "policy": {
+    "no_price_derived_inputs": true,
+    "no_scraping_restricted_sites": true,
+    "prefer_official_public_apis": true,
+    "require_attribution_tracking": true,
+    "require_source_health_tracking": true
+  },
+  "sources": [
+    {
+      "id": "TREASURY_OFFICIAL",
+      "name": "U.S. Treasury official data",
+      "status": "live",
+      "public_access": "official public website/API",
+      "requires_key": false,
+      "primary_uses": [
+        "Official Treasury yields",
+        "yield curves",
+        "rates pressure",
+        "public-source macro context"
+      ],
+      "asset_classes": [
+        "Rates",
+        "Inflation Markets",
+        "FX",
+        "Equity Indices",
+        "Commodities"
+      ],
+      "expected_frequency": "daily/business day for many series",
+      "attribution_note": "Attribute U.S. Treasury / Fiscal Data where used.",
+      "production_note": "Treasury official Daily Treasury Par Yield Curve Rates lane is live. Rates are percentages, not prices."
+    },
+    {
+      "id": "BLS_PUBLIC",
+      "name": "U.S. Bureau of Labor Statistics public data/API",
+      "status": "workflow-ready",
+      "public_access": "official public API/releases",
+      "requires_key": false,
+      "primary_uses": [
+        "CPI",
+        "Core CPI",
+        "PPI",
+        "unemployment rate",
+        "nonfarm payrolls",
+        "average hourly earnings",
+        "inflation/labor macro pressure"
+      ],
+      "asset_classes": [
+        "FX",
+        "Rates",
+        "Inflation Markets",
+        "Equity Indices",
+        "Commodities"
+      ],
+      "expected_frequency": "monthly/weekly depending series",
+      "attribution_note": "Attribute BLS and retrieval date where used.",
+      "production_note": "v0.24 adds BLS inflation/labor lane using published public BLS API series for CPI, core CPI, PPI, unemployment, payrolls, and wages. No API key is required at current request size; cite BLS and do not imply endorsement."
+    },
+    {
+      "id": "BEA_PUBLIC",
+      "name": "U.S. Bureau of Economic Analysis public data/API",
+      "status": "candidate",
+      "public_access": "official public API/releases",
+      "requires_key": true,
+      "primary_uses": [
+        "GDP",
+        "PCE",
+        "income",
+        "consumption"
+      ],
+      "asset_classes": [
+        "FX",
+        "Rates",
+        "Inflation Markets",
+        "Equity Indices",
+        "Commodities"
+      ],
+      "expected_frequency": "monthly/quarterly depending dataset",
+      "attribution_note": "Attribute BEA where used.",
+      "production_note": "Use a BEA API key stored as a GitHub secret if needed."
+    },
+    {
+      "id": "CFTC_COT",
+      "name": "CFTC Commitments of Traders public reports",
+      "status": "live",
+      "public_access": "official public files/reports",
+      "requires_key": false,
+      "primary_uses": [
+        "futures positioning",
+        "open interest",
+        "crowding",
+        "weekly positioning change"
+      ],
+      "asset_classes": [
+        "FX",
+        "Rates",
+        "Equity Indices",
+        "Commodities"
+      ],
+      "expected_frequency": "weekly",
+      "attribution_note": "Attribute CFTC COT reports where used.",
+      "production_note": "CFTC COT lane is live. Interpretation separates spec direction, weekly change, crowding risk, commercial/hedger context, and conflict."
+    },
+    {
+      "id": "EIA_OPEN_DATA",
+      "name": "U.S. Energy Information Administration open data/API",
+      "status": "live",
+      "public_access": "official open data API/reports",
+      "requires_key": true,
+      "primary_uses": [
+        "crude inventories",
+        "Cushing inventories",
+        "gasoline inventories",
+        "distillate inventories",
+        "natural gas storage",
+        "energy physical-balance context"
+      ],
+      "asset_classes": [
+        "Commodities",
+        "Inflation Markets",
+        "FX"
+      ],
+      "expected_frequency": "weekly/monthly depending series",
+      "attribution_note": "Attribute EIA where used.",
+      "production_note": "v0.23 adds EIA energy fundamentals. Petroleum APIv2 calls require a free EIA_API_KEY GitHub secret. Natural gas storage uses EIA information release JSON. Use EIA attribution and do not imply endorsement."
+    },
+    {
+      "id": "USDA_PUBLIC",
+      "name": "USDA National Agricultural Statistics Service Quick Stats API",
+      "status": "live",
+      "public_access": "official public API",
+      "requires_key": true,
+      "primary_uses": [
+        "crop condition",
+        "crop progress",
+        "production estimates",
+        "agriculture supply context"
+      ],
+      "asset_classes": [
+        "Commodities"
+      ],
+      "expected_frequency": "weekly/monthly/annual depending NASS series",
+      "attribution_note": "Attribute USDA/NASS Quick Stats where used; do not imply USDA endorsement.",
+      "production_note": "v0.23 adds USDA/NASS Quick Stats lane for crop condition, progress, and production. WASDE ending stocks, stock/use, and export sales are future sub-lanes."
+    },
+    {
+      "id": "NOAA_NWS",
+      "name": "NOAA/NWS public weather lane",
+      "status": "candidate",
+      "public_access": "official public APIs/reports",
+      "requires_key": "varies",
+      "primary_uses": [
+        "weather risk",
+        "drought",
+        "heating/cooling demand context",
+        "crop/weather stress"
+      ],
+      "asset_classes": [
+        "Commodities"
+      ],
+      "expected_frequency": "daily/intraday depending endpoint",
+      "attribution_note": "Attribute NOAA/NWS where used.",
+      "production_note": "Keep weather context simple at first; avoid paid model data."
+    },
+    {
+      "id": "FED_FRED_SELECTED",
+      "name": "Federal Reserve / FRED selected public series with rights checks",
+      "status": "candidate_with_series_rights_review",
+      "public_access": "public API/release pages",
+      "requires_key": "FRED API key recommended",
+      "primary_uses": [
+        "real yields",
+        "breakevens",
+        "financial conditions",
+        "selected credit spreads",
+        "Fed balance sheet/policy context"
+      ],
+      "asset_classes": [
+        "Rates",
+        "Inflation Markets",
+        "Credit / Liquidity",
+        "FX",
+        "Equity Indices",
+        "Commodities"
+      ],
+      "expected_frequency": "daily/weekly/monthly depending series",
+      "attribution_note": "Attribute original series source and FRED where applicable; check series rights.",
+      "production_note": "Approve individual FRED series one by one before production use."
+    },
+    {
+      "id": "CENSUS_PUBLIC",
+      "name": "U.S. Census Bureau public data/API",
+      "status": "candidate",
+      "public_access": "official public API/releases",
+      "requires_key": "optional/recommended",
+      "primary_uses": [
+        "retail sales",
+        "trade data",
+        "housing starts",
+        "durable goods candidates"
+      ],
+      "asset_classes": [
+        "FX",
+        "Rates",
+        "Equity Indices",
+        "Commodities"
+      ],
+      "expected_frequency": "monthly/quarterly depending dataset",
+      "attribution_note": "Attribute Census Bureau where used.",
+      "production_note": "Use for public growth/consumer/trade context after higher-priority lanes."
+    }
+  ]
+}

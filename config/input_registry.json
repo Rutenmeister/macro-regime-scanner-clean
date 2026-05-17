@@ -1,0 +1,569 @@
+{
+  "notice": "Macro Regime Scanner v0.24 input registry. Adds BLS CPI, core CPI, PPI, unemployment, payroll, and wage public-source macro inputs.",
+  "inputs": [
+    {
+      "name": "10Y yield",
+      "groups": [
+        "Rates / Policy"
+      ],
+      "source_candidates": [
+        "Treasury / official yield data"
+      ],
+      "derived_examples": [
+        "10-year government bond yield trend and level"
+      ]
+    },
+    {
+      "name": "2Y yield",
+      "groups": [
+        "Rates / Policy"
+      ],
+      "source_candidates": [
+        "Treasury / official yield data"
+      ],
+      "derived_examples": [
+        "2-year government bond yield trend and level"
+      ]
+    },
+    {
+      "name": "Breakeven inflation",
+      "groups": [
+        "Rates / Policy"
+      ],
+      "source_candidates": [
+        "Treasury / FRED public series lane"
+      ],
+      "derived_examples": [
+        "5Y and 10Y breakeven inflation"
+      ]
+    },
+    {
+      "name": "CPI pressure",
+      "groups": [
+        "Macro Data"
+      ],
+      "source_candidates": [
+        "BLS public release/API"
+      ],
+      "derived_examples": [
+        "CPI YoY, CPI MoM, Core CPI, and actual-vs-forecast surprise"
+      ]
+    },
+    {
+      "name": "Credit spreads",
+      "groups": [
+        "Risk / Liquidity"
+      ],
+      "source_candidates": [
+        "FRED / Federal Reserve public-source candidate with series rights check"
+      ],
+      "derived_examples": [
+        "High-yield and investment-grade spreads vs history"
+      ]
+    },
+    {
+      "name": "Crop progress / condition",
+      "groups": [
+        "Commodity Physical Balance"
+      ],
+      "source_candidates": [
+        "USDA public report/API candidate"
+      ],
+      "derived_examples": [
+        "Planting, emergence, harvest progress, and good/excellent crop ratings"
+      ]
+    },
+    {
+      "name": "Crude inventories",
+      "groups": [
+        "Commodity Physical Balance"
+      ],
+      "source_candidates": [
+        "EIA open data / public report"
+      ],
+      "derived_examples": [
+        "Weekly U.S. commercial crude oil stock change"
+      ]
+    },
+    {
+      "name": "Cushing inventories",
+      "groups": [
+        "Commodity Physical Balance"
+      ],
+      "source_candidates": [
+        "EIA open data / public report"
+      ],
+      "derived_examples": [
+        "Cushing crude stock level and weekly change"
+      ]
+    },
+    {
+      "name": "Ethanol / biofuel linkage",
+      "groups": [
+        "Commodity Physical Balance"
+      ],
+      "source_candidates": [
+        "EIA/USDA public biofuel lane"
+      ],
+      "derived_examples": [
+        "EIA/USDA ethanol production, corn use for ethanol, and biofuel-demand data"
+      ]
+    },
+    {
+      "name": "Export sales",
+      "groups": [
+        "Commodity Physical Balance"
+      ],
+      "source_candidates": [
+        "USDA public report/API candidate"
+      ],
+      "derived_examples": [
+        "Weekly export sales and shipments"
+      ]
+    },
+    {
+      "name": "Financial conditions",
+      "groups": [
+        "Risk / Liquidity"
+      ],
+      "source_candidates": [
+        "FRED / Federal Reserve public-source candidate with series rights check"
+      ],
+      "derived_examples": [
+        "Financial conditions index or composite of rates, dollar, equities, and credit"
+      ]
+    },
+    {
+      "name": "GDP / growth trend",
+      "groups": [
+        "Macro Data"
+      ],
+      "source_candidates": [
+        "BEA public release/API"
+      ],
+      "derived_examples": [
+        "GDP growth, nowcast, or growth surprise vs prior/forecast"
+      ]
+    },
+    {
+      "name": "Global supply competitors",
+      "groups": [
+        "Commodity Physical Balance"
+      ],
+      "source_candidates": [
+        "USDA public report/API candidate"
+      ],
+      "derived_examples": [
+        "Brazil/Argentina/Black Sea/EU/Australia supply where relevant"
+      ]
+    },
+    {
+      "name": "Imports / exports",
+      "groups": [
+        "Commodity Physical Balance"
+      ],
+      "source_candidates": [
+        "EIA open data / public report"
+      ],
+      "derived_examples": [
+        "Petroleum or commodity trade flow changes"
+      ]
+    },
+    {
+      "name": "LNG exports / power burn",
+      "groups": [
+        "Commodity Physical Balance"
+      ],
+      "source_candidates": [
+        "EIA open data / public report"
+      ],
+      "derived_examples": [
+        "LNG export flows and gas used for electricity generation"
+      ]
+    },
+    {
+      "name": "Labor strength",
+      "groups": [
+        "Macro Data"
+      ],
+      "source_candidates": [
+        "BLS public release/API"
+      ],
+      "derived_examples": [
+        "NFP, unemployment rate, claims, wages, JOLTS, and revisions"
+      ]
+    },
+    {
+      "name": "Natural gas storage",
+      "groups": [
+        "Commodity Physical Balance"
+      ],
+      "source_candidates": [
+        "EIA open data / public report"
+      ],
+      "derived_examples": [
+        "Weekly gas storage change and storage vs 5-year average"
+      ]
+    },
+    {
+      "name": "OPEC policy",
+      "groups": [
+        "Commodity Physical Balance"
+      ],
+      "source_candidates": [
+        "OPEC official public release lane"
+      ],
+      "derived_examples": [
+        "OPEC official production targets, cuts, increases, compliance notes, and public monthly releases"
+      ]
+    },
+    {
+      "name": "Open interest",
+      "groups": [
+        "Positioning"
+      ],
+      "source_candidates": [
+        "CFTC COT public report"
+      ],
+      "derived_examples": [
+        "Futures open interest trend and change"
+      ]
+    },
+    {
+      "name": "PCE pressure",
+      "groups": [
+        "Macro Data"
+      ],
+      "source_candidates": [
+        "BEA public release/API"
+      ],
+      "derived_examples": [
+        "PCE and Core PCE inflation readings"
+      ]
+    },
+    {
+      "name": "PPI pressure",
+      "groups": [
+        "Macro Data"
+      ],
+      "source_candidates": [
+        "BLS public release/API"
+      ],
+      "derived_examples": [
+        "PPI YoY, PPI MoM, and producer-price surprise"
+      ]
+    },
+    {
+      "name": "Policy rate",
+      "groups": [
+        "Rates / Policy"
+      ],
+      "source_candidates": [
+        "Central bank official policy release"
+      ],
+      "derived_examples": [
+        "Current central bank target rate or policy band"
+      ]
+    },
+    {
+      "name": "Product inventories",
+      "groups": [
+        "Commodity Physical Balance"
+      ],
+      "source_candidates": [
+        "EIA open data / public report"
+      ],
+      "derived_examples": [
+        "Gasoline and distillate stock changes"
+      ]
+    },
+    {
+      "name": "Product supplied / demand",
+      "groups": [
+        "Commodity Physical Balance"
+      ],
+      "source_candidates": [
+        "EIA open data / public report"
+      ],
+      "derived_examples": [
+        "EIA product supplied for gasoline, distillates, and total products"
+      ]
+    },
+    {
+      "name": "Rate differentials",
+      "groups": [
+        "Rates / Policy"
+      ],
+      "source_candidates": [
+        "Treasury / official yield data"
+      ],
+      "derived_examples": [
+        "Relevant yield spread between countries or curves, usually 2Y and 10Y comparisons"
+      ]
+    },
+    {
+      "name": "Real yield differentials",
+      "groups": [
+        "Rates / Policy"
+      ],
+      "source_candidates": [
+        "Treasury / FRED public series lane"
+      ],
+      "derived_examples": [
+        "Inflation-adjusted yield spread, often 10Y real yield vs peer real yield"
+      ]
+    },
+    {
+      "name": "Real yields",
+      "groups": [
+        "Rates / Policy"
+      ],
+      "source_candidates": [
+        "Treasury / FRED public series lane"
+      ],
+      "derived_examples": [
+        "10Y TIPS real yield trend and level"
+      ]
+    },
+    {
+      "name": "Refinery utilization",
+      "groups": [
+        "Commodity Physical Balance"
+      ],
+      "source_candidates": [
+        "EIA open data / public report"
+      ],
+      "derived_examples": [
+        "Percent of refinery capacity utilized"
+      ]
+    },
+    {
+      "name": "Retail sales / consumer demand",
+      "groups": [
+        "Macro Data"
+      ],
+      "source_candidates": [
+        "Census public release / API"
+      ],
+      "derived_examples": [
+        "Retail sales headline/control group and surprise"
+      ]
+    },
+    {
+      "name": "Stock/use ratio",
+      "groups": [
+        "Commodity Physical Balance"
+      ],
+      "source_candidates": [
+        "USDA public report/API candidate"
+      ],
+      "derived_examples": [
+        "Ending stocks divided by total use"
+      ]
+    },
+    {
+      "name": "U.S. production",
+      "groups": [
+        "Commodity Physical Balance"
+      ],
+      "source_candidates": [
+        "EIA open data / public report"
+      ],
+      "derived_examples": [
+        "U.S. crude or natural gas production estimate"
+      ]
+    },
+    {
+      "name": "WASDE ending stocks",
+      "groups": [
+        "Commodity Physical Balance"
+      ],
+      "source_candidates": [
+        "USDA public report/API candidate"
+      ],
+      "derived_examples": [
+        "USDA WASDE ending stocks for wheat, corn, soybeans, cotton"
+      ]
+    },
+    {
+      "name": "Weather / drought",
+      "groups": [
+        "Commodity Physical Balance"
+      ],
+      "source_candidates": [
+        "NOAA/NWS public weather lane"
+      ],
+      "derived_examples": [
+        "NOAA/NWS weather, drought monitor, rainfall, heat/freeze risk, and crop-region conditions where available"
+      ]
+    },
+    {
+      "name": "Weather HDD/CDD",
+      "groups": [
+        "Commodity Physical Balance"
+      ],
+      "source_candidates": [
+        "NOAA/NWS public weather lane"
+      ],
+      "derived_examples": [
+        "Heating-degree days, cooling-degree days, and public weather/forecast deviations where available"
+      ]
+    },
+    {
+      "name": "Yield curve",
+      "groups": [
+        "Rates / Policy"
+      ],
+      "source_candidates": [
+        "Treasury / official yield data"
+      ],
+      "derived_examples": [
+        "2Y minus 10Y, 5Y minus 30Y, or comparable curve slope"
+      ]
+    },
+    {
+      "name": "COT spec direction",
+      "groups": [
+        "Positioning"
+      ],
+      "source_candidates": [
+        "CFTC COT public report"
+      ],
+      "derived_examples": [
+        "Managed Money or Leveraged Funds net positioning as a share of open interest"
+      ]
+    },
+    {
+      "name": "COT spec weekly change",
+      "groups": [
+        "Positioning"
+      ],
+      "source_candidates": [
+        "CFTC COT public report"
+      ],
+      "derived_examples": [
+        "Weekly change in speculative net exposure"
+      ]
+    },
+    {
+      "name": "COT crowding risk",
+      "groups": [
+        "Positioning"
+      ],
+      "source_candidates": [
+        "CFTC COT public report"
+      ],
+      "derived_examples": [
+        "Speculative net positioning percentile/range within recent lookback"
+      ]
+    },
+    {
+      "name": "COT commercial / hedger extreme",
+      "groups": [
+        "Positioning"
+      ],
+      "source_candidates": [
+        "CFTC COT public report"
+      ],
+      "derived_examples": [
+        "Producer/Merchant/Processor/User net positioning percentile for commodity futures"
+      ]
+    },
+    {
+      "name": "COT spec-commercial conflict",
+      "groups": [
+        "Positioning"
+      ],
+      "source_candidates": [
+        "CFTC COT public report"
+      ],
+      "derived_examples": [
+        "Opposition between speculative and commercial/hedger net positioning"
+      ]
+    },
+    {
+      "name": "USDA crop condition",
+      "groups": [
+        "Commodity Physical Balance"
+      ],
+      "source_candidates": [
+        "USDA/NASS Quick Stats API"
+      ],
+      "derived_examples": [
+        "Good/excellent crop condition percentages and poor/very-poor ratings"
+      ]
+    },
+    {
+      "name": "USDA production estimate",
+      "groups": [
+        "Commodity Physical Balance"
+      ],
+      "source_candidates": [
+        "USDA/NASS Quick Stats API"
+      ],
+      "derived_examples": [
+        "National crop production estimates and year-over-year changes"
+      ]
+    },
+    {
+      "name": "USDA crop progress context",
+      "groups": [
+        "Commodity Physical Balance"
+      ],
+      "source_candidates": [
+        "USDA/NASS Quick Stats API"
+      ],
+      "derived_examples": [
+        "Planting, emergence, harvest, and other crop progress percentages"
+      ]
+    },
+    {
+      "id": "BLS_CPI_PRESSURE",
+      "name": "BLS CPI pressure",
+      "source_candidates": [
+        "BLS_PUBLIC"
+      ],
+      "definition": "Consumer inflation pressure from BLS CPI all-items index. Hot CPI usually supports inflation/rate pressure and can pressure risk assets through tighter-policy concerns."
+    },
+    {
+      "id": "BLS_CORE_CPI_PRESSURE",
+      "name": "BLS core CPI pressure",
+      "source_candidates": [
+        "BLS_PUBLIC"
+      ],
+      "definition": "Underlying consumer inflation pressure from CPI less food and energy. Sticky core CPI usually supports policy-rate pressure."
+    },
+    {
+      "id": "BLS_PPI_PRESSURE",
+      "name": "BLS PPI pressure",
+      "source_candidates": [
+        "BLS_PUBLIC"
+      ],
+      "definition": "Producer-price pressure from BLS PPI final demand. Hot PPI can feed cost and margin pressure."
+    },
+    {
+      "id": "BLS_UNEMPLOYMENT_RATE",
+      "name": "BLS unemployment rate",
+      "source_candidates": [
+        "BLS_PUBLIC"
+      ],
+      "definition": "Labor-market slack from BLS unemployment rate. Rising unemployment weakens labor/growth pressure and can raise recession risk."
+    },
+    {
+      "id": "BLS_PAYROLL_GROWTH",
+      "name": "BLS payroll growth",
+      "source_candidates": [
+        "BLS_PUBLIC"
+      ],
+      "definition": "Monthly nonfarm payroll change. Strong payrolls support growth/labor strength but can keep rate pressure firmer."
+    },
+    {
+      "id": "BLS_WAGE_PRESSURE",
+      "name": "BLS wage pressure",
+      "source_candidates": [
+        "BLS_PUBLIC"
+      ],
+      "definition": "Average hourly earnings wage pressure. Strong wages support incomes but can keep services inflation sticky."
+    }
+  ]
+}

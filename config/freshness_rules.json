@@ -1,0 +1,21 @@
+{
+  "notice": "Draft only. Freshness is relative to source update cadence.",
+  "rules": {
+    "daily_official_series": {
+      "fresh_days": 3,
+      "aging_days": 10
+    },
+    "weekly_release": {
+      "fresh_days": 8,
+      "aging_days": 21
+    },
+    "monthly_release": {
+      "fresh_days": 35,
+      "aging_days": 75
+    },
+    "quarterly_release": {
+      "fresh_days": 100,
+      "aging_days": 190
+    }
+  }
+}
