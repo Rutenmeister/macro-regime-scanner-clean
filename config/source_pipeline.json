@@ -69,12 +69,12 @@
     },
     {
       "id": "federal_reserve",
-      "enabled": false,
+      "enabled": true,
       "sourceId": "FEDERAL_RESERVE",
       "fetch": "scripts/sources/fetch_fed_macro.py",
       "apply": "scripts/apply_fed_lane.py",
       "requiresSecrets": [],
-      "status": "planned"
+      "status": "live"
     },
     {
       "id": "census",
