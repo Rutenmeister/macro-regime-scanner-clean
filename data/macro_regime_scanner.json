@@ -16,7 +16,7 @@
       "confidence": 83,
       "conflict": "Medium",
       "freshness": "Mixed",
-      "coverage": "public-source prototype | EIA energy fundamentals | BLS inflation/labor | EIA energy fundamentals | BLS inflation/labor | EIA energy fundamentals | BLS inflation/labor | BEA growth/PCE",
+      "coverage": "public-source prototype | EIA energy fundamentals | BLS inflation/labor | EIA energy fundamentals | BLS inflation/labor | EIA energy fundamentals | BLS inflation/labor | BEA growth/PCE | EIA energy fundamentals | BLS inflation/labor | BEA growth/PCE",
       "topDriver": "Rates / BLS / BEA / COT",
       "mainConflict": "Growth, inflation, and positioning must be read together",
       "watchNext": [
@@ -4223,7 +4223,7 @@
       "confidence": 65,
       "conflict": "Medium",
       "freshness": "Mixed",
-      "coverage": "public-source prototype | BLS inflation/labor | BLS inflation/labor | BLS inflation/labor | BEA growth/PCE",
+      "coverage": "public-source prototype | BLS inflation/labor | BLS inflation/labor | BLS inflation/labor | BEA growth/PCE | BLS inflation/labor | BEA growth/PCE",
       "topDriver": "Rates / BLS / BEA / COT",
       "mainConflict": "Growth, inflation, and positioning must be read together",
       "watchNext": [
@@ -4846,7 +4846,7 @@
       "confidence": 61,
       "conflict": "Medium",
       "freshness": "Mixed",
-      "coverage": "public-source prototype | BLS inflation/labor | BLS inflation/labor | BLS inflation/labor | BEA growth/PCE",
+      "coverage": "public-source prototype | BLS inflation/labor | BLS inflation/labor | BLS inflation/labor | BEA growth/PCE | BLS inflation/labor | BEA growth/PCE",
       "topDriver": "Rates / BLS / BEA / COT",
       "mainConflict": "Growth, inflation, and positioning must be read together",
       "watchNext": [
@@ -5469,7 +5469,7 @@
       "confidence": 71,
       "conflict": "Medium",
       "freshness": "Mixed",
-      "coverage": "public-source prototype | BLS inflation/labor | BLS inflation/labor | BLS inflation/labor | BEA growth/PCE",
+      "coverage": "public-source prototype | BLS inflation/labor | BLS inflation/labor | BLS inflation/labor | BEA growth/PCE | BLS inflation/labor | BEA growth/PCE",
       "topDriver": "Rates / BLS / BEA / COT",
       "mainConflict": "Growth, inflation, and positioning must be read together",
       "watchNext": [
@@ -6092,7 +6092,7 @@
       "confidence": 73,
       "conflict": "High",
       "freshness": "Mixed",
-      "coverage": "public-source prototype | BLS inflation/labor | BLS inflation/labor | BLS inflation/labor | BEA growth/PCE",
+      "coverage": "public-source prototype | BLS inflation/labor | BLS inflation/labor | BLS inflation/labor | BEA growth/PCE | BLS inflation/labor | BEA growth/PCE",
       "topDriver": "Rates / BLS / BEA / COT",
       "mainConflict": "Growth, inflation, and positioning must be read together",
       "watchNext": [
@@ -6715,7 +6715,7 @@
       "confidence": 67,
       "conflict": "Medium",
       "freshness": "Mixed",
-      "coverage": "public-source prototype | BLS inflation/labor | BLS inflation/labor | BLS inflation/labor | BEA growth/PCE",
+      "coverage": "public-source prototype | BLS inflation/labor | BLS inflation/labor | BLS inflation/labor | BEA growth/PCE | BLS inflation/labor | BEA growth/PCE",
       "topDriver": "Rates / BLS / BEA / COT",
       "mainConflict": "Growth, inflation, and positioning must be read together",
       "watchNext": [
@@ -11010,7 +11010,7 @@
       "confidence": 80,
       "conflict": "Medium",
       "freshness": "Mixed",
-      "coverage": "public-source prototype | EIA energy fundamentals | BLS inflation/labor | EIA energy fundamentals | BLS inflation/labor | EIA energy fundamentals | BLS inflation/labor | BEA growth/PCE",
+      "coverage": "public-source prototype | EIA energy fundamentals | BLS inflation/labor | EIA energy fundamentals | BLS inflation/labor | EIA energy fundamentals | BLS inflation/labor | BEA growth/PCE | EIA energy fundamentals | BLS inflation/labor | BEA growth/PCE",
       "topDriver": "Rates / BLS / BEA / COT",
       "mainConflict": "Growth, inflation, and positioning must be read together",
       "watchNext": [
@@ -11622,7 +11622,7 @@
       "confidence": 68,
       "conflict": "Medium",
       "freshness": "Mixed",
-      "coverage": "public-source prototype | EIA energy fundamentals | BLS inflation/labor | EIA energy fundamentals | BLS inflation/labor | EIA energy fundamentals | BLS inflation/labor | BEA growth/PCE",
+      "coverage": "public-source prototype | EIA energy fundamentals | BLS inflation/labor | EIA energy fundamentals | BLS inflation/labor | EIA energy fundamentals | BLS inflation/labor | BEA growth/PCE | EIA energy fundamentals | BLS inflation/labor | BEA growth/PCE",
       "topDriver": "Rates / BLS / BEA / COT",
       "mainConflict": "Growth, inflation, and positioning must be read together",
       "watchNext": [
@@ -12234,7 +12234,7 @@
       "confidence": 69,
       "conflict": "Medium",
       "freshness": "Mixed",
-      "coverage": "public-source prototype | EIA energy fundamentals | BLS inflation/labor | EIA energy fundamentals | BLS inflation/labor | EIA energy fundamentals | BLS inflation/labor | BEA growth/PCE",
+      "coverage": "public-source prototype | EIA energy fundamentals | BLS inflation/labor | EIA energy fundamentals | BLS inflation/labor | EIA energy fundamentals | BLS inflation/labor | BEA growth/PCE | EIA energy fundamentals | BLS inflation/labor | BEA growth/PCE",
       "topDriver": "Rates / BLS / BEA / COT",
       "mainConflict": "Growth, inflation, and positioning must be read together",
       "watchNext": [
@@ -15206,7 +15206,7 @@
       "confidence": 67,
       "conflict": "Medium",
       "freshness": "Mixed",
-      "coverage": "public-source prototype | BLS inflation/labor | BLS inflation/labor | BLS inflation/labor | BEA growth/PCE",
+      "coverage": "public-source prototype | BLS inflation/labor | BLS inflation/labor | BLS inflation/labor | BEA growth/PCE | BLS inflation/labor | BEA growth/PCE",
       "topDriver": "Growth / inflation / rates pressure",
       "mainConflict": "Growth support can conflict with inflation/rate pressure",
       "watchNext": [
@@ -15829,7 +15829,7 @@
       "confidence": 63,
       "conflict": "Medium",
       "freshness": "Mixed",
-      "coverage": "public-source prototype | BLS inflation/labor | BLS inflation/labor | BLS inflation/labor | BEA growth/PCE",
+      "coverage": "public-source prototype | BLS inflation/labor | BLS inflation/labor | BLS inflation/labor | BEA growth/PCE | BLS inflation/labor | BEA growth/PCE",
       "topDriver": "Growth / inflation / rates pressure",
       "mainConflict": "Growth support can conflict with inflation/rate pressure",
       "watchNext": [
@@ -16452,7 +16452,7 @@
       "confidence": 72,
       "conflict": "Medium",
       "freshness": "Mixed",
-      "coverage": "public-source prototype | BLS inflation/labor | BLS inflation/labor | BLS inflation/labor | BEA growth/PCE",
+      "coverage": "public-source prototype | BLS inflation/labor | BLS inflation/labor | BLS inflation/labor | BEA growth/PCE | BLS inflation/labor | BEA growth/PCE",
       "topDriver": "Growth / inflation / rates pressure",
       "mainConflict": "Growth support can conflict with inflation/rate pressure",
       "watchNext": [
@@ -17075,7 +17075,7 @@
       "confidence": 68,
       "conflict": "High",
       "freshness": "Mixed",
-      "coverage": "public-source prototype | BLS inflation/labor | BLS inflation/labor | BLS inflation/labor | BEA growth/PCE",
+      "coverage": "public-source prototype | BLS inflation/labor | BLS inflation/labor | BLS inflation/labor | BEA growth/PCE | BLS inflation/labor | BEA growth/PCE",
       "topDriver": "Growth / inflation / rates pressure",
       "mainConflict": "Growth support can conflict with inflation/rate pressure",
       "watchNext": [
@@ -17698,7 +17698,7 @@
       "confidence": 65,
       "conflict": "High",
       "freshness": "Mixed",
-      "coverage": "public-source prototype | BLS inflation/labor | BLS inflation/labor | BLS inflation/labor | BEA growth/PCE",
+      "coverage": "public-source prototype | BLS inflation/labor | BLS inflation/labor | BLS inflation/labor | BEA growth/PCE | BLS inflation/labor | BEA growth/PCE",
       "topDriver": "Growth / inflation / rates pressure",
       "mainConflict": "Growth support can conflict with inflation/rate pressure",
       "watchNext": [
@@ -18321,7 +18321,7 @@
       "confidence": 66,
       "conflict": "Medium",
       "freshness": "Mixed",
-      "coverage": "public-source prototype | BLS inflation/labor | BLS inflation/labor | BLS inflation/labor | BEA growth/PCE",
+      "coverage": "public-source prototype | BLS inflation/labor | BLS inflation/labor | BLS inflation/labor | BEA growth/PCE | BLS inflation/labor | BEA growth/PCE",
       "topDriver": "Growth / inflation / rates pressure",
       "mainConflict": "Growth support can conflict with inflation/rate pressure",
       "watchNext": [
@@ -18944,7 +18944,7 @@
       "confidence": 72,
       "conflict": "Medium",
       "freshness": "Mixed",
-      "coverage": "public-source prototype | BLS inflation/labor | BLS inflation/labor | BLS inflation/labor | BEA growth/PCE",
+      "coverage": "public-source prototype | BLS inflation/labor | BLS inflation/labor | BLS inflation/labor | BEA growth/PCE | BLS inflation/labor | BEA growth/PCE",
       "topDriver": "Growth / inflation / rates pressure",
       "mainConflict": "Growth support can conflict with inflation/rate pressure",
       "watchNext": [
@@ -19567,7 +19567,7 @@
       "confidence": 68,
       "conflict": "Medium",
       "freshness": "Mixed",
-      "coverage": "public-source prototype | BLS inflation/labor | BLS inflation/labor | BLS inflation/labor | BEA growth/PCE",
+      "coverage": "public-source prototype | BLS inflation/labor | BLS inflation/labor | BLS inflation/labor | BEA growth/PCE | BLS inflation/labor | BEA growth/PCE",
       "topDriver": "Growth / inflation / rates pressure",
       "mainConflict": "Growth support can conflict with inflation/rate pressure",
       "watchNext": [
@@ -20190,7 +20190,7 @@
       "confidence": 61,
       "conflict": "Medium",
       "freshness": "Mixed",
-      "coverage": "public-source prototype | BLS inflation/labor | BLS inflation/labor | BLS inflation/labor | BEA growth/PCE",
+      "coverage": "public-source prototype | BLS inflation/labor | BLS inflation/labor | BLS inflation/labor | BEA growth/PCE | BLS inflation/labor | BEA growth/PCE",
       "topDriver": "Growth / inflation / rates pressure",
       "mainConflict": "Growth support can conflict with inflation/rate pressure",
       "watchNext": [
@@ -26050,7 +26050,7 @@
       "confidence": 70,
       "conflict": "Medium",
       "freshness": "Mixed",
-      "coverage": "public-source prototype | EIA energy fundamentals | USDA agriculture fundamentals | BLS inflation/labor | EIA energy fundamentals | USDA agriculture fundamentals | BLS inflation/labor | EIA energy fundamentals | USDA agriculture fundamentals | BLS inflation/labor | BEA growth/PCE",
+      "coverage": "public-source prototype | EIA energy fundamentals | USDA agriculture fundamentals | BLS inflation/labor | EIA energy fundamentals | USDA agriculture fundamentals | BLS inflation/labor | EIA energy fundamentals | USDA agriculture fundamentals | BLS inflation/labor | BEA growth/PCE | EIA energy fundamentals | USDA agriculture fundamentals | BLS inflation/labor | BEA growth/PCE",
       "topDriver": "Public commodity fundamentals",
       "mainConflict": "Macro evidence mixed",
       "watchNext": [
@@ -26684,7 +26684,7 @@
       "confidence": 69,
       "conflict": "Medium",
       "freshness": "Mixed",
-      "coverage": "public-source prototype | EIA energy fundamentals | USDA agriculture fundamentals | BLS inflation/labor | EIA energy fundamentals | USDA agriculture fundamentals | BLS inflation/labor | EIA energy fundamentals | USDA agriculture fundamentals | BLS inflation/labor | BEA growth/PCE",
+      "coverage": "public-source prototype | EIA energy fundamentals | USDA agriculture fundamentals | BLS inflation/labor | EIA energy fundamentals | USDA agriculture fundamentals | BLS inflation/labor | EIA energy fundamentals | USDA agriculture fundamentals | BLS inflation/labor | BEA growth/PCE | EIA energy fundamentals | USDA agriculture fundamentals | BLS inflation/labor | BEA growth/PCE",
       "topDriver": "USDA crop condition / production",
       "mainConflict": "Read USDA supply signals with COT positioning and energy/input-cost context",
       "watchNext": [
@@ -30546,7 +30546,7 @@
     "TREASURY_OFFICIAL": {
       "status": "live_lane_ready",
       "latest_date": "2026-05-15",
-      "retrieved_at": "2026-05-17T01:58:17Z",
+      "retrieved_at": "2026-05-17T02:09:21Z",
       "note": "Official U.S. Treasury yield curve data. Rates are percentages and this lane is used as public-source rate pressure, not trade timing data."
     },
     "BLS_PUBLIC": {
@@ -30590,5 +30590,5 @@
       "note": "Use for public growth/consumer/trade context after higher-priority lanes."
     }
   },
-  "updated_at": "2026-05-17T01:58:17Z"
+  "updated_at": "2026-05-17T02:09:21Z"
 }
