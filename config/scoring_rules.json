@@ -1,12 +1,24 @@
 {
-  "notice": "Draft placeholders only. Do not treat as final methodology.",
+  "methodVersion": "v0.32-live-weighted-scoring",
+  "notice": "Asset header scores are recomputed from live public-source rows only. Prototype/sample/candidate/missing rows are displayed but excluded from scoring.",
   "scale": {
-    "+2": "strongly supportive",
-    "+1": "supportive",
-    "0": "neutral",
-    "-1": "negative",
-    "-2": "strongly negative",
-    "null": "missing/unavailable"
+    "+10_to_+5": "strong positive live pressure",
+    "+4_to_+2": "positive live pressure",
+    "+1_to_-1": "neutral, limited, or mixed live pressure",
+    "-2_to_-4": "negative live pressure",
+    "-5_to_-10": "strong negative live pressure"
   },
-  "rules": []
+  "eligibility": {
+    "counted": "fresh/live rows with numeric scores, real provenance, and enough asset relevance",
+    "excluded": "prototype, sample, candidate, missing, not applicable, low relevance, or display-only rows",
+    "context": "live rows retained for evidence but too indirect to affect the top score"
+  },
+  "principles": [
+    "The same U.S. macro input can score differently for U.S. equities, USD pairs, rates, gold, energy, agriculture, and foreign assets.",
+    "Treasury yield increases are direct support for yield-pressure assets but usually pressure U.S. equities and precious metals through discount-rate and real-yield channels.",
+    "U.S. inflation and labor strength primarily affect assets through Fed policy, real yields, dollar pressure, growth expectations, and risk appetite.",
+    "Energy scores prioritize EIA physical fundamentals and COT; broad macro rows are secondary or contextual.",
+    "Agriculture scores prioritize USDA, NOAA/weather, and COT; U.S. macro rows are mostly contextual.",
+    "Credit and financial stress rows receive high weight for risk assets and credit/liquidity assets."
+  ]
 }

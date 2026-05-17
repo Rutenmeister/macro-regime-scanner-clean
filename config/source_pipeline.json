@@ -1,10 +1,11 @@
 {
-  "pipelineVersion": "0.31",
-  "purpose": "Stable orchestrator pipeline. v0.31 adds NOAA/NWS weather-hazard lane through scripts/config without changing the GitHub workflow.",
+  "pipelineVersion": "0.32",
+  "purpose": "Stable orchestrator pipeline. v0.32 runs all enabled source lanes, then recomputes live-only source-weighted scores before validation.",
   "global": {
     "runValidation": true,
     "stopOnFailure": true,
-    "writeRefreshReport": true
+    "writeRefreshReport": true,
+    "runScoreRecompute": true
   },
   "lanes": [
     {

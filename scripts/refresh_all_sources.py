@@ -113,6 +113,10 @@ def main() -> int:
             lane_record["status"] = "ok" if not args.dry_run else "dry_run"
             report["lanes"].append(lane_record)
 
+        recompute_path = ROOT / "scripts" / "recompute_live_scores.py"
+        if recompute_path.exists():
+            report["scoreRecompute"] = run_script("scripts/recompute_live_scores.py", dry_run=args.dry_run)
+
         if pipeline.get("global", {}).get("runValidation", True):
             report["validation"] = run_script(str(VALIDATE_PATH.relative_to(ROOT)), dry_run=args.dry_run)
 
