@@ -1,7 +1,7 @@
 {
   "source_id": "USDA_PUBLIC",
   "source_name": "USDA National Agricultural Statistics Service Quick Stats API",
-  "retrieved_at": "2026-05-17T03:06:42+00:00",
+  "retrieved_at": "2026-05-17T03:14:38+00:00",
   "latest_date": "2026",
   "observation_count": 12,
   "observation_keys": [
