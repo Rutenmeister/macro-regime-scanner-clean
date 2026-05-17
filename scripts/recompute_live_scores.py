@@ -1,465 +1,401 @@
 #!/usr/bin/env python3
-"""Recompute Macro Regime Scanner asset scores from live source rows only.
+"""
+Macro Regime Scanner v0.34 - Explainable Scoring Engine
 
-v0.32 scoring rebuild principles:
-- do not count prototype/sample/candidate rows;
-- do not count missing/unavailable observations;
-- weight rows by source lane, asset class, and relevance;
-- treat U.S. macro data differently for U.S. equities, USD pairs,
-  foreign crosses, rates, gold, energy, and agriculture;
-- preserve row-level source text and add an asset-level scoreAudit object.
+Purpose:
+- Read a normalized macro regime scanner JSON file.
+- Apply asset-specific relevance and directional scoring rules.
+- Generate a scoreAudit object for every asset.
+- Preserve existing data as much as possible.
 
-This script intentionally does not fetch data. It runs after source fetch/apply
-scripts have populated live rows and before validation.
+Expected input shapes supported:
+1) {"assets": [...], "inputs": [...]} where inputs are shared rows.
+2) {"assets": [{..., "evidence": [...]}]} where each asset carries its own rows.
+3) A list of asset objects.
+
+Evidence row recommended fields:
+- id / input_id / key / type / category
+- value_score / signal / score / normalized_score in range -2..2 where positive means row's own raw pressure is rising/supportive
+- status / freshness / live_status
+- source / provenance
+- label / name
+
+This script intentionally treats missing or stale data as not scored.
 """
 from __future__ import annotations
 
+import argparse
+import copy
 import json
 import math
+from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any
+from typing import Any, Dict, List, Tuple
 
-ROOT = Path(__file__).resolve().parents[1]
-DATA_PATH = ROOT / "data" / "macro_regime_scanner.json"
-RULES_PATH = ROOT / "config" / "scoring_rules.json"
-
-USD_BASE = {"USDJPY", "USDCHF", "USDCAD"}
-USD_QUOTE = {"EURUSD", "GBPUSD", "AUDUSD", "NZDUSD"}
-FX_CROSSES = {"EURGBP", "EURJPY", "AUDJPY", "NZDJPY"}
-RATES = {"US02Y", "US05Y", "US10Y", "US30Y"}
-CURVES = {"CURVE2S10", "CURVE5S30"}
-INFLATION_MARKETS = {"REALY", "BE5Y", "BE10Y"}
-US_EQUITIES = {"SPX", "NDX", "RUT", "DOW"}
-GLOBAL_EQUITIES = {"DAX", "UK100", "NIKKEI", "CHINA50", "HANGSENG", "EM"}
-CREDIT = {"HY", "IG", "FCI"}
-PRECIOUS = {"GOLD", "SILVER"}
-INDUSTRIAL = {"COPPER"}
-ENERGY = {"WTI", "BRENT", "NG", "GASOLINE", "HEATING"}
-GRAINS = {"WHEAT", "CORN", "SOY"}
-SOFTS = {"COFFEE", "SUGAR", "COTTON"}
-BROAD_COMMODITY = {"BCOM"}
-
-LIVE_FRESHNESS = {"fresh", "live"}
-BAD_SOURCE_MARKERS = ["prototype", "sample", "candidate", "not connected", "placeholder"]
+BASE_DIR = Path(__file__).resolve().parents[1]
+DEFAULT_RULES = BASE_DIR / "config" / "scoring_rules.json"
+DEFAULT_MAP = BASE_DIR / "config" / "asset_input_map.json"
 
 
 def load_json(path: Path) -> Any:
-    return json.loads(path.read_text(encoding="utf-8"))
+    with path.open("r", encoding="utf-8") as f:
+        return json.load(f)
 
 
 def write_json(path: Path, data: Any) -> None:
-    path.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("w", encoding="utf-8") as f:
+        json.dump(data, f, indent=2, ensure_ascii=False)
+        f.write("\n")
 
 
-def safe_text(value: Any) -> str:
+def norm(s: Any) -> str:
+    return str(s or "").strip().lower().replace(" ", "_").replace("-", "_")
+
+
+def as_number(value: Any, default: float = 0.0) -> float:
     if value is None:
-        return ""
-    return str(value).strip()
+        return default
+    if isinstance(value, (int, float)) and math.isfinite(value):
+        return float(value)
+    try:
+        return float(str(value).replace("+", "").strip())
+    except Exception:
+        return default
 
 
-def clamp(value: float, lo: float, hi: float) -> float:
-    return max(lo, min(hi, value))
+def clamp(x: float, lo: float, hi: float) -> float:
+    return max(lo, min(hi, x))
 
 
-def asset_bucket(asset: dict[str, Any]) -> str:
-    aid = safe_text(asset.get("id"))
-    cls = safe_text(asset.get("assetClass"))
-    subgroup = safe_text(asset.get("subgroup")).lower()
-    if aid == "DXY":
-        return "usd_index"
-    if aid in USD_BASE:
-        return "usd_base_fx"
-    if aid in USD_QUOTE:
-        return "usd_quote_fx"
-    if aid in FX_CROSSES or cls == "FX":
-        return "fx_cross"
-    if aid in RATES:
+def get_signal(row: Dict[str, Any]) -> float:
+    """Return row's raw evidence pressure in -2..2 before asset directional map."""
+    for key in ("value_score", "signal", "normalized_score", "score", "pressure", "effect_score"):
+        if key in row and row[key] is not None:
+            return clamp(as_number(row[key]), -2, 2)
+
+    # Fallback textual interpretation. Kept conservative.
+    text = norm(row.get("effect") or row.get("direction") or row.get("bias") or row.get("label"))
+    if any(w in text for w in ("strong_positive", "very_positive", "bullish", "tightening_supply", "inventory_draw")):
+        return 2.0
+    if any(w in text for w in ("positive", "supportive", "higher", "rising", "hawkish")):
+        return 1.0
+    if any(w in text for w in ("strong_negative", "very_negative", "bearish", "inventory_build")):
+        return -2.0
+    if any(w in text for w in ("negative", "pressure", "lower", "falling", "dovish")):
+        return -1.0
+    return 0.0
+
+
+def get_input_key(row: Dict[str, Any]) -> str:
+    for key in ("input_key", "input_id", "id", "key", "type", "category", "lane"):
+        if row.get(key):
+            return norm(row[key])
+    name = norm(row.get("name") or row.get("label") or row.get("title"))
+    # broad fallback mapping based on words likely already in live rows
+    if "10y" in name or "treasury" in name or "yield" in name:
+        return "treasury_yield_pressure"
+    if "real_yield" in name or "real yield" in name:
+        return "real_yield_pressure"
+    if "cpi" in name or "pce" in name or "inflation" in name:
+        return "inflation_pressure"
+    if "fed" in name or "policy" in name or "rate" in name:
+        return "fed_hawkish_pressure"
+    if "credit" in name or "stress" in name or "financial_conditions" in name:
+        return "credit_stress"
+    if "liquidity" in name or "reserve" in name:
+        return "liquidity_pressure"
+    if "eia" in name or "crude" in name or "oil" in name or "inventory" in name:
+        return "eia_energy_balance"
+    if "usda" in name or "crop" in name or "wasde" in name:
+        return "usda_crop_balance"
+    if "noaa" in name or "weather" in name or "drought" in name or "freeze" in name:
+        return "noaa_weather_hazard"
+    if "cot" in name and ("gold" in name or "metal" in name):
+        return "cot_metal_positioning"
+    if "cot" in name and ("oil" in name or "energy" in name):
+        return "cot_energy_positioning"
+    if "cot" in name and ("wheat" in name or "corn" in name or "grain" in name or "ag" in name):
+        return "cot_ag_positioning"
+    if "cot" in name:
+        return "cot_equity_positioning"
+    if "gdp" in name or "retail" in name or "growth" in name or "bea" in name or "census" in name:
+        return "growth_strength"
+    if "labor" in name or "payroll" in name or "claims" in name or "unemployment" in name or "bls" in name:
+        return "labor_tightness"
+    return "unmapped"
+
+
+def is_live(row: Dict[str, Any], rules: Dict[str, Any]) -> Tuple[bool, float, str]:
+    status = norm(row.get("status") or row.get("freshness") or row.get("live_status") or row.get("source_status"))
+    policy = rules.get("freshness_policy", {})
+    fresh = set(policy.get("fresh_statuses", []))
+    aging = set(policy.get("aging_statuses", []))
+    stale = set(policy.get("stale_statuses", []))
+
+    if not status:
+        # If source exists and no status is provided, allow but mark as unverified-current.
+        if row.get("source") or row.get("provenance"):
+            return True, 1.0, "live_unverified_status"
+        return False, 0.0, "not_live_missing_status"
+    if status in fresh:
+        return True, 1.0, status
+    if status in aging:
+        return True, as_number(policy.get("aging_penalty", 0.75), 0.75), status
+    if status in stale:
+        return False, 0.0, status
+    if "fresh" in status or "live" in status or "current" in status:
+        return True, 1.0, status
+    if "aging" in status:
+        return True, as_number(policy.get("aging_penalty", 0.75), 0.75), status
+    return False, 0.0, status
+
+
+def classify_asset(asset: Dict[str, Any], mapping: Dict[str, Any]) -> str:
+    symbol = norm(asset.get("symbol") or asset.get("id") or asset.get("ticker") or asset.get("name"))
+    explicit = norm(asset.get("asset_class") or asset.get("class") or asset.get("group"))
+    classes = mapping.get("asset_classes", {})
+
+    if explicit in classes:
+        return explicit
+
+    for cls, spec in classes.items():
+        aliases = [norm(a) for a in spec.get("aliases", [])]
+        if symbol in aliases:
+            return cls
+        if any(symbol == a or symbol.startswith(a + "_") for a in aliases):
+            return cls
+
+    # conservative fallbacks
+    if any(k in symbol for k in ("spx", "nasdaq", "ndx", "russell")):
+        return "us_equity_index"
+    if any(k in symbol for k in ("10y", "2y", "yield")):
         return "us_rates"
-    if aid in CURVES:
-        return "yield_curve"
-    if aid in INFLATION_MARKETS:
-        return "inflation_market"
-    if aid in US_EQUITIES:
-        return "us_equity"
-    if aid in GLOBAL_EQUITIES or cls == "Equity Indices":
-        return "global_equity"
-    if aid in CREDIT or cls == "Credit / Liquidity":
-        return "credit_liquidity"
-    if aid in PRECIOUS or "precious" in subgroup:
+    if symbol in ("dxy", "usdollar", "usd") or symbol.startswith("usd"):
+        return "usd_fx"
+    if symbol.endswith("usd") and symbol not in ("xauusd", "xagusd"):
+        return "foreign_usd_pair"
+    if any(k in symbol for k in ("gold", "xau", "silver", "xag")):
         return "precious_metals"
-    if aid in INDUSTRIAL:
-        return "industrial_metals"
-    if aid in ENERGY or "energy" in subgroup:
-        return "energy"
-    if aid in GRAINS or "grain" in subgroup:
-        return "grains"
-    if aid in SOFTS or "soft" in subgroup:
-        return "softs"
-    if aid in BROAD_COMMODITY:
-        return "broad_commodity"
-    if cls == "Commodities":
-        return "commodity"
-    return "other"
+    if any(k in symbol for k in ("wti", "brent", "oil", "crude", "natgas")):
+        return "energy_commodity"
+    if any(k in symbol for k in ("wheat", "corn", "soy")):
+        return "agriculture_commodity"
+    return "unmapped"
 
 
-def source_lane(factor: dict[str, Any]) -> str:
-    text = " ".join([
-        safe_text(factor.get("group")),
-        safe_text(factor.get("name")),
-        safe_text(factor.get("source")),
-    ]).lower()
-    if "treasury" in text or "yield curve" in text or "10y yield" in text or "2y yield" in text:
-        return "treasury"
-    if "cot" in text or "commitments of traders" in text or "cftc" in text:
-        return "cot"
-    if "eia" in text or "energy information administration" in text:
-        return "eia"
-    if "usda" in text or "nass" in text or "crop" in text:
-        return "usda"
-    if "bls" in text or "bureau of labor statistics" in text or "cpi" in text or "ppi" in text or "payroll" in text or "unemployment" in text:
-        return "bls"
-    if "bea" in text or "pce" in text or "gdp" in text or "personal income" in text:
-        return "bea"
-    if "federal reserve" in text or "fed " in text or "reverse repo" in text or "reserve balances" in text:
-        return "fed"
-    if "census" in text or "retail sales" in text or "housing" in text or "durable" in text or "trade balance" in text:
-        return "census"
-    if "credit" in text or "financial stress" in text or "financial conditions" in text or "st. louis financial stress" in text:
-        return "financial_stress"
-    if "noaa" in text or "weather" in text or "flood" in text or "storm" in text or "drought" in text:
-        return "noaa"
-    return "unknown"
+def get_rule(asset_class: str, input_key: str, mapping: Dict[str, Any]) -> Dict[str, Any]:
+    cls_rules = mapping.get("asset_classes", {}).get(asset_class, {}).get("rules", {})
+    return copy.deepcopy(cls_rules.get(input_key) or mapping.get("default_rule", {"direction": 0, "weight": "excluded", "reason": "Unmapped."}))
 
 
-def is_live_factor(factor: dict[str, Any]) -> tuple[bool, str]:
-    score = factor.get("score")
-    if score is None or not isinstance(score, (int, float)):
-        return False, "missing numeric score"
-    if safe_text(factor.get("status")).lower() in {"missing", "n/a"}:
-        return False, "missing status"
-    if safe_text(factor.get("relevance")) in {"Not applicable", "Low relevance"}:
-        return False, "not applicable or low relevance"
-    freshness = safe_text(factor.get("freshness")).lower()
-    source = safe_text(factor.get("source")).lower()
-    derived = safe_text(factor.get("derived")).lower()
-    if freshness not in LIVE_FRESHNESS and not freshness.startswith("fresh"):
-        return False, f"not live freshness: {freshness or 'blank'}"
-    combined = " ".join([source, derived, freshness])
-    if any(marker in combined for marker in BAD_SOURCE_MARKERS):
-        return False, "prototype/candidate/sample source"
-    if not source or not derived:
-        return False, "missing source or derived text"
-    if "missing" in derived[:120] or "did not provide" in derived[:160]:
-        return False, "missing observation"
-    return True, "live"
+def label_score(net: float, counted: int, confidence: str, rules: Dict[str, Any]) -> str:
+    if confidence == "Insufficient":
+        return "Insufficient live direct evidence"
+    for item in rules.get("score_labels", []):
+        if net >= as_number(item.get("min"), -999):
+            return item.get("label", "Mixed live evidence")
+    return "Mixed live evidence"
 
 
-def relevance_weight(factor: dict[str, Any]) -> float:
-    return {
-        "Primary": 1.00,
-        "Secondary": 0.62,
-        "Contextual": 0.28,
-        "Low relevance": 0.08,
-        "Not applicable": 0.0,
-    }.get(safe_text(factor.get("relevance")), 0.25)
-
-
-def lane_weight(lane: str, bucket: str, factor: dict[str, Any]) -> float:
-    name = safe_text(factor.get("name")).lower()
-    # Defaults assume the row score already carries source-specific direction.
-    table: dict[str, dict[str, float]] = {
-        "treasury": {
-            "us_rates": 1.30, "yield_curve": 1.25, "inflation_market": 0.95,
-            "usd_index": 0.90, "usd_base_fx": 0.82, "usd_quote_fx": 0.82, "fx_cross": 0.18,
-            "us_equity": 1.05, "global_equity": 0.48, "credit_liquidity": 0.80,
-            "precious_metals": 1.10, "industrial_metals": 0.35, "energy": 0.20,
-            "grains": 0.12, "softs": 0.12, "broad_commodity": 0.24, "commodity": 0.18,
-        },
-        "bls": {
-            "us_rates": 1.05, "yield_curve": 0.70, "inflation_market": 1.00,
-            "usd_index": 0.90, "usd_base_fx": 0.80, "usd_quote_fx": 0.80, "fx_cross": 0.18,
-            "us_equity": 0.90, "global_equity": 0.42, "credit_liquidity": 0.70,
-            "precious_metals": 0.80, "industrial_metals": 0.32, "energy": 0.28,
-            "grains": 0.18, "softs": 0.16, "broad_commodity": 0.35, "commodity": 0.22,
-        },
-        "bea": {
-            "us_rates": 0.72, "yield_curve": 0.55, "inflation_market": 0.70,
-            "usd_index": 0.65, "usd_base_fx": 0.58, "usd_quote_fx": 0.58, "fx_cross": 0.15,
-            "us_equity": 0.85, "global_equity": 0.38, "credit_liquidity": 0.55,
-            "precious_metals": 0.45, "industrial_metals": 0.52, "energy": 0.48,
-            "grains": 0.18, "softs": 0.18, "broad_commodity": 0.46, "commodity": 0.32,
-        },
-        "fed": {
-            "us_rates": 1.05, "yield_curve": 0.75, "inflation_market": 0.95,
-            "usd_index": 0.85, "usd_base_fx": 0.78, "usd_quote_fx": 0.78, "fx_cross": 0.18,
-            "us_equity": 1.05, "global_equity": 0.50, "credit_liquidity": 1.10,
-            "precious_metals": 0.90, "industrial_metals": 0.32, "energy": 0.25,
-            "grains": 0.12, "softs": 0.12, "broad_commodity": 0.24, "commodity": 0.18,
-        },
-        "financial_stress": {
-            "us_rates": 0.55, "yield_curve": 0.45, "inflation_market": 0.35,
-            "usd_index": 0.62, "usd_base_fx": 0.52, "usd_quote_fx": 0.52, "fx_cross": 0.22,
-            "us_equity": 1.25, "global_equity": 0.72, "credit_liquidity": 1.45,
-            "precious_metals": 0.62, "industrial_metals": 0.54, "energy": 0.42,
-            "grains": 0.20, "softs": 0.18, "broad_commodity": 0.42, "commodity": 0.34,
-        },
-        "cot": {
-            "us_rates": 0.72, "yield_curve": 0.30, "inflation_market": 0.40,
-            "usd_index": 0.72, "usd_base_fx": 0.72, "usd_quote_fx": 0.72, "fx_cross": 0.42,
-            "us_equity": 0.72, "global_equity": 0.32, "credit_liquidity": 0.25,
-            "precious_metals": 1.05, "industrial_metals": 1.05, "energy": 1.05,
-            "grains": 1.05, "softs": 1.05, "broad_commodity": 0.65, "commodity": 0.85,
-        },
-        "eia": {
-            "us_rates": 0.12, "yield_curve": 0.12, "inflation_market": 0.22,
-            "usd_index": 0.16, "usd_base_fx": 0.14, "usd_quote_fx": 0.14, "fx_cross": 0.08,
-            "us_equity": 0.20, "global_equity": 0.18, "credit_liquidity": 0.16,
-            "precious_metals": 0.16, "industrial_metals": 0.24, "energy": 1.35,
-            "grains": 0.22, "softs": 0.18, "broad_commodity": 0.72, "commodity": 0.42,
-        },
-        "usda": {
-            "us_rates": 0.08, "yield_curve": 0.06, "inflation_market": 0.16,
-            "usd_index": 0.06, "usd_base_fx": 0.06, "usd_quote_fx": 0.06, "fx_cross": 0.04,
-            "us_equity": 0.08, "global_equity": 0.08, "credit_liquidity": 0.05,
-            "precious_metals": 0.08, "industrial_metals": 0.08, "energy": 0.14,
-            "grains": 1.35, "softs": 0.90, "broad_commodity": 0.55, "commodity": 0.70,
-        },
-        "noaa": {
-            "us_rates": 0.06, "yield_curve": 0.04, "inflation_market": 0.12,
-            "usd_index": 0.05, "usd_base_fx": 0.05, "usd_quote_fx": 0.05, "fx_cross": 0.04,
-            "us_equity": 0.10, "global_equity": 0.08, "credit_liquidity": 0.08,
-            "precious_metals": 0.06, "industrial_metals": 0.08, "energy": 0.75,
-            "grains": 1.05, "softs": 0.90, "broad_commodity": 0.40, "commodity": 0.55,
-        },
-        "census": {
-            "us_rates": 0.55, "yield_curve": 0.42, "inflation_market": 0.28,
-            "usd_index": 0.48, "usd_base_fx": 0.42, "usd_quote_fx": 0.42, "fx_cross": 0.12,
-            "us_equity": 0.75, "global_equity": 0.34, "credit_liquidity": 0.45,
-            "precious_metals": 0.24, "industrial_metals": 0.58, "energy": 0.45,
-            "grains": 0.14, "softs": 0.14, "broad_commodity": 0.42, "commodity": 0.30,
-        },
-        "unknown": {},
-    }
-    weight = table.get(lane, {}).get(bucket, 0.18)
-    # COT crowding/conflict/commercial rows are important but not equal to direct spec-direction rows.
-    if lane == "cot" and any(k in name for k in ["crowding", "commercial", "conflict"]):
-        weight *= 0.60
-    # Weather generic active alerts are less direct than specifically hot/cold/drought/flood/hurricane rows.
-    if lane == "noaa" and "active weather hazards" in name:
-        weight *= 0.55
-    return weight
-
-
-def directional_score(asset: dict[str, Any], factor: dict[str, Any]) -> float:
-    """Return asset-specific score using row score plus selected directional overrides."""
-    raw = float(factor.get("score", 0) or 0)
-    aid = safe_text(asset.get("id"))
-    bucket = asset_bucket(asset)
-    lane = source_lane(factor)
-    name = safe_text(factor.get("name")).lower()
-
-    # Treasury contextual rows often carry the raw yield direction. Convert that direction
-    # to asset pressure rather than treating higher rates as positive for every asset.
-    if lane == "treasury" and ("yield" in name or "treasury" in name):
-        if bucket in {"us_rates", "yield_curve", "inflation_market"}:
-            return raw
-        if bucket in {"usd_index", "usd_base_fx"}:
-            return raw
-        if bucket == "usd_quote_fx":
-            return -raw
-        if bucket in {"us_equity", "global_equity", "credit_liquidity", "precious_metals", "industrial_metals"}:
-            return -raw
-        if bucket in {"energy", "grains", "softs", "broad_commodity", "commodity"}:
-            return -0.35 * raw
-        return 0.0
-
-    # U.S.-centric macro rows should not directly score non-USD FX crosses hard.
-    if bucket == "fx_cross" and lane in {"treasury", "bls", "bea", "fed", "census"}:
-        return 0.0
-
-    # Financial stress rows are usually negative for risk assets, positive for stress assets.
-    # Source apply scripts already try to express this; keep their sign unless the asset is a
-    # pure safe-haven/precious-metal context where stress is mixed.
-    if lane == "financial_stress" and bucket == "precious_metals":
-        return raw * 0.75
-
-    return raw
-
-
-def classify_row(asset: dict[str, Any], factor: dict[str, Any]) -> tuple[str, str]:
-    live, reason = is_live_factor(factor)
-    if not live:
-        return "not_live", reason
-    bucket = asset_bucket(asset)
-    lane = source_lane(factor)
-    lw = lane_weight(lane, bucket, factor)
-    rw = relevance_weight(factor)
-    total_weight = lw * rw
-    if total_weight >= 0.45:
-        return "live_scored", "direct/relevant live row"
-    if total_weight >= 0.12:
-        return "live_context", "live context row, below scoring threshold"
-    return "display_only", "too indirect for scoring"
-
-
-def status_from_score(score: int) -> str:
-    if score >= 2:
-        return "Strong support"
-    if score == 1:
-        return "Support"
-    if score == -1:
-        return "Pressure"
-    if score <= -2:
-        return "Strong pressure"
-    return "Neutral"
-
-
-def bias_from_score(score: int, counted: int, direct_count: int, pos: float, neg: float) -> str:
-    if counted == 0 or direct_count == 0:
-        return "Insufficient Live Direct Evidence"
-    if abs(score) <= 1 and pos >= 0.75 and neg >= 0.75:
-        return "Mixed Live Evidence"
-    if score >= 5:
-        return "Strong Positive Live Pressure"
-    if score >= 2:
-        return "Positive Live Pressure"
-    if score <= -5:
-        return "Strong Negative Live Pressure"
-    if score <= -2:
-        return "Negative Live Pressure"
-    return "Neutral / Limited Live Pressure"
-
-
-def conflict_from_weights(pos: float, neg: float, score: int) -> str:
-    if pos >= 2.0 and neg >= 2.0 and abs(score) <= 2:
+def confidence(counted: int, direct: int, coverage: float, rules: Dict[str, Any]) -> str:
+    cr = rules.get("confidence_rules", {})
+    high = cr.get("high", {})
+    med = cr.get("medium", {})
+    low = cr.get("low", {})
+    if counted >= high.get("min_counted_rows", 7) and direct >= high.get("min_direct_rows", 4) and coverage >= high.get("min_coverage", 0.7):
         return "High"
-    if pos >= 1.0 and neg >= 1.0:
+    if counted >= med.get("min_counted_rows", 4) and direct >= med.get("min_direct_rows", 2) and coverage >= med.get("min_coverage", 0.45):
         return "Medium"
-    return "Low"
+    if counted >= low.get("min_counted_rows", 2) and direct >= low.get("min_direct_rows", 1) and coverage >= low.get("min_coverage", 0.25):
+        return "Low"
+    return "Insufficient"
 
 
-def top_label(row: dict[str, Any]) -> str:
-    return f"{row['name']} ({row['sourceLane']}, {row['contribution']:+.2f})"
-
-
-def recompute_asset(asset: dict[str, Any]) -> None:
-    bucket = asset_bucket(asset)
-    counted: list[dict[str, Any]] = []
-    excluded: list[dict[str, Any]] = []
-    live_context: list[dict[str, Any]] = []
-
-    for idx, factor in enumerate(asset.get("factors", [])):
-        lane = source_lane(factor)
-        cls, reason = classify_row(asset, factor)
-        raw = factor.get("score") if isinstance(factor.get("score"), (int, float)) else 0
-        transformed = directional_score(asset, factor) if cls in {"live_scored", "live_context"} else 0.0
-        weight = lane_weight(lane, bucket, factor) * relevance_weight(factor)
-        contribution = transformed * weight
-        factor["scoreRole"] = cls
-        factor["scoreWeight"] = round(weight, 3) if cls == "live_scored" else 0
-        factor["scoreContribution"] = round(contribution, 3) if cls == "live_scored" else 0
-        factor["scoreReason"] = reason
-
-        record = {
-            "index": idx,
-            "name": safe_text(factor.get("name")),
-            "group": safe_text(factor.get("group")),
-            "sourceLane": lane,
-            "relevance": safe_text(factor.get("relevance")),
-            "rawScore": raw,
-            "assetAdjustedScore": round(transformed, 3),
-            "weight": round(weight, 3),
-            "contribution": round(contribution, 3),
-            "reason": reason,
-        }
-        if cls == "live_scored":
-            counted.append(record)
-        elif cls == "live_context":
-            live_context.append(record)
-        else:
-            excluded.append(record)
-
-    net = sum(row["contribution"] for row in counted)
-    final_score = int(clamp(round(net), -10, 10))
-    pos = sum(max(0.0, row["contribution"]) for row in counted)
-    neg = abs(sum(min(0.0, row["contribution"]) for row in counted))
-    direct_count = sum(1 for row in counted if row["weight"] >= 0.45)
-    sorted_counted = sorted(counted, key=lambda r: abs(r["contribution"]), reverse=True)
-    positives = [r for r in sorted_counted if r["contribution"] > 0]
-    negatives = [r for r in sorted_counted if r["contribution"] < 0]
-
-    asset["previousScore"] = asset.get("score", 0) if isinstance(asset.get("score"), (int, float)) else 0
-    asset["score"] = final_score
-    asset["bias"] = bias_from_score(final_score, len(counted), direct_count, pos, neg)
-    asset["conflict"] = conflict_from_weights(pos, neg, final_score)
-    asset["freshness"] = "Fresh" if counted else "Mixed"
-    asset["coverage"] = f"Live-scored {len(counted)} rows; context-only {len(live_context)}; excluded/not-live {len(excluded)}."
-    if sorted_counted:
-        asset["topDriver"] = top_label(sorted_counted[0])
-    else:
-        asset["topDriver"] = "No live-scored direct driver yet"
-    if positives and negatives:
-        main_conflict = f"{top_label(positives[0])} vs {top_label(negatives[0])}"
-    elif len(sorted_counted) > 1:
-        main_conflict = "Low conflict among counted live rows"
-    else:
-        main_conflict = "Insufficient counted live evidence"
-    asset["mainConflict"] = main_conflict
-    base_conf = 22 + min(48, len(counted) * 5) + min(15, direct_count * 4) + min(8, abs(final_score) * 1.2)
-    if asset["conflict"] == "High":
-        base_conf -= 12
-    elif asset["conflict"] == "Medium":
-        base_conf -= 6
-    if len(counted) == 0:
-        base_conf = 18
-    asset["confidence"] = int(clamp(round(base_conf), 10, 88))
-    if counted:
-        direction_word = "positive" if final_score > 0 else "negative" if final_score < 0 else "mixed/neutral"
-        asset["quick"] = (
-            f"Live-only scoring shows {direction_word} pressure from {len(counted)} counted rows. "
-            f"Top driver: {asset['topDriver']}. Aggregate score is provisional, source-weighted, and excludes non-live rows."
-        )
-    else:
-        asset["quick"] = "No live-scored direct evidence is available for this asset yet; displayed rows remain context/provenance only."
-
-    watch = []
-    for row in sorted_counted[:4]:
-        if row["name"] and row["name"] not in watch:
-            watch.append(row["name"])
-    while len(watch) < 3:
-        watch.append("Next source refresh")
-    asset["watchNext"] = watch[:5]
-    asset["scoreAudit"] = {
-        "methodVersion": "v0.32-live-weighted-scoring",
-        "assetBucket": bucket,
-        "countedRows": len(counted),
-        "contextRows": len(live_context),
-        "excludedRows": len(excluded),
-        "positiveContribution": round(pos, 3),
-        "negativeContribution": round(neg, 3),
-        "netContribution": round(net, 3),
-        "finalScore": final_score,
-        "topPositiveDrivers": positives[:5],
-        "topNegativeDrivers": negatives[:5],
-        "countedDetails": sorted_counted[:20],
-        "contextExamples": live_context[:10],
-        "excludedExamples": excluded[:10],
+def summarize_driver(row: Dict[str, Any], contribution: float, rule: Dict[str, Any], input_key: str) -> Dict[str, Any]:
+    return {
+        "inputKey": input_key,
+        "label": row.get("label") or row.get("name") or row.get("title") or input_key,
+        "contribution": round(contribution, 3),
+        "rawSignal": get_signal(row),
+        "weight": rule.get("weight"),
+        "reason": rule.get("reason", ""),
+        "source": row.get("source") or row.get("provenance") or row.get("derived_from") or "Unspecified source"
     }
 
 
-def main() -> int:
-    data = load_json(DATA_PATH)
-    for asset in data.get("assets", []):
-        recompute_asset(asset)
-    data["data_mode"] = "live-public-source-weighted-scoring-v0.32"
-    data["notice"] = (
-        "v0.32 recomputes asset headers from live source rows only using source/asset-specific weights. "
-        "Prototype, sample, candidate, missing, low-relevance, and display-only rows are excluded from score."
-    )
-    write_json(DATA_PATH, data)
-    print(f"Recomputed live weighted scores for {len(data.get('assets', []))} assets.")
-    return 0
+def compute_audit(asset: Dict[str, Any], evidence_rows: List[Dict[str, Any]], rules: Dict[str, Any], mapping: Dict[str, Any]) -> Dict[str, Any]:
+    weights = rules.get("weights", {})
+    asset_class = classify_asset(asset, mapping)
+    counted: List[Dict[str, Any]] = []
+    context: List[Dict[str, Any]] = []
+    excluded: List[Dict[str, Any]] = []
+    positive = 0.0
+    negative = 0.0
+    direct_rows = 0
+
+    for row in evidence_rows:
+        row = copy.deepcopy(row)
+        input_key = get_input_key(row)
+        rule = get_rule(asset_class, input_key, mapping)
+        weight_name = rule.get("weight", "excluded")
+        weight = as_number(weights.get(weight_name, 0), 0)
+        direction = as_number(rule.get("direction", 0), 0)
+        live, freshness_mult, live_reason = is_live(row, rules)
+        raw = get_signal(row)
+
+        if not live:
+            row["scoringStatus"] = "not_live"
+            row["excludedReason"] = f"Not live or stale: {live_reason}"
+            row["inputKey"] = input_key
+            excluded.append(row)
+            continue
+
+        if weight <= 0 or direction == 0:
+            row["scoringStatus"] = "display_only"
+            row["excludedReason"] = rule.get("reason", "Display only / no explicit score mapping.")
+            row["inputKey"] = input_key
+            excluded.append(row)
+            continue
+
+        contribution = raw * direction * weight * freshness_mult
+        row["inputKey"] = input_key
+        row["mappedWeight"] = weight_name
+        row["mappedDirection"] = direction
+        row["contribution"] = round(contribution, 3)
+        row["mappingReason"] = rule.get("reason", "")
+
+        if weight_name in ("contextual", "low"):
+            row["scoringStatus"] = "live_context"
+            context.append(row)
+            # v0.34: contextual/low rows are shown as context, not counted.
+            continue
+
+        row["scoringStatus"] = "live_scored"
+        counted.append(row)
+        if weight_name in ("primary", "secondary"):
+            direct_rows += 1
+        if contribution >= 0:
+            positive += contribution
+        else:
+            negative += contribution
+
+    total_abs = abs(positive) + abs(negative)
+    conflict_ratio = (min(abs(positive), abs(negative)) / total_abs) if total_abs else 0.0
+    coverage_den = len(evidence_rows) if evidence_rows else 1
+    coverage = len(counted) / coverage_den
+    conf = confidence(len(counted), direct_rows, coverage, rules)
+    net = positive + negative
+
+    pos_drivers = sorted([summarize_driver(r, r.get("contribution", 0), get_rule(asset_class, r.get("inputKey"), mapping), r.get("inputKey")) for r in counted if r.get("contribution", 0) > 0], key=lambda x: x["contribution"], reverse=True)[:5]
+    neg_drivers = sorted([summarize_driver(r, r.get("contribution", 0), get_rule(asset_class, r.get("inputKey"), mapping), r.get("inputKey")) for r in counted if r.get("contribution", 0) < 0], key=lambda x: x["contribution"])[:5]
+
+    conflict_level = "Low"
+    crules = rules.get("conflict_rules", {})
+    if conflict_ratio >= as_number(crules.get("high_conflict_threshold", 0.55), 0.55):
+        conflict_level = "High"
+    elif conflict_ratio >= as_number(crules.get("medium_conflict_threshold", 0.3), 0.3):
+        conflict_level = "Medium"
+
+    main_conflicts = []
+    if positive > 0 and negative < 0:
+        main_conflicts.append({
+            "label": f"{conflict_level} internal evidence conflict",
+            "detail": f"Positive scored pressure {positive:.2f} vs negative scored pressure {negative:.2f}."
+        })
+    if context:
+        main_conflicts.append({"label": "Context not counted", "detail": f"{len(context)} live context rows were visible but not counted in v0.34."})
+
+    return {
+        "asset": asset.get("symbol") or asset.get("id") or asset.get("name"),
+        "assetClass": asset_class,
+        "label": label_score(net, len(counted), conf, rules),
+        "confidence": conf,
+        "coverage": round(coverage, 3),
+        "countedRows": len(counted),
+        "contextRows": len(context),
+        "excludedRows": len(excluded),
+        "directRows": direct_rows,
+        "positiveWeight": round(positive, 3),
+        "negativeWeight": round(negative, 3),
+        "netScore": round(net, 3),
+        "conflictLevel": conflict_level,
+        "conflictRatio": round(conflict_ratio, 3),
+        "topPositiveDrivers": pos_drivers,
+        "topNegativeDrivers": neg_drivers,
+        "mainConflicts": main_conflicts,
+        "countedEvidence": counted,
+        "contextEvidence": context,
+        "excludedEvidence": excluded,
+        "caveats": [
+            "This is evidence pressure, not a trade signal.",
+            "Missing or stale evidence is excluded, not treated as neutral.",
+            "U.S. macro evidence is weighted differently by asset class.",
+            "Asset-specific exceptions may require manual tuning."
+        ]
+    }
+
+
+def extract_assets_and_evidence(data: Any) -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]], str]:
+    if isinstance(data, list):
+        return data, [], "list"
+    if isinstance(data, dict):
+        assets = data.get("assets") or data.get("markets") or data.get("regimes") or []
+        shared = data.get("inputs") or data.get("evidence") or data.get("rows") or data.get("live_inputs") or []
+        return assets, shared, "dict"
+    raise ValueError("Unsupported input JSON shape.")
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--input", required=True, help="Path to existing macro_regime_scanner JSON")
+    parser.add_argument("--output", required=True, help="Path to write enriched JSON")
+    parser.add_argument("--rules", default=str(DEFAULT_RULES))
+    parser.add_argument("--map", default=str(DEFAULT_MAP))
+    args = parser.parse_args()
+
+    data = load_json(Path(args.input))
+    rules = load_json(Path(args.rules))
+    mapping = load_json(Path(args.map))
+    assets, shared_evidence, shape = extract_assets_and_evidence(data)
+
+    enriched_assets = []
+    for asset in assets:
+        asset_copy = copy.deepcopy(asset)
+        asset_evidence = asset_copy.get("evidence") or asset_copy.get("rows") or asset_copy.get("inputs") or shared_evidence
+        if not isinstance(asset_evidence, list):
+            asset_evidence = []
+        audit = compute_audit(asset_copy, asset_evidence, rules, mapping)
+        asset_copy["scoreAudit"] = audit
+        asset_copy["score"] = audit["netScore"]
+        asset_copy["pressureLabel"] = audit["label"]
+        asset_copy["confidence"] = audit["confidence"]
+        asset_copy["conflict"] = audit["conflictLevel"]
+        enriched_assets.append(asset_copy)
+
+    if shape == "list":
+        out = enriched_assets
+    else:
+        out = copy.deepcopy(data)
+        if "assets" in out:
+            out["assets"] = enriched_assets
+        elif "markets" in out:
+            out["markets"] = enriched_assets
+        elif "regimes" in out:
+            out["regimes"] = enriched_assets
+        else:
+            out["assets"] = enriched_assets
+        out.setdefault("metadata", {})
+        out["metadata"].update({
+            "scoringVersion": "0.34",
+            "scoringName": "Explainable Scoring Baseline",
+            "scoringGeneratedAt": datetime.now(timezone.utc).isoformat(),
+            "scoringNote": "Scores are asset-specific evidence pressure readings, not buy/sell signals."
+        })
+
+    write_json(Path(args.output), out)
+    print(f"[OK] wrote {args.output} with {len(enriched_assets)} enriched assets")
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    main()

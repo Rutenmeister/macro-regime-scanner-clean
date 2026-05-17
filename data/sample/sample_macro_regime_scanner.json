@@ -1,0 +1,24 @@
+{
+  "metadata": {
+    "name": "Macro Regime Scanner sample for v0.34 scoring audit",
+    "note": "Synthetic sample rows for testing the scoring engine only. Do not use as market data."
+  },
+  "inputs": [
+    {"id": "treasury_yield_pressure", "label": "10Y Treasury yield pressure", "signal": 1.4, "freshness": "fresh", "source": "U.S. Treasury official Daily Treasury Par Yield Curve Rates"},
+    {"id": "inflation_pressure", "label": "CPI / inflation pressure", "signal": 1.2, "freshness": "fresh", "source": "BLS CPI"},
+    {"id": "credit_stress", "label": "Credit / financial stress", "signal": 0.8, "freshness": "fresh", "source": "Public credit stress lane"},
+    {"id": "liquidity_pressure", "label": "Liquidity support", "signal": 0.6, "freshness": "fresh", "source": "Federal Reserve liquidity lane"},
+    {"id": "eia_energy_balance", "label": "EIA crude inventory balance", "signal": 1.7, "freshness": "fresh", "source": "EIA petroleum status lane"},
+    {"id": "usda_crop_balance", "label": "USDA crop balance pressure", "signal": 1.1, "freshness": "fresh", "source": "USDA/NASS lane"},
+    {"id": "noaa_weather_hazard", "label": "NOAA drought / weather hazard", "signal": 1.6, "freshness": "fresh", "source": "NOAA/NWS hazards lane"},
+    {"id": "growth_strength", "label": "Growth / demand strength", "signal": 0.7, "freshness": "aging", "source": "BEA/Census/BLS macro lane"}
+  ],
+  "assets": [
+    {"symbol": "SPX500", "name": "S&P 500", "asset_class": "us_equity_index"},
+    {"symbol": "DXY", "name": "U.S. Dollar Index", "asset_class": "usd_fx"},
+    {"symbol": "EURUSD", "name": "Euro / U.S. Dollar", "asset_class": "foreign_usd_pair"},
+    {"symbol": "XAUUSD", "name": "Gold", "asset_class": "precious_metals"},
+    {"symbol": "WTI", "name": "WTI Crude Oil", "asset_class": "energy_commodity"},
+    {"symbol": "WHEAT", "name": "Wheat", "asset_class": "agriculture_commodity"}
+  ]
+}

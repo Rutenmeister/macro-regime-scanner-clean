@@ -1,24 +1,49 @@
 {
-  "methodVersion": "v0.32-live-weighted-scoring",
-  "notice": "Asset header scores are recomputed from live public-source rows only. Prototype/sample/candidate/missing rows are displayed but excluded from scoring.",
-  "scale": {
-    "+10_to_+5": "strong positive live pressure",
-    "+4_to_+2": "positive live pressure",
-    "+1_to_-1": "neutral, limited, or mixed live pressure",
-    "-2_to_-4": "negative live pressure",
-    "-5_to_-10": "strong negative live pressure"
-  },
-  "eligibility": {
-    "counted": "fresh/live rows with numeric scores, real provenance, and enough asset relevance",
-    "excluded": "prototype, sample, candidate, missing, not applicable, low relevance, or display-only rows",
-    "context": "live rows retained for evidence but too indirect to affect the top score"
-  },
+  "version": "0.34",
+  "name": "Explainable Scoring Baseline",
   "principles": [
-    "The same U.S. macro input can score differently for U.S. equities, USD pairs, rates, gold, energy, agriculture, and foreign assets.",
-    "Treasury yield increases are direct support for yield-pressure assets but usually pressure U.S. equities and precious metals through discount-rate and real-yield channels.",
-    "U.S. inflation and labor strength primarily affect assets through Fed policy, real yields, dollar pressure, growth expectations, and risk appetite.",
-    "Energy scores prioritize EIA physical fundamentals and COT; broad macro rows are secondary or contextual.",
-    "Agriculture scores prioritize USDA, NOAA/weather, and COT; U.S. macro rows are mostly contextual.",
-    "Credit and financial stress rows receive high weight for risk assets and credit/liquidity assets."
-  ]
+    "Only live evidence can be scored.",
+    "Missing, stale, candidate, scaffold, and display-only rows do not silently become neutral.",
+    "Each asset class has its own directional map and relevance weight.",
+    "U.S. macro evidence is not treated as equally relevant to every global asset.",
+    "Every asset score must be auditable from counted rows, excluded rows, drivers, conflicts, and confidence."
+  ],
+  "eligibility_statuses": {
+    "live_scored": {"scores": true, "description": "Fresh/live row with direct or meaningful asset relevance."},
+    "live_context": {"scores": false, "description": "Fresh/live row that informs interpretation but is too indirect to move the score in this pass."},
+    "display_only": {"scores": false, "description": "Visible row for user awareness only."},
+    "not_live": {"scores": false, "description": "Missing, stale, candidate, scaffold, or unverified row; cannot score."}
+  },
+  "weights": {
+    "primary": 1.0,
+    "secondary": 0.6,
+    "contextual": 0.25,
+    "low": 0.1,
+    "excluded": 0.0
+  },
+  "score_labels": [
+    {"min": 2.5, "label": "Positive live pressure"},
+    {"min": 0.75, "label": "Moderately positive live pressure"},
+    {"min": -0.74, "label": "Mixed live evidence"},
+    {"min": -2.49, "label": "Moderately negative live pressure"},
+    {"min": -999, "label": "Negative live pressure"}
+  ],
+  "confidence_rules": {
+    "high": {"min_counted_rows": 7, "min_direct_rows": 4, "min_coverage": 0.7},
+    "medium": {"min_counted_rows": 4, "min_direct_rows": 2, "min_coverage": 0.45},
+    "low": {"min_counted_rows": 2, "min_direct_rows": 1, "min_coverage": 0.25},
+    "insufficient": {"description": "Not enough live direct evidence to make a meaningful pressure read."}
+  },
+  "conflict_rules": {
+    "high_conflict_threshold": 0.55,
+    "medium_conflict_threshold": 0.3,
+    "definition": "Conflict is the smaller absolute side divided by total absolute scored pressure. A high value means meaningful positive and negative evidence coexist."
+  },
+  "freshness_policy": {
+    "fresh_statuses": ["fresh", "live", "current"],
+    "aging_statuses": ["aging", "late"],
+    "stale_statuses": ["stale", "missing", "candidate", "scaffold", "not_live"],
+    "aging_penalty": 0.75,
+    "stale_scores": false
+  }
 }

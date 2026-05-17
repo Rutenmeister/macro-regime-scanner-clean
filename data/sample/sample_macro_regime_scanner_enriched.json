@@ -1,0 +1,1103 @@
+{
+  "metadata": {
+    "name": "Macro Regime Scanner sample for v0.34 scoring audit",
+    "note": "Synthetic sample rows for testing the scoring engine only. Do not use as market data.",
+    "scoringVersion": "0.34",
+    "scoringName": "Explainable Scoring Baseline",
+    "scoringGeneratedAt": "2026-05-17T04:41:13.564213+00:00",
+    "scoringNote": "Scores are asset-specific evidence pressure readings, not buy/sell signals."
+  },
+  "inputs": [
+    {
+      "id": "treasury_yield_pressure",
+      "label": "10Y Treasury yield pressure",
+      "signal": 1.4,
+      "freshness": "fresh",
+      "source": "U.S. Treasury official Daily Treasury Par Yield Curve Rates"
+    },
+    {
+      "id": "inflation_pressure",
+      "label": "CPI / inflation pressure",
+      "signal": 1.2,
+      "freshness": "fresh",
+      "source": "BLS CPI"
+    },
+    {
+      "id": "credit_stress",
+      "label": "Credit / financial stress",
+      "signal": 0.8,
+      "freshness": "fresh",
+      "source": "Public credit stress lane"
+    },
+    {
+      "id": "liquidity_pressure",
+      "label": "Liquidity support",
+      "signal": 0.6,
+      "freshness": "fresh",
+      "source": "Federal Reserve liquidity lane"
+    },
+    {
+      "id": "eia_energy_balance",
+      "label": "EIA crude inventory balance",
+      "signal": 1.7,
+      "freshness": "fresh",
+      "source": "EIA petroleum status lane"
+    },
+    {
+      "id": "usda_crop_balance",
+      "label": "USDA crop balance pressure",
+      "signal": 1.1,
+      "freshness": "fresh",
+      "source": "USDA/NASS lane"
+    },
+    {
+      "id": "noaa_weather_hazard",
+      "label": "NOAA drought / weather hazard",
+      "signal": 1.6,
+      "freshness": "fresh",
+      "source": "NOAA/NWS hazards lane"
+    },
+    {
+      "id": "growth_strength",
+      "label": "Growth / demand strength",
+      "signal": 0.7,
+      "freshness": "aging",
+      "source": "BEA/Census/BLS macro lane"
+    }
+  ],
+  "assets": [
+    {
+      "symbol": "SPX500",
+      "name": "S&P 500",
+      "asset_class": "us_equity_index",
+      "scoreAudit": {
+        "asset": "SPX500",
+        "assetClass": "us_equity_index",
+        "label": "Moderately negative live pressure",
+        "confidence": "Medium",
+        "coverage": 0.625,
+        "countedRows": 5,
+        "contextRows": 0,
+        "excludedRows": 3,
+        "directRows": 5,
+        "positiveWeight": 0.915,
+        "negativeWeight": -3.4,
+        "netScore": -2.485,
+        "conflictLevel": "Low",
+        "conflictRatio": 0.212,
+        "topPositiveDrivers": [
+          {
+            "inputKey": "liquidity_pressure",
+            "label": "Liquidity support",
+            "contribution": 0.6,
+            "rawSignal": 0.6,
+            "weight": "primary",
+            "reason": "Improving liquidity/financial conditions can support broad risk appetite.",
+            "source": "Federal Reserve liquidity lane"
+          },
+          {
+            "inputKey": "growth_strength",
+            "label": "Growth / demand strength",
+            "contribution": 0.315,
+            "rawSignal": 0.7,
+            "weight": "secondary",
+            "reason": "Better growth can support earnings unless it worsens rate pressure.",
+            "source": "BEA/Census/BLS macro lane"
+          }
+        ],
+        "topNegativeDrivers": [
+          {
+            "inputKey": "treasury_yield_pressure",
+            "label": "10Y Treasury yield pressure",
+            "contribution": -1.4,
+            "rawSignal": 1.4,
+            "weight": "primary",
+            "reason": "Higher yield pressure can pressure equity multiples through discount-rate and financing channels.",
+            "source": "U.S. Treasury official Daily Treasury Par Yield Curve Rates"
+          },
+          {
+            "inputKey": "inflation_pressure",
+            "label": "CPI / inflation pressure",
+            "contribution": -1.2,
+            "rawSignal": 1.2,
+            "weight": "primary",
+            "reason": "Hot inflation can raise rate-path pressure and reduce valuation support.",
+            "source": "BLS CPI"
+          },
+          {
+            "inputKey": "credit_stress",
+            "label": "Credit / financial stress",
+            "contribution": -0.8,
+            "rawSignal": 0.8,
+            "weight": "primary",
+            "reason": "Rising credit stress is a direct risk-off input for equities.",
+            "source": "Public credit stress lane"
+          }
+        ],
+        "mainConflicts": [
+          {
+            "label": "Low internal evidence conflict",
+            "detail": "Positive scored pressure 0.92 vs negative scored pressure -3.40."
+          }
+        ],
+        "countedEvidence": [
+          {
+            "id": "treasury_yield_pressure",
+            "label": "10Y Treasury yield pressure",
+            "signal": 1.4,
+            "freshness": "fresh",
+            "source": "U.S. Treasury official Daily Treasury Par Yield Curve Rates",
+            "inputKey": "treasury_yield_pressure",
+            "mappedWeight": "primary",
+            "mappedDirection": -1.0,
+            "contribution": -1.4,
+            "mappingReason": "Higher yield pressure can pressure equity multiples through discount-rate and financing channels.",
+            "scoringStatus": "live_scored"
+          },
+          {
+            "id": "inflation_pressure",
+            "label": "CPI / inflation pressure",
+            "signal": 1.2,
+            "freshness": "fresh",
+            "source": "BLS CPI",
+            "inputKey": "inflation_pressure",
+            "mappedWeight": "primary",
+            "mappedDirection": -1.0,
+            "contribution": -1.2,
+            "mappingReason": "Hot inflation can raise rate-path pressure and reduce valuation support.",
+            "scoringStatus": "live_scored"
+          },
+          {
+            "id": "credit_stress",
+            "label": "Credit / financial stress",
+            "signal": 0.8,
+            "freshness": "fresh",
+            "source": "Public credit stress lane",
+            "inputKey": "credit_stress",
+            "mappedWeight": "primary",
+            "mappedDirection": -1.0,
+            "contribution": -0.8,
+            "mappingReason": "Rising credit stress is a direct risk-off input for equities.",
+            "scoringStatus": "live_scored"
+          },
+          {
+            "id": "liquidity_pressure",
+            "label": "Liquidity support",
+            "signal": 0.6,
+            "freshness": "fresh",
+            "source": "Federal Reserve liquidity lane",
+            "inputKey": "liquidity_pressure",
+            "mappedWeight": "primary",
+            "mappedDirection": 1.0,
+            "contribution": 0.6,
+            "mappingReason": "Improving liquidity/financial conditions can support broad risk appetite.",
+            "scoringStatus": "live_scored"
+          },
+          {
+            "id": "growth_strength",
+            "label": "Growth / demand strength",
+            "signal": 0.7,
+            "freshness": "aging",
+            "source": "BEA/Census/BLS macro lane",
+            "inputKey": "growth_strength",
+            "mappedWeight": "secondary",
+            "mappedDirection": 1.0,
+            "contribution": 0.315,
+            "mappingReason": "Better growth can support earnings unless it worsens rate pressure.",
+            "scoringStatus": "live_scored"
+          }
+        ],
+        "contextEvidence": [],
+        "excludedEvidence": [
+          {
+            "id": "eia_energy_balance",
+            "label": "EIA crude inventory balance",
+            "signal": 1.7,
+            "freshness": "fresh",
+            "source": "EIA petroleum status lane",
+            "scoringStatus": "display_only",
+            "excludedReason": "Energy inventory rows are not direct equity-index evidence in this pass.",
+            "inputKey": "eia_energy_balance"
+          },
+          {
+            "id": "usda_crop_balance",
+            "label": "USDA crop balance pressure",
+            "signal": 1.1,
+            "freshness": "fresh",
+            "source": "USDA/NASS lane",
+            "scoringStatus": "display_only",
+            "excludedReason": "No explicit asset/input mapping in v0.34; visible only unless manually mapped.",
+            "inputKey": "usda_crop_balance"
+          },
+          {
+            "id": "noaa_weather_hazard",
+            "label": "NOAA drought / weather hazard",
+            "signal": 1.6,
+            "freshness": "fresh",
+            "source": "NOAA/NWS hazards lane",
+            "scoringStatus": "display_only",
+            "excludedReason": "Weather hazards are usually display-only for broad equity indices unless specifically tied to economic disruption.",
+            "inputKey": "noaa_weather_hazard"
+          }
+        ],
+        "caveats": [
+          "This is evidence pressure, not a trade signal.",
+          "Missing or stale evidence is excluded, not treated as neutral.",
+          "U.S. macro evidence is weighted differently by asset class.",
+          "Asset-specific exceptions may require manual tuning."
+        ]
+      },
+      "score": -2.485,
+      "pressureLabel": "Moderately negative live pressure",
+      "confidence": "Medium",
+      "conflict": "Low"
+    },
+    {
+      "symbol": "DXY",
+      "name": "U.S. Dollar Index",
+      "asset_class": "usd_fx",
+      "scoreAudit": {
+        "asset": "DXY",
+        "assetClass": "usd_fx",
+        "label": "Positive live pressure",
+        "confidence": "Medium",
+        "coverage": 0.5,
+        "countedRows": 4,
+        "contextRows": 1,
+        "excludedRows": 3,
+        "directRows": 4,
+        "positiveWeight": 2.915,
+        "negativeWeight": 0.0,
+        "netScore": 2.915,
+        "conflictLevel": "Low",
+        "conflictRatio": 0.0,
+        "topPositiveDrivers": [
+          {
+            "inputKey": "treasury_yield_pressure",
+            "label": "10Y Treasury yield pressure",
+            "contribution": 1.4,
+            "rawSignal": 1.4,
+            "weight": "primary",
+            "reason": "Higher U.S. yields can support the dollar through rate-differential channels.",
+            "source": "U.S. Treasury official Daily Treasury Par Yield Curve Rates"
+          },
+          {
+            "inputKey": "inflation_pressure",
+            "label": "CPI / inflation pressure",
+            "contribution": 0.72,
+            "rawSignal": 1.2,
+            "weight": "secondary",
+            "reason": "Hot U.S. inflation can support USD if it raises expected Fed restriction.",
+            "source": "BLS CPI"
+          },
+          {
+            "inputKey": "credit_stress",
+            "label": "Credit / financial stress",
+            "contribution": 0.48,
+            "rawSignal": 0.8,
+            "weight": "secondary",
+            "reason": "Risk-off stress can support USD safe-haven demand, though pair-specific exceptions exist.",
+            "source": "Public credit stress lane"
+          },
+          {
+            "inputKey": "growth_strength",
+            "label": "Growth / demand strength",
+            "contribution": 0.315,
+            "rawSignal": 0.7,
+            "weight": "secondary",
+            "reason": "Relative U.S. growth strength can support USD.",
+            "source": "BEA/Census/BLS macro lane"
+          }
+        ],
+        "topNegativeDrivers": [],
+        "mainConflicts": [
+          {
+            "label": "Context not counted",
+            "detail": "1 live context rows were visible but not counted in v0.34."
+          }
+        ],
+        "countedEvidence": [
+          {
+            "id": "treasury_yield_pressure",
+            "label": "10Y Treasury yield pressure",
+            "signal": 1.4,
+            "freshness": "fresh",
+            "source": "U.S. Treasury official Daily Treasury Par Yield Curve Rates",
+            "inputKey": "treasury_yield_pressure",
+            "mappedWeight": "primary",
+            "mappedDirection": 1.0,
+            "contribution": 1.4,
+            "mappingReason": "Higher U.S. yields can support the dollar through rate-differential channels.",
+            "scoringStatus": "live_scored"
+          },
+          {
+            "id": "inflation_pressure",
+            "label": "CPI / inflation pressure",
+            "signal": 1.2,
+            "freshness": "fresh",
+            "source": "BLS CPI",
+            "inputKey": "inflation_pressure",
+            "mappedWeight": "secondary",
+            "mappedDirection": 1.0,
+            "contribution": 0.72,
+            "mappingReason": "Hot U.S. inflation can support USD if it raises expected Fed restriction.",
+            "scoringStatus": "live_scored"
+          },
+          {
+            "id": "credit_stress",
+            "label": "Credit / financial stress",
+            "signal": 0.8,
+            "freshness": "fresh",
+            "source": "Public credit stress lane",
+            "inputKey": "credit_stress",
+            "mappedWeight": "secondary",
+            "mappedDirection": 1.0,
+            "contribution": 0.48,
+            "mappingReason": "Risk-off stress can support USD safe-haven demand, though pair-specific exceptions exist.",
+            "scoringStatus": "live_scored"
+          },
+          {
+            "id": "growth_strength",
+            "label": "Growth / demand strength",
+            "signal": 0.7,
+            "freshness": "aging",
+            "source": "BEA/Census/BLS macro lane",
+            "inputKey": "growth_strength",
+            "mappedWeight": "secondary",
+            "mappedDirection": 1.0,
+            "contribution": 0.315,
+            "mappingReason": "Relative U.S. growth strength can support USD.",
+            "scoringStatus": "live_scored"
+          }
+        ],
+        "contextEvidence": [
+          {
+            "id": "liquidity_pressure",
+            "label": "Liquidity support",
+            "signal": 0.6,
+            "freshness": "fresh",
+            "source": "Federal Reserve liquidity lane",
+            "inputKey": "liquidity_pressure",
+            "mappedWeight": "contextual",
+            "mappedDirection": -1.0,
+            "contribution": -0.15,
+            "mappingReason": "Easier liquidity can weaken defensive USD demand.",
+            "scoringStatus": "live_context"
+          }
+        ],
+        "excludedEvidence": [
+          {
+            "id": "eia_energy_balance",
+            "label": "EIA crude inventory balance",
+            "signal": 1.7,
+            "freshness": "fresh",
+            "source": "EIA petroleum status lane",
+            "scoringStatus": "display_only",
+            "excludedReason": "No explicit asset/input mapping in v0.34; visible only unless manually mapped.",
+            "inputKey": "eia_energy_balance"
+          },
+          {
+            "id": "usda_crop_balance",
+            "label": "USDA crop balance pressure",
+            "signal": 1.1,
+            "freshness": "fresh",
+            "source": "USDA/NASS lane",
+            "scoringStatus": "display_only",
+            "excludedReason": "No explicit asset/input mapping in v0.34; visible only unless manually mapped.",
+            "inputKey": "usda_crop_balance"
+          },
+          {
+            "id": "noaa_weather_hazard",
+            "label": "NOAA drought / weather hazard",
+            "signal": 1.6,
+            "freshness": "fresh",
+            "source": "NOAA/NWS hazards lane",
+            "scoringStatus": "display_only",
+            "excludedReason": "No explicit asset/input mapping in v0.34; visible only unless manually mapped.",
+            "inputKey": "noaa_weather_hazard"
+          }
+        ],
+        "caveats": [
+          "This is evidence pressure, not a trade signal.",
+          "Missing or stale evidence is excluded, not treated as neutral.",
+          "U.S. macro evidence is weighted differently by asset class.",
+          "Asset-specific exceptions may require manual tuning."
+        ]
+      },
+      "score": 2.915,
+      "pressureLabel": "Positive live pressure",
+      "confidence": "Medium",
+      "conflict": "Low"
+    },
+    {
+      "symbol": "EURUSD",
+      "name": "Euro / U.S. Dollar",
+      "asset_class": "foreign_usd_pair",
+      "scoreAudit": {
+        "asset": "EURUSD",
+        "assetClass": "foreign_usd_pair",
+        "label": "Negative live pressure",
+        "confidence": "Low",
+        "coverage": 0.375,
+        "countedRows": 3,
+        "contextRows": 2,
+        "excludedRows": 3,
+        "directRows": 3,
+        "positiveWeight": 0.0,
+        "negativeWeight": -2.6,
+        "netScore": -2.6,
+        "conflictLevel": "Low",
+        "conflictRatio": 0.0,
+        "topPositiveDrivers": [],
+        "topNegativeDrivers": [
+          {
+            "inputKey": "treasury_yield_pressure",
+            "label": "10Y Treasury yield pressure",
+            "contribution": -1.4,
+            "rawSignal": 1.4,
+            "weight": "primary",
+            "reason": "Higher U.S. yields generally support USD, pressuring non-USD/USD pairs.",
+            "source": "U.S. Treasury official Daily Treasury Par Yield Curve Rates"
+          },
+          {
+            "inputKey": "inflation_pressure",
+            "label": "CPI / inflation pressure",
+            "contribution": -0.72,
+            "rawSignal": 1.2,
+            "weight": "secondary",
+            "reason": "Hot U.S. inflation can pressure EURUSD/GBPUSD/AUDUSD if it raises Fed-rate expectations.",
+            "source": "BLS CPI"
+          },
+          {
+            "inputKey": "credit_stress",
+            "label": "Credit / financial stress",
+            "contribution": -0.48,
+            "rawSignal": 0.8,
+            "weight": "secondary",
+            "reason": "Risk-off USD demand can pressure foreign currencies quoted against USD.",
+            "source": "Public credit stress lane"
+          }
+        ],
+        "mainConflicts": [
+          {
+            "label": "Context not counted",
+            "detail": "2 live context rows were visible but not counted in v0.34."
+          }
+        ],
+        "countedEvidence": [
+          {
+            "id": "treasury_yield_pressure",
+            "label": "10Y Treasury yield pressure",
+            "signal": 1.4,
+            "freshness": "fresh",
+            "source": "U.S. Treasury official Daily Treasury Par Yield Curve Rates",
+            "inputKey": "treasury_yield_pressure",
+            "mappedWeight": "primary",
+            "mappedDirection": -1.0,
+            "contribution": -1.4,
+            "mappingReason": "Higher U.S. yields generally support USD, pressuring non-USD/USD pairs.",
+            "scoringStatus": "live_scored"
+          },
+          {
+            "id": "inflation_pressure",
+            "label": "CPI / inflation pressure",
+            "signal": 1.2,
+            "freshness": "fresh",
+            "source": "BLS CPI",
+            "inputKey": "inflation_pressure",
+            "mappedWeight": "secondary",
+            "mappedDirection": -1.0,
+            "contribution": -0.72,
+            "mappingReason": "Hot U.S. inflation can pressure EURUSD/GBPUSD/AUDUSD if it raises Fed-rate expectations.",
+            "scoringStatus": "live_scored"
+          },
+          {
+            "id": "credit_stress",
+            "label": "Credit / financial stress",
+            "signal": 0.8,
+            "freshness": "fresh",
+            "source": "Public credit stress lane",
+            "inputKey": "credit_stress",
+            "mappedWeight": "secondary",
+            "mappedDirection": -1.0,
+            "contribution": -0.48,
+            "mappingReason": "Risk-off USD demand can pressure foreign currencies quoted against USD.",
+            "scoringStatus": "live_scored"
+          }
+        ],
+        "contextEvidence": [
+          {
+            "id": "liquidity_pressure",
+            "label": "Liquidity support",
+            "signal": 0.6,
+            "freshness": "fresh",
+            "source": "Federal Reserve liquidity lane",
+            "inputKey": "liquidity_pressure",
+            "mappedWeight": "contextual",
+            "mappedDirection": 1.0,
+            "contribution": 0.15,
+            "mappingReason": "Easier liquidity may reduce defensive USD demand and support risk-sensitive currencies.",
+            "scoringStatus": "live_context"
+          },
+          {
+            "id": "growth_strength",
+            "label": "Growth / demand strength",
+            "signal": 0.7,
+            "freshness": "aging",
+            "source": "BEA/Census/BLS macro lane",
+            "inputKey": "growth_strength",
+            "mappedWeight": "contextual",
+            "mappedDirection": -1.0,
+            "contribution": -0.131,
+            "mappingReason": "U.S. growth strength can support USD, though the pair depends on relative foreign data.",
+            "scoringStatus": "live_context"
+          }
+        ],
+        "excludedEvidence": [
+          {
+            "id": "eia_energy_balance",
+            "label": "EIA crude inventory balance",
+            "signal": 1.7,
+            "freshness": "fresh",
+            "source": "EIA petroleum status lane",
+            "scoringStatus": "display_only",
+            "excludedReason": "No explicit asset/input mapping in v0.34; visible only unless manually mapped.",
+            "inputKey": "eia_energy_balance"
+          },
+          {
+            "id": "usda_crop_balance",
+            "label": "USDA crop balance pressure",
+            "signal": 1.1,
+            "freshness": "fresh",
+            "source": "USDA/NASS lane",
+            "scoringStatus": "display_only",
+            "excludedReason": "No explicit asset/input mapping in v0.34; visible only unless manually mapped.",
+            "inputKey": "usda_crop_balance"
+          },
+          {
+            "id": "noaa_weather_hazard",
+            "label": "NOAA drought / weather hazard",
+            "signal": 1.6,
+            "freshness": "fresh",
+            "source": "NOAA/NWS hazards lane",
+            "scoringStatus": "display_only",
+            "excludedReason": "No explicit asset/input mapping in v0.34; visible only unless manually mapped.",
+            "inputKey": "noaa_weather_hazard"
+          }
+        ],
+        "caveats": [
+          "This is evidence pressure, not a trade signal.",
+          "Missing or stale evidence is excluded, not treated as neutral.",
+          "U.S. macro evidence is weighted differently by asset class.",
+          "Asset-specific exceptions may require manual tuning."
+        ]
+      },
+      "score": -2.6,
+      "pressureLabel": "Negative live pressure",
+      "confidence": "Low",
+      "conflict": "Low"
+    },
+    {
+      "symbol": "XAUUSD",
+      "name": "Gold",
+      "asset_class": "precious_metals",
+      "scoreAudit": {
+        "asset": "XAUUSD",
+        "assetClass": "precious_metals",
+        "label": "Mixed live evidence",
+        "confidence": "Low",
+        "coverage": 0.375,
+        "countedRows": 3,
+        "contextRows": 1,
+        "excludedRows": 4,
+        "directRows": 3,
+        "positiveWeight": 1.2,
+        "negativeWeight": -0.84,
+        "netScore": 0.36,
+        "conflictLevel": "Medium",
+        "conflictRatio": 0.412,
+        "topPositiveDrivers": [
+          {
+            "inputKey": "inflation_pressure",
+            "label": "CPI / inflation pressure",
+            "contribution": 0.72,
+            "rawSignal": 1.2,
+            "weight": "secondary",
+            "reason": "Inflation pressure can support gold as an inflation hedge, but this can be offset by real yields.",
+            "source": "BLS CPI"
+          },
+          {
+            "inputKey": "credit_stress",
+            "label": "Credit / financial stress",
+            "contribution": 0.48,
+            "rawSignal": 0.8,
+            "weight": "secondary",
+            "reason": "Risk-off or systemic stress can support safe-haven demand.",
+            "source": "Public credit stress lane"
+          }
+        ],
+        "topNegativeDrivers": [
+          {
+            "inputKey": "treasury_yield_pressure",
+            "label": "10Y Treasury yield pressure",
+            "contribution": -0.84,
+            "rawSignal": 1.4,
+            "weight": "secondary",
+            "reason": "Nominal yield pressure can hurt metals when real-yield or USD pressure dominates.",
+            "source": "U.S. Treasury official Daily Treasury Par Yield Curve Rates"
+          }
+        ],
+        "mainConflicts": [
+          {
+            "label": "Medium internal evidence conflict",
+            "detail": "Positive scored pressure 1.20 vs negative scored pressure -0.84."
+          },
+          {
+            "label": "Context not counted",
+            "detail": "1 live context rows were visible but not counted in v0.34."
+          }
+        ],
+        "countedEvidence": [
+          {
+            "id": "treasury_yield_pressure",
+            "label": "10Y Treasury yield pressure",
+            "signal": 1.4,
+            "freshness": "fresh",
+            "source": "U.S. Treasury official Daily Treasury Par Yield Curve Rates",
+            "inputKey": "treasury_yield_pressure",
+            "mappedWeight": "secondary",
+            "mappedDirection": -1.0,
+            "contribution": -0.84,
+            "mappingReason": "Nominal yield pressure can hurt metals when real-yield or USD pressure dominates.",
+            "scoringStatus": "live_scored"
+          },
+          {
+            "id": "inflation_pressure",
+            "label": "CPI / inflation pressure",
+            "signal": 1.2,
+            "freshness": "fresh",
+            "source": "BLS CPI",
+            "inputKey": "inflation_pressure",
+            "mappedWeight": "secondary",
+            "mappedDirection": 1.0,
+            "contribution": 0.72,
+            "mappingReason": "Inflation pressure can support gold as an inflation hedge, but this can be offset by real yields.",
+            "scoringStatus": "live_scored"
+          },
+          {
+            "id": "credit_stress",
+            "label": "Credit / financial stress",
+            "signal": 0.8,
+            "freshness": "fresh",
+            "source": "Public credit stress lane",
+            "inputKey": "credit_stress",
+            "mappedWeight": "secondary",
+            "mappedDirection": 1.0,
+            "contribution": 0.48,
+            "mappingReason": "Risk-off or systemic stress can support safe-haven demand.",
+            "scoringStatus": "live_scored"
+          }
+        ],
+        "contextEvidence": [
+          {
+            "id": "liquidity_pressure",
+            "label": "Liquidity support",
+            "signal": 0.6,
+            "freshness": "fresh",
+            "source": "Federal Reserve liquidity lane",
+            "inputKey": "liquidity_pressure",
+            "mappedWeight": "contextual",
+            "mappedDirection": 1.0,
+            "contribution": 0.15,
+            "mappingReason": "Easier liquidity can support non-yielding assets.",
+            "scoringStatus": "live_context"
+          }
+        ],
+        "excludedEvidence": [
+          {
+            "id": "eia_energy_balance",
+            "label": "EIA crude inventory balance",
+            "signal": 1.7,
+            "freshness": "fresh",
+            "source": "EIA petroleum status lane",
+            "scoringStatus": "display_only",
+            "excludedReason": "Energy inventories are not direct gold evidence.",
+            "inputKey": "eia_energy_balance"
+          },
+          {
+            "id": "usda_crop_balance",
+            "label": "USDA crop balance pressure",
+            "signal": 1.1,
+            "freshness": "fresh",
+            "source": "USDA/NASS lane",
+            "scoringStatus": "display_only",
+            "excludedReason": "No explicit asset/input mapping in v0.34; visible only unless manually mapped.",
+            "inputKey": "usda_crop_balance"
+          },
+          {
+            "id": "noaa_weather_hazard",
+            "label": "NOAA drought / weather hazard",
+            "signal": 1.6,
+            "freshness": "fresh",
+            "source": "NOAA/NWS hazards lane",
+            "scoringStatus": "display_only",
+            "excludedReason": "No explicit asset/input mapping in v0.34; visible only unless manually mapped.",
+            "inputKey": "noaa_weather_hazard"
+          },
+          {
+            "id": "growth_strength",
+            "label": "Growth / demand strength",
+            "signal": 0.7,
+            "freshness": "aging",
+            "source": "BEA/Census/BLS macro lane",
+            "scoringStatus": "display_only",
+            "excludedReason": "No explicit asset/input mapping in v0.34; visible only unless manually mapped.",
+            "inputKey": "growth_strength"
+          }
+        ],
+        "caveats": [
+          "This is evidence pressure, not a trade signal.",
+          "Missing or stale evidence is excluded, not treated as neutral.",
+          "U.S. macro evidence is weighted differently by asset class.",
+          "Asset-specific exceptions may require manual tuning."
+        ]
+      },
+      "score": 0.36,
+      "pressureLabel": "Mixed live evidence",
+      "confidence": "Low",
+      "conflict": "Medium"
+    },
+    {
+      "symbol": "WTI",
+      "name": "WTI Crude Oil",
+      "asset_class": "energy_commodity",
+      "scoreAudit": {
+        "asset": "WTI",
+        "assetClass": "energy_commodity",
+        "label": "Moderately positive live pressure",
+        "confidence": "Low",
+        "coverage": 0.375,
+        "countedRows": 3,
+        "contextRows": 3,
+        "excludedRows": 2,
+        "directRows": 3,
+        "positiveWeight": 2.015,
+        "negativeWeight": -0.48,
+        "netScore": 1.535,
+        "conflictLevel": "Low",
+        "conflictRatio": 0.192,
+        "topPositiveDrivers": [
+          {
+            "inputKey": "eia_energy_balance",
+            "label": "EIA crude inventory balance",
+            "contribution": 1.7,
+            "rawSignal": 1.7,
+            "weight": "primary",
+            "reason": "Inventory draws, stronger product supplied, or tighter supply balances support energy pressure.",
+            "source": "EIA petroleum status lane"
+          },
+          {
+            "inputKey": "growth_strength",
+            "label": "Growth / demand strength",
+            "contribution": 0.315,
+            "rawSignal": 0.7,
+            "weight": "secondary",
+            "reason": "Growth strength can support demand-sensitive energy commodities.",
+            "source": "BEA/Census/BLS macro lane"
+          }
+        ],
+        "topNegativeDrivers": [
+          {
+            "inputKey": "credit_stress",
+            "label": "Credit / financial stress",
+            "contribution": -0.48,
+            "rawSignal": 0.8,
+            "weight": "secondary",
+            "reason": "Credit/risk stress can pressure demand-sensitive commodities.",
+            "source": "Public credit stress lane"
+          }
+        ],
+        "mainConflicts": [
+          {
+            "label": "Low internal evidence conflict",
+            "detail": "Positive scored pressure 2.02 vs negative scored pressure -0.48."
+          },
+          {
+            "label": "Context not counted",
+            "detail": "3 live context rows were visible but not counted in v0.34."
+          }
+        ],
+        "countedEvidence": [
+          {
+            "id": "credit_stress",
+            "label": "Credit / financial stress",
+            "signal": 0.8,
+            "freshness": "fresh",
+            "source": "Public credit stress lane",
+            "inputKey": "credit_stress",
+            "mappedWeight": "secondary",
+            "mappedDirection": -1.0,
+            "contribution": -0.48,
+            "mappingReason": "Credit/risk stress can pressure demand-sensitive commodities.",
+            "scoringStatus": "live_scored"
+          },
+          {
+            "id": "eia_energy_balance",
+            "label": "EIA crude inventory balance",
+            "signal": 1.7,
+            "freshness": "fresh",
+            "source": "EIA petroleum status lane",
+            "inputKey": "eia_energy_balance",
+            "mappedWeight": "primary",
+            "mappedDirection": 1.0,
+            "contribution": 1.7,
+            "mappingReason": "Inventory draws, stronger product supplied, or tighter supply balances support energy pressure.",
+            "scoringStatus": "live_scored"
+          },
+          {
+            "id": "growth_strength",
+            "label": "Growth / demand strength",
+            "signal": 0.7,
+            "freshness": "aging",
+            "source": "BEA/Census/BLS macro lane",
+            "inputKey": "growth_strength",
+            "mappedWeight": "secondary",
+            "mappedDirection": 1.0,
+            "contribution": 0.315,
+            "mappingReason": "Growth strength can support demand-sensitive energy commodities.",
+            "scoringStatus": "live_scored"
+          }
+        ],
+        "contextEvidence": [
+          {
+            "id": "treasury_yield_pressure",
+            "label": "10Y Treasury yield pressure",
+            "signal": 1.4,
+            "freshness": "fresh",
+            "source": "U.S. Treasury official Daily Treasury Par Yield Curve Rates",
+            "inputKey": "treasury_yield_pressure",
+            "mappedWeight": "contextual",
+            "mappedDirection": -1.0,
+            "contribution": -0.35,
+            "mappingReason": "Higher rates can pressure demand/risk appetite but are not direct physical energy evidence.",
+            "scoringStatus": "live_context"
+          },
+          {
+            "id": "inflation_pressure",
+            "label": "CPI / inflation pressure",
+            "signal": 1.2,
+            "freshness": "fresh",
+            "source": "BLS CPI",
+            "inputKey": "inflation_pressure",
+            "mappedWeight": "contextual",
+            "mappedDirection": 1.0,
+            "contribution": 0.3,
+            "mappingReason": "Energy can contribute to inflation, but CPI itself is not a direct oil inventory signal.",
+            "scoringStatus": "live_context"
+          },
+          {
+            "id": "noaa_weather_hazard",
+            "label": "NOAA drought / weather hazard",
+            "signal": 1.6,
+            "freshness": "fresh",
+            "source": "NOAA/NWS hazards lane",
+            "inputKey": "noaa_weather_hazard",
+            "mappedWeight": "contextual",
+            "mappedDirection": 1.0,
+            "contribution": 0.4,
+            "mappingReason": "Weather can affect energy demand/supply depending on hazard type.",
+            "scoringStatus": "live_context"
+          }
+        ],
+        "excludedEvidence": [
+          {
+            "id": "liquidity_pressure",
+            "label": "Liquidity support",
+            "signal": 0.6,
+            "freshness": "fresh",
+            "source": "Federal Reserve liquidity lane",
+            "scoringStatus": "display_only",
+            "excludedReason": "No explicit asset/input mapping in v0.34; visible only unless manually mapped.",
+            "inputKey": "liquidity_pressure"
+          },
+          {
+            "id": "usda_crop_balance",
+            "label": "USDA crop balance pressure",
+            "signal": 1.1,
+            "freshness": "fresh",
+            "source": "USDA/NASS lane",
+            "scoringStatus": "display_only",
+            "excludedReason": "No explicit asset/input mapping in v0.34; visible only unless manually mapped.",
+            "inputKey": "usda_crop_balance"
+          }
+        ],
+        "caveats": [
+          "This is evidence pressure, not a trade signal.",
+          "Missing or stale evidence is excluded, not treated as neutral.",
+          "U.S. macro evidence is weighted differently by asset class.",
+          "Asset-specific exceptions may require manual tuning."
+        ]
+      },
+      "score": 1.535,
+      "pressureLabel": "Moderately positive live pressure",
+      "confidence": "Low",
+      "conflict": "Low"
+    },
+    {
+      "symbol": "WHEAT",
+      "name": "Wheat",
+      "asset_class": "agriculture_commodity",
+      "scoreAudit": {
+        "asset": "WHEAT",
+        "assetClass": "agriculture_commodity",
+        "label": "Positive live pressure",
+        "confidence": "Low",
+        "coverage": 0.25,
+        "countedRows": 2,
+        "contextRows": 2,
+        "excludedRows": 4,
+        "directRows": 2,
+        "positiveWeight": 2.7,
+        "negativeWeight": 0.0,
+        "netScore": 2.7,
+        "conflictLevel": "Low",
+        "conflictRatio": 0.0,
+        "topPositiveDrivers": [
+          {
+            "inputKey": "noaa_weather_hazard",
+            "label": "NOAA drought / weather hazard",
+            "contribution": 1.6,
+            "rawSignal": 1.6,
+            "weight": "primary",
+            "reason": "Drought, freeze, flood, heat, or storm hazards can affect crop supply risk.",
+            "source": "NOAA/NWS hazards lane"
+          },
+          {
+            "inputKey": "usda_crop_balance",
+            "label": "USDA crop balance pressure",
+            "contribution": 1.1,
+            "rawSignal": 1.1,
+            "weight": "primary",
+            "reason": "Tighter USDA supply/demand or crop condition pressure supports grain price pressure.",
+            "source": "USDA/NASS lane"
+          }
+        ],
+        "topNegativeDrivers": [],
+        "mainConflicts": [
+          {
+            "label": "Context not counted",
+            "detail": "2 live context rows were visible but not counted in v0.34."
+          }
+        ],
+        "countedEvidence": [
+          {
+            "id": "usda_crop_balance",
+            "label": "USDA crop balance pressure",
+            "signal": 1.1,
+            "freshness": "fresh",
+            "source": "USDA/NASS lane",
+            "inputKey": "usda_crop_balance",
+            "mappedWeight": "primary",
+            "mappedDirection": 1.0,
+            "contribution": 1.1,
+            "mappingReason": "Tighter USDA supply/demand or crop condition pressure supports grain price pressure.",
+            "scoringStatus": "live_scored"
+          },
+          {
+            "id": "noaa_weather_hazard",
+            "label": "NOAA drought / weather hazard",
+            "signal": 1.6,
+            "freshness": "fresh",
+            "source": "NOAA/NWS hazards lane",
+            "inputKey": "noaa_weather_hazard",
+            "mappedWeight": "primary",
+            "mappedDirection": 1.0,
+            "contribution": 1.6,
+            "mappingReason": "Drought, freeze, flood, heat, or storm hazards can affect crop supply risk.",
+            "scoringStatus": "live_scored"
+          }
+        ],
+        "contextEvidence": [
+          {
+            "id": "eia_energy_balance",
+            "label": "EIA crude inventory balance",
+            "signal": 1.7,
+            "freshness": "fresh",
+            "source": "EIA petroleum status lane",
+            "inputKey": "eia_energy_balance",
+            "mappedWeight": "contextual",
+            "mappedDirection": 1.0,
+            "contribution": 0.425,
+            "mappingReason": "Energy costs can affect production/transport and biofuel channels, but this is indirect.",
+            "scoringStatus": "live_context"
+          },
+          {
+            "id": "growth_strength",
+            "label": "Growth / demand strength",
+            "signal": 0.7,
+            "freshness": "aging",
+            "source": "BEA/Census/BLS macro lane",
+            "inputKey": "growth_strength",
+            "mappedWeight": "contextual",
+            "mappedDirection": 1.0,
+            "contribution": 0.131,
+            "mappingReason": "Demand context may matter but is not as direct as USDA/NOAA/COT.",
+            "scoringStatus": "live_context"
+          }
+        ],
+        "excludedEvidence": [
+          {
+            "id": "treasury_yield_pressure",
+            "label": "10Y Treasury yield pressure",
+            "signal": 1.4,
+            "freshness": "fresh",
+            "source": "U.S. Treasury official Daily Treasury Par Yield Curve Rates",
+            "scoringStatus": "display_only",
+            "excludedReason": "U.S. yields are not direct crop evidence.",
+            "inputKey": "treasury_yield_pressure"
+          },
+          {
+            "id": "inflation_pressure",
+            "label": "CPI / inflation pressure",
+            "signal": 1.2,
+            "freshness": "fresh",
+            "source": "BLS CPI",
+            "scoringStatus": "display_only",
+            "excludedReason": "Broad CPI is usually not direct grain evidence in this pass.",
+            "inputKey": "inflation_pressure"
+          },
+          {
+            "id": "credit_stress",
+            "label": "Credit / financial stress",
+            "signal": 0.8,
+            "freshness": "fresh",
+            "source": "Public credit stress lane",
+            "scoringStatus": "display_only",
+            "excludedReason": "No explicit asset/input mapping in v0.34; visible only unless manually mapped.",
+            "inputKey": "credit_stress"
+          },
+          {
+            "id": "liquidity_pressure",
+            "label": "Liquidity support",
+            "signal": 0.6,
+            "freshness": "fresh",
+            "source": "Federal Reserve liquidity lane",
+            "scoringStatus": "display_only",
+            "excludedReason": "No explicit asset/input mapping in v0.34; visible only unless manually mapped.",
+            "inputKey": "liquidity_pressure"
+          }
+        ],
+        "caveats": [
+          "This is evidence pressure, not a trade signal.",
+          "Missing or stale evidence is excluded, not treated as neutral.",
+          "U.S. macro evidence is weighted differently by asset class.",
+          "Asset-specific exceptions may require manual tuning."
+        ]
+      },
+      "score": 2.7,
+      "pressureLabel": "Positive live pressure",
+      "confidence": "Low",
+      "conflict": "Low"
+    }
+  ]
+}
