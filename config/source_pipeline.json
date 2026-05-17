@@ -1,6 +1,6 @@
 {
-  "pipelineVersion": "0.27",
-  "purpose": "Stable orchestrator pipeline. v0.27 adds enabled BEA macro lane through scripts/config without changing the GitHub workflow.",
+  "pipelineVersion": "0.29",
+  "purpose": "Stable orchestrator pipeline. v0.29 enables Census real-economy lane through scripts/config without changing the GitHub workflow.",
   "global": {
     "runValidation": true,
     "stopOnFailure": true,
@@ -70,7 +70,7 @@
     {
       "id": "federal_reserve",
       "enabled": true,
-      "sourceId": "FEDERAL_RESERVE",
+      "sourceId": "FED_FRED_SELECTED",
       "fetch": "scripts/sources/fetch_fed_macro.py",
       "apply": "scripts/apply_fed_lane.py",
       "requiresSecrets": [],
@@ -82,9 +82,7 @@
       "sourceId": "CENSUS_PUBLIC",
       "fetch": "scripts/sources/fetch_census_macro.py",
       "apply": "scripts/apply_census_lane.py",
-      "requiresSecrets": [
-        "CENSUS_API_KEY"
-      ],
+      "requiresSecrets": [],
       "status": "live"
     }
   ]
