@@ -1,5 +1,5 @@
 {
-  "notice": "v0.24 source registry. Treasury, CFTC COT, EIA energy, USDA/NASS agriculture, and BLS inflation/labor lanes are live/workflow-ready.",
+  "notice": "v0.30 source registry. Treasury, CFTC COT, EIA, USDA/NASS, BLS, BEA, Federal Reserve/FRED, Census, and credit/financial stress lanes are live/workflow-ready.",
   "policy": {
     "no_price_derived_inputs": true,
     "no_scraping_restricted_sites": true,
@@ -60,14 +60,17 @@
     {
       "id": "BEA_PUBLIC",
       "name": "U.S. Bureau of Economic Analysis public data/API",
-      "status": "candidate",
+      "status": "live",
       "public_access": "official public API/releases",
       "requires_key": true,
       "primary_uses": [
         "GDP",
-        "PCE",
-        "income",
-        "consumption"
+        "real GDP growth",
+        "PCE inflation",
+        "core PCE inflation",
+        "personal consumption",
+        "personal income",
+        "savings rate"
       ],
       "asset_classes": [
         "FX",
@@ -78,7 +81,7 @@
       ],
       "expected_frequency": "monthly/quarterly depending dataset",
       "attribution_note": "Attribute BEA where used.",
-      "production_note": "Use a BEA API key stored as a GitHub secret if needed."
+      "production_note": "v0.27 adds BEA NIPA macro lane using a BEA_API_KEY GitHub secret. Missing optional observations are recorded in audit output and not faked."
     },
     {
       "id": "CFTC_COT",
@@ -165,28 +168,28 @@
     },
     {
       "id": "FED_FRED_SELECTED",
-      "name": "Federal Reserve / FRED selected public series with rights checks",
-      "status": "candidate_with_series_rights_review",
-      "public_access": "public API/release pages",
-      "requires_key": "FRED API key recommended",
+      "name": "Federal Reserve / FRED selected public data",
+      "status": "live",
+      "public_access": "public FRED graph CSV endpoints / Federal Reserve source series",
+      "requires_key": false,
       "primary_uses": [
-        "real yields",
-        "breakevens",
-        "financial conditions",
-        "selected credit spreads",
-        "Fed balance sheet/policy context"
+        "Effective fed funds rate",
+        "Fed balance sheet total assets",
+        "reserve balances",
+        "reverse repo usage",
+        "Treasury General Account",
+        "liquidity pressure"
       ],
       "asset_classes": [
-        "Rates",
-        "Inflation Markets",
-        "Credit / Liquidity",
         "FX",
+        "Rates",
         "Equity Indices",
+        "Credit / Liquidity",
         "Commodities"
       ],
-      "expected_frequency": "daily/weekly/monthly depending series",
-      "attribution_note": "Attribute original series source and FRED where applicable; check series rights.",
-      "production_note": "Approve individual FRED series one by one before production use."
+      "expected_frequency": "daily/weekly depending series",
+      "attribution_note": "Attribute Federal Reserve, New York Fed, FRED / Federal Reserve Bank of St. Louis where used.",
+      "production_note": "v0.28 adds Federal Reserve/FRED selected policy/liquidity lane using public FRED CSV endpoints. No API key required in v0.28."
     },
     {
       "id": "CENSUS_PUBLIC",
@@ -209,6 +212,31 @@
       "expected_frequency": "monthly/quarterly depending dataset",
       "attribution_note": "Attribute Census Bureau where used.",
       "production_note": "Use for public growth/consumer/trade context after higher-priority lanes."
+    },
+    {
+      "id": "FINANCIAL_STRESS_FRED",
+      "name": "Federal Reserve / FRED credit-spread and financial-stress data",
+      "status": "live",
+      "public_access": "public FRED graph CSV endpoints / Federal Reserve Bank of St. Louis hosted public series",
+      "requires_key": false,
+      "primary_uses": [
+        "High-yield credit spreads",
+        "Investment-grade credit spreads",
+        "BBB credit spreads",
+        "National financial conditions",
+        "Adjusted financial conditions",
+        "financial stress"
+      ],
+      "asset_classes": [
+        "Credit / Liquidity",
+        "Equity Indices",
+        "FX",
+        "Rates",
+        "Commodities"
+      ],
+      "expected_frequency": "daily/weekly depending series",
+      "attribution_note": "Attribute FRED / Federal Reserve Bank of St. Louis and underlying source where used.",
+      "production_note": "v0.30 adds a credit and financial-stress lane using public FRED CSV/text endpoints for HY OAS, IG OAS, BBB OAS, NFCI, ANFCI, and STLFSI4. No API key required."
     }
   ]
 }

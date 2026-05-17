@@ -1,6 +1,6 @@
 {
-  "pipelineVersion": "0.29",
-  "purpose": "Stable orchestrator pipeline. v0.29 enables Census real-economy lane through scripts/config without changing the GitHub workflow.",
+  "pipelineVersion": "0.30",
+  "purpose": "Stable orchestrator pipeline. v0.30 adds credit-spread and financial-stress lane through scripts/config without changing the GitHub workflow.",
   "global": {
     "runValidation": true,
     "stopOnFailure": true,
@@ -82,6 +82,15 @@
       "sourceId": "CENSUS_PUBLIC",
       "fetch": "scripts/sources/fetch_census_macro.py",
       "apply": "scripts/apply_census_lane.py",
+      "requiresSecrets": [],
+      "status": "live"
+    },
+    {
+      "id": "financial_stress",
+      "enabled": true,
+      "sourceId": "FINANCIAL_STRESS_FRED",
+      "fetch": "scripts/sources/fetch_financial_stress.py",
+      "apply": "scripts/apply_financial_stress_lane.py",
       "requiresSecrets": [],
       "status": "live"
     }

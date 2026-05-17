@@ -76,3 +76,18 @@ No placeholder scoring should be treated as truth. Live source data, normalized 
 ## v0.26D Deep Variable Extraction Upgrade
 
 Deepens existing live lanes from the v0.25F foundation. The master workflow remains orchestrator-based through `scripts/refresh_all_sources.py`; do not rewrite GitHub workflow YAML for source-variable expansion.
+
+
+## v0.27 BEA Macro Lane
+
+Adds a BEA public-source macro lane for GDP/PCE/growth context through the existing orchestrator. Requires a `BEA_API_KEY` GitHub Actions secret. See `docs/bea_macro_lane.md`.
+
+
+## v0.28 Federal Reserve / Liquidity Lane
+
+Adds Federal Reserve/FRED public policy and liquidity data: EFFR, total assets, reserve balances, reverse repo usage, and Treasury General Account. No new API secret is required in v0.28.
+
+
+## v0.30 Credit / Financial Stress Lane
+
+Adds a public FRED-based credit and financial-stress lane with high-yield OAS, investment-grade OAS, BBB OAS, NFCI, ANFCI, and STLFSI4. No new API secret is required. The existing orchestrator workflow continues to run `scripts/refresh_all_sources.py`.

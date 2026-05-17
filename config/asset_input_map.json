@@ -3757,5 +3757,8 @@
       ],
       "notApplicablePolicy": "Inputs not listed as direct or context should not score for this asset unless explicitly added after review."
     }
-  }
+  },
+  "_notes": [
+    "v0.30 financial_stress lane adds credit and financial-condition inputs to credit, equity, rates, FX, precious metals, and commodity assets."
+  ]
 }

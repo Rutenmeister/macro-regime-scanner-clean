@@ -1,5 +1,5 @@
 {
-  "manifestVersion": "v0.24M",
+  "manifestVersion": "0.28",
   "project": "Macro Regime Scanner",
   "purpose": "Deep source-extraction blueprint for official/public-source macro, positioning, energy, agriculture, inflation/labor, growth, policy, and activity variables before further scoring work.",
   "principles": [
@@ -894,6 +894,100 @@
           "assetUse": "USD/growth/export-import demand context",
           "scoringEligibility": "future"
         }
+      ]
+    },
+    {
+      "id": "federal_reserve",
+      "sourceId": "FED_FRED_SELECTED",
+      "status": "implemented_v0.28",
+      "variables": [
+        "EFFR",
+        "WALCL",
+        "WRESBAL",
+        "RRPONTSYD",
+        "WTREGEN"
+      ],
+      "note": "Fed/FRED policy and liquidity lane using public FRED CSV endpoints; no key required in v0.28."
+    },
+    {
+      "sourceId": "financial_stress_fred",
+      "sourceName": "Federal Reserve / FRED credit-spread and financial-stress public data",
+      "status": "implemented_v030",
+      "access": "Public FRED graph CSV/plain text endpoints; no key expected for current lane",
+      "officialUrl": "https://fred.stlouisfed.org/",
+      "primaryUse": "Credit stress, financial conditions, risk appetite, USD funding, rate pressure, and defensive-demand context.",
+      "variables": [
+        {
+          "id": "hy_oas",
+          "label": "High-yield option-adjusted spread",
+          "frequency": "daily",
+          "transformations": [
+            "change",
+            "stress_threshold"
+          ],
+          "assetUse": "direct credit stress, equity/risk appetite, USD funding context",
+          "scoringEligibility": "live_scored_candidate"
+        },
+        {
+          "id": "ig_oas",
+          "label": "Investment-grade option-adjusted spread",
+          "frequency": "daily",
+          "transformations": [
+            "change",
+            "stress_threshold"
+          ],
+          "assetUse": "direct investment-grade credit stress and broad funding context",
+          "scoringEligibility": "live_scored_candidate"
+        },
+        {
+          "id": "bbb_oas",
+          "label": "BBB option-adjusted spread",
+          "frequency": "daily",
+          "transformations": [
+            "change",
+            "stress_threshold"
+          ],
+          "assetUse": "lower-quality investment-grade stress and credit-cycle pressure",
+          "scoringEligibility": "live_scored_candidate"
+        },
+        {
+          "id": "nfci",
+          "label": "National Financial Conditions Index",
+          "frequency": "weekly",
+          "transformations": [
+            "change",
+            "tightness_threshold"
+          ],
+          "assetUse": "broad financial-condition pressure",
+          "scoringEligibility": "live_scored_candidate"
+        },
+        {
+          "id": "anfci",
+          "label": "Adjusted National Financial Conditions Index",
+          "frequency": "weekly",
+          "transformations": [
+            "change",
+            "tightness_threshold"
+          ],
+          "assetUse": "financial conditions adjusted for economic conditions",
+          "scoringEligibility": "live_scored_candidate"
+        },
+        {
+          "id": "stlfsi4",
+          "label": "St. Louis Fed Financial Stress Index",
+          "frequency": "weekly",
+          "transformations": [
+            "change",
+            "stress_threshold"
+          ],
+          "assetUse": "broad financial stress",
+          "scoringEligibility": "live_scored_candidate"
+        }
+      ],
+      "directionRules": [
+        "Wider credit spreads and higher stress indexes are pressure for equities/credit and usually support USD stress demand.",
+        "Easier credit conditions support risk assets and reduce stress-driven USD demand.",
+        "Gold/precious metals use stress as mixed defensive context because USD and liquidity channels can conflict."
       ]
     }
   ],
