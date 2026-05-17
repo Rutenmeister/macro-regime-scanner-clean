@@ -34,6 +34,7 @@ AUDIT_PATH = RAW_DIR / "census_macro_compact_audit.json"
 SOURCE_ID = "CENSUS_PUBLIC"
 SOURCE_NAME = "U.S. Census Bureau economic indicators"
 FRED_CSV = "https://fred.stlouisfed.org/graph/fredgraph.csv?id={series_id}"
+FRED_DATA = "https://fred.stlouisfed.org/data/{series_id}"
 
 # FRED series are used as public mirrors of Census economic indicators where
 # they are stable and easy to parse. Census API probes are retained in the raw
@@ -161,20 +162,58 @@ def parse_float(value: str | None) -> float | None:
         return None
 
 
-def fetch_csv(series_id: str) -> list[dict[str, str]]:
-    url = FRED_CSV.format(series_id=series_id)
-    req = urllib.request.Request(url, headers={"User-Agent": "MacroRegimeScanner/0.29"})
-    with urllib.request.urlopen(req, timeout=30) as resp:
-        text = resp.read().decode("utf-8")
+def fetch_url(url: str) -> str:
+    req = urllib.request.Request(
+        url,
+        headers={
+            "User-Agent": "Mozilla/5.0 MacroRegimeScanner/0.29",
+            "Accept": "text/csv,text/plain,*/*",
+        },
+    )
+    with urllib.request.urlopen(req, timeout=40) as resp:
+        return resp.read().decode("utf-8", errors="replace")
+
+
+def rows_from_graph_csv(series_id: str) -> list[dict[str, str]]:
+    text = fetch_url(FRED_CSV.format(series_id=series_id))
     reader = csv.DictReader(io.StringIO(text))
     return list(reader)
+
+
+def rows_from_data_txt(series_id: str) -> list[dict[str, str]]:
+    text = fetch_url(FRED_DATA.format(series_id=series_id))
+    rows: list[dict[str, str]] = []
+    for line in text.splitlines():
+        stripped = line.strip()
+        if not stripped or stripped.startswith("#"):
+            continue
+        parts = stripped.split()
+        if len(parts) >= 2 and parts[0].count("-") == 2:
+            rows.append({"DATE": parts[0], series_id: parts[1], "VALUE": parts[1]})
+    return rows
+
+
+def fetch_rows(series_id: str, audit: dict[str, Any]) -> list[dict[str, str]]:
+    errors: list[str] = []
+    for method_name, fn in (("fredgraph_csv", rows_from_graph_csv), ("fred_data_txt", rows_from_data_txt)):
+        try:
+            rows = fn(series_id)
+            audit.setdefault("fetchAttempts", []).append({"method": method_name, "rows": len(rows)})
+            if rows:
+                return rows
+        except Exception as exc:  # noqa: BLE001
+            errors.append(f"{method_name}: {exc}")
+            audit.setdefault("fetchAttempts", []).append({"method": method_name, "error": str(exc)})
+    if errors:
+        audit["fetchErrors"] = errors
+    return []
 
 
 def latest_two(rows: list[dict[str, str]], series_id: str, scale: float) -> tuple[dict[str, Any] | None, dict[str, Any] | None]:
     points: list[dict[str, Any]] = []
     for row in rows:
         date = row.get("observation_date") or row.get("DATE") or row.get("date")
-        raw = row.get(series_id) or row.get("VALUE") or row.get("value")
+        raw = row.get(series_id) or row.get(series_id.lower()) or row.get(series_id.upper()) or row.get("VALUE") or row.get("value")
         value = parse_float(raw)
         if date and value is not None and math.isfinite(value):
             points.append({"date": date, "value": value * scale, "rawValue": value})
@@ -237,7 +276,7 @@ def build_observation(spec: dict[str, Any]) -> tuple[dict[str, Any] | None, dict
     series_id = spec["seriesId"]
     audit: dict[str, Any] = {"seriesId": series_id, "label": spec["label"], "status": "started"}
     try:
-        rows = fetch_csv(series_id)
+        rows = fetch_rows(series_id, audit)
         latest, previous = latest_two(rows, series_id, float(spec.get("valueScale", 1.0)))
         audit["rowsFetched"] = len(rows)
         if not latest:
@@ -324,7 +363,7 @@ def main() -> int:
         "observations": observations,
         "notes": [
             "Census macro lane uses U.S. Census Bureau economic-indicator concepts.",
-            "Stable public FRED CSV mirrors are used for normalized observations where they preserve the official Census/related series and reduce Census EITS category-code fragility.",
+            "Stable public FRED graph/data mirrors are used for normalized observations where they preserve the official Census/related series and reduce Census EITS category-code fragility.",
             "Census API probes are saved in raw audit output when CENSUS_API_KEY is available.",
         ],
     }
