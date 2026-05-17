@@ -1,0 +1,132 @@
+{
+  "sourceId": "CENSUS_PUBLIC",
+  "retrievedAt": "2026-05-17T02:54:25.008177+00:00",
+  "seriesAudit": [
+    {
+      "seriesId": "RSXFS",
+      "label": "Retail sales: retail and food services",
+      "status": "ok",
+      "fetchAttempts": [
+        {
+          "method": "fredgraph_csv",
+          "rows": 412
+        }
+      ],
+      "rowsFetched": 412,
+      "latestPeriod": "2026-04-01",
+      "latestValue": 656115.0,
+      "score": 1
+    },
+    {
+      "seriesId": "HOUST",
+      "label": "Housing starts",
+      "status": "ok",
+      "fetchAttempts": [
+        {
+          "method": "fredgraph_csv",
+          "rows": 807
+        }
+      ],
+      "rowsFetched": 807,
+      "latestPeriod": "2026-03-01",
+      "latestValue": 1502.0,
+      "score": 2
+    },
+    {
+      "seriesId": "PERMIT",
+      "label": "Building permits",
+      "status": "ok",
+      "fetchAttempts": [
+        {
+          "method": "fredgraph_csv",
+          "rows": 795
+        }
+      ],
+      "rowsFetched": 795,
+      "latestPeriod": "2026-03-01",
+      "latestValue": 1363.0,
+      "score": -2
+    },
+    {
+      "seriesId": "HSN1F",
+      "label": "New single-family home sales",
+      "status": "ok",
+      "fetchAttempts": [
+        {
+          "method": "fredgraph_csv",
+          "rows": 759
+        }
+      ],
+      "rowsFetched": 759,
+      "latestPeriod": "2026-03-01",
+      "latestValue": 682.0,
+      "score": 2
+    },
+    {
+      "seriesId": "DGORDER",
+      "label": "Durable goods new orders",
+      "status": "ok",
+      "fetchAttempts": [
+        {
+          "method": "fredgraph_csv",
+          "rows": 410
+        }
+      ],
+      "rowsFetched": 410,
+      "latestPeriod": "2026-03-01",
+      "latestValue": 318909.0,
+      "score": 1
+    },
+    {
+      "seriesId": "BOPGSTB",
+      "label": "U.S. trade balance: goods and services",
+      "status": "ok",
+      "fetchAttempts": [
+        {
+          "method": "fredgraph_csv",
+          "rows": 411
+        }
+      ],
+      "rowsFetched": 411,
+      "latestPeriod": "2026-03-01",
+      "latestValue": -60307.0,
+      "score": -1
+    },
+    {
+      "seriesId": "BUSINV",
+      "label": "Total business inventories",
+      "status": "ok",
+      "fetchAttempts": [
+        {
+          "method": "fredgraph_csv",
+          "rows": 411
+        }
+      ],
+      "rowsFetched": 411,
+      "latestPeriod": "2026-03-01",
+      "latestValue": 2709734.0,
+      "score": 0
+    }
+  ],
+  "censusApiProbes": [
+    {
+      "id": "marts_retail_total",
+      "endpoint": "https://api.census.gov/data/timeseries/eits/marts",
+      "status": "ok",
+      "rowsFetched": 56
+    },
+    {
+      "id": "resconst_recent",
+      "endpoint": "https://api.census.gov/data/timeseries/eits/resconst",
+      "status": "ok",
+      "rowsFetched": 4752
+    },
+    {
+      "id": "advm3_recent",
+      "endpoint": "https://api.census.gov/data/timeseries/eits/advm3",
+      "status": "error",
+      "error": "HTTP Error 400: "
+    }
+  ],
+  "observationCount": 7
+}

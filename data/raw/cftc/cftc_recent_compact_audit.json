@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-05-17T02:26:01+00:00",
+  "fetched_at": "2026-05-17T02:53:45+00:00",
   "note": "Compact audit rows only. Full CFTC JSON datasets are intentionally not committed because they can exceed GitHub's 100 MB file limit.",
   "datasets": {
     "tff_futures_only": "https://publicreporting.cftc.gov/resource/gpe5-46if.json",
