@@ -65,7 +65,7 @@
       "requiresSecrets": [
         "BEA_API_KEY"
       ],
-      "status": "planned"
+      "status": "live"
     },
     {
       "id": "federal_reserve",
