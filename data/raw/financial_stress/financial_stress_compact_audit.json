@@ -1,0 +1,81 @@
+{
+  "sourceId": "FINANCIAL_STRESS_FRED",
+  "sourceName": "Federal Reserve / FRED credit and financial-stress public data",
+  "retrievedAt": "2026-05-17T03:06:56.646542+00:00",
+  "series": {
+    "HY_OAS": {
+      "seriesId": "BAMLH0A0HYM2",
+      "label": "ICE BofA US High Yield Option-Adjusted Spread",
+      "fetchAttempts": [
+        {
+          "method": "fredgraph_csv",
+          "rows": 794
+        }
+      ],
+      "status": "ok",
+      "latestDate": "2026-05-14"
+    },
+    "IG_OAS": {
+      "seriesId": "BAMLC0A0CM",
+      "label": "ICE BofA US Corporate Option-Adjusted Spread",
+      "fetchAttempts": [
+        {
+          "method": "fredgraph_csv",
+          "rows": 794
+        }
+      ],
+      "status": "ok",
+      "latestDate": "2026-05-14"
+    },
+    "BBB_OAS": {
+      "seriesId": "BAMLC0A4CBBB",
+      "label": "ICE BofA BBB US Corporate Option-Adjusted Spread",
+      "fetchAttempts": [
+        {
+          "method": "fredgraph_csv",
+          "rows": 794
+        }
+      ],
+      "status": "ok",
+      "latestDate": "2026-05-14"
+    },
+    "NFCI": {
+      "seriesId": "NFCI",
+      "label": "Chicago Fed National Financial Conditions Index",
+      "fetchAttempts": [
+        {
+          "method": "fredgraph_csv",
+          "rows": 2888
+        }
+      ],
+      "status": "ok",
+      "latestDate": "2026-05-08"
+    },
+    "ANFCI": {
+      "seriesId": "ANFCI",
+      "label": "Chicago Fed Adjusted National Financial Conditions Index",
+      "fetchAttempts": [
+        {
+          "method": "fredgraph_csv",
+          "rows": 2888
+        }
+      ],
+      "status": "ok",
+      "latestDate": "2026-05-08"
+    },
+    "STLFSI4": {
+      "seriesId": "STLFSI4",
+      "label": "St. Louis Fed Financial Stress Index",
+      "fetchAttempts": [
+        {
+          "method": "fredgraph_csv",
+          "rows": 1689
+        }
+      ],
+      "status": "ok",
+      "latestDate": "2026-05-08"
+    }
+  },
+  "observationCount": 6,
+  "errors": []
+}
