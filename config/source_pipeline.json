@@ -58,7 +58,7 @@
     },
     {
       "id": "bea",
-      "enabled": false,
+      "enabled": true,
       "sourceId": "BEA_PUBLIC",
       "fetch": "scripts/sources/fetch_bea_macro.py",
       "apply": "scripts/apply_bea_lane.py",
