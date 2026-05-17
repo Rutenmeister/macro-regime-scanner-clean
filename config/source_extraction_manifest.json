@@ -1,0 +1,906 @@
+{
+  "manifestVersion": "v0.24M",
+  "project": "Macro Regime Scanner",
+  "purpose": "Deep source-extraction blueprint for official/public-source macro, positioning, energy, agriculture, inflation/labor, growth, policy, and activity variables before further scoring work.",
+  "principles": [
+    "Feeds first, but not shallow feeds: every source lane must define the full target variable set before scripts are expanded.",
+    "No variable becomes score-eligible until it has source provenance, freshness, asset relevance, and directional interpretation rules.",
+    "Source extraction, asset mapping, and scoring are separate layers.",
+    "If a variable is contextual only, it remains visible but should not dominate scoring.",
+    "No market-price or copyrighted vendor market data is included in this manifest."
+  ],
+  "sourceStatusDefinitions": {
+    "implemented_v024": "Exists in current clean v0.24 scripts, but may be starter-depth only.",
+    "planned_deepening": "Official/public source appears viable; scripts need expansion before scoring confidence.",
+    "planned_new_lane": "Future source lane, not part of v0.24 script set.",
+    "research_required": "Potentially useful, but endpoint/legal/coverage must be confirmed before implementation."
+  },
+  "scoringEligibilityDefinitions": {
+    "live_scored_candidate": "Likely useful for scoring after extraction and asset-direction rules are verified.",
+    "live_context": "Useful context, should display but carry lower or no score weight until rules mature.",
+    "display_only": "Useful explanatory data, not a direct score input.",
+    "future": "Do not score until source, history, and interpretation are verified."
+  },
+  "sources": [
+    {
+      "sourceId": "us_treasury_fiscal_data",
+      "sourceName": "U.S. Treasury Fiscal Data / Daily Treasury Par Yield Curve Rates",
+      "status": "implemented_v024",
+      "access": "Public API, no key expected for current lane",
+      "officialUrl": "https://fiscaldata.treasury.gov/api-documentation/",
+      "primaryUse": "Rates pressure, curve shape, yield-asset direct readings, cross-asset discount-rate pressure.",
+      "variables": [
+        {
+          "id": "treasury_1m",
+          "label": "1M Treasury yield",
+          "frequency": "daily business day",
+          "transformations": [
+            "daily_change",
+            "weekly_change"
+          ],
+          "assetUse": "front-end rate pressure; cash/short-rate context",
+          "scoringEligibility": "live_scored_candidate"
+        },
+        {
+          "id": "treasury_3m",
+          "label": "3M Treasury yield",
+          "frequency": "daily business day",
+          "transformations": [
+            "daily_change",
+            "weekly_change",
+            "10y_minus_3m"
+          ],
+          "assetUse": "curve inversion/growth pressure context",
+          "scoringEligibility": "live_scored_candidate"
+        },
+        {
+          "id": "treasury_6m",
+          "label": "6M Treasury yield",
+          "frequency": "daily business day",
+          "transformations": [
+            "daily_change",
+            "weekly_change"
+          ],
+          "assetUse": "front-end policy pressure",
+          "scoringEligibility": "live_context"
+        },
+        {
+          "id": "treasury_1y",
+          "label": "1Y Treasury yield",
+          "frequency": "daily business day",
+          "transformations": [
+            "daily_change",
+            "weekly_change"
+          ],
+          "assetUse": "front-end policy pressure",
+          "scoringEligibility": "live_context"
+        },
+        {
+          "id": "treasury_2y",
+          "label": "2Y Treasury yield",
+          "frequency": "daily business day",
+          "transformations": [
+            "daily_change",
+            "weekly_change",
+            "10y_minus_2y",
+            "5y_minus_2y"
+          ],
+          "assetUse": "Fed-sensitive rate pressure; direct for 2Y yield asset; pressure for rate-sensitive risk assets",
+          "scoringEligibility": "live_scored_candidate"
+        },
+        {
+          "id": "treasury_3y",
+          "label": "3Y Treasury yield",
+          "frequency": "daily business day",
+          "transformations": [
+            "daily_change",
+            "weekly_change"
+          ],
+          "assetUse": "intermediate curve context",
+          "scoringEligibility": "live_context"
+        },
+        {
+          "id": "treasury_5y",
+          "label": "5Y Treasury yield",
+          "frequency": "daily business day",
+          "transformations": [
+            "daily_change",
+            "weekly_change",
+            "5y_minus_2y",
+            "30y_minus_5y"
+          ],
+          "assetUse": "intermediate rates/real-economy discount pressure",
+          "scoringEligibility": "live_scored_candidate"
+        },
+        {
+          "id": "treasury_7y",
+          "label": "7Y Treasury yield",
+          "frequency": "daily business day",
+          "transformations": [
+            "daily_change",
+            "weekly_change"
+          ],
+          "assetUse": "curve context",
+          "scoringEligibility": "live_context"
+        },
+        {
+          "id": "treasury_10y",
+          "label": "10Y Treasury yield",
+          "frequency": "daily business day",
+          "transformations": [
+            "daily_change",
+            "weekly_change",
+            "10y_minus_2y",
+            "10y_minus_3m"
+          ],
+          "assetUse": "core discount-rate pressure; direct for 10Y yield; pressure for equities/gold when rising unless offset by inflation/real-yield context",
+          "scoringEligibility": "live_scored_candidate"
+        },
+        {
+          "id": "treasury_20y",
+          "label": "20Y Treasury yield",
+          "frequency": "daily business day",
+          "transformations": [
+            "daily_change",
+            "weekly_change"
+          ],
+          "assetUse": "long-end duration context",
+          "scoringEligibility": "live_context"
+        },
+        {
+          "id": "treasury_30y",
+          "label": "30Y Treasury yield",
+          "frequency": "daily business day",
+          "transformations": [
+            "daily_change",
+            "weekly_change",
+            "30y_minus_5y"
+          ],
+          "assetUse": "long-end duration/growth/inflation pressure",
+          "scoringEligibility": "live_scored_candidate"
+        }
+      ],
+      "directionRules": [
+        "Higher yield is support for the yield asset itself.",
+        "Higher U.S. yields usually pressure rate-sensitive equities and gold/silver through discount-rate and real-yield channels.",
+        "Higher U.S. yields can support USD when relative-rate advantage matters.",
+        "Curve inversion/steepening should be interpreted separately from level changes."
+      ]
+    },
+    {
+      "sourceId": "cftc_cot",
+      "sourceName": "CFTC Commitments of Traders",
+      "status": "implemented_v024",
+      "access": "Public files/API-style downloads, no key expected",
+      "officialUrl": "https://www.cftc.gov/MarketReports/CommitmentsofTraders/index.htm",
+      "primaryUse": "Positioning participation, crowding, commercial/spec conflict, futures-market sentiment context.",
+      "variables": [
+        {
+          "id": "cot_spec_longs",
+          "label": "Managed money / leveraged fund longs",
+          "frequency": "weekly",
+          "transformations": [
+            "weekly_change",
+            "share_of_open_interest"
+          ],
+          "assetUse": "spec participation",
+          "scoringEligibility": "live_scored_candidate"
+        },
+        {
+          "id": "cot_spec_shorts",
+          "label": "Managed money / leveraged fund shorts",
+          "frequency": "weekly",
+          "transformations": [
+            "weekly_change",
+            "share_of_open_interest"
+          ],
+          "assetUse": "spec pressure participation",
+          "scoringEligibility": "live_scored_candidate"
+        },
+        {
+          "id": "cot_spec_net",
+          "label": "Spec net position",
+          "frequency": "weekly",
+          "transformations": [
+            "net_as_pct_open_interest",
+            "weekly_change",
+            "historical_percentile_later"
+          ],
+          "assetUse": "directional participation; not automatically contrarian",
+          "scoringEligibility": "live_scored_candidate"
+        },
+        {
+          "id": "cot_commercial_net",
+          "label": "Commercial / producer / dealer net position",
+          "frequency": "weekly",
+          "transformations": [
+            "net_as_pct_open_interest",
+            "weekly_change",
+            "historical_percentile_later"
+          ],
+          "assetUse": "hedging/value/extreme context; not automatic direction",
+          "scoringEligibility": "live_context"
+        },
+        {
+          "id": "cot_open_interest",
+          "label": "Open interest",
+          "frequency": "weekly",
+          "transformations": [
+            "weekly_change"
+          ],
+          "assetUse": "quality of positioning change",
+          "scoringEligibility": "live_context"
+        },
+        {
+          "id": "cot_spec_commercial_spread",
+          "label": "Spec-commercial spread/conflict",
+          "frequency": "weekly",
+          "transformations": [
+            "spread",
+            "historical_percentile_later"
+          ],
+          "assetUse": "crowding/conflict warning",
+          "scoringEligibility": "live_scored_candidate"
+        },
+        {
+          "id": "cot_crowding_percentile",
+          "label": "Positioning crowding percentile",
+          "frequency": "weekly",
+          "transformations": [
+            "3y_percentile",
+            "5y_percentile"
+          ],
+          "assetUse": "unwind/squeeze risk; requires historical COT expansion",
+          "scoringEligibility": "future"
+        }
+      ],
+      "directionRules": [
+        "Spec net long and increasing = trend participation support, not a guaranteed bullish signal.",
+        "Spec extreme long = support plus crowded-long risk.",
+        "Spec extreme short = pressure plus short-covering risk.",
+        "Commercial extremes are contextual/contrarian warnings, especially at historical extremes.",
+        "Treasury futures signs must be inverted for Treasury yield assets. FX mappings need base/quote direction handling."
+      ]
+    },
+    {
+      "sourceId": "eia_energy",
+      "sourceName": "U.S. Energy Information Administration API",
+      "status": "implemented_v024",
+      "access": "Public API, EIA_API_KEY required for current implementation",
+      "officialUrl": "https://www.eia.gov/opendata/documentation.php",
+      "primaryUse": "Energy supply/demand, inventory, production, refinery, storage, and inflation-cost pressure.",
+      "variables": [
+        {
+          "id": "eia_crude_stocks",
+          "label": "Commercial crude oil inventories",
+          "frequency": "weekly",
+          "transformations": [
+            "weekly_change",
+            "year_ago_change",
+            "5y_range_later"
+          ],
+          "assetUse": "direct for WTI/Brent; inventory draw supports oil, build pressures oil",
+          "scoringEligibility": "live_scored_candidate"
+        },
+        {
+          "id": "eia_cushing_stocks",
+          "label": "Cushing crude inventories",
+          "frequency": "weekly",
+          "transformations": [
+            "weekly_change",
+            "year_ago_change"
+          ],
+          "assetUse": "WTI delivery hub tightness/looseness",
+          "scoringEligibility": "live_scored_candidate"
+        },
+        {
+          "id": "eia_gasoline_stocks",
+          "label": "Gasoline inventories",
+          "frequency": "weekly",
+          "transformations": [
+            "weekly_change",
+            "year_ago_change"
+          ],
+          "assetUse": "gasoline balance and demand/inflation context",
+          "scoringEligibility": "live_scored_candidate"
+        },
+        {
+          "id": "eia_distillate_stocks",
+          "label": "Distillate inventories",
+          "frequency": "weekly",
+          "transformations": [
+            "weekly_change",
+            "year_ago_change"
+          ],
+          "assetUse": "diesel/heating oil tightness and industrial demand context",
+          "scoringEligibility": "live_scored_candidate"
+        },
+        {
+          "id": "eia_refinery_utilization",
+          "label": "Refinery utilization",
+          "frequency": "weekly",
+          "transformations": [
+            "weekly_change"
+          ],
+          "assetUse": "crude demand from refiners and product supply pressure",
+          "scoringEligibility": "planned_deepening"
+        },
+        {
+          "id": "eia_crude_production",
+          "label": "U.S. crude production",
+          "frequency": "weekly",
+          "transformations": [
+            "weekly_change",
+            "year_ago_change"
+          ],
+          "assetUse": "supply pressure for oil",
+          "scoringEligibility": "planned_deepening"
+        },
+        {
+          "id": "eia_crude_imports",
+          "label": "Crude imports",
+          "frequency": "weekly",
+          "transformations": [
+            "weekly_change"
+          ],
+          "assetUse": "balance/context, not usually primary alone",
+          "scoringEligibility": "live_context"
+        },
+        {
+          "id": "eia_crude_exports",
+          "label": "Crude exports",
+          "frequency": "weekly",
+          "transformations": [
+            "weekly_change"
+          ],
+          "assetUse": "export demand / domestic balance",
+          "scoringEligibility": "live_context"
+        },
+        {
+          "id": "eia_product_supplied_gasoline",
+          "label": "Gasoline product supplied",
+          "frequency": "weekly",
+          "transformations": [
+            "weekly_change",
+            "4w_avg_later"
+          ],
+          "assetUse": "demand proxy",
+          "scoringEligibility": "planned_deepening"
+        },
+        {
+          "id": "eia_product_supplied_distillate",
+          "label": "Distillate product supplied",
+          "frequency": "weekly",
+          "transformations": [
+            "weekly_change",
+            "4w_avg_later"
+          ],
+          "assetUse": "industrial/freight demand proxy",
+          "scoringEligibility": "planned_deepening"
+        },
+        {
+          "id": "eia_natural_gas_storage",
+          "label": "Natural gas working storage",
+          "frequency": "weekly",
+          "transformations": [
+            "weekly_change",
+            "surplus_deficit_vs_year_ago",
+            "surplus_deficit_vs_5y_later"
+          ],
+          "assetUse": "direct for natural gas; surplus pressures gas, deficit supports gas",
+          "scoringEligibility": "live_scored_candidate"
+        }
+      ],
+      "directionRules": [
+        "Inventory draw = supportive for related energy price pressure; build = pressure.",
+        "Production growth is supply pressure for oil/gas unless demand absorbs it.",
+        "Product supplied improves demand interpretation but should be smoothed to avoid noise.",
+        "Energy variables are direct for energy assets and contextual for inflation/risk/commodity baskets."
+      ]
+    },
+    {
+      "sourceId": "usda_nass_quickstats",
+      "sourceName": "USDA/NASS Quick Stats",
+      "status": "implemented_v024",
+      "access": "Public API, USDA_API_KEY required for current implementation",
+      "officialUrl": "https://www.nass.usda.gov/developer/index.php",
+      "primaryUse": "Crop supply, condition, progress, acreage, production, yield, and agriculture balance context.",
+      "variables": [
+        {
+          "id": "usda_crop_condition_good_excellent",
+          "label": "Crop condition good/excellent",
+          "frequency": "weekly/seasonal",
+          "transformations": [
+            "weekly_change",
+            "year_ago_compare"
+          ],
+          "assetUse": "worse condition supports crop price pressure; better condition eases supply risk",
+          "scoringEligibility": "live_scored_candidate"
+        },
+        {
+          "id": "usda_crop_progress_planting",
+          "label": "Planting progress",
+          "frequency": "weekly/seasonal",
+          "transformations": [
+            "vs_5y_avg_later",
+            "year_ago_compare"
+          ],
+          "assetUse": "delays can support risk premium; smooth progress eases risk",
+          "scoringEligibility": "live_context"
+        },
+        {
+          "id": "usda_crop_progress_harvest",
+          "label": "Harvest progress",
+          "frequency": "weekly/seasonal",
+          "transformations": [
+            "vs_5y_avg_later",
+            "year_ago_compare"
+          ],
+          "assetUse": "delays can support risk premium; smooth harvest eases risk",
+          "scoringEligibility": "live_context"
+        },
+        {
+          "id": "usda_production_estimate",
+          "label": "Production estimate",
+          "frequency": "monthly/seasonal",
+          "transformations": [
+            "revision",
+            "year_ago_compare"
+          ],
+          "assetUse": "lower production supports crop price pressure; higher production pressures",
+          "scoringEligibility": "live_scored_candidate"
+        },
+        {
+          "id": "usda_yield_estimate",
+          "label": "Yield estimate",
+          "frequency": "monthly/seasonal",
+          "transformations": [
+            "revision",
+            "year_ago_compare"
+          ],
+          "assetUse": "lower yield supports crop price pressure; higher yield pressures",
+          "scoringEligibility": "planned_deepening"
+        },
+        {
+          "id": "usda_acres_planted_harvested",
+          "label": "Planted/harvested acreage",
+          "frequency": "seasonal",
+          "transformations": [
+            "revision",
+            "year_ago_compare"
+          ],
+          "assetUse": "acreage expansion/decline supply context",
+          "scoringEligibility": "planned_deepening"
+        },
+        {
+          "id": "usda_ending_stocks",
+          "label": "Ending stocks / carryout",
+          "frequency": "monthly WASDE, if sourceable",
+          "transformations": [
+            "revision",
+            "year_ago_compare"
+          ],
+          "assetUse": "tighter carryout supports crop price pressure; looser carryout pressures",
+          "scoringEligibility": "future"
+        },
+        {
+          "id": "usda_stock_use_ratio",
+          "label": "Stock/use ratio",
+          "frequency": "monthly WASDE, if sourceable/calculable",
+          "transformations": [
+            "revision",
+            "percentile_later"
+          ],
+          "assetUse": "core tightness metric for grains/softs",
+          "scoringEligibility": "future"
+        },
+        {
+          "id": "usda_export_sales",
+          "label": "Export sales/commitments",
+          "frequency": "weekly, separate USDA/FAS source likely",
+          "transformations": [
+            "weekly_change",
+            "vs_expected_later"
+          ],
+          "assetUse": "demand pressure for crops",
+          "scoringEligibility": "research_required"
+        }
+      ],
+      "directionRules": [
+        "Tighter supply or worsening condition = supportive crop price pressure.",
+        "Larger supply, higher yield, or better condition = crop price pressure relief.",
+        "Progress data is seasonal/contextual unless significantly delayed or ahead of normal.",
+        "WASDE/stock-use data should become primary when implemented, but may require a separate source parser."
+      ]
+    },
+    {
+      "sourceId": "bls_public_data",
+      "sourceName": "Bureau of Labor Statistics Public Data API",
+      "status": "implemented_v024",
+      "access": "Public API, no key required at current small request size",
+      "officialUrl": "https://www.bls.gov/developers/",
+      "primaryUse": "Inflation, labor strength, wage pressure, Fed/rates pressure, growth/recession pressure.",
+      "variables": [
+        {
+          "id": "bls_cpi_headline",
+          "label": "Headline CPI",
+          "frequency": "monthly",
+          "transformations": [
+            "mom_change",
+            "yoy_change",
+            "acceleration"
+          ],
+          "assetUse": "inflation/rate pressure; usually pressure for risk assets if hot",
+          "scoringEligibility": "live_scored_candidate"
+        },
+        {
+          "id": "bls_cpi_core",
+          "label": "Core CPI",
+          "frequency": "monthly",
+          "transformations": [
+            "mom_change",
+            "yoy_change",
+            "acceleration"
+          ],
+          "assetUse": "persistent inflation/Fed pressure",
+          "scoringEligibility": "live_scored_candidate"
+        },
+        {
+          "id": "bls_cpi_shelter",
+          "label": "CPI shelter",
+          "frequency": "monthly",
+          "transformations": [
+            "mom_change",
+            "yoy_change"
+          ],
+          "assetUse": "inflation persistence context",
+          "scoringEligibility": "planned_deepening"
+        },
+        {
+          "id": "bls_cpi_energy",
+          "label": "CPI energy",
+          "frequency": "monthly",
+          "transformations": [
+            "mom_change",
+            "yoy_change"
+          ],
+          "assetUse": "energy inflation channel and consumer pressure",
+          "scoringEligibility": "planned_deepening"
+        },
+        {
+          "id": "bls_cpi_food",
+          "label": "CPI food",
+          "frequency": "monthly",
+          "transformations": [
+            "mom_change",
+            "yoy_change"
+          ],
+          "assetUse": "food inflation/agriculture context",
+          "scoringEligibility": "planned_deepening"
+        },
+        {
+          "id": "bls_ppi_headline",
+          "label": "Headline PPI",
+          "frequency": "monthly",
+          "transformations": [
+            "mom_change",
+            "yoy_change",
+            "acceleration"
+          ],
+          "assetUse": "pipeline inflation / margin pressure",
+          "scoringEligibility": "live_scored_candidate"
+        },
+        {
+          "id": "bls_ppi_core",
+          "label": "Core PPI",
+          "frequency": "monthly",
+          "transformations": [
+            "mom_change",
+            "yoy_change"
+          ],
+          "assetUse": "pipeline inflation persistence",
+          "scoringEligibility": "planned_deepening"
+        },
+        {
+          "id": "bls_unemployment_rate",
+          "label": "Unemployment rate",
+          "frequency": "monthly",
+          "transformations": [
+            "monthly_change",
+            "trend"
+          ],
+          "assetUse": "labor slack/recession risk; weak labor can lower rate pressure but hurt risk appetite",
+          "scoringEligibility": "live_scored_candidate"
+        },
+        {
+          "id": "bls_nonfarm_payrolls",
+          "label": "Nonfarm payroll growth",
+          "frequency": "monthly",
+          "transformations": [
+            "monthly_change",
+            "3m_avg_later"
+          ],
+          "assetUse": "growth/labor strength; can support risk but pressure rates if too hot",
+          "scoringEligibility": "live_scored_candidate"
+        },
+        {
+          "id": "bls_average_hourly_earnings",
+          "label": "Average hourly earnings",
+          "frequency": "monthly",
+          "transformations": [
+            "mom_change",
+            "yoy_change"
+          ],
+          "assetUse": "wage inflation pressure",
+          "scoringEligibility": "live_scored_candidate"
+        },
+        {
+          "id": "bls_labor_force_participation",
+          "label": "Labor force participation",
+          "frequency": "monthly",
+          "transformations": [
+            "monthly_change"
+          ],
+          "assetUse": "labor supply context",
+          "scoringEligibility": "planned_deepening"
+        },
+        {
+          "id": "bls_u6_unemployment",
+          "label": "U-6 unemployment",
+          "frequency": "monthly",
+          "transformations": [
+            "monthly_change"
+          ],
+          "assetUse": "broader labor slack",
+          "scoringEligibility": "planned_deepening"
+        }
+      ],
+      "directionRules": [
+        "Hot inflation = rate pressure; generally negative for equities/bonds/gold if real yields rise, but commodity effects can be contextual.",
+        "Strong labor = growth support and possible Fed tightness; asset interpretation must separate growth support from rate pressure.",
+        "Weak labor = lower rate pressure but higher recession/risk pressure."
+      ]
+    },
+    {
+      "sourceId": "bea_macro",
+      "sourceName": "Bureau of Economic Analysis API",
+      "status": "planned_new_lane",
+      "access": "Public API; key may be required/recommended depending request path",
+      "officialUrl": "https://apps.bea.gov/API/signup/",
+      "primaryUse": "Growth, GDP components, PCE/core PCE, consumption, income, savings, corporate profits.",
+      "variables": [
+        {
+          "id": "bea_real_gdp_growth",
+          "label": "Real GDP growth",
+          "frequency": "quarterly",
+          "transformations": [
+            "qoq_annualized",
+            "revision"
+          ],
+          "assetUse": "growth regime; positive for cyclical risk unless inflation/rates dominate",
+          "scoringEligibility": "future"
+        },
+        {
+          "id": "bea_nominal_gdp_growth",
+          "label": "Nominal GDP growth",
+          "frequency": "quarterly",
+          "transformations": [
+            "qoq_annualized",
+            "revision"
+          ],
+          "assetUse": "nominal demand context",
+          "scoringEligibility": "future"
+        },
+        {
+          "id": "bea_pce_inflation",
+          "label": "PCE inflation",
+          "frequency": "monthly",
+          "transformations": [
+            "mom_change",
+            "yoy_change"
+          ],
+          "assetUse": "Fed preferred inflation broad pressure",
+          "scoringEligibility": "future"
+        },
+        {
+          "id": "bea_core_pce_inflation",
+          "label": "Core PCE inflation",
+          "frequency": "monthly",
+          "transformations": [
+            "mom_change",
+            "yoy_change"
+          ],
+          "assetUse": "Fed preferred persistent inflation pressure",
+          "scoringEligibility": "future"
+        },
+        {
+          "id": "bea_personal_consumption",
+          "label": "Personal consumption expenditures",
+          "frequency": "monthly/quarterly",
+          "transformations": [
+            "monthly_change",
+            "real_vs_nominal_later"
+          ],
+          "assetUse": "consumer demand/growth context",
+          "scoringEligibility": "future"
+        },
+        {
+          "id": "bea_personal_income",
+          "label": "Personal income",
+          "frequency": "monthly",
+          "transformations": [
+            "monthly_change"
+          ],
+          "assetUse": "consumer income support context",
+          "scoringEligibility": "future"
+        },
+        {
+          "id": "bea_savings_rate",
+          "label": "Personal saving rate",
+          "frequency": "monthly",
+          "transformations": [
+            "level_change"
+          ],
+          "assetUse": "consumer cushion/strain context",
+          "scoringEligibility": "future"
+        },
+        {
+          "id": "bea_corporate_profits",
+          "label": "Corporate profits",
+          "frequency": "quarterly",
+          "transformations": [
+            "qoq_change",
+            "yoy_change"
+          ],
+          "assetUse": "equity earnings/margin macro context",
+          "scoringEligibility": "future"
+        }
+      ]
+    },
+    {
+      "sourceId": "federal_reserve_official",
+      "sourceName": "Federal Reserve official data/releases",
+      "status": "planned_new_lane",
+      "access": "Public; endpoint varies by dataset",
+      "officialUrl": "https://www.federalreserve.gov/data.htm",
+      "primaryUse": "Policy stance, balance sheet/liquidity, reserves/reverse repo, rate-setting context.",
+      "variables": [
+        {
+          "id": "fed_funds_target_upper_lower",
+          "label": "Federal funds target range",
+          "frequency": "event-driven",
+          "transformations": [
+            "change",
+            "stance"
+          ],
+          "assetUse": "policy pressure, USD/rates context",
+          "scoringEligibility": "future"
+        },
+        {
+          "id": "fed_balance_sheet_assets",
+          "label": "Fed total assets",
+          "frequency": "weekly",
+          "transformations": [
+            "weekly_change",
+            "trend"
+          ],
+          "assetUse": "liquidity context",
+          "scoringEligibility": "future"
+        },
+        {
+          "id": "fed_reserve_balances",
+          "label": "Reserve balances",
+          "frequency": "weekly",
+          "transformations": [
+            "weekly_change"
+          ],
+          "assetUse": "liquidity/risk context",
+          "scoringEligibility": "future"
+        },
+        {
+          "id": "fed_reverse_repo",
+          "label": "Reverse repo usage",
+          "frequency": "daily/weekly",
+          "transformations": [
+            "change",
+            "trend"
+          ],
+          "assetUse": "liquidity drain/release context",
+          "scoringEligibility": "future"
+        },
+        {
+          "id": "fed_discount_window",
+          "label": "Discount window / liquidity facilities",
+          "frequency": "weekly",
+          "transformations": [
+            "change",
+            "stress_flag"
+          ],
+          "assetUse": "banking/liquidity stress context",
+          "scoringEligibility": "future"
+        }
+      ]
+    },
+    {
+      "sourceId": "census_economic_indicators",
+      "sourceName": "U.S. Census economic indicators / API",
+      "status": "planned_new_lane",
+      "access": "Public API; key likely helpful or required depending endpoint",
+      "officialUrl": "https://www.census.gov/data/developers.html",
+      "primaryUse": "Retail sales, housing, trade, durable goods/orders/inventories, real-economy demand.",
+      "variables": [
+        {
+          "id": "census_retail_sales",
+          "label": "Retail sales",
+          "frequency": "monthly",
+          "transformations": [
+            "mom_change",
+            "control_group_if_sourceable"
+          ],
+          "assetUse": "consumer demand/risk/growth context",
+          "scoringEligibility": "future"
+        },
+        {
+          "id": "census_housing_starts",
+          "label": "Housing starts",
+          "frequency": "monthly",
+          "transformations": [
+            "mom_change",
+            "trend"
+          ],
+          "assetUse": "housing/growth/rate sensitivity",
+          "scoringEligibility": "future"
+        },
+        {
+          "id": "census_building_permits",
+          "label": "Building permits",
+          "frequency": "monthly",
+          "transformations": [
+            "mom_change",
+            "trend"
+          ],
+          "assetUse": "forward housing construction signal",
+          "scoringEligibility": "future"
+        },
+        {
+          "id": "census_new_home_sales",
+          "label": "New home sales",
+          "frequency": "monthly",
+          "transformations": [
+            "mom_change",
+            "inventory_months_supply"
+          ],
+          "assetUse": "housing demand context",
+          "scoringEligibility": "future"
+        },
+        {
+          "id": "census_durable_goods_orders",
+          "label": "Durable goods orders",
+          "frequency": "monthly",
+          "transformations": [
+            "mom_change",
+            "core_capex_proxy_if_sourceable"
+          ],
+          "assetUse": "business investment/cyclical demand",
+          "scoringEligibility": "future"
+        },
+        {
+          "id": "census_trade_balance",
+          "label": "Goods/services trade balance",
+          "frequency": "monthly",
+          "transformations": [
+            "change"
+          ],
+          "assetUse": "USD/growth/export-import demand context",
+          "scoringEligibility": "future"
+        }
+      ]
+    }
+  ],
+  "nextEngineeringSteps": [
+    "Use this manifest to expand each current fetcher deliberately rather than adding shallow variables ad hoc.",
+    "Add a config/asset_variable_map.json that states for each asset whether each variable is direct, secondary, contextual, display-only, or not applicable.",
+    "Only after the asset-variable map exists should scoring weights be rebuilt.",
+    "Keep the current v0.24 app and workflow stable while designing variable depth."
+  ]
+}

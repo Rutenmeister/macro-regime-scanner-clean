@@ -71,3 +71,8 @@ python scripts/validate_data.py
 ```
 
 The validator checks that the public-source edition remains free of price-derived/technical inputs and that all factors preserve relevance, score, provenance, effect, source, and freshness fields.
+
+
+## v0.24M Source Extraction Manifest
+
+This recovery-safe planning build adds `config/source_extraction_manifest.json` and `docs/source_extraction_manifest.md` to define the deeper target variable universe before any further scoring or workflow changes. It intentionally does not alter the clean v0.24 source scripts or workflows.
