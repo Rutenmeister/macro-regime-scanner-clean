@@ -112,7 +112,7 @@ function renderReleaseCalendar(){
   list.innerHTML = nextEvents.map(ev=>{
     const imp = ev.importance || 'Medium';
     const cls = imp === 'Very High' ? 'release-highest' : imp === 'High' ? 'release-high' : 'release-normal';
-    const inputs = (ev.trackedInputs || []).slice(0,3).join(' / ');
+    const inputs = (ev.trackedInputs || []).slice(0,4).join(' / ');
     return `<div class="release-row ${cls}"><div class="flex items-start justify-between gap-2"><div class="font-semibold text-slate-200 leading-tight">${ev.report}</div><div class="release-time">${ev.timeET || ''}</div></div><div class="text-[11px] text-slate-500 mt-1">${ev.source} · ${ev.date || ''} · ${ev.scheduleType || ''}</div><div class="text-[11px] text-slate-400 mt-1 leading-snug">${inputs}</div></div>`;
   }).join('');
 }
@@ -135,7 +135,7 @@ function renderDiagnosis(){ /* right readout not included; public-source edition
 function renderAll(){ renderQueue(); renderDiagnosis(); }
 function download(filename,text,type='application/json'){ const blob=new Blob([text],{type}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download=filename; a.click(); URL.revokeObjectURL(url); }
 ['searchBox','universe','assetClass','subgroup','biasFilter','conflictFilter','freshFilter','sortMode','rowLimit'].forEach(id=>$(id).addEventListener('input',()=>{ if(id==='assetClass') updateSubgroups(); renderAll(); }));
-$('exportJson').addEventListener('click',()=>download('macro_regime_scanner_public_source_data_contract_v0_32.json',JSON.stringify({notice:'Public-source data contract. v0.32 includes live public-source lanes and a source-weighted live-only score audit; price-derived lanes remain excluded.',assets:ASSETS},null,2)));
+$('exportJson').addEventListener('click',()=>download('macro_regime_scanner_public_source_data_contract_v0_33_1.json',JSON.stringify({notice:'Public-source data contract. v0.32 includes live public-source lanes and a source-weighted live-only score audit; price-derived lanes remain excluded.',assets:ASSETS},null,2)));
 async function loadData(){
   try {
     const response = await fetch('data/macro_regime_scanner.json', { cache: 'no-store' });
