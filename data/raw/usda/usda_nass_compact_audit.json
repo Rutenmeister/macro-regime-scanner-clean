@@ -1,0 +1,23 @@
+{
+  "source_id": "USDA_PUBLIC",
+  "source_name": "USDA National Agricultural Statistics Service Quick Stats API",
+  "retrieved_at": "2026-05-17T00:53:04+00:00",
+  "latest_date": "2026",
+  "observation_count": 12,
+  "observation_keys": [
+    "CORN_CONDITION",
+    "CORN_PRODUCTION",
+    "CORN_PROGRESS",
+    "COTTON_CONDITION",
+    "COTTON_PRODUCTION",
+    "COTTON_PROGRESS",
+    "SOY_CONDITION",
+    "SOY_PRODUCTION",
+    "SOY_PROGRESS",
+    "WHEAT_CONDITION",
+    "WHEAT_PRODUCTION",
+    "WHEAT_PROGRESS"
+  ],
+  "errors": [],
+  "note": "USDA/NASS Quick Stats lane covers crop condition, crop progress, and production estimates. WASDE ending stocks, stock/use, and export sales remain future USDA sub-lanes."
+}

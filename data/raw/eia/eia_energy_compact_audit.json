@@ -1,0 +1,90 @@
+{
+  "fetched_at": "2026-05-17T00:52:57+00:00",
+  "source": "U.S. Energy Information Administration open data/API",
+  "petroleum_series_requested": {
+    "CRUDE_STOCKS": {
+      "route": "petroleum/sum/sndw",
+      "series": "W_EPC0_SAX_NUS_MBBL",
+      "label": "U.S. commercial crude oil stocks excluding SPR",
+      "unit": "thousand barrels",
+      "kind": "inventory",
+      "threshold": 1500,
+      "strong_threshold": 5000
+    },
+    "CUSHING_STOCKS": {
+      "route": "petroleum/sum/sndw",
+      "series": "W_EPC0_SAX_YCUOK_MBBL",
+      "label": "Cushing, Oklahoma crude oil stocks",
+      "unit": "thousand barrels",
+      "kind": "inventory",
+      "threshold": 500,
+      "strong_threshold": 1500
+    },
+    "GASOLINE_STOCKS": {
+      "route": "petroleum/sum/sndw",
+      "series": "W_EPM0_SAX_NUS_MBBL",
+      "label": "U.S. motor gasoline stocks",
+      "unit": "thousand barrels",
+      "kind": "inventory",
+      "threshold": 1000,
+      "strong_threshold": 3000
+    },
+    "DISTILLATE_STOCKS": {
+      "route": "petroleum/sum/sndw",
+      "series": "W_EPD0_SAX_NUS_MBBL",
+      "label": "U.S. distillate fuel oil stocks",
+      "unit": "thousand barrels",
+      "kind": "inventory",
+      "threshold": 750,
+      "strong_threshold": 2500
+    }
+  },
+  "notes": "Compact audit only; raw API payloads are not committed to avoid large files.",
+  "observations_summary": {
+    "CRUDE_STOCKS": {
+      "label": "U.S. commercial crude oil stocks excluding SPR",
+      "series": "W_EPC0_SAX_NUS_MBBL",
+      "latest_period": "2016-09-30",
+      "previous_period": "2016-09-23",
+      "latest_value": 499740.0,
+      "weekly_change": -2976.0,
+      "status": "Support"
+    },
+    "CUSHING_STOCKS": {
+      "label": "Cushing, Oklahoma crude oil stocks",
+      "series": "W_EPC0_SAX_YCUOK_MBBL",
+      "latest_period": "2026-05-08",
+      "previous_period": "2026-05-01",
+      "latest_value": 27422.0,
+      "weekly_change": -1702.0,
+      "status": "Strong support"
+    },
+    "GASOLINE_STOCKS": {
+      "label": "U.S. motor gasoline stocks",
+      "series": "W_EPM0_SAX_NUS_MBBL",
+      "latest_period": null,
+      "previous_period": null,
+      "latest_value": null,
+      "weekly_change": null,
+      "status": "Neutral"
+    },
+    "DISTILLATE_STOCKS": {
+      "label": "U.S. distillate fuel oil stocks",
+      "series": "W_EPD0_SAX_NUS_MBBL",
+      "latest_period": null,
+      "previous_period": null,
+      "latest_value": null,
+      "weekly_change": null,
+      "status": "Neutral"
+    },
+    "NATGAS_STORAGE": {
+      "label": "Lower 48 working natural gas in underground storage",
+      "series": "png.nw2_epg0_swo_r48_bcf.w",
+      "latest_period": "2026-05-08",
+      "previous_period": "2026-05-01",
+      "latest_value": 2290.0,
+      "weekly_change": 85.0,
+      "status": "Pressure"
+    }
+  }
+}

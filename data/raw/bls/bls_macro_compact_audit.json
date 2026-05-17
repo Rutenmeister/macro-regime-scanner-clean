@@ -1,0 +1,106 @@
+{
+  "fetched_at": "2026-05-17T00:53:05+00:00",
+  "source": "BLS public API v2",
+  "series_requested": {
+    "CPI_HEADLINE": {
+      "series_id": "CUSR0000SA0",
+      "label": "CPI all items",
+      "input": "BLS CPI pressure",
+      "unit": "index",
+      "kind": "inflation_index"
+    },
+    "CPI_CORE": {
+      "series_id": "CUSR0000SA0L1E",
+      "label": "Core CPI less food and energy",
+      "input": "BLS core CPI pressure",
+      "unit": "index",
+      "kind": "inflation_index"
+    },
+    "PPI_FINAL_DEMAND": {
+      "series_id": "WPUFD4",
+      "label": "PPI final demand",
+      "input": "BLS PPI pressure",
+      "unit": "index",
+      "kind": "inflation_index"
+    },
+    "UNEMPLOYMENT_RATE": {
+      "series_id": "LNS14000000",
+      "label": "Unemployment rate",
+      "input": "BLS unemployment rate",
+      "unit": "percent",
+      "kind": "level"
+    },
+    "NONFARM_PAYROLLS": {
+      "series_id": "CES0000000001",
+      "label": "Total nonfarm payroll employment",
+      "input": "BLS payroll growth",
+      "unit": "thousands of jobs",
+      "kind": "level_change"
+    },
+    "AVG_HOURLY_EARNINGS": {
+      "series_id": "CES0500000003",
+      "label": "Average hourly earnings private employees",
+      "input": "BLS wage pressure",
+      "unit": "dollars/hour",
+      "kind": "wage_index"
+    }
+  },
+  "status": "REQUEST_SUCCEEDED",
+  "message": [],
+  "series": {
+    "CPI_HEADLINE": {
+      "series_id": "CUSR0000SA0",
+      "label": "CPI all items",
+      "latest_date": "2026-04-01",
+      "latest_value": 332.407,
+      "observations": 51,
+      "score": 2,
+      "status": "Strong support"
+    },
+    "CPI_CORE": {
+      "series_id": "CUSR0000SA0L1E",
+      "label": "Core CPI less food and energy",
+      "latest_date": "2026-04-01",
+      "latest_value": 335.423,
+      "observations": 51,
+      "score": 1,
+      "status": "Support"
+    },
+    "PPI_FINAL_DEMAND": {
+      "series_id": "WPUFD4",
+      "label": "PPI final demand",
+      "latest_date": "2026-04-01",
+      "latest_value": 156.878,
+      "observations": 52,
+      "score": 2,
+      "status": "Strong support"
+    },
+    "UNEMPLOYMENT_RATE": {
+      "series_id": "LNS14000000",
+      "label": "Unemployment rate",
+      "latest_date": "2026-04-01",
+      "latest_value": 4.3,
+      "observations": 51,
+      "score": 0,
+      "status": "Neutral"
+    },
+    "NONFARM_PAYROLLS": {
+      "series_id": "CES0000000001",
+      "label": "Total nonfarm payroll employment",
+      "latest_date": "2026-04-01",
+      "latest_value": 158736.0,
+      "observations": 52,
+      "score": 0,
+      "status": "Neutral"
+    },
+    "AVG_HOURLY_EARNINGS": {
+      "series_id": "CES0500000003",
+      "label": "Average hourly earnings private employees",
+      "latest_date": "2026-04-01",
+      "latest_value": 37.41,
+      "observations": 52,
+      "score": 1,
+      "status": "Support"
+    }
+  }
+}
