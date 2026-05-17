@@ -1,7 +1,7 @@
 {
   "source_id": "CFTC_COT",
   "source_name": "CFTC Commitments of Traders public reports",
-  "fetched_at": "2026-05-17T04:11:21+00:00",
+  "fetched_at": "2026-05-17T05:37:51+00:00",
   "latest_report_date": "2026-05-12",
   "reporting_note": "COT is a weekly public report based on Tuesday open interest and normally released Friday afternoon. This lane uses positioning only, not market prices.",
   "datasets": {

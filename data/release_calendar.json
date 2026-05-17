@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-17T04:00:26.326120+00:00",
+  "generatedAt": "2026-05-17T05:38:26.600088+00:00",
   "timezone": "America/New_York",
   "windowDays": 14,
   "method": "rule-based release watch generated during source refresh; entries marked estimated when official dates are not fetched directly",

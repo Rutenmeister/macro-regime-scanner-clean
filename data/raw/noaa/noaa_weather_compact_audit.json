@@ -1,19 +1,21 @@
 {
   "sourceId": "NOAA_NWS",
   "sourceName": "NOAA/National Weather Service public weather alerts",
-  "retrievedAt": "2026-05-17T04:12:02.378920+00:00",
+  "retrievedAt": "2026-05-17T05:38:25.479978+00:00",
   "endpoint": "https://api.weather.gov/alerts/active?status=actual&message_type=alert",
   "fetchAttempts": [
     {
       "endpoint": "https://api.weather.gov/alerts/active?status=actual&message_type=alert",
-      "features": 322
+      "features": 317
     }
   ],
   "categoryCounts": {
     "HEAT_STRESS": {
-      "count": 0,
-      "weighted": 0,
-      "sampleEvents": []
+      "count": 1,
+      "weighted": 2,
+      "sampleEvents": [
+        "Heat Advisory"
+      ]
     },
     "COLD_FREEZE_STRESS": {
       "count": 2,
@@ -35,19 +37,19 @@
       ]
     },
     "FLOOD_STRESS": {
-      "count": 13,
-      "weighted": 33,
+      "count": 7,
+      "weighted": 19,
       "sampleEvents": [
         "Flash Flood Warning",
-        "Flood Watch",
         "Flash Flood Warning",
         "Flood Watch",
-        "Flash Flood Warning"
+        "Flood Watch",
+        "Flood Advisory"
       ]
     },
     "SEVERE_CONVECTIVE_STRESS": {
-      "count": 11,
-      "weighted": 33,
+      "count": 6,
+      "weighted": 18,
       "sampleEvents": [
         "Severe Thunderstorm Warning",
         "Severe Thunderstorm Warning",
@@ -62,13 +64,13 @@
       "sampleEvents": []
     },
     "FIRE_WEATHER_STRESS": {
-      "count": 10,
-      "weighted": 30,
+      "count": 8,
+      "weighted": 24,
       "sampleEvents": [
         "Fire Weather Watch",
         "Fire Weather Watch",
         "Red Flag Warning",
-        "Red Flag Warning",
+        "Fire Weather Watch",
         "Red Flag Warning"
       ]
     },
@@ -80,12 +82,12 @@
   },
   "eventCountsTop": [
     [
-      "Small Craft Advisory",
-      110
+      "Gale Warning",
+      113
     ],
     [
-      "Gale Warning",
-      108
+      "Small Craft Advisory",
+      112
     ],
     [
       "Winter Weather Advisory",
@@ -93,7 +95,7 @@
     ],
     [
       "Wind Advisory",
-      10
+      11
     ],
     [
       "Storm Warning",
@@ -104,27 +106,15 @@
       8
     ],
     [
-      "Severe Thunderstorm Warning",
-      7
-    ],
-    [
-      "Special Weather Statement",
-      7
-    ],
-    [
-      "Flash Flood Warning",
-      6
-    ],
-    [
       "Fire Weather Watch",
-      6
+      5
     ],
     [
       "Winter Storm Warning",
       5
     ],
     [
-      "High Wind Warning",
+      "Special Weather Statement",
       4
     ],
     [
@@ -132,23 +122,35 @@
       4
     ],
     [
-      "Red Flag Warning",
-      4
+      "Flash Flood Warning",
+      3
     ],
     [
       "Lake Wind Advisory",
       3
     ],
     [
+      "High Wind Warning",
+      3
+    ],
+    [
+      "Red Flag Warning",
+      3
+    ],
+    [
+      "Severe Thunderstorm Warning",
+      2
+    ],
+    [
+      "Beach Hazards Statement",
+      2
+    ],
+    [
+      "High Surf Advisory",
+      2
+    ],
+    [
       "Flood Watch",
-      3
-    ],
-    [
-      "Flood Advisory",
-      3
-    ],
-    [
-      "Rip Current Statement",
       2
     ],
     [
@@ -158,6 +160,14 @@
     [
       "Frost Advisory",
       2
+    ],
+    [
+      "Heat Advisory",
+      1
+    ],
+    [
+      "Flood Advisory",
+      1
     ],
     [
       "Brisk Wind Advisory",
@@ -170,22 +180,14 @@
     [
       "Fire Warning",
       1
-    ],
-    [
-      "Hazardous Seas Warning",
-      1
-    ],
-    [
-      "Marine Weather Statement",
-      1
     ]
   ],
-  "totalActiveAlerts": 322,
-  "weightedActiveAlerts": 569,
+  "totalActiveAlerts": 317,
+  "weightedActiveAlerts": 545,
   "severityCounts": {
-    "Severe": 50,
-    "Moderate": 144,
-    "Minor": 117,
+    "Severe": 38,
+    "Moderate": 149,
+    "Minor": 119,
     "Extreme": 1,
     "Unknown": 10
   },
@@ -193,9 +195,149 @@
     {
       "event": "Severe Thunderstorm Warning",
       "severity": "Severe",
-      "effective": "2026-05-16T23:09:00-05:00",
-      "area": "Clay, NE; Fillmore, NE; Nuckolls, NE; Thayer, NE",
-      "headline": "Severe Thunderstorm Warning issued May 16 at 11:09PM CDT until May 17 at 12:00AM CDT by NWS Hastings NE"
+      "effective": "2026-05-17T00:31:00-05:00",
+      "area": "Clay, KS; Geary, KS; Marshall, KS; Pottawatomie, KS; Riley, KS; Washington, KS",
+      "headline": "Severe Thunderstorm Warning issued May 17 at 12:31AM CDT until May 17 at 1:00AM CDT by NWS Topeka KS"
+    },
+    {
+      "event": "Special Weather Statement",
+      "severity": "Moderate",
+      "effective": "2026-05-17T00:28:00-05:00",
+      "area": "Jefferson; Van Buren; Scotland; Clark",
+      "headline": "Special Weather Statement issued May 17 at 12:28AM CDT by NWS Quad Cities IA IL"
+    },
+    {
+      "event": "Wind Advisory",
+      "severity": "Moderate",
+      "effective": "2026-05-16T22:18:00-07:00",
+      "area": "Mono",
+      "headline": "Wind Advisory issued May 16 at 10:18PM PDT until May 17 at 11:00PM PDT by NWS Reno NV"
+    },
+    {
+      "event": "Severe Thunderstorm Warning",
+      "severity": "Severe",
+      "effective": "2026-05-17T00:16:00-05:00",
+      "area": "Marshall, KS; Nemaha, KS",
+      "headline": "Severe Thunderstorm Warning issued May 17 at 12:16AM CDT until May 17 at 1:00AM CDT by NWS Topeka KS"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-05-17T00:11:00-05:00",
+      "area": "Baffin Bay and Upper Laguna Madre; Corpus Christi and Nueces Bays; Copano, Aransas, and Redfish Bays; San Antonio, Mesquite, and Espiritu Santo Bays; Coastal waters from Baffin Bay to Port Aransas out 20 NM; Coastal waters from Port Aransas",
+      "headline": "Small Craft Advisory issued May 17 at 12:11AM CDT until May 18 at 10:00AM CDT by NWS Corpus Christi TX"
+    },
+    {
+      "event": "Flash Flood Warning",
+      "severity": "Severe",
+      "effective": "2026-05-17T00:09:00-05:00",
+      "area": "Gage, NE; Jefferson, NE; Saline, NE",
+      "headline": "Flash Flood Warning issued May 17 at 12:09AM CDT until May 17 at 2:15AM CDT by NWS Omaha/Valley NE"
+    },
+    {
+      "event": "Beach Hazards Statement",
+      "severity": "Moderate",
+      "effective": "2026-05-16T21:55:00-07:00",
+      "area": "Malibu Coast; Los Angeles County Beaches",
+      "headline": "Beach Hazards Statement issued May 16 at 9:55PM PDT until May 18 at 9:00AM PDT by NWS Los Angeles/Oxnard CA"
+    },
+    {
+      "event": "Beach Hazards Statement",
+      "severity": "Moderate",
+      "effective": "2026-05-16T21:55:00-07:00",
+      "area": "Santa Barbara County Southwestern Coast; Santa Barbara County Southeastern Coast",
+      "headline": "Beach Hazards Statement issued May 16 at 9:55PM PDT until May 18 at 9:00AM PDT by NWS Los Angeles/Oxnard CA"
+    },
+    {
+      "event": "High Surf Advisory",
+      "severity": "Minor",
+      "effective": "2026-05-16T21:55:00-07:00",
+      "area": "San Luis Obispo County Beaches; Santa Barbara County Central Coast Beaches",
+      "headline": "High Surf Advisory issued May 16 at 9:55PM PDT until May 18 at 9:00AM PDT by NWS Los Angeles/Oxnard CA"
+    },
+    {
+      "event": "High Surf Advisory",
+      "severity": "Minor",
+      "effective": "2026-05-16T21:55:00-07:00",
+      "area": "Ventura County Beaches",
+      "headline": "High Surf Advisory issued May 16 at 9:55PM PDT until May 18 at 9:00AM PDT by NWS Los Angeles/Oxnard CA"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-05-17T00:50:00-04:00",
+      "area": "Cape Cod Bay; Nantucket Sound; Vineyard Sound; Buzzards Bay",
+      "headline": "Small Craft Advisory issued May 17 at 12:50AM EDT until May 17 at 5:00AM EDT by NWS Boston/Norton MA"
+    },
+    {
+      "event": "Gale Warning",
+      "severity": "Moderate",
+      "effective": "2026-05-16T21:50:00-07:00",
+      "area": "East Santa Barbara Channel from Pt. Conception to Pt. Mugu CA including Santa Cruz Island",
+      "headline": "Gale Warning issued May 16 at 9:50PM PDT until May 17 at 5:00AM PDT by NWS Los Angeles/Oxnard CA"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-05-16T21:50:00-07:00",
+      "area": "Inner waters from Point Mugu to San Mateo Pt. CA including Santa Catalina and Anacapa Islands",
+      "headline": "Small Craft Advisory issued May 16 at 9:50PM PDT until May 17 at 9:00AM PDT by NWS Los Angeles/Oxnard CA"
+    },
+    {
+      "event": "Gale Warning",
+      "severity": "Moderate",
+      "effective": "2026-05-16T21:50:00-07:00",
+      "area": "Point Piedras Blancas to Point Sal westward out to 10 NM",
+      "headline": "Gale Warning issued May 16 at 9:50PM PDT until May 17 at 9:00PM PDT by NWS Los Angeles/Oxnard CA"
+    },
+    {
+      "event": "Gale Warning",
+      "severity": "Moderate",
+      "effective": "2026-05-16T21:50:00-07:00",
+      "area": "Waters from Pt. Sal to Santa Cruz Island CA and westward 60 nm including San Miguel and Santa Rosa Islands",
+      "headline": "Gale Warning issued May 16 at 9:50PM PDT until May 18 at 3:00AM PDT by NWS Los Angeles/Oxnard CA"
+    },
+    {
+      "event": "Gale Warning",
+      "severity": "Moderate",
+      "effective": "2026-05-16T21:50:00-07:00",
+      "area": "Point Piedras Blancas to Point Sal from 10 to 60 NM",
+      "headline": "Gale Warning issued May 16 at 9:50PM PDT until May 18 at 3:00AM PDT by NWS Los Angeles/Oxnard CA"
+    },
+    {
+      "event": "Gale Warning",
+      "severity": "Moderate",
+      "effective": "2026-05-16T21:50:00-07:00",
+      "area": "Outer waters from Santa Cruz Island to San Clemente Island to 60 NM offshore including San Nicolas and Santa Barbara Islands",
+      "headline": "Gale Warning issued May 16 at 9:50PM PDT until May 18 at 3:00AM PDT by NWS Los Angeles/Oxnard CA"
+    },
+    {
+      "event": "Lake Wind Advisory",
+      "severity": "Moderate",
+      "effective": "2026-05-16T23:42:00-05:00",
+      "area": "Jefferson; Franklin; Williamson; Wayne",
+      "headline": "Lake Wind Advisory issued May 16 at 11:42PM CDT until May 17 at 5:00PM CDT by NWS Paducah KY"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-05-16T23:23:00-05:00",
+      "area": "Matagorda Bay; Galveston Bay; Coastal waters from Freeport to Matagorda Ship Channel TX out 20 NM; Coastal waters from High Island to Freeport TX out 20 NM; Waters from Freeport to Matagorda Ship Channel TX from 20 to 60 NM; Waters from Hig",
+      "headline": "Small Craft Advisory issued May 16 at 11:23PM CDT until May 18 at 10:00AM CDT by NWS Houston/Galveston TX"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-05-16T23:23:00-05:00",
+      "area": "Coastal waters from Cameron LA to High Island TX out 20 NM; Coastal waters from Intracoastal City to Cameron LA out 20 NM; Waters from Cameron LA to High Island TX from 20 to 60 NM; Waters from Intracoastal City to Cameron LA from 20 to 60 ",
+      "headline": "Small Craft Advisory issued May 16 at 11:23PM CDT until May 18 at 7:00AM CDT by NWS Lake Charles LA"
+    },
+    {
+      "event": "Heat Advisory",
+      "severity": "Moderate",
+      "effective": "2026-05-16T23:23:00-05:00",
+      "area": "Palo Duro Canyon",
+      "headline": "Heat Advisory issued May 16 at 11:23PM CDT until May 17 at 9:00PM CDT by NWS Amarillo TX"
     },
     {
       "event": "Flash Flood Warning",
@@ -203,27 +345,6 @@
       "effective": "2026-05-16T23:08:00-05:00",
       "area": "Gage, NE; Johnson, NE; Otoe, NE",
       "headline": "Flash Flood Warning issued May 16 at 11:08PM CDT until May 17 at 2:15AM CDT by NWS Omaha/Valley NE"
-    },
-    {
-      "event": "Special Weather Statement",
-      "severity": "Moderate",
-      "effective": "2026-05-16T23:06:00-05:00",
-      "area": "Delaware; Dubuque",
-      "headline": "Special Weather Statement issued May 16 at 11:06PM CDT by NWS Quad Cities IA IL"
-    },
-    {
-      "event": "High Wind Warning",
-      "severity": "Severe",
-      "effective": "2026-05-16T21:02:00-07:00",
-      "area": "Southern Ventura County Mountains; Northern Ventura County Mountains; Interstate 5 Corridor",
-      "headline": "High Wind Warning issued May 16 at 9:02PM PDT until May 17 at 9:00AM PDT by NWS Los Angeles/Oxnard CA"
-    },
-    {
-      "event": "High Wind Warning",
-      "severity": "Severe",
-      "effective": "2026-05-16T21:02:00-07:00",
-      "area": "Santa Barbara County Southwestern Coast; Santa Ynez Mountains Western Range; Santa Ynez Mountains Eastern Range; Santa Barbara County Interior Mountains",
-      "headline": "High Wind Warning issued May 16 at 9:02PM PDT until May 17 at 9:00AM PDT by NWS Los Angeles/Oxnard CA"
     },
     {
       "event": "High Wind Warning",
@@ -240,11 +361,18 @@
       "headline": "Wind Advisory issued May 16 at 9:02PM PDT until May 17 at 11:00PM PDT by NWS Los Angeles/Oxnard CA"
     },
     {
-      "event": "Severe Thunderstorm Warning",
+      "event": "High Wind Warning",
       "severity": "Severe",
-      "effective": "2026-05-16T22:59:00-05:00",
-      "area": "Clay, NE; Fillmore, NE; Hamilton, NE; Merrick, NE; Polk, NE; York, NE",
-      "headline": "Severe Thunderstorm Warning issued May 16 at 10:59PM CDT until May 17 at 12:00AM CDT by NWS Hastings NE"
+      "effective": "2026-05-16T21:02:00-07:00",
+      "area": "Southern Ventura County Mountains; Northern Ventura County Mountains; Interstate 5 Corridor",
+      "headline": "High Wind Warning issued May 16 at 9:02PM PDT until May 17 at 9:00AM PDT by NWS Los Angeles/Oxnard CA"
+    },
+    {
+      "event": "High Wind Warning",
+      "severity": "Severe",
+      "effective": "2026-05-16T21:02:00-07:00",
+      "area": "Santa Barbara County Southwestern Coast; Santa Ynez Mountains Western Range; Santa Ynez Mountains Eastern Range; Santa Barbara County Interior Mountains",
+      "headline": "High Wind Warning issued May 16 at 9:02PM PDT until May 17 at 9:00AM PDT by NWS Los Angeles/Oxnard CA"
     },
     {
       "event": "Severe Thunderstorm Watch",
@@ -268,48 +396,6 @@
       "headline": "Severe Thunderstorm Watch issued May 16 at 10:57PM CDT until May 17 at 6:00AM CDT by NWS Kansas City/Pleasant Hill MO"
     },
     {
-      "event": "Severe Thunderstorm Warning",
-      "severity": "Severe",
-      "effective": "2026-05-16T22:52:00-05:00",
-      "area": "Gage, NE; Jefferson, NE; Saline, NE",
-      "headline": "Severe Thunderstorm Warning issued May 16 at 10:52PM CDT until May 16 at 11:45PM CDT by NWS Omaha/Valley NE"
-    },
-    {
-      "event": "Severe Thunderstorm Warning",
-      "severity": "Severe",
-      "effective": "2026-05-16T22:51:00-05:00",
-      "area": "Mitchell, KS",
-      "headline": "Severe Thunderstorm Warning issued May 16 at 10:51PM CDT until May 16 at 11:45PM CDT by NWS Hastings NE"
-    },
-    {
-      "event": "Severe Thunderstorm Warning",
-      "severity": "Severe",
-      "effective": "2026-05-16T22:47:00-05:00",
-      "area": "Daviess, MO; Harrison, MO",
-      "headline": "Severe Thunderstorm Warning issued May 16 at 10:47PM CDT until May 16 at 11:15PM CDT by NWS Kansas City/Pleasant Hill MO"
-    },
-    {
-      "event": "Severe Thunderstorm Warning",
-      "severity": "Severe",
-      "effective": "2026-05-16T22:46:00-05:00",
-      "area": "Daviess, MO; Gentry, MO; Harrison, MO",
-      "headline": "Severe Thunderstorm Warning issued May 16 at 10:46PM CDT until May 16 at 11:15PM CDT by NWS Kansas City/Pleasant Hill MO"
-    },
-    {
-      "event": "Severe Thunderstorm Warning",
-      "severity": "Severe",
-      "effective": "2026-05-16T22:44:00-05:00",
-      "area": "Grundy, MO; Sullivan, MO",
-      "headline": "Severe Thunderstorm Warning issued May 16 at 10:44PM CDT until May 16 at 11:15PM CDT by NWS Kansas City/Pleasant Hill MO"
-    },
-    {
-      "event": "Special Weather Statement",
-      "severity": "Moderate",
-      "effective": "2026-05-16T21:37:00-06:00",
-      "area": "Sheridan Foothills",
-      "headline": "Special Weather Statement issued May 16 at 9:37PM MDT by NWS Billings MT"
-    },
-    {
       "event": "Lake Wind Advisory",
       "severity": "Moderate",
       "effective": "2026-05-16T21:37:00-06:00",
@@ -324,13 +410,6 @@
       "headline": "Small Craft Advisory issued May 16 at 10:35PM CDT until May 17 at 7:00AM CDT by NWS Brownsville TX"
     },
     {
-      "event": "Special Weather Statement",
-      "severity": "Moderate",
-      "effective": "2026-05-16T22:29:00-05:00",
-      "area": "Iowa; Johnson; Keokuk; Washington",
-      "headline": "Special Weather Statement issued May 16 at 10:29PM CDT by NWS Quad Cities IA IL"
-    },
-    {
       "event": "Fire Weather Watch",
       "severity": "Severe",
       "effective": "2026-05-16T22:23:00-05:00",
@@ -338,32 +417,11 @@
       "headline": "Fire Weather Watch issued May 16 at 10:23PM CDT until May 18 at 9:00PM CDT by NWS Amarillo TX"
     },
     {
-      "event": "Special Weather Statement",
-      "severity": "Moderate",
-      "effective": "2026-05-16T22:22:00-05:00",
-      "area": "Buchanan; Delaware",
-      "headline": "Special Weather Statement issued May 16 at 10:22PM CDT by NWS Quad Cities IA IL"
-    },
-    {
       "event": "Flood Watch",
       "severity": "Severe",
       "effective": "2026-05-16T22:16:00-05:00",
       "area": "Atchison; Nodaway; Worth; Gentry; Harrison; Mercer; Putnam; Holt; Andrew; De Kalb; Daviess; Grundy; Sullivan; Livingston; Linn",
       "headline": "Flood Watch issued May 16 at 10:16PM CDT until May 17 at 1:00PM CDT by NWS Kansas City/Pleasant Hill MO"
-    },
-    {
-      "event": "High Wind Warning",
-      "severity": "Severe",
-      "effective": "2026-05-16T22:08:00-05:00",
-      "area": "Jasper; Poweshiek; Madison; Warren; Marion; Mahaska; Union; Clarke; Lucas",
-      "headline": "High Wind Warning issued May 16 at 10:08PM CDT until May 17 at 1:00AM CDT by NWS Des Moines IA"
-    },
-    {
-      "event": "Flash Flood Warning",
-      "severity": "Severe",
-      "effective": "2026-05-16T22:07:00-05:00",
-      "area": "Daviess, MO",
-      "headline": "Flash Flood Warning issued May 16 at 10:07PM CDT until May 17 at 4:00AM CDT by NWS Kansas City/Pleasant Hill MO"
     },
     {
       "event": "Flood Watch",
@@ -376,43 +434,29 @@
       "event": "Winter Weather Advisory",
       "severity": "Moderate",
       "effective": "2026-05-16T20:44:00-06:00",
-      "area": "Madison River Valley; Gallatin Valley",
-      "headline": "Winter Weather Advisory issued May 16 at 8:44PM MDT until May 17 at 6:00AM MDT by NWS Great Falls MT"
+      "area": "Eastern Uinta Mountains",
+      "headline": "Winter Weather Advisory issued May 16 at 8:44PM MDT until May 18 at 6:00PM MDT by NWS Grand Junction CO"
     },
     {
       "event": "Winter Weather Advisory",
       "severity": "Moderate",
       "effective": "2026-05-16T20:44:00-06:00",
-      "area": "Eastern Uinta Mountains",
-      "headline": "Winter Weather Advisory issued May 16 at 8:44PM MDT until May 18 at 6:00PM MDT by NWS Grand Junction CO"
-    },
-    {
-      "event": "Flash Flood Warning",
-      "severity": "Severe",
-      "effective": "2026-05-16T21:35:00-05:00",
-      "area": "Grundy, MO",
-      "headline": "Flash Flood Warning issued May 16 at 9:35PM CDT until May 17 at 3:30AM CDT by NWS Kansas City/Pleasant Hill MO"
+      "area": "Madison River Valley; Gallatin Valley",
+      "headline": "Winter Weather Advisory issued May 16 at 8:44PM MDT until May 17 at 6:00AM MDT by NWS Great Falls MT"
     },
     {
       "event": "Small Craft Advisory",
       "severity": "Minor",
       "effective": "2026-05-16T21:33:00-05:00",
-      "area": "Outer Apostle Islands Beyond 5 NM from Mainland",
-      "headline": "Small Craft Advisory issued May 16 at 9:33PM CDT until May 17 at 1:00PM CDT by NWS Duluth MN"
+      "area": "Silver Bay Harbor to Two Harbors MN; Two Harbors to Duluth MN; Duluth MN to Port Wing WI",
+      "headline": "Small Craft Advisory issued May 16 at 9:33PM CDT until May 17 at 10:00AM CDT by NWS Duluth MN"
     },
     {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
+      "event": "Gale Warning",
+      "severity": "Moderate",
       "effective": "2026-05-16T21:33:00-05:00",
       "area": "Grand Marais to Taconite Harbor MN; Taconite Harbor to Silver Bay Harbor MN",
-      "headline": "Small Craft Advisory issued May 16 at 9:33PM CDT until May 17 at 1:00PM CDT by NWS Duluth MN"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-05-16T21:33:00-05:00",
-      "area": "Grand Portage to Grand Marais MN",
-      "headline": "Small Craft Advisory issued May 16 at 9:33PM CDT until May 18 at 10:00AM CDT by NWS Duluth MN"
+      "headline": "Gale Warning issued May 16 at 9:33PM CDT until May 17 at 10:00PM CDT by NWS Duluth MN"
     },
     {
       "event": "Small Craft Advisory",
@@ -420,6 +464,13 @@
       "effective": "2026-05-16T21:33:00-05:00",
       "area": "Port Wing to Sand Island WI; Sand Island to Bayfield WI",
       "headline": "Small Craft Advisory issued May 16 at 9:33PM CDT until May 18 at 1:00AM CDT by NWS Duluth MN"
+    },
+    {
+      "event": "Gale Warning",
+      "severity": "Moderate",
+      "effective": "2026-05-16T21:33:00-05:00",
+      "area": "Silver Bay Harbor to Two Harbors MN; Two Harbors to Duluth MN; Duluth MN to Port Wing WI",
+      "headline": "Gale Warning issued May 16 at 9:33PM CDT until May 17 at 10:00PM CDT by NWS Duluth MN"
     },
     {
       "event": "Gale Warning",
@@ -436,46 +487,25 @@
       "headline": "Small Craft Advisory issued May 16 at 9:33PM CDT until May 17 at 10:00PM CDT by NWS Duluth MN"
     },
     {
-      "event": "Gale Warning",
-      "severity": "Moderate",
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
       "effective": "2026-05-16T21:33:00-05:00",
-      "area": "Silver Bay Harbor to Two Harbors MN; Two Harbors to Duluth MN; Duluth MN to Port Wing WI",
-      "headline": "Gale Warning issued May 16 at 9:33PM CDT until May 17 at 10:00PM CDT by NWS Duluth MN"
-    },
-    {
-      "event": "Gale Warning",
-      "severity": "Moderate",
-      "effective": "2026-05-16T21:33:00-05:00",
-      "area": "Grand Marais to Taconite Harbor MN; Taconite Harbor to Silver Bay Harbor MN",
-      "headline": "Gale Warning issued May 16 at 9:33PM CDT until May 17 at 10:00PM CDT by NWS Duluth MN"
+      "area": "Grand Portage to Grand Marais MN",
+      "headline": "Small Craft Advisory issued May 16 at 9:33PM CDT until May 18 at 10:00AM CDT by NWS Duluth MN"
     },
     {
       "event": "Small Craft Advisory",
       "severity": "Minor",
       "effective": "2026-05-16T21:33:00-05:00",
-      "area": "Silver Bay Harbor to Two Harbors MN; Two Harbors to Duluth MN; Duluth MN to Port Wing WI",
-      "headline": "Small Craft Advisory issued May 16 at 9:33PM CDT until May 17 at 10:00AM CDT by NWS Duluth MN"
+      "area": "Grand Marais to Taconite Harbor MN; Taconite Harbor to Silver Bay Harbor MN",
+      "headline": "Small Craft Advisory issued May 16 at 9:33PM CDT until May 17 at 1:00PM CDT by NWS Duluth MN"
     },
     {
-      "event": "Flash Flood Warning",
-      "severity": "Severe",
-      "effective": "2026-05-16T21:22:00-05:00",
-      "area": "Gage, NE",
-      "headline": "Flash Flood Warning issued May 16 at 9:22PM CDT until May 17 at 12:15AM CDT by NWS Omaha/Valley NE"
-    },
-    {
-      "event": "Flood Advisory",
+      "event": "Small Craft Advisory",
       "severity": "Minor",
-      "effective": "2026-05-16T21:06:00-05:00",
-      "area": "Republic, KS; Washington, KS",
-      "headline": "Flood Advisory issued May 16 at 9:06PM CDT until May 17 at 12:15AM CDT by NWS Topeka KS"
-    },
-    {
-      "event": "Special Weather Statement",
-      "severity": "Moderate",
-      "effective": "2026-05-16T17:58:00-08:00",
-      "area": "East Turnagain Arm; Portage; Southern Kachemak Bay; SW Kenai Peninsula; NW Kenai Peninsula; Skilak Lake; Southern Kenai Mtns; Interior Kenai Peninsula; Turnagain Pass",
-      "headline": "Special Weather Statement issued May 16 at 5:58PM AKDT by NWS Anchorage AK"
+      "effective": "2026-05-16T21:33:00-05:00",
+      "area": "Outer Apostle Islands Beyond 5 NM from Mainland",
+      "headline": "Small Craft Advisory issued May 16 at 9:33PM CDT until May 17 at 1:00PM CDT by NWS Duluth MN"
     },
     {
       "event": "Special Weather Statement",
@@ -485,11 +515,11 @@
       "headline": "Special Weather Statement issued May 16 at 5:58PM AKDT by NWS Anchorage AK"
     },
     {
-      "event": "Flood Watch",
-      "severity": "Severe",
-      "effective": "2026-05-16T20:43:00-05:00",
-      "area": "Pottawattamie; Mills; Montgomery; Fremont; Page; Butler; Saunders; Douglas; Sarpy; Seward; Lancaster; Cass; Otoe; Saline; Jefferson; Gage; Johnson; Nemaha; Pawnee; Richardson",
-      "headline": "Flood Watch issued May 16 at 8:43PM CDT until May 17 at 5:00AM CDT by NWS Omaha/Valley NE"
+      "event": "Special Weather Statement",
+      "severity": "Moderate",
+      "effective": "2026-05-16T17:58:00-08:00",
+      "area": "East Turnagain Arm; Portage; Southern Kachemak Bay; SW Kenai Peninsula; NW Kenai Peninsula; Skilak Lake; Southern Kenai Mtns; Interior Kenai Peninsula; Turnagain Pass",
+      "headline": "Special Weather Statement issued May 16 at 5:58PM AKDT by NWS Anchorage AK"
     },
     {
       "event": "Wind Advisory",
@@ -511,34 +541,6 @@
       "effective": "2026-05-16T19:39:00-05:00",
       "area": "Buffalo, NE",
       "headline": "Flash Flood Warning issued May 16 at 7:39PM CDT until May 17 at 1:45AM CDT by NWS Hastings NE"
-    },
-    {
-      "event": "Flash Flood Warning",
-      "severity": "Severe",
-      "effective": "2026-05-16T19:20:00-05:00",
-      "area": "Grundy, MO; Linn, MO; Sullivan, MO",
-      "headline": "Flash Flood Warning issued May 16 at 7:20PM CDT until May 17 at 1:30AM CDT by NWS Kansas City/Pleasant Hill MO"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-05-16T15:49:00-08:00",
-      "area": "North Side of Saint Lawrence Island out to 15 NM",
-      "headline": "Small Craft Advisory issued May 16 at 3:49PM AKDT until May 17 at 5:00PM AKDT by NWS Fairbanks AK"
-    },
-    {
-      "event": "Brisk Wind Advisory",
-      "severity": "Minor",
-      "effective": "2026-05-16T15:49:00-08:00",
-      "area": "Southwest of Saint Lawrence Island from 15 to 100 NM",
-      "headline": "Brisk Wind Advisory issued May 16 at 3:49PM AKDT until May 17 at 5:00PM AKDT by NWS Fairbanks AK"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-05-16T15:49:00-08:00",
-      "area": "Sledge Island to Wales greater than 15 NM",
-      "headline": "Small Craft Advisory issued May 16 at 3:49PM AKDT until May 17 at 5:00PM AKDT by NWS Fairbanks AK"
     }
   ]
 }
