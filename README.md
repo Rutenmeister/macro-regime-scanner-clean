@@ -101,3 +101,25 @@ Adds a NOAA/National Weather Service public active-alerts lane for live weather-
 ## v0.33 Release Calendar + Row Toggle
 
 Adds a sidebar toggle to hide/show non-applicable evidence rows and generates `data/release_calendar.json` during the orchestrated refresh so tracked report dates/times can display under Source Health.
+
+
+## v0.34 Explainable Trust Layer
+
+Starts from the working v0.33.1 Wide Release Calendar baseline and adds rating-raising trust features without changing the live-source architecture:
+
+- Regime Queue Snapshot above the main evidence queue.
+- Stronger expanded asset score-audit panel.
+- Counted/context/excluded row visibility in the audit.
+- Asset-level caveats explaining what the score does not prove.
+- Sidebar trust guide.
+- Export Current Regime Brief markdown button.
+
+This version is meant to raise scoring trust, UX clarity, and commercial readiness by making every score explain itself. It does not add new source lanes.
+
+Validation:
+
+```bash
+node --check app.js
+python scripts/recompute_live_scores.py
+python scripts/validate_data.py
+```

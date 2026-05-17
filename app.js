@@ -3,10 +3,14 @@ let DATA_NOTICE = 'Loading data/macro_regime_scanner.json';
 let DATA_MODE = 'public-source-prototype-json';
 let SOURCE_STATUS = {};
 let RELEASE_CALENDAR = null;
-let SHOW_ALL_ROWS = false; 
+let SHOW_ALL_ROWS = false;
+
 let expanded = new Set();
 let selectedId = 'GOLD';
 const $ = id => document.getElementById(id);
+function esc(v){ return String(v ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+function oneDecimal(n){ return Number(n||0).toFixed(1); }
+function signed(n){ const x=Number(n||0); return x>0?'+'+oneDecimal(x):oneDecimal(x); }
 function fmtScore(n){ if(n===null||n===undefined) return 'MISS'; return n>0?'+'+n:String(n); }
 function scoreClass(n){ return n>0?'score-pos':n<0?'score-neg':'score-neu'; }
 function statusClass(score){ if(score===null||score===undefined) return 'missing'; if(score>0) return 'support'; if(score<0) return 'pressure'; return 'neutral'; }
@@ -61,12 +65,55 @@ function renderSourceHealth(){
   }).join('');
 }
 
+function driverPills(list, emptyText){
+  const items=(list||[]).slice(0,5);
+  if(!items.length) return `<span class="pill">${emptyText}</span>`;
+  return items.map(d=>`<span class="pill">${esc(d.name||'driver')}: ${signed(d.contribution)}</span>`).join('');
+}
+function exampleList(list, emptyText){
+  const items=(list||[]).slice(0,4);
+  if(!items.length) return `<div class="text-xs text-slate-500">${emptyText}</div>`;
+  return `<ul class="audit-list">${items.map(x=>`<li><span class="text-slate-200">${esc(x.name||'row')}</span><span class="text-slate-500"> · ${esc(x.reason||x.sourceLane||'audit context')}</span></li>`).join('')}</ul>`;
+}
+function assetChangeSummary(asset){
+  const delta=(asset.score||0)-(asset.previousScore||0);
+  if(delta>0) return `${asset.symbol} improved by ${signed(delta)} since the previous score snapshot.`;
+  if(delta<0) return `${asset.symbol} deteriorated by ${signed(delta)} since the previous score snapshot.`;
+  return `${asset.symbol} is unchanged versus the previous score snapshot.`;
+}
+function caveatText(asset){
+  const bucket=asset.scoreAudit?.assetBucket || asset.assetClass || 'asset';
+  return `This pressure read does not predict immediate price movement, does not replace trade setup confirmation, and does not account for unexpected news shocks. Coverage is strongest where live public-source rows exist for this ${esc(bucket)} bucket; missing rows are not treated as neutral.`;
+}
 function scoreAuditPanel(asset){
   const a = asset.scoreAudit;
-  if(!a) return '';
-  const pos = (a.topPositiveDrivers||[]).slice(0,3).map(d=>`<span class="pill">${d.name}: +${Math.abs(d.contribution).toFixed(2)}</span>`).join('');
-  const neg = (a.topNegativeDrivers||[]).slice(0,3).map(d=>`<span class="pill">${d.name}: ${d.contribution.toFixed(2)}</span>`).join('');
-  return `<div class="soft-card rounded-2xl p-3 mb-4"><div class="tiny-label">Score audit · ${a.methodVersion||'live scoring'}</div><div class="grid md:grid-cols-4 gap-2 mt-2 text-sm"><div><span class="text-slate-500">Counted</span><div class="metric-value">${a.countedRows||0}</div></div><div><span class="text-slate-500">Context only</span><div class="metric-value">${a.contextRows||0}</div></div><div><span class="text-slate-500">Excluded</span><div class="metric-value">${a.excludedRows||0}</div></div><div><span class="text-slate-500">Net</span><div class="metric-value ${scoreClass(a.finalScore||0)}">${fmtScore(a.finalScore||0)}</div></div></div><div class="flex flex-wrap gap-2 mt-3"><span class="pill">Positive: ${(a.positiveContribution||0).toFixed(2)}</span><span class="pill">Negative: ${(a.negativeContribution||0).toFixed(2)}</span>${pos}${neg}</div></div>`;
+  if(!a) return `<div class="soft-card rounded-2xl p-3 mb-4 text-xs text-slate-400">No score audit object found for this asset. Run <code>python scripts/recompute_live_scores.py</code> after refresh.</div>`;
+  const counted=a.countedRows||0, context=a.contextRows||0, excluded=a.excludedRows||0;
+  const total=counted+context+excluded;
+  const coverage = total ? Math.round(((counted+context)/total)*100) : 0;
+  const method=esc(a.methodVersion||'live scoring');
+  return `<div class="score-audit-shell soft-card rounded-2xl p-4 mb-4">
+    <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-3">
+      <div><div class="tiny-label">Asset detail / score audit · ${method}</div><h3 class="text-lg font-semibold text-slate-100 mt-1">${esc(asset.symbol)} · ${esc(asset.bias || 'Evidence pressure')}</h3><p class="text-xs text-slate-400 mt-1">${esc(asset.quick || '')}</p></div>
+      <div class="text-right"><div class="metric-value text-3xl font-bold ${scoreClass(a.finalScore||asset.score||0)}">${fmtScore(a.finalScore ?? asset.score ?? 0)}</div><div class="text-[11px] text-slate-500">${esc(asset.confidence)}% confidence · ${esc(asset.conflict)} conflict</div></div>
+    </div>
+    <div class="audit-grid mt-4">
+      <div><span class="text-slate-500">Counted rows</span><div class="metric-value">${counted}</div></div>
+      <div><span class="text-slate-500">Context rows</span><div class="metric-value">${context}</div></div>
+      <div><span class="text-slate-500">Excluded rows</span><div class="metric-value">${excluded}</div></div>
+      <div><span class="text-slate-500">Coverage</span><div class="metric-value">${coverage}%</div></div>
+      <div><span class="text-slate-500">Positive pressure</span><div class="metric-value score-pos">${signed(a.positiveContribution)}</div></div>
+      <div><span class="text-slate-500">Negative pressure</span><div class="metric-value score-neg">${signed(a.negativeContribution)}</div></div>
+    </div>
+    <div class="grid xl:grid-cols-2 gap-3 mt-4">
+      <div class="audit-box"><div class="tiny-label">Top positive drivers</div><div class="flex flex-wrap gap-2 mt-2">${driverPills(a.topPositiveDrivers,'No positive scored driver')}</div></div>
+      <div class="audit-box"><div class="tiny-label">Top negative drivers</div><div class="flex flex-wrap gap-2 mt-2">${driverPills(a.topNegativeDrivers,'No negative scored driver')}</div></div>
+      <div class="audit-box"><div class="tiny-label">Why it changed</div><p class="text-xs text-slate-400 mt-2">${esc(assetChangeSummary(asset))}</p></div>
+      <div class="audit-box"><div class="tiny-label">What this does not prove</div><p class="text-xs text-slate-400 mt-2 leading-relaxed">${caveatText(asset)}</p></div>
+      <div class="audit-box"><div class="tiny-label">Context examples</div>${exampleList(a.contextExamples,'No context-only examples in audit.')}</div>
+      <div class="audit-box"><div class="tiny-label">Excluded examples</div>${exampleList(a.excludedExamples,'No excluded examples in audit.')}</div>
+    </div>
+  </div>`;
 }
 
 function factorAppliesToAsset(f){
@@ -96,6 +143,43 @@ function rowRolePill(f){
   if(factorAppliesToAsset(f)) return '<span class="row-role row-role-context">Applies</span>';
   return '<span class="row-role row-role-muted">Hidden default</span>';
 }
+function classifyRegime(asset){
+  const score=Number(asset.score||0), conf=String(asset.conflict||'Medium');
+  const counted=asset.scoreAudit?.countedRows || 0;
+  const delta=score-Number(asset.previousScore||0);
+  if(counted===0) return 'Low evidence / avoid';
+  if(conf==='High') return 'Conflicted / transition';
+  if(delta>=2) return 'Improving';
+  if(delta<=-2) return 'Deteriorating';
+  if(score>=3) return 'Strong positive pressure';
+  if(score<=-3) return 'Strong negative pressure';
+  return 'Mixed / watch';
+}
+function renderRegimeSnapshot(){
+  const box=$('regimeSnapshot');
+  if(!box) return;
+  const groups=['Strong positive pressure','Strong negative pressure','Conflicted / transition','Improving','Deteriorating','Low evidence / avoid'];
+  const rows=[...ASSETS];
+  const cards=groups.map(g=>{
+    const items=rows.filter(a=>classifyRegime(a)===g).sort((a,b)=>Math.abs(b.score||0)-Math.abs(a.score||0)).slice(0,4);
+    const html=items.length ? items.map(a=>`<button class="snapshot-chip" data-jump="${esc(a.id)}"><span>${esc(a.symbol)}</span><strong class="${scoreClass(a.score)}">${fmtScore(a.score)}</strong></button>`).join('') : '<div class="text-[11px] text-slate-500">No assets in this bucket.</div>';
+    return `<div class="snapshot-card"><div class="tiny-label">${g}</div><div class="snapshot-chip-wrap mt-2">${html}</div></div>`;
+  }).join('');
+  box.innerHTML=`<div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-3"><div><div class="tiny-label">Regime Queue Snapshot</div><h3 class="text-lg font-semibold text-slate-100 mt-1">What deserves attention first?</h3><p class="text-xs text-slate-500 mt-1">Groups assets by pressure, conflict, change, and evidence coverage. This is research triage, not a trade signal.</p></div><span class="pill self-start md:self-auto">v0.34 trust layer</span></div><div class="snapshot-grid">${cards}</div>`;
+  box.querySelectorAll('[data-jump]').forEach(btn=>btn.addEventListener('click',e=>{ const id=btn.dataset.jump; selectedId=id; expanded.add(id); const row=document.querySelector(`.market-row[data-id="${CSS.escape(id)}"]`); if(row){ row.scrollIntoView({behavior:'smooth', block:'center'}); } renderAll(); }));
+}
+function generateRegimeBrief(){
+  const now=new Date().toISOString();
+  const topPos=[...ASSETS].sort((a,b)=>(b.score||0)-(a.score||0)).slice(0,5);
+  const topNeg=[...ASSETS].sort((a,b)=>(a.score||0)-(b.score||0)).slice(0,5);
+  const conflicted=[...ASSETS].filter(a=>a.conflict==='High').sort((a,b)=>Math.abs(b.score||0)-Math.abs(a.score||0)).slice(0,5);
+  const changed=[...ASSETS].sort((a,b)=>Math.abs((b.score||0)-(b.previousScore||0))-Math.abs((a.score||0)-(a.previousScore||0))).slice(0,6);
+  const fmt=a=>`- ${a.symbol}: ${a.bias} (${fmtScore(a.score)}, confidence ${a.confidence}%, conflict ${a.conflict}) — ${a.topDriver || a.quick || 'see audit'}`;
+  const sourceLines=Object.entries(SOURCE_STATUS||{}).map(([id,s])=>`- ${id}: ${sourceLabel(s.status)}${s.latest_date ? ' · latest '+s.latest_date : ''}`).join('\n');
+  const events=(RELEASE_CALENDAR?.events||[]).slice(0,8).map(ev=>`- ${ev.date || ''} ${ev.timeET || ''}: ${ev.report} (${ev.source})`).join('\n') || '- No generated release calendar loaded.';
+  return `# Edgefield Macro Regime Brief v0.34\n\nGenerated: ${now}\n\nThis brief ranks public-source fundamental pressure evidence. It is not a buy/sell signal and does not predict immediate price movement. Missing, stale, candidate, and display-only rows are not treated as neutral.\n\n## Strongest positive pressure\n${topPos.map(fmt).join('\n')}\n\n## Strongest negative pressure\n${topNeg.map(fmt).join('\n')}\n\n## Most conflicted / transition candidates\n${conflicted.map(fmt).join('\n') || '- No high-conflict assets in current view.'}\n\n## Largest score changes\n${changed.map(a=>`- ${a.symbol}: ${signed((a.score||0)-(a.previousScore||0))} change, now ${fmtScore(a.score)} — ${a.bias}`).join('\n')}\n\n## Source health\n${sourceLines || '- No source status loaded.'}\n\n## Upcoming tracked reports\n${events}\n\n## Caveats\n- Public-source macro/fundamental pressure only.\n- Mostly U.S.-based inputs, so relevance varies by asset.\n- Scores depend on current source freshness, row eligibility, and asset-specific mapping.\n- Open each asset row in the terminal to inspect counted, context, and excluded evidence.\n`;
+}
+
 function renderReleaseCalendar(){
   const list = $('releaseCalendarList');
   const meta = $('releaseCalendarMeta');
@@ -132,10 +216,12 @@ function inputTable(asset){
 
 function renderQueue(){ const rows=getRows(); $('queueSub').textContent=`${rows.length} markets shown. Closed rows are quick reads; open rows show relevance, derivation, source, and effect for the public-source input universe. `; const total=ASSETS.length; const commodities=ASSETS.filter(a=>a.assetClass==='Commodities').length; const open=expanded.size; const liveInputs=ASSETS.filter(a=>(a.factors||[]).some(f=>(f.freshness||'')==='Fresh')).length; const applicableRows=ASSETS.reduce((n,a)=>n+filteredFactorsForAsset(a).length,0); $('statCards').innerHTML=`<div class="soft-card rounded-2xl p-3"><div class="tiny-label">Universe</div><div class="font-semibold">${total}</div></div><div class="soft-card rounded-2xl p-3"><div class="tiny-label">Shown</div><div class="font-semibold">${rows.length}</div></div><div class="soft-card rounded-2xl p-3"><div class="tiny-label">Live-input assets</div><div class="font-semibold">${liveInputs}</div></div><div class="soft-card rounded-2xl p-3"><div class="tiny-label">Visible rows</div><div class="font-semibold">${applicableRows}</div></div>`; if(!rows.length){ $('queue').innerHTML='<div class="p-4 text-slate-400">No markets match the current filters.</div>'; return; } $('queue').innerHTML=rows.map(a=>{ const isOpen=expanded.has(a.id); return `<div class="market-row" data-id="${a.id}"><div class="row-grid row-closed cursor-pointer"><div><div class="font-semibold text-slate-100">${a.symbol}</div><div class="text-[11px] text-slate-500 mt-1">${a.assetClass}</div></div><div><div class="font-semibold text-slate-100">${a.name}</div><div class="text-xs text-slate-400 mt-1 leading-snug">${a.quick}</div><div class="flex flex-wrap gap-2 mt-2 text-[11px]"><span class="pill">Driver: ${a.topDriver}</span><span class="pill">Conflict: ${a.mainConflict}</span><span class="pill">Watch: ${a.watchNext.slice(0,3).join(' / ')}</span></div></div><div class="text-right metric-value text-xl font-bold ${scoreClass(a.score)}">${fmtScore(a.score)}</div><div><div class="text-sm text-slate-200">${a.bias}</div><div class="text-[11px] text-slate-500 mt-1">${a.rankType}</div></div><div class="text-right metric-value">${a.confidence}%</div><div><span class="pill">${a.conflict}</span></div><div><span class="pill">${a.freshness}</span></div><div class="text-right metric-value ${scoreClass(a.score-a.previousScore)}">${change(a)}</div><div><button class="open-btn rounded-xl px-3 py-2 text-xs">${isOpen?'Close':'Open'}</button></div></div>${isOpen?`<div class="open-panel compact-open">${inputTable(a)}</div>`:''}</div>`; }).join(''); document.querySelectorAll('.market-row .row-closed').forEach(el=>el.addEventListener('click',e=>{ const id=el.closest('.market-row').dataset.id; selectedId=id; if(expanded.has(id)) expanded.delete(id); else expanded.add(id); renderAll(false); })); }
 function renderDiagnosis(){ /* right readout not included; public-source edition; selected row stays open inline. */ }
-function renderAll(){ renderQueue(); renderDiagnosis(); }
+function renderAll(){ renderRegimeSnapshot(); renderQueue(); renderDiagnosis(); }
 function download(filename,text,type='application/json'){ const blob=new Blob([text],{type}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download=filename; a.click(); URL.revokeObjectURL(url); }
 ['searchBox','universe','assetClass','subgroup','biasFilter','conflictFilter','freshFilter','sortMode','rowLimit'].forEach(id=>$(id).addEventListener('input',()=>{ if(id==='assetClass') updateSubgroups(); renderAll(); }));
-$('exportJson').addEventListener('click',()=>download('macro_regime_scanner_public_source_data_contract_v0_33_1.json',JSON.stringify({notice:'Public-source data contract. v0.32 includes live public-source lanes and a source-weighted live-only score audit; price-derived lanes remain excluded.',assets:ASSETS},null,2)));
+$('exportJson').addEventListener('click',()=>download('macro_regime_scanner_public_source_data_contract_v0_34.json',JSON.stringify({notice:'Public-source data contract. v0.34 explainable trust layer keeps v0.33.1 wide calendar and adds score-audit, caveat, regime queue, and brief-export support.',assets:ASSETS,source_status:SOURCE_STATUS,release_calendar:RELEASE_CALENDAR},null,2)));
+const briefBtn=$('exportBrief');
+if(briefBtn) briefBtn.addEventListener('click',()=>download('edgefield_macro_regime_brief_v0_34.md', generateRegimeBrief(), 'text/markdown'));
 async function loadData(){
   try {
     const response = await fetch('data/macro_regime_scanner.json', { cache: 'no-store' });
