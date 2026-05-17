@@ -1,138 +1,48 @@
-# Macro Regime Scanner v0.34 - Explainable Scoring Methodology
+# Macro Regime Scanner v0.32 Scoring Engine Methodology
 
 ## Purpose
 
-v0.34 changes the scoring philosophy from generic scoring to explainable asset-specific evidence pressure.
+v0.32 rebuilds the asset header score so it reflects live public-source evidence instead of prototype assumptions.
 
-The goal is not to make the scores more dramatic. The goal is to make them more honest:
+The score is not a trade signal. It is a source-weighted pressure read that asks:
 
-- only real live values count;
-- only relevant inputs affect each asset;
-- each input has the correct directional effect for that asset;
-- each input has a reasonable relevance weight;
-- U.S. data is treated differently depending on the asset;
-- every score can be audited from row-level evidence.
+> What does the current public-source evidence stack imply for this asset, given the asset's actual sensitivity to the source?
 
-## Core scoring statuses
+## Core rules
 
-Each input row is assigned one of four statuses:
+1. Only live/fresh rows with numeric source scores and real provenance can affect the top-level asset score.
+2. Prototype, sample, candidate, missing, low-relevance, and display-only rows are excluded.
+3. Each counted row receives an asset-specific weight.
+4. U.S. macro data is not treated as equally direct for every global asset.
+5. Each asset receives a `scoreAudit` object showing counted rows, exclusions, contributions, and conflicts.
 
-| Status | Scores? | Meaning |
-|---|---:|---|
-| `live_scored` | Yes | Fresh/live row with direct or meaningful asset relevance. |
-| `live_context` | No | Fresh/live row that informs interpretation but is too indirect to move the score in this pass. |
-| `display_only` | No | Visible row for user awareness only. |
-| `not_live` | No | Missing, stale, candidate, scaffold, or unverified row. |
+## Asset treatment
 
-Important rule:
+- U.S. equities prioritize inflation, Fed/liquidity, credit stress, Treasury-rate pressure, growth data, and COT.
+- Global equities receive lower weights for U.S.-only data unless the channel is global risk, USD liquidity, or credit stress.
+- USD pairs receive higher weights for U.S. rates, inflation, Fed policy, and dollar-liquidity channels; non-USD FX crosses receive low weights for U.S.-only macro data.
+- Gold and silver prioritize Treasury/real-yield/Fed/inflation/COT/credit-stress channels, while recognizing that inflation and safe-haven channels can conflict.
+- Energy assets prioritize EIA physical data, energy COT, and relevant macro demand context.
+- Grains and softs prioritize USDA, NOAA/weather, and COT; U.S. CPI or retail activity is usually context only.
+- Credit/liquidity assets prioritize financial stress, Fed liquidity, rate pressure, and macro growth/inflation stress.
 
-> Missing data is not neutral. Stale data is not neutral. Candidate data is not scored.
+## Score audit fields
 
-## Weight tiers
+Each asset has:
 
-| Tier | Weight | Use |
-|---|---:|---|
-| `primary` | 1.00 | Directly important to the asset. |
-| `secondary` | 0.60 | Meaningful but not dominant. |
-| `contextual` | 0.25 | Useful context but not counted in v0.34 net score. |
-| `low` | 0.10 | Barely relevant; visible only in v0.34. |
-| `excluded` | 0.00 | Does not score. |
+- `scoreAudit.countedRows`
+- `scoreAudit.contextRows`
+- `scoreAudit.excludedRows`
+- `scoreAudit.positiveContribution`
+- `scoreAudit.negativeContribution`
+- `scoreAudit.netContribution`
+- `scoreAudit.finalScore`
+- `scoreAudit.topPositiveDrivers`
+- `scoreAudit.topNegativeDrivers`
+- `scoreAudit.countedDetails`
 
-In v0.34, `primary` and `secondary` are counted. `contextual` and `low` are shown in the audit but not counted. This is conservative by design.
+This makes every score traceable.
 
-## Directional mapping examples
+## External reasoning anchors
 
-The same input can affect different assets differently.
-
-### Hot U.S. inflation
-
-| Asset | Effect |
-|---|---|
-| SPX / Nasdaq | Usually negative through rate-pressure and discount-rate channels. |
-| 10Y yield | Positive yield pressure. |
-| DXY / USD | Often supportive if it raises Fed-rate expectations. |
-| EURUSD | Often negative because USD-side pressure strengthens. |
-| Gold | Mixed: inflation support can be offset by real-yield pressure. |
-| WTI | Mostly contextual unless inflation changes demand/rate expectations. |
-| Wheat / Corn | Low direct relevance. |
-
-### Rising 10Y yield pressure
-
-| Asset | Effect |
-|---|---|
-| 10Y yield | Direct positive pressure. |
-| SPX / Nasdaq | Negative pressure through valuation and financing channels. |
-| Gold | Usually negative when real-yield/USD pressure dominates. |
-| DXY | Supportive through rate differentials. |
-| EURUSD | Negative through USD strength. |
-| WTI | Contextual, not direct physical energy evidence. |
-| Wheat / Corn | Low/directly excluded in this pass. |
-
-## Score audit object
-
-Each asset receives a `scoreAudit` object:
-
-```json
-{
-  "asset": "SPX500",
-  "assetClass": "us_equity_index",
-  "label": "Negative live pressure",
-  "confidence": "Medium",
-  "coverage": 0.5,
-  "countedRows": 4,
-  "contextRows": 1,
-  "excludedRows": 3,
-  "positiveWeight": 0.45,
-  "negativeWeight": -3.14,
-  "netScore": -2.69,
-  "conflictLevel": "Low",
-  "topPositiveDrivers": [],
-  "topNegativeDrivers": [],
-  "mainConflicts": []
-}
-```
-
-## Confidence labels
-
-Confidence is based on counted rows, direct rows, and coverage.
-
-| Confidence | Meaning |
-|---|---|
-| High | Many counted/direct rows and broad coverage. |
-| Medium | Enough direct evidence to interpret, but not fully broad. |
-| Low | Some direct evidence, but coverage is partial. |
-| Insufficient | Not enough live direct evidence to score honestly. |
-
-## Pressure labels
-
-Avoid buy/sell language. Use evidence-pressure labels:
-
-- Positive live pressure
-- Moderately positive live pressure
-- Mixed live evidence
-- Moderately negative live pressure
-- Negative live pressure
-- Insufficient live direct evidence
-
-## Caveat language
-
-Every asset audit should remind the user:
-
-- This is evidence pressure, not a trade signal.
-- Missing or stale evidence is excluded, not treated as neutral.
-- U.S. macro evidence is weighted differently by asset class.
-- Asset-specific exceptions may require manual tuning.
-
-## Files in this patch
-
-- `config/scoring_rules.json`
-- `config/asset_input_map.json`
-- `scripts/recompute_live_scores.py`
-- `ui/score_audit_panel_snippet.js`
-- `data/sample/sample_macro_regime_scanner.json`
-
-## Recommended freeze name
-
-If this works cleanly in the live repo:
-
-**Macro Regime Scanner v0.34 - Explainable Scoring Baseline**
+The methodology reflects standard macro channels: monetary policy influences financial conditions; credit/financial-stress indexes summarize market stress; interest-rate differentials can affect exchange rates; and gold is sensitive to real-rate, dollar, safe-haven, and inflation channels. The implementation is intentionally conservative and should be reviewed against real market examples after each source refresh.
