@@ -1,7 +1,7 @@
 {
   "pipelineVersion": "0.27",
-  "startedAt": "2026-05-17T02:09:11.232197+00:00",
-  "finishedAt": "2026-05-17T02:09:55.612398+00:00",
+  "startedAt": "2026-05-17T02:25:53.084431+00:00",
+  "finishedAt": "2026-05-17T02:26:30.432079+00:00",
   "dryRun": false,
   "selectedLanes": "all enabled",
   "lanes": [
@@ -133,7 +133,24 @@
     },
     {
       "id": "federal_reserve",
-      "status": "skipped_disabled"
+      "sourceId": "FEDERAL_RESERVE",
+      "steps": [
+        {
+          "script": "scripts/sources/fetch_fed_macro.py",
+          "status": "ok",
+          "returncode": 0,
+          "stdoutTail": "Wrote data/normalized/fed_macro.json with 5 observations\nWrote data/raw/fed/fed_macro_compact_audit.json\n",
+          "stderrTail": ""
+        },
+        {
+          "script": "scripts/apply_fed_lane.py",
+          "status": "ok",
+          "returncode": 0,
+          "stdoutTail": "Applied Federal Reserve/FRED liquidity lane to 49 assets\n",
+          "stderrTail": ""
+        }
+      ],
+      "status": "ok"
     },
     {
       "id": "census",
@@ -144,7 +161,7 @@
     "script": "scripts/validate_data.py",
     "status": "ok",
     "returncode": 0,
-    "stdoutTail": "VALIDATION PASSED: 49 assets\nWARNINGS:\n- schema_version is '0.27'; expected '0.24'\n",
+    "stdoutTail": "VALIDATION PASSED: 49 assets\nWARNINGS:\n- schema_version is '0.28'; expected '0.24'\n",
     "stderrTail": ""
   },
   "status": "ok"

@@ -1,0 +1,83 @@
+{
+  "schemaVersion": "0.28.1",
+  "sourceId": "FED_FRED_SELECTED",
+  "retrievedAt": "2026-05-17T02:26:30.282466+00:00",
+  "seriesAudits": [
+    {
+      "seriesId": "EFFR",
+      "label": "Effective federal funds rate",
+      "status": "ok",
+      "fetchAttempts": [
+        {
+          "method": "fredgraph_csv",
+          "rows": 6749
+        }
+      ],
+      "rowsFetched": 6749,
+      "latestPeriod": "2026-05-14",
+      "latestValue": 3.63,
+      "score": 1
+    },
+    {
+      "seriesId": "WALCL",
+      "label": "Federal Reserve total assets",
+      "status": "ok",
+      "fetchAttempts": [
+        {
+          "method": "fredgraph_csv",
+          "rows": 1222
+        }
+      ],
+      "rowsFetched": 1222,
+      "latestPeriod": "2026-05-13",
+      "latestValue": 6728.502,
+      "score": 1
+    },
+    {
+      "seriesId": "WRESBAL",
+      "label": "Reserve balances with Federal Reserve Banks",
+      "status": "ok",
+      "fetchAttempts": [
+        {
+          "method": "fredgraph_csv",
+          "rows": 1222
+        }
+      ],
+      "rowsFetched": 1222,
+      "latestPeriod": "2026-05-13",
+      "latestValue": 3102.81,
+      "score": 2
+    },
+    {
+      "seriesId": "RRPONTSYD",
+      "label": "Overnight reverse repo usage",
+      "status": "ok",
+      "fetchAttempts": [
+        {
+          "method": "fredgraph_csv",
+          "rows": 6071
+        }
+      ],
+      "rowsFetched": 6071,
+      "latestPeriod": "2026-05-15",
+      "latestValue": 0.647,
+      "score": 1
+    },
+    {
+      "seriesId": "WTREGEN",
+      "label": "Treasury General Account at the Fed",
+      "status": "ok",
+      "fetchAttempts": [
+        {
+          "method": "fredgraph_csv",
+          "rows": 1222
+        }
+      ],
+      "rowsFetched": 1222,
+      "latestPeriod": "2026-05-13",
+      "latestValue": 838.584,
+      "score": 1
+    }
+  ],
+  "observationCount": 5
+}
