@@ -1,6 +1,6 @@
 {
-  "pipelineVersion": "0.32",
-  "purpose": "Stable orchestrator pipeline. v0.32 runs all enabled source lanes, then recomputes live-only source-weighted scores before validation.",
+  "pipelineVersion": "0.33",
+  "purpose": "Stable orchestrator pipeline. v0.33 runs enabled source lanes, recomputes live-only weighted scores, generates the upcoming release calendar, then validates.",
   "global": {
     "runValidation": true,
     "stopOnFailure": true,

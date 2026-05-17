@@ -96,3 +96,8 @@ Adds a public FRED-based credit and financial-stress lane with high-yield OAS, i
 ## v0.31 NOAA/NWS Weather Hazard Lane
 
 Adds a NOAA/National Weather Service public active-alerts lane for live weather-hazard context. No API key is required. This lane captures active hazard counts for heat, cold/freeze, winter storms, floods, severe storms/tornadoes, tropical storms/hurricanes, fire weather, and sparse drought wording. It is useful for energy-demand, agriculture/crop stress, logistics, and physical-disruption context, but it is not a full drought monitor, seasonal forecast, or paid weather-model feed.
+
+
+## v0.33 Release Calendar + Row Toggle
+
+Adds a sidebar toggle to hide/show non-applicable evidence rows and generates `data/release_calendar.json` during the orchestrated refresh so tracked report dates/times can display under Source Health.

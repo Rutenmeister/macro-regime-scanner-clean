@@ -117,6 +117,10 @@ def main() -> int:
         if recompute_path.exists():
             report["scoreRecompute"] = run_script("scripts/recompute_live_scores.py", dry_run=args.dry_run)
 
+        release_calendar_path = ROOT / "scripts" / "generate_release_calendar.py"
+        if release_calendar_path.exists():
+            report["releaseCalendar"] = run_script("scripts/generate_release_calendar.py", dry_run=args.dry_run)
+
         if pipeline.get("global", {}).get("runValidation", True):
             report["validation"] = run_script(str(VALIDATE_PATH.relative_to(ROOT)), dry_run=args.dry_run)
 
