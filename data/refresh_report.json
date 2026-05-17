@@ -1,0 +1,112 @@
+{
+  "pipelineVersion": "0.25F",
+  "startedAt": "2026-05-17T00:36:53.548837+00:00",
+  "finishedAt": "2026-05-17T00:36:53.550981+00:00",
+  "dryRun": true,
+  "selectedLanes": "all enabled",
+  "lanes": [
+    {
+      "id": "treasury",
+      "sourceId": "TREASURY_OFFICIAL",
+      "steps": [
+        {
+          "script": "scripts/sources/fetch_treasury_yields.py",
+          "status": "dry_run",
+          "returncode": 0
+        },
+        {
+          "script": "scripts/apply_treasury_lane.py",
+          "status": "dry_run",
+          "returncode": 0
+        }
+      ],
+      "status": "dry_run"
+    },
+    {
+      "id": "cftc_cot",
+      "sourceId": "CFTC_COT",
+      "steps": [
+        {
+          "script": "scripts/sources/fetch_cftc_cot.py",
+          "status": "dry_run",
+          "returncode": 0
+        },
+        {
+          "script": "scripts/apply_cot_lane.py",
+          "status": "dry_run",
+          "returncode": 0
+        }
+      ],
+      "status": "dry_run"
+    },
+    {
+      "id": "eia",
+      "sourceId": "EIA_OPEN_DATA",
+      "steps": [
+        {
+          "script": "scripts/sources/fetch_eia_energy.py",
+          "status": "dry_run",
+          "returncode": 0
+        },
+        {
+          "script": "scripts/apply_eia_lane.py",
+          "status": "dry_run",
+          "returncode": 0
+        }
+      ],
+      "status": "dry_run"
+    },
+    {
+      "id": "usda",
+      "sourceId": "USDA_NASS",
+      "steps": [
+        {
+          "script": "scripts/sources/fetch_usda_agriculture.py",
+          "status": "dry_run",
+          "returncode": 0
+        },
+        {
+          "script": "scripts/apply_usda_lane.py",
+          "status": "dry_run",
+          "returncode": 0
+        }
+      ],
+      "status": "dry_run"
+    },
+    {
+      "id": "bls",
+      "sourceId": "BLS_PUBLIC",
+      "steps": [
+        {
+          "script": "scripts/sources/fetch_bls_macro.py",
+          "status": "dry_run",
+          "returncode": 0
+        },
+        {
+          "script": "scripts/apply_bls_lane.py",
+          "status": "dry_run",
+          "returncode": 0
+        }
+      ],
+      "status": "dry_run"
+    },
+    {
+      "id": "bea",
+      "status": "skipped_disabled"
+    },
+    {
+      "id": "federal_reserve",
+      "status": "skipped_disabled"
+    },
+    {
+      "id": "census",
+      "status": "skipped_disabled"
+    }
+  ],
+  "validation": {
+    "script": "scripts/validate_data.py",
+    "status": "dry_run",
+    "returncode": 0
+  },
+  "status": "dry_run_ok"
+}

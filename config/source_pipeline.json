@@ -1,0 +1,91 @@
+{
+  "pipelineVersion": "0.25F",
+  "purpose": "Stable pipeline config read by scripts/refresh_all_sources.py. Add new lanes here after scripts exist; do not rewrite the GitHub workflow for every source.",
+  "global": {
+    "runValidation": true,
+    "stopOnFailure": true,
+    "writeRefreshReport": true
+  },
+  "lanes": [
+    {
+      "id": "treasury",
+      "enabled": true,
+      "sourceId": "TREASURY_OFFICIAL",
+      "fetch": "scripts/sources/fetch_treasury_yields.py",
+      "apply": "scripts/apply_treasury_lane.py",
+      "requiresSecrets": [],
+      "status": "live"
+    },
+    {
+      "id": "cftc_cot",
+      "enabled": true,
+      "sourceId": "CFTC_COT",
+      "fetch": "scripts/sources/fetch_cftc_cot.py",
+      "apply": "scripts/apply_cot_lane.py",
+      "requiresSecrets": [],
+      "status": "live"
+    },
+    {
+      "id": "eia",
+      "enabled": true,
+      "sourceId": "EIA_OPEN_DATA",
+      "fetch": "scripts/sources/fetch_eia_energy.py",
+      "apply": "scripts/apply_eia_lane.py",
+      "requiresSecrets": [
+        "EIA_API_KEY"
+      ],
+      "status": "live"
+    },
+    {
+      "id": "usda",
+      "enabled": true,
+      "sourceId": "USDA_NASS",
+      "fetch": "scripts/sources/fetch_usda_agriculture.py",
+      "apply": "scripts/apply_usda_lane.py",
+      "requiresSecrets": [
+        "USDA_API_KEY"
+      ],
+      "status": "live_scaffold"
+    },
+    {
+      "id": "bls",
+      "enabled": true,
+      "sourceId": "BLS_PUBLIC",
+      "fetch": "scripts/sources/fetch_bls_macro.py",
+      "apply": "scripts/apply_bls_lane.py",
+      "requiresSecrets": [],
+      "status": "live"
+    },
+    {
+      "id": "bea",
+      "enabled": false,
+      "sourceId": "BEA_PUBLIC",
+      "fetch": "scripts/sources/fetch_bea_macro.py",
+      "apply": "scripts/apply_bea_lane.py",
+      "requiresSecrets": [
+        "BEA_API_KEY"
+      ],
+      "status": "planned"
+    },
+    {
+      "id": "federal_reserve",
+      "enabled": false,
+      "sourceId": "FEDERAL_RESERVE",
+      "fetch": "scripts/sources/fetch_fed_macro.py",
+      "apply": "scripts/apply_fed_lane.py",
+      "requiresSecrets": [],
+      "status": "planned"
+    },
+    {
+      "id": "census",
+      "enabled": false,
+      "sourceId": "CENSUS_PUBLIC",
+      "fetch": "scripts/sources/fetch_census_macro.py",
+      "apply": "scripts/apply_census_lane.py",
+      "requiresSecrets": [
+        "CENSUS_API_KEY"
+      ],
+      "status": "planned"
+    }
+  ]
+}

@@ -1,78 +1,73 @@
-# Macro Regime Scanner Public-Source Prototype v0.24
+# Macro Regime Scanner v0.25F Foundation Infrastructure
 
-GitHub-ready public-source fundamental pressure terminal for Edgefield Systems.
+Public-source macro/fundamental pressure terminal.
 
-## What this is
+This build starts from the clean v0.24 BLS Macro baseline and adds the infrastructure needed to deepen variables without constantly rewriting GitHub workflows.
 
-Macro Regime Scanner is a no-price-data public-source market pressure terminal. It reads `data/macro_regime_scanner.json` and displays compact scan rows plus expandable input-first evidence tables.
+## What is included
 
-It does **not** use price trend, momentum, moving averages, technical confirmation, or manual market-value entry.
+- Working terminal UI from v0.24.
+- Existing live source lanes from v0.24:
+  - Treasury official yield data
+  - CFTC COT positioning
+  - EIA energy fundamentals
+  - USDA/NASS agriculture scaffold
+  - BLS inflation/labor
+- Deep source extraction manifest:
+  - `config/source_extraction_manifest.json`
+  - `docs/source_extraction_manifest.md`
+- Foundational input registry:
+  - `config/input_registry.json`
+- Asset/input relevance map:
+  - `config/asset_input_map.json`
+- Stable source pipeline config:
+  - `config/source_pipeline.json`
+- Stable orchestrator:
+  - `scripts/refresh_all_sources.py`
+- Manual workflow instructions:
+  - `docs/master_refresh_workflow.md`
 
-## v0.24 change
+## Important boundary
 
-v0.24 adds the **BLS Inflation / Labor Lane** scaffold.
+This is **not** a final scoring build.
 
-New files:
+The purpose is to create the foundation for deep variable extraction and future scoring. The scoring engine should be rebuilt only after the variables and asset relevance map are reviewed.
 
-- `.github/workflows/refresh-bls.yml`
-- `scripts/sources/fetch_bls_macro.py`
-- `scripts/apply_bls_lane.py`
-- `data/raw/bls/`
-- `data/normalized/bls_macro.json` after the workflow runs
+## Recommended workflow strategy
 
-BLS inputs added by the lane:
+Use one master workflow that calls:
 
-- CPI pressure
-- Core CPI pressure
-- PPI pressure
-- Unemployment rate
-- Payroll growth
-- Wage pressure
+```bash
+python scripts/refresh_all_sources.py
+```
 
-The BLS lane uses the public BLS API and does not require an API key at the current request size. It should still cite BLS as source and should not imply BLS endorsement of Edgefield scores or analysis.
+Do not keep adding every source as a separate YAML step.
 
-## Current live/source-lane architecture
+## Required GitHub secrets
 
-Already supported:
+Current live lanes require:
 
-- U.S. Treasury official daily rates
-- CFTC COT positioning
-- EIA energy fundamentals
-- USDA/NASS agriculture scaffold
-- BLS inflation/labor scaffold
+```text
+EIA_API_KEY
+USDA_API_KEY
+```
 
-## Workflows
+Future lanes may use:
 
-- `Validate Macro Regime Scanner Data`
-- `Refresh Treasury Lane`
-- `Refresh CFTC COT Lane`
-- `Refresh EIA Energy Lane`
-- `Refresh USDA Agriculture Lane`
-- `Refresh BLS Inflation Labor Lane`
-- `Refresh All Public Sources`
-
-Use **Refresh All Public Sources** as the main workflow after BLS has been tested by itself.
-
-## Files
-
-- `index.html` - UI shell
-- `style.css` - Edgefield visual styling
-- `app.js` - dashboard behavior; loads `data/macro_regime_scanner.json`
-- `data/macro_regime_scanner.json` - dashboard data contract
-- `config/` - source, asset, input, scoring, and freshness registries
-- `scripts/` - validation and source-lane scripts
+```text
+BEA_API_KEY
+CENSUS_API_KEY
+```
 
 ## Validation
 
-Run locally from the project root:
+Run locally from repo root:
 
 ```bash
+python scripts/refresh_all_sources.py --dry-run
 python scripts/validate_data.py
 ```
 
-The validator checks that the public-source edition remains free of price-derived/technical inputs and that all factors preserve relevance, score, provenance, effect, source, and freshness fields.
+## Project principle
 
-
-## v0.24M Source Extraction Manifest
-
-This recovery-safe planning build adds `config/source_extraction_manifest.json` and `docs/source_extraction_manifest.md` to define the deeper target variable universe before any further scoring or workflow changes. It intentionally does not alter the clean v0.24 source scripts or workflows.
+No placeholder scoring should be treated as truth. Live source data, normalized variables, asset relevance, and scoring methodology are separate layers.
