@@ -1,0 +1,43 @@
+{
+  "sourceId": "BEA_PUBLIC",
+  "retrievedAt": "2026-05-17T01:58:46.599867+00:00",
+  "tables": [
+    {
+      "table": "T10101",
+      "frequency": "Q",
+      "label": "Real GDP growth",
+      "rowCount": 7900,
+      "status": "ok"
+    },
+    {
+      "table": "T20804",
+      "frequency": "Q",
+      "label": "PCE price index growth",
+      "status": "failed",
+      "error": "BEA API error: {'APIErrorDescription': 'Error retrieving NIPA data.', 'APIErrorCode': '201', 'ErrorDetail': {'Description': 'Data for this table and frequency are not currently available. Please check BEAs release schedule for more information.'}}"
+    },
+    {
+      "table": "T20306",
+      "frequency": "Q",
+      "label": "Real PCE growth",
+      "rowCount": 2464,
+      "status": "ok"
+    },
+    {
+      "table": "T20600",
+      "frequency": "M",
+      "label": "Personal income and saving",
+      "rowCount": 34524,
+      "status": "ok"
+    }
+  ],
+  "observationKeys": [
+    "PERSONAL_INCOME_GROWTH",
+    "REAL_GDP_GROWTH",
+    "REAL_PCE_GROWTH",
+    "SAVING_RATE"
+  ],
+  "errors": [
+    "T20804/Q: BEA API error: {'APIErrorDescription': 'Error retrieving NIPA data.', 'APIErrorCode': '201', 'ErrorDetail': {'Description': 'Data for this table and frequency are not currently available. Please check BEAs release schedule for more information.'}}"
+  ]
+}

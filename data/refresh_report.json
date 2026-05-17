@@ -1,7 +1,7 @@
 {
-  "pipelineVersion": "0.26D",
-  "startedAt": "2026-05-17T01:18:33.823428+00:00",
-  "finishedAt": "2026-05-17T01:19:41.416840+00:00",
+  "pipelineVersion": "0.27",
+  "startedAt": "2026-05-17T01:58:08.975160+00:00",
+  "finishedAt": "2026-05-17T01:58:48.065345+00:00",
   "dryRun": false,
   "selectedLanes": "all enabled",
   "lanes": [
@@ -112,7 +112,24 @@
     },
     {
       "id": "bea",
-      "status": "skipped_disabled"
+      "sourceId": "BEA_PUBLIC",
+      "steps": [
+        {
+          "script": "scripts/sources/fetch_bea_macro.py",
+          "status": "ok",
+          "returncode": 0,
+          "stdoutTail": "Fetched BEA macro lane with 4 observations\nBEA warnings: 1 issue(s); see data/raw/bea/bea_macro_compact_audit.json\n",
+          "stderrTail": ""
+        },
+        {
+          "script": "scripts/apply_bea_lane.py",
+          "status": "ok",
+          "returncode": 0,
+          "stdoutTail": "Applied BEA macro lane to 49 assets\n",
+          "stderrTail": ""
+        }
+      ],
+      "status": "ok"
     },
     {
       "id": "federal_reserve",
@@ -127,7 +144,7 @@
     "script": "scripts/validate_data.py",
     "status": "ok",
     "returncode": 0,
-    "stdoutTail": "VALIDATION PASSED: 49 assets\nWARNINGS:\n- schema_version is '0.26D'; expected '0.24'\n",
+    "stdoutTail": "VALIDATION PASSED: 49 assets\nWARNINGS:\n- schema_version is '0.27'; expected '0.24'\n",
     "stderrTail": ""
   },
   "status": "ok"

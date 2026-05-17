@@ -1,7 +1,7 @@
 {
-  "schema_version": "0.26D",
-  "notice": "Macro Regime Scanner v0.26D public-source data contract. Existing live lanes are deepened according to the source extraction manifest while price-derived lanes remain excluded.",
-  "data_mode": "public-source-treasury-cot-eia-usda-bls",
+  "schema_version": "0.27",
+  "notice": "Macro Regime Scanner v0.27 public-source data contract. BEA growth/PCE macro lane added to the v0.26D.1 deep extraction baseline. Price-derived lanes remain excluded.",
+  "data_mode": "public-source-treasury-cot-eia-usda-bls-bea",
   "assets": [
     {
       "id": "DXY",
@@ -16,9 +16,9 @@
       "confidence": 83,
       "conflict": "Medium",
       "freshness": "Mixed",
-      "coverage": "public-source prototype | EIA energy fundamentals | BLS inflation/labor | EIA energy fundamentals | BLS inflation/labor",
-      "topDriver": "Rates / BLS macro / COT",
-      "mainConflict": "Inflation and labor must be read with Treasury pressure and positioning",
+      "coverage": "public-source prototype | EIA energy fundamentals | BLS inflation/labor | EIA energy fundamentals | BLS inflation/labor | EIA energy fundamentals | BLS inflation/labor | BEA growth/PCE",
+      "topDriver": "Rates / BLS / BEA / COT",
+      "mainConflict": "Growth, inflation, and positioning must be read together",
       "watchNext": [
         "Policy rates",
         "Rate differentials",
@@ -567,6 +567,50 @@
           "effect": "Primary effect: Strong U.S. labor data can support the dollar through Fed-policy and growth channels; weak labor can pressure the dollar if rate expectations fall.",
           "source": "U.S. Bureau of Labor Statistics public API",
           "freshness": "Missing"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real GDP growth",
+          "relevance": "Primary",
+          "score": 2,
+          "status": "Strong support",
+          "derived": "Real GDP growth (REAL_GDP_GROWTH) latest 5.60% for 2026Q1; previous 2.00% for 2026Q1; change 3.60 pts.",
+          "effect": "Primary effect: Stronger U.S. growth can support the dollar through growth and rate-differential channels; weaker growth can pressure it.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real consumption growth",
+          "relevance": "Primary",
+          "score": 2,
+          "status": "Strong support",
+          "derived": "Real personal consumption growth (REAL_PCE_GROWTH) latest 16,731,167.00% for 2026Q1; previous 16,665,219.00% for 2025Q4; change 65,948.00 pts.",
+          "effect": "Primary effect: Stronger U.S. growth can support the dollar through growth and rate-differential channels; weaker growth can pressure it.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA personal income growth",
+          "relevance": "Primary",
+          "score": -1,
+          "status": "Pressure",
+          "derived": "Personal income growth (PERSONAL_INCOME_GROWTH) latest -0.10% for 2026M03; previous 0.60% for 2026M03; change -0.70 pts.",
+          "effect": "Primary effect: Stronger U.S. growth can support the dollar through growth and rate-differential channels; weaker growth can pressure it.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA savings rate",
+          "relevance": "Contextual",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Personal saving rate (SAVING_RATE) latest 3.60% for 2026M03; previous 3.90% for 2026M02; change -0.30 pts.",
+          "effect": "Contextual effect: BEA savings rate is useful macro context for U.S. Dollar Fundamental Pressure, but it is not scored as a direct driver yet.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
         }
       ],
       "watchlist": true
@@ -584,9 +628,9 @@
       "confidence": 72,
       "conflict": "Medium",
       "freshness": "Fresh",
-      "coverage": "COT: Leveraged Funds / 2026-05-12 | BLS inflation/labor",
-      "topDriver": "Rates / BLS macro / COT",
-      "mainConflict": "Inflation and labor must be read with Treasury pressure and positioning",
+      "coverage": "COT: Leveraged Funds / 2026-05-12 | BLS inflation/labor | BEA growth/PCE",
+      "topDriver": "Rates / BLS / BEA / COT",
+      "mainConflict": "Growth, inflation, and positioning must be read together",
       "watchNext": [
         "Policy rates",
         "Rate differentials",
@@ -1124,6 +1168,50 @@
           "effect": "Primary effect: Strong U.S. labor data can support USD, which usually pressures EURUSD; weak labor can reduce USD pressure and support the pair.",
           "source": "U.S. Bureau of Labor Statistics public API",
           "freshness": "Missing"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real GDP growth",
+          "relevance": "Primary",
+          "score": -2,
+          "status": "Strong pressure",
+          "derived": "Real GDP growth (REAL_GDP_GROWTH) latest 5.60% for 2026Q1; previous 2.00% for 2026Q1; change 3.60 pts.",
+          "effect": "Primary effect: Stronger U.S. growth can support USD, which usually pressures EURUSD; weaker U.S. growth can support the pair.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real consumption growth",
+          "relevance": "Primary",
+          "score": -2,
+          "status": "Strong pressure",
+          "derived": "Real personal consumption growth (REAL_PCE_GROWTH) latest 16,731,167.00% for 2026Q1; previous 16,665,219.00% for 2025Q4; change 65,948.00 pts.",
+          "effect": "Primary effect: Stronger U.S. growth can support USD, which usually pressures EURUSD; weaker U.S. growth can support the pair.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA personal income growth",
+          "relevance": "Primary",
+          "score": 1,
+          "status": "Support",
+          "derived": "Personal income growth (PERSONAL_INCOME_GROWTH) latest -0.10% for 2026M03; previous 0.60% for 2026M03; change -0.70 pts.",
+          "effect": "Primary effect: Stronger U.S. growth can support USD, which usually pressures EURUSD; weaker U.S. growth can support the pair.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA savings rate",
+          "relevance": "Contextual",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Personal saving rate (SAVING_RATE) latest 3.60% for 2026M03; previous 3.90% for 2026M02; change -0.30 pts.",
+          "effect": "Contextual effect: BEA savings rate is useful macro context for Euro / U.S. Dollar, but it is not scored as a direct driver yet.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
         }
       ],
       "watchlist": false
@@ -1141,9 +1229,9 @@
       "confidence": 66,
       "conflict": "Medium",
       "freshness": "Fresh",
-      "coverage": "COT: Leveraged Funds / 2026-05-12 | BLS inflation/labor",
-      "topDriver": "Rates / BLS macro / COT",
-      "mainConflict": "Inflation and labor must be read with Treasury pressure and positioning",
+      "coverage": "COT: Leveraged Funds / 2026-05-12 | BLS inflation/labor | BEA growth/PCE",
+      "topDriver": "Rates / BLS / BEA / COT",
+      "mainConflict": "Growth, inflation, and positioning must be read together",
       "watchNext": [
         "Policy rates",
         "Rate differentials",
@@ -1681,6 +1769,50 @@
           "effect": "Primary effect: Strong U.S. labor data can support USD, which usually pressures GBPUSD; weak labor can reduce USD pressure and support the pair.",
           "source": "U.S. Bureau of Labor Statistics public API",
           "freshness": "Missing"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real GDP growth",
+          "relevance": "Primary",
+          "score": -2,
+          "status": "Strong pressure",
+          "derived": "Real GDP growth (REAL_GDP_GROWTH) latest 5.60% for 2026Q1; previous 2.00% for 2026Q1; change 3.60 pts.",
+          "effect": "Primary effect: Stronger U.S. growth can support USD, which usually pressures GBPUSD; weaker U.S. growth can support the pair.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real consumption growth",
+          "relevance": "Primary",
+          "score": -2,
+          "status": "Strong pressure",
+          "derived": "Real personal consumption growth (REAL_PCE_GROWTH) latest 16,731,167.00% for 2026Q1; previous 16,665,219.00% for 2025Q4; change 65,948.00 pts.",
+          "effect": "Primary effect: Stronger U.S. growth can support USD, which usually pressures GBPUSD; weaker U.S. growth can support the pair.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA personal income growth",
+          "relevance": "Primary",
+          "score": 1,
+          "status": "Support",
+          "derived": "Personal income growth (PERSONAL_INCOME_GROWTH) latest -0.10% for 2026M03; previous 0.60% for 2026M03; change -0.70 pts.",
+          "effect": "Primary effect: Stronger U.S. growth can support USD, which usually pressures GBPUSD; weaker U.S. growth can support the pair.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA savings rate",
+          "relevance": "Contextual",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Personal saving rate (SAVING_RATE) latest 3.60% for 2026M03; previous 3.90% for 2026M02; change -0.30 pts.",
+          "effect": "Contextual effect: BEA savings rate is useful macro context for British Pound / U.S. Dollar, but it is not scored as a direct driver yet.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
         }
       ],
       "watchlist": false
@@ -1698,9 +1830,9 @@
       "confidence": 79,
       "conflict": "Medium",
       "freshness": "Fresh",
-      "coverage": "COT: Leveraged Funds / 2026-05-12 | BLS inflation/labor",
-      "topDriver": "Rates / BLS macro / COT",
-      "mainConflict": "Inflation and labor must be read with Treasury pressure and positioning",
+      "coverage": "COT: Leveraged Funds / 2026-05-12 | BLS inflation/labor | BEA growth/PCE",
+      "topDriver": "Rates / BLS / BEA / COT",
+      "mainConflict": "Growth, inflation, and positioning must be read together",
       "watchNext": [
         "Policy rates",
         "Rate differentials",
@@ -2238,6 +2370,50 @@
           "effect": "Primary effect: Strong U.S. labor data can support USD, which usually supports USDJPY; weak labor can reduce that support.",
           "source": "U.S. Bureau of Labor Statistics public API",
           "freshness": "Missing"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real GDP growth",
+          "relevance": "Primary",
+          "score": 2,
+          "status": "Strong support",
+          "derived": "Real GDP growth (REAL_GDP_GROWTH) latest 5.60% for 2026Q1; previous 2.00% for 2026Q1; change 3.60 pts.",
+          "effect": "Primary effect: Stronger U.S. growth can support USD, which usually supports USDJPY; weaker U.S. growth can pressure the pair.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real consumption growth",
+          "relevance": "Primary",
+          "score": 2,
+          "status": "Strong support",
+          "derived": "Real personal consumption growth (REAL_PCE_GROWTH) latest 16,731,167.00% for 2026Q1; previous 16,665,219.00% for 2025Q4; change 65,948.00 pts.",
+          "effect": "Primary effect: Stronger U.S. growth can support USD, which usually supports USDJPY; weaker U.S. growth can pressure the pair.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA personal income growth",
+          "relevance": "Primary",
+          "score": -1,
+          "status": "Pressure",
+          "derived": "Personal income growth (PERSONAL_INCOME_GROWTH) latest -0.10% for 2026M03; previous 0.60% for 2026M03; change -0.70 pts.",
+          "effect": "Primary effect: Stronger U.S. growth can support USD, which usually supports USDJPY; weaker U.S. growth can pressure the pair.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA savings rate",
+          "relevance": "Contextual",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Personal saving rate (SAVING_RATE) latest 3.60% for 2026M03; previous 3.90% for 2026M02; change -0.30 pts.",
+          "effect": "Contextual effect: BEA savings rate is useful macro context for U.S. Dollar / Japanese Yen, but it is not scored as a direct driver yet.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
         }
       ],
       "watchlist": false
@@ -2255,9 +2431,9 @@
       "confidence": 68,
       "conflict": "Medium",
       "freshness": "Fresh",
-      "coverage": "COT: Leveraged Funds / 2026-05-12 | BLS inflation/labor",
-      "topDriver": "Rates / BLS macro / COT",
-      "mainConflict": "Inflation and labor must be read with Treasury pressure and positioning",
+      "coverage": "COT: Leveraged Funds / 2026-05-12 | BLS inflation/labor | BEA growth/PCE",
+      "topDriver": "Rates / BLS / BEA / COT",
+      "mainConflict": "Growth, inflation, and positioning must be read together",
       "watchNext": [
         "Policy rates",
         "Rate differentials",
@@ -2795,6 +2971,50 @@
           "effect": "Primary effect: Strong U.S. labor data can support USD, which usually supports USDCHF; weak labor can reduce that support.",
           "source": "U.S. Bureau of Labor Statistics public API",
           "freshness": "Missing"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real GDP growth",
+          "relevance": "Primary",
+          "score": 2,
+          "status": "Strong support",
+          "derived": "Real GDP growth (REAL_GDP_GROWTH) latest 5.60% for 2026Q1; previous 2.00% for 2026Q1; change 3.60 pts.",
+          "effect": "Primary effect: Stronger U.S. growth can support USD, which usually supports USDCHF; weaker U.S. growth can pressure the pair.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real consumption growth",
+          "relevance": "Primary",
+          "score": 2,
+          "status": "Strong support",
+          "derived": "Real personal consumption growth (REAL_PCE_GROWTH) latest 16,731,167.00% for 2026Q1; previous 16,665,219.00% for 2025Q4; change 65,948.00 pts.",
+          "effect": "Primary effect: Stronger U.S. growth can support USD, which usually supports USDCHF; weaker U.S. growth can pressure the pair.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA personal income growth",
+          "relevance": "Primary",
+          "score": -1,
+          "status": "Pressure",
+          "derived": "Personal income growth (PERSONAL_INCOME_GROWTH) latest -0.10% for 2026M03; previous 0.60% for 2026M03; change -0.70 pts.",
+          "effect": "Primary effect: Stronger U.S. growth can support USD, which usually supports USDCHF; weaker U.S. growth can pressure the pair.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA savings rate",
+          "relevance": "Contextual",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Personal saving rate (SAVING_RATE) latest 3.60% for 2026M03; previous 3.90% for 2026M02; change -0.30 pts.",
+          "effect": "Contextual effect: BEA savings rate is useful macro context for U.S. Dollar / Swiss Franc, but it is not scored as a direct driver yet.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
         }
       ],
       "watchlist": false
@@ -2812,9 +3032,9 @@
       "confidence": 69,
       "conflict": "Medium",
       "freshness": "Fresh",
-      "coverage": "COT: Leveraged Funds / 2026-05-12 | EIA energy fundamentals | BLS inflation/labor",
-      "topDriver": "Rates / BLS macro / COT",
-      "mainConflict": "Inflation and labor must be read with Treasury pressure and positioning",
+      "coverage": "COT: Leveraged Funds / 2026-05-12 | EIA energy fundamentals | BLS inflation/labor | BEA growth/PCE",
+      "topDriver": "Rates / BLS / BEA / COT",
+      "mainConflict": "Growth, inflation, and positioning must be read together",
       "watchNext": [
         "Policy rates",
         "Rate differentials",
@@ -3341,6 +3561,50 @@
           "effect": "Primary effect: Strong U.S. labor data can support USD, which usually supports USDCAD; weak labor can reduce that support.",
           "source": "U.S. Bureau of Labor Statistics public API",
           "freshness": "Missing"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real GDP growth",
+          "relevance": "Primary",
+          "score": 2,
+          "status": "Strong support",
+          "derived": "Real GDP growth (REAL_GDP_GROWTH) latest 5.60% for 2026Q1; previous 2.00% for 2026Q1; change 3.60 pts.",
+          "effect": "Primary effect: Stronger U.S. growth can support USD, which usually supports USDCAD; weaker U.S. growth can pressure the pair.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real consumption growth",
+          "relevance": "Primary",
+          "score": 2,
+          "status": "Strong support",
+          "derived": "Real personal consumption growth (REAL_PCE_GROWTH) latest 16,731,167.00% for 2026Q1; previous 16,665,219.00% for 2025Q4; change 65,948.00 pts.",
+          "effect": "Primary effect: Stronger U.S. growth can support USD, which usually supports USDCAD; weaker U.S. growth can pressure the pair.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA personal income growth",
+          "relevance": "Primary",
+          "score": -1,
+          "status": "Pressure",
+          "derived": "Personal income growth (PERSONAL_INCOME_GROWTH) latest -0.10% for 2026M03; previous 0.60% for 2026M03; change -0.70 pts.",
+          "effect": "Primary effect: Stronger U.S. growth can support USD, which usually supports USDCAD; weaker U.S. growth can pressure the pair.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA savings rate",
+          "relevance": "Contextual",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Personal saving rate (SAVING_RATE) latest 3.60% for 2026M03; previous 3.90% for 2026M02; change -0.30 pts.",
+          "effect": "Contextual effect: BEA savings rate is useful macro context for U.S. Dollar / Canadian Dollar, but it is not scored as a direct driver yet.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
         }
       ],
       "watchlist": false
@@ -3358,9 +3622,9 @@
       "confidence": 70,
       "conflict": "Medium",
       "freshness": "Fresh",
-      "coverage": "COT: Leveraged Funds / 2026-05-12 | BLS inflation/labor",
-      "topDriver": "Rates / BLS macro / COT",
-      "mainConflict": "Inflation and labor must be read with Treasury pressure and positioning",
+      "coverage": "COT: Leveraged Funds / 2026-05-12 | BLS inflation/labor | BEA growth/PCE",
+      "topDriver": "Rates / BLS / BEA / COT",
+      "mainConflict": "Growth, inflation, and positioning must be read together",
       "watchNext": [
         "Policy rates",
         "Rate differentials",
@@ -3898,6 +4162,50 @@
           "effect": "Primary effect: Strong U.S. labor data can support USD, which usually pressures AUDUSD; weak labor can reduce USD pressure and support the pair.",
           "source": "U.S. Bureau of Labor Statistics public API",
           "freshness": "Missing"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real GDP growth",
+          "relevance": "Primary",
+          "score": -2,
+          "status": "Strong pressure",
+          "derived": "Real GDP growth (REAL_GDP_GROWTH) latest 5.60% for 2026Q1; previous 2.00% for 2026Q1; change 3.60 pts.",
+          "effect": "Primary effect: Stronger U.S. growth can support USD, which usually pressures AUDUSD; weaker U.S. growth can support the pair.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real consumption growth",
+          "relevance": "Primary",
+          "score": -2,
+          "status": "Strong pressure",
+          "derived": "Real personal consumption growth (REAL_PCE_GROWTH) latest 16,731,167.00% for 2026Q1; previous 16,665,219.00% for 2025Q4; change 65,948.00 pts.",
+          "effect": "Primary effect: Stronger U.S. growth can support USD, which usually pressures AUDUSD; weaker U.S. growth can support the pair.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA personal income growth",
+          "relevance": "Primary",
+          "score": 1,
+          "status": "Support",
+          "derived": "Personal income growth (PERSONAL_INCOME_GROWTH) latest -0.10% for 2026M03; previous 0.60% for 2026M03; change -0.70 pts.",
+          "effect": "Primary effect: Stronger U.S. growth can support USD, which usually pressures AUDUSD; weaker U.S. growth can support the pair.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA savings rate",
+          "relevance": "Contextual",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Personal saving rate (SAVING_RATE) latest 3.60% for 2026M03; previous 3.90% for 2026M02; change -0.30 pts.",
+          "effect": "Contextual effect: BEA savings rate is useful macro context for Australian Dollar / U.S. Dollar, but it is not scored as a direct driver yet.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
         }
       ],
       "watchlist": false
@@ -3915,9 +4223,9 @@
       "confidence": 65,
       "conflict": "Medium",
       "freshness": "Mixed",
-      "coverage": "public-source prototype | BLS inflation/labor | BLS inflation/labor",
-      "topDriver": "Rates / BLS macro / COT",
-      "mainConflict": "Inflation and labor must be read with Treasury pressure and positioning",
+      "coverage": "public-source prototype | BLS inflation/labor | BLS inflation/labor | BLS inflation/labor | BEA growth/PCE",
+      "topDriver": "Rates / BLS / BEA / COT",
+      "mainConflict": "Growth, inflation, and positioning must be read together",
       "watchNext": [
         "Policy rates",
         "Rate differentials",
@@ -4477,6 +4785,50 @@
           "effect": "Primary effect: Strong U.S. labor data can support USD, which usually pressures NZDUSD; weak labor can reduce USD pressure and support the pair.",
           "source": "U.S. Bureau of Labor Statistics public API",
           "freshness": "Missing"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real GDP growth",
+          "relevance": "Primary",
+          "score": -2,
+          "status": "Strong pressure",
+          "derived": "Real GDP growth (REAL_GDP_GROWTH) latest 5.60% for 2026Q1; previous 2.00% for 2026Q1; change 3.60 pts.",
+          "effect": "Primary effect: Stronger U.S. growth can support USD, which usually pressures NZDUSD; weaker U.S. growth can support the pair.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real consumption growth",
+          "relevance": "Primary",
+          "score": -2,
+          "status": "Strong pressure",
+          "derived": "Real personal consumption growth (REAL_PCE_GROWTH) latest 16,731,167.00% for 2026Q1; previous 16,665,219.00% for 2025Q4; change 65,948.00 pts.",
+          "effect": "Primary effect: Stronger U.S. growth can support USD, which usually pressures NZDUSD; weaker U.S. growth can support the pair.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA personal income growth",
+          "relevance": "Primary",
+          "score": 1,
+          "status": "Support",
+          "derived": "Personal income growth (PERSONAL_INCOME_GROWTH) latest -0.10% for 2026M03; previous 0.60% for 2026M03; change -0.70 pts.",
+          "effect": "Primary effect: Stronger U.S. growth can support USD, which usually pressures NZDUSD; weaker U.S. growth can support the pair.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA savings rate",
+          "relevance": "Contextual",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Personal saving rate (SAVING_RATE) latest 3.60% for 2026M03; previous 3.90% for 2026M02; change -0.30 pts.",
+          "effect": "Contextual effect: BEA savings rate is useful macro context for New Zealand Dollar / U.S. Dollar, but it is not scored as a direct driver yet.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
         }
       ],
       "watchlist": false
@@ -4494,9 +4846,9 @@
       "confidence": 61,
       "conflict": "Medium",
       "freshness": "Mixed",
-      "coverage": "public-source prototype | BLS inflation/labor | BLS inflation/labor",
-      "topDriver": "Rates / BLS macro / COT",
-      "mainConflict": "Inflation and labor must be read with Treasury pressure and positioning",
+      "coverage": "public-source prototype | BLS inflation/labor | BLS inflation/labor | BLS inflation/labor | BEA growth/PCE",
+      "topDriver": "Rates / BLS / BEA / COT",
+      "mainConflict": "Growth, inflation, and positioning must be read together",
       "watchNext": [
         "Policy rates",
         "Rate differentials",
@@ -5056,6 +5408,50 @@
           "effect": "Contextual effect: BLS U-6 unemployment can affect Euro / British Pound through macro policy, growth, inflation, and risk channels, but it is not the main direct driver.",
           "source": "U.S. Bureau of Labor Statistics public API",
           "freshness": "Missing"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real GDP growth",
+          "relevance": "Primary",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Real GDP growth (REAL_GDP_GROWTH) latest 5.60% for 2026Q1; previous 2.00% for 2026Q1; change 3.60 pts.",
+          "effect": "Contextual effect: BEA growth data affects Euro / British Pound through broad demand, policy, dollar, and risk-appetite channels.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real consumption growth",
+          "relevance": "Primary",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Real personal consumption growth (REAL_PCE_GROWTH) latest 16,731,167.00% for 2026Q1; previous 16,665,219.00% for 2025Q4; change 65,948.00 pts.",
+          "effect": "Contextual effect: BEA growth data affects Euro / British Pound through broad demand, policy, dollar, and risk-appetite channels.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA personal income growth",
+          "relevance": "Primary",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Personal income growth (PERSONAL_INCOME_GROWTH) latest -0.10% for 2026M03; previous 0.60% for 2026M03; change -0.70 pts.",
+          "effect": "Contextual effect: BEA growth data affects Euro / British Pound through broad demand, policy, dollar, and risk-appetite channels.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA savings rate",
+          "relevance": "Contextual",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Personal saving rate (SAVING_RATE) latest 3.60% for 2026M03; previous 3.90% for 2026M02; change -0.30 pts.",
+          "effect": "Contextual effect: BEA savings rate is useful macro context for Euro / British Pound, but it is not scored as a direct driver yet.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
         }
       ],
       "watchlist": false
@@ -5073,9 +5469,9 @@
       "confidence": 71,
       "conflict": "Medium",
       "freshness": "Mixed",
-      "coverage": "public-source prototype | BLS inflation/labor | BLS inflation/labor",
-      "topDriver": "Rates / BLS macro / COT",
-      "mainConflict": "Inflation and labor must be read with Treasury pressure and positioning",
+      "coverage": "public-source prototype | BLS inflation/labor | BLS inflation/labor | BLS inflation/labor | BEA growth/PCE",
+      "topDriver": "Rates / BLS / BEA / COT",
+      "mainConflict": "Growth, inflation, and positioning must be read together",
       "watchNext": [
         "Policy rates",
         "Rate differentials",
@@ -5635,6 +6031,50 @@
           "effect": "Contextual effect: BLS U-6 unemployment can affect Euro / Japanese Yen through macro policy, growth, inflation, and risk channels, but it is not the main direct driver.",
           "source": "U.S. Bureau of Labor Statistics public API",
           "freshness": "Missing"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real GDP growth",
+          "relevance": "Primary",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Real GDP growth (REAL_GDP_GROWTH) latest 5.60% for 2026Q1; previous 2.00% for 2026Q1; change 3.60 pts.",
+          "effect": "Contextual effect: BEA growth data affects Euro / Japanese Yen through broad demand, policy, dollar, and risk-appetite channels.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real consumption growth",
+          "relevance": "Primary",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Real personal consumption growth (REAL_PCE_GROWTH) latest 16,731,167.00% for 2026Q1; previous 16,665,219.00% for 2025Q4; change 65,948.00 pts.",
+          "effect": "Contextual effect: BEA growth data affects Euro / Japanese Yen through broad demand, policy, dollar, and risk-appetite channels.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA personal income growth",
+          "relevance": "Primary",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Personal income growth (PERSONAL_INCOME_GROWTH) latest -0.10% for 2026M03; previous 0.60% for 2026M03; change -0.70 pts.",
+          "effect": "Contextual effect: BEA growth data affects Euro / Japanese Yen through broad demand, policy, dollar, and risk-appetite channels.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA savings rate",
+          "relevance": "Contextual",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Personal saving rate (SAVING_RATE) latest 3.60% for 2026M03; previous 3.90% for 2026M02; change -0.30 pts.",
+          "effect": "Contextual effect: BEA savings rate is useful macro context for Euro / Japanese Yen, but it is not scored as a direct driver yet.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
         }
       ],
       "watchlist": false
@@ -5652,9 +6092,9 @@
       "confidence": 73,
       "conflict": "High",
       "freshness": "Mixed",
-      "coverage": "public-source prototype | BLS inflation/labor | BLS inflation/labor",
-      "topDriver": "Rates / BLS macro / COT",
-      "mainConflict": "Inflation and labor must be read with Treasury pressure and positioning",
+      "coverage": "public-source prototype | BLS inflation/labor | BLS inflation/labor | BLS inflation/labor | BEA growth/PCE",
+      "topDriver": "Rates / BLS / BEA / COT",
+      "mainConflict": "Growth, inflation, and positioning must be read together",
       "watchNext": [
         "Policy rates",
         "Rate differentials",
@@ -6214,6 +6654,50 @@
           "effect": "Contextual effect: BLS U-6 unemployment can affect Australian Dollar / Japanese Yen through macro policy, growth, inflation, and risk channels, but it is not the main direct driver.",
           "source": "U.S. Bureau of Labor Statistics public API",
           "freshness": "Missing"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real GDP growth",
+          "relevance": "Primary",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Real GDP growth (REAL_GDP_GROWTH) latest 5.60% for 2026Q1; previous 2.00% for 2026Q1; change 3.60 pts.",
+          "effect": "Contextual effect: BEA growth data affects Australian Dollar / Japanese Yen through broad demand, policy, dollar, and risk-appetite channels.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real consumption growth",
+          "relevance": "Primary",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Real personal consumption growth (REAL_PCE_GROWTH) latest 16,731,167.00% for 2026Q1; previous 16,665,219.00% for 2025Q4; change 65,948.00 pts.",
+          "effect": "Contextual effect: BEA growth data affects Australian Dollar / Japanese Yen through broad demand, policy, dollar, and risk-appetite channels.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA personal income growth",
+          "relevance": "Primary",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Personal income growth (PERSONAL_INCOME_GROWTH) latest -0.10% for 2026M03; previous 0.60% for 2026M03; change -0.70 pts.",
+          "effect": "Contextual effect: BEA growth data affects Australian Dollar / Japanese Yen through broad demand, policy, dollar, and risk-appetite channels.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA savings rate",
+          "relevance": "Contextual",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Personal saving rate (SAVING_RATE) latest 3.60% for 2026M03; previous 3.90% for 2026M02; change -0.30 pts.",
+          "effect": "Contextual effect: BEA savings rate is useful macro context for Australian Dollar / Japanese Yen, but it is not scored as a direct driver yet.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
         }
       ],
       "watchlist": false
@@ -6231,9 +6715,9 @@
       "confidence": 67,
       "conflict": "Medium",
       "freshness": "Mixed",
-      "coverage": "public-source prototype | BLS inflation/labor | BLS inflation/labor",
-      "topDriver": "Rates / BLS macro / COT",
-      "mainConflict": "Inflation and labor must be read with Treasury pressure and positioning",
+      "coverage": "public-source prototype | BLS inflation/labor | BLS inflation/labor | BLS inflation/labor | BEA growth/PCE",
+      "topDriver": "Rates / BLS / BEA / COT",
+      "mainConflict": "Growth, inflation, and positioning must be read together",
       "watchNext": [
         "Policy rates",
         "Rate differentials",
@@ -6793,6 +7277,50 @@
           "effect": "Contextual effect: BLS U-6 unemployment can affect New Zealand Dollar / Japanese Yen through macro policy, growth, inflation, and risk channels, but it is not the main direct driver.",
           "source": "U.S. Bureau of Labor Statistics public API",
           "freshness": "Missing"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real GDP growth",
+          "relevance": "Primary",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Real GDP growth (REAL_GDP_GROWTH) latest 5.60% for 2026Q1; previous 2.00% for 2026Q1; change 3.60 pts.",
+          "effect": "Contextual effect: BEA growth data affects New Zealand Dollar / Japanese Yen through broad demand, policy, dollar, and risk-appetite channels.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real consumption growth",
+          "relevance": "Primary",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Real personal consumption growth (REAL_PCE_GROWTH) latest 16,731,167.00% for 2026Q1; previous 16,665,219.00% for 2025Q4; change 65,948.00 pts.",
+          "effect": "Contextual effect: BEA growth data affects New Zealand Dollar / Japanese Yen through broad demand, policy, dollar, and risk-appetite channels.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA personal income growth",
+          "relevance": "Primary",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Personal income growth (PERSONAL_INCOME_GROWTH) latest -0.10% for 2026M03; previous 0.60% for 2026M03; change -0.70 pts.",
+          "effect": "Contextual effect: BEA growth data affects New Zealand Dollar / Japanese Yen through broad demand, policy, dollar, and risk-appetite channels.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA savings rate",
+          "relevance": "Contextual",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Personal saving rate (SAVING_RATE) latest 3.60% for 2026M03; previous 3.90% for 2026M02; change -0.30 pts.",
+          "effect": "Contextual effect: BEA savings rate is useful macro context for New Zealand Dollar / Japanese Yen, but it is not scored as a direct driver yet.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
         }
       ],
       "watchlist": false
@@ -6810,9 +7338,9 @@
       "confidence": 92,
       "conflict": "Low",
       "freshness": "Fresh",
-      "coverage": "COT: Leveraged Funds / 2026-05-12 | BLS inflation/labor",
-      "topDriver": "Rates / BLS macro / COT",
-      "mainConflict": "Inflation and labor must be read with Treasury pressure and positioning",
+      "coverage": "COT: Leveraged Funds / 2026-05-12 | BLS inflation/labor | BEA growth/PCE",
+      "topDriver": "Rates / BLS / BEA / COT",
+      "mainConflict": "Growth, inflation, and positioning must be read together",
       "watchNext": [
         "Next Treasury yield update",
         "Inflation releases",
@@ -7350,6 +7878,50 @@
           "effect": "Direct effect: Strong labor data usually supports U.S. 2-Year Treasury Yield rate pressure because it can keep Fed policy firmer; weak labor usually reduces rate pressure but can raise recession concerns.",
           "source": "U.S. Bureau of Labor Statistics public API",
           "freshness": "Missing"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real GDP growth",
+          "relevance": "Primary",
+          "score": 2,
+          "status": "Strong support",
+          "derived": "Real GDP growth (REAL_GDP_GROWTH) latest 5.60% for 2026Q1; previous 2.00% for 2026Q1; change 3.60 pts.",
+          "effect": "Primary effect: Stronger growth usually supports higher yield pressure for U.S. 2-Year Treasury Yield; weaker growth usually reduces rate pressure but can raise recession risk.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real consumption growth",
+          "relevance": "Primary",
+          "score": 2,
+          "status": "Strong support",
+          "derived": "Real personal consumption growth (REAL_PCE_GROWTH) latest 16,731,167.00% for 2026Q1; previous 16,665,219.00% for 2025Q4; change 65,948.00 pts.",
+          "effect": "Primary effect: Stronger growth usually supports higher yield pressure for U.S. 2-Year Treasury Yield; weaker growth usually reduces rate pressure but can raise recession risk.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA personal income growth",
+          "relevance": "Primary",
+          "score": -1,
+          "status": "Pressure",
+          "derived": "Personal income growth (PERSONAL_INCOME_GROWTH) latest -0.10% for 2026M03; previous 0.60% for 2026M03; change -0.70 pts.",
+          "effect": "Primary effect: Stronger growth usually supports higher yield pressure for U.S. 2-Year Treasury Yield; weaker growth usually reduces rate pressure but can raise recession risk.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA savings rate",
+          "relevance": "Contextual",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Personal saving rate (SAVING_RATE) latest 3.60% for 2026M03; previous 3.90% for 2026M02; change -0.30 pts.",
+          "effect": "Contextual effect: BEA savings rate is useful macro context for U.S. 2-Year Treasury Yield, but it is not scored as a direct driver yet.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
         }
       ],
       "watchlist": false
@@ -7367,9 +7939,9 @@
       "confidence": 92,
       "conflict": "Low",
       "freshness": "Fresh",
-      "coverage": "COT: Leveraged Funds / 2026-05-12 | BLS inflation/labor",
-      "topDriver": "Rates / BLS macro / COT",
-      "mainConflict": "Inflation and labor must be read with Treasury pressure and positioning",
+      "coverage": "COT: Leveraged Funds / 2026-05-12 | BLS inflation/labor | BEA growth/PCE",
+      "topDriver": "Rates / BLS / BEA / COT",
+      "mainConflict": "Growth, inflation, and positioning must be read together",
       "watchNext": [
         "Next Treasury yield update",
         "Inflation releases",
@@ -7918,6 +8490,50 @@
           "effect": "Direct effect: Strong labor data usually supports U.S. 5-Year Treasury Yield rate pressure because it can keep Fed policy firmer; weak labor usually reduces rate pressure but can raise recession concerns.",
           "source": "U.S. Bureau of Labor Statistics public API",
           "freshness": "Missing"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real GDP growth",
+          "relevance": "Primary",
+          "score": 2,
+          "status": "Strong support",
+          "derived": "Real GDP growth (REAL_GDP_GROWTH) latest 5.60% for 2026Q1; previous 2.00% for 2026Q1; change 3.60 pts.",
+          "effect": "Primary effect: Stronger growth usually supports higher yield pressure for U.S. 5-Year Treasury Yield; weaker growth usually reduces rate pressure but can raise recession risk.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real consumption growth",
+          "relevance": "Primary",
+          "score": 2,
+          "status": "Strong support",
+          "derived": "Real personal consumption growth (REAL_PCE_GROWTH) latest 16,731,167.00% for 2026Q1; previous 16,665,219.00% for 2025Q4; change 65,948.00 pts.",
+          "effect": "Primary effect: Stronger growth usually supports higher yield pressure for U.S. 5-Year Treasury Yield; weaker growth usually reduces rate pressure but can raise recession risk.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA personal income growth",
+          "relevance": "Primary",
+          "score": -1,
+          "status": "Pressure",
+          "derived": "Personal income growth (PERSONAL_INCOME_GROWTH) latest -0.10% for 2026M03; previous 0.60% for 2026M03; change -0.70 pts.",
+          "effect": "Primary effect: Stronger growth usually supports higher yield pressure for U.S. 5-Year Treasury Yield; weaker growth usually reduces rate pressure but can raise recession risk.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA savings rate",
+          "relevance": "Contextual",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Personal saving rate (SAVING_RATE) latest 3.60% for 2026M03; previous 3.90% for 2026M02; change -0.30 pts.",
+          "effect": "Contextual effect: BEA savings rate is useful macro context for U.S. 5-Year Treasury Yield, but it is not scored as a direct driver yet.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
         }
       ],
       "watchlist": false
@@ -7935,9 +8551,9 @@
       "confidence": 92,
       "conflict": "Low",
       "freshness": "Fresh",
-      "coverage": "COT: Leveraged Funds / 2026-05-12 | BLS inflation/labor",
-      "topDriver": "Rates / BLS macro / COT",
-      "mainConflict": "Inflation and labor must be read with Treasury pressure and positioning",
+      "coverage": "COT: Leveraged Funds / 2026-05-12 | BLS inflation/labor | BEA growth/PCE",
+      "topDriver": "Rates / BLS / BEA / COT",
+      "mainConflict": "Growth, inflation, and positioning must be read together",
       "watchNext": [
         "Next Treasury yield update",
         "Inflation releases",
@@ -8475,6 +9091,50 @@
           "effect": "Direct effect: Strong labor data usually supports U.S. 10-Year Treasury Yield rate pressure because it can keep Fed policy firmer; weak labor usually reduces rate pressure but can raise recession concerns.",
           "source": "U.S. Bureau of Labor Statistics public API",
           "freshness": "Missing"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real GDP growth",
+          "relevance": "Primary",
+          "score": 2,
+          "status": "Strong support",
+          "derived": "Real GDP growth (REAL_GDP_GROWTH) latest 5.60% for 2026Q1; previous 2.00% for 2026Q1; change 3.60 pts.",
+          "effect": "Primary effect: Stronger growth usually supports higher yield pressure for U.S. 10-Year Treasury Yield; weaker growth usually reduces rate pressure but can raise recession risk.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real consumption growth",
+          "relevance": "Primary",
+          "score": 2,
+          "status": "Strong support",
+          "derived": "Real personal consumption growth (REAL_PCE_GROWTH) latest 16,731,167.00% for 2026Q1; previous 16,665,219.00% for 2025Q4; change 65,948.00 pts.",
+          "effect": "Primary effect: Stronger growth usually supports higher yield pressure for U.S. 10-Year Treasury Yield; weaker growth usually reduces rate pressure but can raise recession risk.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA personal income growth",
+          "relevance": "Primary",
+          "score": -1,
+          "status": "Pressure",
+          "derived": "Personal income growth (PERSONAL_INCOME_GROWTH) latest -0.10% for 2026M03; previous 0.60% for 2026M03; change -0.70 pts.",
+          "effect": "Primary effect: Stronger growth usually supports higher yield pressure for U.S. 10-Year Treasury Yield; weaker growth usually reduces rate pressure but can raise recession risk.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA savings rate",
+          "relevance": "Contextual",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Personal saving rate (SAVING_RATE) latest 3.60% for 2026M03; previous 3.90% for 2026M02; change -0.30 pts.",
+          "effect": "Contextual effect: BEA savings rate is useful macro context for U.S. 10-Year Treasury Yield, but it is not scored as a direct driver yet.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
         }
       ],
       "watchlist": true
@@ -8492,9 +9152,9 @@
       "confidence": 92,
       "conflict": "Low",
       "freshness": "Fresh",
-      "coverage": "COT: Leveraged Funds / 2026-05-12 | BLS inflation/labor",
-      "topDriver": "Rates / BLS macro / COT",
-      "mainConflict": "Inflation and labor must be read with Treasury pressure and positioning",
+      "coverage": "COT: Leveraged Funds / 2026-05-12 | BLS inflation/labor | BEA growth/PCE",
+      "topDriver": "Rates / BLS / BEA / COT",
+      "mainConflict": "Growth, inflation, and positioning must be read together",
       "watchNext": [
         "Next Treasury yield update",
         "Inflation releases",
@@ -9043,6 +9703,50 @@
           "effect": "Direct effect: Strong labor data usually supports U.S. 30-Year Treasury Yield rate pressure because it can keep Fed policy firmer; weak labor usually reduces rate pressure but can raise recession concerns.",
           "source": "U.S. Bureau of Labor Statistics public API",
           "freshness": "Missing"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real GDP growth",
+          "relevance": "Primary",
+          "score": 2,
+          "status": "Strong support",
+          "derived": "Real GDP growth (REAL_GDP_GROWTH) latest 5.60% for 2026Q1; previous 2.00% for 2026Q1; change 3.60 pts.",
+          "effect": "Primary effect: Stronger growth usually supports higher yield pressure for U.S. 30-Year Treasury Yield; weaker growth usually reduces rate pressure but can raise recession risk.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real consumption growth",
+          "relevance": "Primary",
+          "score": 2,
+          "status": "Strong support",
+          "derived": "Real personal consumption growth (REAL_PCE_GROWTH) latest 16,731,167.00% for 2026Q1; previous 16,665,219.00% for 2025Q4; change 65,948.00 pts.",
+          "effect": "Primary effect: Stronger growth usually supports higher yield pressure for U.S. 30-Year Treasury Yield; weaker growth usually reduces rate pressure but can raise recession risk.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA personal income growth",
+          "relevance": "Primary",
+          "score": -1,
+          "status": "Pressure",
+          "derived": "Personal income growth (PERSONAL_INCOME_GROWTH) latest -0.10% for 2026M03; previous 0.60% for 2026M03; change -0.70 pts.",
+          "effect": "Primary effect: Stronger growth usually supports higher yield pressure for U.S. 30-Year Treasury Yield; weaker growth usually reduces rate pressure but can raise recession risk.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA savings rate",
+          "relevance": "Contextual",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Personal saving rate (SAVING_RATE) latest 3.60% for 2026M03; previous 3.90% for 2026M02; change -0.30 pts.",
+          "effect": "Contextual effect: BEA savings rate is useful macro context for U.S. 30-Year Treasury Yield, but it is not scored as a direct driver yet.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
         }
       ],
       "watchlist": false
@@ -9060,9 +9764,9 @@
       "confidence": 90,
       "conflict": "Low",
       "freshness": "Fresh",
-      "coverage": "Treasury curve: 10Y minus 2Y | BLS inflation/labor",
-      "topDriver": "Rates / BLS macro / COT",
-      "mainConflict": "Inflation and labor must be read with Treasury pressure and positioning",
+      "coverage": "Treasury curve: 10Y minus 2Y | BLS inflation/labor | BEA growth/PCE",
+      "topDriver": "Rates / BLS / BEA / COT",
+      "mainConflict": "Growth, inflation, and positioning must be read together",
       "watchNext": [
         "Next Treasury yield update",
         "Inflation releases",
@@ -9622,6 +10326,50 @@
           "effect": "Direct effect: Strong labor data usually supports U.S. 2s10s Yield Curve rate pressure because it can keep Fed policy firmer; weak labor usually reduces rate pressure but can raise recession concerns.",
           "source": "U.S. Bureau of Labor Statistics public API",
           "freshness": "Missing"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real GDP growth",
+          "relevance": "Primary",
+          "score": 2,
+          "status": "Strong support",
+          "derived": "Real GDP growth (REAL_GDP_GROWTH) latest 5.60% for 2026Q1; previous 2.00% for 2026Q1; change 3.60 pts.",
+          "effect": "Primary effect: Stronger growth usually supports higher yield pressure for U.S. 2s10s Yield Curve; weaker growth usually reduces rate pressure but can raise recession risk.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real consumption growth",
+          "relevance": "Primary",
+          "score": 2,
+          "status": "Strong support",
+          "derived": "Real personal consumption growth (REAL_PCE_GROWTH) latest 16,731,167.00% for 2026Q1; previous 16,665,219.00% for 2025Q4; change 65,948.00 pts.",
+          "effect": "Primary effect: Stronger growth usually supports higher yield pressure for U.S. 2s10s Yield Curve; weaker growth usually reduces rate pressure but can raise recession risk.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA personal income growth",
+          "relevance": "Primary",
+          "score": -1,
+          "status": "Pressure",
+          "derived": "Personal income growth (PERSONAL_INCOME_GROWTH) latest -0.10% for 2026M03; previous 0.60% for 2026M03; change -0.70 pts.",
+          "effect": "Primary effect: Stronger growth usually supports higher yield pressure for U.S. 2s10s Yield Curve; weaker growth usually reduces rate pressure but can raise recession risk.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA savings rate",
+          "relevance": "Contextual",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Personal saving rate (SAVING_RATE) latest 3.60% for 2026M03; previous 3.90% for 2026M02; change -0.30 pts.",
+          "effect": "Contextual effect: BEA savings rate is useful macro context for U.S. 2s10s Yield Curve, but it is not scored as a direct driver yet.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
         }
       ],
       "watchlist": false
@@ -9639,9 +10387,9 @@
       "confidence": 90,
       "conflict": "Low",
       "freshness": "Fresh",
-      "coverage": "Treasury curve: 30Y minus 5Y | BLS inflation/labor",
-      "topDriver": "Rates / BLS macro / COT",
-      "mainConflict": "Inflation and labor must be read with Treasury pressure and positioning",
+      "coverage": "Treasury curve: 30Y minus 5Y | BLS inflation/labor | BEA growth/PCE",
+      "topDriver": "Rates / BLS / BEA / COT",
+      "mainConflict": "Growth, inflation, and positioning must be read together",
       "watchNext": [
         "Next Treasury yield update",
         "Inflation releases",
@@ -10201,6 +10949,50 @@
           "effect": "Direct effect: Strong labor data usually supports U.S. 5s30s Yield Curve rate pressure because it can keep Fed policy firmer; weak labor usually reduces rate pressure but can raise recession concerns.",
           "source": "U.S. Bureau of Labor Statistics public API",
           "freshness": "Missing"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real GDP growth",
+          "relevance": "Primary",
+          "score": 2,
+          "status": "Strong support",
+          "derived": "Real GDP growth (REAL_GDP_GROWTH) latest 5.60% for 2026Q1; previous 2.00% for 2026Q1; change 3.60 pts.",
+          "effect": "Primary effect: Stronger growth usually supports higher yield pressure for U.S. 5s30s Yield Curve; weaker growth usually reduces rate pressure but can raise recession risk.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real consumption growth",
+          "relevance": "Primary",
+          "score": 2,
+          "status": "Strong support",
+          "derived": "Real personal consumption growth (REAL_PCE_GROWTH) latest 16,731,167.00% for 2026Q1; previous 16,665,219.00% for 2025Q4; change 65,948.00 pts.",
+          "effect": "Primary effect: Stronger growth usually supports higher yield pressure for U.S. 5s30s Yield Curve; weaker growth usually reduces rate pressure but can raise recession risk.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA personal income growth",
+          "relevance": "Primary",
+          "score": -1,
+          "status": "Pressure",
+          "derived": "Personal income growth (PERSONAL_INCOME_GROWTH) latest -0.10% for 2026M03; previous 0.60% for 2026M03; change -0.70 pts.",
+          "effect": "Primary effect: Stronger growth usually supports higher yield pressure for U.S. 5s30s Yield Curve; weaker growth usually reduces rate pressure but can raise recession risk.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA savings rate",
+          "relevance": "Contextual",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Personal saving rate (SAVING_RATE) latest 3.60% for 2026M03; previous 3.90% for 2026M02; change -0.30 pts.",
+          "effect": "Contextual effect: BEA savings rate is useful macro context for U.S. 5s30s Yield Curve, but it is not scored as a direct driver yet.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
         }
       ],
       "watchlist": false
@@ -10218,9 +11010,9 @@
       "confidence": 80,
       "conflict": "Medium",
       "freshness": "Mixed",
-      "coverage": "public-source prototype | EIA energy fundamentals | BLS inflation/labor | EIA energy fundamentals | BLS inflation/labor",
-      "topDriver": "Rates / BLS macro / COT",
-      "mainConflict": "Inflation and labor must be read with Treasury pressure and positioning",
+      "coverage": "public-source prototype | EIA energy fundamentals | BLS inflation/labor | EIA energy fundamentals | BLS inflation/labor | EIA energy fundamentals | BLS inflation/labor | BEA growth/PCE",
+      "topDriver": "Rates / BLS / BEA / COT",
+      "mainConflict": "Growth, inflation, and positioning must be read together",
       "watchNext": [
         "CPI",
         "PCE",
@@ -10769,6 +11561,50 @@
           "effect": "Direct effect: Strong labor data usually supports U.S. Real Yield Proxy rate pressure because it can keep Fed policy firmer; weak labor usually reduces rate pressure but can raise recession concerns.",
           "source": "U.S. Bureau of Labor Statistics public API",
           "freshness": "Missing"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real GDP growth",
+          "relevance": "Primary",
+          "score": 2,
+          "status": "Strong support",
+          "derived": "Real GDP growth (REAL_GDP_GROWTH) latest 5.60% for 2026Q1; previous 2.00% for 2026Q1; change 3.60 pts.",
+          "effect": "Primary effect: Stronger growth usually supports higher yield pressure for U.S. Real Yield Proxy; weaker growth usually reduces rate pressure but can raise recession risk.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real consumption growth",
+          "relevance": "Primary",
+          "score": 2,
+          "status": "Strong support",
+          "derived": "Real personal consumption growth (REAL_PCE_GROWTH) latest 16,731,167.00% for 2026Q1; previous 16,665,219.00% for 2025Q4; change 65,948.00 pts.",
+          "effect": "Primary effect: Stronger growth usually supports higher yield pressure for U.S. Real Yield Proxy; weaker growth usually reduces rate pressure but can raise recession risk.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA personal income growth",
+          "relevance": "Primary",
+          "score": -1,
+          "status": "Pressure",
+          "derived": "Personal income growth (PERSONAL_INCOME_GROWTH) latest -0.10% for 2026M03; previous 0.60% for 2026M03; change -0.70 pts.",
+          "effect": "Primary effect: Stronger growth usually supports higher yield pressure for U.S. Real Yield Proxy; weaker growth usually reduces rate pressure but can raise recession risk.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA savings rate",
+          "relevance": "Contextual",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Personal saving rate (SAVING_RATE) latest 3.60% for 2026M03; previous 3.90% for 2026M02; change -0.30 pts.",
+          "effect": "Contextual effect: BEA savings rate is useful macro context for U.S. Real Yield Proxy, but it is not scored as a direct driver yet.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
         }
       ],
       "watchlist": false
@@ -10786,9 +11622,9 @@
       "confidence": 68,
       "conflict": "Medium",
       "freshness": "Mixed",
-      "coverage": "public-source prototype | EIA energy fundamentals | BLS inflation/labor | EIA energy fundamentals | BLS inflation/labor",
-      "topDriver": "Rates / BLS macro / COT",
-      "mainConflict": "Inflation and labor must be read with Treasury pressure and positioning",
+      "coverage": "public-source prototype | EIA energy fundamentals | BLS inflation/labor | EIA energy fundamentals | BLS inflation/labor | EIA energy fundamentals | BLS inflation/labor | BEA growth/PCE",
+      "topDriver": "Rates / BLS / BEA / COT",
+      "mainConflict": "Growth, inflation, and positioning must be read together",
       "watchNext": [
         "CPI",
         "PCE",
@@ -11337,6 +12173,50 @@
           "effect": "Direct effect: Strong labor data usually supports 5-Year Breakeven Inflation rate pressure because it can keep Fed policy firmer; weak labor usually reduces rate pressure but can raise recession concerns.",
           "source": "U.S. Bureau of Labor Statistics public API",
           "freshness": "Missing"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real GDP growth",
+          "relevance": "Primary",
+          "score": 2,
+          "status": "Strong support",
+          "derived": "Real GDP growth (REAL_GDP_GROWTH) latest 5.60% for 2026Q1; previous 2.00% for 2026Q1; change 3.60 pts.",
+          "effect": "Primary effect: Stronger growth usually supports higher yield pressure for 5-Year Breakeven Inflation; weaker growth usually reduces rate pressure but can raise recession risk.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real consumption growth",
+          "relevance": "Primary",
+          "score": 2,
+          "status": "Strong support",
+          "derived": "Real personal consumption growth (REAL_PCE_GROWTH) latest 16,731,167.00% for 2026Q1; previous 16,665,219.00% for 2025Q4; change 65,948.00 pts.",
+          "effect": "Primary effect: Stronger growth usually supports higher yield pressure for 5-Year Breakeven Inflation; weaker growth usually reduces rate pressure but can raise recession risk.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA personal income growth",
+          "relevance": "Primary",
+          "score": -1,
+          "status": "Pressure",
+          "derived": "Personal income growth (PERSONAL_INCOME_GROWTH) latest -0.10% for 2026M03; previous 0.60% for 2026M03; change -0.70 pts.",
+          "effect": "Primary effect: Stronger growth usually supports higher yield pressure for 5-Year Breakeven Inflation; weaker growth usually reduces rate pressure but can raise recession risk.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA savings rate",
+          "relevance": "Contextual",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Personal saving rate (SAVING_RATE) latest 3.60% for 2026M03; previous 3.90% for 2026M02; change -0.30 pts.",
+          "effect": "Contextual effect: BEA savings rate is useful macro context for 5-Year Breakeven Inflation, but it is not scored as a direct driver yet.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
         }
       ],
       "watchlist": false
@@ -11354,9 +12234,9 @@
       "confidence": 69,
       "conflict": "Medium",
       "freshness": "Mixed",
-      "coverage": "public-source prototype | EIA energy fundamentals | BLS inflation/labor | EIA energy fundamentals | BLS inflation/labor",
-      "topDriver": "Rates / BLS macro / COT",
-      "mainConflict": "Inflation and labor must be read with Treasury pressure and positioning",
+      "coverage": "public-source prototype | EIA energy fundamentals | BLS inflation/labor | EIA energy fundamentals | BLS inflation/labor | EIA energy fundamentals | BLS inflation/labor | BEA growth/PCE",
+      "topDriver": "Rates / BLS / BEA / COT",
+      "mainConflict": "Growth, inflation, and positioning must be read together",
       "watchNext": [
         "CPI",
         "PCE",
@@ -11905,6 +12785,50 @@
           "effect": "Direct effect: Strong labor data usually supports 10-Year Breakeven Inflation rate pressure because it can keep Fed policy firmer; weak labor usually reduces rate pressure but can raise recession concerns.",
           "source": "U.S. Bureau of Labor Statistics public API",
           "freshness": "Missing"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real GDP growth",
+          "relevance": "Primary",
+          "score": 2,
+          "status": "Strong support",
+          "derived": "Real GDP growth (REAL_GDP_GROWTH) latest 5.60% for 2026Q1; previous 2.00% for 2026Q1; change 3.60 pts.",
+          "effect": "Primary effect: Stronger growth usually supports higher yield pressure for 10-Year Breakeven Inflation; weaker growth usually reduces rate pressure but can raise recession risk.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real consumption growth",
+          "relevance": "Primary",
+          "score": 2,
+          "status": "Strong support",
+          "derived": "Real personal consumption growth (REAL_PCE_GROWTH) latest 16,731,167.00% for 2026Q1; previous 16,665,219.00% for 2025Q4; change 65,948.00 pts.",
+          "effect": "Primary effect: Stronger growth usually supports higher yield pressure for 10-Year Breakeven Inflation; weaker growth usually reduces rate pressure but can raise recession risk.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA personal income growth",
+          "relevance": "Primary",
+          "score": -1,
+          "status": "Pressure",
+          "derived": "Personal income growth (PERSONAL_INCOME_GROWTH) latest -0.10% for 2026M03; previous 0.60% for 2026M03; change -0.70 pts.",
+          "effect": "Primary effect: Stronger growth usually supports higher yield pressure for 10-Year Breakeven Inflation; weaker growth usually reduces rate pressure but can raise recession risk.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA savings rate",
+          "relevance": "Contextual",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Personal saving rate (SAVING_RATE) latest 3.60% for 2026M03; previous 3.90% for 2026M02; change -0.30 pts.",
+          "effect": "Contextual effect: BEA savings rate is useful macro context for 10-Year Breakeven Inflation, but it is not scored as a direct driver yet.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
         }
       ],
       "watchlist": false
@@ -11922,9 +12846,9 @@
       "confidence": 78,
       "conflict": "Medium",
       "freshness": "Fresh",
-      "coverage": "COT: Leveraged Funds / 2026-05-12 | EIA energy fundamentals | BLS inflation/labor",
-      "topDriver": "BLS macro / rates pressure",
-      "mainConflict": "Strong growth can support risk, but hot inflation/labor can keep rates restrictive",
+      "coverage": "COT: Leveraged Funds / 2026-05-12 | EIA energy fundamentals | BLS inflation/labor | BEA growth/PCE",
+      "topDriver": "Growth / inflation / rates pressure",
+      "mainConflict": "Growth support can conflict with inflation/rate pressure",
       "watchNext": [
         "Rates",
         "Credit spreads",
@@ -12451,6 +13375,50 @@
           "effect": "Secondary/mixed effect: Strong labor supports growth for S&P 500 Fundamental Pressure, but can pressure risk assets if it keeps rates higher. Weak labor lowers rate pressure but can hurt risk appetite through recession fear.",
           "source": "U.S. Bureau of Labor Statistics public API",
           "freshness": "Missing"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real GDP growth",
+          "relevance": "Primary",
+          "score": 2,
+          "status": "Strong support",
+          "derived": "Real GDP growth (REAL_GDP_GROWTH) latest 5.60% for 2026Q1; previous 2.00% for 2026Q1; change 3.60 pts.",
+          "effect": "Primary effect: Stronger BEA growth/consumption usually supports S&P 500 Fundamental Pressure earnings and demand expectations; weaker growth usually pressures risk appetite.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real consumption growth",
+          "relevance": "Primary",
+          "score": 2,
+          "status": "Strong support",
+          "derived": "Real personal consumption growth (REAL_PCE_GROWTH) latest 16,731,167.00% for 2026Q1; previous 16,665,219.00% for 2025Q4; change 65,948.00 pts.",
+          "effect": "Primary effect: Stronger BEA growth/consumption usually supports S&P 500 Fundamental Pressure earnings and demand expectations; weaker growth usually pressures risk appetite.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA personal income growth",
+          "relevance": "Primary",
+          "score": -1,
+          "status": "Pressure",
+          "derived": "Personal income growth (PERSONAL_INCOME_GROWTH) latest -0.10% for 2026M03; previous 0.60% for 2026M03; change -0.70 pts.",
+          "effect": "Primary effect: Stronger BEA growth/consumption usually supports S&P 500 Fundamental Pressure earnings and demand expectations; weaker growth usually pressures risk appetite.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA savings rate",
+          "relevance": "Contextual",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Personal saving rate (SAVING_RATE) latest 3.60% for 2026M03; previous 3.90% for 2026M02; change -0.30 pts.",
+          "effect": "Contextual effect: BEA savings rate is useful macro context for S&P 500 Fundamental Pressure, but it is not scored as a direct driver yet.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
         }
       ],
       "watchlist": true
@@ -12468,9 +13436,9 @@
       "confidence": 76,
       "conflict": "High",
       "freshness": "Fresh",
-      "coverage": "COT: Leveraged Funds / 2026-05-12 | EIA energy fundamentals | BLS inflation/labor",
-      "topDriver": "BLS macro / rates pressure",
-      "mainConflict": "Strong growth can support risk, but hot inflation/labor can keep rates restrictive",
+      "coverage": "COT: Leveraged Funds / 2026-05-12 | EIA energy fundamentals | BLS inflation/labor | BEA growth/PCE",
+      "topDriver": "Growth / inflation / rates pressure",
+      "mainConflict": "Growth support can conflict with inflation/rate pressure",
       "watchNext": [
         "Rates",
         "Credit spreads",
@@ -12997,6 +13965,50 @@
           "effect": "Secondary/mixed effect: Strong labor supports growth for Nasdaq 100 Fundamental Pressure, but can pressure risk assets if it keeps rates higher. Weak labor lowers rate pressure but can hurt risk appetite through recession fear.",
           "source": "U.S. Bureau of Labor Statistics public API",
           "freshness": "Missing"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real GDP growth",
+          "relevance": "Primary",
+          "score": 2,
+          "status": "Strong support",
+          "derived": "Real GDP growth (REAL_GDP_GROWTH) latest 5.60% for 2026Q1; previous 2.00% for 2026Q1; change 3.60 pts.",
+          "effect": "Primary effect: Stronger BEA growth/consumption usually supports Nasdaq 100 Fundamental Pressure earnings and demand expectations; weaker growth usually pressures risk appetite.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real consumption growth",
+          "relevance": "Primary",
+          "score": 2,
+          "status": "Strong support",
+          "derived": "Real personal consumption growth (REAL_PCE_GROWTH) latest 16,731,167.00% for 2026Q1; previous 16,665,219.00% for 2025Q4; change 65,948.00 pts.",
+          "effect": "Primary effect: Stronger BEA growth/consumption usually supports Nasdaq 100 Fundamental Pressure earnings and demand expectations; weaker growth usually pressures risk appetite.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA personal income growth",
+          "relevance": "Primary",
+          "score": -1,
+          "status": "Pressure",
+          "derived": "Personal income growth (PERSONAL_INCOME_GROWTH) latest -0.10% for 2026M03; previous 0.60% for 2026M03; change -0.70 pts.",
+          "effect": "Primary effect: Stronger BEA growth/consumption usually supports Nasdaq 100 Fundamental Pressure earnings and demand expectations; weaker growth usually pressures risk appetite.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA savings rate",
+          "relevance": "Contextual",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Personal saving rate (SAVING_RATE) latest 3.60% for 2026M03; previous 3.90% for 2026M02; change -0.30 pts.",
+          "effect": "Contextual effect: BEA savings rate is useful macro context for Nasdaq 100 Fundamental Pressure, but it is not scored as a direct driver yet.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
         }
       ],
       "watchlist": false
@@ -13014,9 +14026,9 @@
       "confidence": 70,
       "conflict": "High",
       "freshness": "Fresh",
-      "coverage": "COT: Leveraged Funds / 2026-05-12 | EIA energy fundamentals | BLS inflation/labor",
-      "topDriver": "BLS macro / rates pressure",
-      "mainConflict": "Strong growth can support risk, but hot inflation/labor can keep rates restrictive",
+      "coverage": "COT: Leveraged Funds / 2026-05-12 | EIA energy fundamentals | BLS inflation/labor | BEA growth/PCE",
+      "topDriver": "Growth / inflation / rates pressure",
+      "mainConflict": "Growth support can conflict with inflation/rate pressure",
       "watchNext": [
         "Rates",
         "Credit spreads",
@@ -13543,6 +14555,50 @@
           "effect": "Secondary/mixed effect: Strong labor supports growth for Russell 2000 Fundamental Pressure, but can pressure risk assets if it keeps rates higher. Weak labor lowers rate pressure but can hurt risk appetite through recession fear.",
           "source": "U.S. Bureau of Labor Statistics public API",
           "freshness": "Missing"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real GDP growth",
+          "relevance": "Primary",
+          "score": 2,
+          "status": "Strong support",
+          "derived": "Real GDP growth (REAL_GDP_GROWTH) latest 5.60% for 2026Q1; previous 2.00% for 2026Q1; change 3.60 pts.",
+          "effect": "Primary effect: Stronger BEA growth/consumption usually supports Russell 2000 Fundamental Pressure earnings and demand expectations; weaker growth usually pressures risk appetite.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real consumption growth",
+          "relevance": "Primary",
+          "score": 2,
+          "status": "Strong support",
+          "derived": "Real personal consumption growth (REAL_PCE_GROWTH) latest 16,731,167.00% for 2026Q1; previous 16,665,219.00% for 2025Q4; change 65,948.00 pts.",
+          "effect": "Primary effect: Stronger BEA growth/consumption usually supports Russell 2000 Fundamental Pressure earnings and demand expectations; weaker growth usually pressures risk appetite.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA personal income growth",
+          "relevance": "Primary",
+          "score": -1,
+          "status": "Pressure",
+          "derived": "Personal income growth (PERSONAL_INCOME_GROWTH) latest -0.10% for 2026M03; previous 0.60% for 2026M03; change -0.70 pts.",
+          "effect": "Primary effect: Stronger BEA growth/consumption usually supports Russell 2000 Fundamental Pressure earnings and demand expectations; weaker growth usually pressures risk appetite.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA savings rate",
+          "relevance": "Contextual",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Personal saving rate (SAVING_RATE) latest 3.60% for 2026M03; previous 3.90% for 2026M02; change -0.30 pts.",
+          "effect": "Contextual effect: BEA savings rate is useful macro context for Russell 2000 Fundamental Pressure, but it is not scored as a direct driver yet.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
         }
       ],
       "watchlist": false
@@ -13560,9 +14616,9 @@
       "confidence": 66,
       "conflict": "Medium",
       "freshness": "Fresh",
-      "coverage": "COT: Leveraged Funds / 2026-05-12 | EIA energy fundamentals | BLS inflation/labor",
-      "topDriver": "BLS macro / rates pressure",
-      "mainConflict": "Strong growth can support risk, but hot inflation/labor can keep rates restrictive",
+      "coverage": "COT: Leveraged Funds / 2026-05-12 | EIA energy fundamentals | BLS inflation/labor | BEA growth/PCE",
+      "topDriver": "Growth / inflation / rates pressure",
+      "mainConflict": "Growth support can conflict with inflation/rate pressure",
       "watchNext": [
         "Rates",
         "Credit spreads",
@@ -14089,6 +15145,50 @@
           "effect": "Secondary/mixed effect: Strong labor supports growth for Dow Jones Industrial Average Fundamental Pressure, but can pressure risk assets if it keeps rates higher. Weak labor lowers rate pressure but can hurt risk appetite through recession fear.",
           "source": "U.S. Bureau of Labor Statistics public API",
           "freshness": "Missing"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real GDP growth",
+          "relevance": "Primary",
+          "score": 2,
+          "status": "Strong support",
+          "derived": "Real GDP growth (REAL_GDP_GROWTH) latest 5.60% for 2026Q1; previous 2.00% for 2026Q1; change 3.60 pts.",
+          "effect": "Primary effect: Stronger BEA growth/consumption usually supports Dow Jones Industrial Average Fundamental Pressure earnings and demand expectations; weaker growth usually pressures risk appetite.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real consumption growth",
+          "relevance": "Primary",
+          "score": 2,
+          "status": "Strong support",
+          "derived": "Real personal consumption growth (REAL_PCE_GROWTH) latest 16,731,167.00% for 2026Q1; previous 16,665,219.00% for 2025Q4; change 65,948.00 pts.",
+          "effect": "Primary effect: Stronger BEA growth/consumption usually supports Dow Jones Industrial Average Fundamental Pressure earnings and demand expectations; weaker growth usually pressures risk appetite.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA personal income growth",
+          "relevance": "Primary",
+          "score": -1,
+          "status": "Pressure",
+          "derived": "Personal income growth (PERSONAL_INCOME_GROWTH) latest -0.10% for 2026M03; previous 0.60% for 2026M03; change -0.70 pts.",
+          "effect": "Primary effect: Stronger BEA growth/consumption usually supports Dow Jones Industrial Average Fundamental Pressure earnings and demand expectations; weaker growth usually pressures risk appetite.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA savings rate",
+          "relevance": "Contextual",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Personal saving rate (SAVING_RATE) latest 3.60% for 2026M03; previous 3.90% for 2026M02; change -0.30 pts.",
+          "effect": "Contextual effect: BEA savings rate is useful macro context for Dow Jones Industrial Average Fundamental Pressure, but it is not scored as a direct driver yet.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
         }
       ],
       "watchlist": false
@@ -14106,9 +15206,9 @@
       "confidence": 67,
       "conflict": "Medium",
       "freshness": "Mixed",
-      "coverage": "public-source prototype | BLS inflation/labor | BLS inflation/labor",
-      "topDriver": "BLS macro / rates pressure",
-      "mainConflict": "Strong growth can support risk, but hot inflation/labor can keep rates restrictive",
+      "coverage": "public-source prototype | BLS inflation/labor | BLS inflation/labor | BLS inflation/labor | BEA growth/PCE",
+      "topDriver": "Growth / inflation / rates pressure",
+      "mainConflict": "Growth support can conflict with inflation/rate pressure",
       "watchNext": [
         "Rates",
         "Credit spreads",
@@ -14668,6 +15768,50 @@
           "effect": "Secondary/mixed effect: Strong labor supports growth for Germany 40 / DAX Fundamental Pressure, but can pressure risk assets if it keeps rates higher. Weak labor lowers rate pressure but can hurt risk appetite through recession fear.",
           "source": "U.S. Bureau of Labor Statistics public API",
           "freshness": "Missing"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real GDP growth",
+          "relevance": "Primary",
+          "score": 2,
+          "status": "Strong support",
+          "derived": "Real GDP growth (REAL_GDP_GROWTH) latest 5.60% for 2026Q1; previous 2.00% for 2026Q1; change 3.60 pts.",
+          "effect": "Primary effect: Stronger BEA growth/consumption usually supports Germany 40 / DAX Fundamental Pressure earnings and demand expectations; weaker growth usually pressures risk appetite.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real consumption growth",
+          "relevance": "Primary",
+          "score": 2,
+          "status": "Strong support",
+          "derived": "Real personal consumption growth (REAL_PCE_GROWTH) latest 16,731,167.00% for 2026Q1; previous 16,665,219.00% for 2025Q4; change 65,948.00 pts.",
+          "effect": "Primary effect: Stronger BEA growth/consumption usually supports Germany 40 / DAX Fundamental Pressure earnings and demand expectations; weaker growth usually pressures risk appetite.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA personal income growth",
+          "relevance": "Primary",
+          "score": -1,
+          "status": "Pressure",
+          "derived": "Personal income growth (PERSONAL_INCOME_GROWTH) latest -0.10% for 2026M03; previous 0.60% for 2026M03; change -0.70 pts.",
+          "effect": "Primary effect: Stronger BEA growth/consumption usually supports Germany 40 / DAX Fundamental Pressure earnings and demand expectations; weaker growth usually pressures risk appetite.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA savings rate",
+          "relevance": "Contextual",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Personal saving rate (SAVING_RATE) latest 3.60% for 2026M03; previous 3.90% for 2026M02; change -0.30 pts.",
+          "effect": "Contextual effect: BEA savings rate is useful macro context for Germany 40 / DAX Fundamental Pressure, but it is not scored as a direct driver yet.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
         }
       ],
       "watchlist": false
@@ -14685,9 +15829,9 @@
       "confidence": 63,
       "conflict": "Medium",
       "freshness": "Mixed",
-      "coverage": "public-source prototype | BLS inflation/labor | BLS inflation/labor",
-      "topDriver": "BLS macro / rates pressure",
-      "mainConflict": "Strong growth can support risk, but hot inflation/labor can keep rates restrictive",
+      "coverage": "public-source prototype | BLS inflation/labor | BLS inflation/labor | BLS inflation/labor | BEA growth/PCE",
+      "topDriver": "Growth / inflation / rates pressure",
+      "mainConflict": "Growth support can conflict with inflation/rate pressure",
       "watchNext": [
         "Rates",
         "Credit spreads",
@@ -15247,6 +16391,50 @@
           "effect": "Secondary/mixed effect: Strong labor supports growth for FTSE / UK100 Fundamental Pressure, but can pressure risk assets if it keeps rates higher. Weak labor lowers rate pressure but can hurt risk appetite through recession fear.",
           "source": "U.S. Bureau of Labor Statistics public API",
           "freshness": "Missing"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real GDP growth",
+          "relevance": "Primary",
+          "score": 2,
+          "status": "Strong support",
+          "derived": "Real GDP growth (REAL_GDP_GROWTH) latest 5.60% for 2026Q1; previous 2.00% for 2026Q1; change 3.60 pts.",
+          "effect": "Primary effect: Stronger BEA growth/consumption usually supports FTSE / UK100 Fundamental Pressure earnings and demand expectations; weaker growth usually pressures risk appetite.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real consumption growth",
+          "relevance": "Primary",
+          "score": 2,
+          "status": "Strong support",
+          "derived": "Real personal consumption growth (REAL_PCE_GROWTH) latest 16,731,167.00% for 2026Q1; previous 16,665,219.00% for 2025Q4; change 65,948.00 pts.",
+          "effect": "Primary effect: Stronger BEA growth/consumption usually supports FTSE / UK100 Fundamental Pressure earnings and demand expectations; weaker growth usually pressures risk appetite.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA personal income growth",
+          "relevance": "Primary",
+          "score": -1,
+          "status": "Pressure",
+          "derived": "Personal income growth (PERSONAL_INCOME_GROWTH) latest -0.10% for 2026M03; previous 0.60% for 2026M03; change -0.70 pts.",
+          "effect": "Primary effect: Stronger BEA growth/consumption usually supports FTSE / UK100 Fundamental Pressure earnings and demand expectations; weaker growth usually pressures risk appetite.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA savings rate",
+          "relevance": "Contextual",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Personal saving rate (SAVING_RATE) latest 3.60% for 2026M03; previous 3.90% for 2026M02; change -0.30 pts.",
+          "effect": "Contextual effect: BEA savings rate is useful macro context for FTSE / UK100 Fundamental Pressure, but it is not scored as a direct driver yet.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
         }
       ],
       "watchlist": false
@@ -15264,9 +16452,9 @@
       "confidence": 72,
       "conflict": "Medium",
       "freshness": "Mixed",
-      "coverage": "public-source prototype | BLS inflation/labor | BLS inflation/labor",
-      "topDriver": "BLS macro / rates pressure",
-      "mainConflict": "Strong growth can support risk, but hot inflation/labor can keep rates restrictive",
+      "coverage": "public-source prototype | BLS inflation/labor | BLS inflation/labor | BLS inflation/labor | BEA growth/PCE",
+      "topDriver": "Growth / inflation / rates pressure",
+      "mainConflict": "Growth support can conflict with inflation/rate pressure",
       "watchNext": [
         "Rates",
         "Credit spreads",
@@ -15826,6 +17014,50 @@
           "effect": "Secondary/mixed effect: Strong labor supports growth for Nikkei 225 Fundamental Pressure, but can pressure risk assets if it keeps rates higher. Weak labor lowers rate pressure but can hurt risk appetite through recession fear.",
           "source": "U.S. Bureau of Labor Statistics public API",
           "freshness": "Missing"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real GDP growth",
+          "relevance": "Primary",
+          "score": 2,
+          "status": "Strong support",
+          "derived": "Real GDP growth (REAL_GDP_GROWTH) latest 5.60% for 2026Q1; previous 2.00% for 2026Q1; change 3.60 pts.",
+          "effect": "Primary effect: Stronger BEA growth/consumption usually supports Nikkei 225 Fundamental Pressure earnings and demand expectations; weaker growth usually pressures risk appetite.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real consumption growth",
+          "relevance": "Primary",
+          "score": 2,
+          "status": "Strong support",
+          "derived": "Real personal consumption growth (REAL_PCE_GROWTH) latest 16,731,167.00% for 2026Q1; previous 16,665,219.00% for 2025Q4; change 65,948.00 pts.",
+          "effect": "Primary effect: Stronger BEA growth/consumption usually supports Nikkei 225 Fundamental Pressure earnings and demand expectations; weaker growth usually pressures risk appetite.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA personal income growth",
+          "relevance": "Primary",
+          "score": -1,
+          "status": "Pressure",
+          "derived": "Personal income growth (PERSONAL_INCOME_GROWTH) latest -0.10% for 2026M03; previous 0.60% for 2026M03; change -0.70 pts.",
+          "effect": "Primary effect: Stronger BEA growth/consumption usually supports Nikkei 225 Fundamental Pressure earnings and demand expectations; weaker growth usually pressures risk appetite.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA savings rate",
+          "relevance": "Contextual",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Personal saving rate (SAVING_RATE) latest 3.60% for 2026M03; previous 3.90% for 2026M02; change -0.30 pts.",
+          "effect": "Contextual effect: BEA savings rate is useful macro context for Nikkei 225 Fundamental Pressure, but it is not scored as a direct driver yet.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
         }
       ],
       "watchlist": false
@@ -15843,9 +17075,9 @@
       "confidence": 68,
       "conflict": "High",
       "freshness": "Mixed",
-      "coverage": "public-source prototype | BLS inflation/labor | BLS inflation/labor",
-      "topDriver": "BLS macro / rates pressure",
-      "mainConflict": "Strong growth can support risk, but hot inflation/labor can keep rates restrictive",
+      "coverage": "public-source prototype | BLS inflation/labor | BLS inflation/labor | BLS inflation/labor | BEA growth/PCE",
+      "topDriver": "Growth / inflation / rates pressure",
+      "mainConflict": "Growth support can conflict with inflation/rate pressure",
       "watchNext": [
         "Rates",
         "Credit spreads",
@@ -16405,6 +17637,50 @@
           "effect": "Secondary/mixed effect: Strong labor supports growth for China 50 Fundamental Pressure, but can pressure risk assets if it keeps rates higher. Weak labor lowers rate pressure but can hurt risk appetite through recession fear.",
           "source": "U.S. Bureau of Labor Statistics public API",
           "freshness": "Missing"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real GDP growth",
+          "relevance": "Primary",
+          "score": 2,
+          "status": "Strong support",
+          "derived": "Real GDP growth (REAL_GDP_GROWTH) latest 5.60% for 2026Q1; previous 2.00% for 2026Q1; change 3.60 pts.",
+          "effect": "Primary effect: Stronger BEA growth/consumption usually supports China 50 Fundamental Pressure earnings and demand expectations; weaker growth usually pressures risk appetite.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real consumption growth",
+          "relevance": "Primary",
+          "score": 2,
+          "status": "Strong support",
+          "derived": "Real personal consumption growth (REAL_PCE_GROWTH) latest 16,731,167.00% for 2026Q1; previous 16,665,219.00% for 2025Q4; change 65,948.00 pts.",
+          "effect": "Primary effect: Stronger BEA growth/consumption usually supports China 50 Fundamental Pressure earnings and demand expectations; weaker growth usually pressures risk appetite.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA personal income growth",
+          "relevance": "Primary",
+          "score": -1,
+          "status": "Pressure",
+          "derived": "Personal income growth (PERSONAL_INCOME_GROWTH) latest -0.10% for 2026M03; previous 0.60% for 2026M03; change -0.70 pts.",
+          "effect": "Primary effect: Stronger BEA growth/consumption usually supports China 50 Fundamental Pressure earnings and demand expectations; weaker growth usually pressures risk appetite.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA savings rate",
+          "relevance": "Contextual",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Personal saving rate (SAVING_RATE) latest 3.60% for 2026M03; previous 3.90% for 2026M02; change -0.30 pts.",
+          "effect": "Contextual effect: BEA savings rate is useful macro context for China 50 Fundamental Pressure, but it is not scored as a direct driver yet.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
         }
       ],
       "watchlist": false
@@ -16422,9 +17698,9 @@
       "confidence": 65,
       "conflict": "High",
       "freshness": "Mixed",
-      "coverage": "public-source prototype | BLS inflation/labor | BLS inflation/labor",
-      "topDriver": "BLS macro / rates pressure",
-      "mainConflict": "Strong growth can support risk, but hot inflation/labor can keep rates restrictive",
+      "coverage": "public-source prototype | BLS inflation/labor | BLS inflation/labor | BLS inflation/labor | BEA growth/PCE",
+      "topDriver": "Growth / inflation / rates pressure",
+      "mainConflict": "Growth support can conflict with inflation/rate pressure",
       "watchNext": [
         "Rates",
         "Credit spreads",
@@ -16984,6 +18260,50 @@
           "effect": "Secondary/mixed effect: Strong labor supports growth for Hang Seng Fundamental Pressure, but can pressure risk assets if it keeps rates higher. Weak labor lowers rate pressure but can hurt risk appetite through recession fear.",
           "source": "U.S. Bureau of Labor Statistics public API",
           "freshness": "Missing"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real GDP growth",
+          "relevance": "Primary",
+          "score": 2,
+          "status": "Strong support",
+          "derived": "Real GDP growth (REAL_GDP_GROWTH) latest 5.60% for 2026Q1; previous 2.00% for 2026Q1; change 3.60 pts.",
+          "effect": "Primary effect: Stronger BEA growth/consumption usually supports Hang Seng Fundamental Pressure earnings and demand expectations; weaker growth usually pressures risk appetite.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real consumption growth",
+          "relevance": "Primary",
+          "score": 2,
+          "status": "Strong support",
+          "derived": "Real personal consumption growth (REAL_PCE_GROWTH) latest 16,731,167.00% for 2026Q1; previous 16,665,219.00% for 2025Q4; change 65,948.00 pts.",
+          "effect": "Primary effect: Stronger BEA growth/consumption usually supports Hang Seng Fundamental Pressure earnings and demand expectations; weaker growth usually pressures risk appetite.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA personal income growth",
+          "relevance": "Primary",
+          "score": -1,
+          "status": "Pressure",
+          "derived": "Personal income growth (PERSONAL_INCOME_GROWTH) latest -0.10% for 2026M03; previous 0.60% for 2026M03; change -0.70 pts.",
+          "effect": "Primary effect: Stronger BEA growth/consumption usually supports Hang Seng Fundamental Pressure earnings and demand expectations; weaker growth usually pressures risk appetite.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA savings rate",
+          "relevance": "Contextual",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Personal saving rate (SAVING_RATE) latest 3.60% for 2026M03; previous 3.90% for 2026M02; change -0.30 pts.",
+          "effect": "Contextual effect: BEA savings rate is useful macro context for Hang Seng Fundamental Pressure, but it is not scored as a direct driver yet.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
         }
       ],
       "watchlist": false
@@ -17001,9 +18321,9 @@
       "confidence": 66,
       "conflict": "Medium",
       "freshness": "Mixed",
-      "coverage": "public-source prototype | BLS inflation/labor | BLS inflation/labor",
-      "topDriver": "BLS macro / rates pressure",
-      "mainConflict": "Strong growth can support risk, but hot inflation/labor can keep rates restrictive",
+      "coverage": "public-source prototype | BLS inflation/labor | BLS inflation/labor | BLS inflation/labor | BEA growth/PCE",
+      "topDriver": "Growth / inflation / rates pressure",
+      "mainConflict": "Growth support can conflict with inflation/rate pressure",
       "watchNext": [
         "Rates",
         "Credit spreads",
@@ -17563,6 +18883,50 @@
           "effect": "Secondary/mixed effect: Strong labor supports growth for Emerging Markets Fundamental Pressure, but can pressure risk assets if it keeps rates higher. Weak labor lowers rate pressure but can hurt risk appetite through recession fear.",
           "source": "U.S. Bureau of Labor Statistics public API",
           "freshness": "Missing"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real GDP growth",
+          "relevance": "Primary",
+          "score": 2,
+          "status": "Strong support",
+          "derived": "Real GDP growth (REAL_GDP_GROWTH) latest 5.60% for 2026Q1; previous 2.00% for 2026Q1; change 3.60 pts.",
+          "effect": "Primary effect: Stronger BEA growth/consumption usually supports Emerging Markets Fundamental Pressure earnings and demand expectations; weaker growth usually pressures risk appetite.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real consumption growth",
+          "relevance": "Primary",
+          "score": 2,
+          "status": "Strong support",
+          "derived": "Real personal consumption growth (REAL_PCE_GROWTH) latest 16,731,167.00% for 2026Q1; previous 16,665,219.00% for 2025Q4; change 65,948.00 pts.",
+          "effect": "Primary effect: Stronger BEA growth/consumption usually supports Emerging Markets Fundamental Pressure earnings and demand expectations; weaker growth usually pressures risk appetite.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA personal income growth",
+          "relevance": "Primary",
+          "score": -1,
+          "status": "Pressure",
+          "derived": "Personal income growth (PERSONAL_INCOME_GROWTH) latest -0.10% for 2026M03; previous 0.60% for 2026M03; change -0.70 pts.",
+          "effect": "Primary effect: Stronger BEA growth/consumption usually supports Emerging Markets Fundamental Pressure earnings and demand expectations; weaker growth usually pressures risk appetite.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA savings rate",
+          "relevance": "Contextual",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Personal saving rate (SAVING_RATE) latest 3.60% for 2026M03; previous 3.90% for 2026M02; change -0.30 pts.",
+          "effect": "Contextual effect: BEA savings rate is useful macro context for Emerging Markets Fundamental Pressure, but it is not scored as a direct driver yet.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
         }
       ],
       "watchlist": false
@@ -17580,9 +18944,9 @@
       "confidence": 72,
       "conflict": "Medium",
       "freshness": "Mixed",
-      "coverage": "public-source prototype | BLS inflation/labor | BLS inflation/labor",
-      "topDriver": "BLS macro / rates pressure",
-      "mainConflict": "Strong growth can support risk, but hot inflation/labor can keep rates restrictive",
+      "coverage": "public-source prototype | BLS inflation/labor | BLS inflation/labor | BLS inflation/labor | BEA growth/PCE",
+      "topDriver": "Growth / inflation / rates pressure",
+      "mainConflict": "Growth support can conflict with inflation/rate pressure",
       "watchNext": [
         "Credit spreads",
         "Financial conditions",
@@ -18142,6 +19506,50 @@
           "effect": "Secondary effect: Strong labor supports credit through growth, while weak labor can widen stress if recession risk rises. Very strong labor can still pressure credit through higher rates.",
           "source": "U.S. Bureau of Labor Statistics public API",
           "freshness": "Missing"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real GDP growth",
+          "relevance": "Primary",
+          "score": 2,
+          "status": "Strong support",
+          "derived": "Real GDP growth (REAL_GDP_GROWTH) latest 5.60% for 2026Q1; previous 2.00% for 2026Q1; change 3.60 pts.",
+          "effect": "Contextual effect: BEA growth data affects High-Yield Credit Spreads through broad demand, policy, dollar, and risk-appetite channels.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real consumption growth",
+          "relevance": "Primary",
+          "score": 2,
+          "status": "Strong support",
+          "derived": "Real personal consumption growth (REAL_PCE_GROWTH) latest 16,731,167.00% for 2026Q1; previous 16,665,219.00% for 2025Q4; change 65,948.00 pts.",
+          "effect": "Contextual effect: BEA growth data affects High-Yield Credit Spreads through broad demand, policy, dollar, and risk-appetite channels.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA personal income growth",
+          "relevance": "Primary",
+          "score": -1,
+          "status": "Pressure",
+          "derived": "Personal income growth (PERSONAL_INCOME_GROWTH) latest -0.10% for 2026M03; previous 0.60% for 2026M03; change -0.70 pts.",
+          "effect": "Contextual effect: BEA growth data affects High-Yield Credit Spreads through broad demand, policy, dollar, and risk-appetite channels.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA savings rate",
+          "relevance": "Contextual",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Personal saving rate (SAVING_RATE) latest 3.60% for 2026M03; previous 3.90% for 2026M02; change -0.30 pts.",
+          "effect": "Contextual effect: BEA savings rate is useful macro context for High-Yield Credit Spreads, but it is not scored as a direct driver yet.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
         }
       ],
       "watchlist": true
@@ -18159,9 +19567,9 @@
       "confidence": 68,
       "conflict": "Medium",
       "freshness": "Mixed",
-      "coverage": "public-source prototype | BLS inflation/labor | BLS inflation/labor",
-      "topDriver": "BLS macro / rates pressure",
-      "mainConflict": "Strong growth can support risk, but hot inflation/labor can keep rates restrictive",
+      "coverage": "public-source prototype | BLS inflation/labor | BLS inflation/labor | BLS inflation/labor | BEA growth/PCE",
+      "topDriver": "Growth / inflation / rates pressure",
+      "mainConflict": "Growth support can conflict with inflation/rate pressure",
       "watchNext": [
         "Credit spreads",
         "Financial conditions",
@@ -18721,6 +20129,50 @@
           "effect": "Secondary effect: Strong labor supports credit through growth, while weak labor can widen stress if recession risk rises. Very strong labor can still pressure credit through higher rates.",
           "source": "U.S. Bureau of Labor Statistics public API",
           "freshness": "Missing"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real GDP growth",
+          "relevance": "Primary",
+          "score": 2,
+          "status": "Strong support",
+          "derived": "Real GDP growth (REAL_GDP_GROWTH) latest 5.60% for 2026Q1; previous 2.00% for 2026Q1; change 3.60 pts.",
+          "effect": "Contextual effect: BEA growth data affects Investment-Grade Credit Spreads through broad demand, policy, dollar, and risk-appetite channels.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real consumption growth",
+          "relevance": "Primary",
+          "score": 2,
+          "status": "Strong support",
+          "derived": "Real personal consumption growth (REAL_PCE_GROWTH) latest 16,731,167.00% for 2026Q1; previous 16,665,219.00% for 2025Q4; change 65,948.00 pts.",
+          "effect": "Contextual effect: BEA growth data affects Investment-Grade Credit Spreads through broad demand, policy, dollar, and risk-appetite channels.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA personal income growth",
+          "relevance": "Primary",
+          "score": -1,
+          "status": "Pressure",
+          "derived": "Personal income growth (PERSONAL_INCOME_GROWTH) latest -0.10% for 2026M03; previous 0.60% for 2026M03; change -0.70 pts.",
+          "effect": "Contextual effect: BEA growth data affects Investment-Grade Credit Spreads through broad demand, policy, dollar, and risk-appetite channels.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA savings rate",
+          "relevance": "Contextual",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Personal saving rate (SAVING_RATE) latest 3.60% for 2026M03; previous 3.90% for 2026M02; change -0.30 pts.",
+          "effect": "Contextual effect: BEA savings rate is useful macro context for Investment-Grade Credit Spreads, but it is not scored as a direct driver yet.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
         }
       ],
       "watchlist": false
@@ -18738,9 +20190,9 @@
       "confidence": 61,
       "conflict": "Medium",
       "freshness": "Mixed",
-      "coverage": "public-source prototype | BLS inflation/labor | BLS inflation/labor",
-      "topDriver": "BLS macro / rates pressure",
-      "mainConflict": "Strong growth can support risk, but hot inflation/labor can keep rates restrictive",
+      "coverage": "public-source prototype | BLS inflation/labor | BLS inflation/labor | BLS inflation/labor | BEA growth/PCE",
+      "topDriver": "Growth / inflation / rates pressure",
+      "mainConflict": "Growth support can conflict with inflation/rate pressure",
       "watchNext": [
         "Credit spreads",
         "Financial conditions",
@@ -19300,6 +20752,50 @@
           "effect": "Secondary effect: Strong labor supports credit through growth, while weak labor can widen stress if recession risk rises. Very strong labor can still pressure credit through higher rates.",
           "source": "U.S. Bureau of Labor Statistics public API",
           "freshness": "Missing"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real GDP growth",
+          "relevance": "Primary",
+          "score": 2,
+          "status": "Strong support",
+          "derived": "Real GDP growth (REAL_GDP_GROWTH) latest 5.60% for 2026Q1; previous 2.00% for 2026Q1; change 3.60 pts.",
+          "effect": "Contextual effect: BEA growth data affects Financial Conditions Fundamental Pressure through broad demand, policy, dollar, and risk-appetite channels.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real consumption growth",
+          "relevance": "Primary",
+          "score": 2,
+          "status": "Strong support",
+          "derived": "Real personal consumption growth (REAL_PCE_GROWTH) latest 16,731,167.00% for 2026Q1; previous 16,665,219.00% for 2025Q4; change 65,948.00 pts.",
+          "effect": "Contextual effect: BEA growth data affects Financial Conditions Fundamental Pressure through broad demand, policy, dollar, and risk-appetite channels.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA personal income growth",
+          "relevance": "Primary",
+          "score": -1,
+          "status": "Pressure",
+          "derived": "Personal income growth (PERSONAL_INCOME_GROWTH) latest -0.10% for 2026M03; previous 0.60% for 2026M03; change -0.70 pts.",
+          "effect": "Contextual effect: BEA growth data affects Financial Conditions Fundamental Pressure through broad demand, policy, dollar, and risk-appetite channels.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA savings rate",
+          "relevance": "Contextual",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Personal saving rate (SAVING_RATE) latest 3.60% for 2026M03; previous 3.90% for 2026M02; change -0.30 pts.",
+          "effect": "Contextual effect: BEA savings rate is useful macro context for Financial Conditions Fundamental Pressure, but it is not scored as a direct driver yet.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
         }
       ],
       "watchlist": false
@@ -19317,7 +20813,7 @@
       "confidence": 82,
       "conflict": "Medium",
       "freshness": "Fresh",
-      "coverage": "COT: Managed Money / 2026-05-12 | EIA energy fundamentals | BLS inflation/labor",
+      "coverage": "COT: Managed Money / 2026-05-12 | EIA energy fundamentals | BLS inflation/labor | BEA growth/PCE",
       "topDriver": "COT spec direction",
       "mainConflict": "Spec positioning supports participation, but crowding risk must be checked",
       "watchNext": [
@@ -19879,6 +21375,50 @@
           "effect": "Secondary effect: Strong labor usually pressures Gold Futures / XAUUSD through higher rate/real-yield expectations; weak labor can support it if yields fall or safe-haven demand rises.",
           "source": "U.S. Bureau of Labor Statistics public API",
           "freshness": "Missing"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real GDP growth",
+          "relevance": "Contextual",
+          "score": -1,
+          "status": "Pressure",
+          "derived": "Real GDP growth (REAL_GDP_GROWTH) latest 5.60% for 2026Q1; previous 2.00% for 2026Q1; change 3.60 pts.",
+          "effect": "Contextual/mixed effect: Strong growth can reduce safe-haven demand for Gold Futures / XAUUSD and lift rates, while weak growth can support defensive demand.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real consumption growth",
+          "relevance": "Contextual",
+          "score": -1,
+          "status": "Pressure",
+          "derived": "Real personal consumption growth (REAL_PCE_GROWTH) latest 16,731,167.00% for 2026Q1; previous 16,665,219.00% for 2025Q4; change 65,948.00 pts.",
+          "effect": "Contextual/mixed effect: Strong growth can reduce safe-haven demand for Gold Futures / XAUUSD and lift rates, while weak growth can support defensive demand.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA personal income growth",
+          "relevance": "Contextual",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Personal income growth (PERSONAL_INCOME_GROWTH) latest -0.10% for 2026M03; previous 0.60% for 2026M03; change -0.70 pts.",
+          "effect": "Contextual/mixed effect: Strong growth can reduce safe-haven demand for Gold Futures / XAUUSD and lift rates, while weak growth can support defensive demand.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA savings rate",
+          "relevance": "Contextual",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Personal saving rate (SAVING_RATE) latest 3.60% for 2026M03; previous 3.90% for 2026M02; change -0.30 pts.",
+          "effect": "Contextual effect: BEA savings rate is useful macro context for Gold Futures / XAUUSD, but it is not scored as a direct driver yet.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
         }
       ],
       "watchlist": true
@@ -19896,7 +21436,7 @@
       "confidence": 72,
       "conflict": "Medium",
       "freshness": "Fresh",
-      "coverage": "COT: Managed Money / 2026-05-12 | EIA energy fundamentals | BLS inflation/labor",
+      "coverage": "COT: Managed Money / 2026-05-12 | EIA energy fundamentals | BLS inflation/labor | BEA growth/PCE",
       "topDriver": "COT spec direction",
       "mainConflict": "Spec positioning supports participation, but crowding risk must be checked",
       "watchNext": [
@@ -20458,6 +21998,50 @@
           "effect": "Secondary effect: Strong labor usually pressures Silver Futures through higher rate/real-yield expectations; weak labor can support it if yields fall or safe-haven demand rises.",
           "source": "U.S. Bureau of Labor Statistics public API",
           "freshness": "Missing"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real GDP growth",
+          "relevance": "Contextual",
+          "score": -1,
+          "status": "Pressure",
+          "derived": "Real GDP growth (REAL_GDP_GROWTH) latest 5.60% for 2026Q1; previous 2.00% for 2026Q1; change 3.60 pts.",
+          "effect": "Contextual/mixed effect: Strong growth can reduce safe-haven demand for Silver Futures and lift rates, while weak growth can support defensive demand.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real consumption growth",
+          "relevance": "Contextual",
+          "score": -1,
+          "status": "Pressure",
+          "derived": "Real personal consumption growth (REAL_PCE_GROWTH) latest 16,731,167.00% for 2026Q1; previous 16,665,219.00% for 2025Q4; change 65,948.00 pts.",
+          "effect": "Contextual/mixed effect: Strong growth can reduce safe-haven demand for Silver Futures and lift rates, while weak growth can support defensive demand.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA personal income growth",
+          "relevance": "Contextual",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Personal income growth (PERSONAL_INCOME_GROWTH) latest -0.10% for 2026M03; previous 0.60% for 2026M03; change -0.70 pts.",
+          "effect": "Contextual/mixed effect: Strong growth can reduce safe-haven demand for Silver Futures and lift rates, while weak growth can support defensive demand.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA savings rate",
+          "relevance": "Contextual",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Personal saving rate (SAVING_RATE) latest 3.60% for 2026M03; previous 3.90% for 2026M02; change -0.30 pts.",
+          "effect": "Contextual effect: BEA savings rate is useful macro context for Silver Futures, but it is not scored as a direct driver yet.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
         }
       ],
       "watchlist": false
@@ -20475,7 +22059,7 @@
       "confidence": 74,
       "conflict": "High",
       "freshness": "Fresh",
-      "coverage": "COT: Managed Money / 2026-05-12 | EIA energy fundamentals | BLS inflation/labor",
+      "coverage": "COT: Managed Money / 2026-05-12 | EIA energy fundamentals | BLS inflation/labor | BEA growth/PCE",
       "topDriver": "COT spec direction",
       "mainConflict": "Spec positioning supports participation, but crowding risk must be checked",
       "watchNext": [
@@ -21037,6 +22621,50 @@
           "effect": "Contextual effect: BLS labor data does not directly drive Copper Futures supply, but it affects growth demand, Fed expectations, dollar pressure, and risk appetite.",
           "source": "U.S. Bureau of Labor Statistics public API",
           "freshness": "Missing"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real GDP growth",
+          "relevance": "Secondary",
+          "score": 1,
+          "status": "Support",
+          "derived": "Real GDP growth (REAL_GDP_GROWTH) latest 5.60% for 2026Q1; previous 2.00% for 2026Q1; change 3.60 pts.",
+          "effect": "Secondary effect: Stronger U.S. consumption/growth can support demand expectations for Copper Futures; weaker growth reduces demand pressure.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real consumption growth",
+          "relevance": "Secondary",
+          "score": 1,
+          "status": "Support",
+          "derived": "Real personal consumption growth (REAL_PCE_GROWTH) latest 16,731,167.00% for 2026Q1; previous 16,665,219.00% for 2025Q4; change 65,948.00 pts.",
+          "effect": "Secondary effect: Stronger U.S. consumption/growth can support demand expectations for Copper Futures; weaker growth reduces demand pressure.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA personal income growth",
+          "relevance": "Secondary",
+          "score": -1,
+          "status": "Pressure",
+          "derived": "Personal income growth (PERSONAL_INCOME_GROWTH) latest -0.10% for 2026M03; previous 0.60% for 2026M03; change -0.70 pts.",
+          "effect": "Secondary effect: Stronger U.S. consumption/growth can support demand expectations for Copper Futures; weaker growth reduces demand pressure.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA savings rate",
+          "relevance": "Contextual",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Personal saving rate (SAVING_RATE) latest 3.60% for 2026M03; previous 3.90% for 2026M02; change -0.30 pts.",
+          "effect": "Contextual effect: BEA savings rate is useful macro context for Copper Futures, but it is not scored as a direct driver yet.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
         }
       ],
       "watchlist": true
@@ -21054,7 +22682,7 @@
       "confidence": 78,
       "conflict": "High",
       "freshness": "Fresh",
-      "coverage": "COT: Managed Money / 2026-05-12 | EIA energy fundamentals | BLS inflation/labor",
+      "coverage": "COT: Managed Money / 2026-05-12 | EIA energy fundamentals | BLS inflation/labor | BEA growth/PCE",
       "topDriver": "EIA physical balance / COT",
       "mainConflict": "Energy fundamentals must be read with COT and macro pressure",
       "watchNext": [
@@ -21693,6 +23321,50 @@
           "effect": "Contextual effect: BLS labor data does not directly drive WTI Crude Oil supply, but it affects growth demand, Fed expectations, dollar pressure, and risk appetite.",
           "source": "U.S. Bureau of Labor Statistics public API",
           "freshness": "Missing"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real GDP growth",
+          "relevance": "Secondary",
+          "score": 1,
+          "status": "Support",
+          "derived": "Real GDP growth (REAL_GDP_GROWTH) latest 5.60% for 2026Q1; previous 2.00% for 2026Q1; change 3.60 pts.",
+          "effect": "Secondary effect: Stronger U.S. consumption/growth can support demand expectations for WTI Crude Oil; weaker growth reduces demand pressure.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real consumption growth",
+          "relevance": "Secondary",
+          "score": 1,
+          "status": "Support",
+          "derived": "Real personal consumption growth (REAL_PCE_GROWTH) latest 16,731,167.00% for 2026Q1; previous 16,665,219.00% for 2025Q4; change 65,948.00 pts.",
+          "effect": "Secondary effect: Stronger U.S. consumption/growth can support demand expectations for WTI Crude Oil; weaker growth reduces demand pressure.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA personal income growth",
+          "relevance": "Secondary",
+          "score": -1,
+          "status": "Pressure",
+          "derived": "Personal income growth (PERSONAL_INCOME_GROWTH) latest -0.10% for 2026M03; previous 0.60% for 2026M03; change -0.70 pts.",
+          "effect": "Secondary effect: Stronger U.S. consumption/growth can support demand expectations for WTI Crude Oil; weaker growth reduces demand pressure.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA savings rate",
+          "relevance": "Contextual",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Personal saving rate (SAVING_RATE) latest 3.60% for 2026M03; previous 3.90% for 2026M02; change -0.30 pts.",
+          "effect": "Contextual effect: BEA savings rate is useful macro context for WTI Crude Oil, but it is not scored as a direct driver yet.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
         }
       ],
       "watchlist": true
@@ -21710,7 +23382,7 @@
       "confidence": 76,
       "conflict": "Medium",
       "freshness": "Fresh",
-      "coverage": "COT: Managed Money / 2026-05-12 | EIA energy fundamentals | BLS inflation/labor",
+      "coverage": "COT: Managed Money / 2026-05-12 | EIA energy fundamentals | BLS inflation/labor | BEA growth/PCE",
       "topDriver": "EIA physical balance / COT",
       "mainConflict": "Energy fundamentals must be read with COT and macro pressure",
       "watchNext": [
@@ -22327,6 +23999,50 @@
           "effect": "Contextual effect: BLS labor data does not directly drive Brent Crude Oil supply, but it affects growth demand, Fed expectations, dollar pressure, and risk appetite.",
           "source": "U.S. Bureau of Labor Statistics public API",
           "freshness": "Missing"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real GDP growth",
+          "relevance": "Secondary",
+          "score": 1,
+          "status": "Support",
+          "derived": "Real GDP growth (REAL_GDP_GROWTH) latest 5.60% for 2026Q1; previous 2.00% for 2026Q1; change 3.60 pts.",
+          "effect": "Secondary effect: Stronger U.S. consumption/growth can support demand expectations for Brent Crude Oil; weaker growth reduces demand pressure.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real consumption growth",
+          "relevance": "Secondary",
+          "score": 1,
+          "status": "Support",
+          "derived": "Real personal consumption growth (REAL_PCE_GROWTH) latest 16,731,167.00% for 2026Q1; previous 16,665,219.00% for 2025Q4; change 65,948.00 pts.",
+          "effect": "Secondary effect: Stronger U.S. consumption/growth can support demand expectations for Brent Crude Oil; weaker growth reduces demand pressure.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA personal income growth",
+          "relevance": "Secondary",
+          "score": -1,
+          "status": "Pressure",
+          "derived": "Personal income growth (PERSONAL_INCOME_GROWTH) latest -0.10% for 2026M03; previous 0.60% for 2026M03; change -0.70 pts.",
+          "effect": "Secondary effect: Stronger U.S. consumption/growth can support demand expectations for Brent Crude Oil; weaker growth reduces demand pressure.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA savings rate",
+          "relevance": "Contextual",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Personal saving rate (SAVING_RATE) latest 3.60% for 2026M03; previous 3.90% for 2026M02; change -0.30 pts.",
+          "effect": "Contextual effect: BEA savings rate is useful macro context for Brent Crude Oil, but it is not scored as a direct driver yet.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
         }
       ],
       "watchlist": false
@@ -22344,7 +24060,7 @@
       "confidence": 73,
       "conflict": "High",
       "freshness": "Fresh",
-      "coverage": "COT: Managed Money / 2026-05-12 | EIA energy fundamentals | BLS inflation/labor",
+      "coverage": "COT: Managed Money / 2026-05-12 | EIA energy fundamentals | BLS inflation/labor | BEA growth/PCE",
       "topDriver": "EIA physical balance / COT",
       "mainConflict": "Energy fundamentals must be read with COT and macro pressure",
       "watchNext": [
@@ -22939,6 +24655,50 @@
           "effect": "Contextual effect: BLS labor data does not directly drive Natural Gas Futures supply, but it affects growth demand, Fed expectations, dollar pressure, and risk appetite.",
           "source": "U.S. Bureau of Labor Statistics public API",
           "freshness": "Missing"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real GDP growth",
+          "relevance": "Secondary",
+          "score": 1,
+          "status": "Support",
+          "derived": "Real GDP growth (REAL_GDP_GROWTH) latest 5.60% for 2026Q1; previous 2.00% for 2026Q1; change 3.60 pts.",
+          "effect": "Secondary effect: Stronger U.S. consumption/growth can support demand expectations for Natural Gas Futures; weaker growth reduces demand pressure.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real consumption growth",
+          "relevance": "Secondary",
+          "score": 1,
+          "status": "Support",
+          "derived": "Real personal consumption growth (REAL_PCE_GROWTH) latest 16,731,167.00% for 2026Q1; previous 16,665,219.00% for 2025Q4; change 65,948.00 pts.",
+          "effect": "Secondary effect: Stronger U.S. consumption/growth can support demand expectations for Natural Gas Futures; weaker growth reduces demand pressure.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA personal income growth",
+          "relevance": "Secondary",
+          "score": -1,
+          "status": "Pressure",
+          "derived": "Personal income growth (PERSONAL_INCOME_GROWTH) latest -0.10% for 2026M03; previous 0.60% for 2026M03; change -0.70 pts.",
+          "effect": "Secondary effect: Stronger U.S. consumption/growth can support demand expectations for Natural Gas Futures; weaker growth reduces demand pressure.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA savings rate",
+          "relevance": "Contextual",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Personal saving rate (SAVING_RATE) latest 3.60% for 2026M03; previous 3.90% for 2026M02; change -0.30 pts.",
+          "effect": "Contextual effect: BEA savings rate is useful macro context for Natural Gas Futures, but it is not scored as a direct driver yet.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
         }
       ],
       "watchlist": true
@@ -22956,7 +24716,7 @@
       "confidence": 68,
       "conflict": "Medium",
       "freshness": "Fresh",
-      "coverage": "COT: Managed Money / 2026-05-12 | EIA energy fundamentals | BLS inflation/labor",
+      "coverage": "COT: Managed Money / 2026-05-12 | EIA energy fundamentals | BLS inflation/labor | BEA growth/PCE",
       "topDriver": "EIA physical balance / COT",
       "mainConflict": "Energy fundamentals must be read with COT and macro pressure",
       "watchNext": [
@@ -23562,6 +25322,50 @@
           "effect": "Contextual effect: BLS labor data does not directly drive RBOB Gasoline supply, but it affects growth demand, Fed expectations, dollar pressure, and risk appetite.",
           "source": "U.S. Bureau of Labor Statistics public API",
           "freshness": "Missing"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real GDP growth",
+          "relevance": "Secondary",
+          "score": 1,
+          "status": "Support",
+          "derived": "Real GDP growth (REAL_GDP_GROWTH) latest 5.60% for 2026Q1; previous 2.00% for 2026Q1; change 3.60 pts.",
+          "effect": "Secondary effect: Stronger U.S. consumption/growth can support demand expectations for RBOB Gasoline; weaker growth reduces demand pressure.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real consumption growth",
+          "relevance": "Secondary",
+          "score": 1,
+          "status": "Support",
+          "derived": "Real personal consumption growth (REAL_PCE_GROWTH) latest 16,731,167.00% for 2026Q1; previous 16,665,219.00% for 2025Q4; change 65,948.00 pts.",
+          "effect": "Secondary effect: Stronger U.S. consumption/growth can support demand expectations for RBOB Gasoline; weaker growth reduces demand pressure.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA personal income growth",
+          "relevance": "Secondary",
+          "score": -1,
+          "status": "Pressure",
+          "derived": "Personal income growth (PERSONAL_INCOME_GROWTH) latest -0.10% for 2026M03; previous 0.60% for 2026M03; change -0.70 pts.",
+          "effect": "Secondary effect: Stronger U.S. consumption/growth can support demand expectations for RBOB Gasoline; weaker growth reduces demand pressure.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA savings rate",
+          "relevance": "Contextual",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Personal saving rate (SAVING_RATE) latest 3.60% for 2026M03; previous 3.90% for 2026M02; change -0.30 pts.",
+          "effect": "Contextual effect: BEA savings rate is useful macro context for RBOB Gasoline, but it is not scored as a direct driver yet.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
         }
       ],
       "watchlist": false
@@ -23579,7 +25383,7 @@
       "confidence": 66,
       "conflict": "Medium",
       "freshness": "Fresh",
-      "coverage": "COT: Managed Money / 2026-05-12 | EIA energy fundamentals | BLS inflation/labor",
+      "coverage": "COT: Managed Money / 2026-05-12 | EIA energy fundamentals | BLS inflation/labor | BEA growth/PCE",
       "topDriver": "EIA physical balance / COT",
       "mainConflict": "Energy fundamentals must be read with COT and macro pressure",
       "watchNext": [
@@ -24185,6 +25989,50 @@
           "effect": "Contextual effect: BLS labor data does not directly drive Heating Oil / Distillates supply, but it affects growth demand, Fed expectations, dollar pressure, and risk appetite.",
           "source": "U.S. Bureau of Labor Statistics public API",
           "freshness": "Missing"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real GDP growth",
+          "relevance": "Secondary",
+          "score": 1,
+          "status": "Support",
+          "derived": "Real GDP growth (REAL_GDP_GROWTH) latest 5.60% for 2026Q1; previous 2.00% for 2026Q1; change 3.60 pts.",
+          "effect": "Secondary effect: Stronger U.S. consumption/growth can support demand expectations for Heating Oil / Distillates; weaker growth reduces demand pressure.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real consumption growth",
+          "relevance": "Secondary",
+          "score": 1,
+          "status": "Support",
+          "derived": "Real personal consumption growth (REAL_PCE_GROWTH) latest 16,731,167.00% for 2026Q1; previous 16,665,219.00% for 2025Q4; change 65,948.00 pts.",
+          "effect": "Secondary effect: Stronger U.S. consumption/growth can support demand expectations for Heating Oil / Distillates; weaker growth reduces demand pressure.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA personal income growth",
+          "relevance": "Secondary",
+          "score": -1,
+          "status": "Pressure",
+          "derived": "Personal income growth (PERSONAL_INCOME_GROWTH) latest -0.10% for 2026M03; previous 0.60% for 2026M03; change -0.70 pts.",
+          "effect": "Secondary effect: Stronger U.S. consumption/growth can support demand expectations for Heating Oil / Distillates; weaker growth reduces demand pressure.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA savings rate",
+          "relevance": "Contextual",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Personal saving rate (SAVING_RATE) latest 3.60% for 2026M03; previous 3.90% for 2026M02; change -0.30 pts.",
+          "effect": "Contextual effect: BEA savings rate is useful macro context for Heating Oil / Distillates, but it is not scored as a direct driver yet.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
         }
       ],
       "watchlist": false
@@ -24202,7 +26050,7 @@
       "confidence": 70,
       "conflict": "Medium",
       "freshness": "Mixed",
-      "coverage": "public-source prototype | EIA energy fundamentals | USDA agriculture fundamentals | BLS inflation/labor | EIA energy fundamentals | USDA agriculture fundamentals | BLS inflation/labor",
+      "coverage": "public-source prototype | EIA energy fundamentals | USDA agriculture fundamentals | BLS inflation/labor | EIA energy fundamentals | USDA agriculture fundamentals | BLS inflation/labor | EIA energy fundamentals | USDA agriculture fundamentals | BLS inflation/labor | BEA growth/PCE",
       "topDriver": "Public commodity fundamentals",
       "mainConflict": "Macro evidence mixed",
       "watchNext": [
@@ -24775,6 +26623,50 @@
           "effect": "Contextual effect: BLS labor data does not directly drive Broad Commodity Fundamental Basket supply, but it affects growth demand, Fed expectations, dollar pressure, and risk appetite.",
           "source": "U.S. Bureau of Labor Statistics public API",
           "freshness": "Missing"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real GDP growth",
+          "relevance": "Secondary",
+          "score": 1,
+          "status": "Support",
+          "derived": "Real GDP growth (REAL_GDP_GROWTH) latest 5.60% for 2026Q1; previous 2.00% for 2026Q1; change 3.60 pts.",
+          "effect": "Secondary effect: Stronger U.S. consumption/growth can support demand expectations for Broad Commodity Fundamental Basket; weaker growth reduces demand pressure.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real consumption growth",
+          "relevance": "Secondary",
+          "score": 1,
+          "status": "Support",
+          "derived": "Real personal consumption growth (REAL_PCE_GROWTH) latest 16,731,167.00% for 2026Q1; previous 16,665,219.00% for 2025Q4; change 65,948.00 pts.",
+          "effect": "Secondary effect: Stronger U.S. consumption/growth can support demand expectations for Broad Commodity Fundamental Basket; weaker growth reduces demand pressure.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA personal income growth",
+          "relevance": "Secondary",
+          "score": -1,
+          "status": "Pressure",
+          "derived": "Personal income growth (PERSONAL_INCOME_GROWTH) latest -0.10% for 2026M03; previous 0.60% for 2026M03; change -0.70 pts.",
+          "effect": "Secondary effect: Stronger U.S. consumption/growth can support demand expectations for Broad Commodity Fundamental Basket; weaker growth reduces demand pressure.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA savings rate",
+          "relevance": "Contextual",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Personal saving rate (SAVING_RATE) latest 3.60% for 2026M03; previous 3.90% for 2026M02; change -0.30 pts.",
+          "effect": "Contextual effect: BEA savings rate is useful macro context for Broad Commodity Fundamental Basket, but it is not scored as a direct driver yet.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
         }
       ],
       "watchlist": false
@@ -24792,7 +26684,7 @@
       "confidence": 69,
       "conflict": "Medium",
       "freshness": "Mixed",
-      "coverage": "public-source prototype | EIA energy fundamentals | USDA agriculture fundamentals | BLS inflation/labor | EIA energy fundamentals | USDA agriculture fundamentals | BLS inflation/labor",
+      "coverage": "public-source prototype | EIA energy fundamentals | USDA agriculture fundamentals | BLS inflation/labor | EIA energy fundamentals | USDA agriculture fundamentals | BLS inflation/labor | EIA energy fundamentals | USDA agriculture fundamentals | BLS inflation/labor | BEA growth/PCE",
       "topDriver": "USDA crop condition / production",
       "mainConflict": "Read USDA supply signals with COT positioning and energy/input-cost context",
       "watchNext": [
@@ -25387,6 +27279,50 @@
           "effect": "Contextual effect: BLS labor data does not directly drive Wheat Futures supply, but it affects growth demand, Fed expectations, dollar pressure, and risk appetite.",
           "source": "U.S. Bureau of Labor Statistics public API",
           "freshness": "Missing"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real GDP growth",
+          "relevance": "Contextual",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Real GDP growth (REAL_GDP_GROWTH) latest 5.60% for 2026Q1; previous 2.00% for 2026Q1; change 3.60 pts.",
+          "effect": "Contextual effect: BEA growth data affects Wheat Futures through broad demand, policy, dollar, and risk-appetite channels.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real consumption growth",
+          "relevance": "Contextual",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Real personal consumption growth (REAL_PCE_GROWTH) latest 16,731,167.00% for 2026Q1; previous 16,665,219.00% for 2025Q4; change 65,948.00 pts.",
+          "effect": "Contextual effect: BEA growth data affects Wheat Futures through broad demand, policy, dollar, and risk-appetite channels.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA personal income growth",
+          "relevance": "Contextual",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Personal income growth (PERSONAL_INCOME_GROWTH) latest -0.10% for 2026M03; previous 0.60% for 2026M03; change -0.70 pts.",
+          "effect": "Contextual effect: BEA growth data affects Wheat Futures through broad demand, policy, dollar, and risk-appetite channels.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA savings rate",
+          "relevance": "Contextual",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Personal saving rate (SAVING_RATE) latest 3.60% for 2026M03; previous 3.90% for 2026M02; change -0.30 pts.",
+          "effect": "Contextual effect: BEA savings rate is useful macro context for Wheat Futures, but it is not scored as a direct driver yet.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
         }
       ],
       "watchlist": false
@@ -25404,7 +27340,7 @@
       "confidence": 68,
       "conflict": "Medium",
       "freshness": "Fresh",
-      "coverage": "COT: Managed Money / 2026-05-12 | EIA energy fundamentals | USDA agriculture fundamentals | BLS inflation/labor",
+      "coverage": "COT: Managed Money / 2026-05-12 | EIA energy fundamentals | USDA agriculture fundamentals | BLS inflation/labor | BEA growth/PCE",
       "topDriver": "USDA crop condition / production",
       "mainConflict": "Read USDA supply signals with COT positioning and energy/input-cost context",
       "watchNext": [
@@ -25999,6 +27935,50 @@
           "effect": "Contextual effect: BLS labor data does not directly drive Corn Futures supply, but it affects growth demand, Fed expectations, dollar pressure, and risk appetite.",
           "source": "U.S. Bureau of Labor Statistics public API",
           "freshness": "Missing"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real GDP growth",
+          "relevance": "Contextual",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Real GDP growth (REAL_GDP_GROWTH) latest 5.60% for 2026Q1; previous 2.00% for 2026Q1; change 3.60 pts.",
+          "effect": "Contextual effect: BEA growth data affects Corn Futures through broad demand, policy, dollar, and risk-appetite channels.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real consumption growth",
+          "relevance": "Contextual",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Real personal consumption growth (REAL_PCE_GROWTH) latest 16,731,167.00% for 2026Q1; previous 16,665,219.00% for 2025Q4; change 65,948.00 pts.",
+          "effect": "Contextual effect: BEA growth data affects Corn Futures through broad demand, policy, dollar, and risk-appetite channels.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA personal income growth",
+          "relevance": "Contextual",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Personal income growth (PERSONAL_INCOME_GROWTH) latest -0.10% for 2026M03; previous 0.60% for 2026M03; change -0.70 pts.",
+          "effect": "Contextual effect: BEA growth data affects Corn Futures through broad demand, policy, dollar, and risk-appetite channels.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA savings rate",
+          "relevance": "Contextual",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Personal saving rate (SAVING_RATE) latest 3.60% for 2026M03; previous 3.90% for 2026M02; change -0.30 pts.",
+          "effect": "Contextual effect: BEA savings rate is useful macro context for Corn Futures, but it is not scored as a direct driver yet.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
         }
       ],
       "watchlist": false
@@ -26016,7 +27996,7 @@
       "confidence": 70,
       "conflict": "Medium",
       "freshness": "Fresh",
-      "coverage": "COT: Managed Money / 2026-05-12 | EIA energy fundamentals | USDA agriculture fundamentals | BLS inflation/labor",
+      "coverage": "COT: Managed Money / 2026-05-12 | EIA energy fundamentals | USDA agriculture fundamentals | BLS inflation/labor | BEA growth/PCE",
       "topDriver": "USDA crop condition / production",
       "mainConflict": "Read USDA supply signals with COT positioning and energy/input-cost context",
       "watchNext": [
@@ -26611,6 +28591,50 @@
           "effect": "Contextual effect: BLS labor data does not directly drive Soybean Futures supply, but it affects growth demand, Fed expectations, dollar pressure, and risk appetite.",
           "source": "U.S. Bureau of Labor Statistics public API",
           "freshness": "Missing"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real GDP growth",
+          "relevance": "Contextual",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Real GDP growth (REAL_GDP_GROWTH) latest 5.60% for 2026Q1; previous 2.00% for 2026Q1; change 3.60 pts.",
+          "effect": "Contextual effect: BEA growth data affects Soybean Futures through broad demand, policy, dollar, and risk-appetite channels.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real consumption growth",
+          "relevance": "Contextual",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Real personal consumption growth (REAL_PCE_GROWTH) latest 16,731,167.00% for 2026Q1; previous 16,665,219.00% for 2025Q4; change 65,948.00 pts.",
+          "effect": "Contextual effect: BEA growth data affects Soybean Futures through broad demand, policy, dollar, and risk-appetite channels.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA personal income growth",
+          "relevance": "Contextual",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Personal income growth (PERSONAL_INCOME_GROWTH) latest -0.10% for 2026M03; previous 0.60% for 2026M03; change -0.70 pts.",
+          "effect": "Contextual effect: BEA growth data affects Soybean Futures through broad demand, policy, dollar, and risk-appetite channels.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA savings rate",
+          "relevance": "Contextual",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Personal saving rate (SAVING_RATE) latest 3.60% for 2026M03; previous 3.90% for 2026M02; change -0.30 pts.",
+          "effect": "Contextual effect: BEA savings rate is useful macro context for Soybean Futures, but it is not scored as a direct driver yet.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
         }
       ],
       "watchlist": false
@@ -26628,7 +28652,7 @@
       "confidence": 65,
       "conflict": "Medium",
       "freshness": "Fresh",
-      "coverage": "COT: Managed Money / 2026-05-12 | EIA energy fundamentals | BLS inflation/labor",
+      "coverage": "COT: Managed Money / 2026-05-12 | EIA energy fundamentals | BLS inflation/labor | BEA growth/PCE",
       "topDriver": "COT spec direction",
       "mainConflict": "Spec positioning supports participation, but crowding risk must be checked",
       "watchNext": [
@@ -27190,6 +29214,50 @@
           "effect": "Contextual effect: BLS labor data does not directly drive Coffee Futures supply, but it affects growth demand, Fed expectations, dollar pressure, and risk appetite.",
           "source": "U.S. Bureau of Labor Statistics public API",
           "freshness": "Missing"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real GDP growth",
+          "relevance": "Contextual",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Real GDP growth (REAL_GDP_GROWTH) latest 5.60% for 2026Q1; previous 2.00% for 2026Q1; change 3.60 pts.",
+          "effect": "Contextual effect: BEA growth data affects Coffee Futures through broad demand, policy, dollar, and risk-appetite channels.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real consumption growth",
+          "relevance": "Contextual",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Real personal consumption growth (REAL_PCE_GROWTH) latest 16,731,167.00% for 2026Q1; previous 16,665,219.00% for 2025Q4; change 65,948.00 pts.",
+          "effect": "Contextual effect: BEA growth data affects Coffee Futures through broad demand, policy, dollar, and risk-appetite channels.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA personal income growth",
+          "relevance": "Contextual",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Personal income growth (PERSONAL_INCOME_GROWTH) latest -0.10% for 2026M03; previous 0.60% for 2026M03; change -0.70 pts.",
+          "effect": "Contextual effect: BEA growth data affects Coffee Futures through broad demand, policy, dollar, and risk-appetite channels.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA savings rate",
+          "relevance": "Contextual",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Personal saving rate (SAVING_RATE) latest 3.60% for 2026M03; previous 3.90% for 2026M02; change -0.30 pts.",
+          "effect": "Contextual effect: BEA savings rate is useful macro context for Coffee Futures, but it is not scored as a direct driver yet.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
         }
       ],
       "watchlist": false
@@ -27207,7 +29275,7 @@
       "confidence": 64,
       "conflict": "Medium",
       "freshness": "Fresh",
-      "coverage": "COT: Managed Money / 2026-05-12 | EIA energy fundamentals | BLS inflation/labor",
+      "coverage": "COT: Managed Money / 2026-05-12 | EIA energy fundamentals | BLS inflation/labor | BEA growth/PCE",
       "topDriver": "COT spec direction",
       "mainConflict": "Spec positioning pressures the asset, but short-covering risk must be checked",
       "watchNext": [
@@ -27769,6 +29837,50 @@
           "effect": "Contextual effect: BLS labor data does not directly drive Sugar Futures supply, but it affects growth demand, Fed expectations, dollar pressure, and risk appetite.",
           "source": "U.S. Bureau of Labor Statistics public API",
           "freshness": "Missing"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real GDP growth",
+          "relevance": "Contextual",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Real GDP growth (REAL_GDP_GROWTH) latest 5.60% for 2026Q1; previous 2.00% for 2026Q1; change 3.60 pts.",
+          "effect": "Contextual effect: BEA growth data affects Sugar Futures through broad demand, policy, dollar, and risk-appetite channels.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real consumption growth",
+          "relevance": "Contextual",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Real personal consumption growth (REAL_PCE_GROWTH) latest 16,731,167.00% for 2026Q1; previous 16,665,219.00% for 2025Q4; change 65,948.00 pts.",
+          "effect": "Contextual effect: BEA growth data affects Sugar Futures through broad demand, policy, dollar, and risk-appetite channels.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA personal income growth",
+          "relevance": "Contextual",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Personal income growth (PERSONAL_INCOME_GROWTH) latest -0.10% for 2026M03; previous 0.60% for 2026M03; change -0.70 pts.",
+          "effect": "Contextual effect: BEA growth data affects Sugar Futures through broad demand, policy, dollar, and risk-appetite channels.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA savings rate",
+          "relevance": "Contextual",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Personal saving rate (SAVING_RATE) latest 3.60% for 2026M03; previous 3.90% for 2026M02; change -0.30 pts.",
+          "effect": "Contextual effect: BEA savings rate is useful macro context for Sugar Futures, but it is not scored as a direct driver yet.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
         }
       ],
       "watchlist": false
@@ -27786,7 +29898,7 @@
       "confidence": 62,
       "conflict": "Medium",
       "freshness": "Fresh",
-      "coverage": "COT: Managed Money / 2026-05-12 | EIA energy fundamentals | USDA agriculture fundamentals | BLS inflation/labor",
+      "coverage": "COT: Managed Money / 2026-05-12 | EIA energy fundamentals | USDA agriculture fundamentals | BLS inflation/labor | BEA growth/PCE",
       "topDriver": "USDA crop condition / production",
       "mainConflict": "Read USDA supply signals with COT positioning and energy/input-cost context",
       "watchNext": [
@@ -28381,6 +30493,50 @@
           "effect": "Contextual effect: BLS labor data does not directly drive Cotton Futures supply, but it affects growth demand, Fed expectations, dollar pressure, and risk appetite.",
           "source": "U.S. Bureau of Labor Statistics public API",
           "freshness": "Missing"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real GDP growth",
+          "relevance": "Contextual",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Real GDP growth (REAL_GDP_GROWTH) latest 5.60% for 2026Q1; previous 2.00% for 2026Q1; change 3.60 pts.",
+          "effect": "Contextual effect: BEA growth data affects Cotton Futures through broad demand, policy, dollar, and risk-appetite channels.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA real consumption growth",
+          "relevance": "Contextual",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Real personal consumption growth (REAL_PCE_GROWTH) latest 16,731,167.00% for 2026Q1; previous 16,665,219.00% for 2025Q4; change 65,948.00 pts.",
+          "effect": "Contextual effect: BEA growth data affects Cotton Futures through broad demand, policy, dollar, and risk-appetite channels.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA personal income growth",
+          "relevance": "Contextual",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Personal income growth (PERSONAL_INCOME_GROWTH) latest -0.10% for 2026M03; previous 0.60% for 2026M03; change -0.70 pts.",
+          "effect": "Contextual effect: BEA growth data affects Cotton Futures through broad demand, policy, dollar, and risk-appetite channels.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
+        },
+        {
+          "group": "BEA Growth / PCE",
+          "name": "BEA savings rate",
+          "relevance": "Contextual",
+          "score": 0,
+          "status": "Neutral",
+          "derived": "Personal saving rate (SAVING_RATE) latest 3.60% for 2026M03; previous 3.90% for 2026M02; change -0.30 pts.",
+          "effect": "Contextual effect: BEA savings rate is useful macro context for Cotton Futures, but it is not scored as a direct driver yet.",
+          "source": "U.S. Bureau of Economic Analysis API",
+          "freshness": "Fresh"
         }
       ],
       "watchlist": false
@@ -28390,7 +30546,7 @@
     "TREASURY_OFFICIAL": {
       "status": "live_lane_ready",
       "latest_date": "2026-05-15",
-      "retrieved_at": "2026-05-17T01:18:44Z",
+      "retrieved_at": "2026-05-17T01:58:17Z",
       "note": "Official U.S. Treasury yield curve data. Rates are percentages and this lane is used as public-source rate pressure, not trade timing data."
     },
     "BLS_PUBLIC": {
@@ -28399,9 +30555,9 @@
       "note": "BLS inflation/labor macro data applied to 49 assets. Direct for rates, USD, and inflation pressure; secondary/contextual for risk assets and commodities."
     },
     "BEA_PUBLIC": {
-      "status": "candidate",
-      "latest_date": null,
-      "note": "Use a BEA API key stored as a GitHub secret if needed."
+      "status": "live",
+      "latest_date": "2026Q1",
+      "note": "BEA GDP/PCE/growth lane applied to 49 assets. Direct for rates, USD, equities/growth; contextual for commodities. Missing optional observations are not faked."
     },
     "CFTC_COT": {
       "status": "live",
@@ -28434,5 +30590,5 @@
       "note": "Use for public growth/consumer/trade context after higher-priority lanes."
     }
   },
-  "updated_at": "2026-05-17T01:18:44Z"
+  "updated_at": "2026-05-17T01:58:17Z"
 }
