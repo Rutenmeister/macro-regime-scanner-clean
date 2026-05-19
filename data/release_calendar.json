@@ -1,43 +1,9 @@
 {
-  "generatedAt": "2026-05-17T04:00:26.326120+00:00",
+  "generatedAt": "2026-05-19T20:18:35.132067+00:00",
   "timezone": "America/New_York",
   "windowDays": 14,
   "method": "rule-based release watch generated during source refresh; entries marked estimated when official dates are not fetched directly",
   "events": [
-    {
-      "source": "USDA/NASS",
-      "report": "Crop Progress",
-      "lane": "USDA",
-      "date": "2026-05-18",
-      "timeET": "4:00 PM ET",
-      "datetimeET": "2026-05-18T16:00:00-04:00",
-      "datetimeUTC": "2026-05-18T20:00:00+00:00",
-      "importance": "Medium",
-      "scheduleType": "weekly seasonal expected",
-      "trackedInputs": [
-        "crop progress",
-        "crop condition"
-      ],
-      "note": "Crop Progress is seasonal and generally Monday afternoon Eastern during the growing season."
-    },
-    {
-      "source": "U.S. Treasury",
-      "report": "Daily Treasury Par Yield Curve Rates",
-      "lane": "Treasury",
-      "date": "2026-05-18",
-      "timeET": "6:00 PM ET",
-      "datetimeET": "2026-05-18T18:00:00-04:00",
-      "datetimeUTC": "2026-05-18T22:00:00+00:00",
-      "importance": "High",
-      "scheduleType": "daily expected",
-      "trackedInputs": [
-        "1M-30Y curve",
-        "2Y",
-        "10Y",
-        "curve spreads"
-      ],
-      "note": "Treasury posts daily par yield curve data on business days; publication timing can vary."
-    },
     {
       "source": "U.S. Treasury",
       "report": "Daily Treasury Par Yield Curve Rates",
@@ -216,6 +182,22 @@
       "note": "Estimated late-month watch date; official BEA release schedule controls."
     },
     {
+      "source": "USDA/NASS",
+      "report": "Crop Progress",
+      "lane": "USDA",
+      "date": "2026-05-25",
+      "timeET": "4:00 PM ET",
+      "datetimeET": "2026-05-25T16:00:00-04:00",
+      "datetimeUTC": "2026-05-25T20:00:00+00:00",
+      "importance": "Medium",
+      "scheduleType": "weekly seasonal expected",
+      "trackedInputs": [
+        "crop progress",
+        "crop condition"
+      ],
+      "note": "Crop Progress is seasonal and generally Monday afternoon Eastern during the growing season."
+    },
+    {
       "source": "U.S. Treasury",
       "report": "Daily Treasury Par Yield Curve Rates",
       "lane": "Treasury",
@@ -241,6 +223,24 @@
       "timeET": "6:00 PM ET",
       "datetimeET": "2026-05-26T18:00:00-04:00",
       "datetimeUTC": "2026-05-26T22:00:00+00:00",
+      "importance": "High",
+      "scheduleType": "daily expected",
+      "trackedInputs": [
+        "1M-30Y curve",
+        "2Y",
+        "10Y",
+        "curve spreads"
+      ],
+      "note": "Treasury posts daily par yield curve data on business days; publication timing can vary."
+    },
+    {
+      "source": "U.S. Treasury",
+      "report": "Daily Treasury Par Yield Curve Rates",
+      "lane": "Treasury",
+      "date": "2026-05-27",
+      "timeET": "6:00 PM ET",
+      "datetimeET": "2026-05-27T18:00:00-04:00",
+      "datetimeUTC": "2026-05-27T22:00:00+00:00",
       "importance": "High",
       "scheduleType": "daily expected",
       "trackedInputs": [

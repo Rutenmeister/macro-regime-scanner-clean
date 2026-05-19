@@ -1,7 +1,7 @@
 {
   "schemaVersion": "0.28.1",
   "sourceId": "FED_FRED_SELECTED",
-  "retrievedAt": "2026-05-17T05:47:03.769604+00:00",
+  "retrievedAt": "2026-05-19T20:18:27.222826+00:00",
   "seriesAudits": [
     {
       "seriesId": "EFFR",
@@ -10,11 +10,11 @@
       "fetchAttempts": [
         {
           "method": "fredgraph_csv",
-          "rows": 6749
+          "rows": 6751
         }
       ],
-      "rowsFetched": 6749,
-      "latestPeriod": "2026-05-14",
+      "rowsFetched": 6751,
+      "latestPeriod": "2026-05-18",
       "latestValue": 3.63,
       "score": 1
     },
@@ -55,13 +55,13 @@
       "fetchAttempts": [
         {
           "method": "fredgraph_csv",
-          "rows": 6071
+          "rows": 6073
         }
       ],
-      "rowsFetched": 6071,
-      "latestPeriod": "2026-05-15",
-      "latestValue": 0.647,
-      "score": 1
+      "rowsFetched": 6073,
+      "latestPeriod": "2026-05-19",
+      "latestValue": 12.911,
+      "score": -1
     },
     {
       "seriesId": "WTREGEN",
