@@ -1,27 +1,26 @@
 #!/usr/bin/env python3
 """Recompute Macro Regime Scanner asset scores from live source rows only.
 
-v0.32 scoring rebuild principles:
-- do not count prototype/sample/candidate rows;
-- do not count missing/unavailable observations;
+v0.40 scoring principles:
+- do not cap displayed asset scores at +/-10;
+- do not count prototype/sample/candidate/missing observations;
 - weight rows by source lane, asset class, and relevance;
 - treat U.S. macro data differently for U.S. equities, USD pairs,
   foreign crosses, rates, gold, energy, and agriculture;
-- preserve row-level source text and add an asset-level scoreAudit object.
-
-This script intentionally does not fetch data. It runs after source fetch/apply
-scripts have populated live rows and before validation.
+- preserve row-level source text and add an asset-level scoreAudit object;
+- write score snapshots so future versions can explain score changes.
 """
 from __future__ import annotations
 
 import json
-import math
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA_PATH = ROOT / "data" / "macro_regime_scanner.json"
-RULES_PATH = ROOT / "config" / "scoring_rules.json"
+HISTORY_DIR = ROOT / "data" / "history"
+LATEST_HISTORY_PATH = HISTORY_DIR / "latest.json"
 
 USD_BASE = {"USDJPY", "USDCHF", "USDCAD"}
 USD_QUOTE = {"EURUSD", "GBPUSD", "AUDUSD", "NZDUSD"}
@@ -43,11 +42,14 @@ LIVE_FRESHNESS = {"fresh", "live"}
 BAD_SOURCE_MARKERS = ["prototype", "sample", "candidate", "not connected", "placeholder"]
 
 
-def load_json(path: Path) -> Any:
+def load_json(path: Path, default: Any = None) -> Any:
+    if not path.exists():
+        return default
     return json.loads(path.read_text(encoding="utf-8"))
 
 
 def write_json(path: Path, data: Any) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
 
 
@@ -59,6 +61,10 @@ def safe_text(value: Any) -> str:
 
 def clamp(value: float, lo: float, hi: float) -> float:
     return max(lo, min(hi, value))
+
+
+def round_score(value: float) -> float:
+    return round(float(value), 1)
 
 
 def asset_bucket(asset: dict[str, Any]) -> str:
@@ -166,100 +172,32 @@ def relevance_weight(factor: dict[str, Any]) -> float:
 
 def lane_weight(lane: str, bucket: str, factor: dict[str, Any]) -> float:
     name = safe_text(factor.get("name")).lower()
-    # Defaults assume the row score already carries source-specific direction.
     table: dict[str, dict[str, float]] = {
-        "treasury": {
-            "us_rates": 1.30, "yield_curve": 1.25, "inflation_market": 0.95,
-            "usd_index": 0.90, "usd_base_fx": 0.82, "usd_quote_fx": 0.82, "fx_cross": 0.18,
-            "us_equity": 1.05, "global_equity": 0.48, "credit_liquidity": 0.80,
-            "precious_metals": 1.10, "industrial_metals": 0.35, "energy": 0.20,
-            "grains": 0.12, "softs": 0.12, "broad_commodity": 0.24, "commodity": 0.18,
-        },
-        "bls": {
-            "us_rates": 1.05, "yield_curve": 0.70, "inflation_market": 1.00,
-            "usd_index": 0.90, "usd_base_fx": 0.80, "usd_quote_fx": 0.80, "fx_cross": 0.18,
-            "us_equity": 0.90, "global_equity": 0.42, "credit_liquidity": 0.70,
-            "precious_metals": 0.80, "industrial_metals": 0.32, "energy": 0.28,
-            "grains": 0.18, "softs": 0.16, "broad_commodity": 0.35, "commodity": 0.22,
-        },
-        "bea": {
-            "us_rates": 0.72, "yield_curve": 0.55, "inflation_market": 0.70,
-            "usd_index": 0.65, "usd_base_fx": 0.58, "usd_quote_fx": 0.58, "fx_cross": 0.15,
-            "us_equity": 0.85, "global_equity": 0.38, "credit_liquidity": 0.55,
-            "precious_metals": 0.45, "industrial_metals": 0.52, "energy": 0.48,
-            "grains": 0.18, "softs": 0.18, "broad_commodity": 0.46, "commodity": 0.32,
-        },
-        "fed": {
-            "us_rates": 1.05, "yield_curve": 0.75, "inflation_market": 0.95,
-            "usd_index": 0.85, "usd_base_fx": 0.78, "usd_quote_fx": 0.78, "fx_cross": 0.18,
-            "us_equity": 1.05, "global_equity": 0.50, "credit_liquidity": 1.10,
-            "precious_metals": 0.90, "industrial_metals": 0.32, "energy": 0.25,
-            "grains": 0.12, "softs": 0.12, "broad_commodity": 0.24, "commodity": 0.18,
-        },
-        "financial_stress": {
-            "us_rates": 0.55, "yield_curve": 0.45, "inflation_market": 0.35,
-            "usd_index": 0.62, "usd_base_fx": 0.52, "usd_quote_fx": 0.52, "fx_cross": 0.22,
-            "us_equity": 1.25, "global_equity": 0.72, "credit_liquidity": 1.45,
-            "precious_metals": 0.62, "industrial_metals": 0.54, "energy": 0.42,
-            "grains": 0.20, "softs": 0.18, "broad_commodity": 0.42, "commodity": 0.34,
-        },
-        "cot": {
-            "us_rates": 0.72, "yield_curve": 0.30, "inflation_market": 0.40,
-            "usd_index": 0.72, "usd_base_fx": 0.72, "usd_quote_fx": 0.72, "fx_cross": 0.42,
-            "us_equity": 0.72, "global_equity": 0.32, "credit_liquidity": 0.25,
-            "precious_metals": 1.05, "industrial_metals": 1.05, "energy": 1.05,
-            "grains": 1.05, "softs": 1.05, "broad_commodity": 0.65, "commodity": 0.85,
-        },
-        "eia": {
-            "us_rates": 0.12, "yield_curve": 0.12, "inflation_market": 0.22,
-            "usd_index": 0.16, "usd_base_fx": 0.14, "usd_quote_fx": 0.14, "fx_cross": 0.08,
-            "us_equity": 0.20, "global_equity": 0.18, "credit_liquidity": 0.16,
-            "precious_metals": 0.16, "industrial_metals": 0.24, "energy": 1.35,
-            "grains": 0.22, "softs": 0.18, "broad_commodity": 0.72, "commodity": 0.42,
-        },
-        "usda": {
-            "us_rates": 0.08, "yield_curve": 0.06, "inflation_market": 0.16,
-            "usd_index": 0.06, "usd_base_fx": 0.06, "usd_quote_fx": 0.06, "fx_cross": 0.04,
-            "us_equity": 0.08, "global_equity": 0.08, "credit_liquidity": 0.05,
-            "precious_metals": 0.08, "industrial_metals": 0.08, "energy": 0.14,
-            "grains": 1.35, "softs": 0.90, "broad_commodity": 0.55, "commodity": 0.70,
-        },
-        "noaa": {
-            "us_rates": 0.06, "yield_curve": 0.04, "inflation_market": 0.12,
-            "usd_index": 0.05, "usd_base_fx": 0.05, "usd_quote_fx": 0.05, "fx_cross": 0.04,
-            "us_equity": 0.10, "global_equity": 0.08, "credit_liquidity": 0.08,
-            "precious_metals": 0.06, "industrial_metals": 0.08, "energy": 0.75,
-            "grains": 1.05, "softs": 0.90, "broad_commodity": 0.40, "commodity": 0.55,
-        },
-        "census": {
-            "us_rates": 0.55, "yield_curve": 0.42, "inflation_market": 0.28,
-            "usd_index": 0.48, "usd_base_fx": 0.42, "usd_quote_fx": 0.42, "fx_cross": 0.12,
-            "us_equity": 0.75, "global_equity": 0.34, "credit_liquidity": 0.45,
-            "precious_metals": 0.24, "industrial_metals": 0.58, "energy": 0.45,
-            "grains": 0.14, "softs": 0.14, "broad_commodity": 0.42, "commodity": 0.30,
-        },
+        "treasury": {"us_rates": 1.30, "yield_curve": 1.25, "inflation_market": 0.95, "usd_index": 0.90, "usd_base_fx": 0.82, "usd_quote_fx": 0.82, "fx_cross": 0.18, "us_equity": 1.05, "global_equity": 0.48, "credit_liquidity": 0.80, "precious_metals": 1.10, "industrial_metals": 0.35, "energy": 0.20, "grains": 0.12, "softs": 0.12, "broad_commodity": 0.24, "commodity": 0.18},
+        "bls": {"us_rates": 1.05, "yield_curve": 0.70, "inflation_market": 1.00, "usd_index": 0.90, "usd_base_fx": 0.80, "usd_quote_fx": 0.80, "fx_cross": 0.18, "us_equity": 0.90, "global_equity": 0.42, "credit_liquidity": 0.70, "precious_metals": 0.80, "industrial_metals": 0.32, "energy": 0.28, "grains": 0.18, "softs": 0.16, "broad_commodity": 0.35, "commodity": 0.22},
+        "bea": {"us_rates": 0.72, "yield_curve": 0.55, "inflation_market": 0.70, "usd_index": 0.65, "usd_base_fx": 0.58, "usd_quote_fx": 0.58, "fx_cross": 0.15, "us_equity": 0.85, "global_equity": 0.38, "credit_liquidity": 0.55, "precious_metals": 0.45, "industrial_metals": 0.52, "energy": 0.48, "grains": 0.18, "softs": 0.18, "broad_commodity": 0.46, "commodity": 0.32},
+        "fed": {"us_rates": 1.05, "yield_curve": 0.75, "inflation_market": 0.95, "usd_index": 0.85, "usd_base_fx": 0.78, "usd_quote_fx": 0.78, "fx_cross": 0.18, "us_equity": 1.05, "global_equity": 0.50, "credit_liquidity": 1.10, "precious_metals": 0.90, "industrial_metals": 0.32, "energy": 0.25, "grains": 0.12, "softs": 0.12, "broad_commodity": 0.24, "commodity": 0.18},
+        "financial_stress": {"us_rates": 0.55, "yield_curve": 0.45, "inflation_market": 0.35, "usd_index": 0.62, "usd_base_fx": 0.52, "usd_quote_fx": 0.52, "fx_cross": 0.22, "us_equity": 1.25, "global_equity": 0.72, "credit_liquidity": 1.45, "precious_metals": 0.62, "industrial_metals": 0.54, "energy": 0.42, "grains": 0.20, "softs": 0.18, "broad_commodity": 0.42, "commodity": 0.34},
+        "cot": {"us_rates": 0.72, "yield_curve": 0.30, "inflation_market": 0.40, "usd_index": 0.72, "usd_base_fx": 0.72, "usd_quote_fx": 0.72, "fx_cross": 0.42, "us_equity": 0.72, "global_equity": 0.32, "credit_liquidity": 0.25, "precious_metals": 1.05, "industrial_metals": 1.05, "energy": 1.05, "grains": 1.05, "softs": 1.05, "broad_commodity": 0.65, "commodity": 0.85},
+        "eia": {"us_rates": 0.12, "yield_curve": 0.12, "inflation_market": 0.22, "usd_index": 0.16, "usd_base_fx": 0.14, "usd_quote_fx": 0.14, "fx_cross": 0.08, "us_equity": 0.20, "global_equity": 0.18, "credit_liquidity": 0.16, "precious_metals": 0.16, "industrial_metals": 0.24, "energy": 1.35, "grains": 0.22, "softs": 0.18, "broad_commodity": 0.72, "commodity": 0.42},
+        "usda": {"us_rates": 0.08, "yield_curve": 0.06, "inflation_market": 0.16, "usd_index": 0.06, "usd_base_fx": 0.06, "usd_quote_fx": 0.06, "fx_cross": 0.04, "us_equity": 0.08, "global_equity": 0.08, "credit_liquidity": 0.05, "precious_metals": 0.08, "industrial_metals": 0.08, "energy": 0.14, "grains": 1.35, "softs": 0.90, "broad_commodity": 0.55, "commodity": 0.70},
+        "noaa": {"us_rates": 0.06, "yield_curve": 0.04, "inflation_market": 0.12, "usd_index": 0.05, "usd_base_fx": 0.05, "usd_quote_fx": 0.05, "fx_cross": 0.04, "us_equity": 0.10, "global_equity": 0.08, "credit_liquidity": 0.08, "precious_metals": 0.06, "industrial_metals": 0.08, "energy": 0.75, "grains": 1.05, "softs": 0.90, "broad_commodity": 0.40, "commodity": 0.55},
+        "census": {"us_rates": 0.55, "yield_curve": 0.42, "inflation_market": 0.28, "usd_index": 0.48, "usd_base_fx": 0.42, "usd_quote_fx": 0.42, "fx_cross": 0.12, "us_equity": 0.75, "global_equity": 0.34, "credit_liquidity": 0.45, "precious_metals": 0.24, "industrial_metals": 0.58, "energy": 0.45, "grains": 0.14, "softs": 0.14, "broad_commodity": 0.42, "commodity": 0.30},
         "unknown": {},
     }
     weight = table.get(lane, {}).get(bucket, 0.18)
-    # COT crowding/conflict/commercial rows are important but not equal to direct spec-direction rows.
     if lane == "cot" and any(k in name for k in ["crowding", "commercial", "conflict"]):
         weight *= 0.60
-    # Weather generic active alerts are less direct than specifically hot/cold/drought/flood/hurricane rows.
     if lane == "noaa" and "active weather hazards" in name:
         weight *= 0.55
     return weight
 
 
 def directional_score(asset: dict[str, Any], factor: dict[str, Any]) -> float:
-    """Return asset-specific score using row score plus selected directional overrides."""
     raw = float(factor.get("score", 0) or 0)
-    aid = safe_text(asset.get("id"))
     bucket = asset_bucket(asset)
     lane = source_lane(factor)
     name = safe_text(factor.get("name")).lower()
-
-    # Treasury contextual rows often carry the raw yield direction. Convert that direction
-    # to asset pressure rather than treating higher rates as positive for every asset.
     if lane == "treasury" and ("yield" in name or "treasury" in name):
         if bucket in {"us_rates", "yield_curve", "inflation_market"}:
             return raw
@@ -272,17 +210,10 @@ def directional_score(asset: dict[str, Any], factor: dict[str, Any]) -> float:
         if bucket in {"energy", "grains", "softs", "broad_commodity", "commodity"}:
             return -0.35 * raw
         return 0.0
-
-    # U.S.-centric macro rows should not directly score non-USD FX crosses hard.
     if bucket == "fx_cross" and lane in {"treasury", "bls", "bea", "fed", "census"}:
         return 0.0
-
-    # Financial stress rows are usually negative for risk assets, positive for stress assets.
-    # Source apply scripts already try to express this; keep their sign unless the asset is a
-    # pure safe-haven/precious-metal context where stress is mixed.
     if lane == "financial_stress" and bucket == "precious_metals":
         return raw * 0.75
-
     return raw
 
 
@@ -302,36 +233,54 @@ def classify_row(asset: dict[str, Any], factor: dict[str, Any]) -> tuple[str, st
     return "display_only", "too indirect for scoring"
 
 
-def status_from_score(score: int) -> str:
-    if score >= 2:
-        return "Strong support"
-    if score == 1:
-        return "Support"
-    if score == -1:
-        return "Pressure"
-    if score <= -2:
-        return "Strong pressure"
-    return "Neutral"
-
-
-def bias_from_score(score: int, counted: int, direct_count: int, pos: float, neg: float) -> str:
+def bias_from_score(score: float, counted: int, direct_count: int, pos: float, neg: float) -> str:
     if counted == 0 or direct_count == 0:
         return "Insufficient Live Direct Evidence"
-    if abs(score) <= 1 and pos >= 0.75 and neg >= 0.75:
+    if abs(score) < 3 and pos >= 0.75 and neg >= 0.75:
         return "Mixed Live Evidence"
-    if score >= 5:
+    if score >= 15:
+        return "Extreme Positive Live Pressure"
+    if score >= 8:
         return "Strong Positive Live Pressure"
-    if score >= 2:
+    if score >= 3:
         return "Positive Live Pressure"
-    if score <= -5:
+    if score <= -15:
+        return "Extreme Negative Live Pressure"
+    if score <= -8:
         return "Strong Negative Live Pressure"
-    if score <= -2:
+    if score <= -3:
         return "Negative Live Pressure"
     return "Neutral / Limited Live Pressure"
 
 
-def conflict_from_weights(pos: float, neg: float, score: int) -> str:
-    if pos >= 2.0 and neg >= 2.0 and abs(score) <= 2:
+def pressure_bucket(score: float, counted: int) -> str:
+    if counted <= 0:
+        return "Low evidence / avoid"
+    if score >= 15:
+        return "Extreme positive pressure"
+    if score >= 8:
+        return "Strong positive pressure"
+    if score >= 3:
+        return "Moderate positive pressure"
+    if score <= -15:
+        return "Extreme negative pressure"
+    if score <= -8:
+        return "Strong negative pressure"
+    if score <= -3:
+        return "Moderate negative pressure"
+    return "Mixed / neutral pressure"
+
+
+def movement_label(delta: float) -> str:
+    if delta >= 2:
+        return "Improving"
+    if delta <= -2:
+        return "Deteriorating"
+    return "Stable"
+
+
+def conflict_from_weights(pos: float, neg: float, score: float) -> str:
+    if pos >= 2.0 and neg >= 2.0 and abs(score) <= 3:
         return "High"
     if pos >= 1.0 and neg >= 1.0:
         return "Medium"
@@ -342,7 +291,40 @@ def top_label(row: dict[str, Any]) -> str:
     return f"{row['name']} ({row['sourceLane']}, {row['contribution']:+.2f})"
 
 
-def recompute_asset(asset: dict[str, Any]) -> None:
+def load_previous_snapshot() -> dict[str, dict[str, Any]]:
+    prev = load_json(LATEST_HISTORY_PATH, default={})
+    if not isinstance(prev, dict):
+        return {}
+    out: dict[str, dict[str, Any]] = {}
+    for asset in prev.get("assets", []):
+        if isinstance(asset, dict) and asset.get("id"):
+            out[str(asset["id"])] = asset
+    return out
+
+
+def change_log(asset: dict[str, Any], previous: dict[str, Any] | None, sorted_counted: list[dict[str, Any]], delta: float) -> dict[str, Any]:
+    if not previous:
+        return {
+            "status": "new_or_no_prior_snapshot",
+            "summary": "No prior score snapshot was available for this asset.",
+            "delta": 0,
+            "drivers": [top_label(row) for row in sorted_counted[:3]],
+        }
+    old_score = float(previous.get("score", 0) or 0)
+    new_score = float(asset.get("score", 0) or 0)
+    movement = movement_label(new_score - old_score)
+    drivers = [top_label(row) for row in sorted_counted[:4]]
+    return {
+        "status": movement.lower(),
+        "summary": f"{asset.get('symbol')} moved {new_score - old_score:+.1f} points versus the previous saved snapshot; current primary state is {asset.get('pressureBucket')}." if movement != "Stable" else f"{asset.get('symbol')} is broadly stable versus the previous saved snapshot.",
+        "priorScore": round_score(old_score),
+        "currentScore": round_score(new_score),
+        "delta": round_score(new_score - old_score),
+        "drivers": drivers,
+    }
+
+
+def recompute_asset(asset: dict[str, Any], previous_assets: dict[str, dict[str, Any]]) -> None:
     bucket = asset_bucket(asset)
     counted: list[dict[str, Any]] = []
     excluded: list[dict[str, Any]] = []
@@ -380,7 +362,7 @@ def recompute_asset(asset: dict[str, Any]) -> None:
             excluded.append(record)
 
     net = sum(row["contribution"] for row in counted)
-    final_score = int(clamp(round(net), -10, 10))
+    raw_score = round_score(net)
     pos = sum(max(0.0, row["contribution"]) for row in counted)
     neg = abs(sum(min(0.0, row["contribution"]) for row in counted))
     direct_count = sum(1 for row in counted if row["weight"] >= 0.45)
@@ -388,10 +370,21 @@ def recompute_asset(asset: dict[str, Any]) -> None:
     positives = [r for r in sorted_counted if r["contribution"] > 0]
     negatives = [r for r in sorted_counted if r["contribution"] < 0]
 
-    asset["previousScore"] = asset.get("score", 0) if isinstance(asset.get("score"), (int, float)) else 0
-    asset["score"] = final_score
-    asset["bias"] = bias_from_score(final_score, len(counted), direct_count, pos, neg)
-    asset["conflict"] = conflict_from_weights(pos, neg, final_score)
+    prev = previous_assets.get(str(asset.get("id")))
+    if prev and isinstance(prev.get("score"), (int, float)):
+        previous_score = round_score(prev.get("score", 0))
+    else:
+        previous_score = round_score(asset.get("score", 0) if isinstance(asset.get("score"), (int, float)) else 0)
+
+    asset["previousScore"] = previous_score
+    asset["score"] = raw_score
+    asset["rawScore"] = raw_score
+    asset["displayScore"] = raw_score
+    asset["scoreScale"] = "uncapped_raw_net_pressure"
+    asset["bias"] = bias_from_score(raw_score, len(counted), direct_count, pos, neg)
+    asset["pressureBucket"] = pressure_bucket(raw_score, len(counted))
+    asset["movementTag"] = movement_label(raw_score - previous_score)
+    asset["conflict"] = conflict_from_weights(pos, neg, raw_score)
     asset["freshness"] = "Fresh" if counted else "Mixed"
     asset["coverage"] = f"Live-scored {len(counted)} rows; context-only {len(live_context)}; excluded/not-live {len(excluded)}."
     if sorted_counted:
@@ -405,19 +398,19 @@ def recompute_asset(asset: dict[str, Any]) -> None:
     else:
         main_conflict = "Insufficient counted live evidence"
     asset["mainConflict"] = main_conflict
-    base_conf = 22 + min(48, len(counted) * 5) + min(15, direct_count * 4) + min(8, abs(final_score) * 1.2)
+    base_conf = 22 + min(48, len(counted) * 5) + min(15, direct_count * 4) + min(8, abs(raw_score) * 0.7)
     if asset["conflict"] == "High":
         base_conf -= 12
     elif asset["conflict"] == "Medium":
         base_conf -= 6
     if len(counted) == 0:
         base_conf = 18
-    asset["confidence"] = int(clamp(round(base_conf), 10, 88))
+    asset["confidence"] = int(clamp(round(base_conf), 10, 90))
     if counted:
-        direction_word = "positive" if final_score > 0 else "negative" if final_score < 0 else "mixed/neutral"
+        direction_word = "positive" if raw_score > 0 else "negative" if raw_score < 0 else "mixed/neutral"
         asset["quick"] = (
-            f"Live-only scoring shows {direction_word} pressure from {len(counted)} counted rows. "
-            f"Top driver: {asset['topDriver']}. Aggregate score is provisional, source-weighted, and excludes non-live rows."
+            f"Live-only scoring shows {direction_word} raw pressure from {len(counted)} counted rows. "
+            f"Top driver: {asset['topDriver']}. Raw score is uncapped, source-weighted, and excludes non-live rows."
         )
     else:
         asset["quick"] = "No live-scored direct evidence is available for this asset yet; displayed rows remain context/provenance only."
@@ -430,34 +423,84 @@ def recompute_asset(asset: dict[str, Any]) -> None:
         watch.append("Next source refresh")
     asset["watchNext"] = watch[:5]
     asset["scoreAudit"] = {
-        "methodVersion": "v0.32-live-weighted-scoring",
+        "methodVersion": "v0.40-raw-score-history-validation",
         "assetBucket": bucket,
+        "pressureBucket": asset["pressureBucket"],
+        "movementTag": asset["movementTag"],
         "countedRows": len(counted),
         "contextRows": len(live_context),
         "excludedRows": len(excluded),
         "positiveContribution": round(pos, 3),
         "negativeContribution": round(neg, 3),
         "netContribution": round(net, 3),
-        "finalScore": final_score,
+        "rawScore": raw_score,
+        "finalScore": raw_score,
+        "displayScore": raw_score,
+        "scoreScale": "uncapped_raw_net_pressure",
         "topPositiveDrivers": positives[:5],
         "topNegativeDrivers": negatives[:5],
         "countedDetails": sorted_counted[:20],
         "contextExamples": live_context[:10],
         "excludedExamples": excluded[:10],
     }
+    asset["scoreChangeLog"] = change_log(asset, prev, sorted_counted, raw_score - previous_score)
+
+
+def build_snapshot(data: dict[str, Any], generated_at: str) -> dict[str, Any]:
+    return {
+        "snapshotVersion": "v0.40-score-history",
+        "generatedAt": generated_at,
+        "dataMode": data.get("data_mode"),
+        "assets": [
+            {
+                "id": a.get("id"),
+                "symbol": a.get("symbol"),
+                "score": a.get("score"),
+                "previousScore": a.get("previousScore"),
+                "pressureBucket": a.get("pressureBucket"),
+                "movementTag": a.get("movementTag"),
+                "bias": a.get("bias"),
+                "confidence": a.get("confidence"),
+                "conflict": a.get("conflict"),
+                "freshness": a.get("freshness"),
+                "topDriver": a.get("topDriver"),
+                "scoreAudit": {
+                    "countedRows": a.get("scoreAudit", {}).get("countedRows"),
+                    "contextRows": a.get("scoreAudit", {}).get("contextRows"),
+                    "excludedRows": a.get("scoreAudit", {}).get("excludedRows"),
+                    "positiveContribution": a.get("scoreAudit", {}).get("positiveContribution"),
+                    "negativeContribution": a.get("scoreAudit", {}).get("negativeContribution"),
+                    "netContribution": a.get("scoreAudit", {}).get("netContribution"),
+                },
+            }
+            for a in data.get("assets", [])
+        ],
+    }
 
 
 def main() -> int:
     data = load_json(DATA_PATH)
+    previous_assets = load_previous_snapshot()
     for asset in data.get("assets", []):
-        recompute_asset(asset)
-    data["data_mode"] = "live-public-source-weighted-scoring-v0.32"
+        recompute_asset(asset, previous_assets)
+    generated_at = datetime.now(timezone.utc).isoformat()
+    data["data_mode"] = "live-public-source-raw-pressure-scoring-v0.40"
     data["notice"] = (
-        "v0.32 recomputes asset headers from live source rows only using source/asset-specific weights. "
-        "Prototype, sample, candidate, missing, low-relevance, and display-only rows are excluded from score."
+        "v0.40 displays uncapped raw net pressure scores, classifies assets into primary pressure buckets, "
+        "uses movement/conflict as tags, writes score snapshots, and preserves live-only scoring discipline."
     )
+    data["score_history"] = {
+        "latestSnapshotPath": "data/history/latest.json",
+        "lastSnapshotAt": generated_at,
+        "scoreScale": "uncapped raw net pressure; no +/-10 display cap",
+    }
     write_json(DATA_PATH, data)
-    print(f"Recomputed live weighted scores for {len(data.get('assets', []))} assets.")
+    snapshot = build_snapshot(data, generated_at)
+    stamp = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H%M%SZ")
+    write_json(HISTORY_DIR / f"{stamp}.json", snapshot)
+    write_json(LATEST_HISTORY_PATH, snapshot)
+    print(f"Recomputed uncapped raw pressure scores for {len(data.get('assets', []))} assets.")
+    print(f"Snapshot written to data/history/{stamp}.json and data/history/latest.json")
     return 0
 
 

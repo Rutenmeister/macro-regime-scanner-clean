@@ -123,6 +123,12 @@ def main() -> int:
 
         if pipeline.get("global", {}).get("runValidation", True):
             report["validation"] = run_script(str(VALIDATE_PATH.relative_to(ROOT)), dry_run=args.dry_run)
+            history_validator = ROOT / "scripts" / "validate_score_history.py"
+            if history_validator.exists():
+                report["scoreHistoryValidation"] = run_script(str(history_validator.relative_to(ROOT)), dry_run=args.dry_run)
+            optional_signal_validator = ROOT / "scripts" / "validate_signal_framework.py"
+            if optional_signal_validator.exists():
+                report["optionalSignalValidation"] = run_script(str(optional_signal_validator.relative_to(ROOT)), dry_run=args.dry_run)
 
         report["status"] = "ok" if not args.dry_run else "dry_run_ok"
         return 0

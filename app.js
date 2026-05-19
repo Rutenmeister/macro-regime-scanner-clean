@@ -11,13 +11,13 @@ const $ = id => document.getElementById(id);
 function esc(v){ return String(v ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
 function oneDecimal(n){ return Number(n||0).toFixed(1); }
 function signed(n){ const x=Number(n||0); return x>0?'+'+oneDecimal(x):oneDecimal(x); }
-function fmtScore(n){ if(n===null||n===undefined) return 'MISS'; return n>0?'+'+n:String(n); }
+function fmtScore(n){ if(n===null||n===undefined) return 'MISS'; const x=Number(n||0); const text=Number.isInteger(x)?String(x):x.toFixed(1); return x>0?'+'+text:text; }
 function scoreClass(n){ return n>0?'score-pos':n<0?'score-neg':'score-neu'; }
 function statusClass(score){ if(score===null||score===undefined) return 'missing'; if(score>0) return 'support'; if(score<0) return 'pressure'; return 'neutral'; }
-function change(a){ const d=(a.score||0)-(a.previousScore||0); return d>0?'+'+d:String(d); }
+function change(a){ const d=(a.score||0)-(a.previousScore||0); return fmtScore(d); }
 function freshnessRank(f){ return ({Fresh:7,Sample:5,Mixed:4,Aging:3,Stale:2})[f]||4; }
 function conflictRank(c){ return ({Low:1,Medium:2,High:3})[c]||2; }
-function biasType(a){ if(a.bias.includes('Bullish')) return 'Bullish'; if(a.bias.includes('Bearish')) return 'Bearish'; return 'Neutral / Mixed'; }
+function biasType(a){ const b=String(a.bias||''); if(b.includes('Positive')||b.includes('Bullish')) return 'Bullish'; if(b.includes('Negative')||b.includes('Bearish')) return 'Bearish'; return 'Neutral / Mixed'; }
 function setupFilters(){ const toggle=$('showAllRowsToggle'); if(toggle){ toggle.checked = SHOW_ALL_ROWS; toggle.addEventListener('change', e=>{ SHOW_ALL_ROWS = e.target.checked; renderAll(false); }); } renderReleaseCalendar(); const classes=['All Asset Classes',...Array.from(new Set(ASSETS.map(a=>a.assetClass)))]; $('assetClass').innerHTML=classes.map(c=>`<option>${c}</option>`).join(''); const fresh=['All',...Array.from(new Set(ASSETS.map(a=>a.freshness).filter(Boolean)))]; $('freshFilter').innerHTML=fresh.map(f=>`<option>${f}</option>`).join(''); updateSubgroups(); renderSourcePills(); renderSourceHealth(); }
 function updateSubgroups(){ const cls=$('assetClass').value; const list=cls==='All Asset Classes'?ASSETS:ASSETS.filter(a=>a.assetClass===cls); const subs=['All Subgroups',...Array.from(new Set(list.map(a=>a.subgroup)))]; $('subgroup').innerHTML=subs.map(s=>`<option>${s}</option>`).join(''); }
 function getRows(){ let rows=[...ASSETS]; const q=$('searchBox').value.trim().toLowerCase(); const uni=$('universe').value; const cls=$('assetClass').value; const sub=$('subgroup').value; const bias=$('biasFilter').value; const cf=$('conflictFilter').value; const fr=$('freshFilter').value; if(q) rows=rows.filter(a=>(a.symbol+' '+a.name+' '+a.assetClass+' '+a.subgroup).toLowerCase().includes(q)); if(uni==='Watchlist Only') rows=rows.filter(a=>a.watchlist); if(uni==='Rankable Markets') rows=rows.filter(a=>a.rankType==='rankable'); if(uni==='Regime Anchors') rows=rows.filter(a=>a.rankType==='anchor'); if(cls!=='All Asset Classes') rows=rows.filter(a=>a.assetClass===cls); if(sub&&sub!=='All Subgroups') rows=rows.filter(a=>a.subgroup===sub); if(bias!=='All') rows=rows.filter(a=>biasType(a)===bias); if(cf!=='All') rows=rows.filter(a=>a.conflict===cf); if(fr!=='All') rows=rows.filter(a=>a.freshness===fr); const sort=$('sortMode').value; rows.sort((a,b)=>{ if(sort==='bullish') return b.score-a.score; if(sort==='bearish') return a.score-b.score; if(sort==='confidence') return b.confidence-a.confidence; if(sort==='conflict') return conflictRank(b.conflict)-conflictRank(a.conflict); if(sort==='freshest') return freshnessRank(b.freshness)-freshnessRank(a.freshness); if(sort==='stalest') return freshnessRank(a.freshness)-freshnessRank(b.freshness); if(sort==='improvement') return ((b.score-b.previousScore)-(a.score-a.previousScore)); if(sort==='deterioration') return ((a.score-a.previousScore)-(b.score-b.previousScore)); if(sort==='riskOn') return (b.score + (b.subgroup.includes('Equity')?2:0)) - (a.score + (a.subgroup.includes('Equity')?2:0)); if(sort==='riskOff') return (conflictRank(b.conflict)*2 + (b.assetClass.includes('Volatility')?3:0)) - (conflictRank(a.conflict)*2 + (a.assetClass.includes('Volatility')?3:0)); if(sort==='watchlist') return Number(b.watchlist)-Number(a.watchlist) || b.score-a.score; return b.score-a.score; }); return rows.slice(0, Number($('rowLimit').value)); }
@@ -95,7 +95,7 @@ function scoreAuditPanel(asset){
   return `<div class="score-audit-shell soft-card rounded-2xl p-4 mb-4">
     <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-3">
       <div><div class="tiny-label">Asset detail / score audit · ${method}</div><h3 class="text-lg font-semibold text-slate-100 mt-1">${esc(asset.symbol)} · ${esc(asset.bias || 'Evidence pressure')}</h3><p class="text-xs text-slate-400 mt-1">${esc(asset.quick || '')}</p></div>
-      <div class="text-right"><div class="metric-value text-3xl font-bold ${scoreClass(a.finalScore||asset.score||0)}">${fmtScore(a.finalScore ?? asset.score ?? 0)}</div><div class="text-[11px] text-slate-500">${esc(asset.confidence)}% confidence · ${esc(asset.conflict)} conflict</div></div>
+      <div class="text-right"><div class="metric-value text-3xl font-bold ${scoreClass(a.finalScore||asset.score||0)}">${fmtScore(a.finalScore ?? asset.score ?? 0)}</div><div class="score-scale-note">uncapped raw pressure</div><div class="text-[11px] text-slate-500">${esc(asset.confidence)}% confidence · ${esc(asset.conflict)} conflict · ${esc(asset.movementTag||'Stable')}</div></div>
     </div>
     <div class="audit-grid mt-4">
       <div><span class="text-slate-500">Counted rows</span><div class="metric-value">${counted}</div></div>
@@ -143,42 +143,64 @@ function rowRolePill(f){
   if(factorAppliesToAsset(f)) return '<span class="row-role row-role-context">Applies</span>';
   return '<span class="row-role row-role-muted">Hidden default</span>';
 }
-function classifyRegime(asset){
-  const score=Number(asset.score||0), conf=String(asset.conflict||'Medium');
+function pressureBucket(asset){
   const counted=asset.scoreAudit?.countedRows || 0;
-  const delta=score-Number(asset.previousScore||0);
+  if(asset.pressureBucket) return asset.pressureBucket;
+  const score=Number(asset.score||0);
   if(counted===0) return 'Low evidence / avoid';
-  if(conf==='High') return 'Conflicted / transition';
-  if(delta>=2) return 'Improving';
-  if(delta<=-2) return 'Deteriorating';
-  if(score>=3) return 'Strong positive pressure';
-  if(score<=-3) return 'Strong negative pressure';
-  return 'Mixed / watch';
+  if(score>=15) return 'Extreme positive pressure';
+  if(score>=8) return 'Strong positive pressure';
+  if(score>=3) return 'Moderate positive pressure';
+  if(score<=-15) return 'Extreme negative pressure';
+  if(score<=-8) return 'Strong negative pressure';
+  if(score<=-3) return 'Moderate negative pressure';
+  return 'Mixed / neutral pressure';
+}
+function movementTag(asset){
+  if(asset.movementTag) return asset.movementTag;
+  const d=Number(asset.score||0)-Number(asset.previousScore||0);
+  if(d>=2) return 'Improving';
+  if(d<=-2) return 'Deteriorating';
+  return 'Stable';
+}
+function regimeTags(asset){
+  const tags=[];
+  const move=movementTag(asset);
+  if(move && move!=='Stable') tags.push(move);
+  if(asset.conflict==='High') tags.push('Conflicted');
+  else if(asset.conflict==='Medium') tags.push('Some conflict');
+  const counted=asset.scoreAudit?.countedRows || 0;
+  if(counted<=0) tags.push('Low evidence');
+  else if((asset.confidence||0)>=75) tags.push('High confidence');
+  if(asset.freshness) tags.push(asset.freshness);
+  return tags.slice(0,4);
 }
 function renderRegimeSnapshot(){
   const box=$('regimeSnapshot');
   if(!box) return;
-  const groups=['Strong positive pressure','Strong negative pressure','Conflicted / transition','Improving','Deteriorating','Low evidence / avoid'];
+  const groups=['Extreme positive pressure','Strong positive pressure','Moderate positive pressure','Mixed / neutral pressure','Moderate negative pressure','Strong negative pressure','Extreme negative pressure','Low evidence / avoid'];
   const rows=[...ASSETS];
   const cards=groups.map(g=>{
-    const items=rows.filter(a=>classifyRegime(a)===g).sort((a,b)=>Math.abs(b.score||0)-Math.abs(a.score||0)).slice(0,4);
-    const html=items.length ? items.map(a=>`<button class="snapshot-chip" data-jump="${esc(a.id)}"><span>${esc(a.symbol)}</span><strong class="${scoreClass(a.score)}">${fmtScore(a.score)}</strong></button>`).join('') : '<div class="text-[11px] text-slate-500">No assets in this bucket.</div>';
+    const items=rows.filter(a=>pressureBucket(a)===g).sort((a,b)=>Math.abs(b.score||0)-Math.abs(a.score||0)).slice(0,5);
+    const html=items.length ? items.map(a=>`<button class="snapshot-chip" data-jump="${esc(a.id)}"><span>${esc(a.symbol)}</span><strong class="${scoreClass(a.score)}">${fmtScore(a.score)}</strong><em>${regimeTags(a).join(' · ')}</em></button>`).join('') : '<div class="text-[11px] text-slate-500">No assets in this bucket.</div>';
     return `<div class="snapshot-card"><div class="tiny-label">${g}</div><div class="snapshot-chip-wrap mt-2">${html}</div></div>`;
   }).join('');
-  box.innerHTML=`<div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-3"><div><div class="tiny-label">Regime Queue Snapshot</div><h3 class="text-lg font-semibold text-slate-100 mt-1">What deserves attention first?</h3><p class="text-xs text-slate-500 mt-1">Groups assets by pressure, conflict, change, and evidence coverage. This is research triage, not a trade signal.</p></div><span class="pill self-start md:self-auto">v0.34 trust layer</span></div><div class="snapshot-grid">${cards}</div>`;
+  box.innerHTML=`<div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-3"><div><div class="tiny-label">Regime Queue Snapshot</div><h3 class="text-lg font-semibold text-slate-100 mt-1">What deserves attention first?</h3><p class="text-xs text-slate-500 mt-1">Primary buckets now use uncapped raw pressure scores. Improving, deteriorating, conflicted, freshness, and confidence are tags, not buckets that hide strong positive/negative pressure.</p></div><span class="pill self-start md:self-auto">v0.40 raw score baseline</span></div><div class="snapshot-grid">${cards}</div>`;
   box.querySelectorAll('[data-jump]').forEach(btn=>btn.addEventListener('click',e=>{ const id=btn.dataset.jump; selectedId=id; expanded.add(id); const row=document.querySelector(`.market-row[data-id="${CSS.escape(id)}"]`); if(row){ row.scrollIntoView({behavior:'smooth', block:'center'}); } renderAll(); }));
 }
 function generateRegimeBrief(){
   const now=new Date().toISOString();
-  const topPos=[...ASSETS].sort((a,b)=>(b.score||0)-(a.score||0)).slice(0,5);
-  const topNeg=[...ASSETS].sort((a,b)=>(a.score||0)-(b.score||0)).slice(0,5);
-  const conflicted=[...ASSETS].filter(a=>a.conflict==='High').sort((a,b)=>Math.abs(b.score||0)-Math.abs(a.score||0)).slice(0,5);
-  const changed=[...ASSETS].sort((a,b)=>Math.abs((b.score||0)-(b.previousScore||0))-Math.abs((a.score||0)-(a.previousScore||0))).slice(0,6);
-  const fmt=a=>`- ${a.symbol}: ${a.bias} (${fmtScore(a.score)}, confidence ${a.confidence}%, conflict ${a.conflict}) — ${a.topDriver || a.quick || 'see audit'}`;
+  const topPos=[...ASSETS].filter(a=>(a.scoreAudit?.countedRows||0)>0).sort((a,b)=>(b.score||0)-(a.score||0)).slice(0,7);
+  const topNeg=[...ASSETS].filter(a=>(a.scoreAudit?.countedRows||0)>0).sort((a,b)=>(a.score||0)-(b.score||0)).slice(0,7);
+  const conflicted=[...ASSETS].filter(a=>a.conflict==='High' || pressureBucket(a)==='Mixed / neutral pressure').sort((a,b)=>Math.abs(b.score||0)-Math.abs(a.score||0)).slice(0,7);
+  const changed=[...ASSETS].sort((a,b)=>Math.abs((b.score||0)-(b.previousScore||0))-Math.abs((a.score||0)-(a.previousScore||0))).slice(0,8);
+  const fmt=a=>`- ${a.symbol}: ${pressureBucket(a)} (${fmtScore(a.score)} raw, confidence ${a.confidence}%, ${regimeTags(a).join(' · ') || 'stable'}) — ${a.topDriver || a.quick || 'see audit'}`;
   const sourceLines=Object.entries(SOURCE_STATUS||{}).map(([id,s])=>`- ${id}: ${sourceLabel(s.status)}${s.latest_date ? ' · latest '+s.latest_date : ''}`).join('\n');
   const events=(RELEASE_CALENDAR?.events||[]).slice(0,8).map(ev=>`- ${ev.date || ''} ${ev.timeET || ''}: ${ev.report} (${ev.source})`).join('\n') || '- No generated release calendar loaded.';
-  return `# Edgefield Macro Regime Brief v0.34\n\nGenerated: ${now}\n\nThis brief ranks public-source fundamental pressure evidence. It is not a buy/sell signal and does not predict immediate price movement. Missing, stale, candidate, and display-only rows are not treated as neutral.\n\n## Strongest positive pressure\n${topPos.map(fmt).join('\n')}\n\n## Strongest negative pressure\n${topNeg.map(fmt).join('\n')}\n\n## Most conflicted / transition candidates\n${conflicted.map(fmt).join('\n') || '- No high-conflict assets in current view.'}\n\n## Largest score changes\n${changed.map(a=>`- ${a.symbol}: ${signed((a.score||0)-(a.previousScore||0))} change, now ${fmtScore(a.score)} — ${a.bias}`).join('\n')}\n\n## Source health\n${sourceLines || '- No source status loaded.'}\n\n## Upcoming tracked reports\n${events}\n\n## Caveats\n- Public-source macro/fundamental pressure only.\n- Mostly U.S.-based inputs, so relevance varies by asset.\n- Scores depend on current source freshness, row eligibility, and asset-specific mapping.\n- Open each asset row in the terminal to inspect counted, context, and excluded evidence.\n`;
+  const changes=changed.map(a=>`- ${a.symbol}: ${fmtScore((a.score||0)-(a.previousScore||0))} change, now ${fmtScore(a.score)} raw — ${a.scoreChangeLog?.summary || a.bias}`).join('\n');
+  return `# Edgefield Macro Regime Brief v0.40\n\nGenerated: ${now}\n\nThis brief ranks public-source fundamental pressure evidence using uncapped raw net pressure scores. It is not a buy/sell signal and does not predict immediate price movement. Missing, stale, candidate, and display-only rows are not treated as neutral.\n\n## Strongest positive raw pressure\n${topPos.map(fmt).join('\n') || '- No positive live-scored assets.'}\n\n## Strongest negative raw pressure\n${topNeg.map(fmt).join('\n') || '- No negative live-scored assets.'}\n\n## Conflicted / neutral transition candidates\n${conflicted.map(fmt).join('\n') || '- No conflicted or neutral transition candidates in current view.'}\n\n## Largest score changes\n${changes}\n\n## Source health\n${sourceLines || '- No source status loaded.'}\n\n## Upcoming tracked reports\n${events}\n\n## Caveats\n- Public-source macro/fundamental pressure only.\n- Scores are uncapped raw net pressure; larger absolute numbers mean more weighted evidence, not guaranteed price movement.\n- Mostly U.S.-based inputs, so relevance varies by asset.\n- Scores depend on current source freshness, row eligibility, and asset-specific mapping.\n- Open each asset row in the terminal to inspect counted, context, and excluded evidence.\n`;
 }
+
 
 function renderReleaseCalendar(){
   const list = $('releaseCalendarList');
@@ -219,9 +241,9 @@ function renderDiagnosis(){ /* right readout not included; public-source edition
 function renderAll(){ renderRegimeSnapshot(); renderQueue(); renderDiagnosis(); }
 function download(filename,text,type='application/json'){ const blob=new Blob([text],{type}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download=filename; a.click(); URL.revokeObjectURL(url); }
 ['searchBox','universe','assetClass','subgroup','biasFilter','conflictFilter','freshFilter','sortMode','rowLimit'].forEach(id=>$(id).addEventListener('input',()=>{ if(id==='assetClass') updateSubgroups(); renderAll(); }));
-$('exportJson').addEventListener('click',()=>download('macro_regime_scanner_public_source_data_contract_v0_34.json',JSON.stringify({notice:'Public-source data contract. v0.34 explainable trust layer keeps v0.33.1 wide calendar and adds score-audit, caveat, regime queue, and brief-export support.',assets:ASSETS,source_status:SOURCE_STATUS,release_calendar:RELEASE_CALENDAR},null,2)));
+$('exportJson').addEventListener('click',()=>download('macro_regime_scanner_public_source_data_contract_v0_40.json',JSON.stringify({notice:'Public-source data contract. v0.40 raw score history baseline keeps v0.33.1 wide calendar and adds score-audit, caveat, regime queue, and brief-export support.',assets:ASSETS,source_status:SOURCE_STATUS,release_calendar:RELEASE_CALENDAR},null,2)));
 const briefBtn=$('exportBrief');
-if(briefBtn) briefBtn.addEventListener('click',()=>download('edgefield_macro_regime_brief_v0_34.md', generateRegimeBrief(), 'text/markdown'));
+if(briefBtn) briefBtn.addEventListener('click',()=>download('edgefield_macro_regime_brief_v0_40.md', generateRegimeBrief(), 'text/markdown'));
 async function loadData(){
   try {
     const response = await fetch('data/macro_regime_scanner.json', { cache: 'no-store' });

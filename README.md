@@ -123,3 +123,18 @@ node --check app.js
 python scripts/recompute_live_scores.py
 python scripts/validate_data.py
 ```
+
+## v0.40 Raw Score History Baseline
+
+This package advances the frozen v0.34 Explainable Trust Layer by removing the +/-10 display cap, repairing Regime Queue buckets, adding raw pressure score labels/tags, writing score snapshots, adding why-score-changed summaries, and preparing an optional forward-return validation framework that stays separate from live scoring.
+
+Run the validation set before deploying:
+
+```bash
+node --check app.js
+python scripts/recompute_live_scores.py
+python scripts/validate_data.py
+python scripts/validate_score_history.py
+python scripts/validate_signal_framework.py
+```
+
