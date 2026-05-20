@@ -23,11 +23,11 @@ def main():
     top_neg=sorted(assets,key=score)[:8]
     events=cal.get('events',[])[:10]
     now=datetime.now(timezone.utc).isoformat()
-    md=f"""# Edgefield Daily Macro Regime Brief v0.45
+    md=f"""# Edgefield Research Macro Regime Brief v0.48
 
 Generated: {now}
 
-This brief ranks official/public-source fundamental pressure evidence. It is not a buy/sell signal, does not predict immediate price movement, and keeps price outside the live scoring engine.
+This brief ranks official/public-source macro pressure evidence for a U.S.-centered asset universe. Scores are raw, uncapped, and price-free. This is a research brief, not a buy/sell signal or investment advice.
 
 ## Strongest positive raw pressure
 {chr(10).join(line(a) for a in top_pos)}
@@ -55,6 +55,6 @@ This brief ranks official/public-source fundamental pressure evidence. It is not
 """
     (OUT_DIR/'current_regime_brief.md').write_text(md)
     body='<pre>'+html.escape(md)+'</pre>'
-    (OUT_DIR/'current_regime_brief.html').write_text('<!doctype html><html><head><meta charset="utf-8"><title>Edgefield Regime Brief</title><style>body{font-family:system-ui;background:#090317;color:#e5e7eb;padding:32px}pre{white-space:pre-wrap;line-height:1.5}</style></head><body>'+body+'</body></html>')
+    (OUT_DIR/'current_regime_brief.html').write_text('<!doctype html><html><head><meta charset="utf-8"><title>Edgefield Research Regime Brief</title><style>body{font-family:system-ui;background:#090317;color:#e5e7eb;padding:32px}pre{white-space:pre-wrap;line-height:1.5}</style></head><body>'+body+'</body></html>')
     print('Wrote data/reports/current_regime_brief.md and .html')
 if __name__=='__main__': main()

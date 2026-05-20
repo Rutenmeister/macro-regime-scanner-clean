@@ -6,7 +6,7 @@ v0.40 scoring principles:
 - do not count prototype/sample/candidate/missing observations;
 - weight rows by source lane, asset class, and relevance;
 - treat U.S. macro data differently for U.S. equities, USD pairs,
-  USD pairs, rates, gold, energy, and agriculture; non-USD FX crosses are excluded from v0.47 distribution scope;
+  USD pairs, rates, gold, energy, and agriculture; non-USD FX crosses are excluded from v0.48 distribution scope;
 - preserve row-level source text and add an asset-level scoreAudit object;
 - write score snapshots so future versions can explain score changes.
 """
@@ -24,7 +24,7 @@ LATEST_HISTORY_PATH = HISTORY_DIR / "latest.json"
 
 USD_BASE = {"USDJPY", "USDCHF", "USDCAD"}
 USD_QUOTE = {"EURUSD", "GBPUSD", "AUDUSD", "NZDUSD"}
-FX_CROSSES = set()  # v0.47: non-USD FX crosses removed until direct non-U.S. source lanes exist
+FX_CROSSES = set()  # v0.48: non-USD FX crosses remain removed until direct non-U.S. source lanes exist
 RATES = {"US02Y", "US05Y", "US10Y", "US30Y"}
 CURVES = {"CURVE2S10", "CURVE5S30"}
 INFLATION_MARKETS = {"REALY", "BE5Y", "BE10Y"}

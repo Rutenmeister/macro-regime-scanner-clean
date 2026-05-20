@@ -1,8 +1,8 @@
-# Edgefield Daily Macro Regime Brief v0.45
+# Edgefield Research Macro Regime Brief v0.48
 
-Generated: 2026-05-20T18:03:06.710553+00:00
+Generated: 2026-05-20T19:12:08.400242+00:00
 
-This brief ranks official/public-source fundamental pressure evidence. It is not a buy/sell signal, does not predict immediate price movement, and keeps price outside the live scoring engine.
+This brief ranks official/public-source macro pressure evidence for a U.S.-centered asset universe. Scores are raw, uncapped, and price-free. This is a research brief, not a buy/sell signal or investment advice.
 
 ## Strongest positive raw pressure
 - USD: Low evidence / avoid (+0.0 raw, confidence 18%, conflict Low) — No live-scored direct driver yet

@@ -178,3 +178,8 @@ Do not treat null actual/forecast/previous values as zero or neutral. They mean 
 ## v0.47 note — U.S.-Centered Integrity Baseline
 
 v0.47 is a robustness/scope cleanup. It preserves v0.46 research infrastructure while removing non-USD FX crosses (EURGBP, EURJPY, AUDJPY, NZDJPY) from the displayed asset universe because the current source stack is U.S.-centered. The product keeps price data out of the live score, uses raw uncapped pressure scores, and prioritizes honest coverage over breadth.
+
+
+## v0.48 note — Distribution-Ready Baseline
+
+v0.48 is a final packaging and clarity pass. It keeps the v0.47 U.S.-centered integrity scope, raw uncapped scores, and price-free live scoring, while simplifying the top description, using the **Edgefield Research** brand label, adding a concise reading guide, and strengthening research-only disclaimer language.
