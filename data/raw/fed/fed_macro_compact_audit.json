@@ -1,7 +1,7 @@
 {
   "schemaVersion": "0.28.1",
   "sourceId": "FED_FRED_SELECTED",
-  "retrievedAt": "2026-05-20T17:48:34.033989+00:00",
+  "retrievedAt": "2026-05-20T18:07:18.433423+00:00",
   "seriesAudits": [
     {
       "seriesId": "EFFR",
@@ -55,12 +55,12 @@
       "fetchAttempts": [
         {
           "method": "fredgraph_csv",
-          "rows": 6073
+          "rows": 6074
         }
       ],
-      "rowsFetched": 6073,
-      "latestPeriod": "2026-05-19",
-      "latestValue": 12.911,
+      "rowsFetched": 6074,
+      "latestPeriod": "2026-05-20",
+      "latestValue": 24.867,
       "score": -1
     },
     {
