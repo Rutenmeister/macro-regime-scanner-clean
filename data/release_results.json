@@ -1,6 +1,6 @@
 {
   "version": "v0.42-release-result-schema",
-  "generatedAt": "2026-05-20T15:26:00.819016+00:00",
+  "generatedAt": "2026-05-20T18:02:36.047514+00:00",
   "method": "calendar-derived-result-stub-no-invented-figures",
   "warning": "Null actual/forecast/previous values mean no trusted result feed was available. Do not treat null as zero or neutral.",
   "events": [

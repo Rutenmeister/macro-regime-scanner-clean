@@ -1,5 +1,5 @@
 {
-  "notice": "Skeleton registry. Fill/expand before live source pipelines.",
+  "notice": "v0.47 U.S.-centered scope cleanup. Low-relevance non-USD FX crosses removed from distribution view; retained FX instruments have USD exposure or USD anchor relevance.",
   "assets": [
     {
       "id": "DXY",
@@ -61,38 +61,6 @@
       "id": "NZDUSD",
       "symbol": "NZDUSD",
       "name": "New Zealand Dollar / U.S. Dollar",
-      "asset_class": "FX",
-      "subgroup": "Commodity FX",
-      "rank_type": "rankable"
-    },
-    {
-      "id": "EURGBP",
-      "symbol": "EURGBP",
-      "name": "Euro / British Pound",
-      "asset_class": "FX",
-      "subgroup": "Crosses",
-      "rank_type": "rankable"
-    },
-    {
-      "id": "EURJPY",
-      "symbol": "EURJPY",
-      "name": "Euro / Japanese Yen",
-      "asset_class": "FX",
-      "subgroup": "Crosses",
-      "rank_type": "rankable"
-    },
-    {
-      "id": "AUDJPY",
-      "symbol": "AUDJPY",
-      "name": "Australian Dollar / Japanese Yen",
-      "asset_class": "FX",
-      "subgroup": "Commodity FX",
-      "rank_type": "rankable"
-    },
-    {
-      "id": "NZDJPY",
-      "symbol": "NZDJPY",
-      "name": "New Zealand Dollar / Japanese Yen",
       "asset_class": "FX",
       "subgroup": "Commodity FX",
       "rank_type": "rankable"

@@ -1,6 +1,6 @@
 # Edgefield Daily Macro Regime Brief v0.45
 
-Generated: 2026-05-20T15:26:13.176051+00:00
+Generated: 2026-05-20T18:03:06.710553+00:00
 
 This brief ranks official/public-source fundamental pressure evidence. It is not a buy/sell signal, does not predict immediate price movement, and keeps price outside the live scoring engine.
 
@@ -40,7 +40,7 @@ This brief ranks official/public-source fundamental pressure evidence. It is not
 - Lanes: 9
 - Live/fresh lanes: 3
 - High coverage assets: 0
-- Insufficient coverage assets: 49
+- Insufficient coverage assets: 45
 
 ## Validation status
 framework_ready_no_price_backtest_attached: This validates score distribution and history readiness only. It does not claim predictive accuracy until separate price/return data is supplied.

@@ -174,3 +174,7 @@ python scripts/generate_professional_report.py
 ```
 
 Do not treat null actual/forecast/previous values as zero or neutral. They mean no trusted result feed is attached yet.
+
+## v0.47 note — U.S.-Centered Integrity Baseline
+
+v0.47 is a robustness/scope cleanup. It preserves v0.46 research infrastructure while removing non-USD FX crosses (EURGBP, EURJPY, AUDJPY, NZDJPY) from the displayed asset universe because the current source stack is U.S.-centered. The product keeps price data out of the live score, uses raw uncapped pressure scores, and prioritizes honest coverage over breadth.

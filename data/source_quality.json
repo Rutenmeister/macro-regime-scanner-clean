@@ -1,11 +1,11 @@
 {
   "version": "v0.44-source-quality",
-  "generatedAt": "2026-05-20T15:26:05.957297+00:00",
+  "generatedAt": "2026-05-20T18:02:47.692218+00:00",
   "summary": {
     "lanes": 9,
     "liveOrFreshLanes": 3,
     "highCoverageAssets": 0,
-    "insufficientCoverageAssets": 49
+    "insufficientCoverageAssets": 45
   },
   "lanes": {
     "TREASURY_OFFICIAL": {
@@ -131,38 +131,6 @@
     },
     {
       "symbol": "NZDUSD",
-      "coverageLabel": "Insufficient direct live evidence",
-      "countedRows": 0,
-      "contextRows": 0,
-      "excludedRows": 40,
-      "directEvidenceRatio": 0.0
-    },
-    {
-      "symbol": "EURGBP",
-      "coverageLabel": "Insufficient direct live evidence",
-      "countedRows": 0,
-      "contextRows": 0,
-      "excludedRows": 40,
-      "directEvidenceRatio": 0.0
-    },
-    {
-      "symbol": "EURJPY",
-      "coverageLabel": "Insufficient direct live evidence",
-      "countedRows": 0,
-      "contextRows": 0,
-      "excludedRows": 40,
-      "directEvidenceRatio": 0.0
-    },
-    {
-      "symbol": "AUDJPY",
-      "coverageLabel": "Insufficient direct live evidence",
-      "countedRows": 0,
-      "contextRows": 0,
-      "excludedRows": 40,
-      "directEvidenceRatio": 0.0
-    },
-    {
-      "symbol": "NZDJPY",
       "coverageLabel": "Insufficient direct live evidence",
       "countedRows": 0,
       "contextRows": 0,

@@ -1,7 +1,7 @@
 {
   "snapshotVersion": "v0.40-score-history",
   "generatedAt": "2026-05-20T15:25:50.198513+00:00",
-  "dataMode": "live-public-source-raw-pressure-scoring-v0.40",
+  "dataMode": "live-public-source-us-centered-integrity-v0.47",
   "assets": [
     {
       "id": "DXY",
@@ -153,90 +153,6 @@
     {
       "id": "NZDUSD",
       "symbol": "NZDUSD",
-      "score": 0.0,
-      "previousScore": 0.0,
-      "pressureBucket": "Low evidence / avoid",
-      "movementTag": "Stable",
-      "bias": "Insufficient Live Direct Evidence",
-      "confidence": 18,
-      "conflict": "Low",
-      "freshness": "Mixed",
-      "topDriver": "No live-scored direct driver yet",
-      "scoreAudit": {
-        "countedRows": 0,
-        "contextRows": 0,
-        "excludedRows": 40,
-        "positiveContribution": 0,
-        "negativeContribution": 0,
-        "netContribution": 0
-      }
-    },
-    {
-      "id": "EURGBP",
-      "symbol": "EURGBP",
-      "score": 0.0,
-      "previousScore": 0.0,
-      "pressureBucket": "Low evidence / avoid",
-      "movementTag": "Stable",
-      "bias": "Insufficient Live Direct Evidence",
-      "confidence": 18,
-      "conflict": "Low",
-      "freshness": "Mixed",
-      "topDriver": "No live-scored direct driver yet",
-      "scoreAudit": {
-        "countedRows": 0,
-        "contextRows": 0,
-        "excludedRows": 40,
-        "positiveContribution": 0,
-        "negativeContribution": 0,
-        "netContribution": 0
-      }
-    },
-    {
-      "id": "EURJPY",
-      "symbol": "EURJPY",
-      "score": 0.0,
-      "previousScore": 0.0,
-      "pressureBucket": "Low evidence / avoid",
-      "movementTag": "Stable",
-      "bias": "Insufficient Live Direct Evidence",
-      "confidence": 18,
-      "conflict": "Low",
-      "freshness": "Mixed",
-      "topDriver": "No live-scored direct driver yet",
-      "scoreAudit": {
-        "countedRows": 0,
-        "contextRows": 0,
-        "excludedRows": 40,
-        "positiveContribution": 0,
-        "negativeContribution": 0,
-        "netContribution": 0
-      }
-    },
-    {
-      "id": "AUDJPY",
-      "symbol": "AUDJPY",
-      "score": 0.0,
-      "previousScore": 0.0,
-      "pressureBucket": "Low evidence / avoid",
-      "movementTag": "Stable",
-      "bias": "Insufficient Live Direct Evidence",
-      "confidence": 18,
-      "conflict": "Low",
-      "freshness": "Mixed",
-      "topDriver": "No live-scored direct driver yet",
-      "scoreAudit": {
-        "countedRows": 0,
-        "contextRows": 0,
-        "excludedRows": 40,
-        "positiveContribution": 0,
-        "negativeContribution": 0,
-        "netContribution": 0
-      }
-    },
-    {
-      "id": "NZDJPY",
-      "symbol": "NZDJPY",
       "score": 0.0,
       "previousScore": 0.0,
       "pressureBucket": "Low evidence / avoid",
@@ -1032,5 +948,6 @@
         "netContribution": 0
       }
     }
-  ]
+  ],
+  "scopeNote": "Non-USD FX crosses excluded from this U.S.-centered distribution baseline."
 }

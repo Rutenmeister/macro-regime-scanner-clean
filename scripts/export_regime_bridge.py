@@ -36,7 +36,7 @@ def main():
             'mainConflict': a.get('mainConflict'),
             'scoreChangeSummary': (a.get('scoreChangeLog') or {}).get('summary'),
         })
-    payload={'version':'v0.46-regime-bridge','generatedAt':now,'intendedConsumers':['TradeStream','Capital Trace','Pathwise'],'warning':'Evidence labels are research context, not trade signals.', 'regimes':rows}
+    payload={'version':'v0.47-regime-bridge-us-centered-scope','generatedAt':now,'intendedConsumers':['TradeStream','Capital Trace','Pathwise'],'warning':'Evidence labels are research context, not trade signals. v0.47 excludes unsupported non-USD FX crosses from the distribution asset universe.', 'regimes':rows}
     (OUT_DIR/'regime_labels_latest.json').write_text(json.dumps(payload, indent=2)+'\n')
     with (OUT_DIR/'regime_labels_latest.csv').open('w', newline='') as f:
         w=csv.DictWriter(f, fieldnames=list(rows[0].keys()) if rows else ['date'])
