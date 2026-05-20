@@ -23,7 +23,7 @@ def main():
     top_neg=sorted(assets,key=score)[:8]
     events=cal.get('events',[])[:10]
     now=datetime.now(timezone.utc).isoformat()
-    md=f"""# Edgefield Research Macro Regime Brief v0.48
+    md=f"""# Edgefield Research Macro Regime Brief v0.49
 
 Generated: {now}
 

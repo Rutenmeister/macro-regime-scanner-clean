@@ -1,6 +1,6 @@
-# Edgefield Research Macro Regime Brief v0.48
+# Edgefield Research Macro Regime Brief v0.49
 
-Generated: 2026-05-20T19:12:08.400242+00:00
+Generated: 2026-05-20T19:54:17.592043+00:00
 
 This brief ranks official/public-source macro pressure evidence for a U.S.-centered asset universe. Scores are raw, uncapped, and price-free. This is a research brief, not a buy/sell signal or investment advice.
 

@@ -183,3 +183,9 @@ v0.47 is a robustness/scope cleanup. It preserves v0.46 research infrastructure 
 ## v0.48 note — Distribution-Ready Baseline
 
 v0.48 is a final packaging and clarity pass. It keeps the v0.47 U.S.-centered integrity scope, raw uncapped scores, and price-free live scoring, while simplifying the top description, using the **Edgefield Research** brand label, adding a concise reading guide, and strengthening research-only disclaimer language.
+
+## v0.49 Beta Launch Wrapper
+
+v0.49 adds the lightweight business wrapper needed for private beta distribution while preserving the v0.48 scanner core. It includes a product overview page, beta legal/disclaimer pages, support feedback guidance, a changelog, and expands the Regime Queue Snapshot from 5 assets to 10 assets per bucket.
+
+Core scoring remains U.S.-centered, price-free, raw-score based, and evidence-first.
