@@ -1,7 +1,7 @@
 {
   "source_id": "USDA_PUBLIC",
   "source_name": "USDA National Agricultural Statistics Service Quick Stats API",
-  "retrieved_at": "2026-05-19T20:18:19+00:00",
+  "retrieved_at": "2026-05-20T15:16:59+00:00",
   "latest_date": "2026",
   "observations": {
     "WHEAT_CONDITION": {
