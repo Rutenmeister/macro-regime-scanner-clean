@@ -1,7 +1,7 @@
 {
   "pipelineVersion": "0.33",
-  "startedAt": "2026-05-20T18:06:36.837229+00:00",
-  "finishedAt": "2026-05-20T18:07:27.830074+00:00",
+  "startedAt": "2026-05-20T19:15:13.191787+00:00",
+  "finishedAt": "2026-05-20T19:16:29.152421+00:00",
   "dryRun": false,
   "selectedLanes": "all enabled",
   "lanes": [
@@ -228,7 +228,7 @@
     "script": "scripts/recompute_live_scores.py",
     "status": "ok",
     "returncode": 0,
-    "stdoutTail": "Recomputed uncapped raw pressure scores for 45 assets.\nSnapshot written to data/history/2026-05-20T180727Z.json and data/history/latest.json\n",
+    "stdoutTail": "Recomputed uncapped raw pressure scores for 45 assets.\nSnapshot written to data/history/2026-05-20T191628Z.json and data/history/latest.json\n",
     "stderrTail": ""
   },
   "releaseCalendar": {
