@@ -3,6 +3,10 @@ let DATA_NOTICE = 'Loading data/macro_regime_scanner.json';
 let DATA_MODE = 'public-source-prototype-json';
 let SOURCE_STATUS = {};
 let RELEASE_CALENDAR = null;
+let RELEASE_RESULTS = null;
+let SOURCE_QUALITY = null;
+let VALIDATION_SUMMARY = null;
+let REGIME_BRIDGE = null;
 let SHOW_ALL_ROWS = false;
 
 let expanded = new Set();
@@ -61,7 +65,9 @@ function renderSourceHealth(){
     const cls = sourceHealthClass(s.status);
     const latest = s.latest_date ? `<div class="text-[11px] text-slate-500 mt-1">Latest: ${s.latest_date}</div>` : '';
     const note = s.note || s.production_note || '';
-    return `<div class="source-health-row rounded-xl p-2 ${cls}"><div class="flex items-center justify-between gap-2"><span class="font-semibold text-slate-200">${id.replaceAll('_',' ')}</span><span class="source-dot-label">${label}</span></div>${latest}<div class="text-[11px] text-slate-400 mt-1 leading-snug">${note}</div></div>`;
+    const q = sourceQualityFor(id);
+    const qLine = q ? `<div class="text-[11px] text-slate-500 mt-1">QA: ${esc(q.qualityGrade)} · ${q.qualityScore}/100</div>` : '';
+    return `<div class="source-health-row rounded-xl p-2 ${cls}"><div class="flex items-center justify-between gap-2"><span class="font-semibold text-slate-200">${id.replaceAll('_',' ')}</span><span class="source-dot-label">${label}</span></div>${latest}${qLine}<div class="text-[11px] text-slate-400 mt-1 leading-snug">${note}</div></div>`;
   }).join('');
 }
 
@@ -185,7 +191,7 @@ function renderRegimeSnapshot(){
     const html=items.length ? items.map(a=>`<button class="snapshot-chip" data-jump="${esc(a.id)}"><span>${esc(a.symbol)}</span><strong class="${scoreClass(a.score)}">${fmtScore(a.score)}</strong><em>${regimeTags(a).join(' · ')}</em></button>`).join('') : '<div class="text-[11px] text-slate-500">No assets in this bucket.</div>';
     return `<div class="snapshot-card"><div class="tiny-label">${g}</div><div class="snapshot-chip-wrap mt-2">${html}</div></div>`;
   }).join('');
-  box.innerHTML=`<div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-3"><div><div class="tiny-label">Regime Queue Snapshot</div><h3 class="text-lg font-semibold text-slate-100 mt-1">What deserves attention first?</h3><p class="text-xs text-slate-500 mt-1">Primary buckets now use uncapped raw pressure scores. Improving, deteriorating, conflicted, freshness, and confidence are tags, not buckets that hide strong positive/negative pressure.</p></div><span class="pill self-start md:self-auto">v0.41 calendar-hardened baseline</span></div><div class="snapshot-grid">${cards}</div>`;
+  box.innerHTML=`<div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-3"><div><div class="tiny-label">Regime Queue Snapshot</div><h3 class="text-lg font-semibold text-slate-100 mt-1">What deserves attention first?</h3><p class="text-xs text-slate-500 mt-1">Primary buckets now use uncapped raw pressure scores. Improving, deteriorating, conflicted, freshness, and confidence are tags, not buckets that hide strong positive/negative pressure.</p></div><span class="pill self-start md:self-auto">v0.46 research infrastructure baseline</span></div><div class="snapshot-grid">${cards}</div>`;
   box.querySelectorAll('[data-jump]').forEach(btn=>btn.addEventListener('click',e=>{ const id=btn.dataset.jump; selectedId=id; expanded.add(id); const row=document.querySelector(`.market-row[data-id="${CSS.escape(id)}"]`); if(row){ row.scrollIntoView({behavior:'smooth', block:'center'}); } renderAll(); }));
 }
 function generateRegimeBrief(){
@@ -198,9 +204,39 @@ function generateRegimeBrief(){
   const sourceLines=Object.entries(SOURCE_STATUS||{}).map(([id,s])=>`- ${id}: ${sourceLabel(s.status)}${s.latest_date ? ' · latest '+s.latest_date : ''}`).join('\n');
   const events=(RELEASE_CALENDAR?.events||[]).slice(0,8).map(ev=>`- ${ev.date || ''} ${ev.timeET || ''}: ${ev.report} (${ev.source}, ${ev.calendarConfidence || ev.scheduleType || 'unverified'})`).join('\n') || '- No generated release calendar loaded.';
   const changes=changed.map(a=>`- ${a.symbol}: ${fmtScore((a.score||0)-(a.previousScore||0))} change, now ${fmtScore(a.score)} raw — ${a.scoreChangeLog?.summary || a.bias}`).join('\n');
-  return `# Edgefield Macro Regime Brief v0.41\n\nGenerated: ${now}\n\nThis brief ranks public-source fundamental pressure evidence using uncapped raw net pressure scores. It is not a buy/sell signal and does not predict immediate price movement. Missing, stale, candidate, and display-only rows are not treated as neutral.\n\n## Strongest positive raw pressure\n${topPos.map(fmt).join('\n') || '- No positive live-scored assets.'}\n\n## Strongest negative raw pressure\n${topNeg.map(fmt).join('\n') || '- No negative live-scored assets.'}\n\n## Conflicted / neutral transition candidates\n${conflicted.map(fmt).join('\n') || '- No conflicted or neutral transition candidates in current view.'}\n\n## Largest score changes\n${changes}\n\n## Source health\n${sourceLines || '- No source status loaded.'}\n\n## Upcoming tracked reports\n${events}\n\n## Caveats\n- Public-source macro/fundamental pressure only.\n- Scores are uncapped raw net pressure; larger absolute numbers mean more weighted evidence, not guaranteed price movement.\n- Mostly U.S.-based inputs, so relevance varies by asset.\n- Scores depend on current source freshness, row eligibility, and asset-specific mapping.\n- Open each asset row in the terminal to inspect counted, context, and excluded evidence.\n`;
+  return `# Edgefield Macro Regime Brief v0.46\n\nGenerated: ${now}\n\nThis brief ranks public-source fundamental pressure evidence using uncapped raw net pressure scores. It is not a buy/sell signal and does not predict immediate price movement. Missing, stale, candidate, and display-only rows are not treated as neutral. v0.46 adds release-result fields, validation framework output, source QA, professional reports, and suite export bridge metadata.\n\n## Strongest positive raw pressure\n${topPos.map(fmt).join('\n') || '- No positive live-scored assets.'}\n\n## Strongest negative raw pressure\n${topNeg.map(fmt).join('\n') || '- No negative live-scored assets.'}\n\n## Conflicted / neutral transition candidates\n${conflicted.map(fmt).join('\n') || '- No conflicted or neutral transition candidates in current view.'}\n\n## Largest score changes\n${changes}\n\n## Source health\n${sourceLines || '- No source status loaded.'}\n\n## Upcoming tracked reports\n${events}\n\n## Caveats\n- Public-source macro/fundamental pressure only.\n- Scores are uncapped raw net pressure; larger absolute numbers mean more weighted evidence, not guaranteed price movement.\n- Mostly U.S.-based inputs, so relevance varies by asset.\n- Scores depend on current source freshness, row eligibility, and asset-specific mapping.\n- Open each asset row in the terminal to inspect counted, context, and excluded evidence.\n`;
 }
 
+
+function releaseResultForEvent(ev){
+  const events = RELEASE_RESULTS?.events || [];
+  const eventId = `${ev.date || ''}__${String(ev.lane || ev.source || 'event').toLowerCase().replaceAll(' ','-')}__${String(ev.report || 'report').toLowerCase().replaceAll(' ','-').replaceAll('/','-')}`.slice(0,180);
+  return events.find(r => r.id === eventId) || events.find(r => r.report === ev.report && r.date === ev.date) || null;
+}
+function valueOrDash(v){ return (v === null || v === undefined || v === '') ? '—' : esc(v); }
+function renderReleaseResultMini(ev){
+  const r = releaseResultForEvent(ev);
+  if(!r) return '<div class="release-results-mini muted">Result feed: not loaded</div>';
+  const status = r.releaseStatus || 'unknown';
+  const conf = r.resultConfidence || 'not_available';
+  const hasAny = r.actual !== null || r.forecast !== null || r.previous !== null;
+  const resultClass = hasAny ? 'result-ready' : (status === 'upcoming' ? 'result-upcoming' : 'result-pending');
+  return `<div class="release-results-mini ${resultClass}">
+    <span>Status: ${esc(status)}</span>
+    <span>Actual ${valueOrDash(r.actual)}</span>
+    <span>Forecast ${valueOrDash(r.forecast)}</span>
+    <span>Previous ${valueOrDash(r.previous)}</span>
+    <span>${esc(conf)}</span>
+  </div>`;
+}
+function sourceQualityFor(id){
+  if(!SOURCE_QUALITY?.lanes) return null;
+  return SOURCE_QUALITY.lanes[id] || SOURCE_QUALITY.lanes[String(id || '').replaceAll(' ','_').toUpperCase()] || null;
+}
+function validationStatusText(){
+  if(!VALIDATION_SUMMARY) return 'Validation framework not loaded.';
+  return `${VALIDATION_SUMMARY.status || 'validation loaded'} · ${VALIDATION_SUMMARY.assetCount || 0} assets · ${(VALIDATION_SUMMARY.warning || '').slice(0,130)}`;
+}
 
 function renderReleaseCalendar(){
   const list = $('releaseCalendarList');
@@ -226,7 +262,7 @@ function renderReleaseCalendar(){
     const confidenceLabel = confidence === 'official' ? 'Official date' : confidence === 'official-pattern' ? 'Official pattern' : 'Estimated';
     const sourceLink = ev.sourceUrl ? `<a href="${ev.sourceUrl}" target="_blank" rel="noopener" class="release-source-link">source</a>` : '';
     const note = ev.note ? `<div class="text-[11px] text-slate-500 mt-1 leading-snug">${ev.note}</div>` : '';
-    return `<div class="release-row ${cls}"><div class="flex items-start justify-between gap-2"><div class="font-semibold text-slate-200 leading-tight">${ev.report}</div><div class="release-time">${ev.timeET || ''}</div></div><div class="text-[11px] text-slate-500 mt-1">${ev.source} · ${ev.date || ''} · ${ev.scheduleType || ''} ${sourceLink}</div><div class="mt-2"><span class="calendar-confidence ${confidenceClass}">${confidenceLabel}</span></div><div class="text-[11px] text-slate-400 mt-1 leading-snug">${inputs}</div>${note}</div>`;
+    return `<div class="release-row ${cls}"><div class="flex items-start justify-between gap-2"><div class="font-semibold text-slate-200 leading-tight">${ev.report}</div><div class="release-time">${ev.timeET || ''}</div></div><div class="text-[11px] text-slate-500 mt-1">${ev.source} · ${ev.date || ''} · ${ev.scheduleType || ''} ${sourceLink}</div><div class="mt-2"><span class="calendar-confidence ${confidenceClass}">${confidenceLabel}</span></div>${renderReleaseResultMini(ev)}<div class="text-[11px] text-slate-400 mt-1 leading-snug">${inputs}</div>${note}</div>`;
   }).join('');
 }
 function inputTable(asset){
@@ -248,7 +284,7 @@ function renderDiagnosis(){ /* right readout not included; public-source edition
 function renderAll(){ renderRegimeSnapshot(); renderQueue(); renderDiagnosis(); }
 function download(filename,text,type='application/json'){ const blob=new Blob([text],{type}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download=filename; a.click(); URL.revokeObjectURL(url); }
 ['searchBox','universe','assetClass','subgroup','biasFilter','conflictFilter','freshFilter','sortMode','rowLimit'].forEach(id=>$(id).addEventListener('input',()=>{ if(id==='assetClass') updateSubgroups(); renderAll(); }));
-$('exportJson').addEventListener('click',()=>download('macro_regime_scanner_public_source_data_contract_v0_41.json',JSON.stringify({notice:'Public-source data contract. v0.41 keeps the v0.40 raw-score/history baseline and hardens the release calendar with confidence labels, source links, and holiday safeguards.',assets:ASSETS,source_status:SOURCE_STATUS,release_calendar:RELEASE_CALENDAR},null,2)));
+$('exportJson').addEventListener('click',()=>download('macro_regime_scanner_public_source_data_contract_v0_46.json',JSON.stringify({notice:'Public-source data contract. v0.46 includes v0.41 calendar hardening plus release-result schema, source QA, validation summary, professional report outputs, and suite bridge export labels.',assets:ASSETS,source_status:SOURCE_STATUS,release_calendar:RELEASE_CALENDAR,release_results:RELEASE_RESULTS,source_quality:SOURCE_QUALITY,validation_summary:VALIDATION_SUMMARY,regime_bridge:REGIME_BRIDGE},null,2)));
 const briefBtn=$('exportBrief');
 if(briefBtn) briefBtn.addEventListener('click',()=>download('edgefield_macro_regime_brief_v0_40.md', generateRegimeBrief(), 'text/markdown'));
 async function loadData(){
