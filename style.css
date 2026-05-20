@@ -23,3 +23,20 @@ input,select{background:rgba(4,2,12,.86);border:1px solid rgba(222,214,255,.17);
 .snapshot-chip em{font-style:normal;color:#94a3b8;font-size:10px;margin-left:.1rem;max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .score-scale-note{color:#94a3b8;font-size:11px;margin-top:.15rem}
 .change-log-box{border:1px solid rgba(64,241,223,.16);background:rgba(64,241,223,.045);border-radius:1rem;padding:.65rem;margin-top:.65rem}
+
+/* v0.41 release-calendar confidence labels */
+.calendar-confidence{
+  display:inline-flex;
+  align-items:center;
+  border-radius:999px;
+  padding:2px 8px;
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:.04em;
+  text-transform:uppercase;
+  border:1px solid rgba(148,163,184,.25);
+}
+.calendar-official{ color:#bbf7d0; background:rgba(34,197,94,.12); border-color:rgba(34,197,94,.35); }
+.calendar-pattern{ color:#bae6fd; background:rgba(14,165,233,.12); border-color:rgba(14,165,233,.35); }
+.calendar-estimated{ color:#fde68a; background:rgba(245,158,11,.12); border-color:rgba(245,158,11,.35); }
+.release-source-link{ color:#93c5fd; text-decoration:underline; text-underline-offset:2px; margin-left:4px; }

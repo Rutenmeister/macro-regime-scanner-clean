@@ -185,7 +185,7 @@ function renderRegimeSnapshot(){
     const html=items.length ? items.map(a=>`<button class="snapshot-chip" data-jump="${esc(a.id)}"><span>${esc(a.symbol)}</span><strong class="${scoreClass(a.score)}">${fmtScore(a.score)}</strong><em>${regimeTags(a).join(' · ')}</em></button>`).join('') : '<div class="text-[11px] text-slate-500">No assets in this bucket.</div>';
     return `<div class="snapshot-card"><div class="tiny-label">${g}</div><div class="snapshot-chip-wrap mt-2">${html}</div></div>`;
   }).join('');
-  box.innerHTML=`<div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-3"><div><div class="tiny-label">Regime Queue Snapshot</div><h3 class="text-lg font-semibold text-slate-100 mt-1">What deserves attention first?</h3><p class="text-xs text-slate-500 mt-1">Primary buckets now use uncapped raw pressure scores. Improving, deteriorating, conflicted, freshness, and confidence are tags, not buckets that hide strong positive/negative pressure.</p></div><span class="pill self-start md:self-auto">v0.40 raw score baseline</span></div><div class="snapshot-grid">${cards}</div>`;
+  box.innerHTML=`<div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-3"><div><div class="tiny-label">Regime Queue Snapshot</div><h3 class="text-lg font-semibold text-slate-100 mt-1">What deserves attention first?</h3><p class="text-xs text-slate-500 mt-1">Primary buckets now use uncapped raw pressure scores. Improving, deteriorating, conflicted, freshness, and confidence are tags, not buckets that hide strong positive/negative pressure.</p></div><span class="pill self-start md:self-auto">v0.41 calendar-hardened baseline</span></div><div class="snapshot-grid">${cards}</div>`;
   box.querySelectorAll('[data-jump]').forEach(btn=>btn.addEventListener('click',e=>{ const id=btn.dataset.jump; selectedId=id; expanded.add(id); const row=document.querySelector(`.market-row[data-id="${CSS.escape(id)}"]`); if(row){ row.scrollIntoView({behavior:'smooth', block:'center'}); } renderAll(); }));
 }
 function generateRegimeBrief(){
@@ -196,9 +196,9 @@ function generateRegimeBrief(){
   const changed=[...ASSETS].sort((a,b)=>Math.abs((b.score||0)-(b.previousScore||0))-Math.abs((a.score||0)-(a.previousScore||0))).slice(0,8);
   const fmt=a=>`- ${a.symbol}: ${pressureBucket(a)} (${fmtScore(a.score)} raw, confidence ${a.confidence}%, ${regimeTags(a).join(' · ') || 'stable'}) — ${a.topDriver || a.quick || 'see audit'}`;
   const sourceLines=Object.entries(SOURCE_STATUS||{}).map(([id,s])=>`- ${id}: ${sourceLabel(s.status)}${s.latest_date ? ' · latest '+s.latest_date : ''}`).join('\n');
-  const events=(RELEASE_CALENDAR?.events||[]).slice(0,8).map(ev=>`- ${ev.date || ''} ${ev.timeET || ''}: ${ev.report} (${ev.source})`).join('\n') || '- No generated release calendar loaded.';
+  const events=(RELEASE_CALENDAR?.events||[]).slice(0,8).map(ev=>`- ${ev.date || ''} ${ev.timeET || ''}: ${ev.report} (${ev.source}, ${ev.calendarConfidence || ev.scheduleType || 'unverified'})`).join('\n') || '- No generated release calendar loaded.';
   const changes=changed.map(a=>`- ${a.symbol}: ${fmtScore((a.score||0)-(a.previousScore||0))} change, now ${fmtScore(a.score)} raw — ${a.scoreChangeLog?.summary || a.bias}`).join('\n');
-  return `# Edgefield Macro Regime Brief v0.40\n\nGenerated: ${now}\n\nThis brief ranks public-source fundamental pressure evidence using uncapped raw net pressure scores. It is not a buy/sell signal and does not predict immediate price movement. Missing, stale, candidate, and display-only rows are not treated as neutral.\n\n## Strongest positive raw pressure\n${topPos.map(fmt).join('\n') || '- No positive live-scored assets.'}\n\n## Strongest negative raw pressure\n${topNeg.map(fmt).join('\n') || '- No negative live-scored assets.'}\n\n## Conflicted / neutral transition candidates\n${conflicted.map(fmt).join('\n') || '- No conflicted or neutral transition candidates in current view.'}\n\n## Largest score changes\n${changes}\n\n## Source health\n${sourceLines || '- No source status loaded.'}\n\n## Upcoming tracked reports\n${events}\n\n## Caveats\n- Public-source macro/fundamental pressure only.\n- Scores are uncapped raw net pressure; larger absolute numbers mean more weighted evidence, not guaranteed price movement.\n- Mostly U.S.-based inputs, so relevance varies by asset.\n- Scores depend on current source freshness, row eligibility, and asset-specific mapping.\n- Open each asset row in the terminal to inspect counted, context, and excluded evidence.\n`;
+  return `# Edgefield Macro Regime Brief v0.41\n\nGenerated: ${now}\n\nThis brief ranks public-source fundamental pressure evidence using uncapped raw net pressure scores. It is not a buy/sell signal and does not predict immediate price movement. Missing, stale, candidate, and display-only rows are not treated as neutral.\n\n## Strongest positive raw pressure\n${topPos.map(fmt).join('\n') || '- No positive live-scored assets.'}\n\n## Strongest negative raw pressure\n${topNeg.map(fmt).join('\n') || '- No negative live-scored assets.'}\n\n## Conflicted / neutral transition candidates\n${conflicted.map(fmt).join('\n') || '- No conflicted or neutral transition candidates in current view.'}\n\n## Largest score changes\n${changes}\n\n## Source health\n${sourceLines || '- No source status loaded.'}\n\n## Upcoming tracked reports\n${events}\n\n## Caveats\n- Public-source macro/fundamental pressure only.\n- Scores are uncapped raw net pressure; larger absolute numbers mean more weighted evidence, not guaranteed price movement.\n- Mostly U.S.-based inputs, so relevance varies by asset.\n- Scores depend on current source freshness, row eligibility, and asset-specific mapping.\n- Open each asset row in the terminal to inspect counted, context, and excluded evidence.\n`;
 }
 
 
@@ -213,13 +213,20 @@ function renderReleaseCalendar(){
     return;
   }
   const generated = RELEASE_CALENDAR.generatedAt ? new Date(RELEASE_CALENDAR.generatedAt).toLocaleString() : 'unknown';
-  meta.textContent = `Generated ${generated}. Times shown in ET.`;
+  const summary = RELEASE_CALENDAR.confidenceSummary || {};
+  const confText = `Official ${summary.official ?? 0} · Official-pattern ${summary.officialPattern ?? 0} · Estimated ${summary.estimated ?? 0}`;
+  meta.textContent = `Generated ${generated}. Times shown in ET. ${confText}.`;
   const nextEvents = [...events].sort((a,b)=>String(a.datetimeUTC).localeCompare(String(b.datetimeUTC))).slice(0,14);
   list.innerHTML = nextEvents.map(ev=>{
     const imp = ev.importance || 'Medium';
     const cls = imp === 'Very High' ? 'release-highest' : imp === 'High' ? 'release-high' : 'release-normal';
     const inputs = (ev.trackedInputs || []).slice(0,4).join(' / ');
-    return `<div class="release-row ${cls}"><div class="flex items-start justify-between gap-2"><div class="font-semibold text-slate-200 leading-tight">${ev.report}</div><div class="release-time">${ev.timeET || ''}</div></div><div class="text-[11px] text-slate-500 mt-1">${ev.source} · ${ev.date || ''} · ${ev.scheduleType || ''}</div><div class="text-[11px] text-slate-400 mt-1 leading-snug">${inputs}</div></div>`;
+    const confidence = ev.calendarConfidence || 'estimated';
+    const confidenceClass = confidence === 'official' ? 'calendar-official' : confidence === 'official-pattern' ? 'calendar-pattern' : 'calendar-estimated';
+    const confidenceLabel = confidence === 'official' ? 'Official date' : confidence === 'official-pattern' ? 'Official pattern' : 'Estimated';
+    const sourceLink = ev.sourceUrl ? `<a href="${ev.sourceUrl}" target="_blank" rel="noopener" class="release-source-link">source</a>` : '';
+    const note = ev.note ? `<div class="text-[11px] text-slate-500 mt-1 leading-snug">${ev.note}</div>` : '';
+    return `<div class="release-row ${cls}"><div class="flex items-start justify-between gap-2"><div class="font-semibold text-slate-200 leading-tight">${ev.report}</div><div class="release-time">${ev.timeET || ''}</div></div><div class="text-[11px] text-slate-500 mt-1">${ev.source} · ${ev.date || ''} · ${ev.scheduleType || ''} ${sourceLink}</div><div class="mt-2"><span class="calendar-confidence ${confidenceClass}">${confidenceLabel}</span></div><div class="text-[11px] text-slate-400 mt-1 leading-snug">${inputs}</div>${note}</div>`;
   }).join('');
 }
 function inputTable(asset){
@@ -241,7 +248,7 @@ function renderDiagnosis(){ /* right readout not included; public-source edition
 function renderAll(){ renderRegimeSnapshot(); renderQueue(); renderDiagnosis(); }
 function download(filename,text,type='application/json'){ const blob=new Blob([text],{type}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download=filename; a.click(); URL.revokeObjectURL(url); }
 ['searchBox','universe','assetClass','subgroup','biasFilter','conflictFilter','freshFilter','sortMode','rowLimit'].forEach(id=>$(id).addEventListener('input',()=>{ if(id==='assetClass') updateSubgroups(); renderAll(); }));
-$('exportJson').addEventListener('click',()=>download('macro_regime_scanner_public_source_data_contract_v0_40.json',JSON.stringify({notice:'Public-source data contract. v0.40 raw score history baseline keeps v0.33.1 wide calendar and adds score-audit, caveat, regime queue, and brief-export support.',assets:ASSETS,source_status:SOURCE_STATUS,release_calendar:RELEASE_CALENDAR},null,2)));
+$('exportJson').addEventListener('click',()=>download('macro_regime_scanner_public_source_data_contract_v0_41.json',JSON.stringify({notice:'Public-source data contract. v0.41 keeps the v0.40 raw-score/history baseline and hardens the release calendar with confidence labels, source links, and holiday safeguards.',assets:ASSETS,source_status:SOURCE_STATUS,release_calendar:RELEASE_CALENDAR},null,2)));
 const briefBtn=$('exportBrief');
 if(briefBtn) briefBtn.addEventListener('click',()=>download('edgefield_macro_regime_brief_v0_40.md', generateRegimeBrief(), 'text/markdown'));
 async function loadData(){

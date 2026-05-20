@@ -138,3 +138,7 @@ python scripts/validate_score_history.py
 python scripts/validate_signal_framework.py
 ```
 
+## v0.41 note — Official Release Calendar Hardening
+
+v0.41 keeps the v0.40 raw-score/history scanner intact and hardens the Upcoming Tracked Reports module. Calendar events now include `calendarConfidence` (`official`, `official-pattern`, or `estimated`) and `sourceUrl`, with validation to prevent known false dates such as Retail Sales May 20, PCE May 23, and Treasury releases on Memorial Day.
+

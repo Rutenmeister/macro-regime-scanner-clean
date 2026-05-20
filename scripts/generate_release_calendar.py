@@ -1,17 +1,20 @@
 #!/usr/bin/env python3
-"""Generate a lightweight upcoming-report calendar for the sidebar.
+"""Generate the Macro Regime Scanner upcoming-report calendar.
 
-This is deliberately separate from scoring. It creates data/release_calendar.json
-from the source lanes being tracked by the Macro Regime Scanner. The first
-version uses deterministic release-pattern rules and marks entries as expected
-or official-pattern rather than pretending to be a full government calendar
-parser. It is refreshed whenever the master refresh workflow runs.
+v0.41 hardens the old rule-based release watch by:
+- preferring official agency dates when known/available,
+- attaching calendarConfidence to every event,
+- skipping U.S. federal holidays for daily Treasury releases,
+- moving holiday-sensitive weekly reports when a federal holiday disrupts the week,
+- visibly downgrading estimated entries instead of letting them look confirmed.
+
+This calendar is informational only. It is separate from scoring.
 """
 from __future__ import annotations
 
 import json
 from dataclasses import dataclass
-from datetime import datetime, timedelta, time
+from datetime import date, datetime, time, timedelta
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
@@ -19,6 +22,123 @@ ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "data" / "release_calendar.json"
 ET = ZoneInfo("America/New_York")
 UTC = ZoneInfo("UTC")
+
+# Minimal federal-holiday table used to prevent obvious false daily release rows.
+# Add future years as needed. This is intentionally explicit rather than vague.
+US_FEDERAL_HOLIDAYS = {
+    date(2026, 1, 1),   # New Year's Day
+    date(2026, 1, 19),  # Martin Luther King Jr. Day
+    date(2026, 2, 16),  # Washington's Birthday
+    date(2026, 5, 25),  # Memorial Day
+    date(2026, 6, 19),  # Juneteenth
+    date(2026, 7, 3),   # Independence Day observed
+    date(2026, 9, 7),   # Labor Day
+    date(2026, 10, 12), # Columbus Day
+    date(2026, 11, 11), # Veterans Day
+    date(2026, 11, 26), # Thanksgiving Day
+    date(2026, 12, 25), # Christmas Day
+}
+
+SOURCE_URLS = {
+    "Treasury": "https://home.treasury.gov/policy-issues/financing-the-government/interest-rate-statistics",
+    "CFTC": "https://www.cftc.gov/MarketReports/CommitmentsofTraders/ReleaseSchedule/index.htm",
+    "EIA_WPSR": "https://www.eia.gov/petroleum/supply/weekly/schedule.php",
+    "EIA_NG": "https://ir.eia.gov/ngs/schedule.html",
+    "Fed_H41": "https://www.federalreserve.gov/releases/h41/",
+    "BEA": "https://www.bea.gov/news/schedule",
+    "Census": "https://www.census.gov/economic-indicators/calendar-listview-2026.html",
+    "USDA_NASS": "https://www.nass.usda.gov/Publications/Calendar/",
+    "BLS": "https://www.bls.gov/schedule/news_release/",
+}
+
+# Official/confirmed upcoming dates that replace weak pattern guesses.
+# These prevent errors like Retail Sales May 20 and PCE May 23.
+OFFICIAL_RELEASES_2026 = [
+    {
+        "source": "Census",
+        "report": "New Residential Construction / Housing Starts and Building Permits",
+        "lane": "Census",
+        "date": "2026-05-21",
+        "hour": 8,
+        "minute": 30,
+        "importance": "Medium",
+        "tracked": ["housing starts", "building permits"],
+        "confidence": "official",
+        "schedule_type": "official calendar",
+        "source_url": SOURCE_URLS["Census"],
+        "note": "Official Census economic-indicator calendar date for the April residential construction release.",
+    },
+    {
+        "source": "BEA",
+        "report": "GDP (Second Estimate) and Corporate Profits, Q1 2026",
+        "lane": "BEA",
+        "date": "2026-05-28",
+        "hour": 8,
+        "minute": 30,
+        "importance": "High",
+        "tracked": ["real GDP", "GDP components", "corporate profits"],
+        "confidence": "official",
+        "schedule_type": "official calendar",
+        "source_url": SOURCE_URLS["BEA"],
+        "note": "Official BEA release schedule date.",
+    },
+    {
+        "source": "BEA",
+        "report": "Personal Income and Outlays / PCE, April 2026",
+        "lane": "BEA",
+        "date": "2026-05-28",
+        "hour": 8,
+        "minute": 30,
+        "importance": "Very High",
+        "tracked": ["PCE", "core PCE", "personal income", "consumption", "savings rate"],
+        "confidence": "official",
+        "schedule_type": "official calendar",
+        "source_url": SOURCE_URLS["BEA"],
+        "note": "Official BEA release schedule date. Replaces the old estimated May 23 watch date.",
+    },
+    {
+        "source": "Census",
+        "report": "Advance Report on Durable Goods Manufacturers' Shipments, Inventories, and Orders",
+        "lane": "Census",
+        "date": "2026-05-28",
+        "hour": 8,
+        "minute": 30,
+        "importance": "Medium",
+        "tracked": ["durable goods orders", "core capital goods"],
+        "confidence": "official",
+        "schedule_type": "official calendar",
+        "source_url": SOURCE_URLS["Census"],
+        "note": "Official Census economic-indicator calendar date for the advance durable goods report.",
+    },
+    {
+        "source": "Census",
+        "report": "Advance Monthly Sales for Retail and Food Services / Retail Sales",
+        "lane": "Census",
+        "date": "2026-06-17",
+        "hour": 8,
+        "minute": 30,
+        "importance": "High",
+        "tracked": ["retail sales", "control group"],
+        "confidence": "official",
+        "schedule_type": "official calendar",
+        "source_url": SOURCE_URLS["Census"],
+        "note": "Official Census date for the next retail sales release. Removes the incorrect May 20 estimated event.",
+    },
+    {
+        "source": "BEA",
+        "report": "Personal Income and Outlays / PCE, May 2026",
+        "lane": "BEA",
+        "date": "2026-06-25",
+        "hour": 8,
+        "minute": 30,
+        "importance": "Very High",
+        "tracked": ["PCE", "core PCE", "personal income", "consumption", "savings rate"],
+        "confidence": "official",
+        "schedule_type": "official calendar",
+        "source_url": SOURCE_URLS["BEA"],
+        "note": "Official BEA release schedule date for the following PCE release.",
+    },
+]
 
 
 @dataclass(frozen=True)
@@ -31,6 +151,11 @@ class CalendarEvent:
     schedule_type: str
     tracked_inputs: list[str]
     note: str
+    calendar_confidence: str
+    source_url: str
+
+    def key(self) -> tuple[str, str, str]:
+        return (self.report.lower(), self.source.lower(), self.event_time.date().isoformat())
 
     def to_json(self) -> dict:
         return {
@@ -43,17 +168,27 @@ class CalendarEvent:
             "datetimeUTC": self.event_time.astimezone(UTC).isoformat(),
             "importance": self.importance,
             "scheduleType": self.schedule_type,
+            "calendarConfidence": self.calendar_confidence,
+            "sourceUrl": self.source_url,
             "trackedInputs": self.tracked_inputs,
             "note": self.note,
         }
 
 
-def at_et(day, hour: int, minute: int = 0) -> datetime:
+def at_et(day: date, hour: int, minute: int = 0) -> datetime:
     return datetime.combine(day, time(hour, minute), ET)
 
 
+def is_business_day(day: date) -> bool:
+    return day.weekday() < 5 and day not in US_FEDERAL_HOLIDAYS
+
+
+def week_has_federal_holiday(day: date) -> bool:
+    monday = day - timedelta(days=day.weekday())
+    return any((monday + timedelta(days=i)) in US_FEDERAL_HOLIDAYS for i in range(5))
+
+
 def next_weekday(start: datetime, weekday: int, hour: int, minute: int = 0, include_today: bool = True) -> datetime:
-    # Monday=0 ... Sunday=6
     base = start.astimezone(ET)
     days = (weekday - base.weekday()) % 7
     candidate = at_et((base + timedelta(days=days)).date(), hour, minute)
@@ -65,9 +200,9 @@ def next_weekday(start: datetime, weekday: int, hour: int, minute: int = 0, incl
 def business_days(start: datetime, count: int, hour: int, minute: int = 0) -> list[datetime]:
     base = start.astimezone(ET)
     day = base.date()
-    out = []
+    out: list[datetime] = []
     while len(out) < count:
-        if day.weekday() < 5:
+        if is_business_day(day):
             candidate = at_et(day, hour, minute)
             if candidate > base:
                 out.append(candidate)
@@ -76,7 +211,7 @@ def business_days(start: datetime, count: int, hour: int, minute: int = 0) -> li
 
 
 def nth_weekday(year: int, month: int, weekday: int, n: int, hour: int, minute: int = 0) -> datetime:
-    d = datetime(year, month, 1, tzinfo=ET).date()
+    d = date(year, month, 1)
     offset = (weekday - d.weekday()) % 7
     target = d + timedelta(days=offset + (n - 1) * 7)
     return at_et(target, hour, minute)
@@ -88,7 +223,7 @@ def first_weekday(year: int, month: int, weekday: int, hour: int, minute: int = 
 
 def monthly_candidates(start: datetime, builder, months: int = 3) -> list[datetime]:
     base = start.astimezone(ET)
-    out = []
+    out: list[datetime] = []
     y, m = base.year, base.month
     for i in range(months):
         yy = y + (m - 1 + i) // 12
@@ -99,56 +234,133 @@ def monthly_candidates(start: datetime, builder, months: int = 3) -> list[dateti
     return out
 
 
-def add(events: list[CalendarEvent], source: str, report: str, lane: str, dt: datetime, importance: str, schedule_type: str, tracked: list[str], note: str):
-    events.append(CalendarEvent(source, report, lane, dt, importance, schedule_type, tracked, note))
+def add(events: list[CalendarEvent], source: str, report: str, lane: str, dt: datetime, importance: str, schedule_type: str, tracked: list[str], note: str, confidence: str, source_url: str):
+    events.append(CalendarEvent(source, report, lane, dt, importance, schedule_type, tracked, note, confidence, source_url))
+
+
+def add_official_events(events: list[CalendarEvent], now: datetime) -> None:
+    base = now.astimezone(ET)
+    for item in OFFICIAL_RELEASES_2026:
+        dt = at_et(date.fromisoformat(item["date"]), item["hour"], item["minute"])
+        if dt <= base:
+            continue
+        add(
+            events,
+            item["source"],
+            item["report"],
+            item["lane"],
+            dt,
+            item["importance"],
+            item["schedule_type"],
+            item["tracked"],
+            item["note"],
+            item["confidence"],
+            item["source_url"],
+        )
+
+
+def add_weekly_pattern_events(events: list[CalendarEvent], now: datetime) -> None:
+    # Treasury daily curve: business days only, with U.S. federal holidays excluded.
+    for dt in business_days(now, 9, 18, 0):
+        add(events, "U.S. Treasury", "Daily Treasury Par Yield Curve Rates", "Treasury", dt, "High", "official-pattern", ["1M-30Y curve", "2Y", "10Y", "curve spreads"], "Treasury posts daily par yield curve data on business days; U.S. federal holidays are skipped by v0.41.", "official-pattern", SOURCE_URLS["Treasury"])
+
+    # CFTC COT: official release pattern, holiday caveat.
+    cot_dt = next_weekday(now, 4, 15, 30)
+    add(events, "CFTC", "Commitments of Traders", "CFTC COT", cot_dt, "High", "official-pattern", ["spec net", "commercial net", "open interest", "weekly change"], "CFTC states COT reports are usually released Friday at 3:30 PM ET; federal holidays may delay release.", "official-pattern", SOURCE_URLS["CFTC"])
+
+    # EIA WPSR: official current next release if May 20; otherwise official-pattern with holiday shift.
+    wpsr = next_weekday(now, 2, 10, 30)
+    if week_has_federal_holiday(wpsr.date()):
+        wpsr = wpsr + timedelta(days=1)
+        note = "Holiday-adjusted official-pattern estimate: EIA says WPSR releases are normally Wednesday 10:30 AM ET but some holiday weeks are delayed by one day."
+    else:
+        note = "EIA WPSR files are normally released after 10:30 AM ET Wednesday. Current public WPSR page should be treated as source of truth for exact next release."
+    add(events, "EIA", "Weekly Petroleum Status Report", "EIA", wpsr, "High", "official-pattern", ["crude inventories", "Cushing", "gasoline", "distillate", "refinery utilization"], note, "official-pattern", SOURCE_URLS["EIA_WPSR"])
+
+    # EIA natural gas storage: official pattern with source link. Keep Thursday unless official page specifies holiday shift.
+    ng = next_weekday(now, 3, 10, 30)
+    add(events, "EIA", "Weekly Natural Gas Storage Report", "EIA", ng, "High", "official-pattern", ["natural gas storage"], "EIA natural gas storage schedule is normally Thursday 10:30 AM ET; official schedule page controls holiday exceptions.", "official-pattern", SOURCE_URLS["EIA_NG"])
+
+    # Fed H.4.1: official pattern.
+    h41 = next_weekday(now, 3, 16, 30)
+    add(events, "Federal Reserve", "H.4.1 Factors Affecting Reserve Balances", "Federal Reserve", h41, "High", "official-pattern", ["Fed assets", "reserve balances", "reverse repo", "TGA"], "Federal Reserve says H.4.1 data are released each Thursday, generally at 4:30 PM ET; holidays can shift release.", "official-pattern", SOURCE_URLS["Fed_H41"])
+
+    # USDA/NASS Crop Progress: seasonal official-pattern. Skip federal holiday Mondays and use next business day as tentative.
+    crop = next_weekday(now, 0, 16, 0)
+    if not is_business_day(crop.date()):
+        day = crop.date() + timedelta(days=1)
+        while not is_business_day(day):
+            day += timedelta(days=1)
+        crop = at_et(day, 16, 0)
+        note = "Holiday-adjusted seasonal estimate. NASS official report calendar should control exact release date."
+        confidence = "estimated"
+    else:
+        note = "Crop Progress is seasonal and generally Monday afternoon Eastern during the growing season; NASS calendar controls exact release."
+        confidence = "official-pattern"
+    add(events, "USDA/NASS", "Crop Progress", "USDA", crop, "Medium", "seasonal official-pattern", ["crop progress", "crop condition"], note, confidence, SOURCE_URLS["USDA_NASS"])
+
+
+def add_low_confidence_watch_items(events: list[CalendarEvent], now: datetime) -> None:
+    # These stay available as reminders only, but they are clearly tagged as estimated.
+    # Official overrides above should cover the highest-risk near-term BEA/Census dates.
+    for dt in monthly_candidates(now, lambda y, m: first_weekday(y, m, 4, 8, 30), 3):
+        add(events, "BLS", "Employment Situation", "BLS", dt, "Very High", "monthly estimated", ["payrolls", "unemployment", "wages", "participation", "U-6"], "Estimated first-Friday watch date; official BLS calendar controls.", "estimated", SOURCE_URLS["BLS"])
+    for dt in monthly_candidates(now, lambda y, m: nth_weekday(y, m, 2, 2, 8, 30), 3):
+        add(events, "BLS", "Consumer Price Index", "BLS", dt, "Very High", "monthly estimated", ["headline CPI", "core CPI", "shelter", "energy", "food"], "Estimated second-Wednesday watch date; official BLS calendar controls.", "estimated", SOURCE_URLS["BLS"])
+    for dt in monthly_candidates(now, lambda y, m: nth_weekday(y, m, 3, 2, 8, 30), 3):
+        add(events, "BLS", "Producer Price Index", "BLS", dt, "High", "monthly estimated", ["headline PPI", "core PPI"], "Estimated second-Thursday watch date; official BLS calendar controls.", "estimated", SOURCE_URLS["BLS"])
+
+
+def dedupe_events(events: list[CalendarEvent]) -> list[CalendarEvent]:
+    # Official beats official-pattern; official-pattern beats estimated.
+    rank = {"official": 3, "official-pattern": 2, "estimated": 1}
+    best: dict[tuple[str, str], CalendarEvent] = {}
+    for ev in events:
+        # Deduplicate by report + lane, but allow repeated daily Treasury events.
+        if ev.report == "Daily Treasury Par Yield Curve Rates":
+            best[(ev.report.lower(), ev.event_time.isoformat())] = ev
+            continue
+        key = (ev.report.lower(), ev.lane.lower())
+        current = best.get(key)
+        if current is None:
+            best[key] = ev
+            continue
+        if rank.get(ev.calendar_confidence, 0) > rank.get(current.calendar_confidence, 0):
+            best[key] = ev
+        elif rank.get(ev.calendar_confidence, 0) == rank.get(current.calendar_confidence, 0) and ev.event_time < current.event_time:
+            best[key] = ev
+    return sorted(best.values(), key=lambda e: e.event_time)
 
 
 def build_calendar(now: datetime) -> dict:
     events: list[CalendarEvent] = []
+    add_official_events(events, now)
+    add_weekly_pattern_events(events, now)
+    add_low_confidence_watch_items(events, now)
 
-    # Daily / weekly source updates that affect the scanner directly.
-    for dt in business_days(now, 7, 18, 0):
-        add(events, "U.S. Treasury", "Daily Treasury Par Yield Curve Rates", "Treasury", dt, "High", "daily expected", ["1M-30Y curve", "2Y", "10Y", "curve spreads"], "Treasury posts daily par yield curve data on business days; publication timing can vary.")
-
-    add(events, "CFTC", "Commitments of Traders", "CFTC COT", next_weekday(now, 4, 15, 30), "High", "weekly expected", ["spec net", "commercial net", "open interest", "weekly change"], "COT is generally released Friday afternoon Eastern, subject to holidays.")
-    add(events, "EIA", "Weekly Petroleum Status Report", "EIA", next_weekday(now, 2, 10, 30), "High", "weekly official-pattern", ["crude inventories", "Cushing", "gasoline", "distillate", "refinery utilization"], "WPSR summary/table files are normally released after 10:30 AM ET Wednesday; holidays can shift release.")
-    add(events, "EIA", "Weekly Natural Gas Storage Report", "EIA", next_weekday(now, 3, 10, 30), "High", "weekly expected", ["natural gas storage"], "Natural gas storage is normally a Thursday 10:30 AM ET release; holidays can shift release.")
-    add(events, "USDA/NASS", "Crop Progress", "USDA", next_weekday(now, 0, 16, 0), "Medium", "weekly seasonal expected", ["crop progress", "crop condition"], "Crop Progress is seasonal and generally Monday afternoon Eastern during the growing season.")
-    add(events, "Federal Reserve", "H.4.1 Factors Affecting Reserve Balances", "Federal Reserve", next_weekday(now, 3, 16, 30), "High", "weekly official-pattern", ["Fed assets", "reserve balances", "reverse repo", "TGA"], "H.4.1 is generally a Thursday 4:30 PM ET weekly release.")
-
-    # Monthly/quarterly macro reports. These are release-watch estimates based on common release patterns.
-    # They remain useful as a dashboard reminder but are not a substitute for the official agency calendar.
-    for dt in monthly_candidates(now, lambda y, m: first_weekday(y, m, 4, 8, 30), 3):
-        add(events, "BLS", "Employment Situation", "BLS", dt, "Very High", "monthly expected", ["payrolls", "unemployment", "wages", "participation", "U-6"], "Usually released at 8:30 AM ET on the first Friday; official BLS calendar controls.")
-    for dt in monthly_candidates(now, lambda y, m: nth_weekday(y, m, 2, 2, 8, 30), 3):
-        add(events, "BLS", "Consumer Price Index", "BLS", dt, "Very High", "monthly estimated", ["headline CPI", "core CPI", "shelter", "energy", "food"], "Estimated second-Wednesday watch date; official BLS calendar controls.")
-    for dt in monthly_candidates(now, lambda y, m: nth_weekday(y, m, 3, 2, 8, 30), 3):
-        add(events, "BLS", "Producer Price Index", "BLS", dt, "High", "monthly estimated", ["headline PPI", "core PPI"], "Estimated second-Thursday watch date; official BLS calendar controls.")
-    for dt in monthly_candidates(now, lambda y, m: nth_weekday(y, m, 5, 4, 8, 30), 3):
-        add(events, "BEA", "Personal Income and Outlays / PCE", "BEA", dt, "Very High", "monthly estimated", ["PCE", "core PCE", "personal income", "consumption", "savings rate"], "Estimated late-month watch date; official BEA release schedule controls.")
-    for dt in monthly_candidates(now, lambda y, m: nth_weekday(y, m, 3, 4, 8, 30), 3):
-        add(events, "BEA", "GDP / Corporate Profits", "BEA", dt, "High", "quarterly/monthly estimated", ["real GDP", "GDP components", "corporate profits"], "Estimated late-month watch date; official BEA release schedule controls.")
-    for dt in monthly_candidates(now, lambda y, m: nth_weekday(y, m, 2, 3, 8, 30), 3):
-        add(events, "Census", "Retail Sales", "Census", dt, "High", "monthly estimated", ["retail sales", "control group"], "Estimated mid-month watch date; official Census calendar controls.")
-    for dt in monthly_candidates(now, lambda y, m: nth_weekday(y, m, 4, 3, 8, 30), 3):
-        add(events, "Census", "Housing Starts / Building Permits", "Census", dt, "Medium", "monthly estimated", ["housing starts", "building permits"], "Estimated mid-month watch date; official Census calendar controls.")
-    for dt in monthly_candidates(now, lambda y, m: nth_weekday(y, m, 3, 4, 8, 30), 3):
-        add(events, "Census", "Durable Goods", "Census", dt, "Medium", "monthly estimated", ["durable goods orders"], "Estimated late-month watch date; official Census calendar controls.")
-
-    # Sort and keep an actionable near-term window.
-    events = sorted(events, key=lambda e: e.event_time)
-    horizon = now.astimezone(ET) + timedelta(days=14)
+    events = dedupe_events(events)
+    horizon = now.astimezone(ET) + timedelta(days=21)
     upcoming = [e for e in events if e.event_time <= horizon]
     if len(upcoming) < 12:
-        upcoming = events[:18]
+        upcoming = events[:20]
     else:
-        upcoming = upcoming[:24]
+        upcoming = upcoming[:28]
+
+    official_count = sum(1 for e in upcoming if e.calendar_confidence == "official")
+    pattern_count = sum(1 for e in upcoming if e.calendar_confidence == "official-pattern")
+    estimated_count = sum(1 for e in upcoming if e.calendar_confidence == "estimated")
 
     return {
         "generatedAt": now.astimezone(UTC).isoformat(),
         "timezone": "America/New_York",
-        "windowDays": 14,
-        "method": "rule-based release watch generated during source refresh; entries marked estimated when official dates are not fetched directly",
+        "windowDays": 21,
+        "version": "v0.41-official-calendar-hardening",
+        "method": "official-date overrides + official-pattern recurring releases + visibly tagged estimates; scoring is unaffected",
+        "confidenceSummary": {
+            "official": official_count,
+            "officialPattern": pattern_count,
+            "estimated": estimated_count,
+        },
         "events": [e.to_json() for e in upcoming],
     }
 
@@ -159,6 +371,7 @@ def main() -> int:
     OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
     print(f"Generated {OUT.relative_to(ROOT)} with {len(data['events'])} upcoming report events.")
+    print(f"Confidence summary: {data['confidenceSummary']}")
     return 0
 
 
