@@ -1,7 +1,7 @@
 {
   "sourceId": "NOAA_NWS",
   "sourceName": "NOAA/National Weather Service public weather alerts",
-  "retrievedAt": "2026-05-20T15:17:17.959137+00:00",
+  "retrievedAt": "2026-05-20T15:30:24.126697+00:00",
   "endpoint": "https://api.weather.gov/alerts/active?status=actual&message_type=alert",
   "fetchAttempts": [
     {
@@ -26,14 +26,14 @@
       "sampleEvents": []
     },
     "FLOOD_STRESS": {
-      "count": 9,
-      "weighted": 17,
+      "count": 8,
+      "weighted": 16,
       "sampleEvents": [
         "Flood Advisory",
         "Flash Flood Warning",
         "Flood Warning",
-        "Flood Advisory",
-        "Flood Warning"
+        "Flood Warning",
+        "Flood Advisory"
       ]
     },
     "SEVERE_CONVECTIVE_STRESS": {
@@ -76,7 +76,7 @@
     ],
     [
       "Flood Advisory",
-      3
+      2
     ],
     [
       "Flood Warning",
@@ -89,6 +89,10 @@
     [
       "Coastal Flood Advisory",
       2
+    ],
+    [
+      "Special Weather Statement",
+      1
     ],
     [
       "Flash Flood Warning",
@@ -108,14 +112,21 @@
     ]
   ],
   "totalActiveAlerts": 254,
-  "weightedActiveAlerts": 358,
+  "weightedActiveAlerts": 359,
   "severityCounts": {
-    "Minor": 136,
+    "Moderate": 97,
+    "Minor": 135,
     "Unknown": 18,
-    "Severe": 4,
-    "Moderate": 96
+    "Severe": 4
   },
   "sampleAlerts": [
+    {
+      "event": "Special Weather Statement",
+      "severity": "Moderate",
+      "effective": "2026-05-20T11:20:00-04:00",
+      "area": "Tyler; Doddridge",
+      "headline": "Special Weather Statement issued May 20 at 11:20AM EDT by NWS Charleston WV"
+    },
     {
       "event": "Flood Advisory",
       "severity": "Minor",
@@ -127,14 +138,14 @@
       "event": "Air Quality Alert",
       "severity": "Unknown",
       "effective": "2026-05-20T10:31:00-04:00",
-      "area": "Salem; Gloucester; Camden; Northwestern Burlington; Ocean; Cumberland; Atlantic; Cape May; Atlantic Coastal Cape May; Coastal Atlantic; Coastal Ocean; Southeastern Burlington",
+      "area": "Kent; Queen Anne's",
       "headline": "Air Quality Alert issued May 20 at 10:31AM EDT by NWS Mount Holly NJ"
     },
     {
       "event": "Air Quality Alert",
       "severity": "Unknown",
       "effective": "2026-05-20T10:31:00-04:00",
-      "area": "Kent; Queen Anne's",
+      "area": "Salem; Gloucester; Camden; Northwestern Burlington; Ocean; Cumberland; Atlantic; Cape May; Atlantic Coastal Cape May; Coastal Atlantic; Coastal Ocean; Southeastern Burlington",
       "headline": "Air Quality Alert issued May 20 at 10:31AM EDT by NWS Mount Holly NJ"
     },
     {
@@ -166,11 +177,11 @@
       "headline": "Air Quality Alert issued May 20 at 9:35AM EDT by NWS Mount Holly NJ"
     },
     {
-      "event": "Flood Advisory",
+      "event": "Small Craft Advisory",
       "severity": "Minor",
-      "effective": "2026-05-20T08:30:00-05:00",
-      "area": "Brazoria, TX; Fort Bend, TX; Galveston, TX; Harris, TX; Matagorda, TX; Wharton, TX",
-      "headline": "Flood Advisory issued May 20 at 8:30AM CDT until May 20 at 10:30AM CDT by NWS Houston/Galveston TX"
+      "effective": "2026-05-20T03:20:00-10:00",
+      "area": "Oahu Leeward Waters; Kaiwi Channel; Maui County Windward Waters; Maui County Leeward Waters; Big Island Windward Waters",
+      "headline": "Small Craft Advisory issued May 20 at 3:20AM HST until May 22 at 6:00AM HST by NWS Honolulu HI"
     },
     {
       "event": "Gale Watch",
@@ -178,13 +189,6 @@
       "effective": "2026-05-20T03:20:00-10:00",
       "area": "Pailolo Channel; Alenuihaha Channel",
       "headline": "Gale Watch issued May 20 at 3:20AM HST until May 22 at 6:00AM HST by NWS Honolulu HI"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-05-20T03:20:00-10:00",
-      "area": "Oahu Leeward Waters; Kaiwi Channel; Maui County Windward Waters; Maui County Leeward Waters; Big Island Windward Waters",
-      "headline": "Small Craft Advisory issued May 20 at 3:20AM HST until May 22 at 6:00AM HST by NWS Honolulu HI"
     },
     {
       "event": "Small Craft Advisory",
@@ -222,31 +226,17 @@
       "headline": "Flood Warning issued May 20 at 8:27AM EDT until May 21 at 2:42PM EDT by NWS Indianapolis IN"
     },
     {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
+      "event": "Gale Warning",
+      "severity": "Moderate",
       "effective": "2026-05-20T04:10:00-08:00",
-      "area": "Yakutat Bay",
-      "headline": "Small Craft Advisory issued May 20 at 4:10AM AKDT until May 21 at 5:00AM AKDT by NWS Juneau AK"
+      "area": "Gulf of Alaska South of 57 Degrees North and East of 144 W",
+      "headline": "Gale Warning issued May 20 at 4:10AM AKDT until May 20 at 5:00PM AKDT by NWS Juneau AK"
     },
     {
       "event": "Small Craft Advisory",
       "severity": "Minor",
       "effective": "2026-05-20T04:10:00-08:00",
-      "area": "Clarence Strait",
-      "headline": "Small Craft Advisory issued May 20 at 4:10AM AKDT until May 21 at 5:00AM AKDT by NWS Juneau AK"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-05-20T04:10:00-08:00",
-      "area": "Dixon Entrance to Cape Decision from 15 to 90 NM",
-      "headline": "Small Craft Advisory issued May 20 at 4:10AM AKDT until May 21 at 5:00AM AKDT by NWS Juneau AK"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-05-20T04:10:00-08:00",
-      "area": "Dixon Entrance to Cape Decision out to 15 NM",
+      "area": "Sumner Strait",
       "headline": "Small Craft Advisory issued May 20 at 4:10AM AKDT until May 21 at 5:00AM AKDT by NWS Juneau AK"
     },
     {
@@ -267,29 +257,36 @@
       "event": "Small Craft Advisory",
       "severity": "Minor",
       "effective": "2026-05-20T04:10:00-08:00",
-      "area": "Sumner Strait",
-      "headline": "Small Craft Advisory issued May 20 at 4:10AM AKDT until May 21 at 5:00AM AKDT by NWS Juneau AK"
-    },
-    {
-      "event": "Gale Warning",
-      "severity": "Moderate",
-      "effective": "2026-05-20T04:10:00-08:00",
-      "area": "Gulf of Alaska South of 57 Degrees North and East of 144 W",
-      "headline": "Gale Warning issued May 20 at 4:10AM AKDT until May 20 at 5:00PM AKDT by NWS Juneau AK"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-05-20T04:10:00-08:00",
       "area": "Cross Sound",
       "headline": "Small Craft Advisory issued May 20 at 4:10AM AKDT until May 21 at 5:00AM AKDT by NWS Juneau AK"
     },
     {
       "event": "Small Craft Advisory",
       "severity": "Minor",
-      "effective": "2026-05-20T04:06:00-08:00",
-      "area": "Gore Point to Marmot Island from 15 to 80 NM",
-      "headline": "Small Craft Advisory issued May 20 at 4:06AM AKDT until May 21 at 5:00PM AKDT by NWS Anchorage AK"
+      "effective": "2026-05-20T04:10:00-08:00",
+      "area": "Clarence Strait",
+      "headline": "Small Craft Advisory issued May 20 at 4:10AM AKDT until May 21 at 5:00AM AKDT by NWS Juneau AK"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-05-20T04:10:00-08:00",
+      "area": "Yakutat Bay",
+      "headline": "Small Craft Advisory issued May 20 at 4:10AM AKDT until May 21 at 5:00AM AKDT by NWS Juneau AK"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-05-20T04:10:00-08:00",
+      "area": "Dixon Entrance to Cape Decision from 15 to 90 NM",
+      "headline": "Small Craft Advisory issued May 20 at 4:10AM AKDT until May 21 at 5:00AM AKDT by NWS Juneau AK"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-05-20T04:10:00-08:00",
+      "area": "Dixon Entrance to Cape Decision out to 15 NM",
+      "headline": "Small Craft Advisory issued May 20 at 4:10AM AKDT until May 21 at 5:00AM AKDT by NWS Juneau AK"
     },
     {
       "event": "Small Craft Advisory",
@@ -302,21 +299,7 @@
       "event": "Small Craft Advisory",
       "severity": "Minor",
       "effective": "2026-05-20T04:06:00-08:00",
-      "area": "Marmot Island To Sitkinak from 15 to 85 NM",
-      "headline": "Small Craft Advisory issued May 20 at 4:06AM AKDT until May 21 at 5:00PM AKDT by NWS Anchorage AK"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-05-20T04:06:00-08:00",
-      "area": "West of Barren Islands Including Kamishak Bay",
-      "headline": "Small Craft Advisory issued May 20 at 4:06AM AKDT until May 21 at 5:00PM AKDT by NWS Anchorage AK"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-05-20T04:06:00-08:00",
-      "area": "Barren Islands East",
+      "area": "Shelikof Strait",
       "headline": "Small Craft Advisory issued May 20 at 4:06AM AKDT until May 21 at 5:00PM AKDT by NWS Anchorage AK"
     },
     {
@@ -330,8 +313,36 @@
       "event": "Small Craft Advisory",
       "severity": "Minor",
       "effective": "2026-05-20T04:06:00-08:00",
-      "area": "Shelikof Strait",
+      "area": "Marmot Island to Sitkinak out to 15 NM",
       "headline": "Small Craft Advisory issued May 20 at 4:06AM AKDT until May 21 at 5:00PM AKDT by NWS Anchorage AK"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-05-20T04:06:00-08:00",
+      "area": "Barren Islands East",
+      "headline": "Small Craft Advisory issued May 20 at 4:06AM AKDT until May 21 at 5:00PM AKDT by NWS Anchorage AK"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-05-20T04:06:00-08:00",
+      "area": "West of Barren Islands Including Kamishak Bay",
+      "headline": "Small Craft Advisory issued May 20 at 4:06AM AKDT until May 21 at 5:00PM AKDT by NWS Anchorage AK"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-05-20T04:06:00-08:00",
+      "area": "Marmot Island To Sitkinak from 15 to 85 NM",
+      "headline": "Small Craft Advisory issued May 20 at 4:06AM AKDT until May 21 at 5:00PM AKDT by NWS Anchorage AK"
+    },
+    {
+      "event": "Gale Warning",
+      "severity": "Moderate",
+      "effective": "2026-05-20T04:06:00-08:00",
+      "area": "Cape Suckling to Gravel Point out to 15 NM",
+      "headline": "Gale Warning issued May 20 at 4:06AM AKDT until May 20 at 5:00PM AKDT by NWS Anchorage AK"
     },
     {
       "event": "Small Craft Advisory",
@@ -348,32 +359,11 @@
       "headline": "Small Craft Advisory issued May 20 at 4:06AM AKDT until May 21 at 5:00PM AKDT by NWS Anchorage AK"
     },
     {
-      "event": "Gale Warning",
-      "severity": "Moderate",
-      "effective": "2026-05-20T04:06:00-08:00",
-      "area": "Cape Suckling to Gravel Point out to 15 NM",
-      "headline": "Gale Warning issued May 20 at 4:06AM AKDT until May 20 at 5:00PM AKDT by NWS Anchorage AK"
-    },
-    {
-      "event": "Gale Warning",
-      "severity": "Moderate",
-      "effective": "2026-05-20T04:06:00-08:00",
-      "area": "Cape Suckling to Cape Cleare from 15 to 75 NM",
-      "headline": "Gale Warning issued May 20 at 4:06AM AKDT until May 20 at 5:00PM AKDT by NWS Anchorage AK"
-    },
-    {
       "event": "Small Craft Advisory",
       "severity": "Minor",
       "effective": "2026-05-20T04:06:00-08:00",
-      "area": "Central and Eastern Prince William Sound",
-      "headline": "Small Craft Advisory issued May 20 at 4:06AM AKDT until May 20 at 5:00PM AKDT by NWS Anchorage AK"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-05-20T04:06:00-08:00",
-      "area": "Cape Cleare to Gore Point out to 15 NM",
-      "headline": "Small Craft Advisory issued May 20 at 4:06AM AKDT until May 20 at 5:00PM AKDT by NWS Anchorage AK"
+      "area": "Gore Point to Marmot Island from 15 to 80 NM",
+      "headline": "Small Craft Advisory issued May 20 at 4:06AM AKDT until May 21 at 5:00PM AKDT by NWS Anchorage AK"
     },
     {
       "event": "Small Craft Advisory",
@@ -386,15 +376,29 @@
       "event": "Small Craft Advisory",
       "severity": "Minor",
       "effective": "2026-05-20T04:06:00-08:00",
-      "area": "Marmot Island to Sitkinak out to 15 NM",
-      "headline": "Small Craft Advisory issued May 20 at 4:06AM AKDT until May 21 at 5:00PM AKDT by NWS Anchorage AK"
+      "area": "Cape Cleare to Gore Point out to 15 NM",
+      "headline": "Small Craft Advisory issued May 20 at 4:06AM AKDT until May 20 at 5:00PM AKDT by NWS Anchorage AK"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-05-20T04:06:00-08:00",
+      "area": "Central and Eastern Prince William Sound",
+      "headline": "Small Craft Advisory issued May 20 at 4:06AM AKDT until May 20 at 5:00PM AKDT by NWS Anchorage AK"
     },
     {
       "event": "Gale Warning",
       "severity": "Moderate",
+      "effective": "2026-05-20T04:06:00-08:00",
+      "area": "Cape Suckling to Cape Cleare from 15 to 75 NM",
+      "headline": "Gale Warning issued May 20 at 4:06AM AKDT until May 20 at 5:00PM AKDT by NWS Anchorage AK"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
       "effective": "2026-05-20T03:53:00-08:00",
-      "area": "Nikolski to Seguam Bering Side from 15 to 85 NM",
-      "headline": "Gale Warning issued May 20 at 3:53AM AKDT until May 21 at 5:00AM AKDT by NWS Anchorage AK"
+      "area": "Kuskokwim Delta and Etolin Strait out to 15 NM",
+      "headline": "Small Craft Advisory issued May 20 at 3:53AM AKDT until May 21 at 5:00AM AKDT by NWS Anchorage AK"
     },
     {
       "event": "Gale Warning",
@@ -418,34 +422,6 @@
       "headline": "Small Craft Advisory issued May 20 at 3:53AM AKDT until May 21 at 5:00PM AKDT by NWS Anchorage AK"
     },
     {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-05-20T03:53:00-08:00",
-      "area": "Seguam to Adak Bering Side out to 15 NM",
-      "headline": "Small Craft Advisory issued May 20 at 3:53AM AKDT until May 21 at 5:00PM AKDT by NWS Anchorage AK"
-    },
-    {
-      "event": "Gale Warning",
-      "severity": "Moderate",
-      "effective": "2026-05-20T03:53:00-08:00",
-      "area": "Nikolski to Seguam Bering Side out to 15 NM",
-      "headline": "Gale Warning issued May 20 at 3:53AM AKDT until May 21 at 5:00PM AKDT by NWS Anchorage AK"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-05-20T03:53:00-08:00",
-      "area": "Bristol Bay greater than 15 NM",
-      "headline": "Small Craft Advisory issued May 20 at 3:53AM AKDT until May 21 at 5:00PM AKDT by NWS Anchorage AK"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-05-20T03:53:00-08:00",
-      "area": "Sitkinak to Castle Cape out to 15 NM",
-      "headline": "Small Craft Advisory issued May 20 at 3:53AM AKDT until May 21 at 5:00PM AKDT by NWS Anchorage AK"
-    },
-    {
       "event": "Gale Warning",
       "severity": "Moderate",
       "effective": "2026-05-20T03:53:00-08:00",
@@ -463,8 +439,36 @@
       "event": "Gale Warning",
       "severity": "Moderate",
       "effective": "2026-05-20T03:53:00-08:00",
-      "area": "Castle Cape to Cape Tolstoi from 15 to 100 NM",
-      "headline": "Gale Warning issued May 20 at 3:53AM AKDT until May 21 at 5:00PM AKDT by NWS Anchorage AK"
+      "area": "Nikolski to Seguam Bering Side from 15 to 85 NM",
+      "headline": "Gale Warning issued May 20 at 3:53AM AKDT until May 21 at 5:00AM AKDT by NWS Anchorage AK"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-05-20T03:53:00-08:00",
+      "area": "Bristol Bay from Cape Chichagof to Cape Pierce out to 15 NM",
+      "headline": "Small Craft Advisory issued May 20 at 3:53AM AKDT until May 21 at 5:00AM AKDT by NWS Anchorage AK"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-05-20T03:53:00-08:00",
+      "area": "North and West of Nunivak Island",
+      "headline": "Small Craft Advisory issued May 20 at 3:53AM AKDT until May 21 at 5:00AM AKDT by NWS Anchorage AK"
+    },
+    {
+      "event": "Gale Warning",
+      "severity": "Moderate",
+      "effective": "2026-05-20T03:53:00-08:00",
+      "area": "Seguam to Adak Pacific Side from 15 to 75 NM",
+      "headline": "Gale Warning issued May 20 at 3:53AM AKDT until May 21 at 5:00AM AKDT by NWS Anchorage AK"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-05-20T03:53:00-08:00",
+      "area": "Unalaska Bay",
+      "headline": "Small Craft Advisory issued May 20 at 3:53AM AKDT until May 21 at 5:00PM AKDT by NWS Anchorage AK"
     }
   ]
 }
