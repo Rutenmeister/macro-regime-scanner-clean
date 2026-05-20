@@ -138,7 +138,39 @@ python scripts/validate_score_history.py
 python scripts/validate_signal_framework.py
 ```
 
-## v0.41 note — Official Release Calendar Hardening
+## v0.46 note — Official Release Calendar Hardening
 
-v0.41 keeps the v0.40 raw-score/history scanner intact and hardens the Upcoming Tracked Reports module. Calendar events now include `calendarConfidence` (`official`, `official-pattern`, or `estimated`) and `sourceUrl`, with validation to prevent known false dates such as Retail Sales May 20, PCE May 23, and Treasury releases on Memorial Day.
+v0.46 keeps the v0.40 raw-score/history scanner intact and hardens the Upcoming Tracked Reports module. Calendar events now include `calendarConfidence` (`official`, `official-pattern`, or `estimated`) and `sourceUrl`, with validation to prevent known false dates such as Retail Sales May 20, PCE May 23, and Treasury releases on Memorial Day.
 
+
+
+## v0.46 Research Infrastructure Additions
+
+This package includes five integrated version steps after v0.41:
+
+- v0.42 release-result schema (`data/release_results.json`).
+- v0.43 validation summary framework (`data/validation/score_validation_summary.json`).
+- v0.44 source QA / asset coverage (`data/source_quality.json`).
+- v0.45 generated professional reports (`data/reports/`).
+- v0.46 suite bridge exports (`data/exports/regime_labels_latest.json` and `.csv`).
+
+Run the workflow or execute the scripts in this order after refreshing source lanes:
+
+```bash
+python scripts/generate_release_calendar.py
+python scripts/recompute_live_scores.py
+python scripts/validate_data.py
+python scripts/validate_score_history.py
+python scripts/validate_signal_framework.py
+python scripts/validate_release_calendar.py
+python scripts/generate_release_results.py
+python scripts/validate_release_results.py
+python scripts/build_validation_report.py
+python scripts/build_source_quality.py
+python scripts/validate_source_quality.py
+python scripts/export_regime_bridge.py
+python scripts/validate_regime_bridge.py
+python scripts/generate_professional_report.py
+```
+
+Do not treat null actual/forecast/previous values as zero or neutral. They mean no trusted result feed is attached yet.

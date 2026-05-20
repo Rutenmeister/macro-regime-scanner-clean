@@ -1,0 +1,469 @@
+{
+  "version": "v0.44-source-quality",
+  "generatedAt": "2026-05-20T15:26:05.957297+00:00",
+  "summary": {
+    "lanes": 9,
+    "liveOrFreshLanes": 3,
+    "highCoverageAssets": 0,
+    "insufficientCoverageAssets": 49
+  },
+  "lanes": {
+    "TREASURY_OFFICIAL": {
+      "qualityGrade": "workflow_ready",
+      "qualityScore": 72,
+      "latestDate": "Run Refresh Treasury Lane to populate live Treasury date",
+      "status": "workflow_ready",
+      "note": "v0.16 includes fetch/apply workflow for official Daily Treasury Par Yield Curve Rates. Rates are percentages, not prices."
+    },
+    "BLS_PUBLIC": {
+      "qualityGrade": "live_or_fresh",
+      "qualityScore": 90,
+      "latestDate": "pending first BLS refresh",
+      "status": "workflow-ready",
+      "note": "BLS inflation/labor lane added in v0.24. Run Refresh BLS Inflation Labor Lane to populate CPI, core CPI, PPI, unemployment, payroll, and wage inputs."
+    },
+    "BEA_PUBLIC": {
+      "qualityGrade": "candidate",
+      "qualityScore": 35,
+      "latestDate": null,
+      "status": "candidate",
+      "note": "Use a BEA API key stored as a GitHub secret if needed."
+    },
+    "CFTC_COT": {
+      "qualityGrade": "workflow_ready",
+      "qualityScore": 72,
+      "latestDate": "Run Refresh COT Lane to populate latest COT report date",
+      "status": "workflow_ready",
+      "note": "v0.23 COT lane separates spec direction, weekly change, crowding risk, commercial/hedger extremes, and spec-commercial conflict."
+    },
+    "EIA_OPEN_DATA": {
+      "qualityGrade": "live_or_fresh",
+      "qualityScore": 90,
+      "latestDate": "requires EIA_API_KEY",
+      "status": "workflow_ready",
+      "note": "EIA energy lane added. Add free EIA_API_KEY secret, then run Refresh All Public Sources."
+    },
+    "USDA_PUBLIC": {
+      "qualityGrade": "live_or_fresh",
+      "qualityScore": 90,
+      "latestDate": "requires USDA_API_KEY",
+      "status": "workflow_ready",
+      "note": "USDA/NASS Quick Stats agriculture lane added for crop condition, progress, and production. Add free USDA_API_KEY secret, then run Refresh USDA Agriculture Lane or Refresh All Public Sources."
+    },
+    "NOAA_NWS": {
+      "qualityGrade": "candidate",
+      "qualityScore": 35,
+      "latestDate": null,
+      "status": "candidate",
+      "note": "Keep weather context simple at first; avoid paid model data."
+    },
+    "FED_FRED_SELECTED": {
+      "qualityGrade": "candidate",
+      "qualityScore": 35,
+      "latestDate": null,
+      "status": "candidate",
+      "note": "Approve individual FRED series one by one before production use."
+    },
+    "CENSUS_PUBLIC": {
+      "qualityGrade": "candidate",
+      "qualityScore": 35,
+      "latestDate": null,
+      "status": "candidate",
+      "note": "Use for public growth/consumer/trade context after higher-priority lanes."
+    }
+  },
+  "assets": [
+    {
+      "symbol": "USD",
+      "coverageLabel": "Insufficient direct live evidence",
+      "countedRows": 0,
+      "contextRows": 0,
+      "excludedRows": 40,
+      "directEvidenceRatio": 0.0
+    },
+    {
+      "symbol": "EURUSD",
+      "coverageLabel": "Insufficient direct live evidence",
+      "countedRows": 0,
+      "contextRows": 0,
+      "excludedRows": 40,
+      "directEvidenceRatio": 0.0
+    },
+    {
+      "symbol": "GBPUSD",
+      "coverageLabel": "Insufficient direct live evidence",
+      "countedRows": 0,
+      "contextRows": 0,
+      "excludedRows": 40,
+      "directEvidenceRatio": 0.0
+    },
+    {
+      "symbol": "USDJPY",
+      "coverageLabel": "Insufficient direct live evidence",
+      "countedRows": 0,
+      "contextRows": 0,
+      "excludedRows": 40,
+      "directEvidenceRatio": 0.0
+    },
+    {
+      "symbol": "USDCHF",
+      "coverageLabel": "Insufficient direct live evidence",
+      "countedRows": 0,
+      "contextRows": 0,
+      "excludedRows": 40,
+      "directEvidenceRatio": 0.0
+    },
+    {
+      "symbol": "USDCAD",
+      "coverageLabel": "Insufficient direct live evidence",
+      "countedRows": 0,
+      "contextRows": 0,
+      "excludedRows": 40,
+      "directEvidenceRatio": 0.0
+    },
+    {
+      "symbol": "AUDUSD",
+      "coverageLabel": "Insufficient direct live evidence",
+      "countedRows": 0,
+      "contextRows": 0,
+      "excludedRows": 40,
+      "directEvidenceRatio": 0.0
+    },
+    {
+      "symbol": "NZDUSD",
+      "coverageLabel": "Insufficient direct live evidence",
+      "countedRows": 0,
+      "contextRows": 0,
+      "excludedRows": 40,
+      "directEvidenceRatio": 0.0
+    },
+    {
+      "symbol": "EURGBP",
+      "coverageLabel": "Insufficient direct live evidence",
+      "countedRows": 0,
+      "contextRows": 0,
+      "excludedRows": 40,
+      "directEvidenceRatio": 0.0
+    },
+    {
+      "symbol": "EURJPY",
+      "coverageLabel": "Insufficient direct live evidence",
+      "countedRows": 0,
+      "contextRows": 0,
+      "excludedRows": 40,
+      "directEvidenceRatio": 0.0
+    },
+    {
+      "symbol": "AUDJPY",
+      "coverageLabel": "Insufficient direct live evidence",
+      "countedRows": 0,
+      "contextRows": 0,
+      "excludedRows": 40,
+      "directEvidenceRatio": 0.0
+    },
+    {
+      "symbol": "NZDJPY",
+      "coverageLabel": "Insufficient direct live evidence",
+      "countedRows": 0,
+      "contextRows": 0,
+      "excludedRows": 40,
+      "directEvidenceRatio": 0.0
+    },
+    {
+      "symbol": "2Y",
+      "coverageLabel": "Insufficient direct live evidence",
+      "countedRows": 0,
+      "contextRows": 0,
+      "excludedRows": 40,
+      "directEvidenceRatio": 0.0
+    },
+    {
+      "symbol": "5Y",
+      "coverageLabel": "Insufficient direct live evidence",
+      "countedRows": 0,
+      "contextRows": 0,
+      "excludedRows": 40,
+      "directEvidenceRatio": 0.0
+    },
+    {
+      "symbol": "10Y",
+      "coverageLabel": "Insufficient direct live evidence",
+      "countedRows": 0,
+      "contextRows": 0,
+      "excludedRows": 40,
+      "directEvidenceRatio": 0.0
+    },
+    {
+      "symbol": "30Y",
+      "coverageLabel": "Insufficient direct live evidence",
+      "countedRows": 0,
+      "contextRows": 0,
+      "excludedRows": 40,
+      "directEvidenceRatio": 0.0
+    },
+    {
+      "symbol": "2s10s",
+      "coverageLabel": "Insufficient direct live evidence",
+      "countedRows": 0,
+      "contextRows": 0,
+      "excludedRows": 40,
+      "directEvidenceRatio": 0.0
+    },
+    {
+      "symbol": "5s30s",
+      "coverageLabel": "Insufficient direct live evidence",
+      "countedRows": 0,
+      "contextRows": 0,
+      "excludedRows": 40,
+      "directEvidenceRatio": 0.0
+    },
+    {
+      "symbol": "RealYld",
+      "coverageLabel": "Insufficient direct live evidence",
+      "countedRows": 0,
+      "contextRows": 0,
+      "excludedRows": 40,
+      "directEvidenceRatio": 0.0
+    },
+    {
+      "symbol": "5Y BE",
+      "coverageLabel": "Insufficient direct live evidence",
+      "countedRows": 0,
+      "contextRows": 0,
+      "excludedRows": 40,
+      "directEvidenceRatio": 0.0
+    },
+    {
+      "symbol": "10Y BE",
+      "coverageLabel": "Insufficient direct live evidence",
+      "countedRows": 0,
+      "contextRows": 0,
+      "excludedRows": 40,
+      "directEvidenceRatio": 0.0
+    },
+    {
+      "symbol": "SPX500",
+      "coverageLabel": "Insufficient direct live evidence",
+      "countedRows": 0,
+      "contextRows": 0,
+      "excludedRows": 40,
+      "directEvidenceRatio": 0.0
+    },
+    {
+      "symbol": "NASDAQ100",
+      "coverageLabel": "Insufficient direct live evidence",
+      "countedRows": 0,
+      "contextRows": 0,
+      "excludedRows": 40,
+      "directEvidenceRatio": 0.0
+    },
+    {
+      "symbol": "RUSSELL2000",
+      "coverageLabel": "Insufficient direct live evidence",
+      "countedRows": 0,
+      "contextRows": 0,
+      "excludedRows": 40,
+      "directEvidenceRatio": 0.0
+    },
+    {
+      "symbol": "DOW",
+      "coverageLabel": "Insufficient direct live evidence",
+      "countedRows": 0,
+      "contextRows": 0,
+      "excludedRows": 40,
+      "directEvidenceRatio": 0.0
+    },
+    {
+      "symbol": "GER40",
+      "coverageLabel": "Insufficient direct live evidence",
+      "countedRows": 0,
+      "contextRows": 0,
+      "excludedRows": 40,
+      "directEvidenceRatio": 0.0
+    },
+    {
+      "symbol": "UK100",
+      "coverageLabel": "Insufficient direct live evidence",
+      "countedRows": 0,
+      "contextRows": 0,
+      "excludedRows": 40,
+      "directEvidenceRatio": 0.0
+    },
+    {
+      "symbol": "NIKKEI",
+      "coverageLabel": "Insufficient direct live evidence",
+      "countedRows": 0,
+      "contextRows": 0,
+      "excludedRows": 40,
+      "directEvidenceRatio": 0.0
+    },
+    {
+      "symbol": "CHINA50",
+      "coverageLabel": "Insufficient direct live evidence",
+      "countedRows": 0,
+      "contextRows": 0,
+      "excludedRows": 40,
+      "directEvidenceRatio": 0.0
+    },
+    {
+      "symbol": "HSI",
+      "coverageLabel": "Insufficient direct live evidence",
+      "countedRows": 0,
+      "contextRows": 0,
+      "excludedRows": 40,
+      "directEvidenceRatio": 0.0
+    },
+    {
+      "symbol": "EM",
+      "coverageLabel": "Insufficient direct live evidence",
+      "countedRows": 0,
+      "contextRows": 0,
+      "excludedRows": 40,
+      "directEvidenceRatio": 0.0
+    },
+    {
+      "symbol": "HY Spread",
+      "coverageLabel": "Insufficient direct live evidence",
+      "countedRows": 0,
+      "contextRows": 0,
+      "excludedRows": 40,
+      "directEvidenceRatio": 0.0
+    },
+    {
+      "symbol": "IG Spread",
+      "coverageLabel": "Insufficient direct live evidence",
+      "countedRows": 0,
+      "contextRows": 0,
+      "excludedRows": 40,
+      "directEvidenceRatio": 0.0
+    },
+    {
+      "symbol": "FCI",
+      "coverageLabel": "Insufficient direct live evidence",
+      "countedRows": 0,
+      "contextRows": 0,
+      "excludedRows": 40,
+      "directEvidenceRatio": 0.0
+    },
+    {
+      "symbol": "Gold",
+      "coverageLabel": "Insufficient direct live evidence",
+      "countedRows": 0,
+      "contextRows": 0,
+      "excludedRows": 40,
+      "directEvidenceRatio": 0.0
+    },
+    {
+      "symbol": "Silver",
+      "coverageLabel": "Insufficient direct live evidence",
+      "countedRows": 0,
+      "contextRows": 0,
+      "excludedRows": 40,
+      "directEvidenceRatio": 0.0
+    },
+    {
+      "symbol": "Copper",
+      "coverageLabel": "Insufficient direct live evidence",
+      "countedRows": 0,
+      "contextRows": 0,
+      "excludedRows": 40,
+      "directEvidenceRatio": 0.0
+    },
+    {
+      "symbol": "WTI Oil",
+      "coverageLabel": "Insufficient direct live evidence",
+      "countedRows": 0,
+      "contextRows": 0,
+      "excludedRows": 40,
+      "directEvidenceRatio": 0.0
+    },
+    {
+      "symbol": "Brent Oil",
+      "coverageLabel": "Insufficient direct live evidence",
+      "countedRows": 0,
+      "contextRows": 0,
+      "excludedRows": 40,
+      "directEvidenceRatio": 0.0
+    },
+    {
+      "symbol": "Natural Gas",
+      "coverageLabel": "Insufficient direct live evidence",
+      "countedRows": 0,
+      "contextRows": 0,
+      "excludedRows": 40,
+      "directEvidenceRatio": 0.0
+    },
+    {
+      "symbol": "Gasoline",
+      "coverageLabel": "Insufficient direct live evidence",
+      "countedRows": 0,
+      "contextRows": 0,
+      "excludedRows": 40,
+      "directEvidenceRatio": 0.0
+    },
+    {
+      "symbol": "Heating Oil",
+      "coverageLabel": "Insufficient direct live evidence",
+      "countedRows": 0,
+      "contextRows": 0,
+      "excludedRows": 40,
+      "directEvidenceRatio": 0.0
+    },
+    {
+      "symbol": "CMD-FUND",
+      "coverageLabel": "Insufficient direct live evidence",
+      "countedRows": 0,
+      "contextRows": 0,
+      "excludedRows": 40,
+      "directEvidenceRatio": 0.0
+    },
+    {
+      "symbol": "Wheat",
+      "coverageLabel": "Insufficient direct live evidence",
+      "countedRows": 0,
+      "contextRows": 0,
+      "excludedRows": 40,
+      "directEvidenceRatio": 0.0
+    },
+    {
+      "symbol": "Corn",
+      "coverageLabel": "Insufficient direct live evidence",
+      "countedRows": 0,
+      "contextRows": 0,
+      "excludedRows": 40,
+      "directEvidenceRatio": 0.0
+    },
+    {
+      "symbol": "Soybeans",
+      "coverageLabel": "Insufficient direct live evidence",
+      "countedRows": 0,
+      "contextRows": 0,
+      "excludedRows": 40,
+      "directEvidenceRatio": 0.0
+    },
+    {
+      "symbol": "Coffee",
+      "coverageLabel": "Insufficient direct live evidence",
+      "countedRows": 0,
+      "contextRows": 0,
+      "excludedRows": 40,
+      "directEvidenceRatio": 0.0
+    },
+    {
+      "symbol": "Sugar",
+      "coverageLabel": "Insufficient direct live evidence",
+      "countedRows": 0,
+      "contextRows": 0,
+      "excludedRows": 40,
+      "directEvidenceRatio": 0.0
+    },
+    {
+      "symbol": "Cotton",
+      "coverageLabel": "Insufficient direct live evidence",
+      "countedRows": 0,
+      "contextRows": 0,
+      "excludedRows": 40,
+      "directEvidenceRatio": 0.0
+    }
+  ]
+}

@@ -40,3 +40,12 @@ input,select{background:rgba(4,2,12,.86);border:1px solid rgba(222,214,255,.17);
 .calendar-pattern{ color:#bae6fd; background:rgba(14,165,233,.12); border-color:rgba(14,165,233,.35); }
 .calendar-estimated{ color:#fde68a; background:rgba(245,158,11,.12); border-color:rgba(245,158,11,.35); }
 .release-source-link{ color:#93c5fd; text-decoration:underline; text-underline-offset:2px; margin-left:4px; }
+
+
+/* v0.42-v0.46 release results, source QA, validation, reports, suite bridge */
+.release-results-mini{display:flex;flex-wrap:wrap;gap:.28rem;margin-top:.45rem;font-size:10px;color:#cbd5e1}
+.release-results-mini span{border:1px solid rgba(148,163,184,.18);background:rgba(255,255,255,.035);border-radius:999px;padding:.12rem .38rem;white-space:nowrap}
+.release-results-mini.result-ready span{border-color:rgba(34,197,94,.28);background:rgba(34,197,94,.08);color:#bbf7d0}
+.release-results-mini.result-upcoming span{border-color:rgba(14,165,233,.25);background:rgba(14,165,233,.07);color:#bae6fd}
+.release-results-mini.result-pending span,.release-results-mini.muted span{border-color:rgba(245,158,11,.22);background:rgba(245,158,11,.06);color:#fde68a}
+.report-ready-note{border:1px solid rgba(64,241,223,.16);background:rgba(64,241,223,.045);border-radius:1rem;padding:.65rem;color:#cbd5e1;font-size:.75rem;line-height:1.45}
