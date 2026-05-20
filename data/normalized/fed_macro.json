@@ -2,7 +2,7 @@
   "schemaVersion": "0.28.1",
   "sourceId": "FED_FRED_SELECTED",
   "sourceName": "Federal Reserve / FRED public data",
-  "retrievedAt": "2026-05-20T19:16:18.801905+00:00",
+  "retrievedAt": "2026-05-20T19:21:16.024366+00:00",
   "latestDate": "2026-05-20",
   "observations": {
     "EFFR": {
@@ -19,7 +19,7 @@
       "period": "2026-05-19",
       "previousPeriod": "2026-05-18",
       "releaseDate": "2026-05-19",
-      "retrievedAt": "2026-05-20T19:16:18.410029+00:00",
+      "retrievedAt": "2026-05-20T19:21:15.498433+00:00",
       "frequency": "daily",
       "score": 1,
       "sourceNote": "New York Fed effective federal funds rate via FRED."
@@ -38,7 +38,7 @@
       "period": "2026-05-13",
       "previousPeriod": "2026-05-06",
       "releaseDate": "2026-05-13",
-      "retrievedAt": "2026-05-20T19:16:18.478375+00:00",
+      "retrievedAt": "2026-05-20T19:21:15.587287+00:00",
       "frequency": "weekly",
       "score": 1,
       "sourceNote": "Board of Governors H.4.1 total assets via FRED; converted from millions to billions USD."
@@ -57,7 +57,7 @@
       "period": "2026-05-13",
       "previousPeriod": "2026-05-06",
       "releaseDate": "2026-05-13",
-      "retrievedAt": "2026-05-20T19:16:18.569075+00:00",
+      "retrievedAt": "2026-05-20T19:21:15.766327+00:00",
       "frequency": "weekly",
       "score": 2,
       "sourceNote": "Board of Governors H.4.1 reserve balances via FRED; converted from millions to billions USD."
@@ -76,7 +76,7 @@
       "period": "2026-05-20",
       "previousPeriod": "2026-05-19",
       "releaseDate": "2026-05-20",
-      "retrievedAt": "2026-05-20T19:16:18.678062+00:00",
+      "retrievedAt": "2026-05-20T19:21:15.928371+00:00",
       "frequency": "daily",
       "score": -1,
       "sourceNote": "New York Fed overnight reverse repo operations via FRED."
@@ -95,7 +95,7 @@
       "period": "2026-05-13",
       "previousPeriod": "2026-05-06",
       "releaseDate": "2026-05-13",
-      "retrievedAt": "2026-05-20T19:16:18.801531+00:00",
+      "retrievedAt": "2026-05-20T19:21:16.023988+00:00",
       "frequency": "weekly",
       "score": 1,
       "sourceNote": "Board of Governors H.4.1 Treasury General Account via FRED; converted from millions to billions USD."

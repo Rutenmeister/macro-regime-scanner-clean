@@ -1,12 +1,12 @@
 {
   "sourceId": "NOAA_NWS",
   "sourceName": "NOAA/National Weather Service public weather alerts",
-  "retrievedAt": "2026-05-20T19:16:28.111995+00:00",
+  "retrievedAt": "2026-05-20T19:21:23.543140+00:00",
   "endpoint": "https://api.weather.gov/alerts/active?status=actual&message_type=alert",
   "fetchAttempts": [
     {
       "endpoint": "https://api.weather.gov/alerts/active?status=actual&message_type=alert",
-      "features": 301
+      "features": 305
     }
   ],
   "categoryCounts": {
@@ -23,7 +23,7 @@
         "Frost Advisory",
         "Frost Advisory",
         "Freeze Warning",
-        "Freeze Warning"
+        "Frost Advisory"
       ]
     },
     "WINTER_STORM_STRESS": {
@@ -34,14 +34,14 @@
       ]
     },
     "FLOOD_STRESS": {
-      "count": 13,
-      "weighted": 29,
+      "count": 14,
+      "weighted": 30,
       "sampleEvents": [
         "Flood Advisory",
+        "Flood Advisory",
         "Flood Warning",
-        "Flash Flood Warning",
         "Flood Watch",
-        "Flood Warning"
+        "Flash Flood Warning"
       ]
     },
     "SEVERE_CONVECTIVE_STRESS": {
@@ -86,7 +86,7 @@
     ],
     [
       "Special Weather Statement",
-      8
+      11
     ],
     [
       "Severe Thunderstorm Watch",
@@ -102,7 +102,7 @@
     ],
     [
       "Flood Advisory",
-      3
+      4
     ],
     [
       "Severe Thunderstorm Warning",
@@ -133,11 +133,11 @@
       2
     ],
     [
-      "Winter Storm Warning",
+      "Winter Weather Advisory",
       1
     ],
     [
-      "Winter Weather Advisory",
+      "Winter Storm Warning",
       1
     ],
     [
@@ -157,15 +157,50 @@
       1
     ]
   ],
-  "totalActiveAlerts": 301,
-  "weightedActiveAlerts": 441,
+  "totalActiveAlerts": 305,
+  "weightedActiveAlerts": 448,
   "severityCounts": {
-    "Moderate": 104,
     "Severe": 18,
-    "Minor": 159,
+    "Moderate": 107,
+    "Minor": 160,
     "Unknown": 20
   },
   "sampleAlerts": [
+    {
+      "event": "Severe Thunderstorm Warning",
+      "severity": "Severe",
+      "effective": "2026-05-20T15:20:00-04:00",
+      "area": "Lawrence, OH; Cabell, WV; Lincoln, WV; Wayne, WV",
+      "headline": "Severe Thunderstorm Warning issued May 20 at 3:20PM EDT until May 20 at 3:45PM EDT by NWS Charleston WV"
+    },
+    {
+      "event": "Special Weather Statement",
+      "severity": "Moderate",
+      "effective": "2026-05-20T14:20:00-05:00",
+      "area": "Clay; Jackson; Overton",
+      "headline": "Special Weather Statement issued May 20 at 2:20PM CDT by NWS Nashville TN"
+    },
+    {
+      "event": "Special Weather Statement",
+      "severity": "Moderate",
+      "effective": "2026-05-20T15:17:00-04:00",
+      "area": "Dade; Walker; Catoosa; Whitfield",
+      "headline": "Special Weather Statement issued May 20 at 3:17PM EDT by NWS Peachtree City GA"
+    },
+    {
+      "event": "Flood Advisory",
+      "severity": "Minor",
+      "effective": "2026-05-20T14:17:00-05:00",
+      "area": "St. James, LA",
+      "headline": "Flood Advisory issued May 20 at 2:17PM CDT until May 20 at 5:15PM CDT by NWS New Orleans LA"
+    },
+    {
+      "event": "Special Weather Statement",
+      "severity": "Moderate",
+      "effective": "2026-05-20T15:16:00-04:00",
+      "area": "Buncombe; Henderson",
+      "headline": "Special Weather Statement issued May 20 at 3:16PM EDT by NWS Greenville-Spartanburg SC"
+    },
     {
       "event": "Special Weather Statement",
       "severity": "Moderate",
@@ -209,13 +244,6 @@
       "headline": "Special Weather Statement issued May 20 at 3:09PM EDT by NWS Jackson KY"
     },
     {
-      "event": "Special Weather Statement",
-      "severity": "Moderate",
-      "effective": "2026-05-20T15:08:00-04:00",
-      "area": "Dade; Walker; Chattooga",
-      "headline": "Special Weather Statement issued May 20 at 3:08PM EDT by NWS Peachtree City GA"
-    },
-    {
       "event": "Small Craft Advisory",
       "severity": "Minor",
       "effective": "2026-05-20T14:08:00-05:00",
@@ -223,11 +251,11 @@
       "headline": "Small Craft Advisory issued May 20 at 2:08PM CDT until May 22 at 10:00PM CDT by NWS Milwaukee/Sullivan WI"
     },
     {
-      "event": "Severe Thunderstorm Warning",
-      "severity": "Severe",
-      "effective": "2026-05-20T15:04:00-04:00",
-      "area": "Elliott, KY; Morgan, KY; Rowan, KY",
-      "headline": "Severe Thunderstorm Warning issued May 20 at 3:04PM EDT until May 20 at 3:30PM EDT by NWS Jackson KY"
+      "event": "Special Weather Statement",
+      "severity": "Moderate",
+      "effective": "2026-05-20T15:08:00-04:00",
+      "area": "Dade; Walker; Chattooga",
+      "headline": "Special Weather Statement issued May 20 at 3:08PM EDT by NWS Peachtree City GA"
     },
     {
       "event": "Special Weather Statement",
@@ -251,18 +279,18 @@
       "headline": "Special Weather Statement issued May 20 at 1:59PM CDT by NWS Louisville KY"
     },
     {
-      "event": "Winter Storm Warning",
-      "severity": "Severe",
-      "effective": "2026-05-20T12:55:00-06:00",
-      "area": "Absaroka/Beartooth Mountains",
-      "headline": "Winter Storm Warning issued May 20 at 12:55PM MDT until May 21 at 6:00PM MDT by NWS Billings MT"
-    },
-    {
       "event": "Winter Weather Advisory",
       "severity": "Moderate",
       "effective": "2026-05-20T12:55:00-06:00",
       "area": "Pryor/Northern Bighorn Mountains; Northeast Bighorn Mountains",
       "headline": "Winter Weather Advisory issued May 20 at 12:55PM MDT until May 21 at 9:00PM MDT by NWS Billings MT"
+    },
+    {
+      "event": "Winter Storm Warning",
+      "severity": "Severe",
+      "effective": "2026-05-20T12:55:00-06:00",
+      "area": "Absaroka/Beartooth Mountains",
+      "headline": "Winter Storm Warning issued May 20 at 12:55PM MDT until May 21 at 6:00PM MDT by NWS Billings MT"
     },
     {
       "event": "Flood Advisory",
@@ -296,14 +324,14 @@
       "event": "Small Craft Advisory",
       "severity": "Minor",
       "effective": "2026-05-20T14:25:00-04:00",
-      "area": "Coastal waters from Manasquan Inlet to Little Egg Inlet NJ out 20 NM; Coastal waters from Little Egg Inlet to Great Egg Inlet NJ out 20 NM; Coastal waters from Great Egg Inlet to Cape May NJ out 20 NM; Coastal waters from Cape May NJ to Cap",
+      "area": "Delaware Bay waters south of East Point NJ to Slaughter Beach DE",
       "headline": "Small Craft Advisory issued May 20 at 2:25PM EDT until May 22 at 6:00PM EDT by NWS Mount Holly NJ"
     },
     {
       "event": "Small Craft Advisory",
       "severity": "Minor",
       "effective": "2026-05-20T14:25:00-04:00",
-      "area": "Delaware Bay waters south of East Point NJ to Slaughter Beach DE",
+      "area": "Coastal waters from Manasquan Inlet to Little Egg Inlet NJ out 20 NM; Coastal waters from Little Egg Inlet to Great Egg Inlet NJ out 20 NM; Coastal waters from Great Egg Inlet to Cape May NJ out 20 NM; Coastal waters from Cape May NJ to Cap",
       "headline": "Small Craft Advisory issued May 20 at 2:25PM EDT until May 22 at 6:00PM EDT by NWS Mount Holly NJ"
     },
     {
@@ -387,14 +415,14 @@
       "event": "Small Craft Advisory",
       "severity": "Minor",
       "effective": "2026-05-20T14:01:00-04:00",
-      "area": "Straits of Mackinac within 5 nm of Mackinac Bridge including Mackinac Island; St Ignace to False Detour Channel; 5NM East of Mackinac Bridge to Presque Isle Light MI including Bois Blanc Island; Presque Isle Light to Sturgeon Pt MI Includin",
+      "area": "Whitefish Bay (U.S. Portion)/Whitefish Point to Point Iroquois MI; St. Marys River Point Iroquois to E. Potagannissing Bay",
       "headline": "Small Craft Advisory issued May 20 at 2:01PM EDT until May 20 at 6:00PM EDT by NWS Gaylord MI"
     },
     {
       "event": "Small Craft Advisory",
       "severity": "Minor",
       "effective": "2026-05-20T14:01:00-04:00",
-      "area": "Whitefish Bay (U.S. Portion)/Whitefish Point to Point Iroquois MI; St. Marys River Point Iroquois to E. Potagannissing Bay",
+      "area": "Straits of Mackinac within 5 nm of Mackinac Bridge including Mackinac Island; St Ignace to False Detour Channel; 5NM East of Mackinac Bridge to Presque Isle Light MI including Bois Blanc Island; Presque Isle Light to Sturgeon Pt MI Includin",
       "headline": "Small Craft Advisory issued May 20 at 2:01PM EDT until May 20 at 6:00PM EDT by NWS Gaylord MI"
     },
     {
@@ -412,13 +440,6 @@
       "headline": "Freeze Warning issued May 20 at 1:57PM EDT until May 21 at 9:00AM EDT by NWS Marquette MI"
     },
     {
-      "event": "Flash Flood Warning",
-      "severity": "Severe",
-      "effective": "2026-05-20T12:41:00-05:00",
-      "area": "Andrews, TX; Ector, TX",
-      "headline": "Flash Flood Warning issued May 20 at 12:41PM CDT until May 20 at 3:45PM CDT by NWS Midland/Odessa TX"
-    },
-    {
       "event": "Flood Watch",
       "severity": "Severe",
       "effective": "2026-05-20T12:41:00-05:00",
@@ -426,11 +447,11 @@
       "headline": "Flood Watch issued May 20 at 12:41PM CDT until May 25 at 7:00AM CDT by NWS Houston/Galveston TX"
     },
     {
-      "event": "Freeze Warning",
-      "severity": "Moderate",
-      "effective": "2026-05-20T13:35:00-04:00",
-      "area": "Western Chippewa; Central Chippewa; Western Mackinac; Eastern Mackinac",
-      "headline": "Freeze Warning issued May 20 at 1:35PM EDT until May 21 at 9:00AM EDT by NWS Gaylord MI"
+      "event": "Flash Flood Warning",
+      "severity": "Severe",
+      "effective": "2026-05-20T12:41:00-05:00",
+      "area": "Andrews, TX; Ector, TX",
+      "headline": "Flash Flood Warning issued May 20 at 12:41PM CDT until May 20 at 3:45PM CDT by NWS Midland/Odessa TX"
     },
     {
       "event": "Frost Advisory",
@@ -438,6 +459,13 @@
       "effective": "2026-05-20T13:35:00-04:00",
       "area": "Southeast Chippewa",
       "headline": "Frost Advisory issued May 20 at 1:35PM EDT until May 21 at 9:00AM EDT by NWS Gaylord MI"
+    },
+    {
+      "event": "Freeze Warning",
+      "severity": "Moderate",
+      "effective": "2026-05-20T13:35:00-04:00",
+      "area": "Western Chippewa; Central Chippewa; Western Mackinac; Eastern Mackinac",
+      "headline": "Freeze Warning issued May 20 at 1:35PM EDT until May 21 at 9:00AM EDT by NWS Gaylord MI"
     },
     {
       "event": "Frost Advisory",
@@ -450,8 +478,8 @@
       "event": "Small Craft Advisory",
       "severity": "Minor",
       "effective": "2026-05-20T13:27:00-04:00",
-      "area": "Chesapeake Bay from Drum Point MD to Smith Point VA; Tidal Potomac from Cobb Island MD to Smith Point VA; Tangier Sound and the inland waters surrounding Bloodsworth Island",
-      "headline": "Small Craft Advisory issued May 20 at 1:27PM EDT until May 22 at 6:00AM EDT by NWS Baltimore MD/Washington DC"
+      "area": "Chesapeake Bay from North Beach to Drum Point MD; Patuxent River to Broomes Island MD",
+      "headline": "Small Craft Advisory issued May 20 at 1:27PM EDT until May 21 at 6:00PM EDT by NWS Baltimore MD/Washington DC"
     },
     {
       "event": "Small Craft Advisory",
@@ -464,14 +492,14 @@
       "event": "Small Craft Advisory",
       "severity": "Minor",
       "effective": "2026-05-20T13:27:00-04:00",
-      "area": "Chesapeake Bay from North Beach to Drum Point MD; Patuxent River to Broomes Island MD",
-      "headline": "Small Craft Advisory issued May 20 at 1:27PM EDT until May 21 at 6:00PM EDT by NWS Baltimore MD/Washington DC"
+      "area": "Chesapeake Bay from Drum Point MD to Smith Point VA; Tidal Potomac from Cobb Island MD to Smith Point VA; Tangier Sound and the inland waters surrounding Bloodsworth Island",
+      "headline": "Small Craft Advisory issued May 20 at 1:27PM EDT until May 22 at 6:00AM EDT by NWS Baltimore MD/Washington DC"
     },
     {
       "event": "Small Craft Advisory",
       "severity": "Minor",
       "effective": "2026-05-20T13:24:00-04:00",
-      "area": "Coastal waters from Fenwick Island DE to Chincoteague VA out 20 NM; Coastal waters from Chincoteague to Parramore Island VA out 20 NM",
+      "area": "Coastal waters from Parramore Island to Cape Charles Light VA out 20 NM; Coastal Waters from Cape Charles Light to Virginia-North Carolina border out 20 NM",
       "headline": "Small Craft Advisory issued May 20 at 1:24PM EDT until May 22 at 7:00PM EDT by NWS Wakefield VA"
     },
     {
@@ -485,36 +513,8 @@
       "event": "Small Craft Advisory",
       "severity": "Minor",
       "effective": "2026-05-20T13:24:00-04:00",
-      "area": "Coastal waters from Parramore Island to Cape Charles Light VA out 20 NM; Coastal Waters from Cape Charles Light to Virginia-North Carolina border out 20 NM",
+      "area": "Coastal waters from Fenwick Island DE to Chincoteague VA out 20 NM; Coastal waters from Chincoteague to Parramore Island VA out 20 NM",
       "headline": "Small Craft Advisory issued May 20 at 1:24PM EDT until May 22 at 7:00PM EDT by NWS Wakefield VA"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-05-20T13:24:00-04:00",
-      "area": "Chesapeake Bay from Smith Point to Windmill Point VA; Chesapeake Bay from Windmill Point to New Point Comfort VA",
-      "headline": "Small Craft Advisory issued May 20 at 1:24PM EDT until May 22 at 7:00PM EDT by NWS Wakefield VA"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-05-20T13:24:00-04:00",
-      "area": "Chesapeake Bay from New Point Comfort to Little Creek VA; Chesapeake Bay from Little Creek VA to Cape Henry VA including the Chesapeake Bay Bridge Tunnel",
-      "headline": "Small Craft Advisory issued May 20 at 1:24PM EDT until May 22 at 7:00PM EDT by NWS Wakefield VA"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-05-20T13:21:00-04:00",
-      "area": "St Joseph to South Haven MI; South Haven to Holland MI; Holland to Grand Haven MI",
-      "headline": "Small Craft Advisory issued May 20 at 1:21PM EDT until May 21 at 2:00AM EDT by NWS Grand Rapids MI"
-    },
-    {
-      "event": "Beach Hazards Statement",
-      "severity": "Moderate",
-      "effective": "2026-05-20T13:21:00-04:00",
-      "area": "Ottawa; Allegan; Van Buren",
-      "headline": "Beach Hazards Statement issued May 20 at 1:21PM EDT until May 21 at 2:00AM EDT by NWS Grand Rapids MI"
     }
   ]
 }
