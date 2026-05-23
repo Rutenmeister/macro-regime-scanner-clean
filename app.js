@@ -159,11 +159,6 @@ function axisClass(label){
 function axisWord(label, positiveWord='positive', negativeWord='negative'){
   return label === 'negative' ? negativeWord : positiveWord;
 }
-function driverListForQuad(list, emptyText){
-  const items=(list||[]).slice(0,4);
-  if(!items.length) return `<span class="pill">${emptyText}</span>`;
-  return items.map(d=>`<span class="pill">${esc(d.name||'driver')}: ${signed(d.contribution||0)}</span>`).join('');
-}
 function renderMacroQuadSnapshot(){
   const box=$('macroQuadSnapshot');
   if(!box) return;
@@ -184,13 +179,9 @@ function renderMacroQuadSnapshot(){
       <p class="text-xs text-slate-400 mt-2 max-w-4xl leading-relaxed">${esc(simple)}</p>
     </div>
     <div class="macro-quad-axis-grid macro-quad-axis-grid-simple">
-      <div class="macro-axis-card"><div class="tiny-label">Growth pressure</div><div class="metric-value text-2xl font-bold ${axisClass(g.label)}">${fmtScore(g.score || 0)}</div><div class="text-[11px] text-slate-400">${axisWord(g.label, 'positive', 'negative')} · ${g.inputCount || 0} inputs</div></div>
-      <div class="macro-axis-card"><div class="tiny-label">Inflation pressure</div><div class="metric-value text-2xl font-bold ${axisClass(i.label)}">${fmtScore(i.score || 0)}</div><div class="text-[11px] text-slate-400">${axisWord(i.label, 'positive', 'negative')} · ${i.inputCount || 0} inputs</div></div>
+      <div class="macro-axis-card"><div class="tiny-label">Growth pressure</div><div class="metric-value text-lg font-bold ${axisClass(g.label)}">${axisWord(g.label, 'Positive', 'Negative')}</div></div>
+      <div class="macro-axis-card"><div class="tiny-label">Inflation pressure</div><div class="metric-value text-lg font-bold ${axisClass(i.label)}">${axisWord(i.label, 'Positive', 'Negative')}</div></div>
     </div>
-  </div>
-  <div class="grid xl:grid-cols-2 gap-3 mt-4">
-    <div class="macro-driver-box"><div class="tiny-label">Growth drivers</div><div class="flex flex-wrap gap-2 mt-2">${driverListForQuad(g.topPositiveDrivers, 'No positive growth driver')} ${driverListForQuad(g.topNegativeDrivers, 'No negative growth driver')}</div></div>
-    <div class="macro-driver-box"><div class="tiny-label">Inflation / policy drivers</div><div class="flex flex-wrap gap-2 mt-2">${driverListForQuad(i.topPositiveDrivers, 'No positive inflation driver')} ${driverListForQuad(i.topNegativeDrivers, 'No negative inflation driver')}</div></div>
   </div>`;
 }
 
@@ -236,7 +227,7 @@ function renderRegimeSnapshot(){
     const html=items.length ? items.map(a=>`<button class="snapshot-chip" data-jump="${esc(a.id)}"><span>${esc(a.symbol)}</span><strong class="${scoreClass(a.score)}">${fmtScore(a.score)}</strong><em>${regimeTags(a).join(' · ')}</em></button>`).join('') : '<div class="text-[11px] text-slate-500">No assets in this bucket.</div>';
     return `<div class="snapshot-card"><div class="tiny-label">${g}</div><div class="snapshot-chip-wrap mt-2">${html}</div></div>`;
   }).join('');
-  box.innerHTML=`<div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-3"><div><div class="tiny-label">Regime Queue Snapshot</div><h3 class="text-lg font-semibold text-slate-100 mt-1">What deserves attention first?</h3><p class="text-xs text-slate-500 mt-1">Primary buckets use uncapped raw pressure scores. Improving, deteriorating, conflicted, freshness, and confidence are tags, not buckets that hide strong positive/negative pressure.</p></div><span class="pill self-start md:self-auto">v0.50.2 simple four-quad regime</span></div><div class="snapshot-grid">${cards}</div>`;
+  box.innerHTML=`<div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-3"><div><div class="tiny-label">Regime Queue Snapshot</div><h3 class="text-lg font-semibold text-slate-100 mt-1">What deserves attention first?</h3><p class="text-xs text-slate-500 mt-1">Primary buckets use uncapped raw pressure scores. Improving, deteriorating, conflicted, freshness, and confidence are tags, not buckets that hide strong positive/negative pressure.</p></div><span class="pill self-start md:self-auto">v0.50.3 simple four-quad regime</span></div><div class="snapshot-grid">${cards}</div>`;
   box.querySelectorAll('[data-jump]').forEach(btn=>btn.addEventListener('click',e=>{ const id=btn.dataset.jump; selectedId=id; expanded.add(id); const row=document.querySelector(`.market-row[data-id="${CSS.escape(id)}"]`); if(row){ row.scrollIntoView({behavior:'smooth', block:'center'}); } renderAll(); }));
 }
 function generateRegimeBrief(){
@@ -250,7 +241,7 @@ function generateRegimeBrief(){
   const events=(RELEASE_CALENDAR?.events||[]).slice(0,8).map(ev=>`- ${ev.date || ''} ${ev.timeET || ''}: ${ev.report} (${ev.source}, ${ev.calendarConfidence || ev.scheduleType || 'unverified'})`).join('\n') || '- No generated release calendar loaded.';
   const changes=changed.map(a=>`- ${a.symbol}: ${fmtScore((a.score||0)-(a.previousScore||0))} change, now ${fmtScore(a.score)} raw — ${a.scoreChangeLog?.summary || a.bias}`).join('\n');
   const quad = MACRO_QUAD ? `- Current regime: ${MACRO_QUAD.currentState || ''} — ${MACRO_QUAD.subtitle || ''}\n- Growth pressure: ${fmtScore(MACRO_QUAD.growth?.score || 0)} (${MACRO_QUAD.growth?.label || 'positive'})\n- Inflation pressure: ${fmtScore(MACRO_QUAD.inflation?.score || 0)} (${MACRO_QUAD.inflation?.label || 'positive'})\n- Read: ${MACRO_QUAD.simpleRead || ''}` : '- Growth / Inflation Regime not loaded.';
-  return `# Edgefield Research Macro Regime Brief v0.50.2\n\nGenerated: ${now}\n\nThis brief ranks public-source fundamental pressure evidence using uncapped raw net pressure scores. It is not a buy/sell signal and does not predict immediate price movement. Missing, stale, candidate, and display-only rows are not treated as neutral. v0.50.2 preserves the U.S.-centered, raw-score, no-price scanner while adding a simple four-quad Growth / Inflation Regime map.\n\n## Growth / Inflation Regime\n${quad}\n\n## Strongest positive raw pressure\n${topPos.map(fmt).join('\n') || '- No positive live-scored assets.'}\n\n## Strongest negative raw pressure\n${topNeg.map(fmt).join('\n') || '- No negative live-scored assets.'}\n\n## Conflicted / neutral candidates\n${conflicted.map(fmt).join('\n') || '- No conflicted or neutral candidates in current view.'}\n\n## Largest score changes\n${changes}\n\n## Source health\n${sourceLines || '- No source status loaded.'}\n\n## Upcoming tracked reports\n${events}\n\n## Caveats\n- Public-source macro/fundamental pressure only.\n- Scores are uncapped raw net pressure; larger absolute numbers mean more weighted evidence, not guaranteed price movement.\n- Mostly U.S.-based inputs, so relevance varies by asset.\n- Scores depend on current source freshness, row eligibility, and asset-specific mapping.\n- Open each asset row in the terminal to inspect counted, context, and excluded evidence.\n`;
+  return `# Edgefield Research Macro Regime Brief v0.50.3\n\nGenerated: ${now}\n\nThis brief ranks public-source fundamental pressure evidence using uncapped raw net pressure scores. It is not a buy/sell signal and does not predict immediate price movement. Missing, stale, candidate, and display-only rows are not treated as neutral. v0.50.3 preserves the U.S.-centered, raw-score, no-price scanner while adding a simple four-quad Growth / Inflation Regime map.\n\n## Growth / Inflation Regime\n${quad}\n\n## Strongest positive raw pressure\n${topPos.map(fmt).join('\n') || '- No positive live-scored assets.'}\n\n## Strongest negative raw pressure\n${topNeg.map(fmt).join('\n') || '- No negative live-scored assets.'}\n\n## Conflicted / neutral candidates\n${conflicted.map(fmt).join('\n') || '- No conflicted or neutral candidates in current view.'}\n\n## Largest score changes\n${changes}\n\n## Source health\n${sourceLines || '- No source status loaded.'}\n\n## Upcoming tracked reports\n${events}\n\n## Caveats\n- Public-source macro/fundamental pressure only.\n- Scores are uncapped raw net pressure; larger absolute numbers mean more weighted evidence, not guaranteed price movement.\n- Mostly U.S.-based inputs, so relevance varies by asset.\n- Scores depend on current source freshness, row eligibility, and asset-specific mapping.\n- Open each asset row in the terminal to inspect counted, context, and excluded evidence.\n`;
 }
 
 
@@ -330,9 +321,9 @@ function renderDiagnosis(){ /* right readout not included; public-source edition
 function renderAll(){ renderMacroQuadSnapshot(); renderRegimeSnapshot(); renderQueue(); renderDiagnosis(); }
 function download(filename,text,type='application/json'){ const blob=new Blob([text],{type}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download=filename; a.click(); URL.revokeObjectURL(url); }
 ['searchBox','universe','assetClass','subgroup','biasFilter','conflictFilter','freshFilter','sortMode','rowLimit'].forEach(id=>$(id).addEventListener('input',()=>{ if(id==='assetClass') updateSubgroups(); renderAll(); }));
-$('exportJson').addEventListener('click',()=>download('macro_regime_scanner_public_source_data_contract_v0_50_2.json',JSON.stringify({notice:'Public-source data contract. v0.50.2 is the simple four-quad regime baseline: U.S.-centered, raw-score, price-free macro pressure research data plus a no-price Growth / Inflation Regime map.',assets:ASSETS,source_status:SOURCE_STATUS,release_calendar:RELEASE_CALENDAR,release_results:RELEASE_RESULTS,source_quality:SOURCE_QUALITY,validation_summary:VALIDATION_SUMMARY,regime_bridge:REGIME_BRIDGE,macro_quad:MACRO_QUAD},null,2)));
+$('exportJson').addEventListener('click',()=>download('macro_regime_scanner_public_source_data_contract_v0_50_3.json',JSON.stringify({notice:'Public-source data contract. v0.50.3 is the simple four-quad regime display baseline: U.S.-centered, raw-score, price-free macro pressure research data plus a no-price Growth / Inflation Regime map.',assets:ASSETS,source_status:SOURCE_STATUS,release_calendar:RELEASE_CALENDAR,release_results:RELEASE_RESULTS,source_quality:SOURCE_QUALITY,validation_summary:VALIDATION_SUMMARY,regime_bridge:REGIME_BRIDGE,macro_quad:MACRO_QUAD},null,2)));
 const briefBtn=$('exportBrief');
-if(briefBtn) briefBtn.addEventListener('click',()=>download('edgefield_macro_regime_brief_v0_50_2.md', generateRegimeBrief(), 'text/markdown'));
+if(briefBtn) briefBtn.addEventListener('click',()=>download('edgefield_macro_regime_brief_v0_50_3.md', generateRegimeBrief(), 'text/markdown'));
 async function loadData(){
   try {
     const response = await fetch('data/macro_regime_scanner.json', { cache: 'no-store' });

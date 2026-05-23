@@ -24,8 +24,8 @@ def quad_block(quad):
     i = quad.get('inflation', {})
     return '\n'.join([
         f"- Current regime: {quad.get('currentState', '')} — {quad.get('subtitle', '')}",
-        f"- Growth pressure: {g.get('score', 'n/a')} ({g.get('label', 'n/a')})",
-        f"- Inflation pressure: {i.get('score', 'n/a')} ({i.get('label', 'n/a')})",
+        f"- Growth pressure: {str(g.get('label', 'n/a')).title()}",
+        f"- Inflation pressure: {str(i.get('label', 'n/a')).title()}",
         f"- Read: {quad.get('simpleRead', '')}",
     ])
 
@@ -41,11 +41,11 @@ def main():
     top_neg = sorted(assets, key=score)[:8]
     events = cal.get('events', [])[:10]
     now = datetime.now(timezone.utc).isoformat()
-    md = f"""# Edgefield Research Macro Regime Brief v0.50.2
+    md = f"""# Edgefield Research Macro Regime Brief v0.50.3
 
 Generated: {now}
 
-This brief ranks official/public-source macro pressure evidence for a U.S.-centered asset universe. Scores are raw, uncapped, and price-free. v0.50.2 adds a simple no-price four-quad Growth / Inflation Regime map. This is a research brief, not a buy/sell signal or investment advice.
+This brief ranks official/public-source macro pressure evidence for a U.S.-centered asset universe. Scores are raw, uncapped, and price-free. v0.50.3 keeps the simple no-price four-quad Growth / Inflation Regime display. This is a research brief, not a buy/sell signal or investment advice.
 
 ## Growth / Inflation Regime
 {quad_block(quad)}

@@ -31,8 +31,6 @@ def main():
             raise SystemExit(f'Invalid {axis} label: {obj.get("label")}')
         if not isinstance(obj.get('score'), (int, float)):
             raise SystemExit(f'Invalid {axis} score')
-        if not isinstance(obj.get('inputCount'), int):
-            raise SystemExit(f'Invalid {axis} inputCount')
     print(f"VALIDATION PASSED: macro regime {data['currentState']} / {data['subtitle']}")
 
 

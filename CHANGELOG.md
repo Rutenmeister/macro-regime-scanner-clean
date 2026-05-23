@@ -1,9 +1,9 @@
-## v0.50.2 — Simple Four-Quad Regime Map
+## v0.50.3 — Simple Four-Quad Regime Display Map
 
 - Replaces the prior quad experiment with a simple four-regime model.
 - Growth and inflation axes resolve to positive or negative only.
 - Current regime is always one of Goldilocks, Reflation, Stagflation, or Deflation.
-- Removes quad confidence, low-conviction, and in-between regime outputs.
+- Removes quad confidence, and in-between regime outputs.
 - Keeps price out of live scoring and leaves the core scanner unchanged.
 
 ## v0.49 — Beta Launch Wrapper

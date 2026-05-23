@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Build the Edgefield Growth / Inflation Regime.
 
-v0.50.2 rules:
+v0.50.3 rules:
 - No price is used.
 - Four regimes only: Goldilocks, Reflation, Stagflation, Deflation.
 - No confidence score, no blend states, no transition language.
@@ -222,14 +222,9 @@ def collect_axis(assets: list[dict[str, Any]], axis: str) -> dict[str, Any]:
     score = max(-15.0, min(15.0, score))
     # Four-quad model: every axis resolves to positive or negative. Zero resolves positive by convention.
     label = "positive" if score >= 0 else "negative"
-    top_positive = sorted([d for d in drivers if d["contribution"] > 0], key=lambda d: d["contribution"], reverse=True)[:5]
-    top_negative = sorted([d for d in drivers if d["contribution"] < 0], key=lambda d: d["contribution"])[:5]
     return {
         "score": round(score, 1),
         "label": label,
-        "inputCount": len(drivers),
-        "topPositiveDrivers": top_positive,
-        "topNegativeDrivers": top_negative,
     }
 
 
@@ -252,7 +247,7 @@ def main() -> None:
     copy = STATE_COPY[state]
     output = {
         "schemaVersion": "macro_quad_snapshot_v1_2",
-        "version": "v0.50.2-simple-four-quad-regime-map",
+        "version": "v0.50.3-simple-four-quad-regime-display",
         "generatedAt": datetime.now(timezone.utc).isoformat(),
         "method": "No-price four-quad regime map. Growth and inflation axes are built from current public-source scanner evidence and resolve to positive or negative only.",
         "currentState": state,

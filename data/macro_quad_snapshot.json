@@ -1,24 +1,18 @@
 {
   "schemaVersion": "macro_quad_snapshot_v1_2",
-  "version": "v0.50.2-simple-four-quad-regime-map",
-  "generatedAt": "2026-05-23T12:38:18.740080+00:00",
+  "version": "v0.50.3-simple-four-quad-regime-display",
+  "generatedAt": "2026-05-23T12:48:50.515717+00:00",
   "method": "No-price four-quad regime map. Growth and inflation axes are built from current public-source scanner evidence and resolve to positive or negative only.",
   "currentState": "Reflation",
   "subtitle": "Growth positive / Inflation positive",
   "simpleRead": "Growth evidence is supportive while inflation pressure is elevated.",
   "growth": {
     "score": 0.0,
-    "label": "positive",
-    "inputCount": 0,
-    "topPositiveDrivers": [],
-    "topNegativeDrivers": []
+    "label": "positive"
   },
   "inflation": {
     "score": 0.0,
-    "label": "positive",
-    "inputCount": 0,
-    "topPositiveDrivers": [],
-    "topNegativeDrivers": []
+    "label": "positive"
   },
   "states": [
     {

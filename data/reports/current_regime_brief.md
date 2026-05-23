@@ -1,13 +1,13 @@
-# Edgefield Research Macro Regime Brief v0.50.2
+# Edgefield Research Macro Regime Brief v0.50.3
 
-Generated: 2026-05-23T12:38:26.526036+00:00
+Generated: 2026-05-23T12:48:54.064013+00:00
 
-This brief ranks official/public-source macro pressure evidence for a U.S.-centered asset universe. Scores are raw, uncapped, and price-free. v0.50.2 adds a simple no-price four-quad Growth / Inflation Regime map. This is a research brief, not a buy/sell signal or investment advice.
+This brief ranks official/public-source macro pressure evidence for a U.S.-centered asset universe. Scores are raw, uncapped, and price-free. v0.50.3 keeps the simple no-price four-quad Growth / Inflation Regime display. This is a research brief, not a buy/sell signal or investment advice.
 
 ## Growth / Inflation Regime
 - Current regime: Reflation — Growth positive / Inflation positive
-- Growth pressure: 0.0 (positive)
-- Inflation pressure: 0.0 (positive)
+- Growth pressure: Positive
+- Inflation pressure: Positive
 - Read: Growth evidence is supportive while inflation pressure is elevated.
 
 ## Strongest positive raw pressure

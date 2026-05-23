@@ -1,6 +1,6 @@
 {
   "version": "v0.50.2-simple-four-quad-regime",
-  "generatedAt": "2026-05-23T12:38:30.384545+00:00",
+  "generatedAt": "2026-05-23T12:48:57.878620+00:00",
   "intendedConsumers": [
     "TradeStream",
     "Capital Trace",
@@ -10,7 +10,7 @@
   "regimes": [
     {
       "date": "2026-05-23",
-      "generatedAt": "2026-05-23T12:38:30.384545+00:00",
+      "generatedAt": "2026-05-23T12:48:57.878620+00:00",
       "assetId": "DXY",
       "symbol": "USD",
       "name": "U.S. Dollar Fundamental Pressure",
@@ -32,7 +32,7 @@
     },
     {
       "date": "2026-05-23",
-      "generatedAt": "2026-05-23T12:38:30.384545+00:00",
+      "generatedAt": "2026-05-23T12:48:57.878620+00:00",
       "assetId": "EURUSD",
       "symbol": "EURUSD",
       "name": "Euro / U.S. Dollar",
@@ -54,7 +54,7 @@
     },
     {
       "date": "2026-05-23",
-      "generatedAt": "2026-05-23T12:38:30.384545+00:00",
+      "generatedAt": "2026-05-23T12:48:57.878620+00:00",
       "assetId": "GBPUSD",
       "symbol": "GBPUSD",
       "name": "British Pound / U.S. Dollar",
@@ -76,7 +76,7 @@
     },
     {
       "date": "2026-05-23",
-      "generatedAt": "2026-05-23T12:38:30.384545+00:00",
+      "generatedAt": "2026-05-23T12:48:57.878620+00:00",
       "assetId": "USDJPY",
       "symbol": "USDJPY",
       "name": "U.S. Dollar / Japanese Yen",
@@ -98,7 +98,7 @@
     },
     {
       "date": "2026-05-23",
-      "generatedAt": "2026-05-23T12:38:30.384545+00:00",
+      "generatedAt": "2026-05-23T12:48:57.878620+00:00",
       "assetId": "USDCHF",
       "symbol": "USDCHF",
       "name": "U.S. Dollar / Swiss Franc",
@@ -120,7 +120,7 @@
     },
     {
       "date": "2026-05-23",
-      "generatedAt": "2026-05-23T12:38:30.384545+00:00",
+      "generatedAt": "2026-05-23T12:48:57.878620+00:00",
       "assetId": "USDCAD",
       "symbol": "USDCAD",
       "name": "U.S. Dollar / Canadian Dollar",
@@ -142,7 +142,7 @@
     },
     {
       "date": "2026-05-23",
-      "generatedAt": "2026-05-23T12:38:30.384545+00:00",
+      "generatedAt": "2026-05-23T12:48:57.878620+00:00",
       "assetId": "AUDUSD",
       "symbol": "AUDUSD",
       "name": "Australian Dollar / U.S. Dollar",
@@ -164,7 +164,7 @@
     },
     {
       "date": "2026-05-23",
-      "generatedAt": "2026-05-23T12:38:30.384545+00:00",
+      "generatedAt": "2026-05-23T12:48:57.878620+00:00",
       "assetId": "NZDUSD",
       "symbol": "NZDUSD",
       "name": "New Zealand Dollar / U.S. Dollar",
@@ -186,7 +186,7 @@
     },
     {
       "date": "2026-05-23",
-      "generatedAt": "2026-05-23T12:38:30.384545+00:00",
+      "generatedAt": "2026-05-23T12:48:57.878620+00:00",
       "assetId": "US02Y",
       "symbol": "2Y",
       "name": "U.S. 2-Year Treasury Yield",
@@ -208,7 +208,7 @@
     },
     {
       "date": "2026-05-23",
-      "generatedAt": "2026-05-23T12:38:30.384545+00:00",
+      "generatedAt": "2026-05-23T12:48:57.878620+00:00",
       "assetId": "US05Y",
       "symbol": "5Y",
       "name": "U.S. 5-Year Treasury Yield",
@@ -230,7 +230,7 @@
     },
     {
       "date": "2026-05-23",
-      "generatedAt": "2026-05-23T12:38:30.384545+00:00",
+      "generatedAt": "2026-05-23T12:48:57.878620+00:00",
       "assetId": "US10Y",
       "symbol": "10Y",
       "name": "U.S. 10-Year Treasury Yield",
@@ -252,7 +252,7 @@
     },
     {
       "date": "2026-05-23",
-      "generatedAt": "2026-05-23T12:38:30.384545+00:00",
+      "generatedAt": "2026-05-23T12:48:57.878620+00:00",
       "assetId": "US30Y",
       "symbol": "30Y",
       "name": "U.S. 30-Year Treasury Yield",
@@ -274,7 +274,7 @@
     },
     {
       "date": "2026-05-23",
-      "generatedAt": "2026-05-23T12:38:30.384545+00:00",
+      "generatedAt": "2026-05-23T12:48:57.878620+00:00",
       "assetId": "CURVE2S10",
       "symbol": "2s10s",
       "name": "U.S. 2s10s Yield Curve",
@@ -296,7 +296,7 @@
     },
     {
       "date": "2026-05-23",
-      "generatedAt": "2026-05-23T12:38:30.384545+00:00",
+      "generatedAt": "2026-05-23T12:48:57.878620+00:00",
       "assetId": "CURVE5S30",
       "symbol": "5s30s",
       "name": "U.S. 5s30s Yield Curve",
@@ -318,7 +318,7 @@
     },
     {
       "date": "2026-05-23",
-      "generatedAt": "2026-05-23T12:38:30.384545+00:00",
+      "generatedAt": "2026-05-23T12:48:57.878620+00:00",
       "assetId": "REALY",
       "symbol": "RealYld",
       "name": "U.S. Real Yield Proxy",
@@ -340,7 +340,7 @@
     },
     {
       "date": "2026-05-23",
-      "generatedAt": "2026-05-23T12:38:30.384545+00:00",
+      "generatedAt": "2026-05-23T12:48:57.878620+00:00",
       "assetId": "BE5Y",
       "symbol": "5Y BE",
       "name": "5-Year Breakeven Inflation",
@@ -362,7 +362,7 @@
     },
     {
       "date": "2026-05-23",
-      "generatedAt": "2026-05-23T12:38:30.384545+00:00",
+      "generatedAt": "2026-05-23T12:48:57.878620+00:00",
       "assetId": "BE10Y",
       "symbol": "10Y BE",
       "name": "10-Year Breakeven Inflation",
@@ -384,7 +384,7 @@
     },
     {
       "date": "2026-05-23",
-      "generatedAt": "2026-05-23T12:38:30.384545+00:00",
+      "generatedAt": "2026-05-23T12:48:57.878620+00:00",
       "assetId": "SPX",
       "symbol": "SPX500",
       "name": "S&P 500 Fundamental Pressure",
@@ -406,7 +406,7 @@
     },
     {
       "date": "2026-05-23",
-      "generatedAt": "2026-05-23T12:38:30.384545+00:00",
+      "generatedAt": "2026-05-23T12:48:57.878620+00:00",
       "assetId": "NDX",
       "symbol": "NASDAQ100",
       "name": "Nasdaq 100 Fundamental Pressure",
@@ -428,7 +428,7 @@
     },
     {
       "date": "2026-05-23",
-      "generatedAt": "2026-05-23T12:38:30.384545+00:00",
+      "generatedAt": "2026-05-23T12:48:57.878620+00:00",
       "assetId": "RUT",
       "symbol": "RUSSELL2000",
       "name": "Russell 2000 Fundamental Pressure",
@@ -450,7 +450,7 @@
     },
     {
       "date": "2026-05-23",
-      "generatedAt": "2026-05-23T12:38:30.384545+00:00",
+      "generatedAt": "2026-05-23T12:48:57.878620+00:00",
       "assetId": "DOW",
       "symbol": "DOW",
       "name": "Dow Jones Industrial Average Fundamental Pressure",
@@ -472,7 +472,7 @@
     },
     {
       "date": "2026-05-23",
-      "generatedAt": "2026-05-23T12:38:30.384545+00:00",
+      "generatedAt": "2026-05-23T12:48:57.878620+00:00",
       "assetId": "DAX",
       "symbol": "GER40",
       "name": "Germany 40 / DAX Fundamental Pressure",
@@ -494,7 +494,7 @@
     },
     {
       "date": "2026-05-23",
-      "generatedAt": "2026-05-23T12:38:30.384545+00:00",
+      "generatedAt": "2026-05-23T12:48:57.878620+00:00",
       "assetId": "UK100",
       "symbol": "UK100",
       "name": "FTSE / UK100 Fundamental Pressure",
@@ -516,7 +516,7 @@
     },
     {
       "date": "2026-05-23",
-      "generatedAt": "2026-05-23T12:38:30.384545+00:00",
+      "generatedAt": "2026-05-23T12:48:57.878620+00:00",
       "assetId": "NIKKEI",
       "symbol": "NIKKEI",
       "name": "Nikkei 225 Fundamental Pressure",
@@ -538,7 +538,7 @@
     },
     {
       "date": "2026-05-23",
-      "generatedAt": "2026-05-23T12:38:30.384545+00:00",
+      "generatedAt": "2026-05-23T12:48:57.878620+00:00",
       "assetId": "CHINA50",
       "symbol": "CHINA50",
       "name": "China 50 Fundamental Pressure",
@@ -560,7 +560,7 @@
     },
     {
       "date": "2026-05-23",
-      "generatedAt": "2026-05-23T12:38:30.384545+00:00",
+      "generatedAt": "2026-05-23T12:48:57.878620+00:00",
       "assetId": "HANGSENG",
       "symbol": "HSI",
       "name": "Hang Seng Fundamental Pressure",
@@ -582,7 +582,7 @@
     },
     {
       "date": "2026-05-23",
-      "generatedAt": "2026-05-23T12:38:30.384545+00:00",
+      "generatedAt": "2026-05-23T12:48:57.878620+00:00",
       "assetId": "EM",
       "symbol": "EM",
       "name": "Emerging Markets Fundamental Pressure",
@@ -604,7 +604,7 @@
     },
     {
       "date": "2026-05-23",
-      "generatedAt": "2026-05-23T12:38:30.384545+00:00",
+      "generatedAt": "2026-05-23T12:48:57.878620+00:00",
       "assetId": "HY",
       "symbol": "HY Spread",
       "name": "High-Yield Credit Spreads",
@@ -626,7 +626,7 @@
     },
     {
       "date": "2026-05-23",
-      "generatedAt": "2026-05-23T12:38:30.384545+00:00",
+      "generatedAt": "2026-05-23T12:48:57.878620+00:00",
       "assetId": "IG",
       "symbol": "IG Spread",
       "name": "Investment-Grade Credit Spreads",
@@ -648,7 +648,7 @@
     },
     {
       "date": "2026-05-23",
-      "generatedAt": "2026-05-23T12:38:30.384545+00:00",
+      "generatedAt": "2026-05-23T12:48:57.878620+00:00",
       "assetId": "FCI",
       "symbol": "FCI",
       "name": "Financial Conditions Fundamental Pressure",
@@ -670,7 +670,7 @@
     },
     {
       "date": "2026-05-23",
-      "generatedAt": "2026-05-23T12:38:30.384545+00:00",
+      "generatedAt": "2026-05-23T12:48:57.878620+00:00",
       "assetId": "GOLD",
       "symbol": "Gold",
       "name": "Gold Futures / XAUUSD",
@@ -692,7 +692,7 @@
     },
     {
       "date": "2026-05-23",
-      "generatedAt": "2026-05-23T12:38:30.384545+00:00",
+      "generatedAt": "2026-05-23T12:48:57.878620+00:00",
       "assetId": "SILVER",
       "symbol": "Silver",
       "name": "Silver Futures",
@@ -714,7 +714,7 @@
     },
     {
       "date": "2026-05-23",
-      "generatedAt": "2026-05-23T12:38:30.384545+00:00",
+      "generatedAt": "2026-05-23T12:48:57.878620+00:00",
       "assetId": "COPPER",
       "symbol": "Copper",
       "name": "Copper Futures",
@@ -736,7 +736,7 @@
     },
     {
       "date": "2026-05-23",
-      "generatedAt": "2026-05-23T12:38:30.384545+00:00",
+      "generatedAt": "2026-05-23T12:48:57.878620+00:00",
       "assetId": "WTI",
       "symbol": "WTI Oil",
       "name": "WTI Crude Oil",
@@ -758,7 +758,7 @@
     },
     {
       "date": "2026-05-23",
-      "generatedAt": "2026-05-23T12:38:30.384545+00:00",
+      "generatedAt": "2026-05-23T12:48:57.878620+00:00",
       "assetId": "BRENT",
       "symbol": "Brent Oil",
       "name": "Brent Crude Oil",
@@ -780,7 +780,7 @@
     },
     {
       "date": "2026-05-23",
-      "generatedAt": "2026-05-23T12:38:30.384545+00:00",
+      "generatedAt": "2026-05-23T12:48:57.878620+00:00",
       "assetId": "NG",
       "symbol": "Natural Gas",
       "name": "Natural Gas Futures",
@@ -802,7 +802,7 @@
     },
     {
       "date": "2026-05-23",
-      "generatedAt": "2026-05-23T12:38:30.384545+00:00",
+      "generatedAt": "2026-05-23T12:48:57.878620+00:00",
       "assetId": "GASOLINE",
       "symbol": "Gasoline",
       "name": "RBOB Gasoline",
@@ -824,7 +824,7 @@
     },
     {
       "date": "2026-05-23",
-      "generatedAt": "2026-05-23T12:38:30.384545+00:00",
+      "generatedAt": "2026-05-23T12:48:57.878620+00:00",
       "assetId": "HEATING",
       "symbol": "Heating Oil",
       "name": "Heating Oil / Distillates",
@@ -846,7 +846,7 @@
     },
     {
       "date": "2026-05-23",
-      "generatedAt": "2026-05-23T12:38:30.384545+00:00",
+      "generatedAt": "2026-05-23T12:48:57.878620+00:00",
       "assetId": "BCOM",
       "symbol": "CMD-FUND",
       "name": "Broad Commodity Fundamental Basket",
@@ -868,7 +868,7 @@
     },
     {
       "date": "2026-05-23",
-      "generatedAt": "2026-05-23T12:38:30.384545+00:00",
+      "generatedAt": "2026-05-23T12:48:57.878620+00:00",
       "assetId": "WHEAT",
       "symbol": "Wheat",
       "name": "Wheat Futures",
@@ -890,7 +890,7 @@
     },
     {
       "date": "2026-05-23",
-      "generatedAt": "2026-05-23T12:38:30.384545+00:00",
+      "generatedAt": "2026-05-23T12:48:57.878620+00:00",
       "assetId": "CORN",
       "symbol": "Corn",
       "name": "Corn Futures",
@@ -912,7 +912,7 @@
     },
     {
       "date": "2026-05-23",
-      "generatedAt": "2026-05-23T12:38:30.384545+00:00",
+      "generatedAt": "2026-05-23T12:48:57.878620+00:00",
       "assetId": "SOY",
       "symbol": "Soybeans",
       "name": "Soybean Futures",
@@ -934,7 +934,7 @@
     },
     {
       "date": "2026-05-23",
-      "generatedAt": "2026-05-23T12:38:30.384545+00:00",
+      "generatedAt": "2026-05-23T12:48:57.878620+00:00",
       "assetId": "COFFEE",
       "symbol": "Coffee",
       "name": "Coffee Futures",
@@ -956,7 +956,7 @@
     },
     {
       "date": "2026-05-23",
-      "generatedAt": "2026-05-23T12:38:30.384545+00:00",
+      "generatedAt": "2026-05-23T12:48:57.878620+00:00",
       "assetId": "SUGAR",
       "symbol": "Sugar",
       "name": "Sugar Futures",
@@ -978,7 +978,7 @@
     },
     {
       "date": "2026-05-23",
-      "generatedAt": "2026-05-23T12:38:30.384545+00:00",
+      "generatedAt": "2026-05-23T12:48:57.878620+00:00",
       "assetId": "COTTON",
       "symbol": "Cotton",
       "name": "Cotton Futures",
