@@ -1,11 +1,8 @@
-# Edgefield Research Macro Regime Brief v0.50.5
+# Edgefield Research Macro Regime Brief v0.49
 
-Generated: 2026-05-23T13:16:29.991436+00:00
+Generated: 2026-05-20T19:54:17.592043+00:00
 
-This brief ranks official/public-source macro pressure evidence for a U.S.-centered asset universe. Scores are raw, uncapped, and price-free. v0.50.5 keeps the simple no-price four-quad Growth / Inflation Regime display and fixes the axis scores so regime labels come directly from the signed growth and inflation tallies. This is a research brief, not a buy/sell signal or investment advice.
-
-## Growth / Inflation Regime
-- Growth / Inflation Regime requires a fresh workflow run.
+This brief ranks official/public-source macro pressure evidence for a U.S.-centered asset universe. Scores are raw, uncapped, and price-free. This is a research brief, not a buy/sell signal or investment advice.
 
 ## Strongest positive raw pressure
 - USD: Low evidence / avoid (+0.0 raw, confidence 18%, conflict Low) — No live-scored direct driver yet
