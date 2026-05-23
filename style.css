@@ -49,3 +49,9 @@ input,select{background:rgba(4,2,12,.86);border:1px solid rgba(222,214,255,.17);
 .release-results-mini.result-upcoming span{border-color:rgba(14,165,233,.25);background:rgba(14,165,233,.07);color:#bae6fd}
 .release-results-mini.result-pending span,.release-results-mini.muted span{border-color:rgba(245,158,11,.22);background:rgba(245,158,11,.06);color:#fde68a}
 .report-ready-note{border:1px solid rgba(64,241,223,.16);background:rgba(64,241,223,.045);border-radius:1rem;padding:.65rem;color:#cbd5e1;font-size:.75rem;line-height:1.45}
+
+.macro-regime-card{border-color:rgba(64,241,223,.18);background:linear-gradient(135deg,rgba(64,241,223,.07),rgba(255,255,255,.025));}
+.macro-regime-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.7rem;margin-top:.75rem}
+.macro-regime-stat{border:1px solid rgba(222,214,255,.10);background:rgba(4,2,12,.28);border-radius:1rem;padding:.72rem}
+.macro-regime-value{font-size:1.25rem;font-weight:800;letter-spacing:-.02em}
+.macro-regime-read{border-top:1px solid rgba(222,214,255,.10);margin-top:.8rem;padding-top:.75rem;color:#cbd5e1;font-size:.86rem;line-height:1.45}

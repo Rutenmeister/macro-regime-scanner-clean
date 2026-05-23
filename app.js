@@ -181,6 +181,127 @@ function regimeTags(asset){
   if(asset.freshness) tags.push(asset.freshness);
   return tags.slice(0,4);
 }
+
+function macroRegimeFactorBucket(factor){
+  const text = [factor.group, factor.name, factor.source, factor.derived, factor.effect].map(v=>String(v||'').toLowerCase()).join(' ');
+  const inflationTerms = ['cpi','core cpi','pce inflation','core pce','ppi','inflation','price index','price pressure','wage','earnings','treasury','yield','rate pressure','fed policy','policy pressure','energy','crude','gasoline','distillate','natural gas','petroleum','inventory balance','cushing','usda','crop','production estimate','crop condition','crop progress','noaa','weather','drought','food'];
+  const growthTerms = ['labor','payroll','employment','unemployment','jobless','gdp','real gdp','growth','retail sales','consumer demand','personal income','personal spending','durable','manufacturing','industrial','housing','building permits','business investment','census','credit stress','financial stress','financial conditions','credit spread','liquidity','reserve balances','fed total assets','reverse repo','demand'];
+  if(inflationTerms.some(t=>text.includes(t))) return 'inflation';
+  if(growthTerms.some(t=>text.includes(t))) return 'growth';
+  return null;
+}
+function macroRegimeAnchorRank(asset, bucket, factor){
+  const id = String(asset.id||'');
+  const cls = String(asset.assetClass||'');
+  const text = [factor.group, factor.name, factor.source, factor.derived, factor.effect].map(v=>String(v||'').toLowerCase()).join(' ');
+  if(bucket === 'inflation'){
+    if(['US02Y','US05Y','US10Y','US30Y','DXY','BE5Y','BE10Y','REALY'].includes(id)) return 5;
+    if(['WTI','BRENT','NG','GASOLINE','HEATING','WHEAT','CORN','SOY','BCOM'].includes(id)) return 4;
+    if(cls === 'Rates' || cls === 'Inflation Markets') return 4;
+    if(id === 'SPX' || id === 'NDX') return 2;
+    return 1;
+  }
+  if(bucket === 'growth'){
+    if(text.includes('credit stress') || text.includes('financial stress') || text.includes('financial conditions') || text.includes('credit spread')){
+      if(['HY','IG','FCI','SPX','NDX','RUT','DOW'].includes(id)) return 5;
+      if(cls === 'Credit / Liquidity' || cls === 'Equity Indices') return 4;
+      return 1;
+    }
+    if(['SPX','NDX','RUT','DOW','HY','IG','FCI','DXY','US02Y','US05Y','US10Y','US30Y'].includes(id)) return 5;
+    if(cls === 'Equity Indices' || cls === 'Credit / Liquidity' || cls === 'Rates') return 4;
+    if(['WTI','BRENT','COPPER','BCOM'].includes(id)) return 3;
+    return 1;
+  }
+  return 0;
+}
+function macroRegimePoint(score){
+  const n = Number(score||0);
+  if(n >= 2) return 2;
+  if(n > 0) return 1;
+  if(n <= -2) return -2;
+  if(n < 0) return -1;
+  return 0;
+}
+function factorStrengthLabel(score){
+  const p = macroRegimePoint(score);
+  if(p >= 2) return 'strong positive';
+  if(p === 1) return 'positive';
+  if(p === -1) return 'negative';
+  if(p <= -2) return 'strong negative';
+  return 'neutral';
+}
+function computeMacroRegime(){
+  const chosen = new Map();
+  for(const asset of ASSETS || []){
+    for(const factor of asset.factors || []){
+      if(!factorAppliesToAsset(factor)) continue;
+      if(!['Primary','Secondary','Contextual'].includes(String(factor.relevance||''))) continue;
+      const score = Number(factor.score);
+      if(!Number.isFinite(score) || score === 0) continue;
+      const bucket = macroRegimeFactorBucket(factor);
+      if(!bucket) continue;
+      const key = `${bucket}::${String(factor.name||'')}::${String(factor.source||'')}::${String(factor.derived||'').slice(0,220)}`;
+      const rank = macroRegimeAnchorRank(asset, bucket, factor);
+      const current = chosen.get(key);
+      if(!current || rank > current.rank || (rank === current.rank && Math.abs(score) > Math.abs(current.score))){
+        chosen.set(key, {bucket, score, rank, factor, asset});
+      }
+    }
+  }
+  let growthScore = 0;
+  let inflationScore = 0;
+  const growthDrivers = [];
+  const inflationDrivers = [];
+  for(const item of chosen.values()){
+    const point = macroRegimePoint(item.score);
+    if(!point) continue;
+    const driver = {name:item.factor.name || item.factor.group || 'factor', point, score:item.score, source:item.factor.source || '', asset:item.asset.symbol || item.asset.id || ''};
+    if(item.bucket === 'growth'){
+      growthScore += point;
+      growthDrivers.push(driver);
+    } else if(item.bucket === 'inflation'){
+      inflationScore += point;
+      inflationDrivers.push(driver);
+    }
+  }
+  const resolveAxis = (score, drivers) => {
+    if(score > 0) return 'positive';
+    if(score < 0) return 'negative';
+    const strongest = [...drivers].sort((a,b)=>Math.abs(b.point)-Math.abs(a.point))[0];
+    if(strongest?.point > 0) return 'positive';
+    if(strongest?.point < 0) return 'negative';
+    return null;
+  };
+  const growthDirection = resolveAxis(growthScore, growthDrivers);
+  const inflationDirection = resolveAxis(inflationScore, inflationDrivers);
+  if(!growthDirection || !inflationDirection){
+    return {regime:'Unavailable', growthScore, inflationScore, growthDirection, inflationDirection, explanation:'Regime requires live growth and inflation factor rows from the scanner data.'};
+  }
+  let regime = 'Goldilocks';
+  if(growthDirection === 'positive' && inflationDirection === 'positive') regime = 'Reflation';
+  else if(growthDirection === 'negative' && inflationDirection === 'positive') regime = 'Stagflation';
+  else if(growthDirection === 'negative' && inflationDirection === 'negative') regime = 'Deflation';
+  const reads = {
+    'Goldilocks':'Growth pressure is supportive while inflation pressure is easing.',
+    'Reflation':'Growth pressure is supportive while inflation pressure is elevated.',
+    'Stagflation':'Growth pressure is weakening while inflation pressure remains elevated.',
+    'Deflation':'Growth pressure is weakening while inflation pressure is easing.'
+  };
+  return {regime, growthScore, inflationScore, growthDirection, inflationDirection, explanation:reads[regime], growthDrivers, inflationDrivers};
+}
+function renderMacroRegimeCard(){
+  const box = $('macroRegimeCard');
+  if(!box) return;
+  const r = computeMacroRegime();
+  if(r.regime === 'Unavailable'){
+    box.innerHTML = `<div class="tiny-label">Current Macro Regime</div><h3 class="text-lg font-semibold text-slate-100 mt-1">Regime unavailable</h3><div class="macro-regime-read">${esc(r.explanation)}</div>`;
+    return;
+  }
+  const growthClass = r.growthScore > 0 ? 'score-pos' : 'score-neg';
+  const inflationClass = r.inflationScore > 0 ? 'score-pos' : 'score-neg';
+  box.innerHTML = `<div class="flex flex-col md:flex-row md:items-start md:justify-between gap-3"><div><div class="tiny-label">Current Macro Regime</div><h3 class="text-2xl font-bold text-slate-100 mt-1">${esc(r.regime)}</h3><p class="text-xs text-slate-500 mt-1">Four-quad read from the scanner's live public-source factor rows.</p></div><span class="pill self-start md:self-auto">Growth ${esc(r.growthDirection)} / Inflation ${esc(r.inflationDirection)}</span></div><div class="macro-regime-grid"><div class="macro-regime-stat"><div class="tiny-label">Growth score</div><div class="macro-regime-value ${growthClass}">${fmtScore(r.growthScore)}</div></div><div class="macro-regime-stat"><div class="tiny-label">Inflation score</div><div class="macro-regime-value ${inflationClass}">${fmtScore(r.inflationScore)}</div></div></div><div class="macro-regime-read">${esc(r.explanation)}</div>`;
+}
+
 function renderRegimeSnapshot(){
   const box=$('regimeSnapshot');
   if(!box) return;
@@ -281,7 +402,7 @@ function inputTable(asset){
 
 function renderQueue(){ const rows=getRows(); $('queueSub').textContent=`${rows.length} markets shown. Closed rows are quick reads; open rows show relevance, derivation, source, and effect for the public-source input universe. `; const total=ASSETS.length; const commodities=ASSETS.filter(a=>a.assetClass==='Commodities').length; const open=expanded.size; const liveInputs=ASSETS.filter(a=>(a.factors||[]).some(f=>(f.freshness||'')==='Fresh')).length; const applicableRows=ASSETS.reduce((n,a)=>n+filteredFactorsForAsset(a).length,0); $('statCards').innerHTML=`<div class="soft-card rounded-2xl p-3"><div class="tiny-label">Universe</div><div class="font-semibold">${total}</div></div><div class="soft-card rounded-2xl p-3"><div class="tiny-label">Shown</div><div class="font-semibold">${rows.length}</div></div><div class="soft-card rounded-2xl p-3"><div class="tiny-label">Live-input assets</div><div class="font-semibold">${liveInputs}</div></div><div class="soft-card rounded-2xl p-3"><div class="tiny-label">Visible rows</div><div class="font-semibold">${applicableRows}</div></div>`; if(!rows.length){ $('queue').innerHTML='<div class="p-4 text-slate-400">No markets match the current filters.</div>'; return; } $('queue').innerHTML=rows.map(a=>{ const isOpen=expanded.has(a.id); return `<div class="market-row" data-id="${a.id}"><div class="row-grid row-closed cursor-pointer"><div><div class="font-semibold text-slate-100">${a.symbol}</div><div class="text-[11px] text-slate-500 mt-1">${a.assetClass}</div></div><div><div class="font-semibold text-slate-100">${a.name}</div><div class="text-xs text-slate-400 mt-1 leading-snug">${a.quick}</div><div class="flex flex-wrap gap-2 mt-2 text-[11px]"><span class="pill">Driver: ${a.topDriver}</span><span class="pill">Conflict: ${a.mainConflict}</span><span class="pill">Watch: ${a.watchNext.slice(0,3).join(' / ')}</span></div></div><div class="text-right metric-value text-xl font-bold ${scoreClass(a.score)}">${fmtScore(a.score)}</div><div><div class="text-sm text-slate-200">${a.bias}</div><div class="text-[11px] text-slate-500 mt-1">${a.rankType}</div></div><div class="text-right metric-value">${a.confidence}%</div><div><span class="pill">${a.conflict}</span></div><div><span class="pill">${a.freshness}</span></div><div class="text-right metric-value ${scoreClass(a.score-a.previousScore)}">${change(a)}</div><div><button class="open-btn rounded-xl px-3 py-2 text-xs">${isOpen?'Close':'Open'}</button></div></div>${isOpen?`<div class="open-panel compact-open">${inputTable(a)}</div>`:''}</div>`; }).join(''); document.querySelectorAll('.market-row .row-closed').forEach(el=>el.addEventListener('click',e=>{ const id=el.closest('.market-row').dataset.id; selectedId=id; if(expanded.has(id)) expanded.delete(id); else expanded.add(id); renderAll(false); })); }
 function renderDiagnosis(){ /* right readout not included; public-source edition; selected row stays open inline. */ }
-function renderAll(){ renderRegimeSnapshot(); renderQueue(); renderDiagnosis(); }
+function renderAll(){ renderMacroRegimeCard(); renderRegimeSnapshot(); renderQueue(); renderDiagnosis(); }
 function download(filename,text,type='application/json'){ const blob=new Blob([text],{type}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download=filename; a.click(); URL.revokeObjectURL(url); }
 ['searchBox','universe','assetClass','subgroup','biasFilter','conflictFilter','freshFilter','sortMode','rowLimit'].forEach(id=>$(id).addEventListener('input',()=>{ if(id==='assetClass') updateSubgroups(); renderAll(); }));
 $('exportJson').addEventListener('click',()=>download('macro_regime_scanner_public_source_data_contract_v0_49.json',JSON.stringify({notice:'Public-source data contract. v0.49 is the beta launch wrapper baseline: U.S.-centered, raw-score, price-free macro pressure research data with unsupported non-U.S. crosses excluded until direct non-U.S. source lanes exist, plus lightweight beta wrapper pages and 10-item regime snapshot buckets.',assets:ASSETS,source_status:SOURCE_STATUS,release_calendar:RELEASE_CALENDAR,release_results:RELEASE_RESULTS,source_quality:SOURCE_QUALITY,validation_summary:VALIDATION_SUMMARY,regime_bridge:REGIME_BRIDGE},null,2)));
