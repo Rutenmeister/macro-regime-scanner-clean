@@ -1,7 +1,7 @@
 {
   "schemaVersion": "0.28.1",
   "sourceId": "FED_FRED_SELECTED",
-  "retrievedAt": "2026-05-23T12:53:27.219789+00:00",
+  "retrievedAt": "2026-05-23T13:05:57.499648+00:00",
   "seriesAudits": [
     {
       "seriesId": "EFFR",
