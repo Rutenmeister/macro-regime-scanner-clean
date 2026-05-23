@@ -1,0 +1,108 @@
+{
+  "pipelineVersion": "0.33",
+  "purpose": "Stable orchestrator pipeline. v0.33 runs enabled source lanes, recomputes live-only weighted scores, generates the upcoming release calendar, then validates.",
+  "global": {
+    "runValidation": true,
+    "stopOnFailure": true,
+    "writeRefreshReport": true,
+    "runScoreRecompute": true
+  },
+  "lanes": [
+    {
+      "id": "treasury",
+      "enabled": true,
+      "sourceId": "TREASURY_OFFICIAL",
+      "fetch": "scripts/sources/fetch_treasury_yields.py",
+      "apply": "scripts/apply_treasury_lane.py",
+      "requiresSecrets": [],
+      "status": "live"
+    },
+    {
+      "id": "cftc_cot",
+      "enabled": true,
+      "sourceId": "CFTC_COT",
+      "fetch": "scripts/sources/fetch_cftc_cot.py",
+      "apply": "scripts/apply_cot_lane.py",
+      "requiresSecrets": [],
+      "status": "live"
+    },
+    {
+      "id": "eia",
+      "enabled": true,
+      "sourceId": "EIA_OPEN_DATA",
+      "fetch": "scripts/sources/fetch_eia_energy.py",
+      "apply": "scripts/apply_eia_lane.py",
+      "requiresSecrets": [
+        "EIA_API_KEY"
+      ],
+      "status": "live"
+    },
+    {
+      "id": "usda",
+      "enabled": true,
+      "sourceId": "USDA_NASS",
+      "fetch": "scripts/sources/fetch_usda_agriculture.py",
+      "apply": "scripts/apply_usda_lane.py",
+      "requiresSecrets": [
+        "USDA_API_KEY"
+      ],
+      "status": "live_scaffold"
+    },
+    {
+      "id": "bls",
+      "enabled": true,
+      "sourceId": "BLS_PUBLIC",
+      "fetch": "scripts/sources/fetch_bls_macro.py",
+      "apply": "scripts/apply_bls_lane.py",
+      "requiresSecrets": [],
+      "status": "live"
+    },
+    {
+      "id": "bea",
+      "enabled": true,
+      "sourceId": "BEA_PUBLIC",
+      "fetch": "scripts/sources/fetch_bea_macro.py",
+      "apply": "scripts/apply_bea_lane.py",
+      "requiresSecrets": [
+        "BEA_API_KEY"
+      ],
+      "status": "live"
+    },
+    {
+      "id": "federal_reserve",
+      "enabled": true,
+      "sourceId": "FED_FRED_SELECTED",
+      "fetch": "scripts/sources/fetch_fed_macro.py",
+      "apply": "scripts/apply_fed_lane.py",
+      "requiresSecrets": [],
+      "status": "live"
+    },
+    {
+      "id": "census",
+      "enabled": true,
+      "sourceId": "CENSUS_PUBLIC",
+      "fetch": "scripts/sources/fetch_census_macro.py",
+      "apply": "scripts/apply_census_lane.py",
+      "requiresSecrets": [],
+      "status": "live"
+    },
+    {
+      "id": "financial_stress",
+      "enabled": true,
+      "sourceId": "FINANCIAL_STRESS_FRED",
+      "fetch": "scripts/sources/fetch_financial_stress.py",
+      "apply": "scripts/apply_financial_stress_lane.py",
+      "requiresSecrets": [],
+      "status": "live"
+    },
+    {
+      "id": "noaa_weather",
+      "enabled": true,
+      "sourceId": "NOAA_NWS",
+      "fetch": "scripts/sources/fetch_noaa_weather.py",
+      "apply": "scripts/apply_noaa_weather_lane.py",
+      "requiresSecrets": [],
+      "status": "live"
+    }
+  ]
+}

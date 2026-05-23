@@ -1,0 +1,247 @@
+{
+  "notice": "v0.31 source registry. Treasury, CFTC COT, EIA, USDA/NASS, BLS, BEA, Federal Reserve/FRED, Census, credit/financial stress, and NOAA/NWS weather lanes are live/workflow-ready.",
+  "policy": {
+    "no_price_derived_inputs": true,
+    "no_scraping_restricted_sites": true,
+    "prefer_official_public_apis": true,
+    "require_attribution_tracking": true,
+    "require_source_health_tracking": true
+  },
+  "sources": [
+    {
+      "id": "TREASURY_OFFICIAL",
+      "name": "U.S. Treasury official data",
+      "status": "live",
+      "public_access": "official public website/API",
+      "requires_key": false,
+      "primary_uses": [
+        "Official Treasury yields",
+        "yield curves",
+        "rates pressure",
+        "public-source macro context"
+      ],
+      "asset_classes": [
+        "Rates",
+        "Inflation Markets",
+        "FX",
+        "Equity Indices",
+        "Commodities"
+      ],
+      "expected_frequency": "daily/business day for many series",
+      "attribution_note": "Attribute U.S. Treasury / Fiscal Data where used.",
+      "production_note": "Treasury official Daily Treasury Par Yield Curve Rates lane is live. Rates are percentages, not prices."
+    },
+    {
+      "id": "BLS_PUBLIC",
+      "name": "U.S. Bureau of Labor Statistics public data/API",
+      "status": "workflow-ready",
+      "public_access": "official public API/releases",
+      "requires_key": false,
+      "primary_uses": [
+        "CPI",
+        "Core CPI",
+        "PPI",
+        "unemployment rate",
+        "nonfarm payrolls",
+        "average hourly earnings",
+        "inflation/labor macro pressure"
+      ],
+      "asset_classes": [
+        "FX",
+        "Rates",
+        "Inflation Markets",
+        "Equity Indices",
+        "Commodities"
+      ],
+      "expected_frequency": "monthly/weekly depending series",
+      "attribution_note": "Attribute BLS and retrieval date where used.",
+      "production_note": "v0.24 adds BLS inflation/labor lane using published public BLS API series for CPI, core CPI, PPI, unemployment, payrolls, and wages. No API key is required at current request size; cite BLS and do not imply endorsement."
+    },
+    {
+      "id": "BEA_PUBLIC",
+      "name": "U.S. Bureau of Economic Analysis public data/API",
+      "status": "live",
+      "public_access": "official public API/releases",
+      "requires_key": true,
+      "primary_uses": [
+        "GDP",
+        "real GDP growth",
+        "PCE inflation",
+        "core PCE inflation",
+        "personal consumption",
+        "personal income",
+        "savings rate"
+      ],
+      "asset_classes": [
+        "FX",
+        "Rates",
+        "Inflation Markets",
+        "Equity Indices",
+        "Commodities"
+      ],
+      "expected_frequency": "monthly/quarterly depending dataset",
+      "attribution_note": "Attribute BEA where used.",
+      "production_note": "v0.27 adds BEA NIPA macro lane using a BEA_API_KEY GitHub secret. Missing optional observations are recorded in audit output and not faked."
+    },
+    {
+      "id": "CFTC_COT",
+      "name": "CFTC Commitments of Traders public reports",
+      "status": "live",
+      "public_access": "official public files/reports",
+      "requires_key": false,
+      "primary_uses": [
+        "futures positioning",
+        "open interest",
+        "crowding",
+        "weekly positioning change"
+      ],
+      "asset_classes": [
+        "FX",
+        "Rates",
+        "Equity Indices",
+        "Commodities"
+      ],
+      "expected_frequency": "weekly",
+      "attribution_note": "Attribute CFTC COT reports where used.",
+      "production_note": "CFTC COT lane is live. Interpretation separates spec direction, weekly change, crowding risk, commercial/hedger context, and conflict."
+    },
+    {
+      "id": "EIA_OPEN_DATA",
+      "name": "U.S. Energy Information Administration open data/API",
+      "status": "live",
+      "public_access": "official open data API/reports",
+      "requires_key": true,
+      "primary_uses": [
+        "crude inventories",
+        "Cushing inventories",
+        "gasoline inventories",
+        "distillate inventories",
+        "natural gas storage",
+        "energy physical-balance context"
+      ],
+      "asset_classes": [
+        "Commodities",
+        "Inflation Markets",
+        "FX"
+      ],
+      "expected_frequency": "weekly/monthly depending series",
+      "attribution_note": "Attribute EIA where used.",
+      "production_note": "v0.23 adds EIA energy fundamentals. Petroleum APIv2 calls require a free EIA_API_KEY GitHub secret. Natural gas storage uses EIA information release JSON. Use EIA attribution and do not imply endorsement."
+    },
+    {
+      "id": "USDA_PUBLIC",
+      "name": "USDA National Agricultural Statistics Service Quick Stats API",
+      "status": "live",
+      "public_access": "official public API",
+      "requires_key": true,
+      "primary_uses": [
+        "crop condition",
+        "crop progress",
+        "production estimates",
+        "agriculture supply context"
+      ],
+      "asset_classes": [
+        "Commodities"
+      ],
+      "expected_frequency": "weekly/monthly/annual depending NASS series",
+      "attribution_note": "Attribute USDA/NASS Quick Stats where used; do not imply USDA endorsement.",
+      "production_note": "v0.23 adds USDA/NASS Quick Stats lane for crop condition, progress, and production. WASDE ending stocks, stock/use, and export sales are future sub-lanes."
+    },
+    {
+      "id": "NOAA_NWS",
+      "name": "NOAA/National Weather Service public weather lane",
+      "status": "live",
+      "public_access": "official public NOAA/NWS API",
+      "requires_key": false,
+      "primary_uses": [
+        "active weather hazards",
+        "heat/cold demand context",
+        "crop/weather stress",
+        "storm/flood/fire disruption context"
+      ],
+      "asset_classes": [
+        "Commodities",
+        "Energy",
+        "Agriculture",
+        "Equity Indices",
+        "FX",
+        "Rates"
+      ],
+      "expected_frequency": "intraday for active alerts endpoint",
+      "attribution_note": "Attribute NOAA/National Weather Service where used; do not imply NOAA endorsement.",
+      "production_note": "v0.31 adds NOAA/NWS active-alerts lane using api.weather.gov. This is live weather-hazard context, not a full drought monitor, seasonal forecast, or paid model-data feed."
+    },
+    {
+      "id": "FED_FRED_SELECTED",
+      "name": "Federal Reserve / FRED selected public data",
+      "status": "live",
+      "public_access": "public FRED graph CSV endpoints / Federal Reserve source series",
+      "requires_key": false,
+      "primary_uses": [
+        "Effective fed funds rate",
+        "Fed balance sheet total assets",
+        "reserve balances",
+        "reverse repo usage",
+        "Treasury General Account",
+        "liquidity pressure"
+      ],
+      "asset_classes": [
+        "FX",
+        "Rates",
+        "Equity Indices",
+        "Credit / Liquidity",
+        "Commodities"
+      ],
+      "expected_frequency": "daily/weekly depending series",
+      "attribution_note": "Attribute Federal Reserve, New York Fed, FRED / Federal Reserve Bank of St. Louis where used.",
+      "production_note": "v0.28 adds Federal Reserve/FRED selected policy/liquidity lane using public FRED CSV endpoints. No API key required in v0.28."
+    },
+    {
+      "id": "CENSUS_PUBLIC",
+      "name": "U.S. Census Bureau public data/API",
+      "status": "candidate",
+      "public_access": "official public API/releases",
+      "requires_key": "optional/recommended",
+      "primary_uses": [
+        "retail sales",
+        "trade data",
+        "housing starts",
+        "durable goods candidates"
+      ],
+      "asset_classes": [
+        "FX",
+        "Rates",
+        "Equity Indices",
+        "Commodities"
+      ],
+      "expected_frequency": "monthly/quarterly depending dataset",
+      "attribution_note": "Attribute Census Bureau where used.",
+      "production_note": "Use for public growth/consumer/trade context after higher-priority lanes."
+    },
+    {
+      "id": "FINANCIAL_STRESS_FRED",
+      "name": "Federal Reserve / FRED credit-spread and financial-stress data",
+      "status": "live",
+      "public_access": "public FRED graph CSV endpoints / Federal Reserve Bank of St. Louis hosted public series",
+      "requires_key": false,
+      "primary_uses": [
+        "High-yield credit spreads",
+        "Investment-grade credit spreads",
+        "BBB credit spreads",
+        "National financial conditions",
+        "Adjusted financial conditions",
+        "financial stress"
+      ],
+      "asset_classes": [
+        "Credit / Liquidity",
+        "Equity Indices",
+        "FX",
+        "Rates",
+        "Commodities"
+      ],
+      "expected_frequency": "daily/weekly depending series",
+      "attribution_note": "Attribute FRED / Federal Reserve Bank of St. Louis and underlying source where used.",
+      "production_note": "v0.30 adds a credit and financial-stress lane using public FRED CSV/text endpoints for HY OAS, IG OAS, BBB OAS, NFCI, ANFCI, and STLFSI4. No API key required."
+    }
+  ]
+}

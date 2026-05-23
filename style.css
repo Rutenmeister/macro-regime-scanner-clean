@@ -1,60 +1,51 @@
-:root{--bg-0:#05010d;--bg-1:#090317;--panel:rgba(13,9,27,.78);--line:rgba(222,214,255,.16);--line-strong:rgba(222,214,255,.30);--text:#f8f7ff;--muted:#a99fbd;--teal:#40f1df;--cyan:#58d7ff;--violet:#8b5cf6;--rose:#fb7185;--amber:#fbbf24;--green:#9ce74b;}
-html,body{min-height:100%;margin:0}body{background:radial-gradient(circle at 8% 8%,rgba(88,40,160,.38),transparent 30rem),radial-gradient(circle at 88% 18%,rgba(22,211,238,.12),transparent 26rem),radial-gradient(circle at 78% 72%,rgba(139,92,246,.18),transparent 30rem),linear-gradient(135deg,#05010d 0%,#090317 46%,#03010a 100%);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;overflow-x:hidden}
-body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:-2;background:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.02) 1px,transparent 1px);background-size:46px 46px;mask-image:linear-gradient(to bottom,rgba(0,0,0,.45),transparent 76%)}
-.glass{background:linear-gradient(180deg,rgba(21,14,42,.80),rgba(7,5,18,.74));border:1px solid rgba(236,232,255,.24);border-top-color:rgba(255,255,255,.34);border-left-color:rgba(64,241,223,.22);border-right-color:rgba(139,92,246,.20);border-bottom-color:rgba(236,232,255,.10);box-shadow:0 24px 80px rgba(0,0,0,.42),inset 0 1px 0 rgba(255,255,255,.055);backdrop-filter:blur(18px)}
-.soft-card{background:linear-gradient(180deg,rgba(255,255,255,.043),rgba(255,255,255,.021));border:1px solid rgba(236,232,255,.12);border-top-color:rgba(255,255,255,.22);border-left-color:rgba(64,241,223,.13);border-right-color:rgba(139,92,246,.12);border-bottom-color:rgba(236,232,255,.055);box-shadow:inset 0 1px 0 rgba(255,255,255,.045)}
-.tiny-label{color:var(--muted);font-size:10px;letter-spacing:.12em;text-transform:uppercase;font-weight:750}.metric-value{font-variant-numeric:tabular-nums}.accent-pill{border:1px solid rgba(64,241,223,.18);background:rgba(64,241,223,.055);color:rgba(215,255,248,.86);border-radius:999px;padding:.34rem .62rem;font-size:.72rem;letter-spacing:.03em;white-space:nowrap}.pill{border:1px solid rgba(222,214,255,.14);background:rgba(255,255,255,.045);color:#d5d0e4;border-radius:999px;padding:.28rem .55rem;font-size:.70rem;white-space:nowrap}
-input,select{background:rgba(4,2,12,.86);border:1px solid rgba(222,214,255,.17);color:#fff;outline:none;box-shadow:inset 0 1px 0 rgba(255,255,255,.035)}input:focus,select:focus{border-color:rgba(64,241,223,.74);box-shadow:0 0 0 3px rgba(64,241,223,.11),inset 0 1px 0 rgba(255,255,255,.04)}
-.scrollbar-thin::-webkit-scrollbar{height:9px;width:9px}.scrollbar-thin::-webkit-scrollbar-thumb{background:rgba(222,214,255,.22);border-radius:999px}.scrollbar-thin::-webkit-scrollbar-track{background:rgba(255,255,255,.025)}
-.queue-head{position:sticky;top:0;z-index:8;background:rgba(7,5,18,.96);backdrop-filter:blur(10px)}
-.market-row{border-bottom:1px solid rgba(222,214,255,.09)}.market-row:hover{background:rgba(255,255,255,.025)}.row-grid{display:grid;grid-template-columns:82px minmax(520px,1.7fr) 78px 132px 82px 92px 90px 72px 78px;gap:.6rem;align-items:center;min-width:0}.row-closed{min-height:86px;padding:.72rem 1rem}.open-panel{min-width:0;border-top:1px solid rgba(64,241,223,.12);background:linear-gradient(180deg,rgba(64,241,223,.035),rgba(255,255,255,.012));padding:1rem}.score-pos{color:#9ce74b}.score-neg{color:#fb7185}.score-neu{color:#cbd5e1}.open-btn{border:1px solid rgba(64,241,223,.25);background:rgba(64,241,223,.08);color:#d7fff8}.open-btn:hover{background:rgba(64,241,223,.14)}.factor-table{width:100%;border-collapse:separate;border-spacing:0 .42rem;table-layout:fixed}.factor-table th:nth-child(1){width:15%}.factor-table th:nth-child(2){width:10%}.factor-table th:nth-child(3){width:10%}.factor-table th:nth-child(4){width:22%}.factor-table th:nth-child(5){width:31%}.factor-table th:nth-child(6){width:12%}.factor-table th{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(169,159,189,.9);font-weight:800;text-align:left;padding:.1rem .55rem}.factor-table td{background:rgba(4,2,12,.44);border-top:1px solid rgba(222,214,255,.09);border-bottom:1px solid rgba(222,214,255,.06);padding:.55rem .55rem;vertical-align:top}.factor-table td:first-child{border-left:1px solid rgba(222,214,255,.09);border-radius:.85rem 0 0 .85rem}.factor-table td:last-child{border-right:1px solid rgba(222,214,255,.09);border-radius:0 .85rem .85rem 0}.group-title{border-left:1px solid rgba(64,241,223,.38);background:rgba(64,241,223,.06);color:#d7fff8}
-.status-chip{display:inline-flex;align-items:center;gap:.25rem;border-radius:999px;padding:.2rem .45rem;font-size:.70rem;border:1px solid rgba(222,214,255,.16);white-space:nowrap}.support{color:#9ce74b;background:rgba(156,231,75,.08);border-color:rgba(156,231,75,.25)}.pressure{color:#fb7185;background:rgba(251,113,133,.08);border-color:rgba(251,113,133,.25)}.neutral{color:#cbd5e1;background:rgba(203,213,225,.07);border-color:rgba(203,213,225,.20)}.missing{color:#fbbf24;background:rgba(251,191,36,.07);border-color:rgba(251,191,36,.25)}
-@media(max-width:1300px){.desktop-grid{grid-template-columns:300px minmax(0,1fr)!important}.row-grid{grid-template-columns:78px minmax(460px,1fr) 70px 120px 74px 84px 82px 64px 72px}.open-panel{min-width:0}}
-.source-health-row { border: 1px solid rgba(222,214,255,.10); background: rgba(4,2,12,.28); }
-.source-live { border-color: rgba(64,241,223,.30); background: rgba(64,241,223,.055); }
-.source-ready { border-color: rgba(251,191,36,.24); background: rgba(251,191,36,.045); }
-.source-candidate { border-color: rgba(148,163,184,.14); background: rgba(255,255,255,.025); }
-.source-dot-label { font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: rgba(215,255,248,.88); border: 1px solid rgba(64,241,223,.18); border-radius: 999px; padding: .18rem .42rem; background: rgba(64,241,223,.055); white-space: nowrap; }
-.toggle-row{display:flex;align-items:center;gap:.55rem;cursor:pointer;color:#d5d0e4}.toggle-row input{appearance:none;width:38px;height:21px;border-radius:999px;background:rgba(148,163,184,.22);border:1px solid rgba(222,214,255,.18);position:relative;flex:0 0 auto}.toggle-row input:before{content:"";position:absolute;width:15px;height:15px;border-radius:999px;left:3px;top:2px;background:#cbd5e1;transition:.18s ease}.toggle-row input:checked{background:rgba(64,241,223,.18);border-color:rgba(64,241,223,.38)}.toggle-row input:checked:before{left:18px;background:#40f1df}.row-role{display:inline-flex;border-radius:999px;padding:.14rem .42rem;font-size:10px;letter-spacing:.06em;text-transform:uppercase;border:1px solid rgba(222,214,255,.14)}.row-role-scored{color:#9ce74b;background:rgba(156,231,75,.08);border-color:rgba(156,231,75,.24)}.row-role-context{color:#58d7ff;background:rgba(88,215,255,.08);border-color:rgba(88,215,255,.22)}.row-role-display{color:#fbbf24;background:rgba(251,191,36,.07);border-color:rgba(251,191,36,.22)}.row-role-muted{color:#94a3b8;background:rgba(148,163,184,.06);border-color:rgba(148,163,184,.16)}.release-row{border:1px solid rgba(222,214,255,.10);background:rgba(4,2,12,.28);border-radius:1rem;padding:.55rem .65rem}.release-highest{border-color:rgba(251,113,133,.28);background:rgba(251,113,133,.055)}.release-high{border-color:rgba(251,191,36,.24);background:rgba(251,191,36,.045)}.release-normal{border-color:rgba(88,215,255,.18);background:rgba(88,215,255,.035)}.release-time{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:rgba(215,255,248,.88);border:1px solid rgba(64,241,223,.18);border-radius:999px;padding:.14rem .38rem;background:rgba(64,241,223,.055);white-space:nowrap}
-.release-calendar-wide{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:.65rem;align-items:stretch}.release-calendar-wide .release-row{min-height:108px;display:flex;flex-direction:column;justify-content:space-between}@media (min-width:1280px){.release-calendar-wide{grid-template-columns:repeat(4,minmax(0,1fr));}}@media (min-width:1700px){.release-calendar-wide{grid-template-columns:repeat(5,minmax(0,1fr));}}
-/* v0.34 explainable trust layer */
-.trust-list{margin:0;padding-left:1.1rem}.trust-list li{margin:.22rem 0;color:#d5d0e4}.snapshot-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:.7rem}.snapshot-card{border:1px solid rgba(222,214,255,.10);background:rgba(4,2,12,.28);border-radius:1rem;padding:.72rem}.snapshot-chip-wrap{display:flex;flex-wrap:wrap;gap:.45rem}.snapshot-chip{display:inline-flex;align-items:center;justify-content:space-between;gap:.55rem;border:1px solid rgba(222,214,255,.15);background:rgba(255,255,255,.04);color:#d5d0e4;border-radius:999px;padding:.28rem .55rem;font-size:.72rem;min-width:74px}.snapshot-chip:hover{border-color:rgba(64,241,223,.38);background:rgba(64,241,223,.08)}.score-audit-shell{border-color:rgba(64,241,223,.18)}.audit-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(135px,1fr));gap:.6rem}.audit-grid>div,.audit-box{border:1px solid rgba(222,214,255,.10);background:rgba(4,2,12,.28);border-radius:1rem;padding:.65rem}.audit-list{margin:.55rem 0 0 0;padding-left:1rem;font-size:.74rem;color:#cbd5e1;line-height:1.45}.audit-list li{margin:.28rem 0}
-/* v0.40 raw-score queue tags */
-.snapshot-chip em{font-style:normal;color:#94a3b8;font-size:10px;margin-left:.1rem;max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.score-scale-note{color:#94a3b8;font-size:11px;margin-top:.15rem}
-.change-log-box{border:1px solid rgba(64,241,223,.16);background:rgba(64,241,223,.045);border-radius:1rem;padding:.65rem;margin-top:.65rem}
+#!/usr/bin/env python3
+"""Validate release_calendar.json for v0.41 calendar hardening."""
+from __future__ import annotations
 
-/* v0.41 release-calendar confidence labels */
-.calendar-confidence{
-  display:inline-flex;
-  align-items:center;
-  border-radius:999px;
-  padding:2px 8px;
-  font-size:10px;
-  font-weight:700;
-  letter-spacing:.04em;
-  text-transform:uppercase;
-  border:1px solid rgba(148,163,184,.25);
-}
-.calendar-official{ color:#bbf7d0; background:rgba(34,197,94,.12); border-color:rgba(34,197,94,.35); }
-.calendar-pattern{ color:#bae6fd; background:rgba(14,165,233,.12); border-color:rgba(14,165,233,.35); }
-.calendar-estimated{ color:#fde68a; background:rgba(245,158,11,.12); border-color:rgba(245,158,11,.35); }
-.release-source-link{ color:#93c5fd; text-decoration:underline; text-underline-offset:2px; margin-left:4px; }
+import json
+from datetime import date
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+CAL = ROOT / "data" / "release_calendar.json"
+
+HOLIDAYS_2026 = {"2026-05-25", "2026-06-19", "2026-07-03", "2026-09-07", "2026-10-12", "2026-11-11", "2026-11-26", "2026-12-25"}
+REQUIRED_FIELDS = ["source", "report", "lane", "date", "timeET", "datetimeET", "datetimeUTC", "importance", "scheduleType", "calendarConfidence", "sourceUrl", "trackedInputs", "note"]
+VALID_CONFIDENCE = {"official", "official-pattern", "estimated"}
 
 
-/* v0.42-v0.46 release results, source QA, validation, reports, suite bridge */
-.release-results-mini{display:flex;flex-wrap:wrap;gap:.28rem;margin-top:.45rem;font-size:10px;color:#cbd5e1}
-.release-results-mini span{border:1px solid rgba(148,163,184,.18);background:rgba(255,255,255,.035);border-radius:999px;padding:.12rem .38rem;white-space:nowrap}
-.release-results-mini.result-ready span{border-color:rgba(34,197,94,.28);background:rgba(34,197,94,.08);color:#bbf7d0}
-.release-results-mini.result-upcoming span{border-color:rgba(14,165,233,.25);background:rgba(14,165,233,.07);color:#bae6fd}
-.release-results-mini.result-pending span,.release-results-mini.muted span{border-color:rgba(245,158,11,.22);background:rgba(245,158,11,.06);color:#fde68a}
-.report-ready-note{border:1px solid rgba(64,241,223,.16);background:rgba(64,241,223,.045);border-radius:1rem;padding:.65rem;color:#cbd5e1;font-size:.75rem;line-height:1.45}
+def fail(msg: str) -> int:
+    print(f"VALIDATION FAILED: {msg}")
+    return 1
 
-/* Growth / Inflation Regime */
-.macro-quad-subtitle{display:inline-flex;border:1px solid rgba(64,241,223,.20);background:rgba(64,241,223,.06);color:#d7fff8;border-radius:999px;padding:.22rem .55rem;font-size:.78rem;font-weight:700;letter-spacing:.02em}
-.macro-quad-axis-grid{display:grid;grid-template-columns:repeat(3,minmax(110px,1fr));gap:.6rem;min-width:min(100%,520px)}
-.macro-axis-card,.macro-driver-box{border:1px solid rgba(222,214,255,.10);background:rgba(4,2,12,.28);border-radius:1rem;padding:.7rem}.macro-driver-box{min-height:78px}.macro-quad-note{border:1px solid rgba(251,191,36,.18);background:rgba(251,191,36,.045);color:#fde68a;border-radius:1rem;padding:.55rem .7rem;font-size:.72rem;line-height:1.45}
-@media(max-width:760px){.macro-quad-axis-grid{grid-template-columns:1fr}.macro-axis-card{padding:.6rem}}
 
-.macro-quad-axis-grid-simple{grid-template-columns:repeat(2,minmax(0,1fr));}
-@media (max-width:640px){.macro-quad-axis-grid-simple{grid-template-columns:1fr;}}
+def main() -> int:
+    if not CAL.exists():
+        return fail(f"missing {CAL.relative_to(ROOT)}")
+    data = json.loads(CAL.read_text(encoding="utf-8"))
+    events = data.get("events")
+    if not isinstance(events, list) or not events:
+        return fail("events must be a non-empty list")
+    for i, ev in enumerate(events):
+        for field in REQUIRED_FIELDS:
+            if field not in ev:
+                return fail(f"event {i} missing {field}")
+        if ev["calendarConfidence"] not in VALID_CONFIDENCE:
+            return fail(f"event {i} invalid calendarConfidence {ev['calendarConfidence']}")
+        if not ev.get("sourceUrl", "").startswith("https://"):
+            return fail(f"event {i} sourceUrl must be https URL")
+        if ev["source"] == "U.S. Treasury" and ev["date"] in HOLIDAYS_2026:
+            return fail(f"Treasury release scheduled on federal holiday {ev['date']}")
+        if ev["report"] == "Advance Monthly Sales for Retail and Food Services / Retail Sales" and ev["date"] == "2026-05-20":
+            return fail("Retail Sales May 20 false estimate still present")
+        if "Personal Income and Outlays" in ev["report"] and ev["date"] == "2026-05-23":
+            return fail("PCE May 23 false estimate still present")
+    summary = data.get("confidenceSummary", {})
+    if "official" not in summary or "estimated" not in summary:
+        return fail("confidenceSummary missing official/estimated counts")
+    print(f"VALIDATION PASSED: {len(events)} release-calendar events")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

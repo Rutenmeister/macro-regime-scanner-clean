@@ -1,57 +1,149 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Edgefield Research Macro Regime Scanner v0.50.3 Simple Four-Quad Regime Display</title>
-  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-<main class="min-h-screen p-4 lg:p-6"><div class="mx-auto max-w-[2200px] space-y-4">
-<header class="glass rounded-3xl p-5 flex flex-col gap-4 xl:flex-row xl:items-center xl:justify-between"><div><div class="text-xs uppercase tracking-[0.35em] text-teal-300/80">Edgefield Research</div><h1 class="text-2xl md:text-4xl font-semibold tracking-tight mt-1">Macro Regime Scanner</h1><p class="text-slate-400 mt-2 max-w-4xl">U.S.-centered macro pressure terminal using official and public-source data. Raw, uncapped scores rank fundamental pressure across assets without using price. Built to show evidence, source freshness, conflicts, and upcoming macro risks — not buy/sell signals.</p></div><div class="flex flex-col gap-2 xl:items-end"><div class="accent-pill">v0.50.5 · real quad tally</div><div id="sourcePills" class="flex flex-wrap gap-2 justify-end"><span class="pill">Official/Public-Source Inputs</span><span class="pill">U.S.-Centered Scope</span><span class="pill">Raw Uncapped Scores</span><span class="pill">No Price in Live Score</span><span class="pill">Reads: data/macro_regime_scanner.json</span></div></div></header>
-<section class="glass rounded-3xl p-4 text-xs text-slate-400 leading-relaxed">
-  <div class="grid grid-cols-1 lg:grid-cols-4 gap-3">
-    <div><div class="tiny-label">How to read this</div><strong class="text-slate-200">Raw score</strong><br/>Strength of public-source macro pressure. Larger absolute values mean more weighted evidence.</div>
-    <div><div class="tiny-label">Direction</div><strong class="text-slate-200">Positive / negative</strong><br/>Supportive or restrictive pressure based on the asset-specific macro channel.</div>
-    <div><div class="tiny-label">Trust</div><strong class="text-slate-200">Confidence + freshness</strong><br/>Higher confidence means stronger source coverage, freshness, and scored evidence quality.</div>
-    <div><div class="tiny-label">Boundary</div><strong class="text-slate-200">Research only</strong><br/>Evidence pressure is not a price prediction, trading signal, or investment advice.</div>
-  </div>
-</section>
-<section id="macroQuadSnapshot" class="glass rounded-3xl p-4"></section>
-<section class="desktop-grid grid grid-cols-1 2xl:grid-cols-[320px_minmax(0,1fr)] gap-4 items-start">
-<aside class="glass rounded-3xl p-4 space-y-4"><div><div class="tiny-label">Inputs / filters</div><h2 class="text-lg font-semibold mt-1">Universe Controls</h2><p class="text-xs text-slate-500 mt-1">No market values are entered here. This edition filters official/public-source fundamental evidence across macro, policy, positioning, energy, agriculture, credit, liquidity, and rates.</p></div>
-<label class="space-y-1 block"><span class="tiny-label">Search</span><input id="searchBox" class="w-full rounded-xl px-3 py-2" placeholder="Gold, oil, 10Y, DXY..." /></label>
-<label class="space-y-1 block"><span class="tiny-label">Universe</span><select id="universe" class="w-full rounded-xl px-3 py-2"><option>All Markets</option><option>Watchlist Only</option><option>Rankable Markets</option><option>Regime Anchors</option></select></label>
-<label class="space-y-1 block"><span class="tiny-label">Asset class</span><select id="assetClass" class="w-full rounded-xl px-3 py-2"></select></label>
-<label class="space-y-1 block"><span class="tiny-label">Subgroup</span><select id="subgroup" class="w-full rounded-xl px-3 py-2"></select></label>
-<div class="grid grid-cols-2 gap-3"><label class="space-y-1"><span class="tiny-label">Bias</span><select id="biasFilter" class="w-full rounded-xl px-3 py-2"><option>All</option><option>Bullish</option><option>Bearish</option><option>Neutral / Mixed</option></select></label><label class="space-y-1"><span class="tiny-label">Conflict</span><select id="conflictFilter" class="w-full rounded-xl px-3 py-2"><option>All</option><option>Low</option><option>Medium</option><option>High</option></select></label></div>
-<label class="space-y-1 block"><span class="tiny-label">Freshness</span><select id="freshFilter" class="w-full rounded-xl px-3 py-2"><option>All</option><option>Fresh</option><option>Sample</option><option>Mixed</option><option>Aging</option><option>Stale</option></select></label>
-<label class="space-y-1 block"><span class="tiny-label">Sort center</span><select id="sortMode" class="w-full rounded-xl px-3 py-2"><option value="bullish">Strongest bullish</option><option value="bearish">Strongest bearish</option><option value="confidence">Highest confidence</option><option value="conflict">Highest conflict</option><option value="freshest">Freshest evidence</option><option value="stalest">Stalest evidence</option><option value="improvement">Biggest improvement</option><option value="deterioration">Biggest deterioration</option><option value="riskOn">Risk-on leaders</option><option value="riskOff">Risk-off leaders</option><option value="watchlist">Watchlist first</option></select></label>
-<label class="space-y-1 block"><span class="tiny-label">Max rows</span><select id="rowLimit" class="w-full rounded-xl px-3 py-2"><option value="999">All</option><option value="12">Top 12</option><option value="20">Top 20</option><option value="35">Top 35</option></select></label>
-<button id="exportJson" class="w-full rounded-2xl px-4 py-3 open-btn font-semibold">Export scanner JSON</button>
-<button id="exportBrief" class="w-full rounded-2xl px-4 py-3 open-btn font-semibold">Export Current Regime Brief</button>
-<div class="soft-card rounded-2xl p-3 text-xs text-slate-400 leading-relaxed">
-  <div class="tiny-label">Evidence rows</div>
-  <label class="toggle-row mt-2">
-    <input id="showAllRowsToggle" type="checkbox" />
-    <span>Show non-applicable / display-only rows</span>
-  </label>
-  <div class="text-[11px] text-slate-500 mt-2 leading-snug">Default view hides rows that are not live-scored or live-context for the selected asset. Toggle on for full audit context.</div>
-</div>
+#!/usr/bin/env python3
+"""Refresh all enabled public-source lanes from a stable config.
 
-<div class="soft-card rounded-2xl p-3 text-xs text-slate-400 leading-relaxed"><strong class="text-slate-300">Methodology note:</strong> This edition displays uncapped raw net pressure scores. Missing data is not treated as neutral. Candidate, sample, stale, display-only, and not-live rows are visible for audit context but do not silently drive the headline score.</div>
-<div class="soft-card rounded-2xl p-3 text-xs text-slate-400 leading-relaxed"><div class="tiny-label">Trust guide</div><ol class="trust-list mt-2"><li>Not a buy/sell signal.</li><li>Scores rank public-source pressure evidence.</li><li>Open any row to see what counted and what was excluded.</li><li>Focus on raw pressure, alignment, conflict, freshness, and change.</li></ol></div>
+This is the workflow orchestrator for Macro Regime Scanner v0.25F.
+The GitHub Actions YAML should call this one script instead of listing every
+source step directly. Future sources should be enabled in config/source_pipeline.json
+after their fetch/apply scripts are present and tested.
 
-<div class="soft-card rounded-2xl p-3 text-xs text-slate-400 leading-relaxed"><div class="tiny-label">Beta wrapper</div><div class="mt-2 space-y-1"><a class="text-teal-300 hover:text-teal-200" href="landing.html">Product overview</a><br/><a class="text-teal-300 hover:text-teal-200" href="legal/disclaimer.html">Research disclaimer</a><br/><a class="text-teal-300 hover:text-teal-200" href="CHANGELOG.md">Changelog</a></div><div class="text-[11px] text-slate-500 mt-2">For private beta distribution, pair this app with the landing page, terms, privacy, and support/feedback links.</div></div>
-<div id="sourceHealthPanel" class="soft-card rounded-2xl p-3 text-xs text-slate-400 leading-relaxed">
-  <div class="tiny-label">Source health</div>
-  <div id="sourceHealthList" class="mt-2 space-y-2"></div>
-</div>
-</aside>
-<section class="glass rounded-3xl p-4 min-w-0"><div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-3 mb-3"><div><div class="tiny-label">Center</div><h2 class="text-xl font-semibold">All Markets Evidence Queue</h2><p id="queueSub" class="text-sm text-slate-400 mt-1">Compact rows. Open a row for full input tables.</p></div><div id="statCards" class="grid grid-cols-2 md:grid-cols-4 gap-2 min-w-[360px]"></div></div><div id="regimeSnapshot" class="soft-card rounded-3xl p-4 mb-4"></div><div class="soft-card rounded-3xl overflow-hidden"><div class="queue-head row-grid px-4 py-3 text-xs text-slate-400 border-b border-slate-800/80"><div>Symbol</div><div>Name / quick read</div><div class="text-right">Score</div><div>Bias</div><div class="text-right">Conf.</div><div>Conflict</div><div>Freshness</div><div class="text-right">Change</div><div></div></div><div id="queue" class="max-h-[760px] overflow-y-auto overflow-x-hidden scrollbar-thin"></div></div><div id="releaseCalendarPanel" class="soft-card rounded-3xl p-4 text-xs text-slate-400 leading-relaxed mt-4"><div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2"><div><div class="tiny-label">Upcoming reports</div><h3 class="text-lg font-semibold text-slate-100 mt-1">Upcoming Tracked Reports</h3><div id="releaseCalendarMeta" class="text-[11px] text-slate-500 mt-1">Loading release calendar...</div></div><span class="pill self-start md:self-auto">Next 14d</span></div><div id="releaseCalendarList" class="release-calendar-wide mt-3"></div></div></section>
-</section><footer class="glass rounded-3xl p-4 text-xs text-slate-400 leading-relaxed"><strong class="text-slate-300">Macro Regime Scanner v0.50.3 Simple Four-Quad Regime Display.</strong> U.S.-centered public-source research tool with raw, uncapped, price-free macro pressure scores. Data may be delayed, revised, missing, or incorrect; verify source data before making financial decisions. <a class="text-teal-300" href="legal/disclaimer.html">Disclaimer</a> · <a class="text-teal-300" href="legal/terms.html">Terms</a> · <a class="text-teal-300" href="legal/privacy.html">Privacy</a> · Built to read from <code>data/macro_regime_scanner.json</code>.</footer>
-</div></main>
-<script src="app.js"></script>
-</body>
-</html>
+Usage:
+    python scripts/refresh_all_sources.py
+    python scripts/refresh_all_sources.py --dry-run
+    python scripts/refresh_all_sources.py --lane treasury --lane bls
+"""
+from __future__ import annotations
+
+import argparse
+import json
+import os
+import subprocess
+import sys
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import Any
+
+ROOT = Path(__file__).resolve().parents[1]
+PIPELINE_PATH = ROOT / "config" / "source_pipeline.json"
+REPORT_PATH = ROOT / "data" / "refresh_report.json"
+VALIDATE_PATH = ROOT / "scripts" / "validate_data.py"
+
+
+def load_json(path: Path) -> dict[str, Any]:
+    if not path.exists():
+        raise FileNotFoundError(f"Missing required config: {path.relative_to(ROOT)}")
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def run_script(script_path: str, dry_run: bool = False) -> dict[str, Any]:
+    path = ROOT / script_path
+    if not path.exists():
+        raise FileNotFoundError(f"Pipeline script not found: {script_path}")
+
+    if dry_run:
+        return {"script": script_path, "status": "dry_run", "returncode": 0}
+
+    result = subprocess.run(
+        [sys.executable, str(path)],
+        cwd=ROOT,
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+    record = {
+        "script": script_path,
+        "status": "ok" if result.returncode == 0 else "failed",
+        "returncode": result.returncode,
+        "stdoutTail": result.stdout[-4000:],
+        "stderrTail": result.stderr[-4000:],
+    }
+    if result.returncode != 0:
+        raise RuntimeError(
+            f"Script failed: {script_path}\n"
+            f"Return code: {result.returncode}\n"
+            f"STDOUT:\n{result.stdout[-2000:]}\n"
+            f"STDERR:\n{result.stderr[-2000:]}"
+        )
+    return record
+
+
+def check_required_secrets(lane: dict[str, Any]) -> list[str]:
+    missing: list[str] = []
+    for secret in lane.get("requiresSecrets", []):
+        if not os.environ.get(secret):
+            missing.append(secret)
+    return missing
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--dry-run", action="store_true", help="Check config/scripts without running source fetches")
+    parser.add_argument("--lane", action="append", default=[], help="Run only selected lane id; can be repeated")
+    args = parser.parse_args()
+
+    started = datetime.now(timezone.utc).isoformat()
+    pipeline = load_json(PIPELINE_PATH)
+    selected = set(args.lane or [])
+    report: dict[str, Any] = {
+        "pipelineVersion": pipeline.get("pipelineVersion"),
+        "startedAt": started,
+        "finishedAt": None,
+        "dryRun": args.dry_run,
+        "selectedLanes": sorted(selected) if selected else "all enabled",
+        "lanes": [],
+        "validation": None,
+        "status": "running",
+    }
+
+    try:
+        for lane in pipeline.get("lanes", []):
+            lane_id = lane.get("id")
+            if selected and lane_id not in selected:
+                continue
+            if not lane.get("enabled", False):
+                report["lanes"].append({"id": lane_id, "status": "skipped_disabled"})
+                continue
+
+            missing = check_required_secrets(lane)
+            if missing and not args.dry_run:
+                raise RuntimeError(f"Lane {lane_id} missing required GitHub secrets/environment variables: {', '.join(missing)}")
+
+            lane_record = {"id": lane_id, "sourceId": lane.get("sourceId"), "steps": []}
+            lane_record["steps"].append(run_script(lane["fetch"], dry_run=args.dry_run))
+            lane_record["steps"].append(run_script(lane["apply"], dry_run=args.dry_run))
+            lane_record["status"] = "ok" if not args.dry_run else "dry_run"
+            report["lanes"].append(lane_record)
+
+        recompute_path = ROOT / "scripts" / "recompute_live_scores.py"
+        if recompute_path.exists():
+            report["scoreRecompute"] = run_script("scripts/recompute_live_scores.py", dry_run=args.dry_run)
+
+        release_calendar_path = ROOT / "scripts" / "generate_release_calendar.py"
+        if release_calendar_path.exists():
+            report["releaseCalendar"] = run_script("scripts/generate_release_calendar.py", dry_run=args.dry_run)
+
+        if pipeline.get("global", {}).get("runValidation", True):
+            report["validation"] = run_script(str(VALIDATE_PATH.relative_to(ROOT)), dry_run=args.dry_run)
+            history_validator = ROOT / "scripts" / "validate_score_history.py"
+            if history_validator.exists():
+                report["scoreHistoryValidation"] = run_script(str(history_validator.relative_to(ROOT)), dry_run=args.dry_run)
+            optional_signal_validator = ROOT / "scripts" / "validate_signal_framework.py"
+            if optional_signal_validator.exists():
+                report["optionalSignalValidation"] = run_script(str(optional_signal_validator.relative_to(ROOT)), dry_run=args.dry_run)
+
+        report["status"] = "ok" if not args.dry_run else "dry_run_ok"
+        return 0
+    except Exception as exc:
+        report["status"] = "failed"
+        report["error"] = str(exc)
+        print(str(exc), file=sys.stderr)
+        return 1
+    finally:
+        report["finishedAt"] = datetime.now(timezone.utc).isoformat()
+        REPORT_PATH.parent.mkdir(parents=True, exist_ok=True)
+        REPORT_PATH.write_text(json.dumps(report, indent=2), encoding="utf-8")
+        print(f"Refresh report written to {REPORT_PATH.relative_to(ROOT)}")
+        print(f"Pipeline status: {report['status']}")
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

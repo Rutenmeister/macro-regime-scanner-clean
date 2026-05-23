@@ -1,6 +1,6 @@
 {
   "snapshotVersion": "v0.40-score-history",
-  "generatedAt": "2026-05-19T19:47:18.252393+00:00",
+  "generatedAt": "2026-05-20T15:25:50.198513+00:00",
   "dataMode": "live-public-source-us-centered-integrity-v0.47",
   "assets": [
     {

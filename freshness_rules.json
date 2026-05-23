@@ -1,0 +1,365 @@
+{
+  "notice": "v0.47 U.S.-centered scope cleanup. Low-relevance non-USD FX crosses removed from distribution view; retained FX instruments have USD exposure or USD anchor relevance.",
+  "assets": [
+    {
+      "id": "DXY",
+      "symbol": "USD",
+      "name": "U.S. Dollar Fundamental Pressure",
+      "asset_class": "FX",
+      "subgroup": "Dollar / Macro Anchor",
+      "rank_type": "anchor"
+    },
+    {
+      "id": "EURUSD",
+      "symbol": "EURUSD",
+      "name": "Euro / U.S. Dollar",
+      "asset_class": "FX",
+      "subgroup": "Major FX",
+      "rank_type": "rankable"
+    },
+    {
+      "id": "GBPUSD",
+      "symbol": "GBPUSD",
+      "name": "British Pound / U.S. Dollar",
+      "asset_class": "FX",
+      "subgroup": "Major FX",
+      "rank_type": "rankable"
+    },
+    {
+      "id": "USDJPY",
+      "symbol": "USDJPY",
+      "name": "U.S. Dollar / Japanese Yen",
+      "asset_class": "FX",
+      "subgroup": "Safe-Haven FX",
+      "rank_type": "rankable"
+    },
+    {
+      "id": "USDCHF",
+      "symbol": "USDCHF",
+      "name": "U.S. Dollar / Swiss Franc",
+      "asset_class": "FX",
+      "subgroup": "Safe-Haven FX",
+      "rank_type": "rankable"
+    },
+    {
+      "id": "USDCAD",
+      "symbol": "USDCAD",
+      "name": "U.S. Dollar / Canadian Dollar",
+      "asset_class": "FX",
+      "subgroup": "Commodity FX",
+      "rank_type": "rankable"
+    },
+    {
+      "id": "AUDUSD",
+      "symbol": "AUDUSD",
+      "name": "Australian Dollar / U.S. Dollar",
+      "asset_class": "FX",
+      "subgroup": "Commodity FX",
+      "rank_type": "rankable"
+    },
+    {
+      "id": "NZDUSD",
+      "symbol": "NZDUSD",
+      "name": "New Zealand Dollar / U.S. Dollar",
+      "asset_class": "FX",
+      "subgroup": "Commodity FX",
+      "rank_type": "rankable"
+    },
+    {
+      "id": "US02Y",
+      "symbol": "2Y",
+      "name": "U.S. 2-Year Treasury Yield",
+      "asset_class": "Rates",
+      "subgroup": "U.S. Rates",
+      "rank_type": "anchor"
+    },
+    {
+      "id": "US05Y",
+      "symbol": "5Y",
+      "name": "U.S. 5-Year Treasury Yield",
+      "asset_class": "Rates",
+      "subgroup": "U.S. Rates",
+      "rank_type": "anchor"
+    },
+    {
+      "id": "US10Y",
+      "symbol": "10Y",
+      "name": "U.S. 10-Year Treasury Yield",
+      "asset_class": "Rates",
+      "subgroup": "U.S. Rates",
+      "rank_type": "anchor"
+    },
+    {
+      "id": "US30Y",
+      "symbol": "30Y",
+      "name": "U.S. 30-Year Treasury Yield",
+      "asset_class": "Rates",
+      "subgroup": "U.S. Rates",
+      "rank_type": "anchor"
+    },
+    {
+      "id": "CURVE2S10",
+      "symbol": "2s10s",
+      "name": "U.S. 2s10s Yield Curve",
+      "asset_class": "Rates",
+      "subgroup": "Yield Curves",
+      "rank_type": "anchor"
+    },
+    {
+      "id": "CURVE5S30",
+      "symbol": "5s30s",
+      "name": "U.S. 5s30s Yield Curve",
+      "asset_class": "Rates",
+      "subgroup": "Yield Curves",
+      "rank_type": "anchor"
+    },
+    {
+      "id": "REALY",
+      "symbol": "RealYld",
+      "name": "U.S. Real Yield Proxy",
+      "asset_class": "Inflation Markets",
+      "subgroup": "Real Yields",
+      "rank_type": "anchor"
+    },
+    {
+      "id": "BE5Y",
+      "symbol": "5Y BE",
+      "name": "5-Year Breakeven Inflation",
+      "asset_class": "Inflation Markets",
+      "subgroup": "Breakevens",
+      "rank_type": "anchor"
+    },
+    {
+      "id": "BE10Y",
+      "symbol": "10Y BE",
+      "name": "10-Year Breakeven Inflation",
+      "asset_class": "Inflation Markets",
+      "subgroup": "Breakevens",
+      "rank_type": "anchor"
+    },
+    {
+      "id": "SPX",
+      "symbol": "SPX500",
+      "name": "S&P 500 Fundamental Pressure",
+      "asset_class": "Equity Indices",
+      "subgroup": "U.S. Indices",
+      "rank_type": "rankable"
+    },
+    {
+      "id": "NDX",
+      "symbol": "NASDAQ100",
+      "name": "Nasdaq 100 Fundamental Pressure",
+      "asset_class": "Equity Indices",
+      "subgroup": "U.S. Indices",
+      "rank_type": "rankable"
+    },
+    {
+      "id": "RUT",
+      "symbol": "RUSSELL2000",
+      "name": "Russell 2000 Fundamental Pressure",
+      "asset_class": "Equity Indices",
+      "subgroup": "U.S. Indices",
+      "rank_type": "rankable"
+    },
+    {
+      "id": "DOW",
+      "symbol": "DOW",
+      "name": "Dow Jones Industrial Average Fundamental Pressure",
+      "asset_class": "Equity Indices",
+      "subgroup": "U.S. Indices",
+      "rank_type": "rankable"
+    },
+    {
+      "id": "DAX",
+      "symbol": "GER40",
+      "name": "Germany 40 / DAX Fundamental Pressure",
+      "asset_class": "Equity Indices",
+      "subgroup": "Global Indices",
+      "rank_type": "rankable"
+    },
+    {
+      "id": "UK100",
+      "symbol": "UK100",
+      "name": "FTSE / UK100 Fundamental Pressure",
+      "asset_class": "Equity Indices",
+      "subgroup": "Global Indices",
+      "rank_type": "rankable"
+    },
+    {
+      "id": "NIKKEI",
+      "symbol": "NIKKEI",
+      "name": "Nikkei 225 Fundamental Pressure",
+      "asset_class": "Equity Indices",
+      "subgroup": "Global Indices",
+      "rank_type": "rankable"
+    },
+    {
+      "id": "CHINA50",
+      "symbol": "CHINA50",
+      "name": "China 50 Fundamental Pressure",
+      "asset_class": "Equity Indices",
+      "subgroup": "Global Indices",
+      "rank_type": "rankable"
+    },
+    {
+      "id": "HANGSENG",
+      "symbol": "HSI",
+      "name": "Hang Seng Fundamental Pressure",
+      "asset_class": "Equity Indices",
+      "subgroup": "Global Indices",
+      "rank_type": "rankable"
+    },
+    {
+      "id": "EM",
+      "symbol": "EM",
+      "name": "Emerging Markets Fundamental Pressure",
+      "asset_class": "Equity Indices",
+      "subgroup": "Global Indices",
+      "rank_type": "rankable"
+    },
+    {
+      "id": "HY",
+      "symbol": "HY Spread",
+      "name": "High-Yield Credit Spreads",
+      "asset_class": "Credit / Liquidity",
+      "subgroup": "Credit Spreads",
+      "rank_type": "anchor"
+    },
+    {
+      "id": "IG",
+      "symbol": "IG Spread",
+      "name": "Investment-Grade Credit Spreads",
+      "asset_class": "Credit / Liquidity",
+      "subgroup": "Credit Spreads",
+      "rank_type": "anchor"
+    },
+    {
+      "id": "FCI",
+      "symbol": "FCI",
+      "name": "Financial Conditions Fundamental Pressure",
+      "asset_class": "Credit / Liquidity",
+      "subgroup": "Liquidity",
+      "rank_type": "anchor"
+    },
+    {
+      "id": "GOLD",
+      "symbol": "Gold",
+      "name": "Gold Futures / XAUUSD",
+      "asset_class": "Commodities",
+      "subgroup": "Precious Metals",
+      "rank_type": "rankable"
+    },
+    {
+      "id": "SILVER",
+      "symbol": "Silver",
+      "name": "Silver Futures",
+      "asset_class": "Commodities",
+      "subgroup": "Precious Metals",
+      "rank_type": "rankable"
+    },
+    {
+      "id": "COPPER",
+      "symbol": "Copper",
+      "name": "Copper Futures",
+      "asset_class": "Commodities",
+      "subgroup": "Industrial Metals",
+      "rank_type": "rankable"
+    },
+    {
+      "id": "WTI",
+      "symbol": "WTI Oil",
+      "name": "WTI Crude Oil",
+      "asset_class": "Commodities",
+      "subgroup": "Energy",
+      "rank_type": "rankable"
+    },
+    {
+      "id": "BRENT",
+      "symbol": "Brent Oil",
+      "name": "Brent Crude Oil",
+      "asset_class": "Commodities",
+      "subgroup": "Energy",
+      "rank_type": "rankable"
+    },
+    {
+      "id": "NG",
+      "symbol": "Natural Gas",
+      "name": "Natural Gas Futures",
+      "asset_class": "Commodities",
+      "subgroup": "Energy",
+      "rank_type": "rankable"
+    },
+    {
+      "id": "GASOLINE",
+      "symbol": "Gasoline",
+      "name": "RBOB Gasoline",
+      "asset_class": "Commodities",
+      "subgroup": "Energy",
+      "rank_type": "anchor"
+    },
+    {
+      "id": "HEATING",
+      "symbol": "Heating Oil",
+      "name": "Heating Oil / Distillates",
+      "asset_class": "Commodities",
+      "subgroup": "Energy",
+      "rank_type": "anchor"
+    },
+    {
+      "id": "BCOM",
+      "symbol": "CMD-FUND",
+      "name": "Broad Commodity Fundamental Basket",
+      "asset_class": "Commodities",
+      "subgroup": "Broad Commodity Basket",
+      "rank_type": "anchor"
+    },
+    {
+      "id": "WHEAT",
+      "symbol": "Wheat",
+      "name": "Wheat Futures",
+      "asset_class": "Commodities",
+      "subgroup": "Grains",
+      "rank_type": "rankable"
+    },
+    {
+      "id": "CORN",
+      "symbol": "Corn",
+      "name": "Corn Futures",
+      "asset_class": "Commodities",
+      "subgroup": "Grains",
+      "rank_type": "rankable"
+    },
+    {
+      "id": "SOY",
+      "symbol": "Soybeans",
+      "name": "Soybean Futures",
+      "asset_class": "Commodities",
+      "subgroup": "Grains",
+      "rank_type": "rankable"
+    },
+    {
+      "id": "COFFEE",
+      "symbol": "Coffee",
+      "name": "Coffee Futures",
+      "asset_class": "Commodities",
+      "subgroup": "Softs",
+      "rank_type": "rankable"
+    },
+    {
+      "id": "SUGAR",
+      "symbol": "Sugar",
+      "name": "Sugar Futures",
+      "asset_class": "Commodities",
+      "subgroup": "Softs",
+      "rank_type": "rankable"
+    },
+    {
+      "id": "COTTON",
+      "symbol": "Cotton",
+      "name": "Cotton Futures",
+      "asset_class": "Commodities",
+      "subgroup": "Softs",
+      "rank_type": "rankable"
+    }
+  ]
+}

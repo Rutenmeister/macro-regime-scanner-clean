@@ -1,7 +1,7 @@
 {
   "snapshotVersion": "v0.40-score-history",
-  "generatedAt": "2026-05-19T19:47:18.252393+00:00",
-  "dataMode": "live-public-source-us-centered-integrity-v0.47",
+  "generatedAt": "2026-05-20T18:02:25.339616+00:00",
+  "dataMode": "live-public-source-raw-pressure-scoring-v0.40",
   "assets": [
     {
       "id": "DXY",
@@ -948,6 +948,5 @@
         "netContribution": 0
       }
     }
-  ],
-  "scopeNote": "Non-USD FX crosses excluded from this U.S.-centered distribution baseline."
+  ]
 }

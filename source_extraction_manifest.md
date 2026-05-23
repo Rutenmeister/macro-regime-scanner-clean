@@ -1,0 +1,205 @@
+{
+  "pipelineVersion": "0.33",
+  "startedAt": "2026-05-19T19:46:02.766417+00:00",
+  "finishedAt": "2026-05-19T19:46:02.767426+00:00",
+  "dryRun": true,
+  "selectedLanes": "all enabled",
+  "lanes": [
+    {
+      "id": "treasury",
+      "sourceId": "TREASURY_OFFICIAL",
+      "steps": [
+        {
+          "script": "scripts/sources/fetch_treasury_yields.py",
+          "status": "dry_run",
+          "returncode": 0
+        },
+        {
+          "script": "scripts/apply_treasury_lane.py",
+          "status": "dry_run",
+          "returncode": 0
+        }
+      ],
+      "status": "dry_run"
+    },
+    {
+      "id": "cftc_cot",
+      "sourceId": "CFTC_COT",
+      "steps": [
+        {
+          "script": "scripts/sources/fetch_cftc_cot.py",
+          "status": "dry_run",
+          "returncode": 0
+        },
+        {
+          "script": "scripts/apply_cot_lane.py",
+          "status": "dry_run",
+          "returncode": 0
+        }
+      ],
+      "status": "dry_run"
+    },
+    {
+      "id": "eia",
+      "sourceId": "EIA_OPEN_DATA",
+      "steps": [
+        {
+          "script": "scripts/sources/fetch_eia_energy.py",
+          "status": "dry_run",
+          "returncode": 0
+        },
+        {
+          "script": "scripts/apply_eia_lane.py",
+          "status": "dry_run",
+          "returncode": 0
+        }
+      ],
+      "status": "dry_run"
+    },
+    {
+      "id": "usda",
+      "sourceId": "USDA_NASS",
+      "steps": [
+        {
+          "script": "scripts/sources/fetch_usda_agriculture.py",
+          "status": "dry_run",
+          "returncode": 0
+        },
+        {
+          "script": "scripts/apply_usda_lane.py",
+          "status": "dry_run",
+          "returncode": 0
+        }
+      ],
+      "status": "dry_run"
+    },
+    {
+      "id": "bls",
+      "sourceId": "BLS_PUBLIC",
+      "steps": [
+        {
+          "script": "scripts/sources/fetch_bls_macro.py",
+          "status": "dry_run",
+          "returncode": 0
+        },
+        {
+          "script": "scripts/apply_bls_lane.py",
+          "status": "dry_run",
+          "returncode": 0
+        }
+      ],
+      "status": "dry_run"
+    },
+    {
+      "id": "bea",
+      "sourceId": "BEA_PUBLIC",
+      "steps": [
+        {
+          "script": "scripts/sources/fetch_bea_macro.py",
+          "status": "dry_run",
+          "returncode": 0
+        },
+        {
+          "script": "scripts/apply_bea_lane.py",
+          "status": "dry_run",
+          "returncode": 0
+        }
+      ],
+      "status": "dry_run"
+    },
+    {
+      "id": "federal_reserve",
+      "sourceId": "FED_FRED_SELECTED",
+      "steps": [
+        {
+          "script": "scripts/sources/fetch_fed_macro.py",
+          "status": "dry_run",
+          "returncode": 0
+        },
+        {
+          "script": "scripts/apply_fed_lane.py",
+          "status": "dry_run",
+          "returncode": 0
+        }
+      ],
+      "status": "dry_run"
+    },
+    {
+      "id": "census",
+      "sourceId": "CENSUS_PUBLIC",
+      "steps": [
+        {
+          "script": "scripts/sources/fetch_census_macro.py",
+          "status": "dry_run",
+          "returncode": 0
+        },
+        {
+          "script": "scripts/apply_census_lane.py",
+          "status": "dry_run",
+          "returncode": 0
+        }
+      ],
+      "status": "dry_run"
+    },
+    {
+      "id": "financial_stress",
+      "sourceId": "FINANCIAL_STRESS_FRED",
+      "steps": [
+        {
+          "script": "scripts/sources/fetch_financial_stress.py",
+          "status": "dry_run",
+          "returncode": 0
+        },
+        {
+          "script": "scripts/apply_financial_stress_lane.py",
+          "status": "dry_run",
+          "returncode": 0
+        }
+      ],
+      "status": "dry_run"
+    },
+    {
+      "id": "noaa_weather",
+      "sourceId": "NOAA_NWS",
+      "steps": [
+        {
+          "script": "scripts/sources/fetch_noaa_weather.py",
+          "status": "dry_run",
+          "returncode": 0
+        },
+        {
+          "script": "scripts/apply_noaa_weather_lane.py",
+          "status": "dry_run",
+          "returncode": 0
+        }
+      ],
+      "status": "dry_run"
+    }
+  ],
+  "validation": {
+    "script": "scripts/validate_data.py",
+    "status": "dry_run",
+    "returncode": 0
+  },
+  "status": "dry_run_ok",
+  "scoreRecompute": {
+    "script": "scripts/recompute_live_scores.py",
+    "status": "dry_run",
+    "returncode": 0
+  },
+  "releaseCalendar": {
+    "script": "scripts/generate_release_calendar.py",
+    "status": "dry_run",
+    "returncode": 0
+  },
+  "scoreHistoryValidation": {
+    "script": "scripts/validate_score_history.py",
+    "status": "dry_run",
+    "returncode": 0
+  },
+  "optionalSignalValidation": {
+    "script": "scripts/validate_signal_framework.py",
+    "status": "dry_run",
+    "returncode": 0
+  }
+}

@@ -1,0 +1,60 @@
+name: Refresh All Public Sources
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "45 23 * * 5"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: macro-regime-source-refresh
+  cancel-in-progress: false
+
+jobs:
+  refresh-all:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests
+
+      - name: Refresh data, build research infrastructure, and validate v0.49
+        env:
+          EIA_API_KEY: ${{ secrets.EIA_API_KEY }}
+          USDA_API_KEY: ${{ secrets.USDA_API_KEY }}
+          BEA_API_KEY: ${{ secrets.BEA_API_KEY }}
+          CENSUS_API_KEY: ${{ secrets.CENSUS_API_KEY }}
+          FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
+        run: |
+          python scripts/refresh_all_sources.py
+          python scripts/generate_release_calendar.py
+          python scripts/recompute_live_scores.py
+          python scripts/validate_data.py
+          python scripts/validate_score_history.py
+          python scripts/validate_signal_framework.py
+          python scripts/validate_release_calendar.py
+          python scripts/generate_release_results.py
+          python scripts/validate_release_results.py
+          python scripts/build_validation_report.py
+          python scripts/build_source_quality.py
+          python scripts/validate_source_quality.py
+          python scripts/export_regime_bridge.py
+          python scripts/validate_regime_bridge.py
+          python scripts/generate_professional_report.py
+
+      - name: Commit refreshed public-source data
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "Refresh all public-source lanes and v0.49 beta wrapper data"
+          file_pattern: data/ config/ docs/

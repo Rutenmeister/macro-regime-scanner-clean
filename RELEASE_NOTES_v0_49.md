@@ -1,27 +1,44 @@
-# Macro Regime Scanner v0.49 — Beta Launch Wrapper + Queue Expansion
+#!/usr/bin/env python3
+"""Validate v0.40 score-history snapshot structure."""
+from __future__ import annotations
+import json
+from pathlib import Path
 
-v0.49 is a narrow SaaS-readiness wrapper pass built on v0.48. It does not change the core scoring model, does not add price, and does not expand the asset universe.
+ROOT = Path(__file__).resolve().parents[1]
+LATEST = ROOT / "data" / "history" / "latest.json"
+DATA = ROOT / "data" / "macro_regime_scanner.json"
 
-## Added
+errors: list[str] = []
 
-- `landing.html` product overview page.
-- `legal/disclaimer.html` research disclaimer.
-- `legal/terms.html` beta terms.
-- `legal/privacy.html` beta privacy page.
-- `support/feedback.md` private beta feedback guidance.
-- `CHANGELOG.md` with v0.49 and v0.48 notes.
+def load(path: Path):
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except Exception as exc:
+        errors.append(f"could not load {path.relative_to(ROOT)}: {exc}")
+        return None
 
-## Changed
+snap = load(LATEST)
+data = load(DATA)
+if isinstance(snap, dict):
+    if snap.get("snapshotVersion") != "v0.40-score-history":
+        errors.append("latest snapshot has wrong snapshotVersion")
+    assets = snap.get("assets")
+    if not isinstance(assets, list) or not assets:
+        errors.append("latest snapshot assets must be a non-empty list")
+    else:
+        for i, a in enumerate(assets):
+            for key in ["id", "symbol", "score", "pressureBucket", "movementTag", "confidence", "conflict"]:
+                if key not in a:
+                    errors.append(f"snapshot assets[{i}] missing {key}")
+            if not isinstance(a.get("score"), (int, float)):
+                errors.append(f"snapshot assets[{i}].score must be numeric")
+if isinstance(data, dict):
+    if data.get("score_history", {}).get("scoreScale") != "uncapped raw net pressure; no +/-10 display cap":
+        errors.append("dashboard data missing v0.40 score_history scoreScale")
 
-- Regime Queue Snapshot now displays up to 10 assets per pressure bucket instead of 5.
-- Visible version labels updated to v0.49.
-- Exported Markdown brief heading updated to v0.49.
-- Workflow label/commit message updated to v0.49.
-
-## Preserved
-
-- U.S.-centered scope.
-- Raw uncapped scores.
-- No price in live scoring.
-- Official/public-source release lanes.
-- Source quality, calendar confidence, release result schema, history snapshots, and suite bridge exports.
+if errors:
+    print("SCORE HISTORY VALIDATION FAILED")
+    for e in errors[:100]:
+        print("-", e)
+    raise SystemExit(1)
+print("SCORE HISTORY VALIDATION PASSED")
