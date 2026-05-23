@@ -1,12 +1,12 @@
 {
   "sourceId": "NOAA_NWS",
   "sourceName": "NOAA/National Weather Service public weather alerts",
-  "retrievedAt": "2026-05-23T17:45:08.017326+00:00",
+  "retrievedAt": "2026-05-23T17:57:10.780864+00:00",
   "endpoint": "https://api.weather.gov/alerts/active?status=actual&message_type=alert",
   "fetchAttempts": [
     {
       "endpoint": "https://api.weather.gov/alerts/active?status=actual&message_type=alert",
-      "features": 105
+      "features": 110
     }
   ],
   "categoryCounts": {
@@ -26,24 +26,21 @@
       "sampleEvents": []
     },
     "FLOOD_STRESS": {
-      "count": 21,
-      "weighted": 57,
+      "count": 23,
+      "weighted": 61,
       "sampleEvents": [
+        "Flash Flood Warning",
         "Flood Advisory",
         "Flood Advisory",
-        "Flood Warning",
-        "Flood Warning",
+        "Flood Advisory",
         "Flood Warning"
       ]
     },
     "SEVERE_CONVECTIVE_STRESS": {
-      "count": 5,
-      "weighted": 15,
+      "count": 2,
+      "weighted": 6,
       "sampleEvents": [
         "Severe Thunderstorm Warning",
-        "Severe Thunderstorm Warning",
-        "Severe Thunderstorm Warning",
-        "Severe Thunderstorm Watch",
         "Severe Thunderstorm Watch"
       ]
     },
@@ -70,7 +67,7 @@
     ],
     [
       "Special Weather Statement",
-      16
+      22
     ],
     [
       "Flood Warning",
@@ -90,22 +87,14 @@
     ],
     [
       "Flood Advisory",
-      3
-    ],
-    [
-      "Severe Thunderstorm Warning",
-      3
+      4
     ],
     [
       "Flash Flood Warning",
-      2
+      3
     ],
     [
       "Flood Watch",
-      2
-    ],
-    [
-      "Severe Thunderstorm Watch",
       2
     ],
     [
@@ -117,7 +106,15 @@
       2
     ],
     [
+      "Severe Thunderstorm Warning",
+      1
+    ],
+    [
       "Marine Weather Statement",
+      1
+    ],
+    [
+      "Severe Thunderstorm Watch",
       1
     ],
     [
@@ -133,21 +130,84 @@
       1
     ]
   ],
-  "totalActiveAlerts": 105,
-  "weightedActiveAlerts": 198,
+  "totalActiveAlerts": 110,
+  "weightedActiveAlerts": 205,
   "severityCounts": {
-    "Severe": 28,
-    "Moderate": 37,
-    "Minor": 39,
+    "Severe": 26,
+    "Moderate": 43,
+    "Minor": 40,
     "Unknown": 1
   },
   "sampleAlerts": [
     {
+      "event": "Flash Flood Warning",
+      "severity": "Severe",
+      "effective": "2026-05-23T12:55:00-05:00",
+      "area": "Presidio, TX",
+      "headline": "Flash Flood Warning issued May 23 at 12:55PM CDT until May 23 at 4:00PM CDT by NWS Midland/Odessa TX"
+    },
+    {
+      "event": "Special Weather Statement",
+      "severity": "Moderate",
+      "effective": "2026-05-23T12:52:00-05:00",
+      "area": "Chilton; Coosa; Autauga; Elmore",
+      "headline": "Special Weather Statement issued May 23 at 12:52PM CDT by NWS Birmingham AL"
+    },
+    {
+      "event": "Special Weather Statement",
+      "severity": "Moderate",
+      "effective": "2026-05-23T12:51:00-05:00",
+      "area": "Goliad; Victoria; Coastal Aransas; Inland Refugio; Inland Calhoun; Coastal Refugio",
+      "headline": "Special Weather Statement issued May 23 at 12:51PM CDT by NWS Corpus Christi TX"
+    },
+    {
+      "event": "Special Weather Statement",
+      "severity": "Moderate",
+      "effective": "2026-05-23T12:51:00-05:00",
+      "area": "Jones",
+      "headline": "Special Weather Statement issued May 23 at 12:51PM CDT by NWS Jackson MS"
+    },
+    {
+      "event": "Severe Thunderstorm Warning",
+      "severity": "Severe",
+      "effective": "2026-05-23T13:50:00-04:00",
+      "area": "Glascock, GA; Hancock, GA; Taliaferro, GA; Warren, GA",
+      "headline": "Severe Thunderstorm Warning issued May 23 at 1:50PM EDT until May 23 at 2:30PM EDT by NWS Peachtree City GA"
+    },
+    {
+      "event": "Special Weather Statement",
+      "severity": "Moderate",
+      "effective": "2026-05-23T12:50:00-05:00",
+      "area": "Ashley",
+      "headline": "Special Weather Statement issued May 23 at 12:50PM CDT by NWS Jackson MS"
+    },
+    {
+      "event": "Special Weather Statement",
+      "severity": "Moderate",
+      "effective": "2026-05-23T13:49:00-04:00",
+      "area": "Turner; Ben Hill; Irwin",
+      "headline": "Special Weather Statement issued May 23 at 1:49PM EDT by NWS Tallahassee FL"
+    },
+    {
       "event": "Special Marine Warning",
       "severity": "Severe",
-      "effective": "2026-05-23T12:44:00-05:00",
-      "area": "Corpus Christi and Nueces Bays; Copano, Aransas, and Redfish Bays; San Antonio, Mesquite, and Espiritu Santo Bays; Coastal waters from Baffin Bay to Port Aransas out 20 NM; Coastal waters from Port Aransas to Matagorda Ship Channel out 20 N",
-      "headline": "Special Marine Warning issued May 23 at 12:44PM CDT until May 23 at 1:30PM CDT by NWS Corpus Christi TX"
+      "effective": "2026-05-23T12:47:00-05:00",
+      "area": "Coastal waters from Cameron LA to High Island TX out 20 NM; Waters from Cameron LA to High Island TX from 20 to 60 NM",
+      "headline": "Special Marine Warning issued May 23 at 12:47PM CDT until May 23 at 1:45PM CDT by NWS Lake Charles LA"
+    },
+    {
+      "event": "Flood Advisory",
+      "severity": "Minor",
+      "effective": "2026-05-23T13:47:00-04:00",
+      "area": "Juana Diaz, PR; Ponce, PR",
+      "headline": "Flood Advisory issued May 23 at 1:47PM AST until May 23 at 5:00PM AST by NWS San Juan PR"
+    },
+    {
+      "event": "Special Weather Statement",
+      "severity": "Moderate",
+      "effective": "2026-05-23T12:45:00-05:00",
+      "area": "Marfa Plateau; Presidio Valley",
+      "headline": "Special Weather Statement issued May 23 at 12:45PM CDT by NWS Midland/Odessa TX"
     },
     {
       "event": "Special Weather Statement",
@@ -213,25 +273,11 @@
       "headline": "Small Craft Advisory issued May 23 at 1:32PM EDT until May 23 at 11:00PM EDT by NWS Gaylord MI"
     },
     {
-      "event": "Severe Thunderstorm Warning",
-      "severity": "Severe",
-      "effective": "2026-05-23T12:31:00-05:00",
-      "area": "Cameron, TX; Hidalgo, TX; Willacy, TX",
-      "headline": "Severe Thunderstorm Warning issued May 23 at 12:31PM CDT until May 23 at 1:15PM CDT by NWS Brownsville TX"
-    },
-    {
       "event": "Special Weather Statement",
       "severity": "Moderate",
       "effective": "2026-05-23T12:30:00-05:00",
       "area": "Inland Harris; Inland Brazoria; Inland Galveston; Coastal Harris; Coastal Galveston",
       "headline": "Special Weather Statement issued May 23 at 12:30PM CDT by NWS Houston/Galveston TX"
-    },
-    {
-      "event": "Severe Thunderstorm Warning",
-      "severity": "Severe",
-      "effective": "2026-05-23T12:27:00-05:00",
-      "area": "Aransas, TX; Calhoun, TX; Nueces, TX; Refugio, TX; San Patricio, TX",
-      "headline": "Severe Thunderstorm Warning issued May 23 at 12:27PM CDT until May 23 at 1:15PM CDT by NWS Corpus Christi TX"
     },
     {
       "event": "Flood Warning",
@@ -265,22 +311,15 @@
       "event": "Special Weather Statement",
       "severity": "Moderate",
       "effective": "2026-05-23T12:19:00-05:00",
-      "area": "Claiborne; Lincoln; Union; Bienville; Jackson; Ouachita; Caldwell",
-      "headline": "Special Weather Statement issued May 23 at 12:19PM CDT by NWS Shreveport LA"
+      "area": "Victoria; Inland Calhoun",
+      "headline": "Special Weather Statement issued May 23 at 12:19PM CDT by NWS Corpus Christi TX"
     },
     {
       "event": "Special Weather Statement",
       "severity": "Moderate",
       "effective": "2026-05-23T12:19:00-05:00",
-      "area": "Victoria; Inland Calhoun",
-      "headline": "Special Weather Statement issued May 23 at 12:19PM CDT by NWS Corpus Christi TX"
-    },
-    {
-      "event": "Severe Thunderstorm Warning",
-      "severity": "Severe",
-      "effective": "2026-05-23T12:16:00-05:00",
-      "area": "Catahoula, LA; Concordia, LA; Franklin, LA; Tensas, LA; Adams, MS; Claiborne, MS; Franklin, MS; Jefferson, MS",
-      "headline": "Severe Thunderstorm Warning issued May 23 at 12:16PM CDT until May 23 at 1:15PM CDT by NWS Jackson MS"
+      "area": "Claiborne; Lincoln; Union; Bienville; Jackson; Ouachita; Caldwell",
+      "headline": "Special Weather Statement issued May 23 at 12:19PM CDT by NWS Shreveport LA"
     },
     {
       "event": "Special Marine Warning",
@@ -307,14 +346,14 @@
       "event": "Small Craft Advisory",
       "severity": "Minor",
       "effective": "2026-05-23T12:40:00-04:00",
-      "area": "Chesapeake Bay from Pooles Island to Sandy Point MD; Chesapeake Bay from Sandy Point to North Beach MD; Chesapeake Bay from North Beach to Drum Point MD; Chesapeake Bay from Drum Point MD to Smith Point VA; Tidal Potomac from Key Bridge to ",
+      "area": "Chesapeake Bay north of Pooles Island MD; Patapsco River including Baltimore Harbor",
       "headline": "Small Craft Advisory issued May 23 at 12:40PM EDT until May 24 at 6:00AM EDT by NWS Baltimore MD/Washington DC"
     },
     {
       "event": "Small Craft Advisory",
       "severity": "Minor",
       "effective": "2026-05-23T12:40:00-04:00",
-      "area": "Chesapeake Bay north of Pooles Island MD; Patapsco River including Baltimore Harbor",
+      "area": "Chesapeake Bay from Pooles Island to Sandy Point MD; Chesapeake Bay from Sandy Point to North Beach MD; Chesapeake Bay from North Beach to Drum Point MD; Chesapeake Bay from Drum Point MD to Smith Point VA; Tidal Potomac from Key Bridge to ",
       "headline": "Small Craft Advisory issued May 23 at 12:40PM EDT until May 24 at 6:00AM EDT by NWS Baltimore MD/Washington DC"
     },
     {
@@ -363,15 +402,15 @@
       "event": "Small Craft Advisory",
       "severity": "Minor",
       "effective": "2026-05-23T09:02:00-07:00",
-      "area": "Waters from Cape Mendocino to Pt. Arena CA from 10 to 60 nm",
-      "headline": "Small Craft Advisory issued May 23 at 9:02AM PDT until May 23 at 9:00PM PDT by NWS Eureka CA"
+      "area": "Waters from Pt. St. George to Cape Mendocino CA from 10 to 60 nm",
+      "headline": "Small Craft Advisory issued May 23 at 9:02AM PDT until May 24 at 9:00AM PDT by NWS Eureka CA"
     },
     {
       "event": "Small Craft Advisory",
       "severity": "Minor",
       "effective": "2026-05-23T09:02:00-07:00",
-      "area": "Waters from Pt. St. George to Cape Mendocino CA from 10 to 60 nm",
-      "headline": "Small Craft Advisory issued May 23 at 9:02AM PDT until May 24 at 9:00AM PDT by NWS Eureka CA"
+      "area": "Waters from Cape Mendocino to Pt. Arena CA from 10 to 60 nm",
+      "headline": "Small Craft Advisory issued May 23 at 9:02AM PDT until May 23 at 9:00PM PDT by NWS Eureka CA"
     },
     {
       "event": "Small Craft Advisory",
@@ -418,13 +457,6 @@
     {
       "event": "Severe Thunderstorm Watch",
       "severity": "Severe",
-      "effective": "2026-05-23T10:17:00-05:00",
-      "area": "Bienville, LA; Caldwell, LA; Grant, LA; Jackson, LA; La Salle, LA; Lincoln, LA; Natchitoches, LA; Ouachita, LA; Union, LA; Winn, LA",
-      "headline": "Severe Thunderstorm Watch issued May 23 at 10:17AM CDT until May 23 at 6:00PM CDT by NWS Shreveport LA"
-    },
-    {
-      "event": "Severe Thunderstorm Watch",
-      "severity": "Severe",
       "effective": "2026-05-23T10:15:00-05:00",
       "area": "Ashley, AR; Chicot, AR; Catahoula, LA; Concordia, LA; East Carroll, LA; Franklin, LA; Madison, LA; Morehouse, LA; Richland, LA; Tensas, LA; West Carroll, LA; Adams, MS; Attala, MS; Claiborne, MS; Copiah, MS; Covington, MS; Franklin, MS; Hin",
       "headline": "Severe Thunderstorm Watch issued May 23 at 10:15AM CDT until May 23 at 6:00PM CDT by NWS Jackson MS"
@@ -456,41 +488,6 @@
       "effective": "2026-05-23T09:20:00-05:00",
       "area": "St. Tammany, LA; Hancock, MS; Pearl River, MS",
       "headline": "Flood Warning issued May 23 at 9:20AM CDT until May 28 at 7:00AM CDT by NWS New Orleans LA"
-    },
-    {
-      "event": "Wind Advisory",
-      "severity": "Moderate",
-      "effective": "2026-05-23T10:18:00-04:00",
-      "area": "Northern Erie; Southern Erie",
-      "headline": "Wind Advisory issued May 23 at 10:18AM EDT until May 24 at 2:00AM EDT by NWS Cleveland OH"
-    },
-    {
-      "event": "Rip Current Statement",
-      "severity": "Moderate",
-      "effective": "2026-05-23T09:09:00-05:00",
-      "area": "Mobile Coastal; Baldwin Coastal; Escambia Coastal; Santa Rosa Coastal; Okaloosa Coastal",
-      "headline": "Rip Current Statement issued May 23 at 9:09AM CDT until May 24 at 6:00AM CDT by NWS Mobile AL"
-    },
-    {
-      "event": "Flood Watch",
-      "severity": "Severe",
-      "effective": "2026-05-23T09:04:00-05:00",
-      "area": "Pointe Coupee; West Feliciana; East Feliciana; St. Helena; Washington; Iberville; West Baton Rouge; East Baton Rouge; Assumption; St. James; St. John The Baptist; Upper St. Bernard; Lower St. Bernard; Northern Tangipahoa; Southeast St. Tamm",
-      "headline": "Flood Watch issued May 23 at 9:04AM CDT until May 24 at 7:00PM CDT by NWS New Orleans LA"
-    },
-    {
-      "event": "Flood Warning",
-      "severity": "Severe",
-      "effective": "2026-05-23T10:01:00-04:00",
-      "area": "Tuscarawas, OH",
-      "headline": "Flood Warning issued May 23 at 10:01AM EDT until May 26 at 3:00AM EDT by NWS Pittsburgh PA"
-    },
-    {
-      "event": "Wind Advisory",
-      "severity": "Moderate",
-      "effective": "2026-05-23T09:28:00-04:00",
-      "area": "Chautauqua",
-      "headline": "Wind Advisory issued May 23 at 9:28AM EDT until May 24 at 2:00AM EDT by NWS Buffalo NY"
     }
   ]
 }
