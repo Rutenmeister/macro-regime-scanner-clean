@@ -1,5 +1,13 @@
 # Changelog
 
+## v1.0 Beta — Regime + Evidence Release
+
+- Adds a compact Current Macro Regime card using Growth Score and Inflation Score tallies.
+- Keeps the scanner price-free and public-source based.
+- Adds explicit regime-factor registry logic, a methodology note, a What changed line, and regime export support.
+- Does not add source lanes or workflow dependencies.
+
+
 ## v0.49 — Beta Launch Wrapper + Queue Expansion
 
 - Preserves v0.48 Distribution-Ready Baseline.

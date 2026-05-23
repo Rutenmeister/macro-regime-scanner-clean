@@ -55,3 +55,7 @@ input,select{background:rgba(4,2,12,.86);border:1px solid rgba(222,214,255,.17);
 .macro-regime-stat{border:1px solid rgba(222,214,255,.10);background:rgba(4,2,12,.28);border-radius:1rem;padding:.72rem}
 .macro-regime-value{font-size:1.25rem;font-weight:800;letter-spacing:-.02em}
 .macro-regime-read{border-top:1px solid rgba(222,214,255,.10);margin-top:.8rem;padding-top:.75rem;color:#cbd5e1;font-size:.86rem;line-height:1.45}
+
+/* v1.0 beta finish: regime + evidence release */
+.macro-method-note{color:#94a3b8;font-size:.74rem;line-height:1.45}
+.what-changed-line{border:1px solid rgba(64,241,223,.14);background:rgba(64,241,223,.04);border-radius:1rem;padding:.6rem .7rem;margin:.65rem 0;color:#cbd5e1;font-size:.78rem;line-height:1.45}

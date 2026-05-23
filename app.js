@@ -7,10 +7,50 @@ let RELEASE_RESULTS = null;
 let SOURCE_QUALITY = null;
 let VALIDATION_SUMMARY = null;
 let REGIME_BRIDGE = null;
+let REFRESH_REPORT = null;
 let SHOW_ALL_ROWS = false;
 
 let expanded = new Set();
 let selectedId = 'GOLD';
+
+const REGIME_FACTOR_REGISTRY = {
+  'policy rate': [{ bucket: 'inflation', weight: 1, anchors: ['US02Y','US05Y','US10Y','US30Y','DXY'], note: 'policy pressure' }],
+  'rate differentials': [{ bucket: 'inflation', weight: 1, anchors: ['US02Y','US05Y','US10Y','US30Y','DXY'], note: 'rate pressure' }],
+  'real yield differentials': [{ bucket: 'inflation', weight: 2, anchors: ['REALY','US10Y','US05Y','DXY','GOLD'], note: 'real-yield pressure' }],
+  '2y yield': [{ bucket: 'inflation', weight: 2, anchors: ['US02Y','DXY'], note: 'front-end rate pressure' }],
+  '10y yield': [{ bucket: 'inflation', weight: 2, anchors: ['US10Y','REALY','DXY'], note: 'long-rate pressure' }],
+  'yield curve': [{ bucket: 'growth', weight: 1, anchors: ['US10Y','US02Y','SPX','NDX'], note: 'curve/growth signal' }],
+  'real yields': [{ bucket: 'inflation', weight: 2, anchors: ['REALY','US10Y','DXY','GOLD'], note: 'real-yield pressure' }],
+  'breakeven inflation': [{ bucket: 'inflation', weight: 2, anchors: ['BE5Y','BE10Y','US10Y'], note: 'market inflation compensation' }],
+  'cpi pressure': [{ bucket: 'inflation', weight: 2, anchors: ['US02Y','US10Y','DXY','REALY','BE5Y','BE10Y'], note: 'consumer inflation pressure' }],
+  'ppi pressure': [{ bucket: 'inflation', weight: 2, anchors: ['US02Y','US10Y','DXY','REALY'], note: 'producer inflation pressure' }],
+  'pce pressure': [{ bucket: 'inflation', weight: 2, anchors: ['US02Y','US10Y','DXY','REALY'], note: 'Fed-preferred inflation pressure' }],
+  'gdp / growth trend': [{ bucket: 'growth', weight: 2, anchors: ['SPX','NDX','RUT','DOW','HY','FCI'], note: 'growth trend' }],
+  'retail sales / consumer demand': [{ bucket: 'growth', weight: 2, anchors: ['SPX','NDX','RUT','DOW','HY','FCI'], note: 'consumer demand' }],
+  'labor strength': [{ bucket: 'growth', weight: 2, anchors: ['SPX','NDX','RUT','DOW','HY','FCI'], note: 'labor/growth support' }],
+  'credit spreads': [{ bucket: 'growth', weight: 2, anchors: ['HY','IG','FCI','SPX','NDX','RUT'], note: 'credit stress / risk appetite' }],
+  'financial conditions': [{ bucket: 'growth', weight: 2, anchors: ['FCI','HY','IG','SPX','NDX','RUT'], note: 'financial conditions' }],
+  'crude inventories': [{ bucket: 'inflation', weight: 1, anchors: ['WTI','BRENT','BCOM','GASOLINE','HEATING'], note: 'energy balance' }],
+  'cushing inventories': [{ bucket: 'inflation', weight: 1, anchors: ['WTI','BRENT','BCOM'], note: 'crude storage' }],
+  'product inventories': [{ bucket: 'inflation', weight: 1, anchors: ['GASOLINE','HEATING','WTI','BRENT'], note: 'refined-product balance' }],
+  'refinery utilization': [{ bucket: 'inflation', weight: 1, anchors: ['GASOLINE','HEATING','WTI','BRENT'], note: 'refinery/product pressure' }],
+  'product supplied / demand': [{ bucket: 'growth', weight: 1, anchors: ['WTI','BRENT','BCOM','SPX','RUT'], note: 'physical demand' }, { bucket: 'inflation', weight: 1, anchors: ['WTI','BRENT','GASOLINE','HEATING'], note: 'energy demand pressure' }],
+  'u.s. production': [{ bucket: 'inflation', weight: 1, anchors: ['WTI','BRENT','NG','BCOM'], note: 'supply pressure' }],
+  'imports / exports': [{ bucket: 'inflation', weight: 1, anchors: ['WTI','BRENT','NG','BCOM'], note: 'trade-flow pressure' }],
+  'opec policy': [{ bucket: 'inflation', weight: 1, anchors: ['WTI','BRENT','BCOM'], note: 'energy supply policy' }],
+  'natural gas storage': [{ bucket: 'inflation', weight: 1, anchors: ['NG','BCOM'], note: 'gas balance' }],
+  'weather hdd/cdd': [{ bucket: 'inflation', weight: 1, anchors: ['NG','WTI','BRENT'], note: 'energy weather demand' }],
+  'lng exports / power burn': [{ bucket: 'inflation', weight: 1, anchors: ['NG','BCOM'], note: 'gas demand' }],
+  'wasde ending stocks': [{ bucket: 'inflation', weight: 1, anchors: ['WHEAT','CORN','SOY','BCOM'], note: 'agriculture supply' }],
+  'stock/use ratio': [{ bucket: 'inflation', weight: 1, anchors: ['WHEAT','CORN','SOY','BCOM'], note: 'agriculture tightness' }],
+  'crop progress / condition': [{ bucket: 'inflation', weight: 1, anchors: ['WHEAT','CORN','SOY','BCOM'], note: 'crop condition' }],
+  'export sales': [{ bucket: 'inflation', weight: 1, anchors: ['WHEAT','CORN','SOY','BCOM'], note: 'agriculture demand' }],
+  'weather / drought': [{ bucket: 'inflation', weight: 1, anchors: ['WHEAT','CORN','SOY','BCOM'], note: 'crop/weather risk' }],
+  'global supply competitors': [{ bucket: 'inflation', weight: 1, anchors: ['WHEAT','CORN','SOY','BCOM'], note: 'global ag supply' }],
+  'ethanol / biofuel linkage': [{ bucket: 'inflation', weight: 1, anchors: ['CORN','SOY','WTI','BCOM'], note: 'biofuel demand/cost channel' }]
+};
+const REGIME_BUCKET_LABELS = { growth: 'Growth Score', inflation: 'Inflation Score' };
+
 const $ = id => document.getElementById(id);
 function esc(v){ return String(v ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
 function oneDecimal(n){ return Number(n||0).toFixed(1); }
@@ -41,6 +81,13 @@ function sourceHealthClass(status){
   if(v.includes('candidate')) return 'source-candidate';
   return 'source-candidate';
 }
+
+function refreshStatusPill(){
+  if(!REFRESH_REPORT) return '';
+  const status = REFRESH_REPORT.status || 'unknown';
+  const finished = REFRESH_REPORT.finishedAt ? new Date(REFRESH_REPORT.finishedAt).toLocaleString() : '';
+  return `<span class="pill">Last refresh: ${esc(status)}${finished ? ' · ' + esc(finished) : ''}</span>`;
+}
 function renderSourcePills(){
   const box = $('sourcePills');
   if(!box) return;
@@ -48,7 +95,7 @@ function renderSourcePills(){
   const treasury = items.find(([id]) => id === 'TREASURY_OFFICIAL');
   const liveCount = items.filter(([,s]) => String(s.status || '').toLowerCase().includes('live')).length;
   const candidateCount = items.filter(([,s]) => String(s.status || '').toLowerCase().includes('candidate')).length;
-  box.innerHTML = `<span class="pill">Reads: data/macro_regime_scanner.json</span><span class="pill">Live lanes: ${liveCount}</span><span class="pill">Candidates: ${candidateCount}</span>${treasury ? `<span class="pill">Treasury: ${sourceLabel(treasury[1].status)}${treasury[1].latest_date ? ' · ' + treasury[1].latest_date : ''}</span>` : ''}`;
+  box.innerHTML = `<span class="pill">Reads: data/macro_regime_scanner.json</span><span class="pill">Live lanes: ${liveCount}</span><span class="pill">Candidates: ${candidateCount}</span>${treasury ? `<span class="pill">Treasury: ${sourceLabel(treasury[1].status)}${treasury[1].latest_date ? ' · ' + treasury[1].latest_date : ''}</span>` : ''}${refreshStatusPill()}`;
 }
 function renderSourceHealth(){
   const list = $('sourceHealthList');
@@ -182,45 +229,40 @@ function regimeTags(asset){
   return tags.slice(0,4);
 }
 
-function macroRegimeFactorBucket(factor){
-  const text = [factor.group, factor.name, factor.source, factor.derived, factor.effect].map(v=>String(v||'').toLowerCase()).join(' ');
-  const inflationTerms = ['cpi','core cpi','pce inflation','core pce','ppi','inflation','price index','price pressure','wage','earnings','treasury','yield','rate pressure','fed policy','policy pressure','energy','crude','gasoline','distillate','natural gas','petroleum','inventory balance','cushing','usda','crop','production estimate','crop condition','crop progress','noaa','weather','drought','food'];
-  const growthTerms = ['labor','payroll','employment','unemployment','jobless','gdp','real gdp','growth','retail sales','consumer demand','personal income','personal spending','durable','manufacturing','industrial','housing','building permits','business investment','census','credit stress','financial stress','financial conditions','credit spread','liquidity','reserve balances','fed total assets','reverse repo','demand'];
-  if(inflationTerms.some(t=>text.includes(t))) return 'inflation';
-  if(growthTerms.some(t=>text.includes(t))) return 'growth';
-  return null;
+
+function normalizeFactorName(value){ return String(value || '').toLowerCase().replace(/[^a-z0-9/\.]+/g,' ').replace(/\s+/g,' ').trim(); }
+function regimeRegistryEntries(factor){
+  const key = normalizeFactorName(factor.name);
+  return REGIME_FACTOR_REGISTRY[key] || null;
 }
-function macroRegimeAnchorRank(asset, bucket, factor){
-  const id = String(asset.id||'');
-  const cls = String(asset.assetClass||'');
-  const text = [factor.group, factor.name, factor.source, factor.derived, factor.effect].map(v=>String(v||'').toLowerCase()).join(' ');
-  if(bucket === 'inflation'){
-    if(['US02Y','US05Y','US10Y','US30Y','DXY','BE5Y','BE10Y','REALY'].includes(id)) return 5;
-    if(['WTI','BRENT','NG','GASOLINE','HEATING','WHEAT','CORN','SOY','BCOM'].includes(id)) return 4;
-    if(cls === 'Rates' || cls === 'Inflation Markets') return 4;
-    if(id === 'SPX' || id === 'NDX') return 2;
-    return 1;
+function macroRegimeAnchorRank(asset, entry, factor){
+  const id = String(asset.id || asset.symbol || '').toUpperCase();
+  const cls = String(asset.assetClass || '');
+  const anchors = (entry.anchors || []).map(x => String(x).toUpperCase());
+  const anchorIndex = anchors.indexOf(id);
+  if(anchorIndex >= 0) return 100 - anchorIndex;
+  if(entry.bucket === 'inflation'){
+    if(cls === 'Rates' || cls === 'Inflation Markets') return 50;
+    if(cls === 'Commodities') return 35;
+    if(id === 'DXY') return 45;
+    return 10;
   }
-  if(bucket === 'growth'){
-    if(text.includes('credit stress') || text.includes('financial stress') || text.includes('financial conditions') || text.includes('credit spread')){
-      if(['HY','IG','FCI','SPX','NDX','RUT','DOW'].includes(id)) return 5;
-      if(cls === 'Credit / Liquidity' || cls === 'Equity Indices') return 4;
-      return 1;
-    }
-    if(['SPX','NDX','RUT','DOW','HY','IG','FCI','DXY','US02Y','US05Y','US10Y','US30Y'].includes(id)) return 5;
-    if(cls === 'Equity Indices' || cls === 'Credit / Liquidity' || cls === 'Rates') return 4;
-    if(['WTI','BRENT','COPPER','BCOM'].includes(id)) return 3;
-    return 1;
+  if(entry.bucket === 'growth'){
+    if(cls === 'Equity Indices' || cls === 'Credit / Liquidity') return 50;
+    if(cls === 'Rates') return 35;
+    if(cls === 'Commodities') return 20;
+    return 10;
   }
   return 0;
 }
-function macroRegimePoint(score){
-  const n = Number(score||0);
-  if(n >= 2) return 2;
-  if(n > 0) return 1;
-  if(n <= -2) return -2;
-  if(n < 0) return -1;
-  return 0;
+function macroRegimePoint(score, weight=1){
+  const n = Number(score || 0);
+  let base = 0;
+  if(n >= 2) base = 2;
+  else if(n > 0) base = 1;
+  else if(n <= -2) base = -2;
+  else if(n < 0) base = -1;
+  return base * Number(weight || 1);
 }
 function factorStrengthLabel(score){
   const p = macroRegimePoint(score);
@@ -235,16 +277,19 @@ function computeMacroRegime(){
   for(const asset of ASSETS || []){
     for(const factor of asset.factors || []){
       if(!factorAppliesToAsset(factor)) continue;
-      if(!['Primary','Secondary','Contextual'].includes(String(factor.relevance||''))) continue;
+      if(!['Primary','Secondary','Contextual'].includes(String(factor.relevance || ''))) continue;
       const score = Number(factor.score);
       if(!Number.isFinite(score) || score === 0) continue;
-      const bucket = macroRegimeFactorBucket(factor);
-      if(!bucket) continue;
-      const key = `${bucket}::${String(factor.name||'')}::${String(factor.source||'')}::${String(factor.derived||'').slice(0,220)}`;
-      const rank = macroRegimeAnchorRank(asset, bucket, factor);
-      const current = chosen.get(key);
-      if(!current || rank > current.rank || (rank === current.rank && Math.abs(score) > Math.abs(current.score))){
-        chosen.set(key, {bucket, score, rank, factor, asset});
+      const entries = regimeRegistryEntries(factor);
+      if(!entries) continue;
+      for(const entry of entries){
+        if(!entry || !entry.bucket) continue;
+        const key = `${entry.bucket}::${normalizeFactorName(factor.name)}::${String(factor.source || '')}::${String(factor.derived || '').slice(0,220)}`;
+        const rank = macroRegimeAnchorRank(asset, entry, factor);
+        const current = chosen.get(key);
+        if(!current || rank > current.rank || (rank === current.rank && Math.abs(score) > Math.abs(current.score))){
+          chosen.set(key, {bucket: entry.bucket, weight: entry.weight || 1, note: entry.note || '', score, rank, factor, asset});
+        }
       }
     }
   }
@@ -253,9 +298,9 @@ function computeMacroRegime(){
   const growthDrivers = [];
   const inflationDrivers = [];
   for(const item of chosen.values()){
-    const point = macroRegimePoint(item.score);
+    const point = macroRegimePoint(item.score, item.weight);
     if(!point) continue;
-    const driver = {name:item.factor.name || item.factor.group || 'factor', point, score:item.score, source:item.factor.source || '', asset:item.asset.symbol || item.asset.id || ''};
+    const driver = {name:item.factor.name || item.factor.group || 'factor', point, score:item.score, source:item.factor.source || '', asset:item.asset.symbol || item.asset.id || '', note:item.note};
     if(item.bucket === 'growth'){
       growthScore += point;
       growthDrivers.push(driver);
@@ -287,7 +332,12 @@ function computeMacroRegime(){
     'Stagflation':'Growth pressure is weakening while inflation pressure remains elevated.',
     'Deflation':'Growth pressure is weakening while inflation pressure is easing.'
   };
-  return {regime, growthScore, inflationScore, growthDirection, inflationDirection, explanation:reads[regime], growthDrivers, inflationDrivers};
+  return {regime, growthScore, inflationScore, growthDirection, inflationDirection, explanation:reads[regime], growthDrivers, inflationDrivers, factorCount:growthDrivers.length+inflationDrivers.length};
+}
+function macroRegimeBriefLine(){
+  const r = computeMacroRegime();
+  if(r.regime === 'Unavailable') return 'Current macro regime unavailable until live growth and inflation factor rows are present.';
+  return `Current Macro Regime: ${r.regime} — Growth ${fmtScore(r.growthScore)}, Inflation ${fmtScore(r.inflationScore)} (${r.growthDirection} growth / ${r.inflationDirection} inflation). ${r.explanation}`;
 }
 function renderMacroRegimeCard(){
   const box = $('macroRegimeCard');
@@ -299,9 +349,19 @@ function renderMacroRegimeCard(){
   }
   const growthClass = r.growthScore > 0 ? 'score-pos' : 'score-neg';
   const inflationClass = r.inflationScore > 0 ? 'score-pos' : 'score-neg';
-  box.innerHTML = `<div class="flex flex-col md:flex-row md:items-start md:justify-between gap-3"><div><div class="tiny-label">Current Macro Regime</div><h3 class="text-2xl font-bold text-slate-100 mt-1">${esc(r.regime)}</h3><p class="text-xs text-slate-500 mt-1">Four-quad read from the scanner's live public-source factor rows.</p></div><span class="pill self-start md:self-auto">Growth ${esc(r.growthDirection)} / Inflation ${esc(r.inflationDirection)}</span></div><div class="macro-regime-grid"><div class="macro-regime-stat"><div class="tiny-label">Growth score</div><div class="macro-regime-value ${growthClass}">${fmtScore(r.growthScore)}</div></div><div class="macro-regime-stat"><div class="tiny-label">Inflation score</div><div class="macro-regime-value ${inflationClass}">${fmtScore(r.inflationScore)}</div></div></div><div class="macro-regime-read">${esc(r.explanation)}</div>`;
+  box.innerHTML = `<div class="flex flex-col md:flex-row md:items-start md:justify-between gap-3"><div><div class="tiny-label">Current Macro Regime</div><h3 class="text-2xl font-bold text-slate-100 mt-1">${esc(r.regime)}</h3><p class="text-xs text-slate-500 mt-1">Four-quad summary from live public-source factor rows.</p></div><span class="pill self-start md:self-auto">Growth ${esc(r.growthDirection)} / Inflation ${esc(r.inflationDirection)}</span></div><div class="macro-regime-grid"><div class="macro-regime-stat"><div class="tiny-label">Growth score</div><div class="macro-regime-value ${growthClass}">${fmtScore(r.growthScore)}</div></div><div class="macro-regime-stat"><div class="tiny-label">Inflation score</div><div class="macro-regime-value ${inflationClass}">${fmtScore(r.inflationScore)}</div></div></div><div class="macro-regime-read">${esc(r.explanation)}<div class="macro-method-note mt-2">Regime scores are explicit live-factor tallies. Growth rows feed the Growth Score. Inflation, rates, policy, energy, and agriculture rows feed the Inflation Score. Price is not used.</div></div>`;
 }
 
+
+function renderWhatChangedSummary(){
+  const movers = [...ASSETS].filter(a => Number.isFinite(Number(a.score)) && Number.isFinite(Number(a.previousScore))).map(a => ({...a, delta:Number(a.score||0)-Number(a.previousScore||0)}));
+  const improvers = movers.filter(a => a.delta > 0).sort((a,b)=>b.delta-a.delta).slice(0,3);
+  const deteriorators = movers.filter(a => a.delta < 0).sort((a,b)=>a.delta-b.delta).slice(0,3);
+  if(!improvers.length && !deteriorators.length) return '<div class="what-changed-line">What changed: no prior score movement loaded for this snapshot.</div>';
+  const up = improvers.map(a => `${a.symbol} ${fmtScore(a.delta)}`).join(' · ');
+  const down = deteriorators.map(a => `${a.symbol} ${fmtScore(a.delta)}`).join(' · ');
+  return `<div class="what-changed-line"><strong>What changed:</strong> ${up ? 'Improving — ' + esc(up) + '. ' : ''}${down ? 'Deteriorating — ' + esc(down) + '.' : ''}</div>`;
+}
 function renderRegimeSnapshot(){
   const box=$('regimeSnapshot');
   if(!box) return;
@@ -312,7 +372,7 @@ function renderRegimeSnapshot(){
     const html=items.length ? items.map(a=>`<button class="snapshot-chip" data-jump="${esc(a.id)}"><span>${esc(a.symbol)}</span><strong class="${scoreClass(a.score)}">${fmtScore(a.score)}</strong><em>${regimeTags(a).join(' · ')}</em></button>`).join('') : '<div class="text-[11px] text-slate-500">No assets in this bucket.</div>';
     return `<div class="snapshot-card"><div class="tiny-label">${g}</div><div class="snapshot-chip-wrap mt-2">${html}</div></div>`;
   }).join('');
-  box.innerHTML=`<div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-3"><div><div class="tiny-label">Regime Queue Snapshot</div><h3 class="text-lg font-semibold text-slate-100 mt-1">What deserves attention first?</h3><p class="text-xs text-slate-500 mt-1">Primary buckets now use uncapped raw pressure scores. Improving, deteriorating, conflicted, freshness, and confidence are tags, not buckets that hide strong positive/negative pressure.</p></div><span class="pill self-start md:self-auto">v0.49 beta launch wrapper</span></div><div class="snapshot-grid">${cards}</div>`;
+  box.innerHTML=`<div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-3"><div><div class="tiny-label">Regime Queue Snapshot</div><h3 class="text-lg font-semibold text-slate-100 mt-1">What deserves attention first?</h3><p class="text-xs text-slate-500 mt-1">Primary buckets use uncapped raw pressure scores. Improving, deteriorating, conflicted, freshness, and confidence are tags, not buckets that hide strong positive/negative pressure.</p></div><span class="pill self-start md:self-auto">v1.0 beta finish</span></div>${renderWhatChangedSummary()}<div class="snapshot-grid">${cards}</div>`;
   box.querySelectorAll('[data-jump]').forEach(btn=>btn.addEventListener('click',e=>{ const id=btn.dataset.jump; selectedId=id; expanded.add(id); const row=document.querySelector(`.market-row[data-id="${CSS.escape(id)}"]`); if(row){ row.scrollIntoView({behavior:'smooth', block:'center'}); } renderAll(); }));
 }
 function generateRegimeBrief(){
@@ -325,9 +385,8 @@ function generateRegimeBrief(){
   const sourceLines=Object.entries(SOURCE_STATUS||{}).map(([id,s])=>`- ${id}: ${sourceLabel(s.status)}${s.latest_date ? ' · latest '+s.latest_date : ''}`).join('\n');
   const events=(RELEASE_CALENDAR?.events||[]).slice(0,8).map(ev=>`- ${ev.date || ''} ${ev.timeET || ''}: ${ev.report} (${ev.source}, ${ev.calendarConfidence || ev.scheduleType || 'unverified'})`).join('\n') || '- No generated release calendar loaded.';
   const changes=changed.map(a=>`- ${a.symbol}: ${fmtScore((a.score||0)-(a.previousScore||0))} change, now ${fmtScore(a.score)} raw — ${a.scoreChangeLog?.summary || a.bias}`).join('\n');
-  return `# Edgefield Research Macro Regime Brief v0.49\n\nGenerated: ${now}\n\nThis brief ranks public-source fundamental pressure evidence using uncapped raw net pressure scores. It is not a buy/sell signal and does not predict immediate price movement. Missing, stale, candidate, and display-only rows are not treated as neutral. v0.49 preserves the U.S.-centered integrity scope, release-result fields, source QA, reports, and bridge metadata while adding beta launch wrapper materials, access/disclaimer guidance, and a wider Regime Queue Snapshot.\n\n## Strongest positive raw pressure\n${topPos.map(fmt).join('\n') || '- No positive live-scored assets.'}\n\n## Strongest negative raw pressure\n${topNeg.map(fmt).join('\n') || '- No negative live-scored assets.'}\n\n## Conflicted / neutral transition candidates\n${conflicted.map(fmt).join('\n') || '- No conflicted or neutral transition candidates in current view.'}\n\n## Largest score changes\n${changes}\n\n## Source health\n${sourceLines || '- No source status loaded.'}\n\n## Upcoming tracked reports\n${events}\n\n## Caveats\n- Public-source macro/fundamental pressure only.\n- Scores are uncapped raw net pressure; larger absolute numbers mean more weighted evidence, not guaranteed price movement.\n- Mostly U.S.-based inputs, so relevance varies by asset.\n- Scores depend on current source freshness, row eligibility, and asset-specific mapping.\n- Open each asset row in the terminal to inspect counted, context, and excluded evidence.\n`;
+  return `# Edgefield Research Macro Regime Brief v1.0 Beta\n\nGenerated: ${now}\n\n${macroRegimeBriefLine()}\n\nThis brief ranks public-source fundamental pressure evidence using uncapped raw net pressure scores. It is not a buy/sell signal and does not predict immediate price movement. Missing, stale, candidate, and display-only rows are not treated as neutral. v1.0 Beta adds the current four-quad regime summary, keeps the U.S.-centered integrity scope, preserves source QA and release metadata, and focuses the terminal on regime, pressure, evidence, freshness, and caveats.\n\n## Strongest positive raw pressure\n${topPos.map(fmt).join('\n') || '- No positive live-scored assets.'}\n\n## Strongest negative raw pressure\n${topNeg.map(fmt).join('\n') || '- No negative live-scored assets.'}\n\n## Conflicted / neutral transition candidates\n${conflicted.map(fmt).join('\n') || '- No conflicted or neutral transition candidates in current view.'}\n\n## Largest score changes\n${changes}\n\n## Source health\n${sourceLines || '- No source status loaded.'}\n\n## Upcoming tracked reports\n${events}\n\n## Caveats\n- Public-source macro/fundamental pressure only.\n- Current macro regime is a four-quad live-factor tally, not a prediction or trade signal.\n- Scores are uncapped raw net pressure; larger absolute numbers mean more weighted evidence, not guaranteed price movement.\n- Mostly U.S.-based inputs, so relevance varies by asset.\n- Scores depend on current source freshness, row eligibility, and asset-specific mapping.\n- Open each asset row in the terminal to inspect counted, context, and excluded evidence.\n`;
 }
-
 
 function releaseResultForEvent(ev){
   const events = RELEASE_RESULTS?.events || [];
@@ -405,9 +464,12 @@ function renderDiagnosis(){ /* right readout not included; public-source edition
 function renderAll(){ renderMacroRegimeCard(); renderRegimeSnapshot(); renderQueue(); renderDiagnosis(); }
 function download(filename,text,type='application/json'){ const blob=new Blob([text],{type}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download=filename; a.click(); URL.revokeObjectURL(url); }
 ['searchBox','universe','assetClass','subgroup','biasFilter','conflictFilter','freshFilter','sortMode','rowLimit'].forEach(id=>$(id).addEventListener('input',()=>{ if(id==='assetClass') updateSubgroups(); renderAll(); }));
-$('exportJson').addEventListener('click',()=>download('macro_regime_scanner_public_source_data_contract_v0_49.json',JSON.stringify({notice:'Public-source data contract. v0.49 is the beta launch wrapper baseline: U.S.-centered, raw-score, price-free macro pressure research data with unsupported non-U.S. crosses excluded until direct non-U.S. source lanes exist, plus lightweight beta wrapper pages and 10-item regime snapshot buckets.',assets:ASSETS,source_status:SOURCE_STATUS,release_calendar:RELEASE_CALENDAR,release_results:RELEASE_RESULTS,source_quality:SOURCE_QUALITY,validation_summary:VALIDATION_SUMMARY,regime_bridge:REGIME_BRIDGE},null,2)));
+$('exportJson').addEventListener('click',()=>download('macro_regime_scanner_public_source_data_contract_v1_0_beta.json',JSON.stringify({notice:'Public-source data contract. v1.0 Beta finish: U.S.-centered, raw-score, price-free macro pressure research data with a current four-quad regime summary derived from live public-source factor rows, plus 10-item regime snapshot buckets and beta wrapper pages.',assets:ASSETS,source_status:SOURCE_STATUS,release_calendar:RELEASE_CALENDAR,release_results:RELEASE_RESULTS,source_quality:SOURCE_QUALITY,validation_summary:VALIDATION_SUMMARY,regime_bridge:REGIME_BRIDGE},null,2)));
 const briefBtn=$('exportBrief');
-if(briefBtn) briefBtn.addEventListener('click',()=>download('edgefield_macro_regime_brief_v0_40.md', generateRegimeBrief(), 'text/markdown'));
+if(briefBtn) briefBtn.addEventListener('click',()=>download('edgefield_macro_regime_brief_v1_0_beta.md', generateRegimeBrief(), 'text/markdown'));
+async function fetchJsonIfOk(path){
+  try { const res = await fetch(path, { cache: 'no-store' }); return res.ok ? await res.json() : null; } catch (e) { return null; }
+}
 async function loadData(){
   try {
     const response = await fetch('data/macro_regime_scanner.json', { cache: 'no-store' });
@@ -417,12 +479,12 @@ async function loadData(){
     DATA_NOTICE = payload.notice || DATA_NOTICE;
     DATA_MODE = payload.data_mode || DATA_MODE;
     SOURCE_STATUS = payload.source_status || {};
-    try {
-      const calRes = await fetch('data/release_calendar.json', { cache: 'no-store' });
-      if (calRes.ok) RELEASE_CALENDAR = await calRes.json();
-    } catch (calendarError) {
-      RELEASE_CALENDAR = null;
-    }
+    RELEASE_CALENDAR = await fetchJsonIfOk('data/release_calendar.json');
+    RELEASE_RESULTS = await fetchJsonIfOk('data/release_results.json');
+    SOURCE_QUALITY = await fetchJsonIfOk('data/source_quality.json');
+    VALIDATION_SUMMARY = await fetchJsonIfOk('data/validation_summary.json');
+    REGIME_BRIDGE = await fetchJsonIfOk('data/regime_bridge.json');
+    REFRESH_REPORT = await fetchJsonIfOk('data/refresh_report.json');
   } catch (error) {
     document.getElementById('queue').innerHTML = `<div class="p-4 text-rose-200">Could not load data/macro_regime_scanner.json. Open this project through a local server or GitHub Pages, not directly as a file. Error: ${error.message}</div>`;
     throw error;
