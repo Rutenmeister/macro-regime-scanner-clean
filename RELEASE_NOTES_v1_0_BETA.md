@@ -32,8 +32,3 @@ The terminal should be read top-down:
 4. Source health, upcoming reports, and caveats.
 
 This remains a research tool, not a buy/sell signal or investment advice.
-
-
-## Sensitivity read polish
-
-The current regime card now keeps one primary strict regime while optionally showing a compact sensitivity read when the growth or inflation axis has mixed evidence. This keeps the headline decisive while acknowledging that a broader interpretation may still fit nearby macro debate, especially between Stagflationary Pressure and Inflationary Growth / Reflation.

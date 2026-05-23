@@ -46,8 +46,3 @@ Examples:
 ## Boundaries
 
 The regime card does not override asset scores. It summarizes the macro backdrop. Asset-specific pressure, conflicts, freshness, and caveats still need to be read in the evidence queue.
-
-
-## Sensitivity read polish
-
-The current regime card now keeps one primary strict regime while optionally showing a compact sensitivity read when the growth or inflation axis has mixed evidence. This keeps the headline decisive while acknowledging that a broader interpretation may still fit nearby macro debate, especially between Stagflationary Pressure and Inflationary Growth / Reflation.
