@@ -25,11 +25,11 @@ def main():
     top_neg=sorted(assets,key=score)[:8]
     events=cal.get('events',[])[:10]
     now=datetime.now(timezone.utc).isoformat()
-    md=f"""# Edgefield Research Macro Regime Brief v0.50
+    md=f"""# Edgefield Research Macro Regime Brief v0.50.1
 
 Generated: {now}
 
-This brief ranks official/public-source macro pressure evidence for a U.S.-centered asset universe. Scores are raw, uncapped, and price-free. v0.50 adds a no-price Growth / Inflation Pressure Map. This is a research brief, not a buy/sell signal or investment advice.
+This brief ranks official/public-source macro pressure evidence for a U.S.-centered asset universe. Scores are raw, uncapped, and price-free. v0.50.1 calibrates the no-price Growth / Inflation Pressure Map. This is a research brief, not a buy/sell signal or investment advice.
 
 ## Growth / Inflation Pressure Map
 {('- Current state: '+quad.get('currentState','')+' — '+quad.get('subtitle','')+chr(10)+'- Growth pressure: '+str(quad.get('growth',{}).get('score','n/a'))+' ('+quad.get('growth',{}).get('label','mixed')+')'+chr(10)+'- Inflation pressure: '+str(quad.get('inflation',{}).get('score','n/a'))+' ('+quad.get('inflation',{}).get('label','mixed')+')'+chr(10)+'- Confidence: '+quad.get('confidence','Low')+chr(10)+'- Read: '+quad.get('simpleRead','')) if quad else '- Macro quad snapshot not generated.'}

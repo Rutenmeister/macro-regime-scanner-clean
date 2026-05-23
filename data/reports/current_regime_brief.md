@@ -1,8 +1,8 @@
-# Edgefield Research Macro Regime Brief v0.50
+# Edgefield Research Macro Regime Brief v0.50.1
 
-Generated: 2026-05-23T12:01:54.377744+00:00
+Generated: 2026-05-23T12:18:41.707021+00:00
 
-This brief ranks official/public-source macro pressure evidence for a U.S.-centered asset universe. Scores are raw, uncapped, and price-free. v0.50 adds a no-price Growth / Inflation Pressure Map. This is a research brief, not a buy/sell signal or investment advice.
+This brief ranks official/public-source macro pressure evidence for a U.S.-centered asset universe. Scores are raw, uncapped, and price-free. v0.50.1 calibrates the no-price Growth / Inflation Pressure Map. This is a research brief, not a buy/sell signal or investment advice.
 
 ## Growth / Inflation Pressure Map
 - Current state: Neutral / Low-Conviction Macro Pressure — Growth mixed / inflation mixed

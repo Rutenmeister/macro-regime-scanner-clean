@@ -1,8 +1,8 @@
 {
-  "schemaVersion": "macro_quad_snapshot_v1",
-  "version": "v0.50-growth-inflation-pressure-map",
-  "generatedAt": "2026-05-23T11:51:09.999905+00:00",
-  "method": "No-price public-source overlay built from existing live scanner row evidence. It summarizes growth pressure and inflation/policy pressure; it does not replace asset scores and does not produce buy/sell signals.",
+  "schemaVersion": "macro_quad_snapshot_v1_1",
+  "version": "v0.50.1-growth-inflation-pressure-map-calibrated",
+  "generatedAt": "2026-05-23T12:18:33.786355+00:00",
+  "method": "No-price public-source overlay built from existing live scanner row evidence. v0.50.1 uses calibrated axis extraction so asset-direction conflicts do not cancel obvious macro pressure.",
   "currentState": "Neutral / Low-Conviction Macro Pressure",
   "subtitle": "Growth mixed / inflation mixed",
   "simpleRead": "The scanner does not have enough directional evidence to classify a clean macro quadrant. Source pressure is mixed, near neutral, or low conviction.",

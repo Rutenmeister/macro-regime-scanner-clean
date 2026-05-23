@@ -27,3 +27,11 @@
 - Adds compact How to read this strip.
 - Strengthens research-only disclaimer/footer.
 - Polishes report/export wording.
+
+## v0.50.1 — Quad Scoring Calibration
+
+- Calibrates the Growth / Inflation Pressure Map so live macro evidence does not collapse to zero because asset-level effects cancel each other.
+- Keeps price out of the quad calculation.
+- Uses blend states more appropriately when one axis is clear and the other is mixed.
+- Separates pressure score from confidence so low/medium confidence can still show a directional macro read.
+- Leaves the scanner core unchanged.
