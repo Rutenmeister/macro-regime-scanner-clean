@@ -1,0 +1,47 @@
+{
+  "version": "v1.1-regime-factor-registry",
+  "purpose": "Explicit map from public-source factor names to macro regime axes. Used to explain the Growth Score and Inflation Score; price is not used.",
+  "axis_rules": {
+    "growth": "Positive means growth evidence is supportive. Negative means growth evidence is weakening or restrictive.",
+    "inflation": "Positive means inflation/rates/policy/commodity pressure is elevated. Negative means those pressures are easing."
+  },
+  "registry_note": "The runtime registry lives in app.js for static GitHub Pages compatibility. This JSON mirrors the methodology for audit/review.",
+  "factor_examples": [
+    {
+      "factor": "CPI/PCE/PPI pressure",
+      "bucket": "inflation",
+      "direction": "hotter = positive inflation pressure",
+      "weight": "high"
+    },
+    {
+      "factor": "Treasury yields / real yields",
+      "bucket": "inflation",
+      "direction": "rising = positive inflation/policy pressure",
+      "weight": "high"
+    },
+    {
+      "factor": "GDP / retail sales / labor strength",
+      "bucket": "growth",
+      "direction": "stronger = positive growth pressure",
+      "weight": "high"
+    },
+    {
+      "factor": "Credit stress / tight financial conditions",
+      "bucket": "growth",
+      "direction": "rising stress = negative growth pressure",
+      "weight": "high"
+    },
+    {
+      "factor": "Energy balance / crude inventories / product demand",
+      "bucket": "inflation and sometimes growth",
+      "direction": "tight supply or strong demand = inflation pressure; weak demand = growth drag",
+      "weight": "medium"
+    },
+    {
+      "factor": "USDA/NOAA crop and weather stress",
+      "bucket": "inflation",
+      "direction": "supply stress = food/agriculture inflation pressure",
+      "weight": "medium"
+    }
+  ]
+}

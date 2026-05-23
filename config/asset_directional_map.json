@@ -1,0 +1,51 @@
+{
+  "version": "v1.1-asset-directional-map",
+  "purpose": "Plain-English directional map for how major macro inputs should affect asset groups. This is audit documentation and a guardrail for future scoring changes.",
+  "rules": [
+    {
+      "input": "Hot CPI / PCE / PPI",
+      "equities": "usually negative through rates and discount-rate pressure",
+      "rates": "positive yield pressure",
+      "usd": "often supportive through Fed-rate expectations",
+      "gold": "mixed; inflation supportive but real-yield/USD pressure can dominate",
+      "oil": "contextual",
+      "grains": "low direct except food/agriculture linkage"
+    },
+    {
+      "input": "Rising 10Y / real yield pressure",
+      "equities": "negative, especially duration/growth equities",
+      "rates": "positive for yield-pressure assets",
+      "usd": "supportive",
+      "gold": "usually negative if real yields dominate",
+      "oil": "contextual demand drag",
+      "grains": "low direct"
+    },
+    {
+      "input": "Credit stress / tighter financial conditions",
+      "equities": "negative",
+      "rates": "can be mixed safe-haven versus term-premium",
+      "usd": "often supportive in risk-off",
+      "gold": "mixed",
+      "oil": "negative through demand risk",
+      "grains": "mostly context"
+    },
+    {
+      "input": "EIA inventory draw / energy tightness",
+      "equities": "contextual margin/inflation pressure",
+      "rates": "contextual inflation pressure",
+      "usd": "contextual",
+      "gold": "contextual inflation hedge versus real yield",
+      "oil": "positive",
+      "grains": "context via fuel/input costs"
+    },
+    {
+      "input": "USDA/NOAA crop stress",
+      "equities": "low direct",
+      "rates": "low direct",
+      "usd": "low direct",
+      "gold": "low direct",
+      "oil": "low direct except energy-weather linkage",
+      "grains": "positive price pressure"
+    }
+  ]
+}

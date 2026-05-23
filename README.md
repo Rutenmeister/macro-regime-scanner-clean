@@ -196,3 +196,8 @@ Core scoring remains U.S.-centered, price-free, raw-score based, and evidence-fi
 - Keeps the scanner price-free and public-source based.
 - Adds explicit regime-factor registry logic, a methodology note, a What changed line, and regime export support.
 - Does not add source lanes or workflow dependencies.
+
+
+## v1.1 — Full Credibility Hardening
+
+Adds regime driver audit, coverage/freshness status, explicit methodology documentation, asset directional-map documentation, input eligibility summary, and validation-framework scaffolding while preserving the v1.0 no-price public-source pressure methodology.

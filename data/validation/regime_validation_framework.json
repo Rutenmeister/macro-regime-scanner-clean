@@ -1,0 +1,13 @@
+{
+  "version": "v1.1-validation-framework",
+  "status": "framework-ready-not-statistical-proof",
+  "purpose": "Defines how future snapshots should be checked against forward asset behavior without turning the scanner into a price-prediction signal.",
+  "planned_tests": [
+    "Compare regime labels to 1/5/20 session forward asset behavior.",
+    "Compare extreme raw pressure buckets against later movement and max adverse excursion.",
+    "Track false positives and false negatives by asset class.",
+    "Measure whether score change is more informative than absolute score.",
+    "Separate research-pressure alignment from trade-entry timing."
+  ],
+  "current_limit": "The scanner is a public-source pressure terminal. Historical validation is not yet a claim of predictive edge."
+}
