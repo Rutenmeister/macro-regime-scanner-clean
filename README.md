@@ -1,8 +1,8 @@
-# Edgefield Research Macro Regime Scanner v0.50.4
+# Edgefield Research Macro Regime Scanner v0.50.5
 
 U.S.-centered macro pressure terminal using official and public-source data. Raw, uncapped scores rank fundamental pressure across assets without using price.
 
-v0.50.4 preserves the v0.49/v0.48 distribution baseline and replaces the prior quad experiment with a simple four-quad Growth / Inflation Regime map.
+v0.50.5 preserves the v0.49/v0.48 distribution baseline and replaces the prior quad experiment with a simple four-quad Growth / Inflation Regime map.
 
 ## Growth / Inflation Regime
 
@@ -32,3 +32,8 @@ No price is used. No confidence score is shown. No blend or transition states ar
 ## Refresh
 
 Run the normal Refresh All Public Sources workflow. The workflow rebuilds live source data, recomputes scores, builds the Growth / Inflation Regime, validates outputs, and writes refreshed JSON/report files.
+
+
+## v0.50.5 Real Quad Tally Fix
+
+The Growth / Inflation Regime map now derives its regime label directly from real signed Growth Score and Inflation Score tallies built from normalized official/public-source macro observations. Validation blocks positive/negative labels with zero scores.

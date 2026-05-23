@@ -1,52 +1,12 @@
 {
-  "schemaVersion": "macro_quad_snapshot_v1_3",
-  "version": "v0.50.4-four-quad-axis-scores",
-  "generatedAt": "2026-05-23T13:02:21.975329+00:00",
-  "method": "No-price four-quad regime map. Growth and inflation axes are scored from current public-source scanner evidence and resolve to positive or negative.",
-  "currentState": "Reflation",
-  "subtitle": "Growth positive / Inflation positive",
-  "simpleRead": "Growth evidence is supportive while inflation pressure is elevated.",
-  "growth": {
-    "score": 0,
-    "label": "positive",
-    "factorTally": {
-      "positive": 0,
-      "negative": 0,
-      "net": 0
-    }
-  },
-  "inflation": {
-    "score": 0,
-    "label": "positive",
-    "factorTally": {
-      "positive": 0,
-      "negative": 0,
-      "net": 0
-    }
-  },
-  "states": [
-    {
-      "name": "Goldilocks",
-      "subtitle": "Growth positive / Inflation negative",
-      "simpleRead": "Growth evidence is supportive while inflation pressure is easing."
-    },
-    {
-      "name": "Reflation",
-      "subtitle": "Growth positive / Inflation positive",
-      "simpleRead": "Growth evidence is supportive while inflation pressure is elevated."
-    },
-    {
-      "name": "Stagflation",
-      "subtitle": "Growth negative / Inflation positive",
-      "simpleRead": "Growth evidence is weakening while inflation pressure remains elevated."
-    },
-    {
-      "name": "Deflation",
-      "subtitle": "Growth negative / Inflation negative",
-      "simpleRead": "Growth evidence is weakening while inflation pressure is easing."
-    }
-  ],
-  "limits": [
-    "Uses current public-source pressure only; no price data is used."
-  ]
+  "schemaVersion": "macro_quad_snapshot_v1_5_placeholder",
+  "version": "v0.50.5-real-quad-tally-fix",
+  "generatedAt": null,
+  "method": "Placeholder only. Run Refresh All Public Sources to build the real no-price four-quad regime from normalized public-source observations.",
+  "currentState": null,
+  "subtitle": "Regime snapshot pending refresh",
+  "simpleRead": "Run the refresh workflow to build Growth Score and Inflation Score from public-source macro observations.",
+  "growth": { "score": 0, "label": "unavailable" },
+  "inflation": { "score": 0, "label": "unavailable" },
+  "states": []
 }

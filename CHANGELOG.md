@@ -1,4 +1,13 @@
-## v0.50.4 — Simple Four-Quad Regime Display Map
+
+## v0.50.5 — Real Quad Tally Fix
+
+- Rebuilt the Growth / Inflation Regime calculation so Growth Score and Inflation Score are real signed tallies from normalized official/public-source macro observations.
+- The regime label now comes directly from the signs of those two scores.
+- Validation fails if an axis label says positive or negative while the score is zero.
+- Removed the broken positive/score-zero behavior.
+- Kept the main scanner, raw asset scores, no-price scoring, and U.S.-centered scope unchanged.
+
+## v0.50.5 — Simple Four-Quad Regime Display Map
 
 - Replaces the prior quad experiment with a simple four-regime model.
 - Growth and inflation axes resolve to positive or negative only.

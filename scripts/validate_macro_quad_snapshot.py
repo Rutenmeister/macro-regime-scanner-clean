@@ -27,10 +27,18 @@ def main():
         raise SystemExit('Unexpected confidence key in simple four-quad snapshot')
     for axis in ['growth', 'inflation']:
         obj = data[axis]
-        if obj.get('label') not in {'positive', 'negative'}:
-            raise SystemExit(f'Invalid {axis} label: {obj.get("label")}')
-        if not isinstance(obj.get('score'), (int, float)):
+        label = obj.get('label')
+        score = obj.get('score')
+        if label not in {'positive', 'negative'}:
+            raise SystemExit(f'Invalid {axis} label: {label}')
+        if not isinstance(score, (int, float)):
             raise SystemExit(f'Invalid {axis} score')
+        if score == 0:
+            raise SystemExit(f'Invalid {axis}: score is 0. Do not publish positive/negative zero.')
+        if label == 'positive' and score <= 0:
+            raise SystemExit(f'Invalid {axis}: positive label with non-positive score {score}')
+        if label == 'negative' and score >= 0:
+            raise SystemExit(f'Invalid {axis}: negative label with non-negative score {score}')
     print(f"VALIDATION PASSED: macro regime {data['currentState']} / {data['subtitle']}")
 
 

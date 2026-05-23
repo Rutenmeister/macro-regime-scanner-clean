@@ -1,50 +1,24 @@
 #!/usr/bin/env python3
 """Build the Edgefield Growth / Inflation Regime.
 
-v0.50.4 rules:
+v0.50.5 rules:
 - No price is used.
 - Four regimes only: Goldilocks, Reflation, Stagflation, Deflation.
+- Growth and inflation scores are real signed axis tallies from normalized
+  public-source macro observations.
+- The regime label is derived directly from the two score signs.
 - No confidence score, no blend states, no transition language.
-- Growth and inflation are scored as macro axes, not as asset trade signals.
 """
 from __future__ import annotations
 
 import json
 from datetime import datetime, timezone
 from pathlib import Path
-from statistics import mean
 from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
-DATA_PATH = ROOT / "data" / "macro_regime_scanner.json"
+NORM_DIR = ROOT / "data" / "normalized"
 OUT_PATH = ROOT / "data" / "macro_quad_snapshot.json"
-
-LIVE_ROLES = {"live_scored", "live_context"}
-BAD_MARKERS = ("prototype", "sample", "candidate", "missing", "n/a")
-
-GROWTH_KEYWORDS = (
-    "gdp", "growth", "retail", "consumer", "labor", "payroll", "unemployment",
-    "claims", "jolts", "income", "spending", "durable", "census", "housing",
-    "industrial", "demand", "product supplied", "credit spreads", "financial stress",
-    "financial conditions", "reserve balances", "liquidity", "fed total assets",
-)
-INFLATION_KEYWORDS = (
-    "cpi", "pce", "ppi", "inflation", "core", "wage", "earnings", "yield",
-    "breakeven", "real yields", "policy rate", "fed policy", "energy", "crude",
-    "gasoline", "distillate", "natural gas", "inventories", "cushing", "refinery",
-    "wasde", "stock/use", "crop", "weather", "drought", "food", "agriculture",
-)
-
-GROWTH_ANCHORS = {"SPX", "NDX", "RUT", "DOW", "COPPER", "WTI", "BRENT", "BCOM"}
-INFLATION_ANCHORS = {
-    "DXY", "USD", "US02Y", "US05Y", "US10Y", "US30Y", "REALY", "BE5Y", "BE10Y",
-    "WTI", "BRENT", "NG", "GASOLINE", "HEATING", "BCOM", "WHEAT", "CORN", "SOY",
-}
-
-ASSET_CLUSTER_WEIGHTS = {
-    "growth": {"SPX": 1.0, "NDX": 1.0, "RUT": 0.9, "DOW": 0.8, "COPPER": 0.7, "WTI": 0.45, "BRENT": 0.45},
-    "inflation": {"DXY": 0.8, "US02Y": 1.0, "US05Y": 1.0, "US10Y": 1.0, "US30Y": 0.8, "REALY": 0.8, "WTI": 0.6, "BRENT": 0.6, "GASOLINE": 0.6, "WHEAT": 0.5, "CORN": 0.5, "SOY": 0.5},
-}
 
 STATE_COPY = {
     "Goldilocks": {
@@ -65,200 +39,217 @@ STATE_COPY = {
     },
 }
 
+# These are official/public-source normalized observations already produced by
+# the existing refresh pipeline. Scores are interpreted as macro-axis pressure,
+# not as asset reactions. Example: CPI is inflation pressure; it should not be
+# canceled because it hurts one asset and helps another.
+SOURCE_FILES = {
+    "bls": "bls_macro.json",
+    "bea": "bea_macro.json",
+    "census": "census_macro.json",
+    "fed": "fed_macro.json",
+    "financial_stress": "financial_stress.json",
+    "treasury": "treasury_yields.json",
+    "eia": "eia_energy.json",
+    "usda": "usda_agriculture.json",
+    "noaa": "noaa_weather.json",
+}
 
-def clean(v: Any) -> str:
-    return str(v or "").strip()
+INFLATION_KEYS = (
+    "cpi", "core", "pce", "ppi", "inflation", "wage", "earnings",
+    "yield", "rate", "policy", "energy", "crude", "gasoline",
+    "distillate", "natural gas", "crop", "weather", "drought", "usda",
+)
+GROWTH_KEYS = (
+    "gdp", "growth", "retail", "consumer", "labor", "payroll",
+    "unemployment", "claims", "income", "spending", "durable", "housing",
+    "census", "credit", "spread", "stress", "financial", "liquidity",
+    "reserve", "assets", "demand", "product supplied",
+)
 
-
-def lower_blob(f: dict[str, Any]) -> str:
-    keys = ("group", "name", "source", "derived", "effect", "scoreReason", "status", "relevance")
-    return " ".join(clean(f.get(k)).lower() for k in keys)
-
-
-def asset_symbol(asset: dict[str, Any]) -> str:
-    return clean(asset.get("id") or asset.get("symbol")).upper()
-
-
-def numeric(v: Any) -> float | None:
-    return float(v) if isinstance(v, (int, float)) else None
-
-
-def is_live_row(f: dict[str, Any]) -> bool:
-    if f.get("scoreRole") not in LIVE_ROLES:
-        return False
-    if numeric(f.get("score")) is None and numeric(f.get("scoreContribution")) is None:
-        return False
-    freshness = clean(f.get("freshness")).lower()
-    status = clean(f.get("status")).lower()
-    source = clean(f.get("source")).lower()
-    reason = clean(f.get("scoreReason")).lower()
-    text = " ".join([freshness, status, source, reason])
-    if any(marker in text for marker in BAD_MARKERS):
-        return False
-    return True
-
-
-def axis_matches(f: dict[str, Any], axis: str) -> bool:
-    text = lower_blob(f)
-    keys = GROWTH_KEYWORDS if axis == "growth" else INFLATION_KEYWORDS
-    return any(k in text for k in keys)
-
-
-def group_key(f: dict[str, Any]) -> str:
-    return "__".join([clean(f.get("group")), clean(f.get("name")), clean(f.get("source")), clean(f.get("derived"))[:140]])
+PRIMARY_GROWTH = (
+    "gdp", "retail", "payroll", "unemployment", "labor", "credit", "stress",
+    "liquidity", "reserve", "durable", "housing",
+)
+PRIMARY_INFLATION = (
+    "cpi", "pce", "ppi", "inflation", "yield", "rate", "policy", "energy",
+    "crude", "gasoline", "wage", "crop", "drought",
+)
 
 
-def row_weight(f: dict[str, Any], axis: str) -> float:
-    text = lower_blob(f)
-    weight = 0.45
-    primary_terms = {
-        "growth": ("gdp", "retail", "labor", "payroll", "unemployment", "claims", "credit", "financial stress", "liquidity", "reserve balances", "durable"),
-        "inflation": ("cpi", "pce", "ppi", "inflation", "yield", "policy", "energy", "crude", "gasoline", "wage", "crop", "drought"),
-    }[axis]
-    if any(t in text for t in primary_terms):
-        weight = 1.0
-    relevance = clean(f.get("relevance")).lower()
-    if "secondary" in relevance:
-        weight *= 0.75
-    elif "context" in relevance:
-        weight *= 0.45
-    elif "low" in relevance:
-        weight *= 0.25
-    if f.get("scoreRole") == "live_context":
-        weight *= 0.55
-    return max(0.05, round(weight, 3))
-
-
-def signed_input_value(group: list[dict[str, Any]], axis: str) -> float:
-    anchors = GROWTH_ANCHORS if axis == "growth" else INFLATION_ANCHORS
-    vals = []
-    for f in group:
-        sym = clean(f.get("assetSymbol")).upper()
-        if sym in anchors:
-            val = numeric(f.get("score"))
-            if val is not None:
-                vals.append(val)
-    if not vals:
-        vals = [numeric(f.get("score")) for f in group if numeric(f.get("score")) is not None]
-    vals = [float(v) for v in vals if v is not None and abs(float(v)) > 0.001]
-    if not vals:
-        return 0.0
-    pos = [v for v in vals if v > 0]
-    neg = [v for v in vals if v < 0]
-    if axis == "inflation":
-        # Inflation facts should not disappear because different assets react differently.
-        if pos and (not neg or max(pos) >= abs(min(neg)) * 0.55):
-            return max(pos)
-        if neg:
-            return min(neg)
-    return mean(vals)
-
-
-def asset_cluster_driver(assets: list[dict[str, Any]], axis: str) -> dict[str, Any] | None:
-    weights = ASSET_CLUSTER_WEIGHTS[axis]
-    values = []
-    for asset in assets:
-        sym = asset_symbol(asset)
-        if sym not in weights:
-            continue
-        val = numeric(asset.get("score"))
-        if val is None or abs(val) < 0.001:
-            continue
-        # Raw asset scores can be larger than axis points. Compress for axis use.
-        values.append((max(-2.5, min(2.5, val / 6.0)), weights[sym], sym))
-    if not values:
+def load_json(path: Path) -> Any | None:
+    if not path.exists():
         return None
-    total_w = sum(w for _, w, _ in values)
-    avg = sum(v * w for v, w, _ in values) / total_w
-    label = "Growth asset cluster" if axis == "growth" else "Inflation/rate asset cluster"
-    return {
-        "name": label,
-        "group": "Asset pressure summary",
-        "source": "Current scanner asset scores",
-        "value": round(avg, 3),
-        "weight": 0.85,
-        "contribution": round(avg * 0.85, 3),
-        "reason": "Secondary no-price summary of current scanner pressure anchors.",
-    }
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except Exception:
+        return None
 
 
-def collect_axis(assets: list[dict[str, Any]], axis: str) -> dict[str, Any]:
-    groups: dict[str, list[dict[str, Any]]] = {}
-    for asset in assets:
-        sym = asset_symbol(asset)
-        for f0 in asset.get("factors", []) or []:
-            if not is_live_row(f0) or not axis_matches(f0, axis):
-                continue
-            f = dict(f0)
-            f["assetSymbol"] = sym
-            groups.setdefault(group_key(f), []).append(f)
+def text_blob(*parts: Any) -> str:
+    return " ".join(str(p or "").lower() for p in parts)
 
-    drivers = []
-    for _key, group in groups.items():
-        sample = group[0]
-        value = signed_input_value(group, axis)
-        if abs(value) < 0.001:
+
+def score_value(obs: dict[str, Any]) -> float | None:
+    value = obs.get("score")
+    if isinstance(value, (int, float)):
+        return float(value)
+    return None
+
+
+def observation_label(source: str, key: str, obs: dict[str, Any]) -> str:
+    return str(obs.get("label") or obs.get("input") or obs.get("name") or key or source)
+
+
+def axis_for_observation(source: str, key: str, obs: dict[str, Any]) -> str | None:
+    kind = str(obs.get("kind") or "").lower()
+    label = observation_label(source, key, obs).lower()
+    blob = text_blob(source, key, kind, label, obs.get("interpretation"), obs.get("status"))
+
+    if source == "bls":
+        if "payroll" in blob or "unemployment" in blob or kind in {"labor", "employment"}:
+            return "growth"
+        if any(k in blob for k in ("cpi", "ppi", "inflation", "wage", "earnings", "core")):
+            return "inflation"
+    if source == "bea":
+        if kind == "growth":
+            return "growth"
+        if kind == "inflation":
+            return "inflation"
+    if source == "census":
+        if kind in {"consumer_demand", "housing_activity", "business_investment", "trade_balance", "inventory_cycle"}:
+            return "growth"
+    if source == "fed":
+        if kind == "policy_rate":
+            return "inflation"
+        if kind in {"liquidity_supply", "liquidity_drain"}:
+            return "growth"
+    if source == "financial_stress":
+        return "growth"
+    if source == "treasury":
+        return "inflation"
+    if source in {"eia", "usda", "noaa"}:
+        return "inflation"
+
+    if any(k in blob for k in INFLATION_KEYS):
+        return "inflation"
+    if any(k in blob for k in GROWTH_KEYS):
+        return "growth"
+    return None
+
+
+def observation_weight(axis: str, source: str, key: str, obs: dict[str, Any]) -> int:
+    kind = str(obs.get("kind") or "").lower()
+    label = observation_label(source, key, obs).lower()
+    blob = text_blob(source, key, kind, label)
+    primary = PRIMARY_GROWTH if axis == "growth" else PRIMARY_INFLATION
+    if any(term in blob for term in primary):
+        return 2
+    return 1
+
+
+def add_driver(drivers: list[dict[str, Any]], source: str, key: str, obs: dict[str, Any]) -> None:
+    val = score_value(obs)
+    if val is None or abs(val) < 0.001:
+        return
+    axis = axis_for_observation(source, key, obs)
+    if axis not in {"growth", "inflation"}:
+        return
+    weight = observation_weight(axis, source, key, obs)
+    contribution = int(max(-2, min(2, round(val)))) * weight
+    if contribution == 0:
+        return
+    drivers.append({
+        "axis": axis,
+        "source": source,
+        "key": key,
+        "label": observation_label(source, key, obs),
+        "score": int(max(-2, min(2, round(val)))),
+        "weight": weight,
+        "contribution": contribution,
+    })
+
+
+def iter_observations(source: str, data: Any):
+    if not isinstance(data, dict):
+        return
+    observations = data.get("observations")
+    if isinstance(observations, dict):
+        for key, obs in observations.items():
+            if isinstance(obs, dict):
+                yield str(key), obs
+        return
+    # Treasury may not use the observations wrapper in older builds; scan shallow dicts.
+    for key, value in data.items():
+        if isinstance(value, dict) and "score" in value:
+            yield str(key), value
+
+
+def collect_drivers() -> list[dict[str, Any]]:
+    drivers: list[dict[str, Any]] = []
+    for source, filename in SOURCE_FILES.items():
+        data = load_json(NORM_DIR / filename)
+        if data is None:
             continue
-        weight = row_weight(sample, axis)
-        drivers.append({
-            "name": clean(sample.get("name")) or "Unnamed input",
-            "group": clean(sample.get("group")) or "Input",
-            "source": clean(sample.get("source")) or "Public source",
-            "value": round(value, 3),
-            "weight": weight,
-            "contribution": round(value * weight, 3),
-            "reason": clean(sample.get("derived"))[:220],
-        })
+        for key, obs in iter_observations(source, data) or []:
+            add_driver(drivers, source, key, obs)
+    return drivers
 
-    cluster = asset_cluster_driver(assets, axis)
-    if cluster:
-        drivers.append(cluster)
 
-    # v0.50.4: show the actual factor tally used for the axis.
-    # Each unique macro evidence group contributes +1 or -1 after axis-specific sign handling.
-    # We keep a tiny asset-cluster fallback in the raw calculation, but the visible score is a simple signed tally.
-    tally = 0
-    for d in drivers:
-        val = float(d.get("value", 0) or 0)
-        if abs(val) < 0.001:
-            continue
-        tally += 1 if val > 0 else -1
-    score = int(tally)
-    # Four-quad model: every axis resolves to positive or negative. Zero resolves positive by convention.
-    label = "positive" if score >= 0 else "negative"
+def resolve_axis(drivers: list[dict[str, Any]], axis: str) -> dict[str, Any]:
+    axis_drivers = [d for d in drivers if d["axis"] == axis]
+    raw_score = sum(int(d["contribution"]) for d in axis_drivers)
+    positive_count = sum(1 for d in axis_drivers if d["contribution"] > 0)
+    negative_count = sum(1 for d in axis_drivers if d["contribution"] < 0)
+
+    score = raw_score
+    if score == 0 and axis_drivers:
+        # Resolve exact cancellation with the strongest actual macro observation.
+        strongest = max(axis_drivers, key=lambda d: abs(int(d["contribution"])))
+        score = 1 if strongest["contribution"] > 0 else -1
+
+    if score == 0:
+        # No usable official/public-source axis observations were found. This is
+        # a pipeline problem, not a market regime. Validation will fail so the
+        # app does not publish positive/zero nonsense.
+        label = "unavailable"
+    else:
+        label = "positive" if score > 0 else "negative"
+
     return {
-        "score": score,
+        "score": int(score),
         "label": label,
         "factorTally": {
-            "positive": sum(1 for d in drivers if float(d.get("value", 0) or 0) > 0.001),
-            "negative": sum(1 for d in drivers if float(d.get("value", 0) or 0) < -0.001),
-            "net": score,
+            "positive": positive_count,
+            "negative": negative_count,
+            "net": int(score),
         },
     }
 
 
-def classify(growth: str, inflation: str) -> str:
-    if growth == "positive" and inflation == "negative":
+def classify(growth_label: str, inflation_label: str) -> str:
+    if growth_label == "positive" and inflation_label == "negative":
         return "Goldilocks"
-    if growth == "positive" and inflation == "positive":
+    if growth_label == "positive" and inflation_label == "positive":
         return "Reflation"
-    if growth == "negative" and inflation == "positive":
+    if growth_label == "negative" and inflation_label == "positive":
         return "Stagflation"
-    return "Deflation"
+    if growth_label == "negative" and inflation_label == "negative":
+        return "Deflation"
+    raise SystemExit("Macro quad axis unavailable: refresh normalized public-source data before building the regime map.")
 
 
 def main() -> None:
-    payload = json.loads(DATA_PATH.read_text(encoding="utf-8"))
-    assets = payload.get("assets", []) or []
-    growth = collect_axis(assets, "growth")
-    inflation = collect_axis(assets, "inflation")
+    drivers = collect_drivers()
+    growth = resolve_axis(drivers, "growth")
+    inflation = resolve_axis(drivers, "inflation")
     state = classify(growth["label"], inflation["label"])
     copy = STATE_COPY[state]
     output = {
-        "schemaVersion": "macro_quad_snapshot_v1_3",
-        "version": "v0.50.4-four-quad-axis-scores",
+        "schemaVersion": "macro_quad_snapshot_v1_5",
+        "version": "v0.50.5-real-quad-tally-fix",
         "generatedAt": datetime.now(timezone.utc).isoformat(),
-        "method": "No-price four-quad regime map. Growth and inflation axes are scored from current public-source scanner evidence and resolve to positive or negative.",
+        "method": "No-price four-quad regime map. Growth and inflation scores are signed tallies from normalized official/public-source macro observations. Regime labels are derived directly from score signs.",
         "currentState": state,
         "subtitle": copy["subtitle"],
         "simpleRead": copy["simpleRead"],
