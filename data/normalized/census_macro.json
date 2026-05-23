@@ -1,7 +1,7 @@
 {
   "sourceId": "CENSUS_PUBLIC",
   "sourceName": "U.S. Census Bureau economic indicators",
-  "retrievedAt": "2026-05-23T17:30:45.525585+00:00",
+  "retrievedAt": "2026-05-23T17:36:48.801975+00:00",
   "observations": {
     "RETAIL_SALES_TOTAL": {
       "sourceId": "CENSUS_PUBLIC",
@@ -18,7 +18,7 @@
       "period": "2026-04-01",
       "previousPeriod": "2026-03-01",
       "releaseDate": "2026-04-01",
-      "retrievedAt": "2026-05-23T17:30:39.714499+00:00",
+      "retrievedAt": "2026-05-23T17:36:43.883877+00:00",
       "frequency": "monthly",
       "score": 1,
       "sourceNote": "Advance Monthly Retail Trade Survey / Census retail sales, public series mirrored by FRED."
@@ -38,7 +38,7 @@
       "period": "2026-04-01",
       "previousPeriod": "2026-03-01",
       "releaseDate": "2026-04-01",
-      "retrievedAt": "2026-05-23T17:30:39.825870+00:00",
+      "retrievedAt": "2026-05-23T17:36:43.931631+00:00",
       "frequency": "monthly",
       "score": -2,
       "sourceNote": "Census New Residential Construction housing starts, public series mirrored by FRED."
@@ -58,7 +58,7 @@
       "period": "2026-04-01",
       "previousPeriod": "2026-03-01",
       "releaseDate": "2026-04-01",
-      "retrievedAt": "2026-05-23T17:30:40.021794+00:00",
+      "retrievedAt": "2026-05-23T17:36:44.004511+00:00",
       "frequency": "monthly",
       "score": 2,
       "sourceNote": "Census New Residential Construction building permits, public series mirrored by FRED."
@@ -78,7 +78,7 @@
       "period": "2026-03-01",
       "previousPeriod": "2026-02-01",
       "releaseDate": "2026-03-01",
-      "retrievedAt": "2026-05-23T17:30:40.476442+00:00",
+      "retrievedAt": "2026-05-23T17:36:44.285291+00:00",
       "frequency": "monthly",
       "score": 2,
       "sourceNote": "Census new residential sales, public series mirrored by FRED."
@@ -98,7 +98,7 @@
       "period": "2026-03-01",
       "previousPeriod": "2026-02-01",
       "releaseDate": "2026-03-01",
-      "retrievedAt": "2026-05-23T17:30:40.628483+00:00",
+      "retrievedAt": "2026-05-23T17:36:44.336254+00:00",
       "frequency": "monthly",
       "score": 1,
       "sourceNote": "Census Manufacturers' New Orders: Durable Goods, public series mirrored by FRED."
@@ -118,7 +118,7 @@
       "period": "2026-03-01",
       "previousPeriod": "2026-02-01",
       "releaseDate": "2026-03-01",
-      "retrievedAt": "2026-05-23T17:30:40.868123+00:00",
+      "retrievedAt": "2026-05-23T17:36:44.576066+00:00",
       "frequency": "monthly",
       "score": -1,
       "sourceNote": "U.S. international trade balance from Census/BEA public data, mirrored by FRED."
@@ -138,7 +138,7 @@
       "period": "2026-03-01",
       "previousPeriod": "2026-02-01",
       "releaseDate": "2026-03-01",
-      "retrievedAt": "2026-05-23T17:30:41.118026+00:00",
+      "retrievedAt": "2026-05-23T17:36:44.778279+00:00",
       "frequency": "monthly",
       "score": 0,
       "sourceNote": "Census Manufacturing and Trade Inventories and Sales, public series mirrored by FRED."

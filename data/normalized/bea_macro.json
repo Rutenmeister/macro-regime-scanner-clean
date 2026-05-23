@@ -1,7 +1,7 @@
 {
   "sourceId": "BEA_PUBLIC",
   "sourceName": "U.S. Bureau of Economic Analysis API",
-  "retrievedAt": "2026-05-23T17:30:36.425284+00:00",
+  "retrievedAt": "2026-05-23T17:36:41.859056+00:00",
   "latestDate": "2026Q1",
   "observations": {
     "REAL_GDP_GROWTH": {
@@ -19,7 +19,7 @@
       "lineNumber": "27",
       "lineDescription": "Gross domestic product, current dollars",
       "score": 2,
-      "retrievedAt": "2026-05-23T17:30:36.774492+00:00",
+      "retrievedAt": "2026-05-23T17:36:42.007703+00:00",
       "frequency": "quarterly/monthly"
     },
     "REAL_PCE_GROWTH": {
@@ -37,7 +37,7 @@
       "lineNumber": "1",
       "lineDescription": "Personal consumption expenditures (PCE)",
       "score": 2,
-      "retrievedAt": "2026-05-23T17:30:37.320313+00:00",
+      "retrievedAt": "2026-05-23T17:36:42.164000+00:00",
       "frequency": "quarterly/monthly"
     },
     "PERSONAL_INCOME_GROWTH": {
@@ -55,7 +55,7 @@
       "lineNumber": "43",
       "lineDescription": "Disposable personal income, chained (2017) dollars",
       "score": -1,
-      "retrievedAt": "2026-05-23T17:30:37.746619+00:00",
+      "retrievedAt": "2026-05-23T17:36:42.414672+00:00",
       "frequency": "quarterly/monthly"
     },
     "SAVING_RATE": {
@@ -73,7 +73,7 @@
       "lineNumber": "35",
       "lineDescription": "Personal saving as a percentage of disposable personal income",
       "score": 0,
-      "retrievedAt": "2026-05-23T17:30:37.775999+00:00",
+      "retrievedAt": "2026-05-23T17:36:42.443238+00:00",
       "frequency": "quarterly/monthly"
     }
   },
