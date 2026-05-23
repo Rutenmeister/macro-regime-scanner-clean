@@ -2,7 +2,7 @@
   "schema_version": "0.22",
   "source_id": "EIA_OPEN_DATA",
   "source": "U.S. Energy Information Administration open data/API",
-  "fetched_at": "2026-05-23T13:05:32+00:00",
+  "fetched_at": "2026-05-23T13:20:14+00:00",
   "latest_date": "2026-05-15",
   "observations": {
     "CRUDE_STOCKS": {
