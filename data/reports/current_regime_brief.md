@@ -1,6 +1,6 @@
 # Edgefield Research Macro Regime Brief v0.50
 
-Generated: 2026-05-23T11:51:17.050677+00:00
+Generated: 2026-05-23T12:01:54.377744+00:00
 
 This brief ranks official/public-source macro pressure evidence for a U.S.-centered asset universe. Scores are raw, uncapped, and price-free. v0.50 adds a no-price Growth / Inflation Pressure Map. This is a research brief, not a buy/sell signal or investment advice.
 
@@ -57,4 +57,3 @@ framework_ready_no_price_backtest_attached: This validates score distribution an
 - Missing data is not neutral.
 - Official/public-source dates and result fields vary by source; forecast values may require licensed data.
 - Use the terminal audit rows to inspect what counted and what was excluded.
-- Macro quad blend states describe current ambiguity, not a confirmed historical transition path.

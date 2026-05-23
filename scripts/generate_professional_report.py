@@ -57,7 +57,6 @@ This brief ranks official/public-source macro pressure evidence for a U.S.-cente
 - Missing data is not neutral.
 - Official/public-source dates and result fields vary by source; forecast values may require licensed data.
 - Use the terminal audit rows to inspect what counted and what was excluded.
-- Macro quad blend states describe current ambiguity, not a confirmed historical transition path.
 """
     (OUT_DIR/'current_regime_brief.md').write_text(md)
     body='<pre>'+html.escape(md)+'</pre>'

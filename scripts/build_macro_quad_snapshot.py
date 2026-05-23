@@ -281,8 +281,6 @@ def main() -> None:
         ],
         "limits": [
             "Uses current public-source pressure only; no price data is used.",
-            "Blend states describe current ambiguity, not a confirmed historical transition path.",
-            "Transition direction can be added later once enough growth/inflation snapshots are collected.",
         ],
     }
     OUT_PATH.write_text(json.dumps(output, indent=2), encoding="utf-8")

@@ -32,7 +32,7 @@ The Growth / Inflation Pressure Map summarizes current public-source evidence in
 - Growth pressure
 - Inflation / policy pressure
 
-It classifies the backdrop into four main regimes, four blend states, or one low-conviction state. Blend states describe current ambiguity between adjacent regimes; they do not claim a historical transition path until enough snapshots exist.
+It classifies the backdrop into four main regimes, four blend states, or one low-conviction state using current public-source growth and inflation pressure.
 
 ## Validation
 

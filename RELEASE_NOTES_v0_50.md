@@ -25,7 +25,7 @@ v0.50 preserves the v0.49 beta launch wrapper and adds a compact no-price Growth
 
 The quad map does not use price. It summarizes current public-source row evidence into two axes: growth pressure and inflation/policy pressure.
 
-Blend states describe current ambiguity between adjacent regimes. They do not claim a historical transition path until more quad snapshots are collected.
+The Growth / Inflation Pressure Map uses current public-source evidence to summarize the macro backdrop without adding price or trade-signal language.
 
 ## Why it matters
 
