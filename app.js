@@ -7,6 +7,7 @@ let RELEASE_RESULTS = null;
 let SOURCE_QUALITY = null;
 let VALIDATION_SUMMARY = null;
 let REGIME_BRIDGE = null;
+let MACRO_QUAD = null;
 let SHOW_ALL_ROWS = false;
 
 let expanded = new Set();
@@ -149,6 +150,57 @@ function rowRolePill(f){
   if(factorAppliesToAsset(f)) return '<span class="row-role row-role-context">Applies</span>';
   return '<span class="row-role row-role-muted">Hidden default</span>';
 }
+
+function axisClass(label){
+  if(label === 'positive') return 'score-pos';
+  if(label === 'negative') return 'score-neg';
+  return 'score-neu';
+}
+function axisWord(label, positiveWord='supportive', negativeWord='weak'){
+  if(label === 'positive') return positiveWord;
+  if(label === 'negative') return negativeWord;
+  return 'mixed';
+}
+function driverListForQuad(list, emptyText){
+  const items=(list||[]).slice(0,4);
+  if(!items.length) return `<span class="pill">${emptyText}</span>`;
+  return items.map(d=>`<span class="pill">${esc(d.name||'driver')}: ${signed(d.contribution||0)}</span>`).join('');
+}
+function renderMacroQuadSnapshot(){
+  const box=$('macroQuadSnapshot');
+  if(!box) return;
+  if(!MACRO_QUAD){
+    box.innerHTML = `<div class="tiny-label">Growth / Inflation Pressure Map</div><div class="text-sm text-slate-400 mt-1">Macro quad snapshot not loaded yet. Run <span class="text-slate-200">python scripts/build_macro_quad_snapshot.py</span> after refresh.</div>`;
+    return;
+  }
+  const g=MACRO_QUAD.growth || {};
+  const i=MACRO_QUAD.inflation || {};
+  const state=MACRO_QUAD.currentState || 'Neutral / Low-Conviction Macro Pressure';
+  const subtitle=MACRO_QUAD.subtitle || '';
+  const confidence=MACRO_QUAD.confidence || 'Low';
+  const simple=MACRO_QUAD.simpleRead || '';
+  const conflict=MACRO_QUAD.mainConflict || '';
+  box.innerHTML = `<div class="flex flex-col xl:flex-row xl:items-start xl:justify-between gap-4">
+    <div class="min-w-0">
+      <div class="tiny-label">Growth / Inflation Pressure Map</div>
+      <h2 class="text-xl md:text-2xl font-semibold text-slate-100 mt-1">${esc(state)}</h2>
+      <div class="macro-quad-subtitle mt-1">${esc(subtitle)}</div>
+      <p class="text-xs text-slate-400 mt-2 max-w-4xl leading-relaxed">${esc(simple)}</p>
+      <p class="text-[11px] text-slate-500 mt-2 max-w-4xl leading-relaxed">${esc(conflict)}</p>
+    </div>
+    <div class="macro-quad-axis-grid">
+      <div class="macro-axis-card"><div class="tiny-label">Growth pressure</div><div class="metric-value text-2xl font-bold ${axisClass(g.label)}">${fmtScore(g.score || 0)}</div><div class="text-[11px] text-slate-400">${axisWord(g.label, 'supportive', 'weak')} · ${g.inputCount || 0} inputs</div></div>
+      <div class="macro-axis-card"><div class="tiny-label">Inflation pressure</div><div class="metric-value text-2xl font-bold ${axisClass(i.label)}">${fmtScore(i.score || 0)}</div><div class="text-[11px] text-slate-400">${axisWord(i.label, 'hot', 'easing')} · ${i.inputCount || 0} inputs</div></div>
+      <div class="macro-axis-card"><div class="tiny-label">Confidence</div><div class="metric-value text-2xl font-bold">${esc(confidence)}</div><div class="text-[11px] text-slate-400">No-price overlay</div></div>
+    </div>
+  </div>
+  <div class="grid xl:grid-cols-2 gap-3 mt-4">
+    <div class="macro-driver-box"><div class="tiny-label">Growth drivers</div><div class="flex flex-wrap gap-2 mt-2">${driverListForQuad(g.topPositiveDrivers, 'No positive growth driver')} ${driverListForQuad(g.topNegativeDrivers, 'No negative growth driver')}</div></div>
+    <div class="macro-driver-box"><div class="tiny-label">Inflation / policy drivers</div><div class="flex flex-wrap gap-2 mt-2">${driverListForQuad(i.topPositiveDrivers, 'No positive inflation driver')} ${driverListForQuad(i.topNegativeDrivers, 'No negative inflation driver')}</div></div>
+  </div>
+  <div class="macro-quad-note mt-3">Blend states describe current ambiguity between adjacent regimes. They do not claim a historical transition path until more quad snapshots are collected.</div>`;
+}
+
 function pressureBucket(asset){
   const counted=asset.scoreAudit?.countedRows || 0;
   if(asset.pressureBucket) return asset.pressureBucket;
@@ -191,7 +243,7 @@ function renderRegimeSnapshot(){
     const html=items.length ? items.map(a=>`<button class="snapshot-chip" data-jump="${esc(a.id)}"><span>${esc(a.symbol)}</span><strong class="${scoreClass(a.score)}">${fmtScore(a.score)}</strong><em>${regimeTags(a).join(' · ')}</em></button>`).join('') : '<div class="text-[11px] text-slate-500">No assets in this bucket.</div>';
     return `<div class="snapshot-card"><div class="tiny-label">${g}</div><div class="snapshot-chip-wrap mt-2">${html}</div></div>`;
   }).join('');
-  box.innerHTML=`<div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-3"><div><div class="tiny-label">Regime Queue Snapshot</div><h3 class="text-lg font-semibold text-slate-100 mt-1">What deserves attention first?</h3><p class="text-xs text-slate-500 mt-1">Primary buckets now use uncapped raw pressure scores. Improving, deteriorating, conflicted, freshness, and confidence are tags, not buckets that hide strong positive/negative pressure.</p></div><span class="pill self-start md:self-auto">v0.49 beta launch wrapper</span></div><div class="snapshot-grid">${cards}</div>`;
+  box.innerHTML=`<div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-3"><div><div class="tiny-label">Regime Queue Snapshot</div><h3 class="text-lg font-semibold text-slate-100 mt-1">What deserves attention first?</h3><p class="text-xs text-slate-500 mt-1">Primary buckets use uncapped raw pressure scores. Improving, deteriorating, conflicted, freshness, and confidence are tags, not buckets that hide strong positive/negative pressure.</p></div><span class="pill self-start md:self-auto">v0.50 macro quad snapshot</span></div><div class="snapshot-grid">${cards}</div>`;
   box.querySelectorAll('[data-jump]').forEach(btn=>btn.addEventListener('click',e=>{ const id=btn.dataset.jump; selectedId=id; expanded.add(id); const row=document.querySelector(`.market-row[data-id="${CSS.escape(id)}"]`); if(row){ row.scrollIntoView({behavior:'smooth', block:'center'}); } renderAll(); }));
 }
 function generateRegimeBrief(){
@@ -204,7 +256,7 @@ function generateRegimeBrief(){
   const sourceLines=Object.entries(SOURCE_STATUS||{}).map(([id,s])=>`- ${id}: ${sourceLabel(s.status)}${s.latest_date ? ' · latest '+s.latest_date : ''}`).join('\n');
   const events=(RELEASE_CALENDAR?.events||[]).slice(0,8).map(ev=>`- ${ev.date || ''} ${ev.timeET || ''}: ${ev.report} (${ev.source}, ${ev.calendarConfidence || ev.scheduleType || 'unverified'})`).join('\n') || '- No generated release calendar loaded.';
   const changes=changed.map(a=>`- ${a.symbol}: ${fmtScore((a.score||0)-(a.previousScore||0))} change, now ${fmtScore(a.score)} raw — ${a.scoreChangeLog?.summary || a.bias}`).join('\n');
-  return `# Edgefield Research Macro Regime Brief v0.49\n\nGenerated: ${now}\n\nThis brief ranks public-source fundamental pressure evidence using uncapped raw net pressure scores. It is not a buy/sell signal and does not predict immediate price movement. Missing, stale, candidate, and display-only rows are not treated as neutral. v0.49 preserves the U.S.-centered integrity scope, release-result fields, source QA, reports, and bridge metadata while adding beta launch wrapper materials, access/disclaimer guidance, and a wider Regime Queue Snapshot.\n\n## Strongest positive raw pressure\n${topPos.map(fmt).join('\n') || '- No positive live-scored assets.'}\n\n## Strongest negative raw pressure\n${topNeg.map(fmt).join('\n') || '- No negative live-scored assets.'}\n\n## Conflicted / neutral transition candidates\n${conflicted.map(fmt).join('\n') || '- No conflicted or neutral transition candidates in current view.'}\n\n## Largest score changes\n${changes}\n\n## Source health\n${sourceLines || '- No source status loaded.'}\n\n## Upcoming tracked reports\n${events}\n\n## Caveats\n- Public-source macro/fundamental pressure only.\n- Scores are uncapped raw net pressure; larger absolute numbers mean more weighted evidence, not guaranteed price movement.\n- Mostly U.S.-based inputs, so relevance varies by asset.\n- Scores depend on current source freshness, row eligibility, and asset-specific mapping.\n- Open each asset row in the terminal to inspect counted, context, and excluded evidence.\n`;
+  return `# Edgefield Research Macro Regime Brief v0.50\n\nGenerated: ${now}\n\nThis brief ranks public-source fundamental pressure evidence using uncapped raw net pressure scores. It is not a buy/sell signal and does not predict immediate price movement. Missing, stale, candidate, and display-only rows are not treated as neutral. v0.50 preserves the U.S.-centered, raw-score, no-price scanner while adding the Growth / Inflation Pressure Map as a no-price macro quadrant overlay. Blend states describe current ambiguity; they do not claim a historical transition path until more snapshots exist.\n\n## Strongest positive raw pressure\n${topPos.map(fmt).join('\n') || '- No positive live-scored assets.'}\n\n## Strongest negative raw pressure\n${topNeg.map(fmt).join('\n') || '- No negative live-scored assets.'}\n\n## Conflicted / neutral transition candidates\n${conflicted.map(fmt).join('\n') || '- No conflicted or neutral transition candidates in current view.'}\n\n## Largest score changes\n${changes}\n\n## Source health\n${sourceLines || '- No source status loaded.'}\n\n## Upcoming tracked reports\n${events}\n\n## Caveats\n- Public-source macro/fundamental pressure only.\n- Scores are uncapped raw net pressure; larger absolute numbers mean more weighted evidence, not guaranteed price movement.\n- Mostly U.S.-based inputs, so relevance varies by asset.\n- Scores depend on current source freshness, row eligibility, and asset-specific mapping.\n- Open each asset row in the terminal to inspect counted, context, and excluded evidence.\n`;
 }
 
 
@@ -281,12 +333,12 @@ function inputTable(asset){
 
 function renderQueue(){ const rows=getRows(); $('queueSub').textContent=`${rows.length} markets shown. Closed rows are quick reads; open rows show relevance, derivation, source, and effect for the public-source input universe. `; const total=ASSETS.length; const commodities=ASSETS.filter(a=>a.assetClass==='Commodities').length; const open=expanded.size; const liveInputs=ASSETS.filter(a=>(a.factors||[]).some(f=>(f.freshness||'')==='Fresh')).length; const applicableRows=ASSETS.reduce((n,a)=>n+filteredFactorsForAsset(a).length,0); $('statCards').innerHTML=`<div class="soft-card rounded-2xl p-3"><div class="tiny-label">Universe</div><div class="font-semibold">${total}</div></div><div class="soft-card rounded-2xl p-3"><div class="tiny-label">Shown</div><div class="font-semibold">${rows.length}</div></div><div class="soft-card rounded-2xl p-3"><div class="tiny-label">Live-input assets</div><div class="font-semibold">${liveInputs}</div></div><div class="soft-card rounded-2xl p-3"><div class="tiny-label">Visible rows</div><div class="font-semibold">${applicableRows}</div></div>`; if(!rows.length){ $('queue').innerHTML='<div class="p-4 text-slate-400">No markets match the current filters.</div>'; return; } $('queue').innerHTML=rows.map(a=>{ const isOpen=expanded.has(a.id); return `<div class="market-row" data-id="${a.id}"><div class="row-grid row-closed cursor-pointer"><div><div class="font-semibold text-slate-100">${a.symbol}</div><div class="text-[11px] text-slate-500 mt-1">${a.assetClass}</div></div><div><div class="font-semibold text-slate-100">${a.name}</div><div class="text-xs text-slate-400 mt-1 leading-snug">${a.quick}</div><div class="flex flex-wrap gap-2 mt-2 text-[11px]"><span class="pill">Driver: ${a.topDriver}</span><span class="pill">Conflict: ${a.mainConflict}</span><span class="pill">Watch: ${a.watchNext.slice(0,3).join(' / ')}</span></div></div><div class="text-right metric-value text-xl font-bold ${scoreClass(a.score)}">${fmtScore(a.score)}</div><div><div class="text-sm text-slate-200">${a.bias}</div><div class="text-[11px] text-slate-500 mt-1">${a.rankType}</div></div><div class="text-right metric-value">${a.confidence}%</div><div><span class="pill">${a.conflict}</span></div><div><span class="pill">${a.freshness}</span></div><div class="text-right metric-value ${scoreClass(a.score-a.previousScore)}">${change(a)}</div><div><button class="open-btn rounded-xl px-3 py-2 text-xs">${isOpen?'Close':'Open'}</button></div></div>${isOpen?`<div class="open-panel compact-open">${inputTable(a)}</div>`:''}</div>`; }).join(''); document.querySelectorAll('.market-row .row-closed').forEach(el=>el.addEventListener('click',e=>{ const id=el.closest('.market-row').dataset.id; selectedId=id; if(expanded.has(id)) expanded.delete(id); else expanded.add(id); renderAll(false); })); }
 function renderDiagnosis(){ /* right readout not included; public-source edition; selected row stays open inline. */ }
-function renderAll(){ renderRegimeSnapshot(); renderQueue(); renderDiagnosis(); }
+function renderAll(){ renderMacroQuadSnapshot(); renderRegimeSnapshot(); renderQueue(); renderDiagnosis(); }
 function download(filename,text,type='application/json'){ const blob=new Blob([text],{type}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download=filename; a.click(); URL.revokeObjectURL(url); }
 ['searchBox','universe','assetClass','subgroup','biasFilter','conflictFilter','freshFilter','sortMode','rowLimit'].forEach(id=>$(id).addEventListener('input',()=>{ if(id==='assetClass') updateSubgroups(); renderAll(); }));
-$('exportJson').addEventListener('click',()=>download('macro_regime_scanner_public_source_data_contract_v0_49.json',JSON.stringify({notice:'Public-source data contract. v0.49 is the beta launch wrapper baseline: U.S.-centered, raw-score, price-free macro pressure research data with unsupported non-U.S. crosses excluded until direct non-U.S. source lanes exist, plus lightweight beta wrapper pages and 10-item regime snapshot buckets.',assets:ASSETS,source_status:SOURCE_STATUS,release_calendar:RELEASE_CALENDAR,release_results:RELEASE_RESULTS,source_quality:SOURCE_QUALITY,validation_summary:VALIDATION_SUMMARY,regime_bridge:REGIME_BRIDGE},null,2)));
+$('exportJson').addEventListener('click',()=>download('macro_regime_scanner_public_source_data_contract_v0_50.json',JSON.stringify({notice:'Public-source data contract. v0.50 is the macro quad snapshot baseline: U.S.-centered, raw-score, price-free macro pressure research data plus a no-price Growth / Inflation Pressure Map and 9-state macro regime overlay.',assets:ASSETS,source_status:SOURCE_STATUS,release_calendar:RELEASE_CALENDAR,release_results:RELEASE_RESULTS,source_quality:SOURCE_QUALITY,validation_summary:VALIDATION_SUMMARY,regime_bridge:REGIME_BRIDGE,macro_quad:MACRO_QUAD},null,2)));
 const briefBtn=$('exportBrief');
-if(briefBtn) briefBtn.addEventListener('click',()=>download('edgefield_macro_regime_brief_v0_40.md', generateRegimeBrief(), 'text/markdown'));
+if(briefBtn) briefBtn.addEventListener('click',()=>download('edgefield_macro_regime_brief_v0_50.md', generateRegimeBrief(), 'text/markdown'));
 async function loadData(){
   try {
     const response = await fetch('data/macro_regime_scanner.json', { cache: 'no-store' });
@@ -301,6 +353,19 @@ async function loadData(){
       if (calRes.ok) RELEASE_CALENDAR = await calRes.json();
     } catch (calendarError) {
       RELEASE_CALENDAR = null;
+    }
+    const optionalLoads = [
+      ['data/release_results.json', value => RELEASE_RESULTS = value],
+      ['data/source_quality.json', value => SOURCE_QUALITY = value],
+      ['data/validation/score_validation_summary.json', value => VALIDATION_SUMMARY = value],
+      ['data/exports/regime_labels_latest.json', value => REGIME_BRIDGE = value],
+      ['data/macro_quad_snapshot.json', value => MACRO_QUAD = value],
+    ];
+    for (const [url, setter] of optionalLoads) {
+      try {
+        const res = await fetch(url, { cache: 'no-store' });
+        if (res.ok) setter(await res.json());
+      } catch (optionalError) {}
     }
   } catch (error) {
     document.getElementById('queue').innerHTML = `<div class="p-4 text-rose-200">Could not load data/macro_regime_scanner.json. Open this project through a local server or GitHub Pages, not directly as a file. Error: ${error.message}</div>`;

@@ -1,5 +1,15 @@
 # Changelog
 
+## v0.50 — Macro Quad Snapshot Baseline
+
+- Preserves v0.49 Beta Launch Wrapper and 10-item Regime Queue buckets.
+- Adds the Growth / Inflation Pressure Map above the Regime Queue.
+- Adds a 9-state no-price macro regime overlay: four main quads, four blend states, and one low-conviction state.
+- Adds `data/macro_quad_snapshot.json` plus build/validation scripts.
+- Updates the report export and workflow validation to include the macro quad snapshot.
+- Keeps transition language honest: blend states describe current ambiguity, not a confirmed historical path.
+
+
 ## v0.49 — Beta Launch Wrapper + Queue Expansion
 
 - Preserves v0.48 Distribution-Ready Baseline.

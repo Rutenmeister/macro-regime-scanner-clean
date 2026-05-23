@@ -1,6 +1,6 @@
 {
   "version": "v0.43-validation-framework",
-  "generatedAt": "2026-05-20T18:02:43.206593+00:00",
+  "generatedAt": "2026-05-23T11:50:43.908019+00:00",
   "status": "framework_ready_no_price_backtest_attached",
   "warning": "This validates score distribution and history readiness only. It does not claim predictive accuracy until separate price/return data is supplied.",
   "assetCount": 45,

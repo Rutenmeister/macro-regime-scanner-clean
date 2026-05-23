@@ -8,6 +8,7 @@ DATA=ROOT/'data'/'macro_regime_scanner.json'
 CAL=ROOT/'data'/'release_calendar.json'
 SRCQ=ROOT/'data'/'source_quality.json'
 VAL=ROOT/'data'/'validation'/'score_validation_summary.json'
+QUAD=ROOT/'data'/'macro_quad_snapshot.json'
 OUT_DIR=ROOT/'data'/'reports'
 
 def score(a): return float(a.get('score') or 0)
@@ -19,15 +20,19 @@ def main():
     cal=json.loads(CAL.read_text()) if CAL.exists() else {'events':[]}
     srcq=json.loads(SRCQ.read_text()) if SRCQ.exists() else {'summary':{}}
     val=json.loads(VAL.read_text()) if VAL.exists() else {'status':'not generated'}
+    quad=json.loads(QUAD.read_text()) if QUAD.exists() else None
     top_pos=sorted(assets,key=score,reverse=True)[:8]
     top_neg=sorted(assets,key=score)[:8]
     events=cal.get('events',[])[:10]
     now=datetime.now(timezone.utc).isoformat()
-    md=f"""# Edgefield Research Macro Regime Brief v0.49
+    md=f"""# Edgefield Research Macro Regime Brief v0.50
 
 Generated: {now}
 
-This brief ranks official/public-source macro pressure evidence for a U.S.-centered asset universe. Scores are raw, uncapped, and price-free. This is a research brief, not a buy/sell signal or investment advice.
+This brief ranks official/public-source macro pressure evidence for a U.S.-centered asset universe. Scores are raw, uncapped, and price-free. v0.50 adds a no-price Growth / Inflation Pressure Map. This is a research brief, not a buy/sell signal or investment advice.
+
+## Growth / Inflation Pressure Map
+{('- Current state: '+quad.get('currentState','')+' — '+quad.get('subtitle','')+chr(10)+'- Growth pressure: '+str(quad.get('growth',{}).get('score','n/a'))+' ('+quad.get('growth',{}).get('label','mixed')+')'+chr(10)+'- Inflation pressure: '+str(quad.get('inflation',{}).get('score','n/a'))+' ('+quad.get('inflation',{}).get('label','mixed')+')'+chr(10)+'- Confidence: '+quad.get('confidence','Low')+chr(10)+'- Read: '+quad.get('simpleRead','')) if quad else '- Macro quad snapshot not generated.'}
 
 ## Strongest positive raw pressure
 {chr(10).join(line(a) for a in top_pos)}
@@ -52,6 +57,7 @@ This brief ranks official/public-source macro pressure evidence for a U.S.-cente
 - Missing data is not neutral.
 - Official/public-source dates and result fields vary by source; forecast values may require licensed data.
 - Use the terminal audit rows to inspect what counted and what was excluded.
+- Macro quad blend states describe current ambiguity, not a confirmed historical transition path.
 """
     (OUT_DIR/'current_regime_brief.md').write_text(md)
     body='<pre>'+html.escape(md)+'</pre>'
