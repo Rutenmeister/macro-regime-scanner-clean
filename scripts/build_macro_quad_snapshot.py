@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Build the Edgefield Growth / Inflation Regime.
 
-v0.50.3 rules:
+v0.50.4 rules:
 - No price is used.
 - Four regimes only: Goldilocks, Reflation, Stagflation, Deflation.
 - No confidence score, no blend states, no transition language.
@@ -214,17 +214,26 @@ def collect_axis(assets: list[dict[str, Any]], axis: str) -> dict[str, Any]:
     if cluster:
         drivers.append(cluster)
 
-    total_weight = sum(d["weight"] for d in drivers)
-    if total_weight > 0:
-        score = (sum(d["contribution"] for d in drivers) / total_weight) * 5.0
-    else:
-        score = 0.0
-    score = max(-15.0, min(15.0, score))
+    # v0.50.4: show the actual factor tally used for the axis.
+    # Each unique macro evidence group contributes +1 or -1 after axis-specific sign handling.
+    # We keep a tiny asset-cluster fallback in the raw calculation, but the visible score is a simple signed tally.
+    tally = 0
+    for d in drivers:
+        val = float(d.get("value", 0) or 0)
+        if abs(val) < 0.001:
+            continue
+        tally += 1 if val > 0 else -1
+    score = int(tally)
     # Four-quad model: every axis resolves to positive or negative. Zero resolves positive by convention.
     label = "positive" if score >= 0 else "negative"
     return {
-        "score": round(score, 1),
+        "score": score,
         "label": label,
+        "factorTally": {
+            "positive": sum(1 for d in drivers if float(d.get("value", 0) or 0) > 0.001),
+            "negative": sum(1 for d in drivers if float(d.get("value", 0) or 0) < -0.001),
+            "net": score,
+        },
     }
 
 
@@ -246,10 +255,10 @@ def main() -> None:
     state = classify(growth["label"], inflation["label"])
     copy = STATE_COPY[state]
     output = {
-        "schemaVersion": "macro_quad_snapshot_v1_2",
-        "version": "v0.50.3-simple-four-quad-regime-display",
+        "schemaVersion": "macro_quad_snapshot_v1_3",
+        "version": "v0.50.4-four-quad-axis-scores",
         "generatedAt": datetime.now(timezone.utc).isoformat(),
-        "method": "No-price four-quad regime map. Growth and inflation axes are built from current public-source scanner evidence and resolve to positive or negative only.",
+        "method": "No-price four-quad regime map. Growth and inflation axes are scored from current public-source scanner evidence and resolve to positive or negative.",
         "currentState": state,
         "subtitle": copy["subtitle"],
         "simpleRead": copy["simpleRead"],

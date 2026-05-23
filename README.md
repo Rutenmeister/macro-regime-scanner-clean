@@ -1,8 +1,8 @@
-# Edgefield Research Macro Regime Scanner v0.50.3
+# Edgefield Research Macro Regime Scanner v0.50.4
 
 U.S.-centered macro pressure terminal using official and public-source data. Raw, uncapped scores rank fundamental pressure across assets without using price.
 
-v0.50.3 preserves the v0.49/v0.48 distribution baseline and replaces the prior quad experiment with a simple four-quad Growth / Inflation Regime map.
+v0.50.4 preserves the v0.49/v0.48 distribution baseline and replaces the prior quad experiment with a simple four-quad Growth / Inflation Regime map.
 
 ## Growth / Inflation Regime
 

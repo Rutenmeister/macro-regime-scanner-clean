@@ -1,6 +1,6 @@
-# Macro Regime Scanner v0.50.3 — Simple Four-Quad Regime Display Map
+# Macro Regime Scanner v0.50.4 — Simple Four-Quad Regime Display Map
 
-v0.50.3 replaces the overly cautious quad snapshot with a simpler four-regime map.
+v0.50.4 replaces the overly cautious quad snapshot with a simpler four-regime map.
 
 ## What changed
 

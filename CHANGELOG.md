@@ -1,4 +1,4 @@
-## v0.50.3 — Simple Four-Quad Regime Display Map
+## v0.50.4 — Simple Four-Quad Regime Display Map
 
 - Replaces the prior quad experiment with a simple four-regime model.
 - Growth and inflation axes resolve to positive or negative only.
