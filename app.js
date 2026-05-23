@@ -272,23 +272,54 @@ function factorStrengthLabel(score){
   if(p <= -2) return 'strong negative';
   return 'neutral';
 }
-function computeMacroRegime(){
+function regimeRelevanceMultiplier(factor, mode='strict'){
+  const relevance = String(factor.relevance || '').toLowerCase();
+  if(mode === 'broad'){
+    if(relevance === 'primary') return 1.00;
+    if(relevance === 'secondary') return 0.70;
+    if(relevance === 'contextual') return 0.45;
+    if(relevance === 'low relevance') return 0.20;
+    return 0;
+  }
+  if(relevance === 'primary') return 1.00;
+  if(relevance === 'secondary') return 1.00;
+  if(relevance === 'contextual') return 1.00;
+  return 0;
+}
+function factorEligibleForRegime(factor, mode='strict'){
+  const relevance = String(factor.relevance || '').toLowerCase();
+  if(relevance === 'not applicable') return false;
+  if(mode === 'strict'){
+    if(!['primary','secondary','contextual'].includes(relevance)) return false;
+    return factorAppliesToAsset(factor);
+  }
+  if(!['primary','secondary','contextual','low relevance'].includes(relevance)) return false;
+  const role = String(factor.scoreRole || '').toLowerCase();
+  if(role === 'not_live') return false;
+  if(role === 'live_scored' || role === 'live_context' || role === 'display_only') return true;
+  return factorAppliesToAsset(factor);
+}
+function computeMacroRegime(options={}){
+  const mode = options.mode || 'strict';
   const chosen = new Map();
   for(const asset of ASSETS || []){
     for(const factor of asset.factors || []){
-      if(!factorAppliesToAsset(factor)) continue;
-      if(!['Primary','Secondary','Contextual'].includes(String(factor.relevance || ''))) continue;
+      if(!factorEligibleForRegime(factor, mode)) continue;
       const score = Number(factor.score);
       if(!Number.isFinite(score) || score === 0) continue;
       const entries = regimeRegistryEntries(factor);
       if(!entries) continue;
       for(const entry of entries){
         if(!entry || !entry.bucket) continue;
-        const key = `${entry.bucket}::${normalizeFactorName(factor.name)}::${String(factor.source || '')}::${String(factor.derived || '').slice(0,220)}`;
+        const relevanceMultiplier = regimeRelevanceMultiplier(factor, mode);
+        if(!relevanceMultiplier) continue;
+        const noteKey = normalizeFactorName(entry.note || '');
+        const key = `${entry.bucket}::${normalizeFactorName(factor.name)}::${noteKey}`;
         const rank = macroRegimeAnchorRank(asset, entry, factor);
+        const weightedScore = Math.abs(score) * Number(entry.weight || 1) * relevanceMultiplier;
         const current = chosen.get(key);
-        if(!current || rank > current.rank || (rank === current.rank && Math.abs(score) > Math.abs(current.score))){
-          chosen.set(key, {bucket: entry.bucket, weight: entry.weight || 1, note: entry.note || '', score, rank, factor, asset});
+        if(!current || rank > current.rank || (rank === current.rank && weightedScore > current.weightedScore)){
+          chosen.set(key, {bucket: entry.bucket, weight: Number(entry.weight || 1) * relevanceMultiplier, note: entry.note || '', score, rank, factor, asset, weightedScore, relevance: factor.relevance || '', mode});
         }
       }
     }
@@ -304,7 +335,7 @@ function computeMacroRegime(){
   for(const item of chosen.values()){
     const point = macroRegimePoint(item.score, item.weight);
     if(!point) continue;
-    const driver = {name:item.factor.name || item.factor.group || 'factor', point, score:item.score, source:item.factor.source || '', asset:item.asset.symbol || item.asset.id || '', note:item.note};
+    const driver = {name:item.factor.name || item.factor.group || 'factor', point, score:item.score, source:item.factor.source || '', asset:item.asset.symbol || item.asset.id || '', note:item.note, relevance:item.relevance, mode:item.mode};
     if(item.bucket === 'growth'){
       growthScore += point;
       if(point > 0) growthPositive += point;
@@ -328,7 +359,7 @@ function computeMacroRegime(){
   const growthDirection = resolveAxis(growthScore, growthDrivers);
   const inflationDirection = resolveAxis(inflationScore, inflationDrivers);
   if(!growthDirection || !inflationDirection){
-    return {regime:'Unavailable', growthScore, inflationScore, growthDirection, inflationDirection, explanation:'Regime requires live growth and inflation factor rows from the scanner data.'};
+    return {regime:'Unavailable', growthScore, inflationScore, growthDirection, inflationDirection, mode, explanation:'Regime requires live growth and inflation factor rows from the scanner data.'};
   }
   let regime = 'Goldilocks';
   if(growthDirection === 'positive' && inflationDirection === 'positive') regime = 'Reflation';
@@ -340,11 +371,26 @@ function computeMacroRegime(){
     'Stagflation':'Growth pressure is weakening while inflation pressure remains elevated.',
     'Deflation':'Growth pressure is weakening while inflation pressure is easing.'
   };
-  return {regime, growthScore, inflationScore, growthDirection, inflationDirection, explanation:reads[regime], growthDrivers, inflationDrivers, growthPositive, growthNegative, inflationPositive, inflationNegative, factorCount:growthDrivers.length+inflationDrivers.length};
+  return {regime, growthScore, inflationScore, growthDirection, inflationDirection, mode, explanation:reads[regime], growthDrivers, inflationDrivers, growthPositive, growthNegative, inflationPositive, inflationNegative, factorCount:growthDrivers.length+inflationDrivers.length};
 }
 
+function driverIdentity(d){
+  return `${normalizeFactorName(d?.name || 'factor')}::${normalizeFactorName(d?.note || '')}`;
+}
+function dedupeDrivers(drivers){
+  const best = new Map();
+  for(const d of drivers || []){
+    if(!d || !Number(d.point || 0)) continue;
+    const key = driverIdentity(d);
+    const current = best.get(key);
+    if(!current || Math.abs(Number(d.point || 0)) > Math.abs(Number(current.point || 0))){
+      best.set(key, d);
+    }
+  }
+  return [...best.values()];
+}
 function absSortDrivers(drivers){
-  return [...(drivers || [])].filter(d => Number(d.point || 0) !== 0).sort((a,b)=>Math.abs(b.point)-Math.abs(a.point));
+  return dedupeDrivers(drivers).filter(d => Number(d.point || 0) !== 0).sort((a,b)=>Math.abs(b.point)-Math.abs(a.point));
 }
 function driverName(d){
   const source = d.source ? ` · ${d.source}` : '';
@@ -387,10 +433,13 @@ function regimeChangeSummary(){
   const downText = down.length ? `deteriorating pressure: ${down.map(x=>`${x.symbol} ${fmtScore(x.delta)}`).join(', ')}` : '';
   return [upText, downText].filter(Boolean).join('; ') + '.';
 }
-function regimeSensitivityExplanation(r, sensitivity){
-  if(!sensitivity) return 'No nearby sensitivity read is shown because the current factor balance is not meaningfully split across the alternate axis.';
-  if(r.inflationDirection === 'positive') return 'Inflation pressure is the common signal. The split is whether growth evidence is resilient enough for inflationary growth or weak enough for stagflationary pressure.';
-  return 'The sensitivity read shows where the regime would move if the weaker side of the factor balance gained more weight.';
+function regimeBroadExplanation(strictRead, broadRead){
+  if(!broadRead || broadRead.regime === 'Unavailable') return 'Broad read unavailable until live factors are present.';
+  if(strictRead.regime === broadRead.regime) return 'The broad significance-tier read confirms the strict count read.';
+  if(strictRead.inflationDirection === broadRead.inflationDirection && strictRead.inflationDirection === 'positive'){
+    return 'Inflation pressure is the common signal. The split is whether broader significance weighting gives growth enough benefit to read as inflationary growth or keeps the stricter stagflationary pressure read.';
+  }
+  return 'The broad read uses significance-tier weighting across eligible live factors, while the strict read uses the tighter regime count.';
 }
 function driverListHtml(title, drivers, empty){
   const items = absSortDrivers(drivers).slice(0,3);
@@ -424,32 +473,29 @@ function eligibilityMiniSummary(asset){
   return `Scored ${counts.live_scored} · Context ${counts.live_context} · Display ${counts.display_only} · Not live ${counts.not_live}`;
 }
 
-function macroRegimeSensitivityRead(r){
-  if(!r || r.regime === 'Unavailable') return null;
-  const hasMixedGrowth = Number(r.growthPositive || 0) > 0 && Number(r.growthNegative || 0) > 0;
-  const hasMixedInflation = Number(r.inflationPositive || 0) > 0 && Number(r.inflationNegative || 0) > 0;
-  if(r.regime === 'Stagflation' && r.inflationDirection === 'positive' && hasMixedGrowth){
-    return {label:'Inflationary Growth / Reflation', text:'If remaining growth resilience is weighted more generously, the broader read can still look like Reflation. The strict read treats current growth drag as large enough to call Stagflationary Pressure.'};
+function macroRegimeBroadRead(strictRead){
+  if(!strictRead || strictRead.regime === 'Unavailable') return null;
+  const broad = computeMacroRegime({mode:'broad'});
+  if(!broad || broad.regime === 'Unavailable') return null;
+  let label = broad.regime;
+  if(broad.regime === 'Reflation') label = 'Inflationary Growth / Reflation';
+  if(broad.regime === 'Stagflation') label = 'Stagflationary Pressure';
+  let text = `Broad significance-tier read: Growth ${fmtScore(broad.growthScore)}, Inflation ${fmtScore(broad.inflationScore)}.`;
+  if(strictRead.regime !== broad.regime){
+    text += ' This differs from the strict read because broader relevance weighting gives some lower-tier live factors a smaller but nonzero voice.';
+  } else {
+    text += ' This confirms the strict read after broader relevance weighting.';
   }
-  if(r.regime === 'Reflation' && r.inflationDirection === 'positive' && hasMixedGrowth){
-    return {label:'Stagflationary Pressure', text:'If growth drag is weighted more strictly, the same inflation-positive backdrop can move toward Stagflationary Pressure.'};
-  }
-  if(r.regime === 'Goldilocks' && hasMixedInflation){
-    return {label:'Reflation', text:'If sticky inflation inputs are weighted more heavily, the broader read can move from Goldilocks toward Reflation.'};
-  }
-  if(r.regime === 'Deflation' && hasMixedInflation){
-    return {label:'Stagflationary Pressure', text:'If inflation pressure is weighted more heavily, the broader read can move from Deflation toward Stagflationary Pressure.'};
-  }
-  return null;
+  return {label, text, broad};
 }
 function macroRegimeBriefLine(){
   const r = computeMacroRegime();
   if(r.regime === 'Unavailable') return 'Current macro regime unavailable until live growth and inflation factor rows are present.';
-  const sensitivity = macroRegimeSensitivityRead(r);
-  const sensitivityLine = sensitivity ? ` Sensitivity read: ${sensitivity.label} — ${sensitivity.text}` : '';
+  const broadRead = macroRegimeBroadRead(r);
+  const broadLine = broadRead ? ` Broad significance read: ${broadRead.label} — ${broadRead.text}` : '';
   const coverage = regimeCoverageSummary(r);
   const drivers = ` Top inflation drivers: ${topDriverText((r.inflationDrivers||[]).filter(d=>d.point>0),3)}. Top growth drags: ${topDriverText((r.growthDrivers||[]).filter(d=>d.point<0),3)}.`;
-  return `Current Macro Regime: ${r.regime} — Growth ${fmtScore(r.growthScore)}, Inflation ${fmtScore(r.inflationScore)} (${r.growthDirection} growth / ${r.inflationDirection} inflation). ${r.explanation}${sensitivityLine} Coverage: ${coverage.coverage}; freshness: ${coverage.freshness}.${drivers}`;
+  return `Current Macro Regime: ${r.regime} — Growth ${fmtScore(r.growthScore)}, Inflation ${fmtScore(r.inflationScore)} (${r.growthDirection} growth / ${r.inflationDirection} inflation). ${r.explanation}${broadLine} Coverage: ${coverage.coverage}; freshness: ${coverage.freshness}.${drivers}`;
 }
 function renderMacroRegimeCard(){
   const box = $('macroRegimeCard');
@@ -461,13 +507,13 @@ function renderMacroRegimeCard(){
   }
   const growthClass = r.growthScore > 0 ? 'score-pos' : 'score-neg';
   const inflationClass = r.inflationScore > 0 ? 'score-pos' : 'score-neg';
-  const sensitivity = macroRegimeSensitivityRead(r);
+  const broadRead = macroRegimeBroadRead(r);
   const coverage = regimeCoverageSummary(r);
-  const sensitivityHtml = sensitivity ? `<div class="macro-sensitivity-note mt-2"><strong>Sensitivity read:</strong> ${esc(sensitivity.label)} — ${esc(sensitivity.text)}<div class="text-[11px] text-slate-500 mt-1">${esc(regimeSensitivityExplanation(r, sensitivity))}</div></div>` : '';
+  const broadHtml = broadRead ? `<div class="macro-sensitivity-note mt-2"><strong>Broad significance read:</strong> ${esc(broadRead.label)} — ${esc(broadRead.text)}<div class="text-[11px] text-slate-500 mt-1">${esc(regimeBroadExplanation(r, broadRead.broad))}</div></div>` : '';
   const driverLine = `<div class="macro-driver-line mt-2"><strong>Top regime drivers:</strong> Inflation — ${esc(topDriverText((r.inflationDrivers||[]).filter(d=>d.point>0),3))}. Growth drag — ${esc(topDriverText((r.growthDrivers||[]).filter(d=>d.point<0),3))}.</div>`;
   const trustLine = `<div class="macro-trust-line mt-2"><strong>Coverage:</strong> ${esc(coverage.coverage)} (${coverage.factorCount} regime factors, ${coverage.liveAssets}/${coverage.totalAssets} assets with live scored rows) · <strong>Source freshness:</strong> ${esc(coverage.freshness)}.</div>`;
   const changeLine = `<div class="macro-change-line mt-2"><strong>What changed:</strong> ${esc(regimeChangeSummary())}</div>`;
-  box.innerHTML = `<div class="flex flex-col md:flex-row md:items-start md:justify-between gap-3"><div><div class="tiny-label">Current Macro Regime · primary strict read</div><h3 class="text-2xl font-bold text-slate-100 mt-1">${esc(r.regime)}</h3><p class="text-xs text-slate-500 mt-1">Four-quad summary from live public-source factor rows.</p></div><span class="pill self-start md:self-auto">Growth ${esc(r.growthDirection)} / Inflation ${esc(r.inflationDirection)}</span></div><div class="macro-regime-grid"><div class="macro-regime-stat"><div class="tiny-label">Growth score</div><div class="macro-regime-value ${growthClass}">${fmtScore(r.growthScore)}</div></div><div class="macro-regime-stat"><div class="tiny-label">Inflation score</div><div class="macro-regime-value ${inflationClass}">${fmtScore(r.inflationScore)}</div></div></div><div class="macro-regime-read">${esc(r.explanation)}${sensitivityHtml}${driverLine}${trustLine}${changeLine}${regimeDriverAuditHtml(r)}<div class="macro-method-note mt-2">Regime scores are explicit live-factor tallies from the regime factor registry. Growth rows feed the Growth Score. Inflation, rates, policy, energy, and agriculture rows feed the Inflation Score. Price is not used. This is a public-source pressure summary, not a prediction or trade signal.</div></div>`;
+  box.innerHTML = `<div class="flex flex-col md:flex-row md:items-start md:justify-between gap-3"><div><div class="tiny-label">Current Macro Regime · primary strict read</div><h3 class="text-2xl font-bold text-slate-100 mt-1">${esc(r.regime)}</h3><p class="text-xs text-slate-500 mt-1">Four-quad summary from live public-source factor rows.</p></div><span class="pill self-start md:self-auto">Growth ${esc(r.growthDirection)} / Inflation ${esc(r.inflationDirection)}</span></div><div class="macro-regime-grid"><div class="macro-regime-stat"><div class="tiny-label">Growth score</div><div class="macro-regime-value ${growthClass}">${fmtScore(r.growthScore)}</div></div><div class="macro-regime-stat"><div class="tiny-label">Inflation score</div><div class="macro-regime-value ${inflationClass}">${fmtScore(r.inflationScore)}</div></div></div><div class="macro-regime-read">${esc(r.explanation)}${broadHtml}${driverLine}${trustLine}${changeLine}${regimeDriverAuditHtml(r)}<div class="macro-method-note mt-2">Regime scores are explicit live-factor tallies from the regime factor registry. Growth rows feed the Growth Score. Inflation, rates, policy, energy, and agriculture rows feed the Inflation Score. Price is not used. This is a public-source pressure summary, not a prediction or trade signal.</div></div>`;
 }
 
 
@@ -582,7 +628,7 @@ function renderDiagnosis(){ /* right readout not included; public-source edition
 function renderAll(){ renderMacroRegimeCard(); renderRegimeSnapshot(); renderQueue(); renderDiagnosis(); }
 function download(filename,text,type='application/json'){ const blob=new Blob([text],{type}); const url=URL.createObjectURL(blob); const a=document.createElement('a'); a.href=url; a.download=filename; a.click(); URL.revokeObjectURL(url); }
 ['searchBox','universe','assetClass','subgroup','biasFilter','conflictFilter','freshFilter','sortMode','rowLimit'].forEach(id=>$(id).addEventListener('input',()=>{ if(id==='assetClass') updateSubgroups(); renderAll(); }));
-$('exportJson').addEventListener('click',()=>download('macro_regime_scanner_public_source_data_contract_v1_0_beta.json',JSON.stringify({notice:'Public-source data contract. v1.1 hardening: U.S.-centered, raw-score, price-free macro pressure research data with strict primary regime, sensitivity read, regime driver audit, source/coverage status, asset audit notes, and beta validation framework.',assets:ASSETS,source_status:SOURCE_STATUS,release_calendar:RELEASE_CALENDAR,release_results:RELEASE_RESULTS,source_quality:SOURCE_QUALITY,validation_summary:VALIDATION_SUMMARY,regime_bridge:REGIME_BRIDGE},null,2)));
+$('exportJson').addEventListener('click',()=>download('macro_regime_scanner_public_source_data_contract_v1_0_beta.json',JSON.stringify({notice:'Public-source data contract. v1.1 hardening: U.S.-centered, raw-score, price-free macro pressure research data with strict primary regime, strict and broad regime reads, regime driver audit, source/coverage status, asset audit notes, and beta validation framework.',assets:ASSETS,source_status:SOURCE_STATUS,release_calendar:RELEASE_CALENDAR,release_results:RELEASE_RESULTS,source_quality:SOURCE_QUALITY,validation_summary:VALIDATION_SUMMARY,regime_bridge:REGIME_BRIDGE},null,2)));
 const briefBtn=$('exportBrief');
 if(briefBtn) briefBtn.addEventListener('click',()=>download('edgefield_macro_regime_brief_v1_0_beta.md', generateRegimeBrief(), 'text/markdown'));
 async function fetchJsonIfOk(path){
