@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-05-20T20:09:03+00:00",
+  "fetched_at": "2026-05-23T07:58:43+00:00",
   "source": "U.S. Energy Information Administration open data/API",
   "petroleum_series_requested": {
     "CRUDE_STOCKS": {
@@ -194,10 +194,10 @@
     "NATGAS_STORAGE": {
       "label": "Lower 48 working natural gas in underground storage",
       "series": "png.nw2_epg0_swo_r48_bcf.w",
-      "latest_period": "2026-05-08",
-      "previous_period": "2026-05-01",
-      "latest_value": 2290.0,
-      "weekly_change": 85.0,
+      "latest_period": "2026-05-15",
+      "previous_period": "2026-05-08",
+      "latest_value": 2391.0,
+      "weekly_change": 101.0,
       "status": "Pressure"
     }
   }

@@ -1,12 +1,12 @@
 {
   "sourceId": "NOAA_NWS",
   "sourceName": "NOAA/National Weather Service public weather alerts",
-  "retrievedAt": "2026-05-20T20:09:43.555107+00:00",
+  "retrievedAt": "2026-05-23T07:59:37.465507+00:00",
   "endpoint": "https://api.weather.gov/alerts/active?status=actual&message_type=alert",
   "fetchAttempts": [
     {
       "endpoint": "https://api.weather.gov/alerts/active?status=actual&message_type=alert",
-      "features": 318
+      "features": 135
     }
   ],
   "categoryCounts": {
@@ -16,39 +16,33 @@
       "sampleEvents": []
     },
     "COLD_FREEZE_STRESS": {
-      "count": 7,
-      "weighted": 9,
+      "count": 2,
+      "weighted": 2,
       "sampleEvents": [
         "Frost Advisory",
-        "Frost Advisory",
-        "Frost Advisory",
-        "Freeze Warning",
-        "Freeze Warning"
+        "Frost Advisory"
       ]
     },
     "WINTER_STORM_STRESS": {
-      "count": 1,
-      "weighted": 3,
-      "sampleEvents": [
-        "Winter Storm Warning"
-      ]
+      "count": 0,
+      "weighted": 0,
+      "sampleEvents": []
     },
     "FLOOD_STRESS": {
-      "count": 17,
-      "weighted": 35,
+      "count": 13,
+      "weighted": 31,
       "sampleEvents": [
-        "Flash Flood Warning",
         "Flood Advisory",
+        "Flash Flood Warning",
         "Flood Advisory",
         "Flood Advisory",
         "Flood Warning"
       ]
     },
     "SEVERE_CONVECTIVE_STRESS": {
-      "count": 20,
-      "weighted": 61,
+      "count": 4,
+      "weighted": 12,
       "sampleEvents": [
-        "Tornado Warning",
         "Severe Thunderstorm Warning",
         "Severe Thunderstorm Warning",
         "Severe Thunderstorm Warning",
@@ -74,58 +68,42 @@
   "eventCountsTop": [
     [
       "Small Craft Advisory",
-      144
-    ],
-    [
-      "Gale Warning",
-      86
-    ],
-    [
-      "Air Quality Alert",
-      19
-    ],
-    [
-      "Severe Thunderstorm Warning",
-      11
+      84
     ],
     [
       "Special Weather Statement",
-      10
-    ],
-    [
-      "Severe Thunderstorm Watch",
-      8
-    ],
-    [
-      "Flood Advisory",
-      6
-    ],
-    [
-      "Frost Advisory",
-      5
+      15
     ],
     [
       "Flood Warning",
-      5
+      6
     ],
     [
       "Beach Hazards Statement",
+      5
+    ],
+    [
+      "Severe Thunderstorm Warning",
       4
     ],
     [
-      "Special Marine Warning",
+      "Flood Advisory",
+      4
+    ],
+    [
+      "Dense Fog Advisory",
       3
     ],
     [
-      "Flash Flood Warning",
+      "Brisk Wind Advisory",
+      3
+    ],
+    [
+      "Hydrologic Outlook",
       2
     ],
     [
-      "Wind Advisory",
-      2
-    ],
-    [
-      "Freeze Warning",
+      "Frost Advisory",
       2
     ],
     [
@@ -133,27 +111,11 @@
       2
     ],
     [
-      "Coastal Flood Advisory",
-      2
-    ],
-    [
-      "Tornado Warning",
+      "High Surf Advisory",
       1
     ],
     [
-      "Marine Weather Statement",
-      1
-    ],
-    [
-      "Winter Weather Advisory",
-      1
-    ],
-    [
-      "Winter Storm Warning",
-      1
-    ],
-    [
-      "Gale Watch",
+      "Flash Flood Warning",
       1
     ],
     [
@@ -161,369 +123,372 @@
       1
     ],
     [
-      "Brisk Wind Advisory",
+      "Gale Watch",
+      1
+    ],
+    [
+      "Wind Advisory",
       1
     ]
   ],
-  "totalActiveAlerts": 318,
-  "weightedActiveAlerts": 492,
+  "totalActiveAlerts": 135,
+  "weightedActiveAlerts": 187,
   "severityCounts": {
-    "Extreme": 1,
-    "Severe": 32,
-    "Moderate": 107,
-    "Minor": 159,
-    "Unknown": 19
+    "Moderate": 26,
+    "Minor": 94,
+    "Unknown": 2,
+    "Severe": 13
   },
   "sampleAlerts": [
     {
-      "event": "Tornado Warning",
-      "severity": "Extreme",
-      "effective": "2026-05-20T16:09:00-04:00",
-      "area": "Kanawha, WV; Putnam, WV",
-      "headline": "Tornado Warning issued May 20 at 4:09PM EDT until May 20 at 4:45PM EDT by NWS Charleston WV"
-    },
-    {
-      "event": "Severe Thunderstorm Warning",
-      "severity": "Severe",
-      "effective": "2026-05-20T15:08:00-05:00",
-      "area": "Brewster, TX; Jeff Davis, TX; Presidio, TX",
-      "headline": "Severe Thunderstorm Warning issued May 20 at 3:08PM CDT until May 20 at 3:45PM CDT by NWS Midland/Odessa TX"
-    },
-    {
-      "event": "Severe Thunderstorm Warning",
-      "severity": "Severe",
-      "effective": "2026-05-20T16:06:00-04:00",
-      "area": "Lawrence, KY; Wayne, WV",
-      "headline": "Severe Thunderstorm Warning issued May 20 at 4:06PM EDT until May 20 at 4:30PM EDT by NWS Charleston WV"
-    },
-    {
-      "event": "Severe Thunderstorm Warning",
-      "severity": "Severe",
-      "effective": "2026-05-20T16:05:00-04:00",
-      "area": "Jackson, WV; Kanawha, WV; Putnam, WV",
-      "headline": "Severe Thunderstorm Warning issued May 20 at 4:05PM EDT until May 20 at 4:45PM EDT by NWS Charleston WV"
-    },
-    {
-      "event": "Severe Thunderstorm Warning",
-      "severity": "Severe",
-      "effective": "2026-05-20T16:05:00-04:00",
-      "area": "Clarke, VA; Fauquier, VA; Loudoun, VA",
-      "headline": "Severe Thunderstorm Warning issued May 20 at 4:05PM EDT until May 20 at 4:45PM EDT by NWS Baltimore MD/Washington DC"
-    },
-    {
-      "event": "Severe Thunderstorm Warning",
-      "severity": "Severe",
-      "effective": "2026-05-20T16:01:00-04:00",
-      "area": "Lancaster, PA",
-      "headline": "Severe Thunderstorm Warning issued May 20 at 4:01PM EDT until May 20 at 4:45PM EDT by NWS State College PA"
-    },
-    {
-      "event": "Special Marine Warning",
-      "severity": "Severe",
-      "effective": "2026-05-20T16:00:00-04:00",
-      "area": "Long Island Sound West of New Haven CT/Port Jefferson NY",
-      "headline": "Special Marine Warning issued May 20 at 4:00PM EDT until May 20 at 4:45PM EDT by NWS Upton NY"
-    },
-    {
-      "event": "Severe Thunderstorm Warning",
-      "severity": "Severe",
-      "effective": "2026-05-20T16:00:00-04:00",
-      "area": "Berks, PA",
-      "headline": "Severe Thunderstorm Warning issued May 20 at 4:00PM EDT until May 20 at 4:45PM EDT by NWS Mount Holly NJ"
-    },
-    {
-      "event": "Special Weather Statement",
+      "event": "Dense Fog Advisory",
       "severity": "Moderate",
-      "effective": "2026-05-20T15:59:00-04:00",
-      "area": "Meriwether",
-      "headline": "Special Weather Statement issued May 20 at 3:59PM EDT by NWS Peachtree City GA"
-    },
-    {
-      "event": "Special Marine Warning",
-      "severity": "Severe",
-      "effective": "2026-05-20T15:58:00-04:00",
-      "area": "Chesapeake Bay north of Pooles Island MD; Chesapeake Bay from Pooles Island to Sandy Point MD; Patapsco River including Baltimore Harbor; Chester River to Queenstown MD",
-      "headline": "Special Marine Warning issued May 20 at 3:58PM EDT until May 20 at 6:00PM EDT by NWS Baltimore MD/Washington DC"
-    },
-    {
-      "event": "Special Weather Statement",
-      "severity": "Moderate",
-      "effective": "2026-05-20T15:58:00-04:00",
-      "area": "Clark; Bullitt; Jefferson; Oldham; Shelby",
-      "headline": "Special Weather Statement issued May 20 at 3:58PM EDT by NWS Louisville KY"
-    },
-    {
-      "event": "Severe Thunderstorm Warning",
-      "severity": "Severe",
-      "effective": "2026-05-20T15:57:00-04:00",
-      "area": "Berks, PA; Lehigh, PA",
-      "headline": "Severe Thunderstorm Warning issued May 20 at 3:57PM EDT until May 20 at 4:45PM EDT by NWS Mount Holly NJ"
-    },
-    {
-      "event": "Severe Thunderstorm Warning",
-      "severity": "Severe",
-      "effective": "2026-05-20T15:57:00-04:00",
-      "area": "Lawrence, KY; Wayne, WV",
-      "headline": "Severe Thunderstorm Warning issued May 20 at 3:57PM EDT until May 20 at 4:30PM EDT by NWS Charleston WV"
-    },
-    {
-      "event": "Special Marine Warning",
-      "severity": "Severe",
-      "effective": "2026-05-20T15:57:00-04:00",
-      "area": "Tidal Potomac from Key Bridge to Indian Head MD",
-      "headline": "Special Marine Warning issued May 20 at 3:57PM EDT until May 20 at 5:30PM EDT by NWS Baltimore MD/Washington DC"
-    },
-    {
-      "event": "Special Weather Statement",
-      "severity": "Moderate",
-      "effective": "2026-05-20T13:57:00-06:00",
-      "area": "Southern Hudspeth Highlands",
-      "headline": "Special Weather Statement issued May 20 at 1:57PM MDT by NWS El Paso Tx/Santa Teresa NM"
-    },
-    {
-      "event": "Special Weather Statement",
-      "severity": "Moderate",
-      "effective": "2026-05-20T14:56:00-05:00",
-      "area": "Holmes; Washington",
-      "headline": "Special Weather Statement issued May 20 at 2:56PM CDT by NWS Tallahassee FL"
-    },
-    {
-      "event": "Beach Hazards Statement",
-      "severity": "Moderate",
-      "effective": "2026-05-20T15:54:00-04:00",
-      "area": "Cuyahoga; Lake; Ashtabula Lakeshore; Northern Erie",
-      "headline": "Beach Hazards Statement issued May 20 at 3:54PM EDT until May 22 at 4:00AM EDT by NWS Cleveland OH"
-    },
-    {
-      "event": "Beach Hazards Statement",
-      "severity": "Moderate",
-      "effective": "2026-05-20T15:54:00-04:00",
-      "area": "Lucas; Ottawa; Erie; Lorain",
-      "headline": "Beach Hazards Statement issued May 20 at 3:54PM EDT until May 22 at 10:00PM EDT by NWS Cleveland OH"
+      "effective": "2026-05-23T02:51:00-05:00",
+      "area": "Northern Crawford; Northern Franklin; North and Central Sebastian; Southern Crawford; Central and Southern Franklin; Southern Sebastian",
+      "headline": "Dense Fog Advisory issued May 23 at 2:51AM CDT until May 23 at 9:00AM CDT by NWS Tulsa OK"
     },
     {
       "event": "Small Craft Advisory",
       "severity": "Minor",
-      "effective": "2026-05-20T15:53:00-04:00",
+      "effective": "2026-05-23T03:51:00-04:00",
       "area": "Avon Point to Willowick OH; Willowick to Geneva-on-the Lake OH; Geneva-on-the-Lake to Conneaut OH; Conneaut OH to Ripley NY",
-      "headline": "Small Craft Advisory issued May 20 at 3:53PM EDT until May 22 at 4:00AM EDT by NWS Cleveland OH"
+      "headline": "Small Craft Advisory issued May 23 at 3:51AM EDT until May 24 at 4:00AM EDT by NWS Cleveland OH"
     },
     {
       "event": "Small Craft Advisory",
       "severity": "Minor",
-      "effective": "2026-05-20T15:53:00-04:00",
-      "area": "Maumee Bay to Reno Beach OH; Reno Beach to The Islands OH; The Islands to Vermilion OH; Vermilion to Avon Point OH",
-      "headline": "Small Craft Advisory issued May 20 at 3:53PM EDT until May 22 at 10:00PM EDT by NWS Cleveland OH"
+      "effective": "2026-05-23T03:49:00-04:00",
+      "area": "Sodus Bay to Mexico Bay NY; Mexico Bay NY to the St. Lawrence River",
+      "headline": "Small Craft Advisory issued May 23 at 3:49AM EDT until May 24 at 11:00PM EDT by NWS Buffalo NY"
     },
     {
-      "event": "Marine Weather Statement",
+      "event": "Small Craft Advisory",
       "severity": "Minor",
-      "effective": "2026-05-20T15:53:00-04:00",
-      "area": "Long Island Sound West of New Haven CT/Port Jefferson NY",
-      "headline": "Marine Weather Statement issued May 20 at 3:53PM EDT by NWS Upton NY"
+      "effective": "2026-05-23T03:49:00-04:00",
+      "area": "Niagara River to Hamlin Beach NY; Hamlin Beach to Sodus Bay NY",
+      "headline": "Small Craft Advisory issued May 23 at 3:49AM EDT until May 24 at 4:00AM EDT by NWS Buffalo NY"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-05-23T03:49:00-04:00",
+      "area": "Ripley to Dunkirk NY",
+      "headline": "Small Craft Advisory issued May 23 at 3:49AM EDT until May 24 at 4:00AM EDT by NWS Buffalo NY"
+    },
+    {
+      "event": "Special Weather Statement",
+      "severity": "Moderate",
+      "effective": "2026-05-23T02:49:00-05:00",
+      "area": "Kaufman; Ellis; Henderson; Hill; Navarro; Freestone; McLennan; Falls; Limestone",
+      "headline": "Special Weather Statement issued May 23 at 2:49AM CDT by NWS Fort Worth TX"
+    },
+    {
+      "event": "Beach Hazards Statement",
+      "severity": "Moderate",
+      "effective": "2026-05-23T03:47:00-04:00",
+      "area": "Macomb; Wayne",
+      "headline": "Beach Hazards Statement issued May 23 at 3:47AM EDT until May 23 at 4:00PM EDT by NWS Detroit/Pontiac MI"
+    },
+    {
+      "event": "Hydrologic Outlook",
+      "severity": "Unknown",
+      "effective": "2026-05-23T01:44:00-06:00",
+      "area": "Big Horn, MT; Carbon, MT; Park, MT; Stillwater, MT; Sweet Grass, MT; Yellowstone, MT; Sheridan, WY",
+      "headline": "Hydrologic Outlook issued May 23 at 1:44AM MDT by NWS Billings MT"
+    },
+    {
+      "event": "Special Weather Statement",
+      "severity": "Moderate",
+      "effective": "2026-05-23T02:43:00-05:00",
+      "area": "Cooke; Grayson; Fannin; Denton",
+      "headline": "Special Weather Statement issued May 23 at 2:43AM CDT by NWS Fort Worth TX"
     },
     {
       "event": "Severe Thunderstorm Warning",
       "severity": "Severe",
-      "effective": "2026-05-20T15:52:00-04:00",
-      "area": "Lancaster, PA; York, PA",
-      "headline": "Severe Thunderstorm Warning issued May 20 at 3:52PM EDT until May 20 at 4:30PM EDT by NWS State College PA"
+      "effective": "2026-05-23T02:43:00-05:00",
+      "area": "Crockett, TX; Sutton, TX",
+      "headline": "Severe Thunderstorm Warning issued May 23 at 2:43AM CDT until May 23 at 3:45AM CDT by NWS San Angelo TX"
     },
     {
-      "event": "Severe Thunderstorm Watch",
-      "severity": "Severe",
-      "effective": "2026-05-20T15:50:00-04:00",
-      "area": "Lawrence, KY; Gallia, OH; Lawrence, OH; Buchanan, VA; Dickenson, VA; Boone, WV; Braxton, WV; Cabell, WV; Calhoun, WV; Clay, WV; Fayette, WV; Gilmer, WV; Jackson, WV; Kanawha, WV; Lewis, WV; Lincoln, WV; Logan, WV; McDowell, WV; Mason, WV; M",
-      "headline": "Severe Thunderstorm Watch issued May 20 at 3:50PM EDT until May 20 at 9:00PM EDT by NWS Charleston WV"
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-05-23T03:42:00-04:00",
+      "area": "Huron Islands to Marquette MI",
+      "headline": "Small Craft Advisory issued May 23 at 3:42AM EDT until May 24 at 12:00AM EDT by NWS Marquette MI"
     },
     {
-      "event": "Severe Thunderstorm Watch",
-      "severity": "Severe",
-      "effective": "2026-05-20T15:49:00-04:00",
-      "area": "Bell, KY; Breathitt, KY; Clay, KY; Floyd, KY; Harlan, KY; Johnson, KY; Knott, KY; Knox, KY; Leslie, KY; Letcher, KY; Magoffin, KY; Martin, KY; Perry, KY; Pike, KY",
-      "headline": "Severe Thunderstorm Watch issued May 20 at 3:49PM EDT until May 20 at 9:00PM EDT by NWS Jackson KY"
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-05-23T03:42:00-04:00",
+      "area": "Portage Lake to Huron Island MI to Lower Entrance of Portage Canal To Huron Islands MI Including Keweenaw and Huron Bays",
+      "headline": "Small Craft Advisory issued May 23 at 3:42AM EDT until May 24 at 12:00AM EDT by NWS Marquette MI"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-05-23T03:42:00-04:00",
+      "area": "Seul Choix Point to Point Detour MI",
+      "headline": "Small Craft Advisory issued May 23 at 3:42AM EDT until May 23 at 11:00PM EDT by NWS Marquette MI"
     },
     {
       "event": "Severe Thunderstorm Warning",
       "severity": "Severe",
-      "effective": "2026-05-20T15:49:00-04:00",
-      "area": "Cabell, WV; Kanawha, WV; Lincoln, WV; Mason, WV; Putnam, WV",
-      "headline": "Severe Thunderstorm Warning issued May 20 at 3:49PM EDT until May 20 at 4:30PM EDT by NWS Charleston WV"
+      "effective": "2026-05-23T02:39:00-05:00",
+      "area": "Val Verde, TX",
+      "headline": "Severe Thunderstorm Warning issued May 23 at 2:39AM CDT until May 23 at 3:45AM CDT by NWS Austin/San Antonio TX"
+    },
+    {
+      "event": "Beach Hazards Statement",
+      "severity": "Moderate",
+      "effective": "2026-05-23T03:39:00-04:00",
+      "area": "Southern Schoolcraft",
+      "headline": "Beach Hazards Statement issued May 23 at 3:39AM EDT until May 23 at 10:00PM EDT by NWS Marquette MI"
     },
     {
       "event": "Special Weather Statement",
       "severity": "Moderate",
-      "effective": "2026-05-20T15:47:00-04:00",
-      "area": "Boyd; Lawrence; Wayne",
-      "headline": "Special Weather Statement issued May 20 at 3:47PM EDT by NWS Charleston WV"
+      "effective": "2026-05-23T02:30:00-05:00",
+      "area": "Garvin; Murray; Carter; Johnston",
+      "headline": "Special Weather Statement issued May 23 at 2:30AM CDT by NWS Norman OK"
     },
     {
       "event": "Special Weather Statement",
       "severity": "Moderate",
-      "effective": "2026-05-20T14:43:00-05:00",
-      "area": "Yazoo; Madison",
-      "headline": "Special Weather Statement issued May 20 at 2:43PM CDT by NWS Jackson MS"
+      "effective": "2026-05-23T02:26:00-05:00",
+      "area": "Fayette; Gonzales; De Witt; Lavaca",
+      "headline": "Special Weather Statement issued May 23 at 2:26AM CDT by NWS Austin/San Antonio TX"
+    },
+    {
+      "event": "Severe Thunderstorm Warning",
+      "severity": "Severe",
+      "effective": "2026-05-23T02:25:00-05:00",
+      "area": "Dallas, TX; Tarrant, TX",
+      "headline": "Severe Thunderstorm Warning issued May 23 at 2:25AM CDT until May 23 at 3:15AM CDT by NWS Fort Worth TX"
     },
     {
       "event": "Special Weather Statement",
       "severity": "Moderate",
-      "effective": "2026-05-20T15:40:00-04:00",
-      "area": "Lancaster",
-      "headline": "Special Weather Statement issued May 20 at 3:40PM EDT by NWS State College PA"
+      "effective": "2026-05-23T17:25:00+10:00",
+      "area": "Koror Palau Coastal Waters; Yap Coastal Waters; Chuuk Coastal Waters",
+      "headline": "Special Weather Statement issued May 23 at 5:25PM ChST by NWS Tiyan GU"
+    },
+    {
+      "event": "Flood Advisory",
+      "severity": "Minor",
+      "effective": "2026-05-23T02:23:00-05:00",
+      "area": "Custer, OK; Dewey, OK",
+      "headline": "Flood Advisory issued May 23 at 2:23AM CDT until May 23 at 5:30AM CDT by NWS Norman OK"
+    },
+    {
+      "event": "Special Weather Statement",
+      "severity": "Moderate",
+      "effective": "2026-05-23T02:16:00-05:00",
+      "area": "De Kalb; Daviess; Grundy; Clinton; Caldwell; Livingston; Linn; Clay; Ray; Carroll; Chariton; Jackson; Lafayette; Saline; Howard; Cass; Johnson; Pettis; Cooper; Bates; Henry",
+      "headline": "Special Weather Statement issued May 23 at 2:16AM CDT by NWS Kansas City/Pleasant Hill MO"
+    },
+    {
+      "event": "Severe Thunderstorm Warning",
+      "severity": "Severe",
+      "effective": "2026-05-23T02:14:00-05:00",
+      "area": "Collin, TX; Dallas, TX; Denton, TX; Tarrant, TX",
+      "headline": "Severe Thunderstorm Warning issued May 23 at 2:14AM CDT until May 23 at 3:00AM CDT by NWS Fort Worth TX"
+    },
+    {
+      "event": "Special Weather Statement",
+      "severity": "Moderate",
+      "effective": "2026-05-23T02:13:00-05:00",
+      "area": "Crockett",
+      "headline": "Special Weather Statement issued May 23 at 2:13AM CDT by NWS San Angelo TX"
+    },
+    {
+      "event": "Special Weather Statement",
+      "severity": "Moderate",
+      "effective": "2026-05-23T02:11:00-05:00",
+      "area": "Val Verde",
+      "headline": "Special Weather Statement issued May 23 at 2:11AM CDT by NWS Austin/San Antonio TX"
+    },
+    {
+      "event": "Special Weather Statement",
+      "severity": "Moderate",
+      "effective": "2026-05-23T01:03:00-06:00",
+      "area": "Harding; Northern Perkins; Southern Perkins",
+      "headline": "Special Weather Statement issued May 23 at 1:03AM MDT by NWS Rapid City SD"
+    },
+    {
+      "event": "Dense Fog Advisory",
+      "severity": "Moderate",
+      "effective": "2026-05-23T01:58:00-05:00",
+      "area": "Burke; Williams; Mountrail; McKenzie; Dunn; Billings; Stark; Slope; Hettinger; Grant; Adams; Northwest Ward; Western Morton",
+      "headline": "Dense Fog Advisory issued May 23 at 1:58AM CDT until May 23 at 10:00AM CDT by NWS Bismarck ND"
+    },
+    {
+      "event": "Beach Hazards Statement",
+      "severity": "Moderate",
+      "effective": "2026-05-23T02:38:00-04:00",
+      "area": "Coastal York; Coastal Cumberland; Sagadahoc; Lincoln; Knox; Coastal Waldo; Coastal Rockingham",
+      "headline": "Beach Hazards Statement issued May 23 at 2:38AM EDT until May 23 at 8:00PM EDT by NWS Gray ME"
+    },
+    {
+      "event": "Special Weather Statement",
+      "severity": "Moderate",
+      "effective": "2026-05-23T02:33:00-04:00",
+      "area": "Northern St. Lawrence; Northern Franklin; Eastern Clinton; Southeastern St. Lawrence; Southern Franklin; Western Clinton; Western Essex; Eastern Essex; Southwestern St. Lawrence; Grand Isle; Western Franklin; Orleans; Essex; Western Chitten",
+      "headline": "Special Weather Statement issued May 23 at 2:33AM EDT by NWS Burlington VT"
+    },
+    {
+      "event": "High Surf Advisory",
+      "severity": "Minor",
+      "effective": "2026-05-23T02:29:00-04:00",
+      "area": "Kings (Brooklyn); Southwest Suffolk; Southeast Suffolk; Southern Queens; Southern Nassau",
+      "headline": "High Surf Advisory issued May 23 at 2:29AM EDT until May 24 at 9:00PM EDT by NWS Upton NY"
+    },
+    {
+      "event": "Special Weather Statement",
+      "severity": "Moderate",
+      "effective": "2026-05-23T02:28:00-04:00",
+      "area": "Northern Oxford; Northern Franklin; Central Somerset; Southern Oxford; Southern Franklin; Southern Somerset; Interior York; Central Interior Cumberland; Androscoggin; Kennebec; Interior Waldo; Coastal York; Coastal Cumberland; Sagadahoc; Li",
+      "headline": "Special Weather Statement issued May 23 at 2:28AM EDT by NWS Gray ME"
     },
     {
       "event": "Flash Flood Warning",
       "severity": "Severe",
-      "effective": "2026-05-20T14:39:00-05:00",
-      "area": "Glasscock, TX; Reagan, TX",
-      "headline": "Flash Flood Warning issued May 20 at 2:39PM CDT until May 20 at 5:45PM CDT by NWS Midland/Odessa TX"
-    },
-    {
-      "event": "Severe Thunderstorm Warning",
-      "severity": "Severe",
-      "effective": "2026-05-20T15:39:00-04:00",
-      "area": "Fauquier, VA; Loudoun, VA; Warren, VA",
-      "headline": "Severe Thunderstorm Warning issued May 20 at 3:39PM EDT until May 20 at 4:15PM EDT by NWS Baltimore MD/Washington DC"
-    },
-    {
-      "event": "Flood Advisory",
-      "severity": "Minor",
-      "effective": "2026-05-20T15:37:00-04:00",
-      "area": "Lewis, KY; Mason, KY",
-      "headline": "Flood Advisory issued May 20 at 3:37PM EDT until May 20 at 7:00PM EDT by NWS Wilmington OH"
-    },
-    {
-      "event": "Flood Advisory",
-      "severity": "Minor",
-      "effective": "2026-05-20T14:35:00-05:00",
-      "area": "St. John The Baptist, LA",
-      "headline": "Flood Advisory issued May 20 at 2:35PM CDT until May 20 at 5:45PM CDT by NWS New Orleans LA"
-    },
-    {
-      "event": "Special Weather Statement",
-      "severity": "Moderate",
-      "effective": "2026-05-20T15:34:00-04:00",
-      "area": "York; Lancaster",
-      "headline": "Special Weather Statement issued May 20 at 3:34PM EDT by NWS State College PA"
-    },
-    {
-      "event": "Special Weather Statement",
-      "severity": "Moderate",
-      "effective": "2026-05-20T13:26:00-06:00",
-      "area": "Central and Southern Valley; Garfield; McCone",
-      "headline": "Special Weather Statement issued May 20 at 1:26PM MDT by NWS Glasgow MT"
-    },
-    {
-      "event": "Special Weather Statement",
-      "severity": "Moderate",
-      "effective": "2026-05-20T14:25:00-05:00",
-      "area": "Madison; Hinds; Rankin",
-      "headline": "Special Weather Statement issued May 20 at 2:25PM CDT by NWS Jackson MS"
-    },
-    {
-      "event": "Flood Advisory",
-      "severity": "Minor",
-      "effective": "2026-05-20T14:17:00-05:00",
-      "area": "St. James, LA",
-      "headline": "Flood Advisory issued May 20 at 2:17PM CDT until May 20 at 5:15PM CDT by NWS New Orleans LA"
-    },
-    {
-      "event": "Frost Advisory",
-      "severity": "Minor",
-      "effective": "2026-05-20T14:12:00-05:00",
-      "area": "Northern Cook/Northern Lake; Central St. Louis; Southern Lake/North Shore; Southern Cook/North Shore; Carlton/South St. Louis; Douglas; Bayfield; Ashland; Iron; Sawyer; Price",
-      "headline": "Frost Advisory issued May 20 at 2:12PM CDT until May 21 at 8:00AM CDT by NWS Duluth MN"
+      "effective": "2026-05-23T01:27:00-05:00",
+      "area": "Franklin, LA; Madison, LA; Morehouse, LA; Richland, LA",
+      "headline": "Flash Flood Warning issued May 23 at 1:27AM CDT until May 23 at 7:30AM CDT by NWS Jackson MS"
     },
     {
       "event": "Small Craft Advisory",
       "severity": "Minor",
-      "effective": "2026-05-20T14:08:00-05:00",
-      "area": "Port Washington to North Point Light WI",
-      "headline": "Small Craft Advisory issued May 20 at 2:08PM CDT until May 22 at 10:00PM CDT by NWS Milwaukee/Sullivan WI"
+      "effective": "2026-05-23T02:23:00-04:00",
+      "area": "S of Oregon Inlet NC to Cape Hatteras NC out to 20 NM",
+      "headline": "Small Craft Advisory issued May 23 at 2:23AM EDT until May 25 at 6:00AM EDT by NWS Newport/Morehead City NC"
     },
     {
-      "event": "Winter Weather Advisory",
-      "severity": "Moderate",
-      "effective": "2026-05-20T12:55:00-06:00",
-      "area": "Pryor/Northern Bighorn Mountains; Northeast Bighorn Mountains",
-      "headline": "Winter Weather Advisory issued May 20 at 12:55PM MDT until May 21 at 9:00PM MDT by NWS Billings MT"
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-05-23T02:23:00-04:00",
+      "area": "S of Cape Hatteras NC to Ocracoke Inlet NC out to 20 NM",
+      "headline": "Small Craft Advisory issued May 23 at 2:23AM EDT until May 25 at 6:00AM EDT by NWS Newport/Morehead City NC"
     },
     {
-      "event": "Winter Storm Warning",
-      "severity": "Severe",
-      "effective": "2026-05-20T12:55:00-06:00",
-      "area": "Absaroka/Beartooth Mountains",
-      "headline": "Winter Storm Warning issued May 20 at 12:55PM MDT until May 21 at 6:00PM MDT by NWS Billings MT"
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-05-23T02:23:00-04:00",
+      "area": "S of Currituck Beach Light NC to Oregon Inlet NC out to 20 NM",
+      "headline": "Small Craft Advisory issued May 23 at 2:23AM EDT until May 24 at 10:00PM EDT by NWS Newport/Morehead City NC"
+    },
+    {
+      "event": "Flood Advisory",
+      "severity": "Minor",
+      "effective": "2026-05-23T02:19:00-04:00",
+      "area": "Champaign, OH; Logan, OH; Union, OH",
+      "headline": "Flood Advisory issued May 23 at 2:19AM EDT until May 23 at 5:00AM EDT by NWS Wilmington OH"
+    },
+    {
+      "event": "Flood Advisory",
+      "severity": "Minor",
+      "effective": "2026-05-23T01:12:00-05:00",
+      "area": "Burnet, TX; Williamson, TX",
+      "headline": "Flood Advisory issued May 23 at 1:12AM CDT until May 23 at 5:30AM CDT by NWS Austin/San Antonio TX"
+    },
+    {
+      "event": "Frost Advisory",
+      "severity": "Minor",
+      "effective": "2026-05-23T02:12:00-04:00",
+      "area": "Northern Oxford; Northern Franklin; Central Somerset; Northern Coos; Southern Coos",
+      "headline": "Frost Advisory issued May 23 at 2:12AM EDT until May 23 at 8:00AM EDT by NWS Gray ME"
     },
     {
       "event": "Flood Warning",
       "severity": "Severe",
-      "effective": "2026-05-20T14:48:00-04:00",
-      "area": "Decatur, IN; Rush, IN",
-      "headline": "Flood Warning issued May 20 at 2:48PM EDT until May 20 at 11:45PM EDT by NWS Indianapolis IN"
+      "effective": "2026-05-22T22:06:00-08:00",
+      "area": "Lower Yukon River",
+      "headline": "Flood Warning issued May 22 at 10:06PM AKDT until May 24 at 1:00AM AKDT by NWS Fairbanks AK"
+    },
+    {
+      "event": "Flood Warning",
+      "severity": "Severe",
+      "effective": "2026-05-22T22:06:00-08:00",
+      "area": "Yukon Delta Coast",
+      "headline": "Flood Warning issued May 22 at 10:06PM AKDT until May 24 at 1:00AM AKDT by NWS Fairbanks AK"
+    },
+    {
+      "event": "Flood Warning",
+      "severity": "Severe",
+      "effective": "2026-05-22T22:06:00-08:00",
+      "area": "Lower Yukon River",
+      "headline": "Flood Warning issued May 22 at 10:06PM AKDT until May 24 at 1:00AM AKDT by NWS Fairbanks AK"
     },
     {
       "event": "Flood Advisory",
       "severity": "Minor",
-      "effective": "2026-05-20T13:48:00-05:00",
-      "area": "Ascension, LA; Iberville, LA",
-      "headline": "Flood Advisory issued May 20 at 1:48PM CDT until May 20 at 5:00PM CDT by NWS New Orleans LA"
+      "effective": "2026-05-23T01:01:00-05:00",
+      "area": "Dewey, OK; Major, OK",
+      "headline": "Flood Advisory issued May 23 at 1:01AM CDT until May 23 at 4:15AM CDT by NWS Norman OK"
     },
     {
-      "event": "Air Quality Alert",
-      "severity": "Unknown",
-      "effective": "2026-05-20T14:41:00-04:00",
-      "area": "Forsyth; Guilford; Alamance; Davidson; Randolph",
-      "headline": "Air Quality Alert issued May 20 at 2:41PM EDT by NWS Raleigh NC"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-05-20T14:25:00-04:00",
-      "area": "Delaware Bay waters south of East Point NJ to Slaughter Beach DE",
-      "headline": "Small Craft Advisory issued May 20 at 2:25PM EDT until May 22 at 6:00PM EDT by NWS Mount Holly NJ"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-05-20T14:25:00-04:00",
-      "area": "Coastal waters from Manasquan Inlet to Little Egg Inlet NJ out 20 NM; Coastal waters from Little Egg Inlet to Great Egg Inlet NJ out 20 NM; Coastal waters from Great Egg Inlet to Cape May NJ out 20 NM; Coastal waters from Cape May NJ to Cap",
-      "headline": "Small Craft Advisory issued May 20 at 2:25PM EDT until May 22 at 6:00PM EDT by NWS Mount Holly NJ"
-    },
-    {
-      "event": "Wind Advisory",
+      "event": "Special Weather Statement",
       "severity": "Moderate",
-      "effective": "2026-05-20T10:17:00-08:00",
-      "area": "Municipality of Skagway",
-      "headline": "Wind Advisory issued May 20 at 10:17AM AKDT until May 21 at 1:00AM AKDT by NWS Juneau AK"
+      "effective": "2026-05-23T00:50:00-05:00",
+      "area": "Divide; Burke; Williams; Mountrail; McKenzie; Dunn; Mercer; Golden Valley; Billings; Stark; Slope; Hettinger; Grant; Bowman; Adams; Western McLean; Western Morton",
+      "headline": "Special Weather Statement issued May 23 at 12:50AM CDT by NWS Bismarck ND"
     },
     {
-      "event": "Frost Advisory",
+      "event": "Small Craft Advisory",
       "severity": "Minor",
-      "effective": "2026-05-20T13:17:00-05:00",
-      "area": "Vilas; Oneida; Forest; Florence; Northern Marinette County; Lincoln; Langlade; Northern Oconto County; Southern Marinette County",
-      "headline": "Frost Advisory issued May 20 at 1:17PM CDT until May 21 at 8:00AM CDT by NWS Green Bay WI"
+      "effective": "2026-05-23T01:32:00-04:00",
+      "area": "Coastal waters east of Ipswich Bay and the Stellwagen Bank National Marine Sanctuary",
+      "headline": "Small Craft Advisory issued May 23 at 1:32AM EDT until May 25 at 8:00PM EDT by NWS Boston/Norton MA"
     },
     {
-      "event": "Severe Thunderstorm Watch",
+      "event": "Flood Warning",
       "severity": "Severe",
-      "effective": "2026-05-20T14:11:00-04:00",
-      "area": "Fairfield, CT; Middlesex, CT; New Haven, CT; New London, CT; Bergen, NJ; Essex, NJ; Hudson, NJ; Passaic, NJ; Union, NJ; Bronx, NY; Kings, NY; Nassau, NY; New York, NY; Orange, NY; Putnam, NY; Queens, NY; Richmond, NY; Rockland, NY; Suffolk,",
-      "headline": "Severe Thunderstorm Watch issued May 20 at 2:11PM EDT until May 20 at 9:00PM EDT by NWS Upton NY"
+      "effective": "2026-05-23T00:46:00-04:00",
+      "area": "Hamilton, OH",
+      "headline": "Flood Warning issued May 23 at 12:46AM EDT until May 23 at 9:54AM EDT by NWS Wilmington OH"
     },
     {
-      "event": "Severe Thunderstorm Watch",
-      "severity": "Severe",
-      "effective": "2026-05-20T14:11:00-04:00",
-      "area": "Long Island Sound East of New Haven CT/Port Jefferson NY to the Mouth of the Connecticut River; Long Island Sound East of the Mouth of the Connecticut River; Long Island Sound West of New Haven CT/Port Jefferson NY; New York Harbor; Peconic",
-      "headline": "Severe Thunderstorm Watch issued May 20 at 2:11PM EDT until May 20 at 9:00PM EDT by NWS Upton NY"
+      "event": "Rip Current Statement",
+      "severity": "Moderate",
+      "effective": "2026-05-22T23:33:00-05:00",
+      "area": "Mobile Coastal; Baldwin Coastal; Escambia Coastal; Santa Rosa Coastal; Okaloosa Coastal",
+      "headline": "Rip Current Statement issued May 22 at 11:33PM CDT until May 23 at 7:00AM CDT by NWS Mobile AL"
     },
     {
-      "event": "Severe Thunderstorm Watch",
+      "event": "Special Weather Statement",
+      "severity": "Moderate",
+      "effective": "2026-05-23T00:30:00-04:00",
+      "area": "Southeast Raleigh; Southeast Fayette",
+      "headline": "Special Weather Statement issued May 23 at 12:30AM EDT by NWS Charleston WV"
+    },
+    {
+      "event": "Flood Warning",
       "severity": "Severe",
-      "effective": "2026-05-20T14:10:00-04:00",
-      "area": "Kent, DE; New Castle, DE; Sussex, DE; Caroline, MD; Kent, MD; Queen Anne's, MD; Talbot, MD; Atlantic, NJ; Burlington, NJ; Camden, NJ; Cape May, NJ; Cumberland, NJ; Gloucester, NJ; Hunterdon, NJ; Mercer, NJ; Middlesex, NJ; Monmouth, NJ; Morr",
-      "headline": "Severe Thunderstorm Watch issued May 20 at 2:10PM EDT until May 20 at 9:00PM EDT by NWS Mount Holly NJ"
+      "effective": "2026-05-23T00:27:00-04:00",
+      "area": "Licking, OH",
+      "headline": "Flood Warning issued May 23 at 12:27AM EDT until May 23 at 12:57PM EDT by NWS Wilmington OH"
+    },
+    {
+      "event": "Dense Fog Advisory",
+      "severity": "Moderate",
+      "effective": "2026-05-22T22:30:00-05:00",
+      "area": "Marion; Baxter; Fulton; Stone; Izard; Cleburne; Conway; Faulkner; Perry; Garland; Saline; Pulaski; Lonoke; Prairie; Monroe; Pike; Clark; Hot Spring; Grant; Jefferson; Arkansas; Dallas; Cleveland; Lincoln; Desha; Ouachita; Calhoun; Bradley; ",
+      "headline": "Dense Fog Advisory issued May 22 at 10:30PM CDT until May 23 at 10:00AM CDT by NWS Little Rock AR"
+    },
+    {
+      "event": "Gale Watch",
+      "severity": "Moderate",
+      "effective": "2026-05-22T20:06:00-07:00",
+      "area": "Central U.S. Waters Strait Of Juan De Fuca; East Entrance U.S. Waters Strait Of Juan De Fuca",
+      "headline": "Gale Watch issued May 22 at 8:06PM PDT until May 24 at 2:00AM PDT by NWS Seattle WA"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-05-22T20:06:00-07:00",
+      "area": "Coastal Waters From Cape Flattery To James Island 10 To 60 Nm; Waters From James Island To Point Grenville 10 To 60 Nm; Coastal Waters From Point Grenville To Cape Shoalwater 10 To 60 Nm",
+      "headline": "Small Craft Advisory issued May 22 at 8:06PM PDT until May 24 at 2:00AM PDT by NWS Seattle WA"
     }
   ]
 }

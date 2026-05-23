@@ -1,7 +1,7 @@
 {
   "sourceId": "FINANCIAL_STRESS_FRED",
   "sourceName": "Federal Reserve / FRED credit and financial-stress public data",
-  "retrievedAt": "2026-05-20T20:09:40.775570+00:00",
+  "retrievedAt": "2026-05-23T07:59:34.742165+00:00",
   "series": {
     "HY_OAS": {
       "seriesId": "BAMLH0A0HYM2",
@@ -9,11 +9,11 @@
       "fetchAttempts": [
         {
           "method": "fredgraph_csv",
-          "rows": 793
+          "rows": 794
         }
       ],
       "status": "ok",
-      "latestDate": "2026-05-19"
+      "latestDate": "2026-05-21"
     },
     "IG_OAS": {
       "seriesId": "BAMLC0A0CM",
@@ -21,11 +21,11 @@
       "fetchAttempts": [
         {
           "method": "fredgraph_csv",
-          "rows": 793
+          "rows": 794
         }
       ],
       "status": "ok",
-      "latestDate": "2026-05-19"
+      "latestDate": "2026-05-21"
     },
     "BBB_OAS": {
       "seriesId": "BAMLC0A4CBBB",
@@ -33,11 +33,11 @@
       "fetchAttempts": [
         {
           "method": "fredgraph_csv",
-          "rows": 793
+          "rows": 794
         }
       ],
       "status": "ok",
-      "latestDate": "2026-05-19"
+      "latestDate": "2026-05-21"
     },
     "NFCI": {
       "seriesId": "NFCI",
@@ -69,11 +69,11 @@
       "fetchAttempts": [
         {
           "method": "fredgraph_csv",
-          "rows": 1689
+          "rows": 1690
         }
       ],
       "status": "ok",
-      "latestDate": "2026-05-08"
+      "latestDate": "2026-05-15"
     }
   },
   "observationCount": 6,
