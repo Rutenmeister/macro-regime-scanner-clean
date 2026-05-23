@@ -1,12 +1,12 @@
 {
   "sourceId": "NOAA_NWS",
   "sourceName": "NOAA/National Weather Service public weather alerts",
-  "retrievedAt": "2026-05-23T11:59:28.930081+00:00",
+  "retrievedAt": "2026-05-23T12:05:14.290812+00:00",
   "endpoint": "https://api.weather.gov/alerts/active?status=actual&message_type=alert",
   "fetchAttempts": [
     {
       "endpoint": "https://api.weather.gov/alerts/active?status=actual&message_type=alert",
-      "features": 151
+      "features": 147
     }
   ],
   "categoryCounts": {
@@ -66,7 +66,7 @@
     ],
     [
       "Special Weather Statement",
-      16
+      14
     ],
     [
       "Gale Warning",
@@ -97,10 +97,6 @@
       2
     ],
     [
-      "Rip Current Statement",
-      2
-    ],
-    [
       "Storm Warning",
       1
     ],
@@ -110,6 +106,10 @@
     ],
     [
       "Marine Weather Statement",
+      1
+    ],
+    [
+      "Rip Current Statement",
       1
     ],
     [
@@ -123,16 +123,12 @@
     [
       "Flood Watch",
       1
-    ],
-    [
-      "Wind Advisory",
-      1
     ]
   ],
-  "totalActiveAlerts": 151,
-  "weightedActiveAlerts": 218,
+  "totalActiveAlerts": 147,
+  "weightedActiveAlerts": 210,
   "severityCounts": {
-    "Moderate": 41,
+    "Moderate": 37,
     "Minor": 96,
     "Severe": 13,
     "Unknown": 1
@@ -142,14 +138,7 @@
       "event": "Gale Warning",
       "severity": "Moderate",
       "effective": "2026-05-23T03:55:00-08:00",
-      "area": "Seguam to Adak Pacific Side out to 15 NM",
-      "headline": "Gale Warning issued May 23 at 3:55AM AKDT until May 24 at 5:00PM AKDT by NWS Anchorage AK"
-    },
-    {
-      "event": "Gale Warning",
-      "severity": "Moderate",
-      "effective": "2026-05-23T03:55:00-08:00",
-      "area": "Nikolski to Seguam Pacific Side from 15 to 75 NM",
+      "area": "Nikolski to Seguam Bering Side from 15 to 85 NM",
       "headline": "Gale Warning issued May 23 at 3:55AM AKDT until May 24 at 5:00PM AKDT by NWS Anchorage AK"
     },
     {
@@ -163,8 +152,29 @@
       "event": "Gale Warning",
       "severity": "Moderate",
       "effective": "2026-05-23T03:55:00-08:00",
+      "area": "Seguam to Adak Bering Side out to 15 NM",
+      "headline": "Gale Warning issued May 23 at 3:55AM AKDT until May 24 at 5:00PM AKDT by NWS Anchorage AK"
+    },
+    {
+      "event": "Gale Warning",
+      "severity": "Moderate",
+      "effective": "2026-05-23T03:55:00-08:00",
+      "area": "Nikolski to Seguam Pacific Side from 15 to 75 NM",
+      "headline": "Gale Warning issued May 23 at 3:55AM AKDT until May 24 at 5:00PM AKDT by NWS Anchorage AK"
+    },
+    {
+      "event": "Gale Warning",
+      "severity": "Moderate",
+      "effective": "2026-05-23T03:55:00-08:00",
       "area": "Kiska to Attu Pacific Side",
       "headline": "Gale Warning issued May 23 at 3:55AM AKDT until May 24 at 5:00PM AKDT by NWS Anchorage AK"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-05-23T03:55:00-08:00",
+      "area": "Unalga Pass to Nikolski Pacific Side out to 15 NM",
+      "headline": "Small Craft Advisory issued May 23 at 3:55AM AKDT until May 24 at 5:00PM AKDT by NWS Anchorage AK"
     },
     {
       "event": "Gale Warning",
@@ -177,63 +187,14 @@
       "event": "Small Craft Advisory",
       "severity": "Minor",
       "effective": "2026-05-23T03:55:00-08:00",
-      "area": "Unalga Pass to Nikolski Pacific Side out to 15 NM",
-      "headline": "Small Craft Advisory issued May 23 at 3:55AM AKDT until May 24 at 5:00PM AKDT by NWS Anchorage AK"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-05-23T03:55:00-08:00",
-      "area": "Sitkinak to Castle Cape from 15 to 100 NM",
-      "headline": "Small Craft Advisory issued May 23 at 3:55AM AKDT until May 23 at 5:00PM AKDT by NWS Anchorage AK"
-    },
-    {
-      "event": "Gale Warning",
-      "severity": "Moderate",
-      "effective": "2026-05-23T03:55:00-08:00",
-      "area": "Bering Sea Offshore 171W to 180 and South of 56N",
-      "headline": "Gale Warning issued May 23 at 3:55AM AKDT until May 24 at 5:00PM AKDT by NWS Anchorage AK"
-    },
-    {
-      "event": "Gale Warning",
-      "severity": "Moderate",
-      "effective": "2026-05-23T03:55:00-08:00",
-      "area": "Seguam to Adak Bering Side out to 15 NM",
-      "headline": "Gale Warning issued May 23 at 3:55AM AKDT until May 24 at 5:00PM AKDT by NWS Anchorage AK"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-05-23T03:55:00-08:00",
-      "area": "Unalga Pass to Nikolski Bering Side out to 15 NM",
+      "area": "Unalga Pass to Nikolski Pacific Side from 15 to 85 NM",
       "headline": "Small Craft Advisory issued May 23 at 3:55AM AKDT until May 24 at 5:00PM AKDT by NWS Anchorage AK"
     },
     {
       "event": "Gale Warning",
       "severity": "Moderate",
       "effective": "2026-05-23T03:55:00-08:00",
-      "area": "Nikolski to Seguam Bering Side from 15 to 85 NM",
-      "headline": "Gale Warning issued May 23 at 3:55AM AKDT until May 24 at 5:00PM AKDT by NWS Anchorage AK"
-    },
-    {
-      "event": "Gale Warning",
-      "severity": "Moderate",
-      "effective": "2026-05-23T03:55:00-08:00",
-      "area": "Kiska to Attu Bering Side",
-      "headline": "Gale Warning issued May 23 at 3:55AM AKDT until May 24 at 5:00PM AKDT by NWS Anchorage AK"
-    },
-    {
-      "event": "Storm Warning",
-      "severity": "Severe",
-      "effective": "2026-05-23T03:55:00-08:00",
-      "area": "Adak to Kiska Pacific Side",
-      "headline": "Storm Warning issued May 23 at 3:55AM AKDT until May 24 at 5:00PM AKDT by NWS Anchorage AK"
-    },
-    {
-      "event": "Gale Warning",
-      "severity": "Moderate",
-      "effective": "2026-05-23T03:55:00-08:00",
-      "area": "Seguam to Adak Bering Side from 15 to 85 NM",
+      "area": "Nikolski to Seguam Pacfic Side out to 15 NM",
       "headline": "Gale Warning issued May 23 at 3:55AM AKDT until May 24 at 5:00PM AKDT by NWS Anchorage AK"
     },
     {
@@ -247,15 +208,50 @@
       "event": "Gale Warning",
       "severity": "Moderate",
       "effective": "2026-05-23T03:55:00-08:00",
-      "area": "Nikolski to Seguam Pacfic Side out to 15 NM",
+      "area": "Seguam to Adak Bering Side from 15 to 85 NM",
+      "headline": "Gale Warning issued May 23 at 3:55AM AKDT until May 24 at 5:00PM AKDT by NWS Anchorage AK"
+    },
+    {
+      "event": "Storm Warning",
+      "severity": "Severe",
+      "effective": "2026-05-23T03:55:00-08:00",
+      "area": "Adak to Kiska Pacific Side",
+      "headline": "Storm Warning issued May 23 at 3:55AM AKDT until May 24 at 5:00PM AKDT by NWS Anchorage AK"
+    },
+    {
+      "event": "Gale Warning",
+      "severity": "Moderate",
+      "effective": "2026-05-23T03:55:00-08:00",
+      "area": "Seguam to Adak Pacific Side out to 15 NM",
+      "headline": "Gale Warning issued May 23 at 3:55AM AKDT until May 24 at 5:00PM AKDT by NWS Anchorage AK"
+    },
+    {
+      "event": "Gale Warning",
+      "severity": "Moderate",
+      "effective": "2026-05-23T03:55:00-08:00",
+      "area": "Bering Sea Offshore 171W to 180 and South of 56N",
       "headline": "Gale Warning issued May 23 at 3:55AM AKDT until May 24 at 5:00PM AKDT by NWS Anchorage AK"
     },
     {
       "event": "Small Craft Advisory",
       "severity": "Minor",
       "effective": "2026-05-23T03:55:00-08:00",
-      "area": "Unalga Pass to Nikolski Pacific Side from 15 to 85 NM",
+      "area": "Unalga Pass to Nikolski Bering Side out to 15 NM",
       "headline": "Small Craft Advisory issued May 23 at 3:55AM AKDT until May 24 at 5:00PM AKDT by NWS Anchorage AK"
+    },
+    {
+      "event": "Gale Warning",
+      "severity": "Moderate",
+      "effective": "2026-05-23T03:55:00-08:00",
+      "area": "Kiska to Attu Bering Side",
+      "headline": "Gale Warning issued May 23 at 3:55AM AKDT until May 24 at 5:00PM AKDT by NWS Anchorage AK"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-05-23T03:55:00-08:00",
+      "area": "Sitkinak to Castle Cape from 15 to 100 NM",
+      "headline": "Small Craft Advisory issued May 23 at 3:55AM AKDT until May 23 at 5:00PM AKDT by NWS Anchorage AK"
     },
     {
       "event": "Special Weather Statement",
@@ -328,20 +324,6 @@
       "headline": "Marine Weather Statement issued May 23 at 7:24AM EDT by NWS Wilmington NC"
     },
     {
-      "event": "Special Weather Statement",
-      "severity": "Moderate",
-      "effective": "2026-05-23T06:11:00-05:00",
-      "area": "Upper St. Mary; Lower St. Mary",
-      "headline": "Special Weather Statement issued May 23 at 6:11AM CDT by NWS Lake Charles LA"
-    },
-    {
-      "event": "Special Weather Statement",
-      "severity": "Moderate",
-      "effective": "2026-05-23T06:11:00-05:00",
-      "area": "Pittsburg; Latimer",
-      "headline": "Special Weather Statement issued May 23 at 6:11AM CDT by NWS Tulsa OK"
-    },
-    {
       "event": "Special Marine Warning",
       "severity": "Severe",
       "effective": "2026-05-23T05:55:00-05:00",
@@ -377,18 +359,18 @@
       "headline": "Dense Fog Advisory issued May 23 at 5:05AM CDT until May 23 at 9:00AM CDT by NWS Springfield MO"
     },
     {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-05-23T02:35:00-07:00",
-      "area": "Admiralty Inlet",
-      "headline": "Small Craft Advisory issued May 23 at 2:35AM PDT until May 24 at 3:00AM PDT by NWS Seattle WA"
-    },
-    {
       "event": "Gale Warning",
       "severity": "Moderate",
       "effective": "2026-05-23T02:35:00-07:00",
       "area": "Central U.S. Waters Strait Of Juan De Fuca; East Entrance U.S. Waters Strait Of Juan De Fuca",
       "headline": "Gale Warning issued May 23 at 2:35AM PDT until May 24 at 3:00AM PDT by NWS Seattle WA"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-05-23T02:35:00-07:00",
+      "area": "Admiralty Inlet",
+      "headline": "Small Craft Advisory issued May 23 at 2:35AM PDT until May 24 at 3:00AM PDT by NWS Seattle WA"
     },
     {
       "event": "Flood Advisory",
@@ -405,18 +387,18 @@
       "headline": "Special Weather Statement issued May 23 at 5:27AM EDT by NWS Caribou ME"
     },
     {
-      "event": "Rip Current Statement",
-      "severity": "Moderate",
-      "effective": "2026-05-23T05:21:00-04:00",
-      "area": "Coastal Gulf; Coastal Franklin",
-      "headline": "Rip Current Statement issued May 23 at 5:21AM EDT until May 23 at 11:00PM EDT by NWS Tallahassee FL"
-    },
-    {
       "event": "Special Weather Statement",
       "severity": "Moderate",
       "effective": "2026-05-23T05:21:00-04:00",
       "area": "Northwest Aroostook; Northeast Aroostook; Northern Somerset; Northern Piscataquis; Northern Penobscot; Southeast Aroostook; Central Piscataquis; Central Penobscot; Southern Penobscot; Interior Hancock; Central Washington; Coastal Hancock; C",
       "headline": "Special Weather Statement issued May 23 at 5:21AM EDT by NWS Caribou ME"
+    },
+    {
+      "event": "Rip Current Statement",
+      "severity": "Moderate",
+      "effective": "2026-05-23T05:21:00-04:00",
+      "area": "Coastal Gulf; Coastal Franklin",
+      "headline": "Rip Current Statement issued May 23 at 5:21AM EDT until May 23 at 11:00PM EDT by NWS Tallahassee FL"
     },
     {
       "event": "Flood Warning",
@@ -461,6 +443,13 @@
       "headline": "Flood Advisory issued May 23 at 4:02AM EDT until May 23 at 8:00PM EDT by NWS Wilmington OH"
     },
     {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-05-23T03:51:00-04:00",
+      "area": "Avon Point to Willowick OH; Willowick to Geneva-on-the Lake OH; Geneva-on-the-Lake to Conneaut OH; Conneaut OH to Ripley NY",
+      "headline": "Small Craft Advisory issued May 23 at 3:51AM EDT until May 24 at 4:00AM EDT by NWS Cleveland OH"
+    },
+    {
       "event": "Dense Fog Advisory",
       "severity": "Moderate",
       "effective": "2026-05-23T02:51:00-05:00",
@@ -470,9 +459,16 @@
     {
       "event": "Small Craft Advisory",
       "severity": "Minor",
-      "effective": "2026-05-23T03:51:00-04:00",
-      "area": "Avon Point to Willowick OH; Willowick to Geneva-on-the Lake OH; Geneva-on-the-Lake to Conneaut OH; Conneaut OH to Ripley NY",
-      "headline": "Small Craft Advisory issued May 23 at 3:51AM EDT until May 24 at 4:00AM EDT by NWS Cleveland OH"
+      "effective": "2026-05-23T03:49:00-04:00",
+      "area": "Niagara River to Hamlin Beach NY; Hamlin Beach to Sodus Bay NY",
+      "headline": "Small Craft Advisory issued May 23 at 3:49AM EDT until May 24 at 4:00AM EDT by NWS Buffalo NY"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-05-23T03:49:00-04:00",
+      "area": "Ripley to Dunkirk NY",
+      "headline": "Small Craft Advisory issued May 23 at 3:49AM EDT until May 24 at 4:00AM EDT by NWS Buffalo NY"
     },
     {
       "event": "Small Craft Advisory",
@@ -482,11 +478,11 @@
       "headline": "Small Craft Advisory issued May 23 at 3:49AM EDT until May 24 at 11:00PM EDT by NWS Buffalo NY"
     },
     {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-05-23T03:49:00-04:00",
-      "area": "Ripley to Dunkirk NY",
-      "headline": "Small Craft Advisory issued May 23 at 3:49AM EDT until May 24 at 4:00AM EDT by NWS Buffalo NY"
+      "event": "Beach Hazards Statement",
+      "severity": "Moderate",
+      "effective": "2026-05-23T03:47:00-04:00",
+      "area": "Macomb; Wayne",
+      "headline": "Beach Hazards Statement issued May 23 at 3:47AM EDT until May 23 at 4:00PM EDT by NWS Detroit/Pontiac MI"
     }
   ]
 }
