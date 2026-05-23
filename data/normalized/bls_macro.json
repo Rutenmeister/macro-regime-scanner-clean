@@ -1,7 +1,7 @@
 {
   "schema_version": "0.24",
   "source": "U.S. Bureau of Labor Statistics public API v2",
-  "fetched_at": "2026-05-23T07:59:22+00:00",
+  "fetched_at": "2026-05-23T11:59:14+00:00",
   "latest_date": "2026-04-01",
   "observations": {
     "CPI_HEADLINE": {
