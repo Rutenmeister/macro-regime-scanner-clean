@@ -189,10 +189,3 @@ v0.48 is a final packaging and clarity pass. It keeps the v0.47 U.S.-centered in
 v0.49 adds the lightweight business wrapper needed for private beta distribution while preserving the v0.48 scanner core. It includes a product overview page, beta legal/disclaimer pages, support feedback guidance, a changelog, and expands the Regime Queue Snapshot from 5 assets to 10 assets per bucket.
 
 Core scoring remains U.S.-centered, price-free, raw-score based, and evidence-first.
-
-## v1.0 Beta — Regime + Evidence Release
-
-- Adds a compact Current Macro Regime card using Growth Score and Inflation Score tallies.
-- Keeps the scanner price-free and public-source based.
-- Adds explicit regime-factor registry logic, a methodology note, a What changed line, and regime export support.
-- Does not add source lanes or workflow dependencies.
