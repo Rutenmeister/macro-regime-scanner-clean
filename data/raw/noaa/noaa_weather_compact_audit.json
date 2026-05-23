@@ -1,12 +1,12 @@
 {
   "sourceId": "NOAA_NWS",
   "sourceName": "NOAA/National Weather Service public weather alerts",
-  "retrievedAt": "2026-05-23T17:36:50.621466+00:00",
+  "retrievedAt": "2026-05-23T17:41:49.679546+00:00",
   "endpoint": "https://api.weather.gov/alerts/active?status=actual&message_type=alert",
   "fetchAttempts": [
     {
       "endpoint": "https://api.weather.gov/alerts/active?status=actual&message_type=alert",
-      "features": 109
+      "features": 110
     }
   ],
   "categoryCounts": {
@@ -37,8 +37,8 @@
       ]
     },
     "SEVERE_CONVECTIVE_STRESS": {
-      "count": 8,
-      "weighted": 24,
+      "count": 7,
+      "weighted": 21,
       "sampleEvents": [
         "Severe Thunderstorm Warning",
         "Severe Thunderstorm Warning",
@@ -70,7 +70,7 @@
     ],
     [
       "Special Weather Statement",
-      15
+      16
     ],
     [
       "Flood Warning",
@@ -89,19 +89,15 @@
       5
     ],
     [
+      "Special Marine Warning",
+      4
+    ],
+    [
       "Flood Advisory",
       4
     ],
     [
-      "Special Marine Warning",
-      3
-    ],
-    [
       "Flash Flood Warning",
-      3
-    ],
-    [
-      "Severe Thunderstorm Watch",
       3
     ],
     [
@@ -110,6 +106,10 @@
     ],
     [
       "Flood Watch",
+      2
+    ],
+    [
+      "Severe Thunderstorm Watch",
       2
     ],
     [
@@ -133,15 +133,29 @@
       1
     ]
   ],
-  "totalActiveAlerts": 109,
-  "weightedActiveAlerts": 207,
+  "totalActiveAlerts": 110,
+  "weightedActiveAlerts": 209,
   "severityCounts": {
-    "Minor": 41,
-    "Moderate": 36,
+    "Moderate": 37,
     "Severe": 31,
+    "Minor": 41,
     "Unknown": 1
   },
   "sampleAlerts": [
+    {
+      "event": "Special Weather Statement",
+      "severity": "Moderate",
+      "effective": "2026-05-23T13:39:00-04:00",
+      "area": "McDuffie; Columbia; Richmond; Burke",
+      "headline": "Special Weather Statement issued May 23 at 1:39PM EDT by NWS Columbia SC"
+    },
+    {
+      "event": "Special Marine Warning",
+      "severity": "Severe",
+      "effective": "2026-05-23T12:36:00-05:00",
+      "area": "Coastal waters from Lower Atchafalaya River to Intracoastal City LA out 20 NM; Waters from Lower Atchafalaya River to Intracoastal City LA from 20 to 60 NM",
+      "headline": "Special Marine Warning issued May 23 at 12:36PM CDT until May 23 at 1:30PM CDT by NWS Lake Charles LA"
+    },
     {
       "event": "Flood Advisory",
       "severity": "Minor",
@@ -236,6 +250,13 @@
     {
       "event": "Special Weather Statement",
       "severity": "Moderate",
+      "effective": "2026-05-23T12:19:00-05:00",
+      "area": "Victoria; Inland Calhoun",
+      "headline": "Special Weather Statement issued May 23 at 12:19PM CDT by NWS Corpus Christi TX"
+    },
+    {
+      "event": "Special Weather Statement",
+      "severity": "Moderate",
       "effective": "2026-05-23T13:19:00-04:00",
       "area": "Hancock; Washington; Glascock",
       "headline": "Special Weather Statement issued May 23 at 1:19PM EDT by NWS Peachtree City GA"
@@ -243,9 +264,9 @@
     {
       "event": "Special Weather Statement",
       "severity": "Moderate",
-      "effective": "2026-05-23T12:19:00-05:00",
-      "area": "Victoria; Inland Calhoun",
-      "headline": "Special Weather Statement issued May 23 at 12:19PM CDT by NWS Corpus Christi TX"
+      "effective": "2026-05-23T12:16:00-05:00",
+      "area": "Marfa Plateau; Presidio Valley",
+      "headline": "Special Weather Statement issued May 23 at 12:16PM CDT by NWS Midland/Odessa TX"
     },
     {
       "event": "Severe Thunderstorm Warning",
@@ -253,13 +274,6 @@
       "effective": "2026-05-23T12:16:00-05:00",
       "area": "Catahoula, LA; Concordia, LA; Franklin, LA; Tensas, LA; Adams, MS; Claiborne, MS; Franklin, MS; Jefferson, MS",
       "headline": "Severe Thunderstorm Warning issued May 23 at 12:16PM CDT until May 23 at 1:15PM CDT by NWS Jackson MS"
-    },
-    {
-      "event": "Special Weather Statement",
-      "severity": "Moderate",
-      "effective": "2026-05-23T12:16:00-05:00",
-      "area": "Marfa Plateau; Presidio Valley",
-      "headline": "Special Weather Statement issued May 23 at 12:16PM CDT by NWS Midland/Odessa TX"
     },
     {
       "event": "Special Marine Warning",
@@ -314,14 +328,14 @@
       "event": "Small Craft Advisory",
       "severity": "Minor",
       "effective": "2026-05-23T12:40:00-04:00",
-      "area": "Chesapeake Bay north of Pooles Island MD; Patapsco River including Baltimore Harbor",
+      "area": "Chesapeake Bay from Pooles Island to Sandy Point MD; Chesapeake Bay from Sandy Point to North Beach MD; Chesapeake Bay from North Beach to Drum Point MD; Chesapeake Bay from Drum Point MD to Smith Point VA; Tidal Potomac from Key Bridge to ",
       "headline": "Small Craft Advisory issued May 23 at 12:40PM EDT until May 24 at 6:00AM EDT by NWS Baltimore MD/Washington DC"
     },
     {
       "event": "Small Craft Advisory",
       "severity": "Minor",
       "effective": "2026-05-23T12:40:00-04:00",
-      "area": "Chesapeake Bay from Pooles Island to Sandy Point MD; Chesapeake Bay from Sandy Point to North Beach MD; Chesapeake Bay from North Beach to Drum Point MD; Chesapeake Bay from Drum Point MD to Smith Point VA; Tidal Potomac from Key Bridge to ",
+      "area": "Chesapeake Bay north of Pooles Island MD; Patapsco River including Baltimore Harbor",
       "headline": "Small Craft Advisory issued May 23 at 12:40PM EDT until May 24 at 6:00AM EDT by NWS Baltimore MD/Washington DC"
     },
     {
@@ -356,22 +370,15 @@
       "event": "Flood Warning",
       "severity": "Severe",
       "effective": "2026-05-23T12:04:00-04:00",
-      "area": "Butler, OH",
-      "headline": "Flood Warning issued May 23 at 12:04PM EDT until May 24 at 2:00PM EDT by NWS Wilmington OH"
+      "area": "Hamilton, OH",
+      "headline": "Flood Warning issued May 23 at 12:04PM EDT until May 25 at 3:00AM EDT by NWS Wilmington OH"
     },
     {
       "event": "Flood Warning",
       "severity": "Severe",
       "effective": "2026-05-23T12:04:00-04:00",
-      "area": "Hamilton, OH",
-      "headline": "Flood Warning issued May 23 at 12:04PM EDT until May 25 at 3:00AM EDT by NWS Wilmington OH"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-05-23T09:02:00-07:00",
-      "area": "Waters from Pt. St. George to Cape Mendocino CA from 10 to 60 nm",
-      "headline": "Small Craft Advisory issued May 23 at 9:02AM PDT until May 24 at 9:00AM PDT by NWS Eureka CA"
+      "area": "Butler, OH",
+      "headline": "Flood Warning issued May 23 at 12:04PM EDT until May 24 at 2:00PM EDT by NWS Wilmington OH"
     },
     {
       "event": "Small Craft Advisory",
@@ -379,6 +386,13 @@
       "effective": "2026-05-23T09:02:00-07:00",
       "area": "Waters from Cape Mendocino to Pt. Arena CA from 10 to 60 nm",
       "headline": "Small Craft Advisory issued May 23 at 9:02AM PDT until May 23 at 9:00PM PDT by NWS Eureka CA"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-05-23T09:02:00-07:00",
+      "area": "Waters from Pt. St. George to Cape Mendocino CA from 10 to 60 nm",
+      "headline": "Small Craft Advisory issued May 23 at 9:02AM PDT until May 24 at 9:00AM PDT by NWS Eureka CA"
     },
     {
       "event": "Small Craft Advisory",
@@ -451,13 +465,6 @@
       "headline": "Flash Flood Warning issued May 23 at 10:13AM CDT until May 23 at 1:15PM CDT by NWS Shreveport LA"
     },
     {
-      "event": "Severe Thunderstorm Watch",
-      "severity": "Severe",
-      "effective": "2026-05-23T10:13:00-05:00",
-      "area": "East Baton Rouge, LA; East Feliciana, LA; Livingston, LA; Pointe Coupee, LA; St. Helena, LA; St. Tammany, LA; Tangipahoa, LA; Washington, LA; West Baton Rouge, LA; West Feliciana, LA; Amite, MS; Pike, MS; Walthall, MS; Wilkinson, MS",
-      "headline": "Severe Thunderstorm Watch issued May 23 at 10:13AM CDT until May 23 at 6:00PM CDT by NWS New Orleans LA"
-    },
-    {
       "event": "Flash Flood Warning",
       "severity": "Severe",
       "effective": "2026-05-23T09:33:00-05:00",
@@ -484,13 +491,6 @@
       "effective": "2026-05-23T09:20:00-05:00",
       "area": "St. Tammany, LA; Hancock, MS; Pearl River, MS",
       "headline": "Flood Warning issued May 23 at 9:20AM CDT until May 28 at 7:00AM CDT by NWS New Orleans LA"
-    },
-    {
-      "event": "Wind Advisory",
-      "severity": "Moderate",
-      "effective": "2026-05-23T10:18:00-04:00",
-      "area": "Northern Erie; Southern Erie",
-      "headline": "Wind Advisory issued May 23 at 10:18AM EDT until May 24 at 2:00AM EDT by NWS Cleveland OH"
     }
   ]
 }
