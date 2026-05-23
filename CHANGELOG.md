@@ -1,37 +1,26 @@
-# Changelog
+## v0.50.2 — Simple Four-Quad Regime Map
 
-## v0.50 — Macro Quad Snapshot Baseline
+- Replaces the prior quad experiment with a simple four-regime model.
+- Growth and inflation axes resolve to positive or negative only.
+- Current regime is always one of Goldilocks, Reflation, Stagflation, or Deflation.
+- Removes quad confidence, low-conviction, and in-between regime outputs.
+- Keeps price out of live scoring and leaves the core scanner unchanged.
 
-- Preserves v0.49 Beta Launch Wrapper and 10-item Regime Queue buckets.
-- Adds the Growth / Inflation Pressure Map above the Regime Queue.
-- Adds a 9-state no-price macro regime overlay: four main quads, four blend states, and one low-conviction state.
-- Adds `data/macro_quad_snapshot.json` plus build/validation scripts.
-- Updates the report export and workflow validation to include the macro quad snapshot.
-- Keeps transition language honest: blend states describe current ambiguity, not a confirmed historical path.
+## v0.49 — Beta Launch Wrapper
 
-
-## v0.49 — Beta Launch Wrapper + Queue Expansion
-
-- Preserves v0.48 Distribution-Ready Baseline.
-- Expands the Regime Queue Snapshot from 5 assets per bucket to 10 assets per bucket.
-- Adds a simple product overview/landing page.
-- Adds beta Terms, Privacy, and Research Disclaimer pages.
-- Adds support/feedback guidance for private beta distribution.
-- Updates visible version labels and export brief heading to v0.49.
-- Keeps the scanner U.S.-centered, price-free, raw-score based, and evidence-first.
+- Added landing page, legal pages, support/feedback structure, and changelog.
+- Expanded Regime Queue Snapshot from 5 to 10 assets per bucket.
 
 ## v0.48 — Distribution-Ready Baseline
 
-- Adds Edgefield Research top branding.
-- Simplifies product description.
-- Adds compact How to read this strip.
-- Strengthens research-only disclaimer/footer.
-- Polishes report/export wording.
+- Added Edgefield Research branding.
+- Simplified product description and how-to-read language.
+- Strengthened research-only disclaimer/footer and report wording.
 
-## v0.50.1 — Quad Scoring Calibration
+## Earlier baselines
 
-- Calibrates the Growth / Inflation Pressure Map so live macro evidence does not collapse to zero because asset-level effects cancel each other.
-- Keeps price out of the quad calculation.
-- Uses blend states more appropriately when one axis is clear and the other is mixed.
-- Separates pressure score from confidence so low/medium confidence can still show a directional macro read.
-- Leaves the scanner core unchanged.
+- v0.47: U.S.-Centered Integrity Baseline.
+- v0.46: Research Infrastructure Baseline.
+- v0.41: Official Release Calendar Hardening.
+- v0.40: Raw Score History Baseline.
+- v0.34: Explainable Trust Layer.

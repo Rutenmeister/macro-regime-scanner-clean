@@ -1,19 +1,18 @@
 #!/usr/bin/env python3
-"""Build the Edgefield Growth / Inflation Pressure Map.
+"""Build the Edgefield Growth / Inflation Regime.
 
-v0.50.1 calibration notes:
+v0.50.2 rules:
 - No price is used.
-- Uses existing live scanner row evidence.
-- Does not force neutral just because one axis is uncertain.
-- Uses blend states when one axis is mixed and the other is clear.
-- Separates confidence from score: low confidence can still have directional pressure.
+- Four regimes only: Goldilocks, Reflation, Stagflation, Deflation.
+- No confidence score, no blend states, no transition language.
+- Growth and inflation are scored as macro axes, not as asset trade signals.
 """
 from __future__ import annotations
 
 import json
 from datetime import datetime, timezone
 from pathlib import Path
-from statistics import mean, median
+from statistics import mean
 from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -36,80 +35,33 @@ INFLATION_KEYWORDS = (
     "wasde", "stock/use", "crop", "weather", "drought", "food", "agriculture",
 )
 
-# Anchor assets are used only to avoid asset-direction cancellation. For example,
-# hot CPI can be positive for USD/rates but negative for equities. For the inflation
-# axis, the macro fact is still "inflation hot," so USD/rates/commodity anchors are
-# better than a median across every asset.
-GROWTH_ANCHORS = {
-    "SPX", "NDX", "RUT", "DOW", "DXY", "USD", "COPPER", "WTI", "BRENT", "BCOM",
-    "FCI", "HY", "IG",
-}
+GROWTH_ANCHORS = {"SPX", "NDX", "RUT", "DOW", "COPPER", "WTI", "BRENT", "BCOM"}
 INFLATION_ANCHORS = {
     "DXY", "USD", "US02Y", "US05Y", "US10Y", "US30Y", "REALY", "BE5Y", "BE10Y",
     "WTI", "BRENT", "NG", "GASOLINE", "HEATING", "BCOM", "WHEAT", "CORN", "SOY",
-    "GOLD", "SILVER",
 }
 
-WEIGHT_PRIMARY = {
-    "gdp": 1.05,
-    "retail": 0.95,
-    "labor": 1.05,
-    "payroll": 1.05,
-    "unemployment": 1.05,
-    "credit": 1.05,
-    "financial stress": 1.05,
-    "financial conditions": 0.95,
-    "liquidity": 0.85,
-    "reserve balances": 0.85,
-    "cpi": 1.10,
-    "pce": 1.10,
-    "ppi": 0.95,
-    "yield": 1.00,
-    "policy": 0.95,
-    "energy": 0.85,
-    "crude": 0.85,
-    "gasoline": 0.85,
-    "crop": 0.65,
-    "drought": 0.65,
-    "weather": 0.55,
+ASSET_CLUSTER_WEIGHTS = {
+    "growth": {"SPX": 1.0, "NDX": 1.0, "RUT": 0.9, "DOW": 0.8, "COPPER": 0.7, "WTI": 0.45, "BRENT": 0.45},
+    "inflation": {"DXY": 0.8, "US02Y": 1.0, "US05Y": 1.0, "US10Y": 1.0, "US30Y": 0.8, "REALY": 0.8, "WTI": 0.6, "BRENT": 0.6, "GASOLINE": 0.6, "WHEAT": 0.5, "CORN": 0.5, "SOY": 0.5},
 }
 
 STATE_COPY = {
     "Goldilocks": {
-        "subtitle": "Growth supportive / inflation easing",
-        "simpleRead": "Growth pressure is supportive while inflation pressure is calm or easing. This is usually the cleanest broad risk-supportive backdrop.",
-    },
-    "Goldilocks / Reflation Blend": {
-        "subtitle": "Growth supportive / inflation mixed",
-        "simpleRead": "Growth still looks supportive, but inflation pressure is unclear or shifting. The backdrop sits between clean Goldilocks and hotter Reflation.",
+        "subtitle": "Growth positive / Inflation negative",
+        "simpleRead": "Growth evidence is supportive while inflation pressure is easing.",
     },
     "Reflation": {
-        "subtitle": "Growth supportive / inflation hot",
-        "simpleRead": "Growth remains supportive, but inflation and policy pressure are elevated. Risk can still work, but rate and dollar pressure matter.",
-    },
-    "Reflation / Stagflation Blend": {
-        "subtitle": "Growth mixed / inflation hot",
-        "simpleRead": "Inflation and policy pressure are elevated, but growth evidence is mixed. The backdrop sits between hot-growth Reflation and stagflation risk.",
+        "subtitle": "Growth positive / Inflation positive",
+        "simpleRead": "Growth evidence is supportive while inflation pressure is elevated.",
     },
     "Stagflation": {
-        "subtitle": "Growth weak / inflation hot",
-        "simpleRead": "Growth pressure is weakening while inflation pressure remains elevated. This is a difficult backdrop where conflict matters.",
-    },
-    "Stagflation / Deflation Blend": {
-        "subtitle": "Growth weak / inflation mixed",
-        "simpleRead": "Growth is weak, but inflation pressure is unclear or shifting. The backdrop sits between sticky-inflation slowdown and deflationary slowdown.",
+        "subtitle": "Growth negative / Inflation positive",
+        "simpleRead": "Growth evidence is weakening while inflation pressure remains elevated.",
     },
     "Deflation": {
-        "subtitle": "Growth weak / inflation easing",
-        "simpleRead": "Growth is weakening and inflation pressure is easing. This is usually a defensive slowdown-style backdrop.",
-    },
-    "Deflation / Goldilocks Blend": {
-        "subtitle": "Growth mixed / inflation easing",
-        "simpleRead": "Inflation pressure is cooling, but growth evidence is mixed. The backdrop sits between defensive Deflation and cleaner Goldilocks recovery.",
-    },
-    "Neutral / Low-Conviction Macro Pressure": {
-        "subtitle": "Growth mixed / inflation mixed",
-        "simpleRead": "The scanner does not have enough directional evidence to classify a clean macro quadrant. Source pressure is mixed, near neutral, or low conviction.",
+        "subtitle": "Growth negative / Inflation negative",
+        "simpleRead": "Growth evidence is weakening while inflation pressure is easing.",
     },
 }
 
@@ -119,23 +71,29 @@ def clean(v: Any) -> str:
 
 
 def lower_blob(f: dict[str, Any]) -> str:
-    return " ".join(clean(f.get(k)).lower() for k in ("group", "name", "source", "derived", "effect", "scoreReason", "status"))
+    keys = ("group", "name", "source", "derived", "effect", "scoreReason", "status", "relevance")
+    return " ".join(clean(f.get(k)).lower() for k in keys)
 
 
 def asset_symbol(asset: dict[str, Any]) -> str:
     return clean(asset.get("id") or asset.get("symbol")).upper()
 
 
-def is_usable(f: dict[str, Any]) -> bool:
+def numeric(v: Any) -> float | None:
+    return float(v) if isinstance(v, (int, float)) else None
+
+
+def is_live_row(f: dict[str, Any]) -> bool:
     if f.get("scoreRole") not in LIVE_ROLES:
         return False
-    if not isinstance(f.get("score"), (int, float)):
+    if numeric(f.get("score")) is None and numeric(f.get("scoreContribution")) is None:
         return False
     freshness = clean(f.get("freshness")).lower()
-    if not ("fresh" in freshness or "live" in freshness):
-        return False
-    text = " ".join([clean(f.get("source")), clean(f.get("derived")), clean(f.get("status")), freshness]).lower()
-    if any(m in text[:260] for m in BAD_MARKERS):
+    status = clean(f.get("status")).lower()
+    source = clean(f.get("source")).lower()
+    reason = clean(f.get("scoreReason")).lower()
+    text = " ".join([freshness, status, source, reason])
+    if any(marker in text for marker in BAD_MARKERS):
         return False
     return True
 
@@ -146,73 +104,82 @@ def axis_matches(f: dict[str, Any], axis: str) -> bool:
     return any(k in text for k in keys)
 
 
-def base_weight(f: dict[str, Any], axis: str) -> float:
-    text = lower_blob(f)
-    weight = 0.45
-    for key, w in WEIGHT_PRIMARY.items():
-        if key in text:
-            weight = max(weight, w)
-    relevance = clean(f.get("relevance")).lower()
-    if "primary" in relevance:
-        weight *= 1.0
-    elif "secondary" in relevance:
-        weight *= 0.72
-    elif "context" in relevance:
-        weight *= 0.42
-    else:
-        weight *= 0.55
-    if f.get("scoreRole") == "live_context":
-        weight *= 0.55
-    return round(max(0.05, weight), 3)
-
-
 def group_key(f: dict[str, Any]) -> str:
     return "__".join([clean(f.get("group")), clean(f.get("name")), clean(f.get("source")), clean(f.get("derived"))[:140]])
 
 
-def strongest(vals: list[float]) -> float:
-    if not vals:
-        return 0.0
-    return max(vals, key=lambda v: abs(v))
+def row_weight(f: dict[str, Any], axis: str) -> float:
+    text = lower_blob(f)
+    weight = 0.45
+    primary_terms = {
+        "growth": ("gdp", "retail", "labor", "payroll", "unemployment", "claims", "credit", "financial stress", "liquidity", "reserve balances", "durable"),
+        "inflation": ("cpi", "pce", "ppi", "inflation", "yield", "policy", "energy", "crude", "gasoline", "wage", "crop", "drought"),
+    }[axis]
+    if any(t in text for t in primary_terms):
+        weight = 1.0
+    relevance = clean(f.get("relevance")).lower()
+    if "secondary" in relevance:
+        weight *= 0.75
+    elif "context" in relevance:
+        weight *= 0.45
+    elif "low" in relevance:
+        weight *= 0.25
+    if f.get("scoreRole") == "live_context":
+        weight *= 0.55
+    return max(0.05, round(weight, 3))
 
 
-def calibrated_value(group: list[dict[str, Any]], axis: str) -> float:
-    vals = [float(f.get("score", 0) or 0) for f in group if isinstance(f.get("score"), (int, float))]
-    if not vals:
-        return 0.0
-
-    text = lower_blob(group[0])
-    symbols = [clean(f.get("assetSymbol")).upper() for f in group]
+def signed_input_value(group: list[dict[str, Any]], axis: str) -> float:
     anchors = GROWTH_ANCHORS if axis == "growth" else INFLATION_ANCHORS
-    anchor_vals = [float(f.get("score", 0) or 0) for f in group if clean(f.get("assetSymbol")).upper() in anchors]
-    usable_vals = anchor_vals or vals
-
-    # Direct inflation and rate rows should not cancel just because they hurt some assets and help others.
-    # If live evidence has a positive inflation/rate-pressure read anywhere in the anchor set, use it.
-    if axis == "inflation":
-        direct_hot_terms = ("cpi", "pce", "ppi", "inflation", "wage", "earnings", "yield", "policy", "breakeven", "energy", "crude", "gasoline")
-        if any(t in text for t in direct_hot_terms):
-            pos = [v for v in usable_vals if v > 0]
-            neg = [v for v in usable_vals if v < 0]
-            if pos and (not neg or max(pos) >= abs(min(neg)) * 0.60):
-                return max(pos)
-            if neg:
-                return min(neg)
-
-    # Growth rows should lean on risk/growth anchors so bond/rate inversions do not dominate.
-    if axis == "growth" and anchor_vals:
-        nonzero = [v for v in anchor_vals if abs(v) > 0.01]
-        if nonzero:
-            return float(mean(nonzero))
-
-    nonzero = [v for v in usable_vals if abs(v) > 0.01]
-    if not nonzero:
+    vals = []
+    for f in group:
+        sym = clean(f.get("assetSymbol")).upper()
+        if sym in anchors:
+            val = numeric(f.get("score"))
+            if val is not None:
+                vals.append(val)
+    if not vals:
+        vals = [numeric(f.get("score")) for f in group if numeric(f.get("score")) is not None]
+    vals = [float(v) for v in vals if v is not None and abs(float(v)) > 0.001]
+    if not vals:
         return 0.0
-    # Median is still useful when rows are already source-directional.
-    med = float(median(nonzero))
-    if abs(med) >= 0.25:
-        return med
-    return strongest(nonzero)
+    pos = [v for v in vals if v > 0]
+    neg = [v for v in vals if v < 0]
+    if axis == "inflation":
+        # Inflation facts should not disappear because different assets react differently.
+        if pos and (not neg or max(pos) >= abs(min(neg)) * 0.55):
+            return max(pos)
+        if neg:
+            return min(neg)
+    return mean(vals)
+
+
+def asset_cluster_driver(assets: list[dict[str, Any]], axis: str) -> dict[str, Any] | None:
+    weights = ASSET_CLUSTER_WEIGHTS[axis]
+    values = []
+    for asset in assets:
+        sym = asset_symbol(asset)
+        if sym not in weights:
+            continue
+        val = numeric(asset.get("score"))
+        if val is None or abs(val) < 0.001:
+            continue
+        # Raw asset scores can be larger than axis points. Compress for axis use.
+        values.append((max(-2.5, min(2.5, val / 6.0)), weights[sym], sym))
+    if not values:
+        return None
+    total_w = sum(w for _, w, _ in values)
+    avg = sum(v * w for v, w, _ in values) / total_w
+    label = "Growth asset cluster" if axis == "growth" else "Inflation/rate asset cluster"
+    return {
+        "name": label,
+        "group": "Asset pressure summary",
+        "source": "Current scanner asset scores",
+        "value": round(avg, 3),
+        "weight": 0.85,
+        "contribution": round(avg * 0.85, 3),
+        "reason": "Secondary no-price summary of current scanner pressure anchors.",
+    }
 
 
 def collect_axis(assets: list[dict[str, Any]], axis: str) -> dict[str, Any]:
@@ -220,121 +187,80 @@ def collect_axis(assets: list[dict[str, Any]], axis: str) -> dict[str, Any]:
     for asset in assets:
         sym = asset_symbol(asset)
         for f0 in asset.get("factors", []) or []:
-            if not is_usable(f0) or not axis_matches(f0, axis):
+            if not is_live_row(f0) or not axis_matches(f0, axis):
                 continue
             f = dict(f0)
             f["assetSymbol"] = sym
             groups.setdefault(group_key(f), []).append(f)
 
-    rows = []
+    drivers = []
     for _key, group in groups.items():
         sample = group[0]
-        val = calibrated_value(group, axis)
-        wt = base_weight(sample, axis)
-        rows.append({
+        value = signed_input_value(group, axis)
+        if abs(value) < 0.001:
+            continue
+        weight = row_weight(sample, axis)
+        drivers.append({
             "name": clean(sample.get("name")) or "Unnamed input",
             "group": clean(sample.get("group")) or "Input",
             "source": clean(sample.get("source")) or "Public source",
-            "status": clean(sample.get("status")),
-            "value": round(val, 3),
-            "weight": wt,
-            "contribution": round(val * wt, 3),
+            "value": round(value, 3),
+            "weight": weight,
+            "contribution": round(value * weight, 3),
             "reason": clean(sample.get("derived"))[:220],
         })
 
-    total_weight = sum(r["weight"] for r in rows)
-    if total_weight <= 0:
-        score = 0.0
+    cluster = asset_cluster_driver(assets, axis)
+    if cluster:
+        drivers.append(cluster)
+
+    total_weight = sum(d["weight"] for d in drivers)
+    if total_weight > 0:
+        score = (sum(d["contribution"] for d in drivers) / total_weight) * 5.0
     else:
-        score = (sum(r["contribution"] for r in rows) / total_weight) * 5.0
+        score = 0.0
     score = max(-15.0, min(15.0, score))
-    top_positive = sorted([r for r in rows if r["contribution"] > 0], key=lambda r: r["contribution"], reverse=True)[:5]
-    top_negative = sorted([r for r in rows if r["contribution"] < 0], key=lambda r: r["contribution"])[:5]
-    label = "positive" if score > 2 else "negative" if score < -2 else "mixed"
+    # Four-quad model: every axis resolves to positive or negative. Zero resolves positive by convention.
+    label = "positive" if score >= 0 else "negative"
+    top_positive = sorted([d for d in drivers if d["contribution"] > 0], key=lambda d: d["contribution"], reverse=True)[:5]
+    top_negative = sorted([d for d in drivers if d["contribution"] < 0], key=lambda d: d["contribution"])[:5]
     return {
         "score": round(score, 1),
         "label": label,
-        "inputCount": len(rows),
-        "totalWeight": round(total_weight, 2),
+        "inputCount": len(drivers),
         "topPositiveDrivers": top_positive,
         "topNegativeDrivers": top_negative,
     }
 
 
-def classify_state(growth: str, inflation: str) -> str:
+def classify(growth: str, inflation: str) -> str:
     if growth == "positive" and inflation == "negative":
         return "Goldilocks"
-    if growth == "positive" and inflation == "mixed":
-        return "Goldilocks / Reflation Blend"
     if growth == "positive" and inflation == "positive":
         return "Reflation"
-    if growth == "mixed" and inflation == "positive":
-        return "Reflation / Stagflation Blend"
     if growth == "negative" and inflation == "positive":
         return "Stagflation"
-    if growth == "negative" and inflation == "mixed":
-        return "Stagflation / Deflation Blend"
-    if growth == "negative" and inflation == "negative":
-        return "Deflation"
-    if growth == "mixed" and inflation == "negative":
-        return "Deflation / Goldilocks Blend"
-    return "Neutral / Low-Conviction Macro Pressure"
-
-
-def confidence(g_axis: dict[str, Any], i_axis: dict[str, Any]) -> str:
-    inputs = min(g_axis["inputCount"], i_axis["inputCount"])
-    distance = min(abs(g_axis["score"]), abs(i_axis["score"]))
-    max_distance = max(abs(g_axis["score"]), abs(i_axis["score"]))
-    if inputs >= 6 and distance >= 5:
-        return "High"
-    if inputs >= 3 and (distance >= 2 or max_distance >= 5):
-        return "Medium"
-    if inputs >= 2 and max_distance >= 2:
-        return "Low-Medium"
-    return "Low"
-
-
-def main_conflict(state: str, g_axis: dict[str, Any], i_axis: dict[str, Any]) -> str:
-    if state == "Neutral / Low-Conviction Macro Pressure":
-        return "Both growth and inflation axes are near neutral, source coverage is limited, or live evidence is mixed."
-    if "Blend" in state:
-        if g_axis["label"] == "mixed":
-            return "Growth evidence is mixed, so the map shows the adjacent inflation-led blend rather than forcing a clean quadrant."
-        if i_axis["label"] == "mixed":
-            return "Inflation evidence is mixed, so the map shows the adjacent growth-led blend rather than forcing a clean quadrant."
-    if state == "Stagflation":
-        return "Traditional stagflation can favor inflation hedges, but individual asset audits should still check rate, USD, and source-specific conflicts."
-    if state == "Reflation":
-        return "Reflation can support cyclicals and commodities, but elevated rates and USD pressure can still hurt duration-sensitive assets."
-    return "Use individual asset audits to confirm whether the broad quadrant is supported or contradicted by live source evidence."
+    return "Deflation"
 
 
 def main() -> None:
     payload = json.loads(DATA_PATH.read_text(encoding="utf-8"))
     assets = payload.get("assets", []) or []
-    g_axis = collect_axis(assets, "growth")
-    i_axis = collect_axis(assets, "inflation")
-    state = classify_state(g_axis["label"], i_axis["label"])
+    growth = collect_axis(assets, "growth")
+    inflation = collect_axis(assets, "inflation")
+    state = classify(growth["label"], inflation["label"])
     copy = STATE_COPY[state]
     output = {
-        "schemaVersion": "macro_quad_snapshot_v1_1",
-        "version": "v0.50.1-growth-inflation-pressure-map-calibrated",
+        "schemaVersion": "macro_quad_snapshot_v1_2",
+        "version": "v0.50.2-simple-four-quad-regime-map",
         "generatedAt": datetime.now(timezone.utc).isoformat(),
-        "method": "No-price public-source overlay built from existing live scanner row evidence. v0.50.1 uses calibrated axis extraction so asset-direction conflicts do not cancel obvious macro pressure.",
+        "method": "No-price four-quad regime map. Growth and inflation axes are built from current public-source scanner evidence and resolve to positive or negative only.",
         "currentState": state,
         "subtitle": copy["subtitle"],
         "simpleRead": copy["simpleRead"],
-        "confidence": confidence(g_axis, i_axis),
-        "growth": g_axis,
-        "inflation": i_axis,
-        "mainConflict": main_conflict(state, g_axis, i_axis),
-        "states": [
-            {"name": name, **STATE_COPY[name]} for name in [
-                "Goldilocks", "Goldilocks / Reflation Blend", "Reflation",
-                "Reflation / Stagflation Blend", "Stagflation", "Stagflation / Deflation Blend",
-                "Deflation", "Deflation / Goldilocks Blend", "Neutral / Low-Conviction Macro Pressure",
-            ]
-        ],
+        "growth": growth,
+        "inflation": inflation,
+        "states": [{"name": name, **STATE_COPY[name]} for name in ["Goldilocks", "Reflation", "Stagflation", "Deflation"]],
         "limits": ["Uses current public-source pressure only; no price data is used."],
     }
     OUT_PATH.write_text(json.dumps(output, indent=2), encoding="utf-8")

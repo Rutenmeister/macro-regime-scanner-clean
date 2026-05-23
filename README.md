@@ -1,60 +1,34 @@
-# Edgefield Research Macro Regime Scanner v0.50
+# Edgefield Research Macro Regime Scanner v0.50.2
 
-U.S.-centered public-source macro pressure terminal using raw, uncapped, price-free scores.
+U.S.-centered macro pressure terminal using official and public-source data. Raw, uncapped scores rank fundamental pressure across assets without using price.
 
-## Current baseline
+v0.50.2 preserves the v0.49/v0.48 distribution baseline and replaces the prior quad experiment with a simple four-quad Growth / Inflation Regime map.
 
-v0.50 starts from the v0.49 Beta Launch Wrapper and adds the Growth / Inflation Pressure Map.
+## Growth / Inflation Regime
 
-## Core principles
-
-- No price in the live score.
-- Raw uncapped pressure scores.
-- Official/public-source evidence lanes.
-- U.S.-centered asset scope.
-- Missing data is not treated as neutral.
-- Scores are research evidence, not buy/sell signals.
-
-## Major modules
-
-- Regime Queue Snapshot with up to 10 assets per bucket.
-- Asset-level score audits.
-- Source health and release calendar confidence.
-- Release-result schema for actual/forecast/previous when verified data exists.
-- Score history and why-score-changed summaries.
-- Professional macro regime brief export.
-- Growth / Inflation Pressure Map with 9 no-price macro states.
-
-## Macro Quad Snapshot
-
-The Growth / Inflation Pressure Map summarizes current public-source evidence into two axes:
+The top regime panel uses two current public-source axes:
 
 - Growth pressure
-- Inflation / policy pressure
+- Inflation pressure
 
-It classifies the backdrop into four main regimes, four blend states, or one low-conviction state using current public-source growth and inflation pressure.
+It resolves those two axes into one of four regimes:
 
-## Validation
+- Goldilocks: Growth positive / Inflation negative
+- Reflation: Growth positive / Inflation positive
+- Stagflation: Growth negative / Inflation positive
+- Deflation: Growth negative / Inflation negative
 
-Run from the repo root:
+No price is used. No confidence score is shown. No blend or transition states are used.
 
-```bash
-python scripts/validate_data.py
-python scripts/validate_score_history.py
-python scripts/validate_signal_framework.py
-python scripts/validate_release_calendar.py
-python scripts/validate_release_results.py
-python scripts/validate_source_quality.py
-python scripts/validate_regime_bridge.py
-python scripts/build_macro_quad_snapshot.py
-python scripts/validate_macro_quad_snapshot.py
-node --check app.js
-```
+## Core product rules
 
-## Refresh workflow
+- Raw uncapped scores stay.
+- Price stays out of live scoring.
+- U.S.-centered asset scope stays.
+- Unsupported non-USD FX crosses remain removed.
+- Missing, stale, candidate, and display-only rows are not treated as neutral.
+- The regime panel is a summary lens; asset rows remain the detailed evidence layer.
 
-The GitHub Actions workflow refreshes public-source lanes, recomputes scores, builds research infrastructure, builds the macro quad snapshot, validates outputs, and commits refreshed data.
+## Refresh
 
-## Distribution boundary
-
-Research tool only. Not investment advice, not a trade signal, and not a performance guarantee.
+Run the normal Refresh All Public Sources workflow. The workflow rebuilds live source data, recomputes scores, builds the Growth / Inflation Regime, validates outputs, and writes refreshed JSON/report files.

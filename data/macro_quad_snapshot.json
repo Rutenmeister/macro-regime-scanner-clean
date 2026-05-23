@@ -1,74 +1,45 @@
 {
-  "schemaVersion": "macro_quad_snapshot_v1_1",
-  "version": "v0.50.1-growth-inflation-pressure-map-calibrated",
-  "generatedAt": "2026-05-23T12:18:33.786355+00:00",
-  "method": "No-price public-source overlay built from existing live scanner row evidence. v0.50.1 uses calibrated axis extraction so asset-direction conflicts do not cancel obvious macro pressure.",
-  "currentState": "Neutral / Low-Conviction Macro Pressure",
-  "subtitle": "Growth mixed / inflation mixed",
-  "simpleRead": "The scanner does not have enough directional evidence to classify a clean macro quadrant. Source pressure is mixed, near neutral, or low conviction.",
-  "confidence": "Low",
+  "schemaVersion": "macro_quad_snapshot_v1_2",
+  "version": "v0.50.2-simple-four-quad-regime-map",
+  "generatedAt": "2026-05-23T12:38:18.740080+00:00",
+  "method": "No-price four-quad regime map. Growth and inflation axes are built from current public-source scanner evidence and resolve to positive or negative only.",
+  "currentState": "Reflation",
+  "subtitle": "Growth positive / Inflation positive",
+  "simpleRead": "Growth evidence is supportive while inflation pressure is elevated.",
   "growth": {
     "score": 0.0,
-    "label": "mixed",
+    "label": "positive",
     "inputCount": 0,
-    "totalWeight": 0,
     "topPositiveDrivers": [],
     "topNegativeDrivers": []
   },
   "inflation": {
     "score": 0.0,
-    "label": "mixed",
+    "label": "positive",
     "inputCount": 0,
-    "totalWeight": 0,
     "topPositiveDrivers": [],
     "topNegativeDrivers": []
   },
-  "mainConflict": "Both growth and inflation axes are near neutral, source coverage is limited, or live evidence is mixed.",
   "states": [
     {
       "name": "Goldilocks",
-      "subtitle": "Growth supportive / inflation easing",
-      "simpleRead": "Growth pressure is supportive while inflation pressure is calm or easing. This is usually the cleanest broad risk-supportive backdrop."
-    },
-    {
-      "name": "Goldilocks / Reflation Blend",
-      "subtitle": "Growth supportive / inflation mixed",
-      "simpleRead": "Growth still looks supportive, but inflation pressure is unclear or shifting. The backdrop sits between clean Goldilocks and hotter Reflation."
+      "subtitle": "Growth positive / Inflation negative",
+      "simpleRead": "Growth evidence is supportive while inflation pressure is easing."
     },
     {
       "name": "Reflation",
-      "subtitle": "Growth supportive / inflation hot",
-      "simpleRead": "Growth remains supportive, but inflation and policy pressure are elevated. Risk can still work, but rate and dollar pressure matter."
-    },
-    {
-      "name": "Reflation / Stagflation Blend",
-      "subtitle": "Growth mixed / inflation hot",
-      "simpleRead": "Inflation and policy pressure are elevated, but growth evidence is mixed. The backdrop sits between hot-growth Reflation and stagflation risk."
+      "subtitle": "Growth positive / Inflation positive",
+      "simpleRead": "Growth evidence is supportive while inflation pressure is elevated."
     },
     {
       "name": "Stagflation",
-      "subtitle": "Growth weak / inflation hot",
-      "simpleRead": "Growth pressure is weakening while inflation pressure remains elevated. This is a difficult backdrop where conflict matters."
-    },
-    {
-      "name": "Stagflation / Deflation Blend",
-      "subtitle": "Growth weak / inflation mixed",
-      "simpleRead": "Growth is weak, but inflation pressure is unclear or shifting. The backdrop sits between sticky-inflation slowdown and deflationary slowdown."
+      "subtitle": "Growth negative / Inflation positive",
+      "simpleRead": "Growth evidence is weakening while inflation pressure remains elevated."
     },
     {
       "name": "Deflation",
-      "subtitle": "Growth weak / inflation easing",
-      "simpleRead": "Growth is weakening and inflation pressure is easing. This is usually a defensive slowdown-style backdrop."
-    },
-    {
-      "name": "Deflation / Goldilocks Blend",
-      "subtitle": "Growth mixed / inflation easing",
-      "simpleRead": "Inflation pressure is cooling, but growth evidence is mixed. The backdrop sits between defensive Deflation and cleaner Goldilocks recovery."
-    },
-    {
-      "name": "Neutral / Low-Conviction Macro Pressure",
-      "subtitle": "Growth mixed / inflation mixed",
-      "simpleRead": "The scanner does not have enough directional evidence to classify a clean macro quadrant. Source pressure is mixed, near neutral, or low conviction."
+      "subtitle": "Growth negative / Inflation negative",
+      "simpleRead": "Growth evidence is weakening while inflation pressure is easing."
     }
   ],
   "limits": [

@@ -50,8 +50,11 @@ input,select{background:rgba(4,2,12,.86);border:1px solid rgba(222,214,255,.17);
 .release-results-mini.result-pending span,.release-results-mini.muted span{border-color:rgba(245,158,11,.22);background:rgba(245,158,11,.06);color:#fde68a}
 .report-ready-note{border:1px solid rgba(64,241,223,.16);background:rgba(64,241,223,.045);border-radius:1rem;padding:.65rem;color:#cbd5e1;font-size:.75rem;line-height:1.45}
 
-/* v0.50 Growth / Inflation Pressure Map */
+/* v0.50.2 Growth / Inflation Regime */
 .macro-quad-subtitle{display:inline-flex;border:1px solid rgba(64,241,223,.20);background:rgba(64,241,223,.06);color:#d7fff8;border-radius:999px;padding:.22rem .55rem;font-size:.78rem;font-weight:700;letter-spacing:.02em}
 .macro-quad-axis-grid{display:grid;grid-template-columns:repeat(3,minmax(110px,1fr));gap:.6rem;min-width:min(100%,520px)}
 .macro-axis-card,.macro-driver-box{border:1px solid rgba(222,214,255,.10);background:rgba(4,2,12,.28);border-radius:1rem;padding:.7rem}.macro-driver-box{min-height:78px}.macro-quad-note{border:1px solid rgba(251,191,36,.18);background:rgba(251,191,36,.045);color:#fde68a;border-radius:1rem;padding:.55rem .7rem;font-size:.72rem;line-height:1.45}
 @media(max-width:760px){.macro-quad-axis-grid{grid-template-columns:1fr}.macro-axis-card{padding:.6rem}}
+
+.macro-quad-axis-grid-simple{grid-template-columns:repeat(2,minmax(0,1fr));}
+@media (max-width:640px){.macro-quad-axis-grid-simple{grid-template-columns:1fr;}}

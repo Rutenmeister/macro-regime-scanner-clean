@@ -36,7 +36,7 @@ def main():
             'mainConflict': a.get('mainConflict'),
             'scoreChangeSummary': (a.get('scoreChangeLog') or {}).get('summary'),
         })
-    payload={'version':'v0.50.1-quad-scoring-calibration','generatedAt':now,'intendedConsumers':['TradeStream','Capital Trace','Pathwise'],'warning':'Evidence labels are research context, not trade signals. v0.50.1 keeps the U.S.-centered asset universe and excludes unsupported non-USD FX crosses until direct non-U.S. source lanes exist, and adds the no-price Growth / Inflation Pressure Map for macro context.', 'regimes':rows}
+    payload={'version':'v0.50.2-simple-four-quad-regime','generatedAt':now,'intendedConsumers':['TradeStream','Capital Trace','Pathwise'],'warning':'Evidence labels are research context, not trade signals. v0.50.2 keeps the U.S.-centered asset universe and excludes unsupported non-USD FX crosses until direct non-U.S. source lanes exist, and adds a simple no-price four-quad Growth / Inflation Regime for macro context.', 'regimes':rows}
     (OUT_DIR/'regime_labels_latest.json').write_text(json.dumps(payload, indent=2)+'\n')
     with (OUT_DIR/'regime_labels_latest.csv').open('w', newline='') as f:
         w=csv.DictWriter(f, fieldnames=list(rows[0].keys()) if rows else ['date'])
