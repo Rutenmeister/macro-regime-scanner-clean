@@ -1,7 +1,7 @@
 {
   "sourceId": "FINANCIAL_STRESS_FRED",
   "sourceName": "Federal Reserve / FRED credit and financial-stress public data",
-  "retrievedAt": "2026-05-23T17:18:00.409419+00:00",
+  "retrievedAt": "2026-05-23T17:30:46.819824+00:00",
   "latestDate": "2026-05-21",
   "observations": {
     "HY_OAS": {
@@ -19,7 +19,7 @@
       "period": "2026-05-21",
       "previousPeriod": "2026-05-20",
       "score": 1,
-      "retrievedAt": "2026-05-23T17:17:58.727129+00:00",
+      "retrievedAt": "2026-05-23T17:30:45.724389+00:00",
       "sourceNote": "ICE BofA US High Yield Index OAS via FRED."
     },
     "IG_OAS": {
@@ -37,7 +37,7 @@
       "period": "2026-05-21",
       "previousPeriod": "2026-05-20",
       "score": 1,
-      "retrievedAt": "2026-05-23T17:17:59.084052+00:00",
+      "retrievedAt": "2026-05-23T17:30:45.768820+00:00",
       "sourceNote": "ICE BofA US Corporate Index OAS via FRED."
     },
     "BBB_OAS": {
@@ -55,7 +55,7 @@
       "period": "2026-05-21",
       "previousPeriod": "2026-05-20",
       "score": 1,
-      "retrievedAt": "2026-05-23T17:17:59.418341+00:00",
+      "retrievedAt": "2026-05-23T17:30:45.863989+00:00",
       "sourceNote": "ICE BofA BBB US Corporate Index OAS via FRED."
     },
     "NFCI": {
@@ -73,7 +73,7 @@
       "period": "2026-05-15",
       "previousPeriod": "2026-05-08",
       "score": 1,
-      "retrievedAt": "2026-05-23T17:17:59.518349+00:00",
+      "retrievedAt": "2026-05-23T17:30:45.989811+00:00",
       "sourceNote": "Chicago Fed National Financial Conditions Index via FRED. Positive values indicate tighter-than-average financial conditions."
     },
     "ANFCI": {
@@ -91,7 +91,7 @@
       "period": "2026-05-15",
       "previousPeriod": "2026-05-08",
       "score": 1,
-      "retrievedAt": "2026-05-23T17:18:00.361442+00:00",
+      "retrievedAt": "2026-05-23T17:30:46.673261+00:00",
       "sourceNote": "Chicago Fed adjusted NFCI via FRED. Positive values indicate tighter financial conditions after controlling for economic conditions."
     },
     "STLFSI4": {
@@ -109,7 +109,7 @@
       "period": "2026-05-15",
       "previousPeriod": "2026-05-08",
       "score": 1,
-      "retrievedAt": "2026-05-23T17:18:00.409119+00:00",
+      "retrievedAt": "2026-05-23T17:30:46.819468+00:00",
       "sourceNote": "St. Louis Fed Financial Stress Index via FRED. Positive values indicate above-average financial stress."
     }
   },
