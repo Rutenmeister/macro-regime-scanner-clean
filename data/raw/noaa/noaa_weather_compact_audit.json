@@ -1,12 +1,12 @@
 {
   "sourceId": "NOAA_NWS",
   "sourceName": "NOAA/National Weather Service public weather alerts",
-  "retrievedAt": "2026-05-23T12:22:43.012698+00:00",
+  "retrievedAt": "2026-05-23T12:43:05.256503+00:00",
   "endpoint": "https://api.weather.gov/alerts/active?status=actual&message_type=alert",
   "fetchAttempts": [
     {
       "endpoint": "https://api.weather.gov/alerts/active?status=actual&message_type=alert",
-      "features": 151
+      "features": 171
     }
   ],
   "categoryCounts": {
@@ -31,15 +31,16 @@
       "sampleEvents": [
         "Flood Advisory",
         "Flood Advisory",
-        "Flood Warning",
         "Flood Advisory",
+        "Flood Warning",
         "Flood Warning"
       ]
     },
     "SEVERE_CONVECTIVE_STRESS": {
-      "count": 2,
-      "weighted": 6,
+      "count": 3,
+      "weighted": 9,
       "sampleEvents": [
+        "Severe Thunderstorm Warning",
         "Severe Thunderstorm Warning",
         "Severe Thunderstorm Warning"
       ]
@@ -63,15 +64,15 @@
   "eventCountsTop": [
     [
       "Small Craft Advisory",
-      88
+      99
     ],
     [
       "Special Weather Statement",
-      16
+      20
     ],
     [
       "Gale Warning",
-      13
+      16
     ],
     [
       "Flood Warning",
@@ -82,11 +83,15 @@
       6
     ],
     [
+      "Special Marine Warning",
+      4
+    ],
+    [
       "Flood Advisory",
       4
     ],
     [
-      "Special Marine Warning",
+      "Severe Thunderstorm Warning",
       3
     ],
     [
@@ -96,10 +101,6 @@
     [
       "Brisk Wind Advisory",
       3
-    ],
-    [
-      "Severe Thunderstorm Warning",
-      2
     ],
     [
       "Storm Warning",
@@ -122,15 +123,204 @@
       1
     ]
   ],
-  "totalActiveAlerts": 151,
-  "weightedActiveAlerts": 220,
+  "totalActiveAlerts": 171,
+  "weightedActiveAlerts": 251,
   "severityCounts": {
-    "Moderate": 39,
-    "Severe": 15,
-    "Minor": 96,
+    "Severe": 17,
+    "Moderate": 46,
+    "Minor": 107,
     "Unknown": 1
   },
   "sampleAlerts": [
+    {
+      "event": "Special Marine Warning",
+      "severity": "Severe",
+      "effective": "2026-05-23T08:41:00-04:00",
+      "area": "Coastal waters from Tarpon Springs to Suwannee River FL out 20 NM",
+      "headline": "Special Marine Warning issued May 23 at 8:41AM EDT until May 23 at 9:15AM EDT by NWS Tampa Bay Ruskin FL"
+    },
+    {
+      "event": "Special Marine Warning",
+      "severity": "Severe",
+      "effective": "2026-05-23T07:40:00-05:00",
+      "area": "Waters from Intracoastal City to Cameron LA from 20 to 60 NM; Waters from Lower Atchafalaya River to Intracoastal City LA from 20 to 60 NM",
+      "headline": "Special Marine Warning issued May 23 at 7:40AM CDT until May 23 at 9:15AM CDT by NWS Lake Charles LA"
+    },
+    {
+      "event": "Special Weather Statement",
+      "severity": "Moderate",
+      "effective": "2026-05-23T07:39:00-05:00",
+      "area": "Webb",
+      "headline": "Special Weather Statement issued May 23 at 7:39AM CDT by NWS Corpus Christi TX"
+    },
+    {
+      "event": "Special Weather Statement",
+      "severity": "Moderate",
+      "effective": "2026-05-23T07:39:00-05:00",
+      "area": "Sevier; McCurtain",
+      "headline": "Special Weather Statement issued May 23 at 7:39AM CDT by NWS Shreveport LA"
+    },
+    {
+      "event": "Flood Advisory",
+      "severity": "Minor",
+      "effective": "2026-05-23T08:36:00-04:00",
+      "area": "Butler, OH; Champaign, OH; Clark, OH; Greene, OH; Miami, OH; Montgomery, OH; Preble, OH; Warren, OH",
+      "headline": "Flood Advisory issued May 23 at 8:36AM EDT until May 23 at 11:45AM EDT by NWS Wilmington OH"
+    },
+    {
+      "event": "Special Weather Statement",
+      "severity": "Moderate",
+      "effective": "2026-05-23T07:34:00-05:00",
+      "area": "Angelina",
+      "headline": "Special Weather Statement issued May 23 at 7:34AM CDT by NWS Shreveport LA"
+    },
+    {
+      "event": "Special Weather Statement",
+      "severity": "Moderate",
+      "effective": "2026-05-23T07:30:00-05:00",
+      "area": "Upper Terrebonne; Lower Terrebonne",
+      "headline": "Special Weather Statement issued May 23 at 7:30AM CDT by NWS New Orleans LA"
+    },
+    {
+      "event": "Severe Thunderstorm Warning",
+      "severity": "Severe",
+      "effective": "2026-05-23T07:29:00-05:00",
+      "area": "Chambers, TX; Galveston, TX; Liberty, TX",
+      "headline": "Severe Thunderstorm Warning issued May 23 at 7:29AM CDT until May 23 at 7:45AM CDT by NWS Houston/Galveston TX"
+    },
+    {
+      "event": "Special Weather Statement",
+      "severity": "Moderate",
+      "effective": "2026-05-23T07:29:00-05:00",
+      "area": "Medina",
+      "headline": "Special Weather Statement issued May 23 at 7:29AM CDT by NWS Austin/San Antonio TX"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-05-23T04:28:00-08:00",
+      "area": "Dixon Entrance to Cape Decision from 15 to 90 NM",
+      "headline": "Small Craft Advisory issued May 23 at 4:28AM AKDT until May 24 at 1:00PM AKDT by NWS Juneau AK"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-05-23T04:28:00-08:00",
+      "area": "Dixon Entrance to Cape Decision out to 15 NM",
+      "headline": "Small Craft Advisory issued May 23 at 4:28AM AKDT until May 24 at 1:00PM AKDT by NWS Juneau AK"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-05-23T04:28:00-08:00",
+      "area": "Cape Decision to Cape Edgecumbe from 15 to 80 NM",
+      "headline": "Small Craft Advisory issued May 23 at 4:28AM AKDT until May 24 at 4:00PM AKDT by NWS Juneau AK"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-05-23T04:28:00-08:00",
+      "area": "Cape Decision to Cape Edgecumbe from 15 to 80 NM",
+      "headline": "Small Craft Advisory issued May 23 at 4:28AM AKDT until May 26 at 6:00AM AKDT by NWS Juneau AK"
+    },
+    {
+      "event": "Gale Warning",
+      "severity": "Moderate",
+      "effective": "2026-05-23T04:28:00-08:00",
+      "area": "Cape Decision to Cape Edgecumbe from 15 to 80 NM",
+      "headline": "Gale Warning issued May 23 at 4:28AM AKDT until May 24 at 10:00PM AKDT by NWS Juneau AK"
+    },
+    {
+      "event": "Gale Warning",
+      "severity": "Moderate",
+      "effective": "2026-05-23T04:28:00-08:00",
+      "area": "Dixon Entrance to Cape Decision out to 15 NM",
+      "headline": "Gale Warning issued May 23 at 4:28AM AKDT until May 25 at 1:00AM AKDT by NWS Juneau AK"
+    },
+    {
+      "event": "Gale Warning",
+      "severity": "Moderate",
+      "effective": "2026-05-23T04:28:00-08:00",
+      "area": "Dixon Entrance to Cape Decision from 15 to 90 NM",
+      "headline": "Gale Warning issued May 23 at 4:28AM AKDT until May 25 at 1:00AM AKDT by NWS Juneau AK"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-05-23T04:28:00-08:00",
+      "area": "Glacier Bay",
+      "headline": "Small Craft Advisory issued May 23 at 4:28AM AKDT until May 25 at 7:00AM AKDT by NWS Juneau AK"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-05-23T04:28:00-08:00",
+      "area": "Northern Lynn Canal",
+      "headline": "Small Craft Advisory issued May 23 at 4:28AM AKDT until May 25 at 7:00AM AKDT by NWS Juneau AK"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-05-23T04:28:00-08:00",
+      "area": "Northern Lynn Canal",
+      "headline": "Small Craft Advisory issued May 23 at 4:28AM AKDT until May 25 at 1:00PM AKDT by NWS Juneau AK"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-05-23T04:28:00-08:00",
+      "area": "Cape Fairweather to Icy Cape from 15 to 80 NM",
+      "headline": "Small Craft Advisory issued May 23 at 4:28AM AKDT until May 25 at 4:00PM AKDT by NWS Juneau AK"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-05-23T04:28:00-08:00",
+      "area": "Cape Decision to Cape Edgecumbe out to 15 NM",
+      "headline": "Small Craft Advisory issued May 23 at 4:28AM AKDT until May 26 at 6:00AM AKDT by NWS Juneau AK"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-05-23T04:28:00-08:00",
+      "area": "Dixon Entrance to Cape Decision from 15 to 90 NM",
+      "headline": "Small Craft Advisory issued May 23 at 4:28AM AKDT until May 26 at 6:00AM AKDT by NWS Juneau AK"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-05-23T04:28:00-08:00",
+      "area": "Dixon Entrance to Cape Decision out to 15 NM",
+      "headline": "Small Craft Advisory issued May 23 at 4:28AM AKDT until May 26 at 6:00AM AKDT by NWS Juneau AK"
+    },
+    {
+      "event": "Special Weather Statement",
+      "severity": "Moderate",
+      "effective": "2026-05-23T07:27:00-05:00",
+      "area": "Lower St. Martin; Upper St. Mary; Lower St. Mary",
+      "headline": "Special Weather Statement issued May 23 at 7:27AM CDT by NWS Lake Charles LA"
+    },
+    {
+      "event": "Special Weather Statement",
+      "severity": "Moderate",
+      "effective": "2026-05-23T08:26:00-04:00",
+      "area": "Coastal Levy",
+      "headline": "Special Weather Statement issued May 23 at 8:26AM EDT by NWS Tampa Bay Ruskin FL"
+    },
+    {
+      "event": "Special Weather Statement",
+      "severity": "Moderate",
+      "effective": "2026-05-23T07:24:00-05:00",
+      "area": "Trinity; San Jacinto; Polk; Montgomery; Northern Liberty",
+      "headline": "Special Weather Statement issued May 23 at 7:24AM CDT by NWS Houston/Galveston TX"
+    },
+    {
+      "event": "Severe Thunderstorm Warning",
+      "severity": "Severe",
+      "effective": "2026-05-23T07:23:00-05:00",
+      "area": "Jefferson, TX",
+      "headline": "Severe Thunderstorm Warning issued May 23 at 7:23AM CDT until May 23 at 8:30AM CDT by NWS Lake Charles LA"
+    },
     {
       "event": "Special Weather Statement",
       "severity": "Moderate",
@@ -167,13 +357,6 @@
       "headline": "Small Craft Advisory issued May 23 at 4:12AM AKDT until May 23 at 5:00PM AKDT by NWS Anchorage AK"
     },
     {
-      "event": "Severe Thunderstorm Warning",
-      "severity": "Severe",
-      "effective": "2026-05-23T07:11:00-05:00",
-      "area": "Miller, AR; Caddo, LA; Cass, TX; Harrison, TX; Marion, TX; Panola, TX",
-      "headline": "Severe Thunderstorm Warning issued May 23 at 7:11AM CDT until May 23 at 8:15AM CDT by NWS Shreveport LA"
-    },
-    {
       "event": "Special Weather Statement",
       "severity": "Moderate",
       "effective": "2026-05-23T07:11:00-05:00",
@@ -181,11 +364,25 @@
       "headline": "Special Weather Statement issued May 23 at 7:11AM CDT by NWS Shreveport LA"
     },
     {
-      "event": "Gale Warning",
-      "severity": "Moderate",
+      "event": "Severe Thunderstorm Warning",
+      "severity": "Severe",
+      "effective": "2026-05-23T07:11:00-05:00",
+      "area": "Miller, AR; Caddo, LA; Cass, TX; Harrison, TX; Marion, TX; Panola, TX",
+      "headline": "Severe Thunderstorm Warning issued May 23 at 7:11AM CDT until May 23 at 8:15AM CDT by NWS Shreveport LA"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
       "effective": "2026-05-23T03:55:00-08:00",
-      "area": "Nikolski to Seguam Bering Side from 15 to 85 NM",
-      "headline": "Gale Warning issued May 23 at 3:55AM AKDT until May 24 at 5:00PM AKDT by NWS Anchorage AK"
+      "area": "Sitkinak to Castle Cape from 15 to 100 NM",
+      "headline": "Small Craft Advisory issued May 23 at 3:55AM AKDT until May 23 at 5:00PM AKDT by NWS Anchorage AK"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-05-23T03:55:00-08:00",
+      "area": "Unalga Pass to Nikolski Pacific Side out to 15 NM",
+      "headline": "Small Craft Advisory issued May 23 at 3:55AM AKDT until May 24 at 5:00PM AKDT by NWS Anchorage AK"
     },
     {
       "event": "Gale Warning",
@@ -198,22 +395,15 @@
       "event": "Small Craft Advisory",
       "severity": "Minor",
       "effective": "2026-05-23T03:55:00-08:00",
-      "area": "Sitkinak to Castle Cape from 15 to 100 NM",
-      "headline": "Small Craft Advisory issued May 23 at 3:55AM AKDT until May 23 at 5:00PM AKDT by NWS Anchorage AK"
+      "area": "Unalga Pass to Nikolski Bering Side out to 15 NM",
+      "headline": "Small Craft Advisory issued May 23 at 3:55AM AKDT until May 24 at 5:00PM AKDT by NWS Anchorage AK"
     },
     {
       "event": "Gale Warning",
       "severity": "Moderate",
       "effective": "2026-05-23T03:55:00-08:00",
-      "area": "Nikolski to Seguam Pacific Side from 15 to 75 NM",
+      "area": "Nikolski to Seguam Bering Side from 15 to 85 NM",
       "headline": "Gale Warning issued May 23 at 3:55AM AKDT until May 24 at 5:00PM AKDT by NWS Anchorage AK"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-05-23T03:55:00-08:00",
-      "area": "Unalga Pass to Nikolski Bering Side out to 15 NM",
-      "headline": "Small Craft Advisory issued May 23 at 3:55AM AKDT until May 24 at 5:00PM AKDT by NWS Anchorage AK"
     },
     {
       "event": "Gale Warning",
@@ -235,13 +425,6 @@
       "effective": "2026-05-23T03:55:00-08:00",
       "area": "Kiska to Attu Pacific Side",
       "headline": "Gale Warning issued May 23 at 3:55AM AKDT until May 24 at 5:00PM AKDT by NWS Anchorage AK"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-05-23T03:55:00-08:00",
-      "area": "Unalga Pass to Nikolski Pacific Side out to 15 NM",
-      "headline": "Small Craft Advisory issued May 23 at 3:55AM AKDT until May 24 at 5:00PM AKDT by NWS Anchorage AK"
     },
     {
       "event": "Gale Warning",
@@ -272,17 +455,10 @@
       "headline": "Gale Warning issued May 23 at 3:55AM AKDT until May 24 at 5:00PM AKDT by NWS Anchorage AK"
     },
     {
-      "event": "Storm Warning",
-      "severity": "Severe",
-      "effective": "2026-05-23T03:55:00-08:00",
-      "area": "Adak to Kiska Pacific Side",
-      "headline": "Storm Warning issued May 23 at 3:55AM AKDT until May 24 at 5:00PM AKDT by NWS Anchorage AK"
-    },
-    {
       "event": "Gale Warning",
       "severity": "Moderate",
       "effective": "2026-05-23T03:55:00-08:00",
-      "area": "Seguam to Adak Pacific Side out to 15 NM",
+      "area": "Seguam to Adak Bering Side from 15 to 85 NM",
       "headline": "Gale Warning issued May 23 at 3:55AM AKDT until May 24 at 5:00PM AKDT by NWS Anchorage AK"
     },
     {
@@ -296,190 +472,15 @@
       "event": "Gale Warning",
       "severity": "Moderate",
       "effective": "2026-05-23T03:55:00-08:00",
-      "area": "Seguam to Adak Bering Side from 15 to 85 NM",
+      "area": "Nikolski to Seguam Pacific Side from 15 to 75 NM",
       "headline": "Gale Warning issued May 23 at 3:55AM AKDT until May 24 at 5:00PM AKDT by NWS Anchorage AK"
-    },
-    {
-      "event": "Special Weather Statement",
-      "severity": "Moderate",
-      "effective": "2026-05-23T06:49:00-05:00",
-      "area": "McCurtain; Red River",
-      "headline": "Special Weather Statement issued May 23 at 6:49AM CDT by NWS Shreveport LA"
-    },
-    {
-      "event": "Flood Advisory",
-      "severity": "Minor",
-      "effective": "2026-05-23T06:47:00-05:00",
-      "area": "Noble, OK",
-      "headline": "Flood Advisory issued May 23 at 6:47AM CDT until May 23 at 10:00AM CDT by NWS Norman OK"
-    },
-    {
-      "event": "Special Weather Statement",
-      "severity": "Moderate",
-      "effective": "2026-05-23T06:45:00-05:00",
-      "area": "Upper Terrebonne; Lower Terrebonne",
-      "headline": "Special Weather Statement issued May 23 at 6:45AM CDT by NWS New Orleans LA"
-    },
-    {
-      "event": "Special Weather Statement",
-      "severity": "Moderate",
-      "effective": "2026-05-23T06:44:00-05:00",
-      "area": "Pushmataha; Choctaw",
-      "headline": "Special Weather Statement issued May 23 at 6:44AM CDT by NWS Tulsa OK"
-    },
-    {
-      "event": "Special Weather Statement",
-      "severity": "Moderate",
-      "effective": "2026-05-23T06:42:00-05:00",
-      "area": "Pushmataha; Pittsburg; Haskell; Latimer; Central Le Flore; Southern Le Flore",
-      "headline": "Special Weather Statement issued May 23 at 6:42AM CDT by NWS Tulsa OK"
-    },
-    {
-      "event": "Severe Thunderstorm Warning",
-      "severity": "Severe",
-      "effective": "2026-05-23T06:36:00-05:00",
-      "area": "Cass, TX; Harrison, TX; Marion, TX; Morris, TX; Panola, TX; Shelby, TX",
-      "headline": "Severe Thunderstorm Warning issued May 23 at 6:36AM CDT until May 23 at 7:30AM CDT by NWS Shreveport LA"
-    },
-    {
-      "event": "Special Marine Warning",
-      "severity": "Severe",
-      "effective": "2026-05-23T07:27:00-04:00",
-      "area": "Coastal Waters from Mexico Beach to Apalachicola out 20 NM; Coastal Waters From  Ochlockonee River to Apalachicola FL out to 20 Nm; Waters from Mexico Beach to Apalachicola FL from 20 to 60 NM",
-      "headline": "Special Marine Warning issued May 23 at 7:27AM EDT until May 23 at 9:30AM EDT by NWS Tallahassee FL"
-    },
-    {
-      "event": "Special Marine Warning",
-      "severity": "Severe",
-      "effective": "2026-05-23T05:55:00-05:00",
-      "area": "Waters from Intracoastal City to Cameron LA from 20 to 60 NM; Waters from Lower Atchafalaya River to Intracoastal City LA from 20 to 60 NM",
-      "headline": "Special Marine Warning issued May 23 at 5:55AM CDT until May 23 at 7:30AM CDT by NWS Lake Charles LA"
-    },
-    {
-      "event": "Flood Advisory",
-      "severity": "Minor",
-      "effective": "2026-05-23T06:33:00-04:00",
-      "area": "Anderson, KY; Franklin, KY; Shelby, KY; Spencer, KY",
-      "headline": "Flood Advisory issued May 23 at 6:33AM EDT until May 23 at 9:30AM EDT by NWS Louisville KY"
-    },
-    {
-      "event": "Flood Warning",
-      "severity": "Severe",
-      "effective": "2026-05-23T06:25:00-04:00",
-      "area": "Greene, OH; Warren, OH",
-      "headline": "Flood Warning issued May 23 at 6:25AM EDT until May 24 at 8:00PM EDT by NWS Wilmington OH"
-    },
-    {
-      "event": "Beach Hazards Statement",
-      "severity": "Moderate",
-      "effective": "2026-05-23T05:24:00-05:00",
-      "area": "Carlton/South St. Louis; Douglas",
-      "headline": "Beach Hazards Statement issued May 23 at 5:24AM CDT until May 23 at 2:00PM CDT by NWS Duluth MN"
-    },
-    {
-      "event": "Dense Fog Advisory",
-      "severity": "Moderate",
-      "effective": "2026-05-23T05:05:00-05:00",
-      "area": "Bourbon; Crawford; Cherokee; Benton; Morgan; Vernon; St. Clair; Hickory; Camden; Barton; Cedar; Polk; Dallas; Laclede; Jasper; Dade; Greene; Webster; Wright; Newton; Lawrence; Christian; Douglas; McDonald; Barry; Stone; Taney; Ozark",
-      "headline": "Dense Fog Advisory issued May 23 at 5:05AM CDT until May 23 at 9:00AM CDT by NWS Springfield MO"
     },
     {
       "event": "Gale Warning",
       "severity": "Moderate",
-      "effective": "2026-05-23T02:35:00-07:00",
-      "area": "Central U.S. Waters Strait Of Juan De Fuca; East Entrance U.S. Waters Strait Of Juan De Fuca",
-      "headline": "Gale Warning issued May 23 at 2:35AM PDT until May 24 at 3:00AM PDT by NWS Seattle WA"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-05-23T02:35:00-07:00",
-      "area": "Admiralty Inlet",
-      "headline": "Small Craft Advisory issued May 23 at 2:35AM PDT until May 24 at 3:00AM PDT by NWS Seattle WA"
-    },
-    {
-      "event": "Flood Advisory",
-      "severity": "Minor",
-      "effective": "2026-05-23T04:31:00-05:00",
-      "area": "Garfield, OK; Kingfisher, OK; Logan, OK",
-      "headline": "Flood Advisory issued May 23 at 4:31AM CDT until May 23 at 7:30AM CDT by NWS Norman OK"
-    },
-    {
-      "event": "Special Weather Statement",
-      "severity": "Moderate",
-      "effective": "2026-05-23T05:27:00-04:00",
-      "area": "Northwest Aroostook; Northeast Aroostook; Northern Somerset; Northern Piscataquis; Northern Penobscot; Southeast Aroostook; Central Piscataquis; Central Penobscot; Southern Penobscot; Interior Hancock; Central Washington; Coastal Hancock; C",
-      "headline": "Special Weather Statement issued May 23 at 5:27AM EDT by NWS Caribou ME"
-    },
-    {
-      "event": "Rip Current Statement",
-      "severity": "Moderate",
-      "effective": "2026-05-23T05:21:00-04:00",
-      "area": "Coastal Gulf; Coastal Franklin",
-      "headline": "Rip Current Statement issued May 23 at 5:21AM EDT until May 23 at 11:00PM EDT by NWS Tallahassee FL"
-    },
-    {
-      "event": "Special Weather Statement",
-      "severity": "Moderate",
-      "effective": "2026-05-23T05:21:00-04:00",
-      "area": "Northwest Aroostook; Northeast Aroostook; Northern Somerset; Northern Piscataquis; Northern Penobscot; Southeast Aroostook; Central Piscataquis; Central Penobscot; Southern Penobscot; Interior Hancock; Central Washington; Coastal Hancock; C",
-      "headline": "Special Weather Statement issued May 23 at 5:21AM EDT by NWS Caribou ME"
-    },
-    {
-      "event": "Flood Warning",
-      "severity": "Severe",
-      "effective": "2026-05-23T05:11:00-04:00",
-      "area": "Monroe, OH; Noble, OH",
-      "headline": "Flood Warning issued May 23 at 5:11AM EDT until May 23 at 11:15AM EDT by NWS Pittsburgh PA"
-    },
-    {
-      "event": "Special Weather Statement",
-      "severity": "Moderate",
-      "effective": "2026-05-23T05:00:00-04:00",
-      "area": "Southeast Raleigh; Southeast Fayette",
-      "headline": "Special Weather Statement issued May 23 at 5:00AM EDT by NWS Charleston WV"
-    },
-    {
-      "event": "Flood Warning",
-      "severity": "Severe",
-      "effective": "2026-05-23T04:42:00-04:00",
-      "area": "Clark, OH",
-      "headline": "Flood Warning issued May 23 at 4:42AM EDT until May 23 at 7:23PM EDT by NWS Wilmington OH"
-    },
-    {
-      "event": "Flood Warning",
-      "severity": "Severe",
-      "effective": "2026-05-23T04:28:00-04:00",
-      "area": "Warren, OH",
-      "headline": "Flood Warning issued May 23 at 4:28AM EDT until May 23 at 6:31PM EDT by NWS Wilmington OH"
-    },
-    {
-      "event": "Beach Hazards Statement",
-      "severity": "Moderate",
-      "effective": "2026-05-23T04:15:00-04:00",
-      "area": "Maryland Beaches; Virginia Beach; Accomack; Northampton",
-      "headline": "Beach Hazards Statement issued May 23 at 4:15AM EDT until May 23 at 8:00PM EDT by NWS Wakefield VA"
-    },
-    {
-      "event": "Flood Advisory",
-      "severity": "Minor",
-      "effective": "2026-05-23T04:02:00-04:00",
-      "area": "Delaware, OH; Franklin, OH",
-      "headline": "Flood Advisory issued May 23 at 4:02AM EDT until May 23 at 8:00PM EDT by NWS Wilmington OH"
-    },
-    {
-      "event": "Dense Fog Advisory",
-      "severity": "Moderate",
-      "effective": "2026-05-23T02:51:00-05:00",
-      "area": "Northern Crawford; Northern Franklin; North and Central Sebastian; Southern Crawford; Central and Southern Franklin; Southern Sebastian",
-      "headline": "Dense Fog Advisory issued May 23 at 2:51AM CDT until May 23 at 9:00AM CDT by NWS Tulsa OK"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-05-23T03:51:00-04:00",
-      "area": "Avon Point to Willowick OH; Willowick to Geneva-on-the Lake OH; Geneva-on-the-Lake to Conneaut OH; Conneaut OH to Ripley NY",
-      "headline": "Small Craft Advisory issued May 23 at 3:51AM EDT until May 24 at 4:00AM EDT by NWS Cleveland OH"
+      "effective": "2026-05-23T03:55:00-08:00",
+      "area": "Seguam to Adak Pacific Side out to 15 NM",
+      "headline": "Gale Warning issued May 23 at 3:55AM AKDT until May 24 at 5:00PM AKDT by NWS Anchorage AK"
     }
   ]
 }
