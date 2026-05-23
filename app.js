@@ -182,45 +182,116 @@ function regimeTags(asset){
   return tags.slice(0,4);
 }
 
-function macroRegimeFactorBucket(factor){
-  const text = [factor.group, factor.name, factor.source, factor.derived, factor.effect].map(v=>String(v||'').toLowerCase()).join(' ');
-  const inflationTerms = ['cpi','core cpi','pce inflation','core pce','ppi','inflation','price index','price pressure','wage','earnings','treasury','yield','rate pressure','fed policy','policy pressure','energy','crude','gasoline','distillate','natural gas','petroleum','inventory balance','cushing','usda','crop','production estimate','crop condition','crop progress','noaa','weather','drought','food'];
-  const growthTerms = ['labor','payroll','employment','unemployment','jobless','gdp','real gdp','growth','retail sales','consumer demand','personal income','personal spending','durable','manufacturing','industrial','housing','building permits','business investment','census','credit stress','financial stress','financial conditions','credit spread','liquidity','reserve balances','fed total assets','reverse repo','demand'];
-  if(inflationTerms.some(t=>text.includes(t))) return 'inflation';
-  if(growthTerms.some(t=>text.includes(t))) return 'growth';
-  return null;
+
+const MACRO_REGIME_FAMILIES = [
+  {
+    id:'inflation_core', label:'Inflation', axis:'inflationPolicy', weight:3, cap:9,
+    terms:['cpi','core cpi','pce inflation','core pce','ppi','inflation','price index','price pressure','services inflation','wage','earnings']
+  },
+  {
+    id:'rates_policy', label:'Rates / Policy', axis:'inflationPolicy', weight:3, cap:9,
+    terms:['treasury','yield','real yield','breakeven','rate pressure','policy rate','rate differential','fed policy','policy pressure','hawkish','dovish']
+  },
+  {
+    id:'growth_demand', label:'Growth / Demand', axis:'growth', weight:3, cap:9,
+    terms:['gdp','real gdp','growth','retail sales','consumer demand','personal income','personal spending','durable','manufacturing','industrial','housing','building permits','business investment','census','demand']
+  },
+  {
+    id:'labor', label:'Labor', axis:'growth', weight:3, cap:8,
+    terms:['labor','payroll','employment','unemployment','jobless','claims','jobs']
+  },
+  {
+    id:'credit_stress', label:'Credit / Stress', axis:'growth', weight:3, cap:7,
+    terms:['credit stress','financial stress','financial conditions','credit spread','high yield spread','investment grade spread','stress index']
+  },
+  {
+    id:'liquidity', label:'Liquidity', axis:'growth', weight:2.5, cap:6,
+    terms:['liquidity','reserve balances','fed total assets','balance sheet','reverse repo','money supply','bank reserves']
+  },
+  {
+    id:'energy', label:'Energy', axis:'inflationPolicy', weight:2, cap:6,
+    terms:['energy','crude','wti','brent','gasoline','distillate','heating oil','natural gas','petroleum','inventory balance','cushing','refinery','product supplied','eia']
+  },
+  {
+    id:'ag_weather', label:'Agriculture / Weather', axis:'inflationPolicy', weight:1.5, cap:5,
+    terms:['usda','crop','production estimate','crop condition','crop progress','wasde','noaa','weather','drought','food','grain','wheat','corn','soy']
+  },
+  {
+    id:'positioning', label:'Positioning', axis:'contextual', weight:1, cap:3,
+    terms:['cot','positioning','managed money','commercial positioning','speculative','open interest']
+  }
+];
+function clamp(n, min, max){ return Math.max(min, Math.min(max, n)); }
+function macroRegimeText(factor){
+  return [factor.group, factor.name, factor.source, factor.derived, factor.effect, factor.status, factor.scoreReason]
+    .map(v=>String(v||'').toLowerCase()).join(' ');
 }
-function macroRegimeAnchorRank(asset, bucket, factor){
-  const id = String(asset.id||'');
+function macroRegimeFamilyFor(factor, asset){
+  const text = macroRegimeText(factor);
+  const family = MACRO_REGIME_FAMILIES.find(f => f.terms.some(t => text.includes(t)));
+  if(!family) return null;
+  if(family.id !== 'positioning') return family;
+  const assetId = String(asset?.id || '').toUpperCase();
+  const assetClass = String(asset?.assetClass || '').toLowerCase();
+  const commodityIds = ['GOLD','SILVER','COPPER','WTI','BRENT','NG','GASOLINE','HEATING','WHEAT','CORN','SOY','BCOM'];
+  const axis = commodityIds.includes(assetId) || assetClass.includes('commod') || assetClass.includes('energy') || assetClass.includes('agriculture')
+    ? 'inflationPolicy'
+    : 'growth';
+  return {...family, axis};
+}
+function macroRegimeAnchorRank(asset, family, factor){
+  const id = String(asset.id||'').toUpperCase();
   const cls = String(asset.assetClass||'');
-  const text = [factor.group, factor.name, factor.source, factor.derived, factor.effect].map(v=>String(v||'').toLowerCase()).join(' ');
-  if(bucket === 'inflation'){
-    if(['US02Y','US05Y','US10Y','US30Y','DXY','BE5Y','BE10Y','REALY'].includes(id)) return 5;
-    if(['WTI','BRENT','NG','GASOLINE','HEATING','WHEAT','CORN','SOY','BCOM'].includes(id)) return 4;
-    if(cls === 'Rates' || cls === 'Inflation Markets') return 4;
-    if(id === 'SPX' || id === 'NDX') return 2;
+  const fam = family.id;
+  if(['inflation_core','rates_policy'].includes(fam)){
+    if(['US02Y','US05Y','US10Y','US30Y','DXY','BE5Y','BE10Y','REALY'].includes(id)) return 6;
+    if(cls === 'Rates' || cls === 'Inflation Markets' || cls === 'FX') return 5;
+    if(['SPX','NDX','GOLD','SILVER'].includes(id)) return 3;
     return 1;
   }
-  if(bucket === 'growth'){
-    if(text.includes('credit stress') || text.includes('financial stress') || text.includes('financial conditions') || text.includes('credit spread')){
-      if(['HY','IG','FCI','SPX','NDX','RUT','DOW'].includes(id)) return 5;
-      if(cls === 'Credit / Liquidity' || cls === 'Equity Indices') return 4;
-      return 1;
-    }
-    if(['SPX','NDX','RUT','DOW','HY','IG','FCI','DXY','US02Y','US05Y','US10Y','US30Y'].includes(id)) return 5;
-    if(cls === 'Equity Indices' || cls === 'Credit / Liquidity' || cls === 'Rates') return 4;
-    if(['WTI','BRENT','COPPER','BCOM'].includes(id)) return 3;
+  if(['growth_demand','labor'].includes(fam)){
+    if(['SPX','NDX','RUT','DOW','HY','IG','FCI'].includes(id)) return 6;
+    if(cls === 'Equity Indices' || cls === 'Credit / Liquidity') return 5;
+    if(['DXY','US02Y','US05Y','US10Y','US30Y','WTI','BRENT','COPPER'].includes(id)) return 3;
+    return 1;
+  }
+  if(['credit_stress','liquidity'].includes(fam)){
+    if(['HY','IG','FCI','SPX','NDX','RUT','DOW'].includes(id)) return 6;
+    if(cls === 'Credit / Liquidity' || cls === 'Equity Indices') return 5;
+    if(['DXY','US10Y','GOLD'].includes(id)) return 2;
+    return 1;
+  }
+  if(fam === 'energy'){
+    if(['WTI','BRENT','NG','GASOLINE','HEATING','BCOM'].includes(id)) return 6;
+    if(cls.includes('Energy') || cls.includes('Commod')) return 5;
+    if(['SPX','DXY','US10Y'].includes(id)) return 2;
+    return 1;
+  }
+  if(fam === 'ag_weather'){
+    if(['WHEAT','CORN','SOY','BCOM'].includes(id)) return 6;
+    if(cls.includes('Agriculture') || cls.includes('Commod')) return 5;
+    return 1;
+  }
+  if(fam === 'positioning'){
+    if(['GOLD','SILVER','COPPER','WTI','BRENT','NG','WHEAT','CORN','SOY','SPX','NDX','DXY','US10Y'].includes(id)) return 4;
     return 1;
   }
   return 0;
 }
 function macroRegimePoint(score){
   const n = Number(score||0);
-  if(n >= 2) return 2;
+  if(n >= 4) return 2;
   if(n > 0) return 1;
-  if(n <= -2) return -2;
+  if(n <= -4) return -2;
   if(n < 0) return -1;
   return 0;
+}
+function macroRegimeRelevanceMultiplier(relevance){
+  const r = String(relevance || '').toLowerCase();
+  if(r.includes('primary')) return 1;
+  if(r.includes('secondary')) return 0.65;
+  if(r.includes('context')) return 0.35;
+  return 0.2;
 }
 function factorStrengthLabel(score){
   const p = macroRegimePoint(score);
@@ -230,6 +301,11 @@ function factorStrengthLabel(score){
   if(p <= -2) return 'strong negative';
   return 'neutral';
 }
+function canonicalMacroFactorKey(family, factor){
+  const name = String(factor.name || factor.group || '').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
+  const source = String(factor.source || '').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim().slice(0,80);
+  return `${family.id}::${name || 'factor'}::${source || 'source'}`;
+}
 function computeMacroRegime(){
   const chosen = new Map();
   for(const asset of ASSETS || []){
@@ -238,57 +314,74 @@ function computeMacroRegime(){
       if(!['Primary','Secondary','Contextual'].includes(String(factor.relevance||''))) continue;
       const score = Number(factor.score);
       if(!Number.isFinite(score) || score === 0) continue;
-      const bucket = macroRegimeFactorBucket(factor);
-      if(!bucket) continue;
-      const key = `${bucket}::${String(factor.name||'')}::${String(factor.source||'')}::${String(factor.derived||'').slice(0,220)}`;
-      const rank = macroRegimeAnchorRank(asset, bucket, factor);
+      const family = macroRegimeFamilyFor(factor, asset);
+      if(!family) continue;
+      const key = canonicalMacroFactorKey(family, factor);
+      const rank = macroRegimeAnchorRank(asset, family, factor);
       const current = chosen.get(key);
       if(!current || rank > current.rank || (rank === current.rank && Math.abs(score) > Math.abs(current.score))){
-        chosen.set(key, {bucket, score, rank, factor, asset});
+        chosen.set(key, {family, score, rank, factor, asset});
       }
     }
   }
-  let growthScore = 0;
-  let inflationScore = 0;
-  const growthDrivers = [];
-  const inflationDrivers = [];
+  const familyTotals = new Map();
   for(const item of chosen.values()){
     const point = macroRegimePoint(item.score);
     if(!point) continue;
-    const driver = {name:item.factor.name || item.factor.group || 'factor', point, score:item.score, source:item.factor.source || '', asset:item.asset.symbol || item.asset.id || ''};
-    if(item.bucket === 'growth'){
-      growthScore += point;
-      growthDrivers.push(driver);
-    } else if(item.bucket === 'inflation'){
-      inflationScore += point;
-      inflationDrivers.push(driver);
+    const mult = macroRegimeRelevanceMultiplier(item.factor.relevance);
+    const contribution = point * item.family.weight * mult;
+    const id = item.family.id;
+    const current = familyTotals.get(id) || {family:item.family, raw:0, drivers:[]};
+    current.raw += contribution;
+    current.drivers.push({
+      name:item.factor.name || item.factor.group || item.family.label,
+      contribution,
+      point,
+      score:item.score,
+      source:item.factor.source || '',
+      asset:item.asset.symbol || item.asset.id || ''
+    });
+    familyTotals.set(id, current);
+  }
+  let growthScore = 0;
+  let inflationPolicyScore = 0;
+  const growthDrivers = [];
+  const inflationDrivers = [];
+  const familyBreakdown = [];
+  for(const item of familyTotals.values()){
+    const capped = clamp(item.raw, -item.family.cap, item.family.cap);
+    const rounded = Math.round(capped * 10) / 10;
+    if(!rounded) continue;
+    const row = {family:item.family.label, axis:item.family.axis, raw:item.raw, capped:rounded, drivers:item.drivers};
+    familyBreakdown.push(row);
+    if(item.family.axis === 'growth'){
+      growthScore += rounded;
+      growthDrivers.push(...item.drivers);
+    } else if(item.family.axis === 'inflationPolicy'){
+      inflationPolicyScore += rounded;
+      inflationDrivers.push(...item.drivers);
     }
   }
-  const resolveAxis = (score, drivers) => {
-    if(score > 0) return 'positive';
-    if(score < 0) return 'negative';
-    const strongest = [...drivers].sort((a,b)=>Math.abs(b.point)-Math.abs(a.point))[0];
-    if(strongest?.point > 0) return 'positive';
-    if(strongest?.point < 0) return 'negative';
-    return null;
-  };
-  const growthDirection = resolveAxis(growthScore, growthDrivers);
-  const inflationDirection = resolveAxis(inflationScore, inflationDrivers);
+  growthScore = Math.round(growthScore * 10) / 10;
+  inflationPolicyScore = Math.round(inflationPolicyScore * 10) / 10;
+  const growthDirection = growthScore > 0 ? 'positive' : growthScore < 0 ? 'negative' : null;
+  const inflationDirection = inflationPolicyScore > 0 ? 'positive' : inflationPolicyScore < 0 ? 'negative' : null;
   if(!growthDirection || !inflationDirection){
-    return {regime:'Unavailable', growthScore, inflationScore, growthDirection, inflationDirection, explanation:'Regime requires live growth and inflation factor rows from the scanner data.'};
+    return {regime:'Unavailable', growthScore, inflationScore:inflationPolicyScore, growthDirection, inflationDirection, explanation:'Regime requires live weighted growth and inflation / policy factor rows from the scanner data.'};
   }
   let regime = 'Goldilocks';
   if(growthDirection === 'positive' && inflationDirection === 'positive') regime = 'Reflation';
   else if(growthDirection === 'negative' && inflationDirection === 'positive') regime = 'Stagflation';
   else if(growthDirection === 'negative' && inflationDirection === 'negative') regime = 'Deflation';
   const reads = {
-    'Goldilocks':'Growth pressure is supportive while inflation pressure is easing.',
-    'Reflation':'Growth pressure is supportive while inflation pressure is elevated.',
-    'Stagflation':'Growth pressure is weakening while inflation pressure remains elevated.',
-    'Deflation':'Growth pressure is weakening while inflation pressure is easing.'
+    'Goldilocks':'Growth evidence is supportive while inflation, rates, and policy pressure are easing.',
+    'Reflation':'Growth evidence remains supportive, but inflation, rates, and policy pressure are elevated.',
+    'Stagflation':'Growth evidence is weakening while inflation, rates, and policy pressure remain elevated.',
+    'Deflation':'Growth evidence is weakening while inflation, rates, and policy pressure are easing.'
   };
-  return {regime, growthScore, inflationScore, growthDirection, inflationDirection, explanation:reads[regime], growthDrivers, inflationDrivers};
+  return {regime, growthScore, inflationScore:inflationPolicyScore, growthDirection, inflationDirection, explanation:reads[regime], growthDrivers, inflationDrivers, familyBreakdown};
 }
+
 function renderMacroRegimeCard(){
   const box = $('macroRegimeCard');
   if(!box) return;
@@ -299,7 +392,7 @@ function renderMacroRegimeCard(){
   }
   const growthClass = r.growthScore > 0 ? 'score-pos' : 'score-neg';
   const inflationClass = r.inflationScore > 0 ? 'score-pos' : 'score-neg';
-  box.innerHTML = `<div class="flex flex-col md:flex-row md:items-start md:justify-between gap-3"><div><div class="tiny-label">Current Macro Regime</div><h3 class="text-2xl font-bold text-slate-100 mt-1">${esc(r.regime)}</h3><p class="text-xs text-slate-500 mt-1">Four-quad read from the scanner's live public-source factor rows.</p></div><span class="pill self-start md:self-auto">Growth ${esc(r.growthDirection)} / Inflation ${esc(r.inflationDirection)}</span></div><div class="macro-regime-grid"><div class="macro-regime-stat"><div class="tiny-label">Growth score</div><div class="macro-regime-value ${growthClass}">${fmtScore(r.growthScore)}</div></div><div class="macro-regime-stat"><div class="tiny-label">Inflation score</div><div class="macro-regime-value ${inflationClass}">${fmtScore(r.inflationScore)}</div></div></div><div class="macro-regime-read">${esc(r.explanation)}</div>`;
+  box.innerHTML = `<div class="flex flex-col md:flex-row md:items-start md:justify-between gap-3"><div><div class="tiny-label">Current Macro Regime</div><h3 class="text-2xl font-bold text-slate-100 mt-1">${esc(r.regime)}</h3><p class="text-xs text-slate-500 mt-1">Weighted four-quad summary from live public-source factor rows.</p></div><span class="pill self-start md:self-auto">Growth ${esc(r.growthDirection)} / Inflation-policy ${esc(r.inflationDirection)}</span></div><div class="macro-regime-grid"><div class="macro-regime-stat"><div class="tiny-label">Growth score</div><div class="macro-regime-value ${growthClass}">${fmtScore(r.growthScore)}</div></div><div class="macro-regime-stat"><div class="tiny-label">Inflation / policy score</div><div class="macro-regime-value ${inflationClass}">${fmtScore(r.inflationScore)}</div></div></div><div class="macro-regime-read">${esc(r.explanation)}</div>`;
 }
 
 function renderRegimeSnapshot(){
