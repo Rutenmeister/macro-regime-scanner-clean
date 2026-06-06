@@ -1,12 +1,12 @@
 {
   "sourceId": "NOAA_NWS",
   "sourceName": "NOAA/National Weather Service public weather alerts",
-  "retrievedAt": "2026-05-30T08:43:30.351362+00:00",
+  "retrievedAt": "2026-06-06T09:18:54.462557+00:00",
   "endpoint": "https://api.weather.gov/alerts/active?status=actual&message_type=alert",
   "fetchAttempts": [
     {
       "endpoint": "https://api.weather.gov/alerts/active?status=actual&message_type=alert",
-      "features": 61
+      "features": 149
     }
   ],
   "categoryCounts": {
@@ -16,24 +16,31 @@
       "sampleEvents": []
     },
     "COLD_FREEZE_STRESS": {
-      "count": 0,
-      "weighted": 0,
-      "sampleEvents": []
+      "count": 4,
+      "weighted": 5,
+      "sampleEvents": [
+        "Frost Advisory",
+        "Frost Advisory",
+        "Frost Advisory",
+        "Freeze Warning"
+      ]
     },
     "WINTER_STORM_STRESS": {
-      "count": 0,
-      "weighted": 0,
-      "sampleEvents": []
+      "count": 1,
+      "weighted": 3,
+      "sampleEvents": [
+        "Winter Storm Watch"
+      ]
     },
     "FLOOD_STRESS": {
-      "count": 13,
-      "weighted": 29,
+      "count": 20,
+      "weighted": 50,
       "sampleEvents": [
         "Flash Flood Warning",
         "Flood Advisory",
+        "Flood Warning",
         "Flash Flood Warning",
-        "Flood Advisory",
-        "Flood Advisory"
+        "Flood Warning"
       ]
     },
     "SEVERE_CONVECTIVE_STRESS": {
@@ -47,9 +54,15 @@
       "sampleEvents": []
     },
     "FIRE_WEATHER_STRESS": {
-      "count": 0,
-      "weighted": 0,
-      "sampleEvents": []
+      "count": 19,
+      "weighted": 57,
+      "sampleEvents": [
+        "Red Flag Warning",
+        "Fire Weather Watch",
+        "Red Flag Warning",
+        "Red Flag Warning",
+        "Red Flag Warning"
+      ]
     },
     "DROUGHT_STRESS": {
       "count": 0,
@@ -60,423 +73,439 @@
   "eventCountsTop": [
     [
       "Small Craft Advisory",
-      31
+      44
+    ],
+    [
+      "Air Quality Alert",
+      26
+    ],
+    [
+      "Special Weather Statement",
+      19
+    ],
+    [
+      "Red Flag Warning",
+      12
+    ],
+    [
+      "Fire Weather Watch",
+      7
+    ],
+    [
+      "Flash Flood Warning",
+      6
+    ],
+    [
+      "Flood Watch",
+      6
     ],
     [
       "Flood Advisory",
       5
     ],
     [
-      "Gale Warning",
-      5
-    ],
-    [
-      "Flood Watch",
-      5
-    ],
-    [
-      "Special Weather Statement",
+      "Dense Fog Advisory",
       3
     ],
     [
-      "Flash Flood Warning",
+      "Flood Warning",
+      3
+    ],
+    [
+      "Beach Hazards Statement",
+      3
+    ],
+    [
+      "Frost Advisory",
+      3
+    ],
+    [
+      "Wind Advisory",
+      3
+    ],
+    [
+      "Marine Weather Statement",
       2
     ],
     [
-      "High Surf Advisory",
+      "Gale Warning",
       2
+    ],
+    [
+      "Hydrologic Outlook",
+      2
+    ],
+    [
+      "Freeze Warning",
+      1
+    ],
+    [
+      "Winter Storm Watch",
+      1
     ],
     [
       "Lake Wind Advisory",
       1
-    ],
-    [
-      "High Wind Watch",
-      1
-    ],
-    [
-      "Rip Current Statement",
-      1
-    ],
-    [
-      "Beach Hazards Statement",
-      1
-    ],
-    [
-      "Wind Advisory",
-      1
-    ],
-    [
-      "Gale Watch",
-      1
-    ],
-    [
-      "Flood Warning",
-      1
-    ],
-    [
-      "Hydrologic Outlook",
-      1
     ]
   ],
-  "totalActiveAlerts": 61,
-  "weightedActiveAlerts": 92,
+  "totalActiveAlerts": 149,
+  "weightedActiveAlerts": 249,
   "severityCounts": {
-    "Severe": 9,
-    "Moderate": 13,
-    "Minor": 38,
-    "Unknown": 1
+    "Moderate": 30,
+    "Minor": 56,
+    "Unknown": 28,
+    "Severe": 35
   },
   "sampleAlerts": [
     {
+      "event": "Special Weather Statement",
+      "severity": "Moderate",
+      "effective": "2026-06-06T05:15:00-04:00",
+      "area": "Starke; Marshall; Fulton; Southern La Porte",
+      "headline": "Special Weather Statement issued June 6 at 5:15AM EDT by NWS Northern Indiana"
+    },
+    {
+      "event": "Special Weather Statement",
+      "severity": "Moderate",
+      "effective": "2026-06-06T05:00:00-04:00",
+      "area": "Wabash; Huntington",
+      "headline": "Special Weather Statement issued June 6 at 5:00AM EDT by NWS Northern Indiana"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-06-06T01:56:00-07:00",
+      "area": "Central U.S. Waters Strait Of Juan De Fuca; East Entrance U.S. Waters Strait Of Juan De Fuca",
+      "headline": "Small Craft Advisory issued June 6 at 1:56AM PDT until June 7 at 5:00AM PDT by NWS Seattle WA"
+    },
+    {
+      "event": "Dense Fog Advisory",
+      "severity": "Moderate",
+      "effective": "2026-06-06T02:56:00-06:00",
+      "area": "Yuma County; Kit Carson County; Cheyenne; Rawlins; Decatur; Sherman; Thomas; Dundy; Hitchcock; Red Willow",
+      "headline": "Dense Fog Advisory issued June 6 at 2:56AM MDT until June 6 at 9:00AM MDT by NWS Goodland KS"
+    },
+    {
+      "event": "Special Weather Statement",
+      "severity": "Moderate",
+      "effective": "2026-06-06T03:55:00-05:00",
+      "area": "Republic",
+      "headline": "Special Weather Statement issued June 6 at 3:55AM CDT by NWS Topeka KS"
+    },
+    {
+      "event": "Air Quality Alert",
+      "severity": "Unknown",
+      "effective": "2026-06-06T04:54:00-04:00",
+      "area": "Stokes; Rockingham; Caswell",
+      "headline": "Air Quality Alert issued June 6 at 4:54AM EDT by NWS Blacksburg VA"
+    },
+    {
+      "event": "Dense Fog Advisory",
+      "severity": "Minor",
+      "effective": "2026-06-06T04:52:00-04:00",
+      "area": "Holland to Grand Haven MI; Grand Haven to Whitehall MI; Whitehall to Pentwater MI; Pentwater to Manistee MI",
+      "headline": "Dense Fog Advisory issued June 6 at 4:52AM EDT until June 6 at 2:00PM EDT by NWS Grand Rapids MI"
+    },
+    {
+      "event": "Special Weather Statement",
+      "severity": "Moderate",
+      "effective": "2026-06-06T03:47:00-05:00",
+      "area": "Hubbard; Wilkin; West Otter Tail; East Otter Tail; Wadena; Grant",
+      "headline": "Special Weather Statement issued June 6 at 3:47AM CDT by NWS Grand Forks ND"
+    },
+    {
+      "event": "Special Weather Statement",
+      "severity": "Moderate",
+      "effective": "2026-06-06T03:41:00-05:00",
+      "area": "North Itasca; North Cass; South Itasca; South Cass; Crow Wing; Northern Aitkin; South Aitkin",
+      "headline": "Special Weather Statement issued June 6 at 3:41AM CDT by NWS Duluth MN"
+    },
+    {
       "event": "Flash Flood Warning",
       "severity": "Severe",
-      "effective": "2026-05-30T04:25:00-04:00",
-      "area": "Anderson, TN; Morgan, TN",
-      "headline": "Flash Flood Warning issued May 30 at 4:25AM EDT until May 30 at 8:30AM EDT by NWS Morristown TN"
-    },
-    {
-      "event": "Lake Wind Advisory",
-      "severity": "Moderate",
-      "effective": "2026-05-30T02:17:00-06:00",
-      "area": "Lower Snake River Plain",
-      "headline": "Lake Wind Advisory issued May 30 at 2:17AM MDT until May 30 at 9:00PM MDT by NWS Pocatello ID"
+      "effective": "2026-06-06T03:39:00-05:00",
+      "area": "Caddo, OK; Comanche, OK; Grady, OK",
+      "headline": "Flash Flood Warning issued June 6 at 3:39AM CDT until June 6 at 7:00AM CDT by NWS Norman OK"
     },
     {
       "event": "Special Weather Statement",
       "severity": "Moderate",
-      "effective": "2026-05-30T04:16:00-04:00",
-      "area": "Ontonagon; Baraga; Marquette; Gogebic; Iron; Dickinson; Southern Houghton",
-      "headline": "Special Weather Statement issued May 30 at 4:16AM EDT by NWS Marquette MI"
+      "effective": "2026-06-06T03:37:00-05:00",
+      "area": "Traverse; Big Stone",
+      "headline": "Special Weather Statement issued June 6 at 3:37AM CDT by NWS Aberdeen SD"
     },
     {
       "event": "Special Weather Statement",
       "severity": "Moderate",
-      "effective": "2026-05-30T03:11:00-05:00",
-      "area": "Cloud; Ottawa",
-      "headline": "Special Weather Statement issued May 30 at 3:11AM CDT by NWS Topeka KS"
-    },
-    {
-      "event": "Flood Advisory",
-      "severity": "Minor",
-      "effective": "2026-05-30T04:09:00-04:00",
-      "area": "Anderson, TN; Morgan, TN",
-      "headline": "Flood Advisory issued May 30 at 4:09AM EDT until May 30 at 7:15AM EDT by NWS Morristown TN"
-    },
-    {
-      "event": "Flash Flood Warning",
-      "severity": "Severe",
-      "effective": "2026-05-30T03:46:00-04:00",
-      "area": "Greene, TN",
-      "headline": "Flash Flood Warning issued May 30 at 3:46AM EDT until May 30 at 7:45AM EDT by NWS Morristown TN"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-05-30T02:34:00-05:00",
-      "area": "Oak Point to Saxon Harbor WI",
-      "headline": "Small Craft Advisory issued May 30 at 2:34AM CDT until May 30 at 10:00PM CDT by NWS Duluth MN"
-    },
-    {
-      "event": "High Wind Watch",
-      "severity": "Severe",
-      "effective": "2026-05-30T01:22:00-06:00",
-      "area": "Central Laramie Range and Southwest Platte County; North Snowy Range Foothills; South Laramie Range; South Laramie Range Foothills",
-      "headline": "High Wind Watch issued May 30 at 1:22AM MDT until May 31 at 3:00PM MDT by NWS Cheyenne WY"
-    },
-    {
-      "event": "Flood Advisory",
-      "severity": "Minor",
-      "effective": "2026-05-30T03:10:00-04:00",
-      "area": "Oxford, ME; Carroll, NH",
-      "headline": "Flood Advisory issued May 30 at 3:10AM EDT until May 30 at 8:00AM EDT by NWS Gray ME"
-    },
-    {
-      "event": "Flood Advisory",
-      "severity": "Minor",
-      "effective": "2026-05-30T01:29:00-05:00",
-      "area": "Clay, AL",
-      "headline": "Flood Advisory issued May 30 at 1:29AM CDT until May 30 at 4:30AM CDT by NWS Birmingham AL"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-05-30T02:28:00-04:00",
-      "area": "Tidal Potomac from Key Bridge to Indian Head MD; Tidal Potomac from Indian Head to Cobb Island MD; Patuxent River to Broomes Island MD",
-      "headline": "Small Craft Advisory issued May 30 at 2:28AM EDT until May 30 at 8:00PM EDT by NWS Baltimore MD/Washington DC"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-05-30T02:28:00-04:00",
-      "area": "Chesapeake Bay from Sandy Point to North Beach MD; Chesapeake Bay from North Beach to Drum Point MD; Eastern Bay; Choptank River to Cambridge MD and the Little Choptank River",
-      "headline": "Small Craft Advisory issued May 30 at 2:28AM EDT until May 30 at 11:00PM EDT by NWS Baltimore MD/Washington DC"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-05-30T02:28:00-04:00",
-      "area": "Chesapeake Bay from Drum Point MD to Smith Point VA; Tidal Potomac from Cobb Island MD to Smith Point VA; Tangier Sound and the inland waters surrounding Bloodsworth Island",
-      "headline": "Small Craft Advisory issued May 30 at 2:28AM EDT until May 30 at 11:00PM EDT by NWS Baltimore MD/Washington DC"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-05-30T02:28:00-04:00",
-      "area": "Chesapeake Bay north of Pooles Island MD; Chesapeake Bay from Pooles Island to Sandy Point MD; Patapsco River including Baltimore Harbor; Chester River to Queenstown MD",
-      "headline": "Small Craft Advisory issued May 30 at 2:28AM EDT until May 30 at 8:00PM EDT by NWS Baltimore MD/Washington DC"
-    },
-    {
-      "event": "Gale Warning",
-      "severity": "Moderate",
-      "effective": "2026-05-30T02:25:00-04:00",
-      "area": "Fire Island Inlet NY to Moriches Inlet NY out 20 NM",
-      "headline": "Gale Warning issued May 30 at 2:25AM EDT until May 30 at 8:00PM EDT by NWS Upton NY"
-    },
-    {
-      "event": "Gale Warning",
-      "severity": "Moderate",
-      "effective": "2026-05-30T02:25:00-04:00",
-      "area": "South Shore Bays from Jones Inlet through Shinnecock Bay",
-      "headline": "Gale Warning issued May 30 at 2:25AM EDT until May 30 at 8:00PM EDT by NWS Upton NY"
-    },
-    {
-      "event": "Gale Warning",
-      "severity": "Moderate",
-      "effective": "2026-05-30T02:25:00-04:00",
-      "area": "Waters from Fire Island Inlet NY to Moriches Inlet NY from 20 to 60 NM",
-      "headline": "Gale Warning issued May 30 at 2:25AM EDT until May 30 at 8:00PM EDT by NWS Upton NY"
+      "effective": "2026-06-06T03:33:00-05:00",
+      "area": "Douglas; Todd; Morrison; Mille Lacs; Stevens; Pope; Stearns; Benton; Sherburne; Lac Qui Parle; Swift; Chippewa; Kandiyohi; Meeker; Wright",
+      "headline": "Special Weather Statement issued June 6 at 3:33AM CDT by NWS Twin Cities/Chanhassen MN"
     },
     {
       "event": "Special Weather Statement",
       "severity": "Moderate",
-      "effective": "2026-05-30T01:24:00-05:00",
-      "area": "Koochiching; North St. Louis; Northern Cook/Northern Lake; North Cass; South Cass; Crow Wing; South Aitkin; Pine",
-      "headline": "Special Weather Statement issued May 30 at 1:24AM CDT by NWS Duluth MN"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-05-30T02:21:00-04:00",
-      "area": "Coastal waters from South Santee River to Edisto Beach SC out 20 NM",
-      "headline": "Small Craft Advisory issued May 30 at 2:21AM EDT until May 31 at 10:00PM EDT by NWS Charleston SC"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-05-30T02:21:00-04:00",
-      "area": "Coastal waters from Edisto Beach SC to Savannah GA out 20 NM",
-      "headline": "Small Craft Advisory issued May 30 at 2:21AM EDT until May 31 at 10:00PM EDT by NWS Charleston SC"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-05-30T02:21:00-04:00",
-      "area": "Waters from Savannah GA to Altamaha Sound GA extending from 20 to 60 NM",
-      "headline": "Small Craft Advisory issued May 30 at 2:21AM EDT until June 1 at 8:00AM EDT by NWS Charleston SC"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-05-30T02:08:00-04:00",
-      "area": "South Haven to Holland MI; Holland to Grand Haven MI; Grand Haven to Whitehall MI; Whitehall to Pentwater MI",
-      "headline": "Small Craft Advisory issued May 30 at 2:08AM EDT until May 30 at 11:00AM EDT by NWS Grand Rapids MI"
+      "effective": "2026-06-06T03:27:00-05:00",
+      "area": "Taylor; Clark; Buffalo; Trempealeau; Jackson",
+      "headline": "Special Weather Statement issued June 6 at 3:27AM CDT by NWS La Crosse WI"
     },
     {
       "event": "Flood Advisory",
       "severity": "Minor",
-      "effective": "2026-05-30T02:06:00-04:00",
-      "area": "Greene, TN; Unicoi, TN; Washington, TN",
-      "headline": "Flood Advisory issued May 30 at 2:06AM EDT until May 30 at 5:15AM EDT by NWS Morristown TN"
-    },
-    {
-      "event": "Gale Warning",
-      "severity": "Moderate",
-      "effective": "2026-05-30T01:53:00-04:00",
-      "area": "Waters from Eastport ME to Schoodic Point ME from 25 to 60 NM or the Hague Line; Waters from Schoodic Point ME to Stonington ME from 25 to 60 NM",
-      "headline": "Gale Warning issued May 30 at 1:53AM EDT until May 30 at 8:00PM EDT by NWS Caribou ME"
-    },
-    {
-      "event": "Gale Warning",
-      "severity": "Moderate",
-      "effective": "2026-05-30T01:53:00-04:00",
-      "area": "Coastal Waters from Eastport, ME to Schoodic Point, ME out 25 NM; Coastal Waters from Schoodic Point, ME to Stonington, ME out 25 NM",
-      "headline": "Gale Warning issued May 30 at 1:53AM EDT until May 30 at 11:00AM EDT by NWS Caribou ME"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-05-30T01:53:00-04:00",
-      "area": "Intra Coastal Waters from Schoodic Point, ME to Stonington, ME",
-      "headline": "Small Craft Advisory issued May 30 at 1:53AM EDT until May 30 at 11:00AM EDT by NWS Caribou ME"
-    },
-    {
-      "event": "Flood Advisory",
-      "severity": "Minor",
-      "effective": "2026-05-30T01:45:00-04:00",
-      "area": "Madison, NC",
-      "headline": "Flood Advisory issued May 30 at 1:45AM EDT until May 30 at 4:45AM EDT by NWS Greenville-Spartanburg SC"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-05-30T01:30:00-04:00",
-      "area": "Neuse and Bay Rivers",
-      "headline": "Small Craft Advisory issued May 30 at 1:30AM EDT until May 31 at 2:00AM EDT by NWS Newport/Morehead City NC"
-    },
-    {
-      "event": "Rip Current Statement",
-      "severity": "Moderate",
-      "effective": "2026-05-30T00:09:00-05:00",
-      "area": "Mobile Coastal; Baldwin Coastal; Escambia Coastal; Santa Rosa Coastal; Okaloosa Coastal",
-      "headline": "Rip Current Statement issued May 30 at 12:09AM CDT until May 30 at 6:00AM CDT by NWS Mobile AL"
-    },
-    {
-      "event": "Beach Hazards Statement",
-      "severity": "Moderate",
-      "effective": "2026-05-30T00:08:00-05:00",
-      "area": "Carlton/South St. Louis; Douglas",
-      "headline": "Beach Hazards Statement issued May 30 at 12:08AM CDT until May 30 at 10:00PM CDT by NWS Duluth MN"
-    },
-    {
-      "event": "Wind Advisory",
-      "severity": "Moderate",
-      "effective": "2026-05-29T23:59:00-04:00",
-      "area": "Carbon; Monroe",
-      "headline": "Wind Advisory issued May 29 at 11:59PM EDT until May 30 at 2:00PM EDT by NWS Mount Holly NJ"
-    },
-    {
-      "event": "Gale Watch",
-      "severity": "Moderate",
-      "effective": "2026-05-29T20:10:00-07:00",
-      "area": "Coastal waters from Cape Blanco OR to Pt. St. George CA out 10 nm; Waters from Cape Blanco OR to Pt. St. George CA from 10 to 60 nm",
-      "headline": "Gale Watch issued May 29 at 8:10PM PDT until June 1 at 2:00AM PDT by NWS Medford OR"
-    },
-    {
-      "event": "High Surf Advisory",
-      "severity": "Minor",
-      "effective": "2026-05-29T15:30:00-10:00",
-      "area": "Niihau; Kauai Southwest; Waianae Coast; Kahoolawe; Maui Leeward West; Kona; Kauai South; East Honolulu; Honolulu Metro; Ewa Plain; Molokai Leeward South; Lanai Leeward; Lanai South; Maui Central Valley South; South Maui/Upcountry; South Hal",
-      "headline": "High Surf Advisory issued May 29 at 3:30PM HST until May 31 at 6:00PM HST by NWS Honolulu HI"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-05-29T21:07:00-04:00",
-      "area": "Ontonagon to Upper Entrance of Portage Canal MI",
-      "headline": "Small Craft Advisory issued May 29 at 9:07PM EDT until May 30 at 6:00AM EDT by NWS Marquette MI"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-05-29T15:48:00-08:00",
-      "area": "Cape Tolstoi to Unalga Pass from 15 to 100 NM",
-      "headline": "Small Craft Advisory issued May 29 at 3:48PM AKDT until May 31 at 5:00AM AKDT by NWS Anchorage AK"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-05-29T15:48:00-08:00",
-      "area": "Kiska to Attu Bering Side",
-      "headline": "Small Craft Advisory issued May 29 at 3:48PM AKDT until May 31 at 5:00AM AKDT by NWS Anchorage AK"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-05-29T15:48:00-08:00",
-      "area": "Nikolski to Seguam Pacific Side from 15 to 75 NM",
-      "headline": "Small Craft Advisory issued May 29 at 3:48PM AKDT until May 31 at 5:00AM AKDT by NWS Anchorage AK"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-05-29T15:48:00-08:00",
-      "area": "Unalga Pass to Nikolski Pacific Side from 15 to 85 NM",
-      "headline": "Small Craft Advisory issued May 29 at 3:48PM AKDT until May 31 at 5:00AM AKDT by NWS Anchorage AK"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-05-29T15:48:00-08:00",
-      "area": "Kiska to Attu Pacific Side",
-      "headline": "Small Craft Advisory issued May 29 at 3:48PM AKDT until May 31 at 5:00AM AKDT by NWS Anchorage AK"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-05-29T15:48:00-08:00",
-      "area": "Nikolski to Seguam Bering Side out to 15 NM",
-      "headline": "Small Craft Advisory issued May 29 at 3:48PM AKDT until May 30 at 5:00AM AKDT by NWS Anchorage AK"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-05-29T15:48:00-08:00",
-      "area": "Nikolski to Seguam Pacfic Side out to 15 NM",
-      "headline": "Small Craft Advisory issued May 29 at 3:48PM AKDT until May 30 at 5:00PM AKDT by NWS Anchorage AK"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-05-29T15:48:00-08:00",
-      "area": "Nikolski to Seguam Bering Side from 15 to 85 NM",
-      "headline": "Small Craft Advisory issued May 29 at 3:48PM AKDT until May 30 at 5:00AM AKDT by NWS Anchorage AK"
+      "effective": "2026-06-06T03:25:00-05:00",
+      "area": "Clay, NE; Nuckolls, NE; Thayer, NE",
+      "headline": "Flood Advisory issued June 6 at 3:25AM CDT until June 6 at 7:00AM CDT by NWS Hastings NE"
     },
     {
       "event": "Flood Warning",
       "severity": "Severe",
-      "effective": "2026-05-29T17:43:00-05:00",
-      "area": "Ottawa, KS; Saline, KS",
-      "headline": "Flood Warning issued May 29 at 5:43PM CDT until May 30 at 1:44PM CDT by NWS Topeka KS"
+      "effective": "2026-06-06T03:25:00-05:00",
+      "area": "Comanche, OK; Cotton, OK; Tillman, OK; Wichita, TX",
+      "headline": "Flood Warning issued June 6 at 3:25AM CDT until June 6 at 7:00AM CDT by NWS Norman OK"
     },
     {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-05-29T14:24:00-08:00",
-      "area": "Cook Inlet Kalgin Island to Point Bede",
-      "headline": "Small Craft Advisory issued May 29 at 2:24PM AKDT until May 30 at 5:00AM AKDT by NWS Anchorage AK"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-05-29T14:24:00-08:00",
-      "area": "Cook Inlet North Kalgin Island",
-      "headline": "Small Craft Advisory issued May 29 at 2:24PM AKDT until May 30 at 5:00AM AKDT by NWS Anchorage AK"
-    },
-    {
-      "event": "Flood Watch",
+      "event": "Flash Flood Warning",
       "severity": "Severe",
-      "effective": "2026-05-29T13:22:00-06:00",
-      "area": "East Glacier Park Region; Northern High Plains; Eastern Glacier, Western Toole, and Central Pondera; Southern Rocky Mountain Front; Southern High Plains; Eastern Pondera and Eastern Teton; Cascade County below 5000ft; Gates of the Mountains",
-      "headline": "Flood Watch issued May 29 at 1:22PM MDT until June 1 at 6:00PM MDT by NWS Great Falls MT"
+      "effective": "2026-06-06T03:23:00-05:00",
+      "area": "Bell, TX; Falls, TX",
+      "headline": "Flash Flood Warning issued June 6 at 3:23AM CDT until June 6 at 6:30AM CDT by NWS Fort Worth TX"
     },
     {
-      "event": "High Surf Advisory",
+      "event": "Beach Hazards Statement",
+      "severity": "Moderate",
+      "effective": "2026-06-06T04:10:00-04:00",
+      "area": "Chautauqua; Southern Erie",
+      "headline": "Beach Hazards Statement issued June 6 at 4:10AM EDT until June 6 at 6:00PM EDT by NWS Buffalo NY"
+    },
+    {
+      "event": "Flood Warning",
+      "severity": "Severe",
+      "effective": "2026-06-06T03:09:00-05:00",
+      "area": "Gage, NE; Jefferson, NE; Saline, NE; Seward, NE",
+      "headline": "Flood Warning issued June 6 at 3:09AM CDT until June 6 at 12:00PM CDT by NWS Omaha/Valley NE"
+    },
+    {
+      "event": "Small Craft Advisory",
       "severity": "Minor",
-      "effective": "2026-05-29T14:36:00-04:00",
-      "area": "Coastal York; Coastal Cumberland; Coastal Rockingham",
-      "headline": "High Surf Advisory issued May 29 at 2:36PM EDT until May 30 at 8:00PM EDT by NWS Gray ME"
+      "effective": "2026-06-06T04:08:00-04:00",
+      "area": "Niagara River to Hamlin Beach NY; Hamlin Beach to Sodus Bay NY",
+      "headline": "Small Craft Advisory issued June 6 at 4:08AM EDT until June 6 at 8:00PM EDT by NWS Buffalo NY"
     },
     {
-      "event": "Hydrologic Outlook",
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-06-06T04:08:00-04:00",
+      "area": "Sodus Bay to Mexico Bay NY; Mexico Bay NY to the St. Lawrence River",
+      "headline": "Small Craft Advisory issued June 6 at 4:08AM EDT until June 7 at 12:00AM EDT by NWS Buffalo NY"
+    },
+    {
+      "event": "Dense Fog Advisory",
+      "severity": "Minor",
+      "effective": "2026-06-06T03:04:00-05:00",
+      "area": "Lake Michigan from Seul Choix Point to Rock Island Passage 5NM offshore to Mid Lake; Lake Michigan South of a line from Seul Choix Point to the Mackinac Bridge and North of a line from Charlevoix MI to South Fox Island 5NM offshore; Lake Mi",
+      "headline": "Dense Fog Advisory issued June 6 at 3:04AM CDT until June 6 at 1:00PM CDT by NWS Milwaukee/Sullivan WI"
+    },
+    {
+      "event": "Special Weather Statement",
+      "severity": "Moderate",
+      "effective": "2026-06-06T04:00:00-04:00",
+      "area": "Emmet; Cheboygan; Leelanau; Antrim; Otsego; Benzie; Grand Traverse; Kalkaska; Manistee; Wexford; Eastern Mackinac; Charlevoix",
+      "headline": "Special Weather Statement issued June 6 at 4:00AM EDT by NWS Gaylord MI"
+    },
+    {
+      "event": "Air Quality Alert",
       "severity": "Unknown",
-      "effective": "2026-05-29T12:23:00-06:00",
-      "area": "Granite, MT; Missoula, MT; Powell, MT; Ravalli, MT",
-      "headline": "Hydrologic Outlook issued May 29 at 12:23PM MDT by NWS Missoula MT"
+      "effective": "2026-06-06T03:56:00-04:00",
+      "area": "Davie",
+      "headline": "Air Quality Alert issued June 6 at 3:56AM EDT by NWS Greenville-Spartanburg SC"
     },
     {
-      "event": "Flood Watch",
-      "severity": "Severe",
-      "effective": "2026-05-29T12:13:00-06:00",
-      "area": "West Glacier Region; Flathead/Mission Valleys",
-      "headline": "Flood Watch issued May 29 at 12:13PM MDT until June 1 at 12:00PM MDT by NWS Missoula MT"
+      "event": "Beach Hazards Statement",
+      "severity": "Moderate",
+      "effective": "2026-06-06T03:48:00-04:00",
+      "area": "Lake; Ashtabula Lakeshore; Northern Erie",
+      "headline": "Beach Hazards Statement issued June 6 at 3:48AM EDT until June 6 at 8:00PM EDT by NWS Cleveland OH"
     },
     {
-      "event": "Flood Watch",
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-06-06T03:48:00-04:00",
+      "area": "Willowick to Geneva-on-the Lake OH; Geneva-on-the-Lake to Conneaut OH; Conneaut OH to Ripley NY",
+      "headline": "Small Craft Advisory issued June 6 at 3:48AM EDT until June 6 at 8:00PM EDT by NWS Cleveland OH"
+    },
+    {
+      "event": "Red Flag Warning",
       "severity": "Severe",
-      "effective": "2026-05-29T11:37:00-06:00",
-      "area": "Flathead, MT",
-      "headline": "Flood Watch issued May 29 at 11:37AM MDT until June 1 at 6:00AM MDT by NWS Missoula MT"
+      "effective": "2026-06-06T02:47:00-05:00",
+      "area": "Eastern Panhandle/Crescent Lake NWR",
+      "headline": "Red Flag Warning issued June 6 at 2:47AM CDT until June 6 at 10:00PM CDT by NWS North Platte NE"
+    },
+    {
+      "event": "Fire Weather Watch",
+      "severity": "Severe",
+      "effective": "2026-06-06T01:44:00-06:00",
+      "area": "Huerfano County Including Walsenburg",
+      "headline": "Fire Weather Watch issued June 6 at 1:44AM MDT until June 7 at 9:00PM MDT by NWS Pueblo CO"
+    },
+    {
+      "event": "Air Quality Alert",
+      "severity": "Unknown",
+      "effective": "2026-06-06T03:42:00-04:00",
+      "area": "Forsyth; Guilford; Alamance; Davidson; Randolph",
+      "headline": "Air Quality Alert issued June 6 at 3:42AM EDT by NWS Raleigh NC"
+    },
+    {
+      "event": "Flash Flood Warning",
+      "severity": "Severe",
+      "effective": "2026-06-06T02:41:00-05:00",
+      "area": "Fillmore, NE",
+      "headline": "Flash Flood Warning issued June 6 at 2:41AM CDT until June 6 at 6:30AM CDT by NWS Hastings NE"
+    },
+    {
+      "event": "Special Weather Statement",
+      "severity": "Moderate",
+      "effective": "2026-06-06T03:39:00-04:00",
+      "area": "Wayne; Sampson",
+      "headline": "Special Weather Statement issued June 6 at 3:39AM EDT by NWS Raleigh NC"
+    },
+    {
+      "event": "Flood Advisory",
+      "severity": "Minor",
+      "effective": "2026-06-06T02:33:00-05:00",
+      "area": "Coleman, TX; McCulloch, TX",
+      "headline": "Flood Advisory issued June 6 at 2:33AM CDT until June 6 at 4:45AM CDT by NWS San Angelo TX"
+    },
+    {
+      "event": "Special Weather Statement",
+      "severity": "Moderate",
+      "effective": "2026-06-06T02:25:00-05:00",
+      "area": "Barron; Rusk; Dunn; Pepin; Chippewa; Eau Claire",
+      "headline": "Special Weather Statement issued June 6 at 2:25AM CDT by NWS Twin Cities/Chanhassen MN"
+    },
+    {
+      "event": "Special Weather Statement",
+      "severity": "Moderate",
+      "effective": "2026-06-06T02:25:00-05:00",
+      "area": "Vilas; Oneida; Forest; Lincoln; Langlade; Marathon",
+      "headline": "Special Weather Statement issued June 6 at 2:25AM CDT by NWS Green Bay WI"
+    },
+    {
+      "event": "Special Weather Statement",
+      "severity": "Moderate",
+      "effective": "2026-06-06T02:18:00-05:00",
+      "area": "Ashland; Iron; Sawyer; Price",
+      "headline": "Special Weather Statement issued June 6 at 2:18AM CDT by NWS Duluth MN"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-06-05T23:15:00-08:00",
+      "area": "Northern Lynn Canal",
+      "headline": "Small Craft Advisory issued June 5 at 11:15PM AKDT until June 6 at 5:00PM AKDT by NWS Juneau AK"
+    },
+    {
+      "event": "Flood Advisory",
+      "severity": "Minor",
+      "effective": "2026-06-06T02:14:00-05:00",
+      "area": "Falls, TX; McLennan, TX",
+      "headline": "Flood Advisory issued June 6 at 2:14AM CDT until June 6 at 5:30AM CDT by NWS Fort Worth TX"
+    },
+    {
+      "event": "Marine Weather Statement",
+      "severity": "Minor",
+      "effective": "2026-06-06T02:58:00-04:00",
+      "area": "Long Island Sound East of New Haven CT/Port Jefferson NY to the Mouth of the Connecticut River; Long Island Sound East of the Mouth of the Connecticut River; Long Island Sound West of New Haven CT/Port Jefferson NY; Moriches Inlet NY to Mon",
+      "headline": "Marine Weather Statement issued June 6 at 2:58AM EDT by NWS Upton NY"
+    },
+    {
+      "event": "Special Weather Statement",
+      "severity": "Moderate",
+      "effective": "2026-06-06T02:57:00-04:00",
+      "area": "Hertford; Gates; Pasquotank; Camden; Western Currituck; Bertie; Chowan; Perquimans; Eastern Currituck",
+      "headline": "Special Weather Statement issued June 6 at 2:57AM EDT by NWS Wakefield VA"
+    },
+    {
+      "event": "Air Quality Alert",
+      "severity": "Unknown",
+      "effective": "2026-06-06T02:57:00-04:00",
+      "area": "Northwest Providence; Southeast Providence; Western Kent; Eastern Kent; Bristol; Washington; Newport; Block Island",
+      "headline": "Air Quality Alert issued June 6 at 2:57AM EDT by NWS Boston/Norton MA"
+    },
+    {
+      "event": "Air Quality Alert",
+      "severity": "Unknown",
+      "effective": "2026-06-06T02:57:00-04:00",
+      "area": "Western Norfolk; Eastern Norfolk; Northern Bristol; Western Plymouth; Eastern Plymouth; Southern Bristol; Southern Plymouth; Barnstable; Dukes; Nantucket",
+      "headline": "Air Quality Alert issued June 6 at 2:57AM EDT by NWS Boston/Norton MA"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-06-06T02:55:00-04:00",
+      "area": "Coastal waters east of Ipswich Bay and the Stellwagen Bank National Marine Sanctuary",
+      "headline": "Small Craft Advisory issued June 6 at 2:55AM EDT until June 6 at 11:00PM EDT by NWS Boston/Norton MA"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-06-06T02:55:00-04:00",
+      "area": "Cape Cod Bay",
+      "headline": "Small Craft Advisory issued June 6 at 2:55AM EDT until June 6 at 11:00PM EDT by NWS Boston/Norton MA"
+    },
+    {
+      "event": "Frost Advisory",
+      "severity": "Minor",
+      "effective": "2026-06-05T23:54:00-07:00",
+      "area": "Northern Panhandle; Northeast Mountains; Okanogan Highlands; Okanogan Valley; Western Okanogan County",
+      "headline": "Frost Advisory issued June 5 at 11:54PM PDT until June 7 at 11:00AM PDT by NWS Spokane WA"
+    },
+    {
+      "event": "Flash Flood Warning",
+      "severity": "Severe",
+      "effective": "2026-06-06T01:48:00-05:00",
+      "area": "Bell, TX",
+      "headline": "Flash Flood Warning issued June 6 at 1:48AM CDT until June 6 at 4:45AM CDT by NWS Fort Worth TX"
+    },
+    {
+      "event": "Air Quality Alert",
+      "severity": "Unknown",
+      "effective": "2026-06-06T02:46:00-04:00",
+      "area": "Northern Fairfield; Northern New Haven; Northern Middlesex; Northern New London",
+      "headline": "Air Quality Alert issued June 6 at 2:46AM EDT by NWS Upton NY"
+    },
+    {
+      "event": "Air Quality Alert",
+      "severity": "Unknown",
+      "effective": "2026-06-06T02:46:00-04:00",
+      "area": "Eastern Passaic; Hudson; Western Bergen; Eastern Bergen; Western Essex; Eastern Essex; Western Union; Eastern Union",
+      "headline": "Air Quality Alert issued June 6 at 2:46AM EDT by NWS Upton NY"
+    },
+    {
+      "event": "Air Quality Alert",
+      "severity": "Unknown",
+      "effective": "2026-06-06T02:46:00-04:00",
+      "area": "Southern Fairfield; Southern New Haven; Southern Middlesex; Southern New London",
+      "headline": "Air Quality Alert issued June 6 at 2:46AM EDT by NWS Upton NY"
+    },
+    {
+      "event": "Air Quality Alert",
+      "severity": "Unknown",
+      "effective": "2026-06-06T02:46:00-04:00",
+      "area": "Rockland; Northern Westchester; Southern Westchester; New York (Manhattan); Bronx; Richmond (Staten Is.); Kings (Brooklyn); Northwest Suffolk; Northeast Suffolk; Southwest Suffolk; Southeast Suffolk; Northern Queens; Northern Nassau; Southe",
+      "headline": "Air Quality Alert issued June 6 at 2:46AM EDT by NWS Upton NY"
+    },
+    {
+      "event": "Special Weather Statement",
+      "severity": "Moderate",
+      "effective": "2026-06-06T02:41:00-04:00",
+      "area": "Robeson; Bladen; Columbus; Inland Pender; Coastal Pender; Inland New Hanover; Coastal New Hanover; Inland Brunswick; Coastal Brunswick",
+      "headline": "Special Weather Statement issued June 6 at 2:41AM EDT by NWS Wilmington NC"
+    },
+    {
+      "event": "Wind Advisory",
+      "severity": "Moderate",
+      "effective": "2026-06-06T01:36:00-05:00",
+      "area": "McKenzie; Dunn; Mercer; Oliver; Golden Valley; Billings; Stark; Slope; Hettinger; Grant; Bowman; Adams; Western Morton; Eastern Morton; Western Sioux; Eastern Sioux",
+      "headline": "Wind Advisory issued June 6 at 1:36AM CDT until June 7 at 12:00AM CDT by NWS Bismarck ND"
     }
   ]
 }

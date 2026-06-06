@@ -1,22 +1,23 @@
 {
   "schemaVersion": "0.28.1",
   "sourceId": "FED_FRED_SELECTED",
-  "retrievedAt": "2026-05-30T08:43:18.135418+00:00",
+  "retrievedAt": "2026-06-06T09:15:25.241649+00:00",
   "seriesAudits": [
     {
       "seriesId": "EFFR",
       "label": "Effective federal funds rate",
-      "status": "ok",
+      "status": "no_observations",
       "fetchAttempts": [
         {
           "method": "fredgraph_csv",
-          "rows": 6759
+          "error": "The read operation timed out"
+        },
+        {
+          "method": "fred_data_txt",
+          "rows": 24
         }
       ],
-      "rowsFetched": 6759,
-      "latestPeriod": "2026-05-28",
-      "latestValue": 3.62,
-      "score": 1
+      "rowsFetched": 24
     },
     {
       "seriesId": "WALCL",
@@ -25,13 +26,13 @@
       "fetchAttempts": [
         {
           "method": "fredgraph_csv",
-          "rows": 1224
+          "rows": 1225
         }
       ],
-      "rowsFetched": 1224,
-      "latestPeriod": "2026-05-27",
-      "latestValue": 6704.383,
-      "score": -1
+      "rowsFetched": 1225,
+      "latestPeriod": "2026-06-03",
+      "latestValue": 6711.495,
+      "score": 1
     },
     {
       "seriesId": "WRESBAL",
@@ -40,28 +41,29 @@
       "fetchAttempts": [
         {
           "method": "fredgraph_csv",
-          "rows": 1224
+          "rows": 1225
         }
       ],
-      "rowsFetched": 1224,
-      "latestPeriod": "2026-05-27",
-      "latestValue": 3066.56,
+      "rowsFetched": 1225,
+      "latestPeriod": "2026-06-03",
+      "latestValue": 3013.902,
       "score": -2
     },
     {
       "seriesId": "RRPONTSYD",
       "label": "Overnight reverse repo usage",
-      "status": "ok",
+      "status": "no_observations",
       "fetchAttempts": [
         {
           "method": "fredgraph_csv",
-          "rows": 6081
+          "error": "The read operation timed out"
+        },
+        {
+          "method": "fred_data_txt",
+          "rows": 24
         }
       ],
-      "rowsFetched": 6081,
-      "latestPeriod": "2026-05-29",
-      "latestValue": 11.677,
-      "score": -1
+      "rowsFetched": 24
     },
     {
       "seriesId": "WTREGEN",
@@ -70,14 +72,14 @@
       "fetchAttempts": [
         {
           "method": "fredgraph_csv",
-          "rows": 1224
+          "rows": 1225
         }
       ],
-      "rowsFetched": 1224,
-      "latestPeriod": "2026-05-27",
-      "latestValue": 830.296,
+      "rowsFetched": 1225,
+      "latestPeriod": "2026-06-03",
+      "latestValue": 875.713,
       "score": -1
     }
   ],
-  "observationCount": 5
+  "observationCount": 3
 }

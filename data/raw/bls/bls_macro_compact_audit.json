@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-05-30T08:43:11+00:00",
+  "fetched_at": "2026-06-06T09:13:17+00:00",
   "source": "BLS public API v2",
   "series_requested": {
     "CPI_HEADLINE": {
@@ -172,45 +172,45 @@
     "UNEMPLOYMENT_RATE": {
       "series_id": "LNS14000000",
       "label": "Unemployment rate",
-      "latest_date": "2026-04-01",
+      "latest_date": "2026-05-01",
       "latest_value": 4.3,
-      "observations": 51,
+      "observations": 52,
       "score": 0,
       "status": "Neutral"
     },
     "NONFARM_PAYROLLS": {
       "series_id": "CES0000000001",
       "label": "Total nonfarm payroll employment",
-      "latest_date": "2026-04-01",
-      "latest_value": 158736.0,
-      "observations": 52,
-      "score": 0,
-      "status": "Neutral"
+      "latest_date": "2026-05-01",
+      "latest_value": 159001.0,
+      "observations": 53,
+      "score": 1,
+      "status": "Support"
     },
     "AVG_HOURLY_EARNINGS": {
       "series_id": "CES0500000003",
       "label": "Average hourly earnings private employees",
-      "latest_date": "2026-04-01",
-      "latest_value": 37.41,
-      "observations": 52,
-      "score": 1,
-      "status": "Support"
+      "latest_date": "2026-05-01",
+      "latest_value": 37.53,
+      "observations": 53,
+      "score": 0,
+      "status": "Neutral"
     },
     "LABOR_FORCE_PARTICIPATION": {
       "series_id": "LNS11300000",
       "label": "Labor force participation rate",
-      "latest_date": "2026-04-01",
+      "latest_date": "2026-05-01",
       "latest_value": 61.8,
-      "observations": 51,
+      "observations": 52,
       "score": null,
       "status": null
     },
     "U6_UNEMPLOYMENT": {
       "series_id": "LNS13327709",
       "label": "U-6 unemployment rate",
-      "latest_date": "2026-04-01",
-      "latest_value": 8.2,
-      "observations": 51,
+      "latest_date": "2026-05-01",
+      "latest_value": 8.1,
+      "observations": 52,
       "score": null,
       "status": null
     }

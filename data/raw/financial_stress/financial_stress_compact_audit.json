@@ -1,7 +1,7 @@
 {
   "sourceId": "FINANCIAL_STRESS_FRED",
   "sourceName": "Federal Reserve / FRED credit and financial-stress public data",
-  "retrievedAt": "2026-05-30T08:43:26.639935+00:00",
+  "retrievedAt": "2026-06-06T09:16:23.974336+00:00",
   "series": {
     "HY_OAS": {
       "seriesId": "BAMLH0A0HYM2",
@@ -9,11 +9,11 @@
       "fetchAttempts": [
         {
           "method": "fredgraph_csv",
-          "rows": 794
+          "rows": 795
         }
       ],
       "status": "ok",
-      "latestDate": "2026-05-28"
+      "latestDate": "2026-06-04"
     },
     "IG_OAS": {
       "seriesId": "BAMLC0A0CM",
@@ -21,11 +21,11 @@
       "fetchAttempts": [
         {
           "method": "fredgraph_csv",
-          "rows": 794
+          "rows": 795
         }
       ],
       "status": "ok",
-      "latestDate": "2026-05-28"
+      "latestDate": "2026-06-04"
     },
     "BBB_OAS": {
       "seriesId": "BAMLC0A4CBBB",
@@ -33,11 +33,11 @@
       "fetchAttempts": [
         {
           "method": "fredgraph_csv",
-          "rows": 794
+          "rows": 795
         }
       ],
       "status": "ok",
-      "latestDate": "2026-05-28"
+      "latestDate": "2026-06-04"
     },
     "NFCI": {
       "seriesId": "NFCI",
@@ -45,11 +45,14 @@
       "fetchAttempts": [
         {
           "method": "fredgraph_csv",
-          "rows": 2890
+          "error": "The read operation timed out"
+        },
+        {
+          "method": "fred_data_txt",
+          "rows": 24
         }
       ],
-      "status": "ok",
-      "latestDate": "2026-05-22"
+      "status": "missing_observations"
     },
     "ANFCI": {
       "seriesId": "ANFCI",
@@ -57,11 +60,14 @@
       "fetchAttempts": [
         {
           "method": "fredgraph_csv",
-          "rows": 2890
+          "error": "The read operation timed out"
+        },
+        {
+          "method": "fred_data_txt",
+          "rows": 24
         }
       ],
-      "status": "ok",
-      "latestDate": "2026-05-22"
+      "status": "missing_observations"
     },
     "STLFSI4": {
       "seriesId": "STLFSI4",
@@ -69,13 +75,16 @@
       "fetchAttempts": [
         {
           "method": "fredgraph_csv",
-          "rows": 1691
+          "rows": 1692
         }
       ],
       "status": "ok",
-      "latestDate": "2026-05-22"
+      "latestDate": "2026-05-29"
     }
   },
-  "observationCount": 6,
-  "errors": []
+  "observationCount": 4,
+  "errors": [
+    "NFCI: no observations parsed",
+    "ANFCI: no observations parsed"
+  ]
 }
