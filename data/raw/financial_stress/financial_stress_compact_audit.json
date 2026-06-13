@@ -1,7 +1,7 @@
 {
   "sourceId": "FINANCIAL_STRESS_FRED",
   "sourceName": "Federal Reserve / FRED credit and financial-stress public data",
-  "retrievedAt": "2026-06-06T09:16:23.974336+00:00",
+  "retrievedAt": "2026-06-13T10:17:42.815405+00:00",
   "series": {
     "HY_OAS": {
       "seriesId": "BAMLH0A0HYM2",
@@ -13,7 +13,7 @@
         }
       ],
       "status": "ok",
-      "latestDate": "2026-06-04"
+      "latestDate": "2026-06-11"
     },
     "IG_OAS": {
       "seriesId": "BAMLC0A0CM",
@@ -25,7 +25,7 @@
         }
       ],
       "status": "ok",
-      "latestDate": "2026-06-04"
+      "latestDate": "2026-06-11"
     },
     "BBB_OAS": {
       "seriesId": "BAMLC0A4CBBB",
@@ -37,7 +37,7 @@
         }
       ],
       "status": "ok",
-      "latestDate": "2026-06-04"
+      "latestDate": "2026-06-11"
     },
     "NFCI": {
       "seriesId": "NFCI",
@@ -60,14 +60,11 @@
       "fetchAttempts": [
         {
           "method": "fredgraph_csv",
-          "error": "The read operation timed out"
-        },
-        {
-          "method": "fred_data_txt",
-          "rows": 24
+          "rows": 2892
         }
       ],
-      "status": "missing_observations"
+      "status": "ok",
+      "latestDate": "2026-06-05"
     },
     "STLFSI4": {
       "seriesId": "STLFSI4",
@@ -75,16 +72,15 @@
       "fetchAttempts": [
         {
           "method": "fredgraph_csv",
-          "rows": 1692
+          "rows": 1693
         }
       ],
       "status": "ok",
-      "latestDate": "2026-05-29"
+      "latestDate": "2026-06-05"
     }
   },
-  "observationCount": 4,
+  "observationCount": 5,
   "errors": [
-    "NFCI: no observations parsed",
-    "ANFCI: no observations parsed"
+    "NFCI: no observations parsed"
   ]
 }

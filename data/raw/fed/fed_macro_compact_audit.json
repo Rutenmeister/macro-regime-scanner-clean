@@ -1,7 +1,7 @@
 {
   "schemaVersion": "0.28.1",
   "sourceId": "FED_FRED_SELECTED",
-  "retrievedAt": "2026-06-06T09:15:25.241649+00:00",
+  "retrievedAt": "2026-06-13T10:16:00.936339+00:00",
   "seriesAudits": [
     {
       "seriesId": "EFFR",
@@ -26,12 +26,12 @@
       "fetchAttempts": [
         {
           "method": "fredgraph_csv",
-          "rows": 1225
+          "rows": 1226
         }
       ],
-      "rowsFetched": 1225,
-      "latestPeriod": "2026-06-03",
-      "latestValue": 6711.495,
+      "rowsFetched": 1226,
+      "latestPeriod": "2026-06-10",
+      "latestValue": 6725.397,
       "score": 1
     },
     {
@@ -41,13 +41,13 @@
       "fetchAttempts": [
         {
           "method": "fredgraph_csv",
-          "rows": 1225
+          "rows": 1226
         }
       ],
-      "rowsFetched": 1225,
-      "latestPeriod": "2026-06-03",
-      "latestValue": 3013.902,
-      "score": -2
+      "rowsFetched": 1226,
+      "latestPeriod": "2026-06-10",
+      "latestValue": 3080.723,
+      "score": 2
     },
     {
       "seriesId": "RRPONTSYD",
@@ -72,13 +72,13 @@
       "fetchAttempts": [
         {
           "method": "fredgraph_csv",
-          "rows": 1225
+          "rows": 1226
         }
       ],
-      "rowsFetched": 1225,
-      "latestPeriod": "2026-06-03",
-      "latestValue": 875.713,
-      "score": -1
+      "rowsFetched": 1226,
+      "latestPeriod": "2026-06-10",
+      "latestValue": 828.122,
+      "score": 1
     }
   ],
   "observationCount": 3

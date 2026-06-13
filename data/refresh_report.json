@@ -1,7 +1,7 @@
 {
   "pipelineVersion": "0.33",
-  "startedAt": "2026-06-06T09:12:23.712312+00:00",
-  "finishedAt": "2026-06-06T09:18:55.204568+00:00",
+  "startedAt": "2026-06-13T10:12:09.047314+00:00",
+  "finishedAt": "2026-06-13T10:18:45.587983+00:00",
   "dryRun": false,
   "selectedLanes": "all enabled",
   "lanes": [
@@ -13,14 +13,14 @@
           "script": "scripts/sources/fetch_treasury_yields.py",
           "status": "ok",
           "returncode": 0,
-          "stdoutTail": "Fetched Treasury yields through 2026-06-05\n",
+          "stdoutTail": "Fetched Treasury yields through 2026-06-12\n",
           "stderrTail": ""
         },
         {
           "script": "scripts/apply_treasury_lane.py",
           "status": "ok",
           "returncode": 0,
-          "stdoutTail": "Applied Treasury lane through 2026-06-05\n",
+          "stdoutTail": "Applied Treasury lane through 2026-06-12\n",
           "stderrTail": ""
         }
       ],
@@ -34,7 +34,7 @@
           "script": "scripts/sources/fetch_cftc_cot.py",
           "status": "ok",
           "returncode": 0,
-          "stdoutTail": "Fetched CFTC COT observations: 27 assets; latest report date: 2026-06-02\n",
+          "stdoutTail": "Fetched CFTC COT observations: 27 assets; latest report date: 2026-06-09\n",
           "stderrTail": ""
         },
         {
@@ -55,7 +55,7 @@
           "script": "scripts/sources/fetch_eia_energy.py",
           "status": "ok",
           "returncode": 0,
-          "stdoutTail": "Fetched EIA energy fundamentals for 11 series; latest date 2026-05-29\n",
+          "stdoutTail": "Fetched EIA energy fundamentals for 11 series; latest date 2026-06-05\n",
           "stderrTail": ""
         },
         {
@@ -181,7 +181,7 @@
           "script": "scripts/sources/fetch_financial_stress.py",
           "status": "ok",
           "returncode": 0,
-          "stdoutTail": "Wrote data/normalized/financial_stress.json with 4 observations\n",
+          "stdoutTail": "Wrote data/normalized/financial_stress.json with 5 observations\n",
           "stderrTail": ""
         },
         {
@@ -228,14 +228,14 @@
     "script": "scripts/recompute_live_scores.py",
     "status": "ok",
     "returncode": 0,
-    "stdoutTail": "Recomputed uncapped raw pressure scores for 45 assets.\nSnapshot written to data/history/2026-06-06T091854Z.json and data/history/latest.json\n",
+    "stdoutTail": "Recomputed uncapped raw pressure scores for 45 assets.\nSnapshot written to data/history/2026-06-13T101845Z.json and data/history/latest.json\n",
     "stderrTail": ""
   },
   "releaseCalendar": {
     "script": "scripts/generate_release_calendar.py",
     "status": "ok",
     "returncode": 0,
-    "stdoutTail": "Generated data/release_calendar.json with 18 upcoming report events.\nConfidence summary: {'official': 2, 'officialPattern': 14, 'estimated': 2}\n",
+    "stdoutTail": "Generated data/release_calendar.json with 17 upcoming report events.\nConfidence summary: {'official': 2, 'officialPattern': 14, 'estimated': 1}\n",
     "stderrTail": ""
   },
   "scoreHistoryValidation": {
