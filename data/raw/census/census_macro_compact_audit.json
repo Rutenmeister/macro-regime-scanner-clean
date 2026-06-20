@@ -1,6 +1,6 @@
 {
   "sourceId": "CENSUS_PUBLIC",
-  "retrievedAt": "2026-06-13T10:17:42.656904+00:00",
+  "retrievedAt": "2026-06-20T10:20:09.363462+00:00",
   "seriesAudit": [
     {
       "seriesId": "RSXFS",
@@ -9,13 +9,13 @@
       "fetchAttempts": [
         {
           "method": "fredgraph_csv",
-          "rows": 412
+          "rows": 413
         }
       ],
-      "rowsFetched": 412,
-      "latestPeriod": "2026-04-01",
-      "latestValue": 656115.0,
-      "score": 1
+      "rowsFetched": 413,
+      "latestPeriod": "2026-05-01",
+      "latestValue": 662752.0,
+      "score": 2
     },
     {
       "seriesId": "HOUST",
@@ -24,12 +24,12 @@
       "fetchAttempts": [
         {
           "method": "fredgraph_csv",
-          "rows": 808
+          "rows": 809
         }
       ],
-      "rowsFetched": 808,
-      "latestPeriod": "2026-04-01",
-      "latestValue": 1465.0,
+      "rowsFetched": 809,
+      "latestPeriod": "2026-05-01",
+      "latestValue": 1177.0,
       "score": -2
     },
     {
@@ -39,13 +39,13 @@
       "fetchAttempts": [
         {
           "method": "fredgraph_csv",
-          "rows": 796
+          "rows": 797
         }
       ],
-      "rowsFetched": 796,
-      "latestPeriod": "2026-04-01",
-      "latestValue": 1423.0,
-      "score": 2
+      "rowsFetched": 797,
+      "latestPeriod": "2026-05-01",
+      "latestValue": 1413.0,
+      "score": -1
     },
     {
       "seriesId": "HSN1F",
@@ -99,12 +99,12 @@
       "fetchAttempts": [
         {
           "method": "fredgraph_csv",
-          "rows": 411
+          "rows": 412
         }
       ],
-      "rowsFetched": 411,
-      "latestPeriod": "2026-03-01",
-      "latestValue": 2709734.0,
+      "rowsFetched": 412,
+      "latestPeriod": "2026-04-01",
+      "latestValue": 2726588.0,
       "score": 0
     }
   ],
@@ -113,13 +113,13 @@
       "id": "marts_retail_total",
       "endpoint": "https://api.census.gov/data/timeseries/eits/marts",
       "status": "ok",
-      "rowsFetched": 56
+      "rowsFetched": 58
     },
     {
       "id": "resconst_recent",
       "endpoint": "https://api.census.gov/data/timeseries/eits/resconst",
       "status": "ok",
-      "rowsFetched": 4928
+      "rowsFetched": 5104
     },
     {
       "id": "advm3_recent",

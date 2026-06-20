@@ -1,23 +1,23 @@
 {
   "sourceId": "NOAA_NWS",
   "sourceName": "NOAA/National Weather Service public weather alerts",
-  "retrievedAt": "2026-06-13T10:18:44.601435+00:00",
+  "retrievedAt": "2026-06-20T10:20:10.760621+00:00",
   "endpoint": "https://api.weather.gov/alerts/active?status=actual&message_type=alert",
   "fetchAttempts": [
     {
       "endpoint": "https://api.weather.gov/alerts/active?status=actual&message_type=alert",
-      "features": 197
+      "features": 100
     }
   ],
   "categoryCounts": {
     "HEAT_STRESS": {
-      "count": 11,
-      "weighted": 22,
+      "count": 5,
+      "weighted": 11,
       "sampleEvents": [
         "Heat Advisory",
         "Heat Advisory",
         "Heat Advisory",
-        "Heat Advisory",
+        "Extreme Heat Watch",
         "Heat Advisory"
       ]
     },
@@ -32,24 +32,20 @@
       "sampleEvents": []
     },
     "FLOOD_STRESS": {
-      "count": 11,
-      "weighted": 19,
+      "count": 37,
+      "weighted": 97,
       "sampleEvents": [
-        "Coastal Flood Statement",
-        "Coastal Flood Statement",
-        "Coastal Flood Advisory",
-        "Coastal Flood Advisory",
-        "Flood Watch"
+        "Flood Advisory",
+        "Flood Advisory",
+        "Flash Flood Warning",
+        "Flood Advisory",
+        "Flash Flood Warning"
       ]
     },
     "SEVERE_CONVECTIVE_STRESS": {
-      "count": 3,
-      "weighted": 9,
-      "sampleEvents": [
-        "Severe Thunderstorm Watch",
-        "Severe Thunderstorm Watch",
-        "Severe Thunderstorm Watch"
-      ]
+      "count": 0,
+      "weighted": 0,
+      "sampleEvents": []
     },
     "TROPICAL_STORM_STRESS": {
       "count": 0,
@@ -57,10 +53,13 @@
       "sampleEvents": []
     },
     "FIRE_WEATHER_STRESS": {
-      "count": 2,
-      "weighted": 6,
+      "count": 14,
+      "weighted": 42,
       "sampleEvents": [
+        "Red Flag Warning",
         "Fire Weather Watch",
+        "Red Flag Warning",
+        "Red Flag Warning",
         "Red Flag Warning"
       ]
     },
@@ -73,74 +72,50 @@
   "eventCountsTop": [
     [
       "Small Craft Advisory",
-      93
-    ],
-    [
-      "Gale Warning",
-      51
-    ],
-    [
-      "Heat Advisory",
-      11
-    ],
-    [
-      "Special Weather Statement",
-      8
-    ],
-    [
-      "Coastal Flood Advisory",
-      5
-    ],
-    [
-      "Beach Hazards Statement",
-      4
-    ],
-    [
-      "Rip Current Statement",
-      4
-    ],
-    [
-      "Hydrologic Outlook",
-      4
-    ],
-    [
-      "Severe Thunderstorm Watch",
-      3
-    ],
-    [
-      "Flood Warning",
-      3
-    ],
-    [
-      "Coastal Flood Statement",
-      2
-    ],
-    [
-      "Special Marine Warning",
-      1
-    ],
-    [
-      "Dense Fog Advisory",
-      1
+      25
     ],
     [
       "Flood Watch",
-      1
+      17
     ],
     [
-      "Storm Warning",
-      1
+      "Red Flag Warning",
+      13
     ],
     [
-      "Wind Advisory",
-      1
+      "Special Weather Statement",
+      10
+    ],
+    [
+      "Flood Advisory",
+      7
+    ],
+    [
+      "Flood Warning",
+      7
+    ],
+    [
+      "Flash Flood Warning",
+      6
     ],
     [
       "Air Quality Alert",
+      5
+    ],
+    [
+      "Heat Advisory",
+      4
+    ],
+    [
+      "Beach Hazards Statement",
+      2
+    ],
+    [
+      "Hydrologic Outlook",
       1
     ],
     [
-      "Winter Weather Advisory",
+      "Rip Current Statement",
       1
     ],
     [
@@ -148,368 +123,368 @@
       1
     ],
     [
-      "Red Flag Warning",
+      "Extreme Heat Watch",
       1
     ]
   ],
-  "totalActiveAlerts": 197,
-  "weightedActiveAlerts": 300,
+  "totalActiveAlerts": 100,
+  "weightedActiveAlerts": 207,
   "severityCounts": {
-    "Moderate": 81,
-    "Severe": 11,
-    "Minor": 100,
-    "Unknown": 5
+    "Minor": 32,
+    "Severe": 45,
+    "Moderate": 17,
+    "Unknown": 6
   },
   "sampleAlerts": [
     {
-      "event": "Special Weather Statement",
-      "severity": "Moderate",
-      "effective": "2026-06-13T05:18:00-05:00",
-      "area": "Brown; Thomas; Blaine; Logan; Custer",
-      "headline": "Special Weather Statement issued June 13 at 5:18AM CDT by NWS North Platte NE"
+      "event": "Flood Advisory",
+      "severity": "Minor",
+      "effective": "2026-06-20T05:13:00-05:00",
+      "area": "Houston, TX",
+      "headline": "Flood Advisory issued June 20 at 5:13AM CDT until June 20 at 7:15AM CDT by NWS Houston/Galveston TX"
     },
     {
-      "event": "Special Weather Statement",
-      "severity": "Moderate",
-      "effective": "2026-06-13T05:10:00-05:00",
-      "area": "Union; Johnson; Pope; Hardin; Alexander; Pulaski; Massac; Fulton; Hickman; Carlisle; Ballard; McCracken; Graves; Livingston; Marshall; Calloway; Crittenden; Lyon; Trigg; Caldwell; Webster; Hopkins; Christian; McLean; Muhlenberg; Todd; Bolli",
-      "headline": "Special Weather Statement issued June 13 at 5:10AM CDT by NWS Paducah KY"
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-06-20T02:55:00-07:00",
+      "area": "Coastal waters from Cape Mendocino to Pt. Arena CA out 10 nm",
+      "headline": "Small Craft Advisory issued June 20 at 2:55AM PDT until June 22 at 3:00AM PDT by NWS Eureka CA"
     },
     {
-      "event": "Special Marine Warning",
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-06-20T02:55:00-07:00",
+      "area": "Coastal waters from Pt. St. George to Cape Mendocino CA out 10 nm",
+      "headline": "Small Craft Advisory issued June 20 at 2:55AM PDT until June 22 at 11:00AM PDT by NWS Eureka CA"
+    },
+    {
+      "event": "Flood Advisory",
+      "severity": "Minor",
+      "effective": "2026-06-20T04:48:00-05:00",
+      "area": "Burnet, TX",
+      "headline": "Flood Advisory issued June 20 at 4:48AM CDT until June 20 at 8:00AM CDT by NWS Austin/San Antonio TX"
+    },
+    {
+      "event": "Flash Flood Warning",
       "severity": "Severe",
-      "effective": "2026-06-13T05:58:00-04:00",
-      "area": "Waters from Cape Hatteras to Ocracoke Inlet NC from 20 to 60 NM; Waters from Ocracoke Inlet to Cape Lookout NC from 20 to 60 NM",
-      "headline": "Special Marine Warning issued June 13 at 5:58AM EDT until June 13 at 7:00AM EDT by NWS Newport/Morehead City NC"
+      "effective": "2026-06-20T04:46:00-05:00",
+      "area": "Freestone, TX; Limestone, TX",
+      "headline": "Flash Flood Warning issued June 20 at 4:46AM CDT until June 20 at 7:00AM CDT by NWS Fort Worth TX"
     },
     {
-      "event": "Severe Thunderstorm Watch",
-      "severity": "Severe",
-      "effective": "2026-06-13T04:46:00-05:00",
-      "area": "Blaine, NE; Custer, NE; Garfield, NE; Loup, NE; Wheeler, NE",
-      "headline": "Severe Thunderstorm Watch issued June 13 at 4:46AM CDT until June 13 at 11:00AM CDT by NWS North Platte NE"
-    },
-    {
-      "event": "Severe Thunderstorm Watch",
-      "severity": "Severe",
-      "effective": "2026-06-13T04:42:00-05:00",
-      "area": "Adams, NE; Buffalo, NE; Clay, NE; Dawson, NE; Fillmore, NE; Gosper, NE; Greeley, NE; Hall, NE; Hamilton, NE; Howard, NE; Kearney, NE; Merrick, NE; Nance, NE; Phelps, NE; Polk, NE; Sherman, NE; Valley, NE; York, NE",
-      "headline": "Severe Thunderstorm Watch issued June 13 at 4:42AM CDT until June 13 at 11:00AM CDT by NWS Hastings NE"
-    },
-    {
-      "event": "Severe Thunderstorm Watch",
-      "severity": "Severe",
-      "effective": "2026-06-13T04:42:00-05:00",
-      "area": "Fremont, IA; Harrison, IA; Mills, IA; Monona, IA; Montgomery, IA; Page, IA; Pottawattamie, IA; Shelby, IA; Antelope, NE; Boone, NE; Burt, NE; Butler, NE; Cass, NE; Colfax, NE; Cuming, NE; Dodge, NE; Douglas, NE; Lancaster, NE; Madison, NE; ",
-      "headline": "Severe Thunderstorm Watch issued June 13 at 4:42AM CDT until June 13 at 11:00AM CDT by NWS Omaha/Valley NE"
+      "event": "Flood Advisory",
+      "severity": "Minor",
+      "effective": "2026-06-20T04:41:00-05:00",
+      "area": "San Saba, TX",
+      "headline": "Flood Advisory issued June 20 at 4:41AM CDT until June 20 at 6:45AM CDT by NWS San Angelo TX"
     },
     {
       "event": "Special Weather Statement",
       "severity": "Moderate",
-      "effective": "2026-06-13T04:41:00-05:00",
-      "area": "Valley; Greeley",
-      "headline": "Special Weather Statement issued June 13 at 4:41AM CDT by NWS Hastings NE"
-    },
-    {
-      "event": "Dense Fog Advisory",
-      "severity": "Moderate",
-      "effective": "2026-06-13T04:44:00-04:00",
-      "area": "Interior York; Central Interior Cumberland",
-      "headline": "Dense Fog Advisory issued June 13 at 4:44AM EDT until June 13 at 7:00AM EDT by NWS Gray ME"
-    },
-    {
-      "event": "Beach Hazards Statement",
-      "severity": "Moderate",
-      "effective": "2026-06-13T04:34:00-04:00",
-      "area": "Mason; Oceana; Muskegon",
-      "headline": "Beach Hazards Statement issued June 13 at 4:34AM EDT until June 14 at 2:00AM EDT by NWS Grand Rapids MI"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-06-13T04:26:00-04:00",
-      "area": "Grand Haven to Whitehall MI; Whitehall to Pentwater MI; Pentwater to Manistee MI",
-      "headline": "Small Craft Advisory issued June 13 at 4:26AM EDT until June 14 at 2:00AM EDT by NWS Grand Rapids MI"
+      "effective": "2026-06-20T19:35:00+10:00",
+      "area": "Chuuk Lagoon",
+      "headline": "Special Weather Statement issued June 20 at 7:35PM ChST by NWS Tiyan GU"
     },
     {
       "event": "Special Weather Statement",
       "severity": "Moderate",
-      "effective": "2026-06-13T04:13:00-04:00",
-      "area": "Lewis; Adams; Scioto",
-      "headline": "Special Weather Statement issued June 13 at 4:13AM EDT by NWS Wilmington OH"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-06-13T04:08:00-04:00",
-      "area": "5NM East of a line from Fairport MI to Rock Island Passage",
-      "headline": "Small Craft Advisory issued June 13 at 4:08AM EDT until June 13 at 4:00PM EDT by NWS Marquette MI"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-06-13T04:08:00-04:00",
-      "area": "Seul Choix Point to Point Detour MI",
-      "headline": "Small Craft Advisory issued June 13 at 4:08AM EDT until June 13 at 4:00PM EDT by NWS Marquette MI"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-06-13T03:06:00-05:00",
-      "area": "Rock Island Passage to Sturgeon Bay WI; Sturgeon Bay to Two Rivers WI; Two Rivers to Sheboygan WI",
-      "headline": "Small Craft Advisory issued June 13 at 3:06AM CDT until June 13 at 5:00PM CDT by NWS Green Bay WI"
+      "effective": "2026-06-20T19:35:00+10:00",
+      "area": "Yap; Melekeok; Airai; Koror; Peleliu; Angaur",
+      "headline": "Special Weather Statement issued June 20 at 7:35PM ChST by NWS Tiyan GU"
     },
     {
       "event": "Special Weather Statement",
       "severity": "Moderate",
-      "effective": "2026-06-13T04:05:00-04:00",
-      "area": "Butler; Edmonson; Hart; Green; Taylor; Logan; Warren; Simpson; Allen; Barren; Monroe; Metcalfe; Adair; Russell; Cumberland; Clinton",
-      "headline": "Special Weather Statement issued June 13 at 4:05AM EDT by NWS Louisville KY"
+      "effective": "2026-06-20T05:21:00-04:00",
+      "area": "Hartford; Tolland; Windham",
+      "headline": "Special Weather Statement issued June 20 at 5:21AM EDT by NWS Boston/Norton MA"
     },
     {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-06-13T02:35:00-05:00",
-      "area": "Laguna Madre From the Port Of Brownsville to the Arroyo Colorado; Laguna Madre From The Arroyo Colorado To 5 NM North Of Port Mansfield TX; Laguna Madre From 5 nm North Of Port Mansfield To Baffin Bay TX",
-      "headline": "Small Craft Advisory issued June 13 at 2:35AM CDT until June 14 at 1:00AM CDT by NWS Brownsville TX"
+      "event": "Flash Flood Warning",
+      "severity": "Severe",
+      "effective": "2026-06-20T04:16:00-05:00",
+      "area": "Cherokee, TX",
+      "headline": "Flash Flood Warning issued June 20 at 4:16AM CDT until June 20 at 7:15AM CDT by NWS Shreveport LA"
     },
     {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-06-13T02:35:00-05:00",
-      "area": "Coastal waters from Port Mansfield TX to the Rio Grande River out 20 NM; Coastal waters from Baffin Bay to Port Mansfield TX out 20 NM; Waters from Port Mansfield TX to the Rio Grande River from 20 to 60 NM; Waters from Baffin Bay to Port M",
-      "headline": "Small Craft Advisory issued June 13 at 2:35AM CDT until June 14 at 7:00PM CDT by NWS Brownsville TX"
-    },
-    {
-      "event": "Coastal Flood Statement",
-      "severity": "Minor",
-      "effective": "2026-06-13T02:33:00-05:00",
-      "area": "Kenedy Island; Willacy Island; Cameron Island",
-      "headline": "Coastal Flood Statement issued June 13 at 2:33AM CDT until June 13 at 1:00PM CDT by NWS Brownsville TX"
-    },
-    {
-      "event": "Rip Current Statement",
+      "event": "Special Weather Statement",
       "severity": "Moderate",
-      "effective": "2026-06-13T02:33:00-05:00",
-      "area": "Kenedy Island; Willacy Island; Cameron Island",
-      "headline": "Rip Current Statement issued June 13 at 2:33AM CDT until June 14 at 7:00PM CDT by NWS Brownsville TX"
+      "effective": "2026-06-20T05:05:00-04:00",
+      "area": "Inland Broward County; Metro Broward County; Inland Miami-Dade County; Metropolitan Miami Dade",
+      "headline": "Special Weather Statement issued June 20 at 5:05AM EDT by NWS Miami FL"
     },
     {
-      "event": "Coastal Flood Statement",
-      "severity": "Minor",
-      "effective": "2026-06-13T02:33:00-05:00",
-      "area": "Kenedy Island; Willacy Island; Cameron Island",
-      "headline": "Coastal Flood Statement issued June 13 at 2:33AM CDT until June 14 at 1:00PM CDT by NWS Brownsville TX"
+      "event": "Flash Flood Warning",
+      "severity": "Severe",
+      "effective": "2026-06-20T04:05:00-05:00",
+      "area": "Houston, TX",
+      "headline": "Flash Flood Warning issued June 20 at 4:05AM CDT until June 20 at 7:00AM CDT by NWS Houston/Galveston TX"
     },
     {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-06-13T02:29:00-05:00",
-      "area": "Sheboygan to Port Washington WI; Port Washington to North Point Light WI; North Point Light to Wind Point WI; Wind Point WI to Winthrop Harbor IL",
-      "headline": "Small Craft Advisory issued June 13 at 2:29AM CDT until June 13 at 5:00PM CDT by NWS Milwaukee/Sullivan WI"
+      "event": "Flash Flood Warning",
+      "severity": "Severe",
+      "effective": "2026-06-20T03:50:00-05:00",
+      "area": "Columbia, AR; Union, AR; Claiborne, LA; Union, LA; Webster, LA",
+      "headline": "Flash Flood Warning issued June 20 at 3:50AM CDT until June 20 at 6:45AM CDT by NWS Shreveport LA"
     },
     {
-      "event": "Coastal Flood Advisory",
-      "severity": "Minor",
-      "effective": "2026-06-13T02:22:00-05:00",
-      "area": "Aransas Islands; Kleberg Islands; Nueces Islands; Calhoun Islands",
-      "headline": "Coastal Flood Advisory issued June 13 at 2:22AM CDT until June 14 at 1:00PM CDT by NWS Corpus Christi TX"
-    },
-    {
-      "event": "Rip Current Statement",
-      "severity": "Moderate",
-      "effective": "2026-06-13T02:22:00-05:00",
-      "area": "Aransas Islands; Kleberg Islands; Nueces Islands; Calhoun Islands",
-      "headline": "Rip Current Statement issued June 13 at 2:22AM CDT until June 15 at 10:00AM CDT by NWS Corpus Christi TX"
-    },
-    {
-      "event": "Coastal Flood Advisory",
-      "severity": "Minor",
-      "effective": "2026-06-13T02:22:00-05:00",
-      "area": "Aransas Islands; Kleberg Islands; Nueces Islands; Calhoun Islands",
-      "headline": "Coastal Flood Advisory issued June 13 at 2:22AM CDT until June 13 at 1:00PM CDT by NWS Corpus Christi TX"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-06-13T00:16:00-07:00",
-      "area": "Coastal waters from Cape Shoalwater WA to Cape Falcon OR out 10 nm; Waters from Cape Shoalwater WA to Cape Falcon OR from 10 to 60 nm",
-      "headline": "Small Craft Advisory issued June 13 at 12:16AM PDT until June 14 at 2:00AM PDT by NWS Portland OR"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-06-13T00:16:00-07:00",
-      "area": "Columbia River Bar",
-      "headline": "Small Craft Advisory issued June 13 at 12:16AM PDT until June 13 at 6:00AM PDT by NWS Portland OR"
-    },
-    {
-      "event": "Rip Current Statement",
-      "severity": "Moderate",
-      "effective": "2026-06-13T03:16:00-04:00",
-      "area": "South Walton; Coastal Bay; Coastal Gulf",
-      "headline": "Rip Current Statement issued June 13 at 3:16AM EDT until June 15 at 5:00AM EDT by NWS Tallahassee FL"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-06-13T03:11:00-04:00",
-      "area": "Seul Choix Point to 5NM West of Mackinac Bridge",
-      "headline": "Small Craft Advisory issued June 13 at 3:11AM EDT until June 13 at 4:00PM EDT by NWS Gaylord MI"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-06-13T03:11:00-04:00",
-      "area": "Straits of Mackinac within 5 nm of Mackinac Bridge including Mackinac Island; St Ignace to False Detour Channel; 5NM East of Mackinac Bridge to Presque Isle Light MI including Bois Blanc Island",
-      "headline": "Small Craft Advisory issued June 13 at 3:11AM EDT until June 13 at 6:00PM EDT by NWS Gaylord MI"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-06-13T03:11:00-04:00",
-      "area": "Point Betsie to Sleeping Bear Point MI; Manistee to Point Betsie MI",
-      "headline": "Small Craft Advisory issued June 13 at 3:11AM EDT until June 13 at 6:00PM EDT by NWS Gaylord MI"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-06-13T03:11:00-04:00",
-      "area": "Grand Traverse Bay south of a line Grand Traverse Light to Norwood MI; Norwood MI to 5NM West of Mackinac Bridge including Little Traverse Bay; Sleeping Bear Point to Grand Traverse Light MI",
-      "headline": "Small Craft Advisory issued June 13 at 3:11AM EDT until June 13 at 8:00PM EDT by NWS Gaylord MI"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-06-13T03:11:00-04:00",
-      "area": "Presque Isle Light to Sturgeon Pt MI Including Thunder Bay National Marine Sanctuary; Sturgeon Pt to Alabaster MI",
-      "headline": "Small Craft Advisory issued June 13 at 3:11AM EDT until June 13 at 8:00PM EDT by NWS Gaylord MI"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-06-13T03:11:00-04:00",
-      "area": "St. Marys River Point Iroquois to E. Potagannissing Bay",
-      "headline": "Small Craft Advisory issued June 13 at 3:11AM EDT until June 13 at 4:00PM EDT by NWS Gaylord MI"
-    },
-    {
-      "event": "Beach Hazards Statement",
-      "severity": "Moderate",
-      "effective": "2026-06-13T03:10:00-04:00",
-      "area": "Emmet; Western Mackinac; Eastern Mackinac; Beaver Island and surrounding islands",
-      "headline": "Beach Hazards Statement issued June 13 at 3:10AM EDT until June 13 at 8:00PM EDT by NWS Gaylord MI"
-    },
-    {
-      "event": "Heat Advisory",
-      "severity": "Moderate",
-      "effective": "2026-06-13T02:02:00-05:00",
-      "area": "Independence; Jackson; White; Woodruff; Lonoke; Prairie; Monroe; Jefferson; Arkansas; Lincoln; Desha; Drew",
-      "headline": "Heat Advisory issued June 13 at 2:02AM CDT until June 13 at 8:00PM CDT by NWS Little Rock AR"
+      "event": "Flash Flood Warning",
+      "severity": "Severe",
+      "effective": "2026-06-20T03:49:00-05:00",
+      "area": "Anderson, TX; Freestone, TX; Leon, TX; Limestone, TX",
+      "headline": "Flash Flood Warning issued June 20 at 3:49AM CDT until June 20 at 7:00AM CDT by NWS Fort Worth TX"
     },
     {
       "event": "Flood Watch",
       "severity": "Severe",
-      "effective": "2026-06-13T01:54:00-05:00",
-      "area": "Greenwood; Woodson; Allen; Elk; Wilson; Neosho; Chautauqua; Montgomery; Labette",
-      "headline": "Flood Watch issued June 13 at 1:54AM CDT until June 14 at 7:00AM CDT by NWS Wichita KS"
+      "effective": "2026-06-20T03:36:00-05:00",
+      "area": "Lamar; Fayette; Walker; Pickens; Tuscaloosa; Jefferson; Shelby; St. Clair; Talladega; Clay; Randolph; Sumter; Greene; Hale; Perry; Bibb; Chilton; Coosa; Tallapoosa; Chambers; Marengo; Dallas; Autauga; Lowndes; Elmore; Montgomery; Macon; Bul",
+      "headline": "Flood Watch issued June 20 at 3:36AM CDT until June 20 at 7:00PM CDT by NWS Birmingham AL"
+    },
+    {
+      "event": "Hydrologic Outlook",
+      "severity": "Unknown",
+      "effective": "2026-06-20T03:30:00-05:00",
+      "area": "Cook, IL; Ford, IL; Grundy, IL; Iroquois, IL; Kankakee, IL; Kendall, IL; La Salle, IL; Livingston, IL; Will, IL; Benton, IN; Jasper, IN; Lake, IN; Newton, IN; Porter, IN",
+      "headline": "Hydrologic Outlook issued June 20 at 3:30AM CDT by NWS Chicago IL"
+    },
+    {
+      "event": "Flood Watch",
+      "severity": "Severe",
+      "effective": "2026-06-20T03:29:00-05:00",
+      "area": "Ashley; Chicot; Morehouse; West Carroll; East Carroll; Richland; Madison; Franklin; Catahoula; Tensas; Concordia; Lowndes; Choctaw; Oktibbeha; Washington; Humphreys; Holmes; Attala; Winston; Noxubee; Issaquena; Sharkey; Yazoo; Madison; Leak",
+      "headline": "Flood Watch issued June 20 at 3:29AM CDT until June 20 at 7:00PM CDT by NWS Jackson MS"
     },
     {
       "event": "Heat Advisory",
       "severity": "Moderate",
-      "effective": "2026-06-13T01:52:00-05:00",
-      "area": "Kingman; Harper; Sumner; Cowley",
-      "headline": "Heat Advisory issued June 13 at 1:52AM CDT until June 13 at 7:00PM CDT by NWS Wichita KS"
+      "effective": "2026-06-20T03:26:00-05:00",
+      "area": "Pointe Coupee; West Feliciana; East Feliciana; St. Helena; Washington; Iberville; West Baton Rouge; East Baton Rouge; Assumption; St. James; St. John The Baptist; Upper St. Bernard; Lower St. Bernard; Northern Tangipahoa; Southeast St. Tamm",
+      "headline": "Heat Advisory issued June 20 at 3:26AM CDT until June 20 at 6:00PM CDT by NWS New Orleans LA"
     },
     {
-      "event": "Beach Hazards Statement",
-      "severity": "Moderate",
-      "effective": "2026-06-13T02:50:00-04:00",
-      "area": "Coastal York; Coastal Cumberland; Sagadahoc; Lincoln; Knox; Coastal Waldo; Coastal Rockingham",
-      "headline": "Beach Hazards Statement issued June 13 at 2:50AM EDT until June 13 at 8:00PM EDT by NWS Gray ME"
+      "event": "Flash Flood Warning",
+      "severity": "Severe",
+      "effective": "2026-06-20T03:23:00-05:00",
+      "area": "Columbia, AR; Lafayette, AR; Miller, AR; Bossier, LA; Caddo, LA; Webster, LA; Cass, TX; Marion, TX",
+      "headline": "Flash Flood Warning issued June 20 at 3:23AM CDT until June 20 at 7:30AM CDT by NWS Shreveport LA"
     },
     {
-      "event": "Coastal Flood Advisory",
+      "event": "Flood Watch",
+      "severity": "Severe",
+      "effective": "2026-06-20T03:18:00-05:00",
+      "area": "Boone; Platte; Colfax; Butler; Saunders",
+      "headline": "Flood Watch issued June 20 at 3:18AM CDT until June 21 at 7:00AM CDT by NWS Omaha/Valley NE"
+    },
+    {
+      "event": "Red Flag Warning",
+      "severity": "Severe",
+      "effective": "2026-06-20T01:03:00-07:00",
+      "area": "Western Elko County, northern Eureka and Lander Counties north of Interstate 80; Central Elko County; Eastern Elko County",
+      "headline": "Red Flag Warning issued June 20 at 1:03AM PDT until June 20 at 5:00PM PDT by NWS Elko NV"
+    },
+    {
+      "event": "Flood Watch",
+      "severity": "Severe",
+      "effective": "2026-06-20T03:02:00-05:00",
+      "area": "Lincoln; Ellsworth; Saline; McPherson; Marion; Chase",
+      "headline": "Flood Watch issued June 20 at 3:02AM CDT until June 21 at 1:00PM CDT by NWS Wichita KS"
+    },
+    {
+      "event": "Flood Watch",
+      "severity": "Severe",
+      "effective": "2026-06-20T03:02:00-05:00",
+      "area": "Greenwood; Woodson; Allen",
+      "headline": "Flood Watch issued June 20 at 3:02AM CDT until June 21 at 7:00PM CDT by NWS Wichita KS"
+    },
+    {
+      "event": "Flood Advisory",
       "severity": "Minor",
-      "effective": "2026-06-13T02:49:00-04:00",
-      "area": "Western Monmouth; Eastern Monmouth; Ocean; Coastal Ocean; Southeastern Burlington",
-      "headline": "Coastal Flood Advisory issued June 13 at 2:49AM EDT until June 14 at 12:00AM EDT by NWS Mount Holly NJ"
+      "effective": "2026-06-20T03:00:00-05:00",
+      "area": "Burnet, TX; Travis, TX; Williamson, TX",
+      "headline": "Flood Advisory issued June 20 at 3:00AM CDT until June 20 at 7:00AM CDT by NWS Austin/San Antonio TX"
     },
     {
-      "event": "Coastal Flood Advisory",
+      "event": "Flood Advisory",
       "severity": "Minor",
-      "effective": "2026-06-13T02:49:00-04:00",
-      "area": "Kent; Inland Sussex; Delaware Beaches; Cumberland; Atlantic; Cape May; Atlantic Coastal Cape May",
-      "headline": "Coastal Flood Advisory issued June 13 at 2:49AM EDT until June 14 at 12:00AM EDT by NWS Mount Holly NJ"
+      "effective": "2026-06-20T02:57:00-05:00",
+      "area": "Bandera, TX; Medina, TX; Real, TX; Uvalde, TX",
+      "headline": "Flood Advisory issued June 20 at 2:57AM CDT until June 20 at 7:00AM CDT by NWS Austin/San Antonio TX"
     },
     {
-      "event": "Heat Advisory",
-      "severity": "Moderate",
-      "effective": "2026-06-13T02:38:00-04:00",
-      "area": "Orange; Durham; Chatham; Wake; Johnston; Montgomery; Moore; Lee; Harnett; Wayne; Anson; Richmond; Scotland; Hoke; Cumberland; Sampson",
-      "headline": "Heat Advisory issued June 13 at 2:38AM EDT until June 13 at 8:00PM EDT by NWS Raleigh NC"
-    },
-    {
-      "event": "Heat Advisory",
-      "severity": "Moderate",
-      "effective": "2026-06-13T01:24:00-05:00",
-      "area": "Cross; Crittenden; St. Francis; Lee; Phillips; Tunica; Coahoma; Quitman; Tallahatchie",
-      "headline": "Heat Advisory issued June 13 at 1:24AM CDT until June 13 at 8:00PM CDT by NWS Memphis TN"
-    },
-    {
-      "event": "Special Weather Statement",
-      "severity": "Moderate",
-      "effective": "2026-06-13T01:23:00-05:00",
-      "area": "Alexander; Pulaski; Massac; Fulton; Hickman; Carlisle; Ballard; McCracken; Graves; Livingston; Marshall; Calloway; Crittenden; Lyon; Trigg; Caldwell; Hopkins; Christian; Muhlenberg; Todd; Wayne; Carter; Ripley; Butler; Stoddard; Scott; Miss",
-      "headline": "Special Weather Statement issued June 13 at 1:23AM CDT by NWS Paducah KY"
-    },
-    {
-      "event": "Heat Advisory",
-      "severity": "Moderate",
-      "effective": "2026-06-13T02:05:00-04:00",
-      "area": "Duplin; Lenoir; Jones; Pamlico; Northern Craven; Southern Craven; West Carteret; Inland Onslow; Coastal Onslow",
-      "headline": "Heat Advisory issued June 13 at 2:05AM EDT until June 13 at 5:00PM EDT by NWS Newport/Morehead City NC"
-    },
-    {
-      "event": "Heat Advisory",
-      "severity": "Moderate",
-      "effective": "2026-06-13T02:03:00-04:00",
-      "area": "Oglethorpe; Wilkes; Morgan; Greene; Taliaferro; Butts; Jasper; Putnam; Hancock; Warren; Upson; Lamar; Monroe; Jones; Baldwin; Washington; Glascock; Jefferson; Talbot; Taylor; Crawford; Bibb; Twiggs; Wilkinson; Johnson; Emanuel; Muscogee; Ch",
-      "headline": "Heat Advisory issued June 13 at 2:03AM EDT until June 13 at 8:00PM EDT by NWS Peachtree City GA"
-    },
-    {
-      "event": "Beach Hazards Statement",
-      "severity": "Moderate",
-      "effective": "2026-06-13T01:52:00-04:00",
-      "area": "Alger",
-      "headline": "Beach Hazards Statement issued June 13 at 1:52AM EDT until June 13 at 10:00PM EDT by NWS Marquette MI"
-    },
-    {
-      "event": "Heat Advisory",
-      "severity": "Moderate",
-      "effective": "2026-06-13T01:46:00-04:00",
-      "area": "Coastal Bryan; Coastal Chatham; Coastal Liberty; Coastal McIntosh; Inland Berkeley; Beaufort; Coastal Colleton; Charleston; Coastal Jasper; Tidal Berkeley",
-      "headline": "Heat Advisory issued June 13 at 1:46AM EDT until June 13 at 5:00PM EDT by NWS Charleston SC"
-    },
-    {
-      "event": "Special Weather Statement",
-      "severity": "Moderate",
-      "effective": "2026-06-12T21:28:00-08:00",
-      "area": "City and Borough of Yakutat",
-      "headline": "Special Weather Statement issued June 12 at 9:28PM AKDT by NWS Juneau AK"
-    },
-    {
-      "event": "Coastal Flood Advisory",
+      "event": "Small Craft Advisory",
       "severity": "Minor",
-      "effective": "2026-06-13T00:07:00-05:00",
-      "area": "Matagorda Islands; Brazoria Islands; Galveston Island; Bolivar Peninsula",
-      "headline": "Coastal Flood Advisory issued June 13 at 12:07AM CDT until June 14 at 1:00PM CDT by NWS Houston/Galveston TX"
+      "effective": "2026-06-20T03:56:00-04:00",
+      "area": "Narragansett Bay",
+      "headline": "Small Craft Advisory issued June 20 at 3:56AM EDT until June 20 at 4:00PM EDT by NWS Boston/Norton MA"
+    },
+    {
+      "event": "Flood Advisory",
+      "severity": "Minor",
+      "effective": "2026-06-20T02:49:00-05:00",
+      "area": "DeWitt, TX; Gonzales, TX; Karnes, TX; Wilson, TX",
+      "headline": "Flood Advisory issued June 20 at 2:49AM CDT until June 20 at 7:00AM CDT by NWS Austin/San Antonio TX"
+    },
+    {
+      "event": "Flood Advisory",
+      "severity": "Minor",
+      "effective": "2026-06-20T02:29:00-05:00",
+      "area": "Cotton, OK",
+      "headline": "Flood Advisory issued June 20 at 2:29AM CDT until June 21 at 1:00AM CDT by NWS Norman OK"
+    },
+    {
+      "event": "Flood Watch",
+      "severity": "Severe",
+      "effective": "2026-06-20T02:13:00-05:00",
+      "area": "Dickinson; Morris",
+      "headline": "Flood Watch issued June 20 at 2:13AM CDT until June 21 at 1:00PM CDT by NWS Topeka KS"
+    },
+    {
+      "event": "Flood Watch",
+      "severity": "Severe",
+      "effective": "2026-06-20T02:13:00-05:00",
+      "area": "Lee; Hancock; McDonough; Scotland; Clark",
+      "headline": "Flood Watch issued June 20 at 2:13AM CDT until June 21 at 10:00PM CDT by NWS Quad Cities IA IL"
+    },
+    {
+      "event": "Flood Watch",
+      "severity": "Severe",
+      "effective": "2026-06-20T02:13:00-05:00",
+      "area": "Lyon; Osage; Franklin; Coffey; Anderson",
+      "headline": "Flood Watch issued June 20 at 2:13AM CDT until June 21 at 7:00PM CDT by NWS Topeka KS"
     },
     {
       "event": "Rip Current Statement",
       "severity": "Moderate",
-      "effective": "2026-06-13T00:07:00-05:00",
-      "area": "Matagorda Islands; Brazoria Islands; Galveston Island; Bolivar Peninsula",
-      "headline": "Rip Current Statement issued June 13 at 12:07AM CDT until June 15 at 10:00AM CDT by NWS Houston/Galveston TX"
+      "effective": "2026-06-20T02:10:00-05:00",
+      "area": "Mobile Coastal; Baldwin Coastal; Escambia Coastal; Santa Rosa Coastal; Okaloosa Coastal",
+      "headline": "Rip Current Statement issued June 20 at 2:10AM CDT until June 20 at 6:00PM CDT by NWS Mobile AL"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-06-20T02:59:00-04:00",
+      "area": "Tidal Potomac from Indian Head to Cobb Island MD; Patuxent River to Broomes Island MD",
+      "headline": "Small Craft Advisory issued June 20 at 2:59AM EDT until June 20 at 8:00PM EDT by NWS Baltimore MD/Washington DC"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-06-20T02:59:00-04:00",
+      "area": "Chesapeake Bay from Sandy Point to North Beach MD; Chesapeake Bay from North Beach to Drum Point MD; Chesapeake Bay from Drum Point MD to Smith Point VA; Tidal Potomac from Cobb Island MD to Smith Point VA; Chester River to Queenstown MD; E",
+      "headline": "Small Craft Advisory issued June 20 at 2:59AM EDT until June 20 at 8:00PM EDT by NWS Baltimore MD/Washington DC"
+    },
+    {
+      "event": "Flood Watch",
+      "severity": "Severe",
+      "effective": "2026-06-20T02:58:00-04:00",
+      "area": "Warren; Tippecanoe; Clinton; Fountain; Montgomery; Boone; Hamilton; Vermillion; Parke; Putnam; Hendricks; Marion; Hancock; Vigo; Clay; Owen; Morgan; Johnson; Shelby; Rush; Sullivan; Greene; Monroe; Brown; Bartholomew; Decatur; Knox; Daviess",
+      "headline": "Flood Watch issued June 20 at 2:58AM EDT until June 22 at 8:00AM EDT by NWS Indianapolis IN"
+    },
+    {
+      "event": "Special Weather Statement",
+      "severity": "Moderate",
+      "effective": "2026-06-20T02:51:00-04:00",
+      "area": "Northern New London; Southern New London",
+      "headline": "Special Weather Statement issued June 20 at 2:51AM EDT by NWS Upton NY"
+    },
+    {
+      "event": "Flood Watch",
+      "severity": "Severe",
+      "effective": "2026-06-20T01:45:00-05:00",
+      "area": "Fulton; Schuyler; Mason; Logan; De Witt; Piatt; Champaign; Vermilion; Cass; Menard; Scott; Morgan; Sangamon; Christian; Macon; Moultrie; Douglas; Coles; Edgar; Shelby; Cumberland; Clark; Effingham; Jasper; Crawford; Clay; Richland; Lawrence",
+      "headline": "Flood Watch issued June 20 at 1:45AM CDT until June 22 at 1:00AM CDT by NWS Lincoln IL"
+    },
+    {
+      "event": "Fire Weather Watch",
+      "severity": "Severe",
+      "effective": "2026-06-20T00:30:00-06:00",
+      "area": "Upper Arkansas River Valley Including Lake County and Chaffee County; Fremont County Including Canon City/Howard/Texas Creek; Eastern San Juan Mountains and La Garita Mountains Including Wolf Creek Pass and Creede; San Luis Valley Including",
+      "headline": "Fire Weather Watch issued June 20 at 12:30AM MDT until June 21 at 10:00PM MDT by NWS Pueblo CO"
+    },
+    {
+      "event": "Flood Watch",
+      "severity": "Severe",
+      "effective": "2026-06-20T01:28:00-05:00",
+      "area": "Adams; Brown; Pike; Calhoun; Knox; Lewis; Shelby; Marion; Monroe; Ralls; Pike; Boone; Audrain; Moniteau; Cole; Osage; Callaway; Montgomery; Lincoln; Gasconade; Warren",
+      "headline": "Flood Watch issued June 20 at 1:28AM CDT until June 21 at 7:00PM CDT by NWS St Louis MO"
+    },
+    {
+      "event": "Flood Watch",
+      "severity": "Severe",
+      "effective": "2026-06-20T01:28:00-05:00",
+      "area": "Greene; Macoupin; Montgomery; Bond; Fayette; Jersey; Madison; St. Charles; Franklin; St. Louis; St. Louis City",
+      "headline": "Flood Watch issued June 20 at 1:28AM CDT until June 22 at 1:00AM CDT by NWS St Louis MO"
+    },
+    {
+      "event": "Flood Watch",
+      "severity": "Severe",
+      "effective": "2026-06-20T01:28:00-05:00",
+      "area": "Clinton; Marion; Washington; Randolph; St. Clair; Monroe; Jefferson; Crawford; Washington; St. Francois; Ste. Genevieve; Iron; Madison; Reynolds",
+      "headline": "Flood Watch issued June 20 at 1:28AM CDT until June 22 at 7:00AM CDT by NWS St Louis MO"
+    },
+    {
+      "event": "Flood Watch",
+      "severity": "Severe",
+      "effective": "2026-06-20T01:19:00-05:00",
+      "area": "Miami; Linn; Cass; Johnson; Pettis; Cooper; Bates; Henry",
+      "headline": "Flood Watch issued June 20 at 1:19AM CDT until June 21 at 7:00PM CDT by NWS Kansas City/Pleasant Hill MO"
+    },
+    {
+      "event": "Red Flag Warning",
+      "severity": "Severe",
+      "effective": "2026-06-19T23:17:00-07:00",
+      "area": "Lower Columbia Basin of Oregon; Central Mountains of Oregon; Lower Columbia Basin",
+      "headline": "Red Flag Warning issued June 19 at 11:17PM PDT until June 20 at 8:00PM PDT by NWS Pendleton OR"
+    },
+    {
+      "event": "Red Flag Warning",
+      "severity": "Severe",
+      "effective": "2026-06-19T23:17:00-07:00",
+      "area": "Kittitas Valley",
+      "headline": "Red Flag Warning issued June 19 at 11:17PM PDT until June 20 at 8:00PM PDT by NWS Pendleton OR"
+    },
+    {
+      "event": "Flood Watch",
+      "severity": "Severe",
+      "effective": "2026-06-20T01:13:00-05:00",
+      "area": "Bourbon; Crawford; Cherokee; Benton; Morgan; Miller; Maries; Vernon; St. Clair; Hickory; Camden; Pulaski; Phelps; Barton; Cedar; Polk; Dallas; Laclede; Texas; Dent; Jasper; Dade; Greene; Webster; Wright; Newton; Lawrence; Christian; Douglas",
+      "headline": "Flood Watch issued June 20 at 1:13AM CDT until June 22 at 7:00AM CDT by NWS Springfield MO"
+    },
+    {
+      "event": "Flood Watch",
+      "severity": "Severe",
+      "effective": "2026-06-20T00:59:00-05:00",
+      "area": "Valley; Greeley",
+      "headline": "Flood Watch issued June 20 at 12:59AM CDT until June 21 at 7:00AM CDT by NWS Hastings NE"
+    },
+    {
+      "event": "Heat Advisory",
+      "severity": "Moderate",
+      "effective": "2026-06-20T01:46:00-04:00",
+      "area": "Coastal Collier County; Inland Collier County; Inland Broward County; Metro Broward County; Inland Miami-Dade County; Metropolitan Miami Dade; Coastal Broward County; Coastal Miami Dade County; Far South Miami-Dade County",
+      "headline": "Heat Advisory issued June 20 at 1:46AM EDT until June 20 at 6:00PM EDT by NWS Miami FL"
+    },
+    {
+      "event": "Heat Advisory",
+      "severity": "Moderate",
+      "effective": "2026-06-20T00:34:00-04:00",
+      "area": "San Juan and Vicinity; Northeast; Southeast; Eastern Interior; North Central; Ponce and Vicinity; Northwest; Mayaguez and Vicinity; Southwest; Culebra; Vieques; St.Thomas...St. John.. and Adjacent Islands; St Croix",
+      "headline": "Heat Advisory issued June 20 at 12:34AM AST until June 20 at 5:00PM AST by NWS San Juan PR"
+    },
+    {
+      "event": "Beach Hazards Statement",
+      "severity": "Moderate",
+      "effective": "2026-06-19T21:28:00-07:00",
+      "area": "San Diego County Coastal Areas; Orange County Coastal",
+      "headline": "Beach Hazards Statement issued June 19 at 9:28PM PDT until June 21 at 11:00PM PDT by NWS San Diego CA"
+    },
+    {
+      "event": "Flood Warning",
+      "severity": "Severe",
+      "effective": "2026-06-19T23:15:00-05:00",
+      "area": "Covington, MS; Forrest, MS",
+      "headline": "Flood Warning issued June 19 at 11:15PM CDT until June 21 at 5:00AM CDT by NWS Jackson MS"
     }
   ]
 }
