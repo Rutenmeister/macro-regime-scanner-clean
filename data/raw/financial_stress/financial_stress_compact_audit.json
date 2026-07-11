@@ -1,7 +1,7 @@
 {
   "sourceId": "FINANCIAL_STRESS_FRED",
   "sourceName": "Federal Reserve / FRED credit and financial-stress public data",
-  "retrievedAt": "2026-07-04T01:15:25.057346+00:00",
+  "retrievedAt": "2026-07-11T01:06:54.801598+00:00",
   "series": {
     "HY_OAS": {
       "seriesId": "BAMLH0A0HYM2",
@@ -13,7 +13,7 @@
         }
       ],
       "status": "ok",
-      "latestDate": "2026-07-02"
+      "latestDate": "2026-07-09"
     },
     "IG_OAS": {
       "seriesId": "BAMLC0A0CM",
@@ -25,7 +25,7 @@
         }
       ],
       "status": "ok",
-      "latestDate": "2026-07-02"
+      "latestDate": "2026-07-09"
     },
     "BBB_OAS": {
       "seriesId": "BAMLC0A4CBBB",
@@ -37,7 +37,7 @@
         }
       ],
       "status": "ok",
-      "latestDate": "2026-07-02"
+      "latestDate": "2026-07-09"
     },
     "NFCI": {
       "seriesId": "NFCI",
@@ -45,11 +45,11 @@
       "fetchAttempts": [
         {
           "method": "fredgraph_csv",
-          "rows": 2895
+          "rows": 2896
         }
       ],
       "status": "ok",
-      "latestDate": "2026-06-26"
+      "latestDate": "2026-07-03"
     },
     "ANFCI": {
       "seriesId": "ANFCI",
@@ -57,11 +57,11 @@
       "fetchAttempts": [
         {
           "method": "fredgraph_csv",
-          "rows": 2895
+          "rows": 2896
         }
       ],
       "status": "ok",
-      "latestDate": "2026-06-26"
+      "latestDate": "2026-07-03"
     },
     "STLFSI4": {
       "seriesId": "STLFSI4",
@@ -69,11 +69,11 @@
       "fetchAttempts": [
         {
           "method": "fredgraph_csv",
-          "rows": 1696
+          "rows": 1697
         }
       ],
       "status": "ok",
-      "latestDate": "2026-06-26"
+      "latestDate": "2026-07-03"
     }
   },
   "observationCount": 6,

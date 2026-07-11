@@ -1,7 +1,7 @@
 {
   "schemaVersion": "0.28.1",
   "sourceId": "FED_FRED_SELECTED",
-  "retrievedAt": "2026-07-04T01:15:18.617061+00:00",
+  "retrievedAt": "2026-07-11T01:06:47.900779+00:00",
   "seriesAudits": [
     {
       "seriesId": "EFFR",
@@ -10,12 +10,12 @@
       "fetchAttempts": [
         {
           "method": "fredgraph_csv",
-          "rows": 6784
+          "rows": 6789
         }
       ],
-      "rowsFetched": 6784,
-      "latestPeriod": "2026-07-02",
-      "latestValue": 3.63,
+      "rowsFetched": 6789,
+      "latestPeriod": "2026-07-09",
+      "latestValue": 3.62,
       "score": 1
     },
     {
@@ -25,13 +25,13 @@
       "fetchAttempts": [
         {
           "method": "fredgraph_csv",
-          "rows": 1229
+          "rows": 1230
         }
       ],
-      "rowsFetched": 1229,
-      "latestPeriod": "2026-07-01",
-      "latestValue": 6724.564,
-      "score": -1
+      "rowsFetched": 1230,
+      "latestPeriod": "2026-07-08",
+      "latestValue": 6735.609,
+      "score": 1
     },
     {
       "seriesId": "WRESBAL",
@@ -40,13 +40,13 @@
       "fetchAttempts": [
         {
           "method": "fredgraph_csv",
-          "rows": 1229
+          "rows": 1230
         }
       ],
-      "rowsFetched": 1229,
-      "latestPeriod": "2026-07-01",
-      "latestValue": 2966.897,
-      "score": 1
+      "rowsFetched": 1230,
+      "latestPeriod": "2026-07-08",
+      "latestValue": 3098.911,
+      "score": 2
     },
     {
       "seriesId": "RRPONTSYD",
@@ -55,13 +55,13 @@
       "fetchAttempts": [
         {
           "method": "fredgraph_csv",
-          "rows": 6105
+          "rows": 6111
         }
       ],
-      "rowsFetched": 6105,
-      "latestPeriod": "2026-07-02",
-      "latestValue": 2.175,
-      "score": -1
+      "rowsFetched": 6111,
+      "latestPeriod": "2026-07-10",
+      "latestValue": 0.545,
+      "score": 1
     },
     {
       "seriesId": "WTREGEN",
@@ -70,13 +70,13 @@
       "fetchAttempts": [
         {
           "method": "fredgraph_csv",
-          "rows": 1229
+          "rows": 1230
         }
       ],
-      "rowsFetched": 1229,
-      "latestPeriod": "2026-07-01",
-      "latestValue": 880.237,
-      "score": 1
+      "rowsFetched": 1230,
+      "latestPeriod": "2026-07-08",
+      "latestValue": 774.062,
+      "score": 2
     }
   ],
   "observationCount": 5

@@ -1,24 +1,24 @@
 {
   "sourceId": "NOAA_NWS",
   "sourceName": "NOAA/National Weather Service public weather alerts",
-  "retrievedAt": "2026-07-04T01:15:27.303197+00:00",
+  "retrievedAt": "2026-07-11T01:06:56.557488+00:00",
   "endpoint": "https://api.weather.gov/alerts/active?status=actual&message_type=alert",
   "fetchAttempts": [
     {
       "endpoint": "https://api.weather.gov/alerts/active?status=actual&message_type=alert",
-      "features": 200
+      "features": 216
     }
   ],
   "categoryCounts": {
     "HEAT_STRESS": {
-      "count": 10,
-      "weighted": 23,
+      "count": 17,
+      "weighted": 41,
       "sampleEvents": [
         "Heat Advisory",
         "Heat Advisory",
-        "Heat Advisory",
         "Extreme Heat Warning",
-        "Heat Advisory"
+        "Extreme Heat Warning",
+        "Extreme Heat Watch"
       ]
     },
     "COLD_FREEZE_STRESS": {
@@ -32,19 +32,19 @@
       "sampleEvents": []
     },
     "FLOOD_STRESS": {
-      "count": 27,
-      "weighted": 61,
+      "count": 37,
+      "weighted": 87,
       "sampleEvents": [
-        "Flash Flood Warning",
         "Flood Advisory",
         "Flash Flood Warning",
-        "Flood Warning",
+        "Flash Flood Warning",
+        "Flood Advisory",
         "Flash Flood Warning"
       ]
     },
     "SEVERE_CONVECTIVE_STRESS": {
-      "count": 22,
-      "weighted": 66,
+      "count": 7,
+      "weighted": 21,
       "sampleEvents": [
         "Severe Thunderstorm Warning",
         "Severe Thunderstorm Warning",
@@ -59,9 +59,10 @@
       "sampleEvents": []
     },
     "FIRE_WEATHER_STRESS": {
-      "count": 4,
-      "weighted": 12,
+      "count": 10,
+      "weighted": 30,
       "sampleEvents": [
+        "Red Flag Warning",
         "Red Flag Warning",
         "Red Flag Warning",
         "Red Flag Warning",
@@ -76,71 +77,83 @@
   },
   "eventCountsTop": [
     [
-      "Air Quality Alert",
-      57
-    ],
-    [
       "Small Craft Advisory",
-      50
+      99
     ],
     [
       "Special Weather Statement",
-      20
+      18
     ],
     [
-      "Severe Thunderstorm Warning",
-      11
-    ],
-    [
-      "Severe Thunderstorm Watch",
-      11
-    ],
-    [
-      "Flood Advisory",
-      10
-    ],
-    [
-      "Flash Flood Warning",
-      9
+      "Flood Warning",
+      13
     ],
     [
       "Heat Advisory",
+      10
+    ],
+    [
+      "Flood Advisory",
+      9
+    ],
+    [
+      "Air Quality Alert",
+      8
+    ],
+    [
+      "Special Marine Warning",
       7
     ],
     [
       "Flood Watch",
-      6
+      7
     ],
     [
       "Red Flag Warning",
+      7
+    ],
+    [
+      "Severe Thunderstorm Warning",
+      5
+    ],
+    [
+      "Flash Flood Warning",
+      5
+    ],
+    [
+      "Beach Hazards Statement",
       4
+    ],
+    [
+      "Extreme Heat Watch",
+      4
+    ],
+    [
+      "Marine Weather Statement",
+      3
     ],
     [
       "Extreme Heat Warning",
       3
     ],
     [
-      "Special Marine Warning",
+      "Fire Weather Watch",
+      3
+    ],
+    [
+      "Coastal Flood Advisory",
+      3
+    ],
+    [
+      "Severe Thunderstorm Watch",
       2
     ],
     [
-      "Flood Warning",
+      "Wind Advisory",
       2
     ],
     [
-      "Tropical Cyclone Local Statement",
-      2
-    ],
-    [
-      "Hazardous Seas Warning",
-      2
-    ],
-    [
-      "Marine Weather Statement",
-      1
-    ],
-    [
-      "Beach Hazards Statement",
+      "Dust Storm Warning",
       1
     ],
     [
@@ -150,366 +163,370 @@
     [
       "Gale Warning",
       1
+    ],
+    [
+      "Blowing Dust Advisory",
+      1
     ]
   ],
-  "totalActiveAlerts": 200,
-  "weightedActiveAlerts": 330,
+  "totalActiveAlerts": 216,
+  "weightedActiveAlerts": 367,
   "severityCounts": {
-    "Moderate": 34,
-    "Severe": 48,
-    "Minor": 61,
-    "Unknown": 57
+    "Moderate": 37,
+    "Severe": 57,
+    "Minor": 114,
+    "Unknown": 8
   },
   "sampleAlerts": [
     {
       "event": "Special Weather Statement",
       "severity": "Moderate",
-      "effective": "2026-07-03T20:15:00-05:00",
-      "area": "Williamson; Saline",
-      "headline": "Special Weather Statement issued July 3 at 8:15PM CDT by NWS Paducah KY"
+      "effective": "2026-07-10T20:06:00-05:00",
+      "area": "Oregon",
+      "headline": "Special Weather Statement issued July 10 at 8:06PM CDT by NWS Springfield MO"
+    },
+    {
+      "event": "Special Marine Warning",
+      "severity": "Severe",
+      "effective": "2026-07-10T21:05:00-04:00",
+      "area": "Pamlico Sound; Pamlico and Pungo Rivers; Neuse and Bay Rivers",
+      "headline": "Special Marine Warning issued July 10 at 9:05PM EDT until July 10 at 10:00PM EDT by NWS Newport/Morehead City NC"
     },
     {
       "event": "Special Weather Statement",
       "severity": "Moderate",
-      "effective": "2026-07-03T20:14:00-05:00",
-      "area": "Scott; Whiteside; Rock Island; Henry; Mercer",
-      "headline": "Special Weather Statement issued July 3 at 8:14PM CDT by NWS Quad Cities IA IL"
+      "effective": "2026-07-10T19:03:00-06:00",
+      "area": "Eastern Las Animas County; Las Animas Vicinity/Bent County; Springfield Vicinity/Baca County",
+      "headline": "Special Weather Statement issued July 10 at 7:03PM MDT by NWS Pueblo CO"
+    },
+    {
+      "event": "Special Marine Warning",
+      "severity": "Severe",
+      "effective": "2026-07-10T21:03:00-04:00",
+      "area": "Straits of Florida from Ocean Reef to Craig Key out 20 NM; Straits of Florida from Craig Key to west end of Seven Mile Bridge out 20 NM; Straits of Florida from west end of Seven Mile Bridge to south of Halfmoon Shoal out 20 NM; Straits of ",
+      "headline": "Special Marine Warning issued July 10 at 9:03PM EDT until July 10 at 10:00PM EDT by NWS Key West FL"
     },
     {
       "event": "Special Weather Statement",
       "severity": "Moderate",
-      "effective": "2026-07-03T21:13:00-04:00",
-      "area": "Claiborne; Grainger",
-      "headline": "Special Weather Statement issued July 3 at 9:13PM EDT by NWS Morristown TN"
-    },
-    {
-      "event": "Severe Thunderstorm Warning",
-      "severity": "Severe",
-      "effective": "2026-07-03T20:11:00-05:00",
-      "area": "Johnson, NE; Lancaster, NE; Otoe, NE",
-      "headline": "Severe Thunderstorm Warning issued July 3 at 8:11PM CDT until July 3 at 9:00PM CDT by NWS Omaha/Valley NE"
-    },
-    {
-      "event": "Severe Thunderstorm Warning",
-      "severity": "Severe",
-      "effective": "2026-07-03T19:10:00-06:00",
-      "area": "Fall River, SD",
-      "headline": "Severe Thunderstorm Warning issued July 3 at 7:10PM MDT until July 3 at 8:15PM MDT by NWS Rapid City SD"
-    },
-    {
-      "event": "Heat Advisory",
-      "severity": "Moderate",
-      "effective": "2026-07-03T21:09:00-04:00",
-      "area": "Orange; Washington; Scott; Jefferson; Dubois; Crawford; Perry; Harrison; Floyd; Clark; Hancock; Breckinridge; Meade; Ohio; Grayson; Hardin; Bullitt; Jefferson; Oldham; Trimble; Henry; Shelby; Franklin; Scott; Harrison; Spencer; Anderson; Wo",
-      "headline": "Heat Advisory issued July 3 at 9:09PM EDT until July 4 at 9:00PM EDT by NWS Louisville KY"
-    },
-    {
-      "event": "Severe Thunderstorm Warning",
-      "severity": "Severe",
-      "effective": "2026-07-03T21:09:00-04:00",
-      "area": "Columbiana, OH; Beaver, PA; Lawrence, PA",
-      "headline": "Severe Thunderstorm Warning issued July 3 at 9:09PM EDT until July 3 at 9:45PM EDT by NWS Pittsburgh PA"
+      "effective": "2026-07-10T21:01:00-04:00",
+      "area": "Wood; Sandusky; Seneca",
+      "headline": "Special Weather Statement issued July 10 at 9:01PM EDT by NWS Cleveland OH"
     },
     {
       "event": "Special Weather Statement",
       "severity": "Moderate",
-      "effective": "2026-07-03T17:06:00-08:00",
-      "area": "Fortymile Country; Delta Junction; Eastern Alaska Range North of Trims Camp",
-      "headline": "Special Weather Statement issued July 3 at 5:06PM AKDT by NWS Fairbanks AK"
+      "effective": "2026-07-10T21:00:00-04:00",
+      "area": "Wabash",
+      "headline": "Special Weather Statement issued July 10 at 9:00PM EDT by NWS Northern Indiana"
+    },
+    {
+      "event": "Special Weather Statement",
+      "severity": "Moderate",
+      "effective": "2026-07-10T21:00:00-04:00",
+      "area": "Central Marion",
+      "headline": "Special Weather Statement issued July 10 at 9:00PM EDT by NWS Jacksonville FL"
+    },
+    {
+      "event": "Special Weather Statement",
+      "severity": "Moderate",
+      "effective": "2026-07-10T18:59:00-06:00",
+      "area": "Crowley County; La Junta Vicinity/Otero County; Las Animas Vicinity/Bent County",
+      "headline": "Special Weather Statement issued July 10 at 6:59PM MDT by NWS Pueblo CO"
+    },
+    {
+      "event": "Special Weather Statement",
+      "severity": "Moderate",
+      "effective": "2026-07-10T19:59:00-05:00",
+      "area": "Dallam; Hartley; Oldham",
+      "headline": "Special Weather Statement issued July 10 at 7:59PM CDT by NWS Amarillo TX"
     },
     {
       "event": "Marine Weather Statement",
       "severity": "Minor",
-      "effective": "2026-07-03T20:05:00-05:00",
-      "area": "Winthrop Harbor to Wilmette Harbor IL; Lake Michigan from Winthrop Harbor to Wilmette Harbor IL 5NM offshore to Mid Lake",
-      "headline": "Marine Weather Statement issued July 3 at 8:05PM CDT by NWS Chicago IL"
-    },
-    {
-      "event": "Special Weather Statement",
-      "severity": "Moderate",
-      "effective": "2026-07-03T19:05:00-06:00",
-      "area": "Powder River; Southern Rosebud; Southern Big Horn",
-      "headline": "Special Weather Statement issued July 3 at 7:05PM MDT by NWS Billings MT"
+      "effective": "2026-07-10T20:58:00-04:00",
+      "area": "Charleston Harbor; Coastal waters from South Santee River to Edisto Beach SC out 20 NM",
+      "headline": "Marine Weather Statement issued July 10 at 8:58PM EDT by NWS Charleston SC"
     },
     {
       "event": "Severe Thunderstorm Warning",
       "severity": "Severe",
-      "effective": "2026-07-03T21:05:00-04:00",
-      "area": "Geauga, OH; Mahoning, OH; Medina, OH; Portage, OH; Stark, OH; Summit, OH; Trumbull, OH; Wayne, OH",
-      "headline": "Severe Thunderstorm Warning issued July 3 at 9:05PM EDT until July 3 at 9:45PM EDT by NWS Cleveland OH"
+      "effective": "2026-07-10T19:58:00-05:00",
+      "area": "Calhoun, IL; Lincoln, MO; St. Charles, MO; St. Louis, MO; Warren, MO",
+      "headline": "Severe Thunderstorm Warning issued July 10 at 7:58PM CDT until July 10 at 8:45PM CDT by NWS St Louis MO"
     },
     {
       "event": "Severe Thunderstorm Warning",
       "severity": "Severe",
-      "effective": "2026-07-03T20:05:00-05:00",
-      "area": "Trego, KS",
-      "headline": "Severe Thunderstorm Warning issued July 3 at 8:05PM CDT until July 3 at 8:45PM CDT by NWS Dodge City KS"
-    },
-    {
-      "event": "Severe Thunderstorm Warning",
-      "severity": "Severe",
-      "effective": "2026-07-03T21:04:00-04:00",
-      "area": "Jefferson, PA",
-      "headline": "Severe Thunderstorm Warning issued July 3 at 9:04PM EDT until July 3 at 9:30PM EDT by NWS Pittsburgh PA"
-    },
-    {
-      "event": "Severe Thunderstorm Warning",
-      "severity": "Severe",
-      "effective": "2026-07-03T21:03:00-04:00",
-      "area": "Burlington, NJ; Ocean, NJ",
-      "headline": "Severe Thunderstorm Warning issued July 3 at 9:03PM EDT until July 3 at 9:45PM EDT by NWS Mount Holly NJ"
-    },
-    {
-      "event": "Special Weather Statement",
-      "severity": "Moderate",
-      "effective": "2026-07-03T21:02:00-04:00",
-      "area": "Pulaski; Laurel; McCreary; Whitley; Knox",
-      "headline": "Special Weather Statement issued July 3 at 9:02PM EDT by NWS Jackson KY"
-    },
-    {
-      "event": "Severe Thunderstorm Warning",
-      "severity": "Severe",
-      "effective": "2026-07-03T19:02:00-06:00",
-      "area": "Dawson, MT; McCone, MT; Richland, MT",
-      "headline": "Severe Thunderstorm Warning issued July 3 at 7:02PM MDT until July 3 at 8:00PM MDT by NWS Glasgow MT"
-    },
-    {
-      "event": "Special Weather Statement",
-      "severity": "Moderate",
-      "effective": "2026-07-03T20:01:00-05:00",
-      "area": "Wapello; Davis",
-      "headline": "Special Weather Statement issued July 3 at 8:01PM CDT by NWS Des Moines IA"
-    },
-    {
-      "event": "Air Quality Alert",
-      "severity": "Unknown",
-      "effective": "2026-07-03T21:00:00-04:00",
-      "area": "Lorain; Cuyahoga; Lake; Geauga; Ashtabula Inland; Medina; Summit; Portage; Ashtabula Lakeshore",
-      "headline": "Air Quality Alert issued July 3 at 9:00PM EDT by NWS Cleveland OH"
-    },
-    {
-      "event": "Severe Thunderstorm Warning",
-      "severity": "Severe",
-      "effective": "2026-07-03T19:58:00-05:00",
-      "area": "Cloud, KS; Republic, KS; Washington, KS",
-      "headline": "Severe Thunderstorm Warning issued July 3 at 7:58PM CDT until July 3 at 8:45PM CDT by NWS Topeka KS"
-    },
-    {
-      "event": "Special Weather Statement",
-      "severity": "Moderate",
-      "effective": "2026-07-03T19:58:00-05:00",
-      "area": "Rooks; Osborne",
-      "headline": "Special Weather Statement issued July 3 at 7:58PM CDT by NWS Hastings NE"
-    },
-    {
-      "event": "Special Weather Statement",
-      "severity": "Moderate",
-      "effective": "2026-07-03T18:58:00-06:00",
-      "area": "Northern Stillwater; Red Lodge Foothills; Southern Big Horn; Northern Carbon; Southwestern Yellowstone",
-      "headline": "Special Weather Statement issued July 3 at 6:58PM MDT by NWS Billings MT"
-    },
-    {
-      "event": "Special Weather Statement",
-      "severity": "Moderate",
-      "effective": "2026-07-03T19:57:00-05:00",
-      "area": "Beaver; Lipscomb",
-      "headline": "Special Weather Statement issued July 3 at 7:57PM CDT by NWS Amarillo TX"
-    },
-    {
-      "event": "Severe Thunderstorm Warning",
-      "severity": "Severe",
-      "effective": "2026-07-03T19:55:00-05:00",
-      "area": "Otoe, NE",
-      "headline": "Severe Thunderstorm Warning issued July 3 at 7:55PM CDT until July 3 at 8:45PM CDT by NWS Omaha/Valley NE"
-    },
-    {
-      "event": "Special Weather Statement",
-      "severity": "Moderate",
-      "effective": "2026-07-03T18:52:00-06:00",
-      "area": "Southern Big Horn; Sheridan Foothills",
-      "headline": "Special Weather Statement issued July 3 at 6:52PM MDT by NWS Billings MT"
-    },
-    {
-      "event": "Severe Thunderstorm Warning",
-      "severity": "Severe",
-      "effective": "2026-07-03T20:51:00-04:00",
-      "area": "Campbell, TN; Scott, TN",
-      "headline": "Severe Thunderstorm Warning issued July 3 at 8:51PM EDT until July 3 at 9:45PM EDT by NWS Morristown TN"
+      "effective": "2026-07-10T18:57:00-06:00",
+      "area": "Adams, CO; Central Arapahoe, CO; Eastern Arapahoe, CO",
+      "headline": "Severe Thunderstorm Warning issued July 10 at 6:57PM MDT until July 10 at 7:30PM MDT by NWS Denver CO"
     },
     {
       "event": "Special Marine Warning",
       "severity": "Severe",
-      "effective": "2026-07-03T20:50:00-04:00",
-      "area": "Waters from Fire Island Inlet NY to Moriches Inlet NY from 20 to 60 NM; Waters from Sandy Hook NJ to Fire Island Inlet NY out 20 to 60 NM",
-      "headline": "Special Marine Warning issued July 3 at 8:50PM EDT until July 3 at 9:45PM EDT by NWS Upton NY"
+      "effective": "2026-07-10T20:57:00-04:00",
+      "area": "Florida Bay including Barnes Sound, Blackwater Sound, and Buttonwood Sound; Bayside and Gulfside from Craig Key to West End of Seven Mile Bridge; Hawk Channel from Craig Key to west end of Seven Mile Bridge out to the reef; Straits of Flori",
+      "headline": "Special Marine Warning issued July 10 at 8:57PM EDT until July 10 at 9:30PM EDT by NWS Key West FL"
     },
     {
-      "event": "Flash Flood Warning",
+      "event": "Marine Weather Statement",
+      "severity": "Minor",
+      "effective": "2026-07-10T20:54:00-04:00",
+      "area": "Bayside and Gulfside from Craig Key to West End of Seven Mile Bridge; Hawk Channel from Craig Key to west end of Seven Mile Bridge out to the reef; Straits of Florida from Craig Key to west end of Seven Mile Bridge out 20 NM; Straits of Flo",
+      "headline": "Marine Weather Statement issued July 10 at 8:54PM EDT by NWS Key West FL"
+    },
+    {
+      "event": "Marine Weather Statement",
+      "severity": "Minor",
+      "effective": "2026-07-10T20:54:00-04:00",
+      "area": "Gulf of America including Dry Tortugas and Rebecca Shoal Channel",
+      "headline": "Marine Weather Statement issued July 10 at 8:54PM EDT by NWS Key West FL"
+    },
+    {
+      "event": "Dust Storm Warning",
       "severity": "Severe",
-      "effective": "2026-07-03T19:50:00-05:00",
-      "area": "Scott, IA; Rock Island, IL",
-      "headline": "Flash Flood Warning issued July 3 at 7:50PM CDT until July 3 at 10:45PM CDT by NWS Quad Cities IA IL"
+      "effective": "2026-07-10T17:53:00-07:00",
+      "area": "Cochise, AZ",
+      "headline": "Dust Storm Warning issued July 10 at 5:53PM MST until July 10 at 7:00PM MST by NWS Tucson AZ"
+    },
+    {
+      "event": "Severe Thunderstorm Warning",
+      "severity": "Severe",
+      "effective": "2026-07-10T19:53:00-05:00",
+      "area": "Franklin, IL; Jackson, IL; Williamson, IL",
+      "headline": "Severe Thunderstorm Warning issued July 10 at 7:53PM CDT until July 10 at 8:45PM CDT by NWS Paducah KY"
+    },
+    {
+      "event": "Severe Thunderstorm Warning",
+      "severity": "Severe",
+      "effective": "2026-07-10T19:52:00-05:00",
+      "area": "Calhoun, IL; Lincoln, MO; Pike, MO",
+      "headline": "Severe Thunderstorm Warning issued July 10 at 7:52PM CDT until July 10 at 8:30PM CDT by NWS St Louis MO"
     },
     {
       "event": "Special Weather Statement",
       "severity": "Moderate",
-      "effective": "2026-07-03T20:49:00-04:00",
-      "area": "Pulaski; Wayne; McCreary",
-      "headline": "Special Weather Statement issued July 3 at 8:49PM EDT by NWS Jackson KY"
+      "effective": "2026-07-10T18:49:00-06:00",
+      "area": "Crowley County; La Junta Vicinity/Otero County",
+      "headline": "Special Weather Statement issued July 10 at 6:49PM MDT by NWS Pueblo CO"
+    },
+    {
+      "event": "Severe Thunderstorm Warning",
+      "severity": "Severe",
+      "effective": "2026-07-10T20:47:00-04:00",
+      "area": "Ben Hill, GA; Irwin, GA",
+      "headline": "Severe Thunderstorm Warning issued July 10 at 8:47PM EDT until July 10 at 10:15PM EDT by NWS Tallahassee FL"
+    },
+    {
+      "event": "Special Weather Statement",
+      "severity": "Moderate",
+      "effective": "2026-07-10T18:47:00-06:00",
+      "area": "Northern Big Horn; Southwestern Yellowstone",
+      "headline": "Special Weather Statement issued July 10 at 6:47PM MDT by NWS Billings MT"
     },
     {
       "event": "Flood Advisory",
       "severity": "Minor",
-      "effective": "2026-07-03T18:44:00-06:00",
-      "area": "McCone, MT",
-      "headline": "Flood Advisory issued July 3 at 6:44PM MDT until July 3 at 9:45PM MDT by NWS Glasgow MT"
-    },
-    {
-      "event": "Special Weather Statement",
-      "severity": "Moderate",
-      "effective": "2026-07-03T18:43:00-06:00",
-      "area": "Custer",
-      "headline": "Special Weather Statement issued July 3 at 6:43PM MDT by NWS Billings MT"
-    },
-    {
-      "event": "Flash Flood Warning",
-      "severity": "Severe",
-      "effective": "2026-07-03T18:43:00-06:00",
-      "area": "Otero, NM",
-      "headline": "Flash Flood Warning issued July 3 at 6:43PM MDT until July 3 at 9:45PM MDT by NWS El Paso Tx/Santa Teresa NM"
-    },
-    {
-      "event": "Special Weather Statement",
-      "severity": "Moderate",
-      "effective": "2026-07-03T18:28:00-06:00",
-      "area": "Northern Rosebud",
-      "headline": "Special Weather Statement issued July 3 at 6:28PM MDT by NWS Billings MT"
-    },
-    {
-      "event": "Flood Warning",
-      "severity": "Severe",
-      "effective": "2026-07-03T19:27:00-05:00",
-      "area": "Davidson, TN",
-      "headline": "Flood Warning issued July 3 at 7:27PM CDT by NWS Nashville TN"
+      "effective": "2026-07-10T17:46:00-07:00",
+      "area": "Cochise, AZ",
+      "headline": "Flood Advisory issued July 10 at 5:46PM MST until July 10 at 7:45PM MST by NWS Tucson AZ"
     },
     {
       "event": "Special Marine Warning",
       "severity": "Severe",
-      "effective": "2026-07-03T20:13:00-04:00",
-      "area": "Willowick to Geneva-on-the Lake OH; Geneva-on-the-Lake to Conneaut OH; Willowick to Geneva-on-the-Lake OH beyond 5NM off shoreline to US-Canadian border; Geneva-on-the-Lake to Conneaut OH beyond 5 nm off shoreline to US-Canadian border",
-      "headline": "Special Marine Warning issued July 3 at 8:13PM EDT until July 3 at 9:45PM EDT by NWS Cleveland OH"
+      "effective": "2026-07-10T20:45:00-04:00",
+      "area": "Coastal waters from Tarpon Springs to Suwannee River FL out 20 NM",
+      "headline": "Special Marine Warning issued July 10 at 8:45PM EDT until July 10 at 9:30PM EDT by NWS Tampa Bay Ruskin FL"
+    },
+    {
+      "event": "Special Weather Statement",
+      "severity": "Moderate",
+      "effective": "2026-07-10T20:42:00-04:00",
+      "area": "Jones; Southern Craven; West Carteret",
+      "headline": "Special Weather Statement issued July 10 at 8:42PM EDT by NWS Newport/Morehead City NC"
     },
     {
       "event": "Flash Flood Warning",
       "severity": "Severe",
-      "effective": "2026-07-03T19:12:00-05:00",
-      "area": "Jefferson, AL",
-      "headline": "Flash Flood Warning issued July 3 at 7:12PM CDT until July 3 at 10:15PM CDT by NWS Birmingham AL"
+      "effective": "2026-07-10T20:42:00-04:00",
+      "area": "Vinton, OH",
+      "headline": "Flash Flood Warning issued July 10 at 8:42PM EDT until July 11 at 12:15AM EDT by NWS Charleston WV"
     },
     {
-      "event": "Heat Advisory",
+      "event": "Special Weather Statement",
       "severity": "Moderate",
-      "effective": "2026-07-03T20:05:00-04:00",
-      "area": "Lucas; Wood; Ottawa; Sandusky; Erie; Lorain; Cuyahoga; Lake; Geauga; Ashtabula Inland; Hancock; Seneca; Huron; Medina; Summit; Portage; Trumbull; Wyandot; Crawford; Richland; Ashland; Wayne; Stark; Mahoning; Marion; Morrow; Holmes; Knox; As",
-      "headline": "Heat Advisory issued July 3 at 8:05PM EDT until July 4 at 8:00PM EDT by NWS Cleveland OH"
+      "effective": "2026-07-10T18:40:00-06:00",
+      "area": "Crowley County",
+      "headline": "Special Weather Statement issued July 10 at 6:40PM MDT by NWS Pueblo CO"
+    },
+    {
+      "event": "Special Marine Warning",
+      "severity": "Severe",
+      "effective": "2026-07-10T20:39:00-04:00",
+      "area": "Pamlico Sound; Pamlico and Pungo Rivers",
+      "headline": "Special Marine Warning issued July 10 at 8:39PM EDT until July 10 at 9:45PM EDT by NWS Newport/Morehead City NC"
+    },
+    {
+      "event": "Flash Flood Warning",
+      "severity": "Severe",
+      "effective": "2026-07-10T20:34:00-04:00",
+      "area": "Hocking, OH; Ross, OH",
+      "headline": "Flash Flood Warning issued July 10 at 8:34PM EDT until July 11 at 12:00AM EDT by NWS Wilmington OH"
+    },
+    {
+      "event": "Special Weather Statement",
+      "severity": "Moderate",
+      "effective": "2026-07-10T20:32:00-04:00",
+      "area": "Forsyth; Guilford; Davidson; Randolph",
+      "headline": "Special Weather Statement issued July 10 at 8:32PM EDT by NWS Raleigh NC"
+    },
+    {
+      "event": "Special Weather Statement",
+      "severity": "Moderate",
+      "effective": "2026-07-10T20:31:00-04:00",
+      "area": "Wood",
+      "headline": "Special Weather Statement issued July 10 at 8:31PM EDT by NWS Cleveland OH"
+    },
+    {
+      "event": "Special Marine Warning",
+      "severity": "Severe",
+      "effective": "2026-07-10T20:30:00-04:00",
+      "area": "Pamlico Sound; Neuse and Bay Rivers; S of Ocracoke Inlet NC to Cape Lookout NC out to 20 NM; S of Cape Lookout NC to Surf City NC out to 20 NM",
+      "headline": "Special Marine Warning issued July 10 at 8:30PM EDT until July 10 at 9:30PM EDT by NWS Newport/Morehead City NC"
+    },
+    {
+      "event": "Special Weather Statement",
+      "severity": "Moderate",
+      "effective": "2026-07-10T18:28:00-06:00",
+      "area": "Harding County; Eastern San Miguel County; Guadalupe County; Quay County; De Baca County",
+      "headline": "Special Weather Statement issued July 10 at 6:28PM MDT by NWS Albuquerque NM"
+    },
+    {
+      "event": "Special Weather Statement",
+      "severity": "Moderate",
+      "effective": "2026-07-10T20:25:00-04:00",
+      "area": "Beaufort; Mainland Hyde; Pamlico; Northern Craven",
+      "headline": "Special Weather Statement issued July 10 at 8:25PM EDT by NWS Newport/Morehead City NC"
     },
     {
       "event": "Flood Advisory",
       "severity": "Minor",
-      "effective": "2026-07-03T19:03:00-05:00",
-      "area": "Washington, IL",
-      "headline": "Flood Advisory issued July 3 at 7:03PM CDT until July 3 at 10:00PM CDT by NWS St Louis MO"
+      "effective": "2026-07-10T19:24:00-05:00",
+      "area": "Fulton, IL; Knox, IL",
+      "headline": "Flood Advisory issued July 10 at 7:24PM CDT until July 10 at 10:30PM CDT by NWS Lincoln IL"
+    },
+    {
+      "event": "Special Marine Warning",
+      "severity": "Severe",
+      "effective": "2026-07-10T20:18:00-04:00",
+      "area": "Gulf of America from East Cape Sable to Chokoloskee 20 to 60 NM out and beyond 5 fathoms; Gulf of America including Dry Tortugas and Rebecca Shoal Channel; Gulf of America from West End of Seven Mile Bridge to Halfmoon Shoal out to 5 Fathom",
+      "headline": "Special Marine Warning issued July 10 at 8:18PM EDT until July 10 at 9:15PM EDT by NWS Key West FL"
+    },
+    {
+      "event": "Flash Flood Warning",
+      "severity": "Severe",
+      "effective": "2026-07-10T20:18:00-04:00",
+      "area": "Potter, PA; Tioga, PA",
+      "headline": "Flash Flood Warning issued July 10 at 8:18PM EDT until July 10 at 11:30PM EDT by NWS State College PA"
     },
     {
       "event": "Flood Advisory",
       "severity": "Minor",
-      "effective": "2026-07-03T18:03:00-06:00",
-      "area": "Garfield, MT",
-      "headline": "Flood Advisory issued July 3 at 6:03PM MDT until July 3 at 9:00PM MDT by NWS Glasgow MT"
+      "effective": "2026-07-10T20:16:00-04:00",
+      "area": "Hocking, OH; Pickaway, OH; Ross, OH",
+      "headline": "Flood Advisory issued July 10 at 8:16PM EDT until July 10 at 11:15PM EDT by NWS Wilmington OH"
+    },
+    {
+      "event": "Flood Advisory",
+      "severity": "Minor",
+      "effective": "2026-07-10T20:09:00-04:00",
+      "area": "Cass, IN",
+      "headline": "Flood Advisory issued July 10 at 8:09PM EDT until July 10 at 10:15PM EDT by NWS Northern Indiana"
+    },
+    {
+      "event": "Rip Current Statement",
+      "severity": "Moderate",
+      "effective": "2026-07-10T20:09:00-04:00",
+      "area": "Coastal Brunswick",
+      "headline": "Rip Current Statement issued July 10 at 8:09PM EDT until July 11 at 8:00PM EDT by NWS Wilmington NC"
     },
     {
       "event": "Beach Hazards Statement",
       "severity": "Moderate",
-      "effective": "2026-07-03T20:02:00-04:00",
-      "area": "Coastal Hancock; Coastal Washington",
-      "headline": "Beach Hazards Statement issued July 3 at 8:02PM EDT until July 4 at 8:00PM EDT by NWS Caribou ME"
+      "effective": "2026-07-10T20:09:00-04:00",
+      "area": "Coastal Pender; Coastal New Hanover; Coastal Horry; Coastal Georgetown",
+      "headline": "Beach Hazards Statement issued July 10 at 8:09PM EDT until July 11 at 8:00PM EDT by NWS Wilmington NC"
     },
     {
-      "event": "Severe Thunderstorm Watch",
+      "event": "Flood Warning",
       "severity": "Severe",
-      "effective": "2026-07-03T19:02:00-05:00",
-      "area": "Jewell, KS; Mitchell, KS; Osborne, KS; Rooks, KS; Smith, KS",
-      "headline": "Severe Thunderstorm Watch issued July 3 at 7:02PM CDT until July 4 at 1:00AM CDT by NWS Hastings NE"
+      "effective": "2026-07-10T19:07:00-05:00",
+      "area": "Iron, MO; Washington, MO",
+      "headline": "Flood Warning issued July 10 at 7:07PM CDT until July 11 at 3:00AM CDT by NWS St Louis MO"
     },
     {
-      "event": "Heat Advisory",
-      "severity": "Moderate",
-      "effective": "2026-07-03T20:01:00-04:00",
-      "area": "Eastern Hillsborough; Interior Rockingham; Coastal Rockingham; Western And Central Hillsborough",
-      "headline": "Heat Advisory issued July 3 at 8:01PM EDT until July 4 at 9:00PM EDT by NWS Gray ME"
-    },
-    {
-      "event": "Severe Thunderstorm Watch",
+      "event": "Flood Warning",
       "severity": "Severe",
-      "effective": "2026-07-03T19:01:00-05:00",
-      "area": "Clay, KS; Cloud, KS; Marshall, KS; Nemaha, KS; Ottawa, KS; Pottawatomie, KS; Republic, KS; Riley, KS; Washington, KS",
-      "headline": "Severe Thunderstorm Watch issued July 3 at 7:01PM CDT until July 4 at 1:00AM CDT by NWS Topeka KS"
+      "effective": "2026-07-10T19:06:00-05:00",
+      "area": "Iron, MO; Madison, MO",
+      "headline": "Flood Warning issued July 10 at 7:06PM CDT until July 11 at 3:00AM CDT by NWS St Louis MO"
     },
     {
-      "event": "Severe Thunderstorm Watch",
+      "event": "Flood Warning",
       "severity": "Severe",
-      "effective": "2026-07-03T19:00:00-05:00",
-      "area": "Lincoln, KS; Russell, KS",
-      "headline": "Severe Thunderstorm Watch issued July 3 at 7:00PM CDT until July 4 at 1:00AM CDT by NWS Wichita KS"
-    },
-    {
-      "event": "Severe Thunderstorm Watch",
-      "severity": "Severe",
-      "effective": "2026-07-03T19:00:00-05:00",
-      "area": "Ellis, KS; Trego, KS",
-      "headline": "Severe Thunderstorm Watch issued July 3 at 7:00PM CDT until July 4 at 1:00AM CDT by NWS Dodge City KS"
-    },
-    {
-      "event": "Extreme Heat Warning",
-      "severity": "Severe",
-      "effective": "2026-07-03T19:59:00-04:00",
-      "area": "Knox; Bell; Harlan; Elliott; Morgan; Johnson; Wolfe; Magoffin; Floyd; Lee; Breathitt; Knott; Owsley; Perry; Clay; Leslie; Letcher; Martin; Pike",
-      "headline": "Extreme Heat Warning issued July 3 at 7:59PM EDT until July 4 at 9:00PM EDT by NWS Jackson KY"
-    },
-    {
-      "event": "Flood Advisory",
-      "severity": "Minor",
-      "effective": "2026-07-03T18:52:00-05:00",
-      "area": "Jefferson, AL",
-      "headline": "Flood Advisory issued July 3 at 6:52PM CDT until July 3 at 10:00PM CDT by NWS Birmingham AL"
-    },
-    {
-      "event": "Flash Flood Warning",
-      "severity": "Severe",
-      "effective": "2026-07-03T18:51:00-05:00",
-      "area": "Calloway, KY",
-      "headline": "Flash Flood Warning issued July 3 at 6:51PM CDT until July 4 at 1:00AM CDT by NWS Paducah KY"
+      "effective": "2026-07-10T19:58:00-04:00",
+      "area": "Tippecanoe, IN; Warren, IN",
+      "headline": "Flood Warning issued July 10 at 7:58PM EDT until July 10 at 11:00PM EDT by NWS Indianapolis IN"
     },
     {
       "event": "Small Craft Advisory",
       "severity": "Minor",
-      "effective": "2026-07-03T15:49:00-08:00",
-      "area": "Kwemeluk Pass to Kwikpak Pass from 15 to 90 NM",
-      "headline": "Small Craft Advisory issued July 3 at 3:49PM AKDT until July 4 at 5:00AM AKDT by NWS Fairbanks AK"
+      "effective": "2026-07-10T15:57:00-08:00",
+      "area": "Seguam to Adak Bering Side from 15 to 85 NM",
+      "headline": "Small Craft Advisory issued July 10 at 3:57PM AKDT until July 12 at 5:00AM AKDT by NWS Anchorage AK"
     },
     {
       "event": "Small Craft Advisory",
       "severity": "Minor",
-      "effective": "2026-07-03T15:49:00-08:00",
-      "area": "Wales to Cape Thompson greater than 15 NM",
-      "headline": "Small Craft Advisory issued July 3 at 3:49PM AKDT until July 4 at 5:00AM AKDT by NWS Fairbanks AK"
+      "effective": "2026-07-10T15:57:00-08:00",
+      "area": "Unalga Pass to Nikolski Bering Side out to 15 NM",
+      "headline": "Small Craft Advisory issued July 10 at 3:57PM AKDT until July 11 at 5:00AM AKDT by NWS Anchorage AK"
     },
     {
       "event": "Small Craft Advisory",
       "severity": "Minor",
-      "effective": "2026-07-03T15:49:00-08:00",
-      "area": "North Side of Saint Lawrence Island out to 15 NM",
-      "headline": "Small Craft Advisory issued July 3 at 3:49PM AKDT until July 4 at 5:00AM AKDT by NWS Fairbanks AK"
+      "effective": "2026-07-10T15:57:00-08:00",
+      "area": "Bristol Bay greater than 15 NM",
+      "headline": "Small Craft Advisory issued July 10 at 3:57PM AKDT until July 11 at 5:00PM AKDT by NWS Anchorage AK"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-07-10T15:57:00-08:00",
+      "area": "Unalga Pass to Nikolski Bering Side from 15 to 85 NM",
+      "headline": "Small Craft Advisory issued July 10 at 3:57PM AKDT until July 12 at 5:00AM AKDT by NWS Anchorage AK"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-07-10T15:57:00-08:00",
+      "area": "Unalga Pass to Nikolski Pacific Side from 15 to 85 NM",
+      "headline": "Small Craft Advisory issued July 10 at 3:57PM AKDT until July 11 at 5:00AM AKDT by NWS Anchorage AK"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-07-10T15:57:00-08:00",
+      "area": "Pribilof Islands Nearshore Waters",
+      "headline": "Small Craft Advisory issued July 10 at 3:57PM AKDT until July 12 at 5:00AM AKDT by NWS Anchorage AK"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-07-10T15:57:00-08:00",
+      "area": "Nelson Lagoon to Cape Sarichef out to 15 NM",
+      "headline": "Small Craft Advisory issued July 10 at 3:57PM AKDT until July 12 at 5:00AM AKDT by NWS Anchorage AK"
     }
   ]
 }

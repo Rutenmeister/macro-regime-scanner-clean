@@ -1,7 +1,7 @@
 {
   "source_id": "USDA_PUBLIC",
   "source_name": "USDA National Agricultural Statistics Service Quick Stats API",
-  "retrieved_at": "2026-07-04T01:15:13+00:00",
+  "retrieved_at": "2026-07-11T01:06:43+00:00",
   "latest_date": "2026",
   "observations": {
     "WHEAT_CONDITION": {
@@ -26,15 +26,15 @@
       "crop": "Wheat",
       "input": "USDA production estimate",
       "latest_year": 2026,
-      "latest_value": 1047510000.0,
+      "latest_value": 1536383000.0,
       "previous_year": 2025,
       "previous_value": 9851786000.0,
       "unit": "BU",
-      "change_pct": -89.36730862810053,
+      "change_pct": -84.4050307223482,
       "score": 2,
       "status": "Strong support",
       "interpretation": "Production fell sharply year over year; smaller supply usually supports crop prices.",
-      "records_returned": 301
+      "records_returned": 318
     },
     "WHEAT_PROGRESS": {
       "id": "WHEAT_PROGRESS",
