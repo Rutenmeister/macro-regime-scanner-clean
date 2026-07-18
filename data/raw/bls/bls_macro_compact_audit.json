@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-07-11T01:06:44+00:00",
+  "fetched_at": "2026-07-18T01:04:30+00:00",
   "source": "BLS public API v2",
   "series_requested": {
     "CPI_HEADLINE": {
@@ -100,72 +100,72 @@
     "CPI_HEADLINE": {
       "series_id": "CUSR0000SA0",
       "label": "CPI all items",
-      "latest_date": "2026-05-01",
-      "latest_value": 333.979,
-      "observations": 52,
-      "score": 2,
-      "status": "Strong support"
+      "latest_date": "2026-06-01",
+      "latest_value": 332.568,
+      "observations": 53,
+      "score": 1,
+      "status": "Support"
     },
     "CPI_CORE": {
       "series_id": "CUSR0000SA0L1E",
       "label": "Core CPI less food and energy",
-      "latest_date": "2026-05-01",
-      "latest_value": 336.121,
-      "observations": 52,
-      "score": 1,
-      "status": "Support"
+      "latest_date": "2026-06-01",
+      "latest_value": 336.065,
+      "observations": 53,
+      "score": 0,
+      "status": "Neutral"
     },
     "CPI_SHELTER": {
       "series_id": "CUSR0000SAH1",
       "label": "CPI shelter",
-      "latest_date": "2026-05-01",
-      "latest_value": 427.998,
-      "observations": 52,
+      "latest_date": "2026-06-01",
+      "latest_value": 428.501,
+      "observations": 53,
       "score": 1,
       "status": "Support"
     },
     "CPI_ENERGY": {
       "series_id": "CUSR0000SA0E",
       "label": "CPI energy",
-      "latest_date": "2026-05-01",
-      "latest_value": 338.639,
-      "observations": 52,
+      "latest_date": "2026-06-01",
+      "latest_value": 319.29,
+      "observations": 53,
       "score": 2,
       "status": "Strong support"
     },
     "CPI_FOOD": {
       "series_id": "CUSR0000SAF1",
       "label": "CPI food",
-      "latest_date": "2026-05-01",
-      "latest_value": 348.892,
-      "observations": 52,
+      "latest_date": "2026-06-01",
+      "latest_value": 349.609,
+      "observations": 53,
       "score": 1,
       "status": "Support"
     },
     "CPI_SERVICES_LESS_ENERGY": {
       "series_id": "CUSR0000SASLE",
       "label": "CPI services less energy services",
-      "latest_date": "2026-05-01",
-      "latest_value": 444.46,
-      "observations": 52,
+      "latest_date": "2026-06-01",
+      "latest_value": 444.602,
+      "observations": 53,
       "score": 1,
       "status": "Support"
     },
     "PPI_FINAL_DEMAND": {
       "series_id": "WPUFD4",
       "label": "PPI final demand",
-      "latest_date": "2026-05-01",
-      "latest_value": 158.012,
-      "observations": 53,
+      "latest_date": "2026-06-01",
+      "latest_value": 157.045,
+      "observations": 54,
       "score": 2,
       "status": "Strong support"
     },
     "PPI_CORE_FINAL_DEMAND": {
       "series_id": "WPUFD49116",
       "label": "PPI final demand less foods, energy, and trade services",
-      "latest_date": "2026-05-01",
-      "latest_value": 142.356,
-      "observations": 53,
+      "latest_date": "2026-06-01",
+      "latest_value": 142.698,
+      "observations": 54,
       "score": 2,
       "status": "Strong support"
     },
