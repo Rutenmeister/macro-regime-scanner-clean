@@ -1,6 +1,6 @@
 {
   "sourceId": "CENSUS_PUBLIC",
-  "retrievedAt": "2026-07-18T01:04:42.545796+00:00",
+  "retrievedAt": "2026-07-25T01:08:41.478900+00:00",
   "seriesAudit": [
     {
       "seriesId": "RSXFS",
@@ -44,7 +44,7 @@
       ],
       "rowsFetched": 798,
       "latestPeriod": "2026-06-01",
-      "latestValue": 1367.0,
+      "latestValue": 1374.0,
       "score": -2
     },
     {
@@ -54,13 +54,13 @@
       "fetchAttempts": [
         {
           "method": "fredgraph_csv",
-          "rows": 761
+          "rows": 762
         }
       ],
-      "rowsFetched": 761,
-      "latestPeriod": "2026-05-01",
-      "latestValue": 580.0,
-      "score": -2
+      "rowsFetched": 762,
+      "latestPeriod": "2026-06-01",
+      "latestValue": 628.0,
+      "score": 2
     },
     {
       "seriesId": "DGORDER",
