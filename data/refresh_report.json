@@ -1,7 +1,7 @@
 {
   "pipelineVersion": "0.33",
-  "startedAt": "2026-07-25T01:07:33.602645+00:00",
-  "finishedAt": "2026-07-25T01:08:44.553396+00:00",
+  "startedAt": "2026-08-01T01:11:42.208124+00:00",
+  "finishedAt": "2026-08-01T01:12:49.917819+00:00",
   "dryRun": false,
   "selectedLanes": "all enabled",
   "lanes": [
@@ -13,14 +13,14 @@
           "script": "scripts/sources/fetch_treasury_yields.py",
           "status": "ok",
           "returncode": 0,
-          "stdoutTail": "Fetched Treasury yields through 2026-07-24\n",
+          "stdoutTail": "Fetched Treasury yields through 2026-07-31\n",
           "stderrTail": ""
         },
         {
           "script": "scripts/apply_treasury_lane.py",
           "status": "ok",
           "returncode": 0,
-          "stdoutTail": "Applied Treasury lane through 2026-07-24\n",
+          "stdoutTail": "Applied Treasury lane through 2026-07-31\n",
           "stderrTail": ""
         }
       ],
@@ -34,7 +34,7 @@
           "script": "scripts/sources/fetch_cftc_cot.py",
           "status": "ok",
           "returncode": 0,
-          "stdoutTail": "Fetched CFTC COT observations: 27 assets; latest report date: 2026-07-21\n",
+          "stdoutTail": "Fetched CFTC COT observations: 27 assets; latest report date: 2026-07-28\n",
           "stderrTail": ""
         },
         {
@@ -55,7 +55,7 @@
           "script": "scripts/sources/fetch_eia_energy.py",
           "status": "ok",
           "returncode": 0,
-          "stdoutTail": "Fetched EIA energy fundamentals for 11 series; latest date 2026-07-17\n",
+          "stdoutTail": "Fetched EIA energy fundamentals for 11 series; latest date 2026-07-24\n",
           "stderrTail": ""
         },
         {
@@ -228,7 +228,7 @@
     "script": "scripts/recompute_live_scores.py",
     "status": "ok",
     "returncode": 0,
-    "stdoutTail": "Recomputed uncapped raw pressure scores for 45 assets.\nSnapshot written to data/history/2026-07-25T010844Z.json and data/history/latest.json\n",
+    "stdoutTail": "Recomputed uncapped raw pressure scores for 45 assets.\nSnapshot written to data/history/2026-08-01T011249Z.json and data/history/latest.json\n",
     "stderrTail": ""
   },
   "releaseCalendar": {
