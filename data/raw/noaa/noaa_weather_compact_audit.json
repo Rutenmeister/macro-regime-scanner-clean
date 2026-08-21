@@ -1,24 +1,24 @@
 {
   "sourceId": "NOAA_NWS",
   "sourceName": "NOAA/National Weather Service public weather alerts",
-  "retrievedAt": "2026-08-14T23:59:03.413179+00:00",
+  "retrievedAt": "2026-08-21T23:58:17.714517+00:00",
   "endpoint": "https://api.weather.gov/alerts/active?status=actual&message_type=alert",
   "fetchAttempts": [
     {
       "endpoint": "https://api.weather.gov/alerts/active?status=actual&message_type=alert",
-      "features": 217
+      "features": 293
     }
   ],
   "categoryCounts": {
     "HEAT_STRESS": {
-      "count": 22,
-      "weighted": 48,
+      "count": 29,
+      "weighted": 60,
       "sampleEvents": [
+        "Extreme Heat Warning",
         "Heat Advisory",
         "Heat Advisory",
         "Heat Advisory",
-        "Heat Advisory",
-        "Extreme Heat Warning"
+        "Heat Advisory"
       ]
     },
     "COLD_FREEZE_STRESS": {
@@ -32,10 +32,10 @@
       "sampleEvents": []
     },
     "FLOOD_STRESS": {
-      "count": 59,
-      "weighted": 129,
+      "count": 31,
+      "weighted": 49,
       "sampleEvents": [
-        "Flash Flood Warning",
+        "Flood Advisory",
         "Flood Advisory",
         "Flood Advisory",
         "Flood Advisory",
@@ -43,28 +43,27 @@
       ]
     },
     "SEVERE_CONVECTIVE_STRESS": {
-      "count": 3,
-      "weighted": 9,
+      "count": 23,
+      "weighted": 70,
       "sampleEvents": [
         "Severe Thunderstorm Warning",
+        "Tornado Warning",
         "Severe Thunderstorm Warning",
-        "Severe Thunderstorm Watch"
+        "Severe Thunderstorm Warning",
+        "Severe Thunderstorm Warning"
       ]
     },
     "TROPICAL_STORM_STRESS": {
-      "count": 4,
-      "weighted": 12,
-      "sampleEvents": [
-        "Tropical Storm Warning",
-        "Tropical Storm Watch",
-        "Tropical Storm Warning",
-        "Tropical Storm Watch"
-      ]
+      "count": 0,
+      "weighted": 0,
+      "sampleEvents": []
     },
     "FIRE_WEATHER_STRESS": {
-      "count": 3,
-      "weighted": 9,
+      "count": 21,
+      "weighted": 63,
       "sampleEvents": [
+        "Red Flag Warning",
+        "Red Flag Warning",
         "Red Flag Warning",
         "Red Flag Warning",
         "Red Flag Warning"
@@ -79,90 +78,82 @@
   "eventCountsTop": [
     [
       "Small Craft Advisory",
-      54
+      115
     ],
     [
       "Special Weather Statement",
-      37
+      39
+    ],
+    [
+      "Heat Advisory",
+      26
     ],
     [
       "Flood Advisory",
       22
     ],
     [
-      "Heat Advisory",
-      18
+      "Red Flag Warning",
+      21
     ],
     [
-      "Flash Flood Warning",
-      13
-    ],
-    [
-      "Gale Warning",
+      "Severe Thunderstorm Watch",
       13
     ],
     [
       "Air Quality Alert",
-      13
-    ],
-    [
-      "Flood Watch",
-      11
-    ],
-    [
-      "Flood Warning",
-      11
-    ],
-    [
-      "Extreme Heat Warning",
-      4
-    ],
-    [
-      "Red Flag Warning",
-      3
-    ],
-    [
-      "Marine Weather Statement",
-      2
+      10
     ],
     [
       "Severe Thunderstorm Warning",
-      2
+      9
+    ],
+    [
+      "Flash Flood Warning",
+      6
+    ],
+    [
+      "Gale Warning",
+      5
+    ],
+    [
+      "Wind Advisory",
+      5
+    ],
+    [
+      "Beach Hazards Statement",
+      3
+    ],
+    [
+      "Extreme Heat Warning",
+      3
+    ],
+    [
+      "Lake Wind Advisory",
+      3
     ],
     [
       "Special Marine Warning",
       2
     ],
     [
-      "Tropical Storm Warning",
+      "Marine Weather Statement",
       2
     ],
     [
-      "Tropical Storm Watch",
+      "Dust Advisory",
       2
     ],
     [
-      "Severe Thunderstorm Watch",
+      "Flood Watch",
+      2
+    ],
+    [
+      "Tornado Warning",
       1
     ],
     [
-      "Wind Advisory",
-      1
-    ],
-    [
-      "Tropical Cyclone Local Statement",
-      1
-    ],
-    [
-      "Hydrologic Outlook",
-      1
-    ],
-    [
-      "Beach Hazards Statement",
-      1
-    ],
-    [
-      "Coastal Flood Advisory",
+      "Fire Warning",
       1
     ],
     [
@@ -170,368 +161,373 @@
       1
     ],
     [
-      "Flash Flood Watch",
+      "Flood Warning",
+      1
+    ],
+    [
+      "Hydrologic Outlook",
       1
     ]
   ],
-  "totalActiveAlerts": 217,
-  "weightedActiveAlerts": 391,
+  "totalActiveAlerts": 293,
+  "weightedActiveAlerts": 493,
   "severityCounts": {
-    "Minor": 80,
-    "Moderate": 72,
-    "Severe": 51,
-    "Unknown": 14
+    "Moderate": 83,
+    "Severe": 57,
+    "Extreme": 1,
+    "Minor": 140,
+    "Unknown": 12
   },
   "sampleAlerts": [
     {
+      "event": "Special Weather Statement",
+      "severity": "Moderate",
+      "effective": "2026-08-21T18:57:00-05:00",
+      "area": "Vernon; St. Clair",
+      "headline": "Special Weather Statement issued August 21 at 6:57PM CDT by NWS Springfield MO"
+    },
+    {
+      "event": "Special Weather Statement",
+      "severity": "Moderate",
+      "effective": "2026-08-21T19:57:00-04:00",
+      "area": "Inland Colleton; Dorchester",
+      "headline": "Special Weather Statement issued August 21 at 7:57PM EDT by NWS Charleston SC"
+    },
+    {
+      "event": "Severe Thunderstorm Warning",
+      "severity": "Severe",
+      "effective": "2026-08-21T18:57:00-05:00",
+      "area": "Acadia, LA",
+      "headline": "Severe Thunderstorm Warning issued August 21 at 6:57PM CDT until August 21 at 7:45PM CDT by NWS Lake Charles LA"
+    },
+    {
+      "event": "Tornado Warning",
+      "severity": "Extreme",
+      "effective": "2026-08-21T18:56:00-05:00",
+      "area": "Bureau, IL; Putnam, IL",
+      "headline": "Tornado Warning issued August 21 at 6:56PM CDT until August 21 at 7:45PM CDT by NWS Quad Cities IA IL"
+    },
+    {
+      "event": "Severe Thunderstorm Warning",
+      "severity": "Severe",
+      "effective": "2026-08-21T19:55:00-04:00",
+      "area": "Brevard, FL; Volusia, FL",
+      "headline": "Severe Thunderstorm Warning issued August 21 at 7:55PM EDT until August 21 at 8:45PM EDT by NWS Melbourne FL"
+    },
+    {
+      "event": "Severe Thunderstorm Warning",
+      "severity": "Severe",
+      "effective": "2026-08-21T17:55:00-06:00",
+      "area": "Box Butte, NE; Dawes, NE",
+      "headline": "Severe Thunderstorm Warning issued August 21 at 5:55PM MDT until August 21 at 7:00PM MDT by NWS Cheyenne WY"
+    },
+    {
+      "event": "Flood Advisory",
+      "severity": "Minor",
+      "effective": "2026-08-21T13:55:00-10:00",
+      "area": "Oahu in Honolulu, HI",
+      "headline": "Flood Advisory issued August 21 at 1:55PM HST until August 21 at 5:00PM HST by NWS Honolulu HI"
+    },
+    {
+      "event": "Special Marine Warning",
+      "severity": "Severe",
+      "effective": "2026-08-21T18:54:00-05:00",
+      "area": "Pensacola Bay Area including Santa Rosa Sound; Coastal waters from Pensacola FL to Pascagoula MS out 20 NM; Coastal waters from Okaloosa-Walton County Line to Pensacola FL out 20 NM; Waters from Pensacola FL to Pascagoula MS from 20 to 60 N",
+      "headline": "Special Marine Warning issued August 21 at 6:54PM CDT until August 21 at 8:00PM CDT by NWS Mobile AL"
+    },
+    {
+      "event": "Severe Thunderstorm Warning",
+      "severity": "Severe",
+      "effective": "2026-08-21T18:54:00-05:00",
+      "area": "Carroll, IL; Whiteside, IL; Clinton, IA; Jackson, IA",
+      "headline": "Severe Thunderstorm Warning issued August 21 at 6:54PM CDT until August 21 at 8:00PM CDT by NWS Quad Cities IA IL"
+    },
+    {
+      "event": "Severe Thunderstorm Warning",
+      "severity": "Severe",
+      "effective": "2026-08-21T18:51:00-05:00",
+      "area": "Cedar, IA; Clinton, IA; Jones, IA; Scott, IA",
+      "headline": "Severe Thunderstorm Warning issued August 21 at 6:51PM CDT until August 21 at 7:30PM CDT by NWS Quad Cities IA IL"
+    },
+    {
+      "event": "Special Weather Statement",
+      "severity": "Moderate",
+      "effective": "2026-08-21T18:50:00-05:00",
+      "area": "Grant",
+      "headline": "Special Weather Statement issued August 21 at 6:50PM CDT by NWS Shreveport LA"
+    },
+    {
+      "event": "Special Weather Statement",
+      "severity": "Moderate",
+      "effective": "2026-08-21T19:50:00-04:00",
+      "area": "Clark; Greene",
+      "headline": "Special Weather Statement issued August 21 at 7:50PM EDT by NWS Wilmington OH"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-08-21T15:49:00-08:00",
+      "area": "Kotzebue Sound greater than 10 NM",
+      "headline": "Small Craft Advisory issued August 21 at 3:49PM AKDT until August 22 at 5:00AM AKDT by NWS Fairbanks AK"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-08-21T15:49:00-08:00",
+      "area": "Cape Espenberg to Motherwood Point out to 10 NM",
+      "headline": "Small Craft Advisory issued August 21 at 3:49PM AKDT until August 22 at 5:00AM AKDT by NWS Fairbanks AK"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-08-21T15:49:00-08:00",
+      "area": "Etolin Strait to Kwemeluk Pass from 15 to 90 NM",
+      "headline": "Small Craft Advisory issued August 21 at 3:49PM AKDT until August 22 at 5:00PM AKDT by NWS Fairbanks AK"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-08-21T15:49:00-08:00",
+      "area": "Cape Stephens to Moses Point out to 15 NM",
+      "headline": "Small Craft Advisory issued August 21 at 3:49PM AKDT until August 22 at 5:00PM AKDT by NWS Fairbanks AK"
+    },
+    {
+      "event": "Gale Warning",
+      "severity": "Moderate",
+      "effective": "2026-08-21T15:49:00-08:00",
+      "area": "Sledge Island to Wales greater than 15 NM",
+      "headline": "Gale Warning issued August 21 at 3:49PM AKDT until August 22 at 5:00PM AKDT by NWS Fairbanks AK"
+    },
+    {
+      "event": "Gale Warning",
+      "severity": "Moderate",
+      "effective": "2026-08-21T15:49:00-08:00",
+      "area": "Dall Point to Kwikpak Pass out to 15 NM",
+      "headline": "Gale Warning issued August 21 at 3:49PM AKDT until August 22 at 5:00PM AKDT by NWS Fairbanks AK"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-08-21T15:49:00-08:00",
+      "area": "Norton Sound greater than 15 NM",
+      "headline": "Small Craft Advisory issued August 21 at 3:49PM AKDT until August 22 at 5:00PM AKDT by NWS Fairbanks AK"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-08-21T15:49:00-08:00",
+      "area": "Motherwood Point to Cape Krusenstern out to 10 NM",
+      "headline": "Small Craft Advisory issued August 21 at 3:49PM AKDT until August 22 at 5:00PM AKDT by NWS Fairbanks AK"
+    },
+    {
+      "event": "Gale Warning",
+      "severity": "Moderate",
+      "effective": "2026-08-21T15:49:00-08:00",
+      "area": "Sledge Island to Wales out to 15 NM",
+      "headline": "Gale Warning issued August 21 at 3:49PM AKDT until August 22 at 5:00PM AKDT by NWS Fairbanks AK"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-08-21T15:49:00-08:00",
+      "area": "Moses Point to Sledge Island out to 15 NM",
+      "headline": "Small Craft Advisory issued August 21 at 3:49PM AKDT until August 22 at 5:00PM AKDT by NWS Fairbanks AK"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-08-21T15:49:00-08:00",
+      "area": "Southwest of Saint Lawrence Island from 15 to 100 NM",
+      "headline": "Small Craft Advisory issued August 21 at 3:49PM AKDT until August 22 at 5:00PM AKDT by NWS Fairbanks AK"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-08-21T15:49:00-08:00",
+      "area": "South Side of Saint Lawrence Island out to 15 NM",
+      "headline": "Small Craft Advisory issued August 21 at 3:49PM AKDT until August 22 at 5:00PM AKDT by NWS Fairbanks AK"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-08-21T15:49:00-08:00",
+      "area": "North Side of Saint Lawrence Island out to 15 NM",
+      "headline": "Small Craft Advisory issued August 21 at 3:49PM AKDT until August 22 at 5:00PM AKDT by NWS Fairbanks AK"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-08-21T15:49:00-08:00",
+      "area": "Kwikpak Pass to Cape Stephens out to 15 NM",
+      "headline": "Small Craft Advisory issued August 21 at 3:49PM AKDT until August 22 at 5:00PM AKDT by NWS Fairbanks AK"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-08-21T15:49:00-08:00",
+      "area": "Etolin Strait to Dall Point out to 15 NM",
+      "headline": "Small Craft Advisory issued August 21 at 3:49PM AKDT until August 22 at 5:00PM AKDT by NWS Fairbanks AK"
+    },
+    {
+      "event": "Gale Warning",
+      "severity": "Moderate",
+      "effective": "2026-08-21T15:49:00-08:00",
+      "area": "Wales to Cape Thompson greater than 15 NM",
+      "headline": "Gale Warning issued August 21 at 3:49PM AKDT until August 22 at 5:00PM AKDT by NWS Fairbanks AK"
+    },
+    {
+      "event": "Special Weather Statement",
+      "severity": "Moderate",
+      "effective": "2026-08-21T17:48:00-06:00",
+      "area": "North Laramie Range; Central Laramie Range and Southwest Platte County; East Platte County",
+      "headline": "Special Weather Statement issued August 21 at 5:48PM MDT by NWS Cheyenne WY"
+    },
+    {
+      "event": "Severe Thunderstorm Warning",
+      "severity": "Severe",
+      "effective": "2026-08-21T19:47:00-04:00",
+      "area": "Polk, NC; Greenville, SC; Spartanburg, SC",
+      "headline": "Severe Thunderstorm Warning issued August 21 at 7:47PM EDT until August 21 at 8:30PM EDT by NWS Greenville-Spartanburg SC"
+    },
+    {
+      "event": "Special Weather Statement",
+      "severity": "Moderate",
+      "effective": "2026-08-21T19:47:00-04:00",
+      "area": "Inland Volusia; Seminole; Coastal Volusia; Inland Northern Brevard; Mainland Northern Brevard; Northern Brevard Barrier Islands",
+      "headline": "Special Weather Statement issued August 21 at 7:47PM EDT by NWS Melbourne FL"
+    },
+    {
+      "event": "Flood Advisory",
+      "severity": "Minor",
+      "effective": "2026-08-21T17:45:00-06:00",
+      "area": "Cibola, NM",
+      "headline": "Flood Advisory issued August 21 at 5:45PM MDT until August 21 at 8:45PM MDT by NWS Albuquerque NM"
+    },
+    {
+      "event": "Special Weather Statement",
+      "severity": "Moderate",
+      "effective": "2026-08-21T17:45:00-06:00",
+      "area": "Northern Wasatch Front; Wasatch Back; Wasatch Mountains I-80 North",
+      "headline": "Special Weather Statement issued August 21 at 5:45PM MDT by NWS Salt Lake City UT"
+    },
+    {
+      "event": "Severe Thunderstorm Warning",
+      "severity": "Severe",
+      "effective": "2026-08-21T18:45:00-05:00",
+      "area": "Grant, LA; Natchitoches, LA",
+      "headline": "Severe Thunderstorm Warning issued August 21 at 6:45PM CDT until August 21 at 7:45PM CDT by NWS Shreveport LA"
+    },
+    {
+      "event": "Special Marine Warning",
+      "severity": "Severe",
+      "effective": "2026-08-21T19:45:00-04:00",
+      "area": "Flagler Beach to Volusia-Brevard County Line 0-20 nm; Volusia-Brevard County Line to Sebastian Inlet 0-20 nm",
+      "headline": "Special Marine Warning issued August 21 at 7:45PM EDT until August 21 at 8:45PM EDT by NWS Melbourne FL"
+    },
+    {
+      "event": "Special Weather Statement",
+      "severity": "Moderate",
+      "effective": "2026-08-21T18:44:00-05:00",
+      "area": "Allen; Evangeline; Northern Jefferson Davis; Northern Acadia",
+      "headline": "Special Weather Statement issued August 21 at 6:44PM CDT by NWS Lake Charles LA"
+    },
+    {
+      "event": "Special Weather Statement",
+      "severity": "Moderate",
+      "effective": "2026-08-21T18:44:00-05:00",
+      "area": "Marengo",
+      "headline": "Special Weather Statement issued August 21 at 6:44PM CDT by NWS Birmingham AL"
+    },
+    {
+      "event": "Special Weather Statement",
+      "severity": "Moderate",
+      "effective": "2026-08-21T19:44:00-04:00",
+      "area": "Inland Flagler; Eastern Putnam; Southern Inland St. Johns; Western St. Johns",
+      "headline": "Special Weather Statement issued August 21 at 7:44PM EDT by NWS Jacksonville FL"
+    },
+    {
       "event": "Marine Weather Statement",
       "severity": "Minor",
-      "effective": "2026-08-14T18:58:00-05:00",
-      "area": "Pensacola Bay Area including Santa Rosa Sound; Western Choctawhatchee Bay; Eastern Choctawhatchee Bay; Coastal waters from Okaloosa-Walton County Line to Pensacola FL out 20 NM",
-      "headline": "Marine Weather Statement issued August 14 at 6:58PM CDT by NWS Mobile AL"
+      "effective": "2026-08-21T18:44:00-05:00",
+      "area": "Pensacola Bay Area including Santa Rosa Sound; Coastal waters from Pensacola FL to Pascagoula MS out 20 NM; Coastal waters from Okaloosa-Walton County Line to Pensacola FL out 20 NM; Waters from Okaloosa-Walton County Line to Pensacola FL f",
+      "headline": "Marine Weather Statement issued August 21 at 6:44PM CDT by NWS Mobile AL"
     },
     {
       "event": "Special Weather Statement",
       "severity": "Moderate",
-      "effective": "2026-08-14T17:57:00-06:00",
-      "area": "North and Northeast Elbert County Below 6000 Feet/North Lincoln County",
-      "headline": "Special Weather Statement issued August 14 at 5:57PM MDT by NWS Denver CO"
-    },
-    {
-      "event": "Flash Flood Warning",
-      "severity": "Severe",
-      "effective": "2026-08-14T16:55:00-07:00",
-      "area": "Chelan, WA",
-      "headline": "Flash Flood Warning issued August 14 at 4:55PM PDT until August 14 at 8:00PM PDT by NWS Spokane WA"
-    },
-    {
-      "event": "Special Weather Statement",
-      "severity": "Moderate",
-      "effective": "2026-08-14T18:55:00-05:00",
-      "area": "Harper; Ellis; Woodward",
-      "headline": "Special Weather Statement issued August 14 at 6:55PM CDT by NWS Norman OK"
-    },
-    {
-      "event": "Special Weather Statement",
-      "severity": "Moderate",
-      "effective": "2026-08-14T19:54:00-04:00",
-      "area": "Amelia; Dinwiddie; Western Chesterfield; Eastern Chesterfield (Including Col. Heights)",
-      "headline": "Special Weather Statement issued August 14 at 7:54PM EDT by NWS Wakefield VA"
+      "effective": "2026-08-21T19:44:00-04:00",
+      "area": "Eastern Polk; Greenville Mountains; Central Greenville; Southern Greenville; Northern Spartanburg; Southern Spartanburg",
+      "headline": "Special Weather Statement issued August 21 at 7:44PM EDT by NWS Greenville-Spartanburg SC"
     },
     {
       "event": "Severe Thunderstorm Warning",
       "severity": "Severe",
-      "effective": "2026-08-14T17:54:00-06:00",
-      "area": "Bent, CO; Kiowa, CO; Prowers, CO",
-      "headline": "Severe Thunderstorm Warning issued August 14 at 5:54PM MDT until August 14 at 6:45PM MDT by NWS Pueblo CO"
-    },
-    {
-      "event": "Flood Advisory",
-      "severity": "Minor",
-      "effective": "2026-08-14T17:53:00-06:00",
-      "area": "Adams, CO; Arapahoe, CO; Elbert, CO; Lincoln, CO; Morgan, CO; Washington, CO",
-      "headline": "Flood Advisory issued August 14 at 5:53PM MDT until August 14 at 9:00PM MDT by NWS Denver CO"
-    },
-    {
-      "event": "Special Weather Statement",
-      "severity": "Moderate",
-      "effective": "2026-08-14T19:52:00-04:00",
-      "area": "Hawkins; Sullivan; Scott",
-      "headline": "Special Weather Statement issued August 14 at 7:52PM EDT by NWS Morristown TN"
-    },
-    {
-      "event": "Special Weather Statement",
-      "severity": "Moderate",
-      "effective": "2026-08-14T19:52:00-04:00",
-      "area": "Caroline; Western Hanover",
-      "headline": "Special Weather Statement issued August 14 at 7:52PM EDT by NWS Wakefield VA"
-    },
-    {
-      "event": "Special Weather Statement",
-      "severity": "Moderate",
-      "effective": "2026-08-14T18:51:00-05:00",
-      "area": "Pawnee; Stafford; Edwards",
-      "headline": "Special Weather Statement issued August 14 at 6:51PM CDT by NWS Dodge City KS"
-    },
-    {
-      "event": "Special Weather Statement",
-      "severity": "Moderate",
-      "effective": "2026-08-14T18:48:00-05:00",
-      "area": "Davis Mountains; Central Brewster County",
-      "headline": "Special Weather Statement issued August 14 at 6:48PM CDT by NWS Midland/Odessa TX"
-    },
-    {
-      "event": "Special Marine Warning",
-      "severity": "Severe",
-      "effective": "2026-08-14T19:48:00-04:00",
-      "area": "Coastal waters from Chokoloskee to Bonita Beach FL out 20 NM; Coastal waters from East Cape Sable to Chokoloskee FL out 20 NM; Waters from Chokoloskee to Bonita Beach FL from 20 to 60 NM",
-      "headline": "Special Marine Warning issued August 14 at 7:48PM EDT until August 14 at 8:15PM EDT by NWS Miami FL"
-    },
-    {
-      "event": "Special Weather Statement",
-      "severity": "Moderate",
-      "effective": "2026-08-14T17:47:00-06:00",
-      "area": "Northern El Paso County/Monument Ridge/Rampart Range Below 7500 Ft",
-      "headline": "Special Weather Statement issued August 14 at 5:47PM MDT by NWS Pueblo CO"
-    },
-    {
-      "event": "Special Weather Statement",
-      "severity": "Moderate",
-      "effective": "2026-08-14T18:46:00-05:00",
-      "area": "Okaloosa Inland",
-      "headline": "Special Weather Statement issued August 14 at 6:46PM CDT by NWS Mobile AL"
-    },
-    {
-      "event": "Special Weather Statement",
-      "severity": "Moderate",
-      "effective": "2026-08-14T17:44:00-06:00",
-      "area": "Western Kiowa County; Eastern Kiowa County; Las Animas Vicinity/Bent County; Lamar Vicinity/Prowers County",
-      "headline": "Special Weather Statement issued August 14 at 5:44PM MDT by NWS Pueblo CO"
-    },
-    {
-      "event": "Special Weather Statement",
-      "severity": "Moderate",
-      "effective": "2026-08-14T18:44:00-05:00",
-      "area": "Ellis; Woodward",
-      "headline": "Special Weather Statement issued August 14 at 6:44PM CDT by NWS Norman OK"
-    },
-    {
-      "event": "Special Marine Warning",
-      "severity": "Severe",
-      "effective": "2026-08-14T19:41:00-04:00",
-      "area": "Apalachee Bay or Coastal Waters From Keaton Beach to Ochlockonee River Fl out to 20 Nm; Coastal Waters From  Ochlockonee River to Apalachicola FL out to 20 Nm; Coastal waters from  Suwannee River to Keaton Beach out 20 NM; Waters from Suwan",
-      "headline": "Special Marine Warning issued August 14 at 7:41PM EDT until August 14 at 9:45PM EDT by NWS Tallahassee FL"
-    },
-    {
-      "event": "Special Weather Statement",
-      "severity": "Moderate",
-      "effective": "2026-08-14T17:41:00-06:00",
-      "area": "Beaverhead and Western Madison below 6000ft; Ruby Mountains and Southern Beaverhead Mountains",
-      "headline": "Special Weather Statement issued August 14 at 5:41PM MDT by NWS Great Falls MT"
-    },
-    {
-      "event": "Special Weather Statement",
-      "severity": "Moderate",
-      "effective": "2026-08-14T17:40:00-06:00",
-      "area": "Northeast Weld County",
-      "headline": "Special Weather Statement issued August 14 at 5:40PM MDT by NWS Denver CO"
-    },
-    {
-      "event": "Flood Advisory",
-      "severity": "Minor",
-      "effective": "2026-08-14T16:40:00-07:00",
-      "area": "Washoe, NV",
-      "headline": "Flood Advisory issued August 14 at 4:40PM PDT until August 14 at 6:45PM PDT by NWS Reno NV"
-    },
-    {
-      "event": "Special Weather Statement",
-      "severity": "Moderate",
-      "effective": "2026-08-14T17:40:00-06:00",
-      "area": "Southwest Highlands",
-      "headline": "Special Weather Statement issued August 14 at 5:40PM MDT by NWS Boise ID"
-    },
-    {
-      "event": "Flood Advisory",
-      "severity": "Minor",
-      "effective": "2026-08-14T16:39:00-07:00",
-      "area": "Clark, NV; Lincoln, NV",
-      "headline": "Flood Advisory issued August 14 at 4:39PM PDT until August 14 at 7:45PM PDT by NWS Las Vegas NV"
-    },
-    {
-      "event": "Special Weather Statement",
-      "severity": "Moderate",
-      "effective": "2026-08-14T16:39:00-07:00",
-      "area": "Humboldt County; Northern Lander County and Northern Eureka County",
-      "headline": "Special Weather Statement issued August 14 at 4:39PM PDT by NWS Elko NV"
-    },
-    {
-      "event": "Special Weather Statement",
-      "severity": "Moderate",
-      "effective": "2026-08-14T19:38:00-04:00",
-      "area": "Northampton; Mecklenburg; Brunswick; Dinwiddie; Greensville; Sussex; Southampton",
-      "headline": "Special Weather Statement issued August 14 at 7:38PM EDT by NWS Wakefield VA"
-    },
-    {
-      "event": "Special Weather Statement",
-      "severity": "Moderate",
-      "effective": "2026-08-14T17:37:00-06:00",
-      "area": "Roosevelt County",
-      "headline": "Special Weather Statement issued August 14 at 5:37PM MDT by NWS Albuquerque NM"
+      "effective": "2026-08-21T17:44:00-06:00",
+      "area": "Cheyenne, CO",
+      "headline": "Severe Thunderstorm Warning issued August 21 at 5:44PM MDT until August 21 at 6:15PM MDT by NWS Goodland KS"
     },
     {
       "event": "Severe Thunderstorm Warning",
       "severity": "Severe",
-      "effective": "2026-08-14T18:37:00-05:00",
-      "area": "Harper, OK; Woods, OK; Woodward, OK",
-      "headline": "Severe Thunderstorm Warning issued August 14 at 6:37PM CDT until August 14 at 7:15PM CDT by NWS Norman OK"
+      "effective": "2026-08-21T18:41:00-05:00",
+      "area": "Evangeline, LA; St. Landry, LA",
+      "headline": "Severe Thunderstorm Warning issued August 21 at 6:41PM CDT until August 21 at 7:15PM CDT by NWS Lake Charles LA"
+    },
+    {
+      "event": "Special Weather Statement",
+      "severity": "Moderate",
+      "effective": "2026-08-21T19:41:00-04:00",
+      "area": "Echols; Clinch; Northern Ware; Southern Ware; Western Charlton",
+      "headline": "Special Weather Statement issued August 21 at 7:41PM EDT by NWS Jacksonville FL"
     },
     {
       "event": "Flood Advisory",
       "severity": "Minor",
-      "effective": "2026-08-14T17:36:00-06:00",
-      "area": "Dona Ana, NM",
-      "headline": "Flood Advisory issued August 14 at 5:36PM MDT until August 14 at 7:30PM MDT by NWS El Paso Tx/Santa Teresa NM"
+      "effective": "2026-08-21T16:41:00-07:00",
+      "area": "Pima, AZ; Pinal, AZ",
+      "headline": "Flood Advisory issued August 21 at 4:41PM MST until August 21 at 6:45PM MST by NWS Tucson AZ"
     },
     {
       "event": "Special Weather Statement",
       "severity": "Moderate",
-      "effective": "2026-08-14T16:36:00-07:00",
-      "area": "Jackson County; Siskiyou Mountains and Southern Oregon Cascades",
-      "headline": "Special Weather Statement issued August 14 at 4:36PM PDT by NWS Medford OR"
-    },
-    {
-      "event": "Special Weather Statement",
-      "severity": "Moderate",
-      "effective": "2026-08-14T19:33:00-04:00",
-      "area": "Lincoln; McCormick",
-      "headline": "Special Weather Statement issued August 14 at 7:33PM EDT by NWS Columbia SC"
-    },
-    {
-      "event": "Special Weather Statement",
-      "severity": "Moderate",
-      "effective": "2026-08-14T16:31:00-07:00",
-      "area": "Northern Lander County and Northern Eureka County",
-      "headline": "Special Weather Statement issued August 14 at 4:31PM PDT by NWS Elko NV"
-    },
-    {
-      "event": "Flash Flood Warning",
-      "severity": "Severe",
-      "effective": "2026-08-14T17:31:00-06:00",
-      "area": "Weld, CO",
-      "headline": "Flash Flood Warning issued August 14 at 5:31PM MDT until August 14 at 8:30PM MDT by NWS Denver CO"
-    },
-    {
-      "event": "Special Weather Statement",
-      "severity": "Moderate",
-      "effective": "2026-08-14T16:31:00-07:00",
-      "area": "Okanogan Valley; Western Okanogan County",
-      "headline": "Special Weather Statement issued August 14 at 4:31PM PDT by NWS Spokane WA"
-    },
-    {
-      "event": "Special Weather Statement",
-      "severity": "Moderate",
-      "effective": "2026-08-14T17:31:00-06:00",
-      "area": "Beaverhead and Western Madison below 6000ft; Gallatin and Madison County Mountains and Centennial Mountains",
-      "headline": "Special Weather Statement issued August 14 at 5:31PM MDT by NWS Great Falls MT"
-    },
-    {
-      "event": "Special Weather Statement",
-      "severity": "Moderate",
-      "effective": "2026-08-14T19:30:00-04:00",
-      "area": "Effingham; Inland Jasper",
-      "headline": "Special Weather Statement issued August 14 at 7:30PM EDT by NWS Charleston SC"
-    },
-    {
-      "event": "Special Weather Statement",
-      "severity": "Moderate",
-      "effective": "2026-08-14T17:24:00-06:00",
-      "area": "Washington County",
-      "headline": "Special Weather Statement issued August 14 at 5:24PM MDT by NWS Denver CO"
-    },
-    {
-      "event": "Special Weather Statement",
-      "severity": "Moderate",
-      "effective": "2026-08-14T17:23:00-06:00",
-      "area": "Elbert/Central and East Douglas Counties Above 6000 Feet",
-      "headline": "Special Weather Statement issued August 14 at 5:23PM MDT by NWS Denver CO"
-    },
-    {
-      "event": "Flash Flood Warning",
-      "severity": "Severe",
-      "effective": "2026-08-14T19:23:00-04:00",
-      "area": "Sullivan, TN; Scott, VA; Washington, VA; City of Bristol, VA",
-      "headline": "Flash Flood Warning issued August 14 at 7:23PM EDT until August 14 at 10:30PM EDT by NWS Morristown TN"
-    },
-    {
-      "event": "Special Weather Statement",
-      "severity": "Moderate",
-      "effective": "2026-08-14T18:23:00-05:00",
-      "area": "Edwards; Kiowa",
-      "headline": "Special Weather Statement issued August 14 at 6:23PM CDT by NWS Dodge City KS"
+      "effective": "2026-08-21T19:40:00-04:00",
+      "area": "Inland Berkeley",
+      "headline": "Special Weather Statement issued August 21 at 7:40PM EDT by NWS Charleston SC"
     },
     {
       "event": "Flood Advisory",
       "severity": "Minor",
-      "effective": "2026-08-14T17:21:00-06:00",
-      "area": "Mora, NM; Rio Arriba, NM; Taos, NM",
-      "headline": "Flood Advisory issued August 14 at 5:21PM MDT until August 14 at 8:15PM MDT by NWS Albuquerque NM"
+      "effective": "2026-08-21T19:39:00-04:00",
+      "area": "Durham, NC; Granville, NC; Person, NC; Vance, NC",
+      "headline": "Flood Advisory issued August 21 at 7:39PM EDT until August 21 at 10:45PM EDT by NWS Raleigh NC"
     },
     {
       "event": "Special Weather Statement",
       "severity": "Moderate",
-      "effective": "2026-08-14T17:21:00-06:00",
-      "area": "North and Northeast Elbert County Below 6000 Feet/North Lincoln County",
-      "headline": "Special Weather Statement issued August 14 at 5:21PM MDT by NWS Denver CO"
-    },
-    {
-      "event": "Flood Advisory",
-      "severity": "Minor",
-      "effective": "2026-08-14T19:20:00-04:00",
-      "area": "Jefferson, FL; Leon, FL; Madison, FL; Taylor, FL",
-      "headline": "Flood Advisory issued August 14 at 7:20PM EDT until August 14 at 9:15PM EDT by NWS Tallahassee FL"
-    },
-    {
-      "event": "Flash Flood Warning",
-      "severity": "Severe",
-      "effective": "2026-08-14T16:19:00-07:00",
-      "area": "Mohave, AZ",
-      "headline": "Flash Flood Warning issued August 14 at 4:19PM PDT until August 14 at 7:15PM PDT by NWS Las Vegas NV"
-    },
-    {
-      "event": "Flood Advisory",
-      "severity": "Minor",
-      "effective": "2026-08-14T19:18:00-04:00",
-      "area": "Columbia, FL; Hamilton, FL; Suwannee, FL",
-      "headline": "Flood Advisory issued August 14 at 7:18PM EDT until August 14 at 10:15PM EDT by NWS Jacksonville FL"
+      "effective": "2026-08-21T18:39:00-05:00",
+      "area": "Shelby; San Augustine",
+      "headline": "Special Weather Statement issued August 21 at 6:39PM CDT by NWS Shreveport LA"
     },
     {
       "event": "Special Weather Statement",
       "severity": "Moderate",
-      "effective": "2026-08-14T19:16:00-04:00",
-      "area": "Nottoway; Amelia; Dinwiddie; Western Chesterfield",
-      "headline": "Special Weather Statement issued August 14 at 7:16PM EDT by NWS Wakefield VA"
+      "effective": "2026-08-21T18:38:00-05:00",
+      "area": "Evangeline; St. Landry; Lafayette; Upper St. Martin; Northern Acadia; Upper Vermilion; Upper Iberia",
+      "headline": "Special Weather Statement issued August 21 at 6:38PM CDT by NWS Lake Charles LA"
     },
     {
       "event": "Special Weather Statement",
       "severity": "Moderate",
-      "effective": "2026-08-14T18:15:00-05:00",
-      "area": "Escambia; Covington; Santa Rosa Inland; Okaloosa Inland",
-      "headline": "Special Weather Statement issued August 14 at 6:15PM CDT by NWS Mobile AL"
+      "effective": "2026-08-21T18:36:00-05:00",
+      "area": "Western Orleans; Upper Jefferson",
+      "headline": "Special Weather Statement issued August 21 at 6:36PM CDT by NWS New Orleans LA"
     },
     {
       "event": "Special Weather Statement",
       "severity": "Moderate",
-      "effective": "2026-08-14T19:14:00-04:00",
-      "area": "Suwannee; Gilchrist; Southwestern Columbia",
-      "headline": "Special Weather Statement issued August 14 at 7:14PM EDT by NWS Jacksonville FL"
-    },
-    {
-      "event": "Special Weather Statement",
-      "severity": "Moderate",
-      "effective": "2026-08-14T19:10:00-04:00",
-      "area": "Western Marion",
-      "headline": "Special Weather Statement issued August 14 at 7:10PM EDT by NWS Jacksonville FL"
-    },
-    {
-      "event": "Special Weather Statement",
-      "severity": "Moderate",
-      "effective": "2026-08-14T18:10:00-05:00",
-      "area": "North Walton; Central Walton; Holmes",
-      "headline": "Special Weather Statement issued August 14 at 6:10PM CDT by NWS Tallahassee FL"
-    },
-    {
-      "event": "Special Weather Statement",
-      "severity": "Moderate",
-      "effective": "2026-08-14T17:09:00-06:00",
-      "area": "Kimball; Cheyenne",
-      "headline": "Special Weather Statement issued August 14 at 5:09PM MDT by NWS Cheyenne WY"
-    },
-    {
-      "event": "Special Weather Statement",
-      "severity": "Moderate",
-      "effective": "2026-08-14T19:09:00-04:00",
-      "area": "Southeastern Orangeburg",
-      "headline": "Special Weather Statement issued August 14 at 7:09PM EDT by NWS Columbia SC"
+      "effective": "2026-08-21T19:36:00-04:00",
+      "area": "Clay; Braxton; Northwest Nicholas; Northwest Webster; Southeast Webster",
+      "headline": "Special Weather Statement issued August 21 at 7:36PM EDT by NWS Charleston WV"
     }
   ]
 }

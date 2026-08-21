@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-08-14T23:59:04.420927+00:00",
+  "generatedAt": "2026-08-21T23:58:18.577326+00:00",
   "timezone": "America/New_York",
   "windowDays": 21,
   "version": "v0.41-official-calendar-hardening",
@@ -7,17 +7,17 @@
   "confidenceSummary": {
     "official": 0,
     "officialPattern": 14,
-    "estimated": 1
+    "estimated": 3
   },
   "events": [
     {
       "source": "USDA/NASS",
       "report": "Crop Progress",
       "lane": "USDA",
-      "date": "2026-08-17",
+      "date": "2026-08-24",
       "timeET": "4:00 PM ET",
-      "datetimeET": "2026-08-17T16:00:00-04:00",
-      "datetimeUTC": "2026-08-17T20:00:00+00:00",
+      "datetimeET": "2026-08-24T16:00:00-04:00",
+      "datetimeUTC": "2026-08-24T20:00:00+00:00",
       "importance": "Medium",
       "scheduleType": "seasonal official-pattern",
       "calendarConfidence": "official-pattern",
@@ -27,184 +27,6 @@
         "crop condition"
       ],
       "note": "Crop Progress is seasonal and generally Monday afternoon Eastern during the growing season; NASS calendar controls exact release."
-    },
-    {
-      "source": "U.S. Treasury",
-      "report": "Daily Treasury Par Yield Curve Rates",
-      "lane": "Treasury",
-      "date": "2026-08-17",
-      "timeET": "6:00 PM ET",
-      "datetimeET": "2026-08-17T18:00:00-04:00",
-      "datetimeUTC": "2026-08-17T22:00:00+00:00",
-      "importance": "High",
-      "scheduleType": "official-pattern",
-      "calendarConfidence": "official-pattern",
-      "sourceUrl": "https://home.treasury.gov/policy-issues/financing-the-government/interest-rate-statistics",
-      "trackedInputs": [
-        "1M-30Y curve",
-        "2Y",
-        "10Y",
-        "curve spreads"
-      ],
-      "note": "Treasury posts daily par yield curve data on business days; U.S. federal holidays are skipped by v0.41."
-    },
-    {
-      "source": "U.S. Treasury",
-      "report": "Daily Treasury Par Yield Curve Rates",
-      "lane": "Treasury",
-      "date": "2026-08-18",
-      "timeET": "6:00 PM ET",
-      "datetimeET": "2026-08-18T18:00:00-04:00",
-      "datetimeUTC": "2026-08-18T22:00:00+00:00",
-      "importance": "High",
-      "scheduleType": "official-pattern",
-      "calendarConfidence": "official-pattern",
-      "sourceUrl": "https://home.treasury.gov/policy-issues/financing-the-government/interest-rate-statistics",
-      "trackedInputs": [
-        "1M-30Y curve",
-        "2Y",
-        "10Y",
-        "curve spreads"
-      ],
-      "note": "Treasury posts daily par yield curve data on business days; U.S. federal holidays are skipped by v0.41."
-    },
-    {
-      "source": "EIA",
-      "report": "Weekly Petroleum Status Report",
-      "lane": "EIA",
-      "date": "2026-08-19",
-      "timeET": "10:30 AM ET",
-      "datetimeET": "2026-08-19T10:30:00-04:00",
-      "datetimeUTC": "2026-08-19T14:30:00+00:00",
-      "importance": "High",
-      "scheduleType": "official-pattern",
-      "calendarConfidence": "official-pattern",
-      "sourceUrl": "https://www.eia.gov/petroleum/supply/weekly/schedule.php",
-      "trackedInputs": [
-        "crude inventories",
-        "Cushing",
-        "gasoline",
-        "distillate",
-        "refinery utilization"
-      ],
-      "note": "EIA WPSR files are normally released after 10:30 AM ET Wednesday. Current public WPSR page should be treated as source of truth for exact next release."
-    },
-    {
-      "source": "U.S. Treasury",
-      "report": "Daily Treasury Par Yield Curve Rates",
-      "lane": "Treasury",
-      "date": "2026-08-19",
-      "timeET": "6:00 PM ET",
-      "datetimeET": "2026-08-19T18:00:00-04:00",
-      "datetimeUTC": "2026-08-19T22:00:00+00:00",
-      "importance": "High",
-      "scheduleType": "official-pattern",
-      "calendarConfidence": "official-pattern",
-      "sourceUrl": "https://home.treasury.gov/policy-issues/financing-the-government/interest-rate-statistics",
-      "trackedInputs": [
-        "1M-30Y curve",
-        "2Y",
-        "10Y",
-        "curve spreads"
-      ],
-      "note": "Treasury posts daily par yield curve data on business days; U.S. federal holidays are skipped by v0.41."
-    },
-    {
-      "source": "EIA",
-      "report": "Weekly Natural Gas Storage Report",
-      "lane": "EIA",
-      "date": "2026-08-20",
-      "timeET": "10:30 AM ET",
-      "datetimeET": "2026-08-20T10:30:00-04:00",
-      "datetimeUTC": "2026-08-20T14:30:00+00:00",
-      "importance": "High",
-      "scheduleType": "official-pattern",
-      "calendarConfidence": "official-pattern",
-      "sourceUrl": "https://ir.eia.gov/ngs/schedule.html",
-      "trackedInputs": [
-        "natural gas storage"
-      ],
-      "note": "EIA natural gas storage schedule is normally Thursday 10:30 AM ET; official schedule page controls holiday exceptions."
-    },
-    {
-      "source": "Federal Reserve",
-      "report": "H.4.1 Factors Affecting Reserve Balances",
-      "lane": "Federal Reserve",
-      "date": "2026-08-20",
-      "timeET": "4:30 PM ET",
-      "datetimeET": "2026-08-20T16:30:00-04:00",
-      "datetimeUTC": "2026-08-20T20:30:00+00:00",
-      "importance": "High",
-      "scheduleType": "official-pattern",
-      "calendarConfidence": "official-pattern",
-      "sourceUrl": "https://www.federalreserve.gov/releases/h41/",
-      "trackedInputs": [
-        "Fed assets",
-        "reserve balances",
-        "reverse repo",
-        "TGA"
-      ],
-      "note": "Federal Reserve says H.4.1 data are released each Thursday, generally at 4:30 PM ET; holidays can shift release."
-    },
-    {
-      "source": "U.S. Treasury",
-      "report": "Daily Treasury Par Yield Curve Rates",
-      "lane": "Treasury",
-      "date": "2026-08-20",
-      "timeET": "6:00 PM ET",
-      "datetimeET": "2026-08-20T18:00:00-04:00",
-      "datetimeUTC": "2026-08-20T22:00:00+00:00",
-      "importance": "High",
-      "scheduleType": "official-pattern",
-      "calendarConfidence": "official-pattern",
-      "sourceUrl": "https://home.treasury.gov/policy-issues/financing-the-government/interest-rate-statistics",
-      "trackedInputs": [
-        "1M-30Y curve",
-        "2Y",
-        "10Y",
-        "curve spreads"
-      ],
-      "note": "Treasury posts daily par yield curve data on business days; U.S. federal holidays are skipped by v0.41."
-    },
-    {
-      "source": "CFTC",
-      "report": "Commitments of Traders",
-      "lane": "CFTC COT",
-      "date": "2026-08-21",
-      "timeET": "3:30 PM ET",
-      "datetimeET": "2026-08-21T15:30:00-04:00",
-      "datetimeUTC": "2026-08-21T19:30:00+00:00",
-      "importance": "High",
-      "scheduleType": "official-pattern",
-      "calendarConfidence": "official-pattern",
-      "sourceUrl": "https://www.cftc.gov/MarketReports/CommitmentsofTraders/ReleaseSchedule/index.htm",
-      "trackedInputs": [
-        "spec net",
-        "commercial net",
-        "open interest",
-        "weekly change"
-      ],
-      "note": "CFTC states COT reports are usually released Friday at 3:30 PM ET; federal holidays may delay release."
-    },
-    {
-      "source": "U.S. Treasury",
-      "report": "Daily Treasury Par Yield Curve Rates",
-      "lane": "Treasury",
-      "date": "2026-08-21",
-      "timeET": "6:00 PM ET",
-      "datetimeET": "2026-08-21T18:00:00-04:00",
-      "datetimeUTC": "2026-08-21T22:00:00+00:00",
-      "importance": "High",
-      "scheduleType": "official-pattern",
-      "calendarConfidence": "official-pattern",
-      "sourceUrl": "https://home.treasury.gov/policy-issues/financing-the-government/interest-rate-statistics",
-      "trackedInputs": [
-        "1M-30Y curve",
-        "2Y",
-        "10Y",
-        "curve spreads"
-      ],
-      "note": "Treasury posts daily par yield curve data on business days; U.S. federal holidays are skipped by v0.41."
     },
     {
       "source": "U.S. Treasury",
@@ -247,6 +69,27 @@
       "note": "Treasury posts daily par yield curve data on business days; U.S. federal holidays are skipped by v0.41."
     },
     {
+      "source": "EIA",
+      "report": "Weekly Petroleum Status Report",
+      "lane": "EIA",
+      "date": "2026-08-26",
+      "timeET": "10:30 AM ET",
+      "datetimeET": "2026-08-26T10:30:00-04:00",
+      "datetimeUTC": "2026-08-26T14:30:00+00:00",
+      "importance": "High",
+      "scheduleType": "official-pattern",
+      "calendarConfidence": "official-pattern",
+      "sourceUrl": "https://www.eia.gov/petroleum/supply/weekly/schedule.php",
+      "trackedInputs": [
+        "crude inventories",
+        "Cushing",
+        "gasoline",
+        "distillate",
+        "refinery utilization"
+      ],
+      "note": "EIA WPSR files are normally released after 10:30 AM ET Wednesday. Current public WPSR page should be treated as source of truth for exact next release."
+    },
+    {
       "source": "U.S. Treasury",
       "report": "Daily Treasury Par Yield Curve Rates",
       "lane": "Treasury",
@@ -267,6 +110,43 @@
       "note": "Treasury posts daily par yield curve data on business days; U.S. federal holidays are skipped by v0.41."
     },
     {
+      "source": "EIA",
+      "report": "Weekly Natural Gas Storage Report",
+      "lane": "EIA",
+      "date": "2026-08-27",
+      "timeET": "10:30 AM ET",
+      "datetimeET": "2026-08-27T10:30:00-04:00",
+      "datetimeUTC": "2026-08-27T14:30:00+00:00",
+      "importance": "High",
+      "scheduleType": "official-pattern",
+      "calendarConfidence": "official-pattern",
+      "sourceUrl": "https://ir.eia.gov/ngs/schedule.html",
+      "trackedInputs": [
+        "natural gas storage"
+      ],
+      "note": "EIA natural gas storage schedule is normally Thursday 10:30 AM ET; official schedule page controls holiday exceptions."
+    },
+    {
+      "source": "Federal Reserve",
+      "report": "H.4.1 Factors Affecting Reserve Balances",
+      "lane": "Federal Reserve",
+      "date": "2026-08-27",
+      "timeET": "4:30 PM ET",
+      "datetimeET": "2026-08-27T16:30:00-04:00",
+      "datetimeUTC": "2026-08-27T20:30:00+00:00",
+      "importance": "High",
+      "scheduleType": "official-pattern",
+      "calendarConfidence": "official-pattern",
+      "sourceUrl": "https://www.federalreserve.gov/releases/h41/",
+      "trackedInputs": [
+        "Fed assets",
+        "reserve balances",
+        "reverse repo",
+        "TGA"
+      ],
+      "note": "Federal Reserve says H.4.1 data are released each Thursday, generally at 4:30 PM ET; holidays can shift release."
+    },
+    {
       "source": "U.S. Treasury",
       "report": "Daily Treasury Par Yield Curve Rates",
       "lane": "Treasury",
@@ -274,6 +154,126 @@
       "timeET": "6:00 PM ET",
       "datetimeET": "2026-08-27T18:00:00-04:00",
       "datetimeUTC": "2026-08-27T22:00:00+00:00",
+      "importance": "High",
+      "scheduleType": "official-pattern",
+      "calendarConfidence": "official-pattern",
+      "sourceUrl": "https://home.treasury.gov/policy-issues/financing-the-government/interest-rate-statistics",
+      "trackedInputs": [
+        "1M-30Y curve",
+        "2Y",
+        "10Y",
+        "curve spreads"
+      ],
+      "note": "Treasury posts daily par yield curve data on business days; U.S. federal holidays are skipped by v0.41."
+    },
+    {
+      "source": "CFTC",
+      "report": "Commitments of Traders",
+      "lane": "CFTC COT",
+      "date": "2026-08-28",
+      "timeET": "3:30 PM ET",
+      "datetimeET": "2026-08-28T15:30:00-04:00",
+      "datetimeUTC": "2026-08-28T19:30:00+00:00",
+      "importance": "High",
+      "scheduleType": "official-pattern",
+      "calendarConfidence": "official-pattern",
+      "sourceUrl": "https://www.cftc.gov/MarketReports/CommitmentsofTraders/ReleaseSchedule/index.htm",
+      "trackedInputs": [
+        "spec net",
+        "commercial net",
+        "open interest",
+        "weekly change"
+      ],
+      "note": "CFTC states COT reports are usually released Friday at 3:30 PM ET; federal holidays may delay release."
+    },
+    {
+      "source": "U.S. Treasury",
+      "report": "Daily Treasury Par Yield Curve Rates",
+      "lane": "Treasury",
+      "date": "2026-08-28",
+      "timeET": "6:00 PM ET",
+      "datetimeET": "2026-08-28T18:00:00-04:00",
+      "datetimeUTC": "2026-08-28T22:00:00+00:00",
+      "importance": "High",
+      "scheduleType": "official-pattern",
+      "calendarConfidence": "official-pattern",
+      "sourceUrl": "https://home.treasury.gov/policy-issues/financing-the-government/interest-rate-statistics",
+      "trackedInputs": [
+        "1M-30Y curve",
+        "2Y",
+        "10Y",
+        "curve spreads"
+      ],
+      "note": "Treasury posts daily par yield curve data on business days; U.S. federal holidays are skipped by v0.41."
+    },
+    {
+      "source": "U.S. Treasury",
+      "report": "Daily Treasury Par Yield Curve Rates",
+      "lane": "Treasury",
+      "date": "2026-08-31",
+      "timeET": "6:00 PM ET",
+      "datetimeET": "2026-08-31T18:00:00-04:00",
+      "datetimeUTC": "2026-08-31T22:00:00+00:00",
+      "importance": "High",
+      "scheduleType": "official-pattern",
+      "calendarConfidence": "official-pattern",
+      "sourceUrl": "https://home.treasury.gov/policy-issues/financing-the-government/interest-rate-statistics",
+      "trackedInputs": [
+        "1M-30Y curve",
+        "2Y",
+        "10Y",
+        "curve spreads"
+      ],
+      "note": "Treasury posts daily par yield curve data on business days; U.S. federal holidays are skipped by v0.41."
+    },
+    {
+      "source": "U.S. Treasury",
+      "report": "Daily Treasury Par Yield Curve Rates",
+      "lane": "Treasury",
+      "date": "2026-09-01",
+      "timeET": "6:00 PM ET",
+      "datetimeET": "2026-09-01T18:00:00-04:00",
+      "datetimeUTC": "2026-09-01T22:00:00+00:00",
+      "importance": "High",
+      "scheduleType": "official-pattern",
+      "calendarConfidence": "official-pattern",
+      "sourceUrl": "https://home.treasury.gov/policy-issues/financing-the-government/interest-rate-statistics",
+      "trackedInputs": [
+        "1M-30Y curve",
+        "2Y",
+        "10Y",
+        "curve spreads"
+      ],
+      "note": "Treasury posts daily par yield curve data on business days; U.S. federal holidays are skipped by v0.41."
+    },
+    {
+      "source": "U.S. Treasury",
+      "report": "Daily Treasury Par Yield Curve Rates",
+      "lane": "Treasury",
+      "date": "2026-09-02",
+      "timeET": "6:00 PM ET",
+      "datetimeET": "2026-09-02T18:00:00-04:00",
+      "datetimeUTC": "2026-09-02T22:00:00+00:00",
+      "importance": "High",
+      "scheduleType": "official-pattern",
+      "calendarConfidence": "official-pattern",
+      "sourceUrl": "https://home.treasury.gov/policy-issues/financing-the-government/interest-rate-statistics",
+      "trackedInputs": [
+        "1M-30Y curve",
+        "2Y",
+        "10Y",
+        "curve spreads"
+      ],
+      "note": "Treasury posts daily par yield curve data on business days; U.S. federal holidays are skipped by v0.41."
+    },
+    {
+      "source": "U.S. Treasury",
+      "report": "Daily Treasury Par Yield Curve Rates",
+      "lane": "Treasury",
+      "date": "2026-09-03",
+      "timeET": "6:00 PM ET",
+      "datetimeET": "2026-09-03T18:00:00-04:00",
+      "datetimeUTC": "2026-09-03T22:00:00+00:00",
       "importance": "High",
       "scheduleType": "official-pattern",
       "calendarConfidence": "official-pattern",
@@ -306,6 +306,45 @@
         "U-6"
       ],
       "note": "Estimated first-Friday watch date; official BLS calendar controls."
+    },
+    {
+      "source": "BLS",
+      "report": "Consumer Price Index",
+      "lane": "BLS",
+      "date": "2026-09-09",
+      "timeET": "8:30 AM ET",
+      "datetimeET": "2026-09-09T08:30:00-04:00",
+      "datetimeUTC": "2026-09-09T12:30:00+00:00",
+      "importance": "Very High",
+      "scheduleType": "monthly estimated",
+      "calendarConfidence": "estimated",
+      "sourceUrl": "https://www.bls.gov/schedule/news_release/",
+      "trackedInputs": [
+        "headline CPI",
+        "core CPI",
+        "shelter",
+        "energy",
+        "food"
+      ],
+      "note": "Estimated second-Wednesday watch date; official BLS calendar controls."
+    },
+    {
+      "source": "BLS",
+      "report": "Producer Price Index",
+      "lane": "BLS",
+      "date": "2026-09-10",
+      "timeET": "8:30 AM ET",
+      "datetimeET": "2026-09-10T08:30:00-04:00",
+      "datetimeUTC": "2026-09-10T12:30:00+00:00",
+      "importance": "High",
+      "scheduleType": "monthly estimated",
+      "calendarConfidence": "estimated",
+      "sourceUrl": "https://www.bls.gov/schedule/news_release/",
+      "trackedInputs": [
+        "headline PPI",
+        "core PPI"
+      ],
+      "note": "Estimated second-Thursday watch date; official BLS calendar controls."
     }
   ]
 }
