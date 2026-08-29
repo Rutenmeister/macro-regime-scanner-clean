@@ -1,6 +1,6 @@
 {
   "sourceId": "CENSUS_PUBLIC",
-  "retrievedAt": "2026-08-21T23:58:15.252910+00:00",
+  "retrievedAt": "2026-08-29T04:19:46.749833+00:00",
   "seriesAudit": [
     {
       "seriesId": "RSXFS",
@@ -44,7 +44,7 @@
       ],
       "rowsFetched": 799,
       "latestPeriod": "2026-07-01",
-      "latestValue": 1443.0,
+      "latestValue": 1433.0,
       "score": 2
     },
     {
@@ -54,13 +54,13 @@
       "fetchAttempts": [
         {
           "method": "fredgraph_csv",
-          "rows": 762
+          "rows": 763
         }
       ],
-      "rowsFetched": 762,
-      "latestPeriod": "2026-06-01",
-      "latestValue": 628.0,
-      "score": 2
+      "rowsFetched": 763,
+      "latestPeriod": "2026-07-01",
+      "latestValue": 607.0,
+      "score": -2
     },
     {
       "seriesId": "DGORDER",
@@ -69,13 +69,13 @@
       "fetchAttempts": [
         {
           "method": "fredgraph_csv",
-          "rows": 413
+          "rows": 414
         }
       ],
-      "rowsFetched": 413,
-      "latestPeriod": "2026-06-01",
-      "latestValue": 335418.0,
-      "score": 1
+      "rowsFetched": 414,
+      "latestPeriod": "2026-07-01",
+      "latestValue": 339250.0,
+      "score": 2
     },
     {
       "seriesId": "BOPGSTB",

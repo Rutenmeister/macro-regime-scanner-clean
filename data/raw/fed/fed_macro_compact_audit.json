@@ -1,7 +1,7 @@
 {
   "schemaVersion": "0.28.1",
   "sourceId": "FED_FRED_SELECTED",
-  "retrievedAt": "2026-08-21T23:58:07.960222+00:00",
+  "retrievedAt": "2026-08-29T04:19:40.477025+00:00",
   "seriesAudits": [
     {
       "seriesId": "EFFR",
@@ -10,11 +10,11 @@
       "fetchAttempts": [
         {
           "method": "fredgraph_csv",
-          "rows": 6819
+          "rows": 6824
         }
       ],
-      "rowsFetched": 6819,
-      "latestPeriod": "2026-08-20",
+      "rowsFetched": 6824,
+      "latestPeriod": "2026-08-27",
       "latestValue": 3.63,
       "score": 1
     },
@@ -25,12 +25,12 @@
       "fetchAttempts": [
         {
           "method": "fredgraph_csv",
-          "rows": 1236
+          "rows": 1237
         }
       ],
-      "rowsFetched": 1236,
-      "latestPeriod": "2026-08-19",
-      "latestValue": 6745.699,
+      "rowsFetched": 1237,
+      "latestPeriod": "2026-08-26",
+      "latestValue": 6730.912,
       "score": -1
     },
     {
@@ -40,12 +40,12 @@
       "fetchAttempts": [
         {
           "method": "fredgraph_csv",
-          "rows": 1236
+          "rows": 1237
         }
       ],
-      "rowsFetched": 1236,
-      "latestPeriod": "2026-08-19",
-      "latestValue": 2935.287,
+      "rowsFetched": 1237,
+      "latestPeriod": "2026-08-26",
+      "latestValue": 2924.936,
       "score": -1
     },
     {
@@ -55,12 +55,12 @@
       "fetchAttempts": [
         {
           "method": "fredgraph_csv",
-          "rows": 6141
+          "rows": 6146
         }
       ],
-      "rowsFetched": 6141,
-      "latestPeriod": "2026-08-21",
-      "latestValue": 0.2,
+      "rowsFetched": 6146,
+      "latestPeriod": "2026-08-28",
+      "latestValue": 0.175,
       "score": 1
     },
     {
@@ -70,12 +70,12 @@
       "fetchAttempts": [
         {
           "method": "fredgraph_csv",
-          "rows": 1236
+          "rows": 1237
         }
       ],
-      "rowsFetched": 1236,
-      "latestPeriod": "2026-08-19",
-      "latestValue": 953.612,
+      "rowsFetched": 1237,
+      "latestPeriod": "2026-08-26",
+      "latestValue": 950.736,
       "score": 1
     }
   ],
