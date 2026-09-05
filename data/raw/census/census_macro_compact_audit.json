@@ -1,6 +1,6 @@
 {
   "sourceId": "CENSUS_PUBLIC",
-  "retrievedAt": "2026-08-29T04:19:46.749833+00:00",
+  "retrievedAt": "2026-09-05T01:25:14.729364+00:00",
   "seriesAudit": [
     {
       "seriesId": "RSXFS",
@@ -74,7 +74,7 @@
       ],
       "rowsFetched": 414,
       "latestPeriod": "2026-07-01",
-      "latestValue": 339250.0,
+      "latestValue": 339392.0,
       "score": 2
     },
     {
@@ -84,13 +84,13 @@
       "fetchAttempts": [
         {
           "method": "fredgraph_csv",
-          "rows": 414
+          "rows": 415
         }
       ],
-      "rowsFetched": 414,
-      "latestPeriod": "2026-06-01",
-      "latestValue": -73261.0,
-      "score": 1
+      "rowsFetched": 415,
+      "latestPeriod": "2026-07-01",
+      "latestValue": -88576.0,
+      "score": -2
     },
     {
       "seriesId": "BUSINV",
