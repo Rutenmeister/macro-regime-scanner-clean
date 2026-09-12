@@ -1,7 +1,7 @@
 {
   "pipelineVersion": "0.33",
-  "startedAt": "2026-09-05T01:22:57.028272+00:00",
-  "finishedAt": "2026-09-05T01:25:18.340497+00:00",
+  "startedAt": "2026-09-12T01:32:04.918126+00:00",
+  "finishedAt": "2026-09-12T01:33:39.759539+00:00",
   "dryRun": false,
   "selectedLanes": "all enabled",
   "lanes": [
@@ -13,14 +13,14 @@
           "script": "scripts/sources/fetch_treasury_yields.py",
           "status": "ok",
           "returncode": 0,
-          "stdoutTail": "Fetched Treasury yields through 2026-09-04\n",
+          "stdoutTail": "Fetched Treasury yields through 2026-09-11\n",
           "stderrTail": ""
         },
         {
           "script": "scripts/apply_treasury_lane.py",
           "status": "ok",
           "returncode": 0,
-          "stdoutTail": "Applied Treasury lane through 2026-09-04\n",
+          "stdoutTail": "Applied Treasury lane through 2026-09-11\n",
           "stderrTail": ""
         }
       ],
@@ -34,7 +34,7 @@
           "script": "scripts/sources/fetch_cftc_cot.py",
           "status": "ok",
           "returncode": 0,
-          "stdoutTail": "Fetched CFTC COT observations: 27 assets; latest report date: 2026-09-01\n",
+          "stdoutTail": "Fetched CFTC COT observations: 27 assets; latest report date: 2026-09-08\n",
           "stderrTail": ""
         },
         {
@@ -55,7 +55,7 @@
           "script": "scripts/sources/fetch_eia_energy.py",
           "status": "ok",
           "returncode": 0,
-          "stdoutTail": "Fetched EIA energy fundamentals for 11 series; latest date 2026-08-28\n",
+          "stdoutTail": "Fetched EIA energy fundamentals for 11 series; latest date 2026-09-04\n",
           "stderrTail": ""
         },
         {
@@ -228,14 +228,14 @@
     "script": "scripts/recompute_live_scores.py",
     "status": "ok",
     "returncode": 0,
-    "stdoutTail": "Recomputed uncapped raw pressure scores for 45 assets.\nSnapshot written to data/history/2026-09-05T012517Z.json and data/history/latest.json\n",
+    "stdoutTail": "Recomputed uncapped raw pressure scores for 45 assets.\nSnapshot written to data/history/2026-09-12T013339Z.json and data/history/latest.json\n",
     "stderrTail": ""
   },
   "releaseCalendar": {
     "script": "scripts/generate_release_calendar.py",
     "status": "ok",
     "returncode": 0,
-    "stdoutTail": "Generated data/release_calendar.json with 16 upcoming report events.\nConfidence summary: {'official': 0, 'officialPattern': 13, 'estimated': 3}\n",
+    "stdoutTail": "Generated data/release_calendar.json with 15 upcoming report events.\nConfidence summary: {'official': 0, 'officialPattern': 14, 'estimated': 1}\n",
     "stderrTail": ""
   },
   "scoreHistoryValidation": {
