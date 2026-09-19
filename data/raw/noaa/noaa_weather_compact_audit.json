@@ -1,12 +1,12 @@
 {
   "sourceId": "NOAA_NWS",
   "sourceName": "NOAA/National Weather Service public weather alerts",
-  "retrievedAt": "2026-09-12T01:33:39.045707+00:00",
+  "retrievedAt": "2026-09-19T01:35:53.822275+00:00",
   "endpoint": "https://api.weather.gov/alerts/active?status=actual&message_type=alert",
   "fetchAttempts": [
     {
       "endpoint": "https://api.weather.gov/alerts/active?status=actual&message_type=alert",
-      "features": 147
+      "features": 289
     }
   ],
   "categoryCounts": {
@@ -32,25 +32,21 @@
       "sampleEvents": []
     },
     "FLOOD_STRESS": {
-      "count": 15,
-      "weighted": 29,
+      "count": 23,
+      "weighted": 57,
       "sampleEvents": [
-        "Flash Flood Warning",
         "Flood Advisory",
         "Flash Flood Warning",
-        "Flash Flood Warning",
-        "Flood Advisory"
+        "Flood Advisory",
+        "Flood Advisory",
+        "Flood Warning"
       ]
     },
     "SEVERE_CONVECTIVE_STRESS": {
-      "count": 8,
-      "weighted": 24,
+      "count": 1,
+      "weighted": 3,
       "sampleEvents": [
-        "Severe Thunderstorm Warning",
-        "Severe Thunderstorm Warning",
-        "Severe Thunderstorm Warning",
-        "Severe Thunderstorm Watch",
-        "Severe Thunderstorm Watch"
+        "Severe Thunderstorm Warning"
       ]
     },
     "TROPICAL_STORM_STRESS": {
@@ -59,15 +55,9 @@
       "sampleEvents": []
     },
     "FIRE_WEATHER_STRESS": {
-      "count": 10,
-      "weighted": 30,
-      "sampleEvents": [
-        "Red Flag Warning",
-        "Fire Weather Watch",
-        "Red Flag Warning",
-        "Red Flag Warning",
-        "Red Flag Warning"
-      ]
+      "count": 0,
+      "weighted": 0,
+      "sampleEvents": []
     },
     "DROUGHT_STRESS": {
       "count": 0,
@@ -78,38 +68,26 @@
   "eventCountsTop": [
     [
       "Small Craft Advisory",
-      84
-    ],
-    [
-      "Red Flag Warning",
-      8
-    ],
-    [
-      "Wind Advisory",
-      7
-    ],
-    [
-      "Flood Advisory",
-      7
+      211
     ],
     [
       "Gale Warning",
-      6
+      31
     ],
     [
-      "Flash Flood Warning",
-      5
+      "Flood Watch",
+      12
     ],
     [
       "Special Weather Statement",
+      10
+    ],
+    [
+      "Flood Advisory",
       5
     ],
     [
-      "Severe Thunderstorm Watch",
-      5
-    ],
-    [
-      "Severe Thunderstorm Warning",
+      "Flash Flood Warning",
       3
     ],
     [
@@ -121,23 +99,27 @@
       3
     ],
     [
-      "Lake Wind Advisory",
-      2
-    ],
-    [
       "Hydrologic Outlook",
       2
     ],
     [
-      "Fire Weather Watch",
+      "Flood Warning",
       2
     ],
     [
-      "Flash Flood Watch",
+      "High Wind Watch",
+      2
+    ],
+    [
+      "Severe Thunderstorm Warning",
       1
     ],
     [
-      "Flood Watch",
+      "Air Quality Alert",
+      1
+    ],
+    [
+      "Rip Current Statement",
       1
     ],
     [
@@ -145,372 +127,368 @@
       1
     ],
     [
-      "High Wind Watch",
-      1
-    ],
-    [
-      "Coastal Flood Advisory",
+      "Flash Flood Watch",
       1
     ]
   ],
-  "totalActiveAlerts": 147,
-  "weightedActiveAlerts": 225,
+  "totalActiveAlerts": 289,
+  "weightedActiveAlerts": 377,
   "severityCounts": {
-    "Severe": 26,
-    "Moderate": 26,
-    "Minor": 93,
-    "Unknown": 2
+    "Moderate": 48,
+    "Severe": 20,
+    "Minor": 218,
+    "Unknown": 3
   },
   "sampleAlerts": [
     {
-      "event": "Severe Thunderstorm Warning",
-      "severity": "Severe",
-      "effective": "2026-09-11T20:32:00-05:00",
-      "area": "Stevens, MN; Swift, MN",
-      "headline": "Severe Thunderstorm Warning issued September 11 at 8:32PM CDT until September 11 at 9:15PM CDT by NWS Twin Cities/Chanhassen MN"
-    },
-    {
-      "event": "Flash Flood Warning",
-      "severity": "Severe",
-      "effective": "2026-09-11T18:31:00-07:00",
-      "area": "Pima, AZ",
-      "headline": "Flash Flood Warning issued September 11 at 6:31PM MST until September 11 at 9:30PM MST by NWS Tucson AZ"
-    },
-    {
       "event": "Special Weather Statement",
       "severity": "Moderate",
-      "effective": "2026-09-11T19:30:00-06:00",
-      "area": "Southwest Desert/Mimbres Basin",
-      "headline": "Special Weather Statement issued September 11 at 7:30PM MDT by NWS El Paso Tx/Santa Teresa NM"
-    },
-    {
-      "event": "Lake Wind Advisory",
-      "severity": "Moderate",
-      "effective": "2026-09-11T18:28:00-07:00",
-      "area": "West Side Mountains north of 198",
-      "headline": "Lake Wind Advisory issued September 11 at 6:28PM PDT until September 13 at 10:00AM PDT by NWS Hanford CA"
-    },
-    {
-      "event": "Wind Advisory",
-      "severity": "Moderate",
-      "effective": "2026-09-11T18:28:00-07:00",
-      "area": "Los Banos - Dos Palos; Merced - Madera - Mendota; Planada - Le Grand - Snelling; Coalinga - Avenal; West Side of Fresno and Kings Counties; Caruthers - San Joaquin - Selma; Fresno-Clovis; Buttonwillow - Lost Hills - I5; Delano-Wasco-Shafter",
-      "headline": "Wind Advisory issued September 11 at 6:28PM PDT until September 13 at 5:00AM PDT by NWS Hanford CA"
-    },
-    {
-      "event": "Lake Wind Advisory",
-      "severity": "Moderate",
-      "effective": "2026-09-11T18:28:00-07:00",
-      "area": "Kern River Valley",
-      "headline": "Lake Wind Advisory issued September 11 at 6:28PM PDT until September 13 at 11:00PM PDT by NWS Hanford CA"
-    },
-    {
-      "event": "Wind Advisory",
-      "severity": "Moderate",
-      "effective": "2026-09-11T18:28:00-07:00",
-      "area": "Mojave Desert Slopes",
-      "headline": "Wind Advisory issued September 11 at 6:28PM PDT until September 13 at 11:00AM PDT by NWS Hanford CA"
+      "effective": "2026-09-18T19:35:00-06:00",
+      "area": "North Sioux; Niobrara County; Goshen County",
+      "headline": "Special Weather Statement issued September 18 at 7:35PM MDT by NWS Cheyenne WY"
     },
     {
       "event": "Severe Thunderstorm Warning",
       "severity": "Severe",
-      "effective": "2026-09-11T20:25:00-05:00",
-      "area": "Antelope, NE",
-      "headline": "Severe Thunderstorm Warning issued September 11 at 8:25PM CDT until September 11 at 9:15PM CDT by NWS Omaha/Valley NE"
-    },
-    {
-      "event": "Severe Thunderstorm Warning",
-      "severity": "Severe",
-      "effective": "2026-09-11T18:24:00-07:00",
-      "area": "Cochise, AZ",
-      "headline": "Severe Thunderstorm Warning issued September 11 at 6:24PM MST until September 11 at 7:15PM MST by NWS Tucson AZ"
+      "effective": "2026-09-18T21:28:00-04:00",
+      "area": "Abbeville, SC; Anderson, SC; Greenville, SC",
+      "headline": "Severe Thunderstorm Warning issued September 18 at 9:28PM EDT until September 18 at 10:30PM EDT by NWS Greenville-Spartanburg SC"
     },
     {
       "event": "Special Weather Statement",
       "severity": "Moderate",
-      "effective": "2026-09-11T20:23:00-05:00",
-      "area": "Burleson; Washington; Colorado; Austin",
-      "headline": "Special Weather Statement issued September 11 at 8:23PM CDT by NWS Houston/Galveston TX"
+      "effective": "2026-09-18T21:24:00-04:00",
+      "area": "Anderson; Southern Greenville",
+      "headline": "Special Weather Statement issued September 18 at 9:24PM EDT by NWS Greenville-Spartanburg SC"
     },
     {
       "event": "Special Weather Statement",
       "severity": "Moderate",
-      "effective": "2026-09-11T20:19:00-05:00",
-      "area": "Christian; Muhlenberg; Todd",
-      "headline": "Special Weather Statement issued September 11 at 8:19PM CDT by NWS Paducah KY"
-    },
-    {
-      "event": "Special Weather Statement",
-      "severity": "Moderate",
-      "effective": "2026-09-11T20:18:00-05:00",
-      "area": "Holt; Wheeler",
-      "headline": "Special Weather Statement issued September 11 at 8:18PM CDT by NWS North Platte NE"
-    },
-    {
-      "event": "Flood Advisory",
-      "severity": "Minor",
-      "effective": "2026-09-11T20:16:00-05:00",
-      "area": "Mobile, AL; Washington, AL; Greene, MS",
-      "headline": "Flood Advisory issued September 11 at 8:16PM CDT until September 11 at 11:15PM CDT by NWS Mobile AL"
-    },
-    {
-      "event": "Special Weather Statement",
-      "severity": "Moderate",
-      "effective": "2026-09-11T20:15:00-05:00",
-      "area": "Tom Green; Schleicher",
-      "headline": "Special Weather Statement issued September 11 at 8:15PM CDT by NWS San Angelo TX"
-    },
-    {
-      "event": "Flash Flood Warning",
-      "severity": "Severe",
-      "effective": "2026-09-11T18:13:00-07:00",
-      "area": "Gila, AZ; Navajo, AZ",
-      "headline": "Flash Flood Warning issued September 11 at 6:13PM MST until September 11 at 11:15PM MST by NWS Flagstaff AZ"
+      "effective": "2026-09-18T19:20:00-06:00",
+      "area": "Eastern Lincoln County",
+      "headline": "Special Weather Statement issued September 18 at 7:20PM MDT by NWS Albuquerque NM"
     },
     {
       "event": "Small Craft Advisory",
       "severity": "Minor",
-      "effective": "2026-09-11T20:06:00-05:00",
-      "area": "Laguna Madre From the Port Of Brownsville to the Arroyo Colorado; Laguna Madre From The Arroyo Colorado To 5 NM North Of Port Mansfield TX; Laguna Madre From 5 nm North Of Port Mansfield To Baffin Bay TX; Coastal waters from Port Mansfield ",
-      "headline": "Small Craft Advisory issued September 11 at 8:06PM CDT until September 12 at 8:00PM CDT by NWS Brownsville TX"
+      "effective": "2026-09-18T21:14:00-04:00",
+      "area": "Chesapeake Bay from Drum Point MD to Smith Point VA; Tidal Potomac from Cobb Island MD to Smith Point VA; Tangier Sound and the inland waters surrounding Bloodsworth Island",
+      "headline": "Small Craft Advisory issued September 18 at 9:14PM EDT until September 19 at 1:00PM EDT by NWS Baltimore MD/Washington DC"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-09-18T21:14:00-04:00",
+      "area": "Chesapeake Bay from Pooles Island to Sandy Point MD; Chesapeake Bay from Sandy Point to North Beach MD; Chesapeake Bay from North Beach to Drum Point MD; Chester River to Queenstown MD; Eastern Bay; Choptank River to Cambridge MD and the Li",
+      "headline": "Small Craft Advisory issued September 18 at 9:14PM EDT until September 19 at 10:00AM EDT by NWS Baltimore MD/Washington DC"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-09-18T21:14:00-04:00",
+      "area": "Chesapeake Bay from Drum Point MD to Smith Point VA; Tidal Potomac from Cobb Island MD to Smith Point VA; Tangier Sound and the inland waters surrounding Bloodsworth Island",
+      "headline": "Small Craft Advisory issued September 18 at 9:14PM EDT until September 20 at 1:00AM EDT by NWS Baltimore MD/Washington DC"
+    },
+    {
+      "event": "Special Weather Statement",
+      "severity": "Moderate",
+      "effective": "2026-09-18T21:14:00-04:00",
+      "area": "Anderson; Abbeville; Laurens; Southern Greenville",
+      "headline": "Special Weather Statement issued September 18 at 9:14PM EDT by NWS Greenville-Spartanburg SC"
+    },
+    {
+      "event": "Special Weather Statement",
+      "severity": "Moderate",
+      "effective": "2026-09-18T21:10:00-04:00",
+      "area": "Henry; Shelby; Franklin; Scott; Spencer; Anderson; Woodford; Fayette; Bourbon; Nelson; Washington; Mercer; Jessamine; Larue; Marion; Boyle; Garrard; Madison; Taylor; Casey; Lincoln",
+      "headline": "Special Weather Statement issued September 18 at 9:10PM EDT by NWS Louisville KY"
+    },
+    {
+      "event": "Special Weather Statement",
+      "severity": "Moderate",
+      "effective": "2026-09-18T19:10:00-06:00",
+      "area": "Kimball; Central Laramie County; East Laramie County",
+      "headline": "Special Weather Statement issued September 18 at 7:10PM MDT by NWS Cheyenne WY"
+    },
+    {
+      "event": "Flood Advisory",
+      "severity": "Minor",
+      "effective": "2026-09-18T19:08:00-06:00",
+      "area": "Golden Valley, MT; Sweet Grass, MT",
+      "headline": "Flood Advisory issued September 18 at 7:08PM MDT until September 18 at 10:15PM MDT by NWS Billings MT"
+    },
+    {
+      "event": "Special Weather Statement",
+      "severity": "Moderate",
+      "effective": "2026-09-18T19:08:00-06:00",
+      "area": "Northern Campbell; Southern Campbell; Western Crook; Weston County Plains",
+      "headline": "Special Weather Statement issued September 18 at 7:08PM MDT by NWS Rapid City SD"
+    },
+    {
+      "event": "Special Weather Statement",
+      "severity": "Moderate",
+      "effective": "2026-09-18T19:04:00-06:00",
+      "area": "East Platte County; Goshen County",
+      "headline": "Special Weather Statement issued September 18 at 7:04PM MDT by NWS Cheyenne WY"
+    },
+    {
+      "event": "Air Quality Alert",
+      "severity": "Unknown",
+      "effective": "2026-09-18T20:00:00-05:00",
+      "area": "Crittenden; DeSoto; Shelby",
+      "headline": "Air Quality Alert issued September 18 at 8:00PM CDT by NWS Memphis TN"
     },
     {
       "event": "Flash Flood Warning",
       "severity": "Severe",
-      "effective": "2026-09-11T18:04:00-07:00",
-      "area": "Gila, AZ",
-      "headline": "Flash Flood Warning issued September 11 at 6:04PM MST until September 11 at 9:00PM MST by NWS Flagstaff AZ"
+      "effective": "2026-09-18T18:56:00-06:00",
+      "area": "Eddy, NM",
+      "headline": "Flash Flood Warning issued September 18 at 6:56PM MDT until September 18 at 10:00PM MDT by NWS Midland/Odessa TX"
     },
     {
-      "event": "Heat Advisory",
-      "severity": "Moderate",
-      "effective": "2026-09-11T19:58:00-05:00",
-      "area": "Brooks; Inland Kenedy; Starr; Southern Hidalgo; Inland Willacy; Inland Cameron; Coastal Kenedy; Northern Hidalgo; Coastal Willacy; Coastal Cameron",
-      "headline": "Heat Advisory issued September 11 at 7:58PM CDT until September 12 at 6:00PM CDT by NWS Brownsville TX"
+      "event": "Flood Advisory",
+      "severity": "Minor",
+      "effective": "2026-09-18T18:22:00-06:00",
+      "area": "Cibola, NM; Socorro, NM",
+      "headline": "Flood Advisory issued September 18 at 6:22PM MDT until September 18 at 8:15PM MDT by NWS Albuquerque NM"
+    },
+    {
+      "event": "Flood Advisory",
+      "severity": "Minor",
+      "effective": "2026-09-18T18:15:00-06:00",
+      "area": "McKinley, NM; Sandoval, NM",
+      "headline": "Flood Advisory issued September 18 at 6:15PM MDT until September 18 at 8:15PM MDT by NWS Albuquerque NM"
     },
     {
       "event": "Hydrologic Outlook",
       "severity": "Unknown",
-      "effective": "2026-09-11T16:38:00-08:00",
-      "area": "Noatak Valley; Kivalina and Red Dog Dock; Lower Kobuk Valley; Upper Kobuk Valleys",
-      "headline": "Hydrologic Outlook issued September 11 at 4:38PM AKDT by NWS Fairbanks AK"
+      "effective": "2026-09-18T16:14:00-08:00",
+      "area": "Interior Kuskokwim Delta",
+      "headline": "Hydrologic Outlook issued September 18 at 4:14PM AKDT by NWS Anchorage AK"
     },
     {
-      "event": "Flood Advisory",
+      "event": "Small Craft Advisory",
       "severity": "Minor",
-      "effective": "2026-09-11T17:30:00-07:00",
-      "area": "Pima, AZ",
-      "headline": "Flood Advisory issued September 11 at 5:30PM MST until September 11 at 7:30PM MST by NWS Tucson AZ"
+      "effective": "2026-09-18T16:10:00-08:00",
+      "area": "Cape Edgecumbe to Cape Spencer from 15 to 80 NM",
+      "headline": "Small Craft Advisory issued September 18 at 4:10PM AKDT until September 19 at 5:00AM AKDT by NWS Juneau AK"
     },
     {
-      "event": "Flood Advisory",
+      "event": "Small Craft Advisory",
       "severity": "Minor",
-      "effective": "2026-09-11T20:30:00-04:00",
-      "area": "Wake, NC",
-      "headline": "Flood Advisory issued September 11 at 8:30PM EDT until September 11 at 10:30PM EDT by NWS Raleigh NC"
+      "effective": "2026-09-18T16:10:00-08:00",
+      "area": "Yakutat Bay",
+      "headline": "Small Craft Advisory issued September 18 at 4:10PM AKDT until September 19 at 5:00AM AKDT by NWS Juneau AK"
     },
     {
-      "event": "Flood Advisory",
+      "event": "Small Craft Advisory",
       "severity": "Minor",
-      "effective": "2026-09-11T17:18:00-07:00",
-      "area": "Cochise, AZ",
-      "headline": "Flood Advisory issued September 11 at 5:18PM MST until September 11 at 8:15PM MST by NWS Tucson AZ"
+      "effective": "2026-09-18T16:10:00-08:00",
+      "area": "Cape Edgecumbe to Cape Spencer out to 15 NM",
+      "headline": "Small Craft Advisory issued September 18 at 4:10PM AKDT until September 19 at 5:00AM AKDT by NWS Juneau AK"
     },
     {
-      "event": "Flash Flood Watch",
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-09-18T16:10:00-08:00",
+      "area": "Cross Sound",
+      "headline": "Small Craft Advisory issued September 18 at 4:10PM AKDT until September 19 at 5:00AM AKDT by NWS Juneau AK"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-09-18T16:10:00-08:00",
+      "area": "Southern Chatham Strait",
+      "headline": "Small Craft Advisory issued September 18 at 4:10PM AKDT until September 19 at 5:00PM AKDT by NWS Juneau AK"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-09-18T16:10:00-08:00",
+      "area": "Northern Lynn Canal",
+      "headline": "Small Craft Advisory issued September 18 at 4:10PM AKDT until September 19 at 5:00PM AKDT by NWS Juneau AK"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-09-18T16:10:00-08:00",
+      "area": "Stephens Passage",
+      "headline": "Small Craft Advisory issued September 18 at 4:10PM AKDT until September 19 at 5:00PM AKDT by NWS Juneau AK"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-09-18T16:10:00-08:00",
+      "area": "Southern Lynn Canal",
+      "headline": "Small Craft Advisory issued September 18 at 4:10PM AKDT until September 19 at 5:00PM AKDT by NWS Juneau AK"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-09-18T16:10:00-08:00",
+      "area": "Clarence Strait",
+      "headline": "Small Craft Advisory issued September 18 at 4:10PM AKDT until September 19 at 5:00PM AKDT by NWS Juneau AK"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-09-18T16:10:00-08:00",
+      "area": "Northern Chatham Strait",
+      "headline": "Small Craft Advisory issued September 18 at 4:10PM AKDT until September 19 at 5:00PM AKDT by NWS Juneau AK"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-09-18T16:10:00-08:00",
+      "area": "Cape Decision to Cape Edgecumbe from 15 to 80 NM",
+      "headline": "Small Craft Advisory issued September 18 at 4:10PM AKDT until September 19 at 5:00PM AKDT by NWS Juneau AK"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-09-18T16:10:00-08:00",
+      "area": "Dixon Entrance to Cape Decision from 15 to 90 NM",
+      "headline": "Small Craft Advisory issued September 18 at 4:10PM AKDT until September 19 at 5:00PM AKDT by NWS Juneau AK"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-09-18T16:10:00-08:00",
+      "area": "Cape Edgecumbe to Cape Spencer out to 15 NM",
+      "headline": "Small Craft Advisory issued September 18 at 4:10PM AKDT until September 19 at 5:00PM AKDT by NWS Juneau AK"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-09-18T16:10:00-08:00",
+      "area": "Dixon Entrance to Cape Decision out to 15 NM",
+      "headline": "Small Craft Advisory issued September 18 at 4:10PM AKDT until September 19 at 5:00PM AKDT by NWS Juneau AK"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-09-18T16:10:00-08:00",
+      "area": "Cape Edgecumbe to Cape Spencer from 15 to 80 NM",
+      "headline": "Small Craft Advisory issued September 18 at 4:10PM AKDT until September 19 at 5:00PM AKDT by NWS Juneau AK"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-09-18T16:10:00-08:00",
+      "area": "Cape Decision to Cape Edgecumbe out to 15 NM",
+      "headline": "Small Craft Advisory issued September 18 at 4:10PM AKDT until September 19 at 5:00PM AKDT by NWS Juneau AK"
+    },
+    {
+      "event": "Flood Warning",
       "severity": "Severe",
-      "effective": "2026-09-11T17:05:00-07:00",
-      "area": "Northern Blue Mountains of Oregon; Northwest Blue Mountains",
-      "headline": "Flash Flood Watch issued September 11 at 5:05PM PDT until September 13 at 8:00PM PDT by NWS Pendleton OR"
+      "effective": "2026-09-18T18:07:00-06:00",
+      "area": "Otero, NM",
+      "headline": "Flood Warning issued September 18 at 6:07PM MDT until September 18 at 8:00PM MDT by NWS El Paso Tx/Santa Teresa NM"
     },
     {
-      "event": "Flood Advisory",
+      "event": "Flood Watch",
       "severity": "Minor",
-      "effective": "2026-09-11T20:00:00-04:00",
-      "area": "Carroll, VA; Grayson, VA; City of Galax, VA",
-      "headline": "Flood Advisory issued September 11 at 8:00PM EDT until September 11 at 10:00PM EDT by NWS Blacksburg VA"
+      "effective": "2026-09-18T15:59:00-08:00",
+      "area": "Upper Chena River Valley; Two Rivers; Fairbanks Metro Area",
+      "headline": "The Flood Watch has been cancelled."
+    },
+    {
+      "event": "Heat Advisory",
+      "severity": "Moderate",
+      "effective": "2026-09-18T19:56:00-04:00",
+      "area": "Dubois; Perry; Hancock; Breckinridge; Meade; Ohio; Grayson; Hardin; Larue; Butler; Edmonson; Hart; Logan; Warren; Simpson; Allen; Barren; Monroe; Metcalfe",
+      "headline": "Heat Advisory issued September 18 at 7:56PM EDT until September 19 at 8:00PM EDT by NWS Louisville KY"
     },
     {
       "event": "Small Craft Advisory",
       "severity": "Minor",
-      "effective": "2026-09-11T15:49:00-08:00",
-      "area": "Norton Sound greater than 15 NM",
-      "headline": "Small Craft Advisory issued September 11 at 3:49PM AKDT until September 12 at 5:00PM AKDT by NWS Fairbanks AK"
+      "effective": "2026-09-18T15:55:00-08:00",
+      "area": "Cape Edgecumbe to Cape Spencer out to 15 NM",
+      "headline": "Small Craft Advisory issued September 18 at 3:55PM AKDT until September 21 at 6:00AM AKDT by NWS Juneau AK"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-09-18T15:55:00-08:00",
+      "area": "Glacier Bay",
+      "headline": "Small Craft Advisory issued September 18 at 3:55PM AKDT until September 21 at 1:00AM AKDT by NWS Juneau AK"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-09-18T15:55:00-08:00",
+      "area": "Icy Strait",
+      "headline": "Small Craft Advisory issued September 18 at 3:55PM AKDT until September 21 at 4:00AM AKDT by NWS Juneau AK"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-09-18T15:55:00-08:00",
+      "area": "Cape Spencer to Cape Fairweather out to 15 NM",
+      "headline": "Small Craft Advisory issued September 18 at 3:55PM AKDT until September 21 at 6:00AM AKDT by NWS Juneau AK"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-09-18T15:55:00-08:00",
+      "area": "Icy Cape to Cape Suckling out to 15 NM",
+      "headline": "Small Craft Advisory issued September 18 at 3:55PM AKDT until September 21 at 6:00AM AKDT by NWS Juneau AK"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-09-18T15:55:00-08:00",
+      "area": "Cape Fairweather to Icy Cape out to 15 NM",
+      "headline": "Small Craft Advisory issued September 18 at 3:55PM AKDT until September 21 at 6:00AM AKDT by NWS Juneau AK"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-09-18T15:55:00-08:00",
+      "area": "Cape Spencer to Cape Fairweather from 15 to 85 NM",
+      "headline": "Small Craft Advisory issued September 18 at 3:55PM AKDT until September 21 at 6:00AM AKDT by NWS Juneau AK"
     },
     {
       "event": "Gale Warning",
       "severity": "Moderate",
-      "effective": "2026-09-11T15:49:00-08:00",
-      "area": "Sledge Island to Wales out to 15 NM",
-      "headline": "Gale Warning issued September 11 at 3:49PM AKDT until September 12 at 5:00PM AKDT by NWS Fairbanks AK"
+      "effective": "2026-09-18T15:55:00-08:00",
+      "area": "Northern Lynn Canal",
+      "headline": "Gale Warning issued September 18 at 3:55PM AKDT until September 21 at 6:00AM AKDT by NWS Juneau AK"
     },
     {
       "event": "Small Craft Advisory",
       "severity": "Minor",
-      "effective": "2026-09-11T15:49:00-08:00",
-      "area": "Cape Espenberg to Motherwood Point out to 10 NM",
-      "headline": "Small Craft Advisory issued September 11 at 3:49PM AKDT until September 12 at 5:00PM AKDT by NWS Fairbanks AK"
+      "effective": "2026-09-18T15:55:00-08:00",
+      "area": "Icy Cape to Cape Suckling from 15 to 80 NM",
+      "headline": "Small Craft Advisory issued September 18 at 3:55PM AKDT until September 21 at 6:00AM AKDT by NWS Juneau AK"
     },
     {
       "event": "Small Craft Advisory",
       "severity": "Minor",
-      "effective": "2026-09-11T15:49:00-08:00",
-      "area": "North Side of Saint Lawrence Island out to 15 NM",
-      "headline": "Small Craft Advisory issued September 11 at 3:49PM AKDT until September 12 at 5:00PM AKDT by NWS Fairbanks AK"
+      "effective": "2026-09-18T15:55:00-08:00",
+      "area": "Cape Fairweather to Icy Cape from 15 to 80 NM",
+      "headline": "Small Craft Advisory issued September 18 at 3:55PM AKDT until September 21 at 6:00AM AKDT by NWS Juneau AK"
     },
     {
       "event": "Small Craft Advisory",
       "severity": "Minor",
-      "effective": "2026-09-11T15:49:00-08:00",
-      "area": "Wales to Cape Thompson greater than 15 NM",
-      "headline": "Small Craft Advisory issued September 11 at 3:49PM AKDT until September 12 at 5:00PM AKDT by NWS Fairbanks AK"
+      "effective": "2026-09-18T15:55:00-08:00",
+      "area": "Cape Edgecumbe to Cape Spencer from 15 to 80 NM",
+      "headline": "Small Craft Advisory issued September 18 at 3:55PM AKDT until September 21 at 6:00AM AKDT by NWS Juneau AK"
     },
     {
       "event": "Small Craft Advisory",
       "severity": "Minor",
-      "effective": "2026-09-11T15:49:00-08:00",
-      "area": "Dall Point to Kwikpak Pass out to 15 NM",
-      "headline": "Small Craft Advisory issued September 11 at 3:49PM AKDT until September 12 at 5:00PM AKDT by NWS Fairbanks AK"
+      "effective": "2026-09-18T15:55:00-08:00",
+      "area": "Cape Decision to Cape Edgecumbe from 15 to 80 NM",
+      "headline": "Small Craft Advisory issued September 18 at 3:55PM AKDT until September 21 at 6:00AM AKDT by NWS Juneau AK"
     },
     {
       "event": "Small Craft Advisory",
       "severity": "Minor",
-      "effective": "2026-09-11T15:49:00-08:00",
-      "area": "Kotzebue Sound greater than 10 NM",
-      "headline": "Small Craft Advisory issued September 11 at 3:49PM AKDT until September 12 at 5:00PM AKDT by NWS Fairbanks AK"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-09-11T15:49:00-08:00",
-      "area": "Cape Krusenstern to Cape Thompson out to 15 NM",
-      "headline": "Small Craft Advisory issued September 11 at 3:49PM AKDT until September 12 at 5:00PM AKDT by NWS Fairbanks AK"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-09-11T15:49:00-08:00",
-      "area": "South Side of Saint Lawrence Island out to 15 NM",
-      "headline": "Small Craft Advisory issued September 11 at 3:49PM AKDT until September 12 at 5:00PM AKDT by NWS Fairbanks AK"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-09-11T15:49:00-08:00",
-      "area": "Cape Stephens to Moses Point out to 15 NM",
-      "headline": "Small Craft Advisory issued September 11 at 3:49PM AKDT until September 12 at 5:00PM AKDT by NWS Fairbanks AK"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-09-11T15:49:00-08:00",
-      "area": "Etolin Strait to Dall Point out to 15 NM",
-      "headline": "Small Craft Advisory issued September 11 at 3:49PM AKDT until September 12 at 5:00PM AKDT by NWS Fairbanks AK"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-09-11T15:49:00-08:00",
-      "area": "Southwest of Saint Lawrence Island from 15 to 100 NM",
-      "headline": "Small Craft Advisory issued September 11 at 3:49PM AKDT until September 12 at 5:00AM AKDT by NWS Fairbanks AK"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-09-11T15:49:00-08:00",
-      "area": "Kwemeluk Pass to Kwikpak Pass from 15 to 90 NM",
-      "headline": "Small Craft Advisory issued September 11 at 3:49PM AKDT until September 12 at 5:00PM AKDT by NWS Fairbanks AK"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-09-11T15:49:00-08:00",
-      "area": "Kwikpak Pass to Cape Stephens out to 15 NM",
-      "headline": "Small Craft Advisory issued September 11 at 3:49PM AKDT until September 12 at 5:00PM AKDT by NWS Fairbanks AK"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-09-11T15:49:00-08:00",
-      "area": "Moses Point to Sledge Island out to 15 NM",
-      "headline": "Small Craft Advisory issued September 11 at 3:49PM AKDT until September 12 at 5:00PM AKDT by NWS Fairbanks AK"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-09-11T15:49:00-08:00",
-      "area": "Motherwood Point to Cape Krusenstern out to 10 NM",
-      "headline": "Small Craft Advisory issued September 11 at 3:49PM AKDT until September 12 at 5:00PM AKDT by NWS Fairbanks AK"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-09-11T15:49:00-08:00",
-      "area": "Sledge Island to Wales greater than 15 NM",
-      "headline": "Small Craft Advisory issued September 11 at 3:49PM AKDT until September 12 at 5:00PM AKDT by NWS Fairbanks AK"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-09-11T15:49:00-08:00",
-      "area": "Wales to Cape Espenberg out to 15 NM",
-      "headline": "Small Craft Advisory issued September 11 at 3:49PM AKDT until September 12 at 5:00PM AKDT by NWS Fairbanks AK"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-09-11T15:49:00-08:00",
-      "area": "Etolin Strait to Kwemeluk Pass from 15 to 90 NM",
-      "headline": "Small Craft Advisory issued September 11 at 3:49PM AKDT until September 12 at 5:00PM AKDT by NWS Fairbanks AK"
-    },
-    {
-      "event": "Gale Warning",
-      "severity": "Moderate",
-      "effective": "2026-09-11T15:48:00-08:00",
-      "area": "Cape Thompson to Cape Beaufort from 15 to 85 NM",
-      "headline": "Gale Warning issued September 11 at 3:48PM AKDT until September 12 at 5:00PM AKDT by NWS Fairbanks AK"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-09-11T15:48:00-08:00",
-      "area": "Cape Halkett to Flaxman Island from 15 to 80 NM",
-      "headline": "Small Craft Advisory issued September 11 at 3:48PM AKDT until September 12 at 5:00PM AKDT by NWS Fairbanks AK"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-09-11T15:48:00-08:00",
-      "area": "Point Franklin to Cape Halkett from 15 to 75 NM",
-      "headline": "Small Craft Advisory issued September 11 at 3:48PM AKDT until September 12 at 5:00PM AKDT by NWS Fairbanks AK"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-09-11T15:48:00-08:00",
-      "area": "Flaxman Island to Demarcation Point out to 15 NM",
-      "headline": "Small Craft Advisory issued September 11 at 3:48PM AKDT until September 12 at 5:00PM AKDT by NWS Fairbanks AK"
-    },
-    {
-      "event": "Gale Warning",
-      "severity": "Moderate",
-      "effective": "2026-09-11T15:48:00-08:00",
-      "area": "Cape Beaufort to Point Franklin from 15 to 85 NM",
-      "headline": "Gale Warning issued September 11 at 3:48PM AKDT until September 12 at 5:00PM AKDT by NWS Fairbanks AK"
-    },
-    {
-      "event": "Gale Warning",
-      "severity": "Moderate",
-      "effective": "2026-09-11T15:48:00-08:00",
-      "area": "Cape Thompson to Cape Beaufort out to 15 NM",
-      "headline": "Gale Warning issued September 11 at 3:48PM AKDT until September 12 at 5:00PM AKDT by NWS Fairbanks AK"
-    },
-    {
-      "event": "Gale Warning",
-      "severity": "Moderate",
-      "effective": "2026-09-11T15:48:00-08:00",
-      "area": "Cape Beaufort to Point Franklin out to 15 NM",
-      "headline": "Gale Warning issued September 11 at 3:48PM AKDT until September 12 at 5:00PM AKDT by NWS Fairbanks AK"
+      "effective": "2026-09-18T15:55:00-08:00",
+      "area": "Clarence Strait",
+      "headline": "Small Craft Advisory issued September 18 at 3:55PM AKDT until September 20 at 10:00AM AKDT by NWS Juneau AK"
     }
   ]
 }
