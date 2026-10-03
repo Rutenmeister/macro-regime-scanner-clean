@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-09-26T01:58:59+00:00",
+  "fetched_at": "2026-10-03T02:19:41+00:00",
   "source": "BLS public API v2",
   "series_requested": {
     "CPI_HEADLINE": {
@@ -172,45 +172,45 @@
     "UNEMPLOYMENT_RATE": {
       "series_id": "LNS14000000",
       "label": "Unemployment rate",
-      "latest_date": "2026-08-01",
-      "latest_value": 4.1,
-      "observations": 55,
-      "score": 0,
-      "status": "Neutral"
+      "latest_date": "2026-09-01",
+      "latest_value": 4.2,
+      "observations": 56,
+      "score": -1,
+      "status": "Pressure"
     },
     "NONFARM_PAYROLLS": {
       "series_id": "CES0000000001",
       "label": "Total nonfarm payroll employment",
-      "latest_date": "2026-08-01",
-      "latest_value": 159075.0,
-      "observations": 56,
-      "score": 1,
-      "status": "Support"
+      "latest_date": "2026-09-01",
+      "latest_value": 159044.0,
+      "observations": 57,
+      "score": -1,
+      "status": "Pressure"
     },
     "AVG_HOURLY_EARNINGS": {
       "series_id": "CES0500000003",
       "label": "Average hourly earnings private employees",
-      "latest_date": "2026-08-01",
-      "latest_value": 37.75,
-      "observations": 56,
+      "latest_date": "2026-09-01",
+      "latest_value": 37.81,
+      "observations": 57,
       "score": 0,
       "status": "Neutral"
     },
     "LABOR_FORCE_PARTICIPATION": {
       "series_id": "LNS11300000",
       "label": "Labor force participation rate",
-      "latest_date": "2026-08-01",
-      "latest_value": 61.6,
-      "observations": 55,
+      "latest_date": "2026-09-01",
+      "latest_value": 61.8,
+      "observations": 56,
       "score": null,
       "status": null
     },
     "U6_UNEMPLOYMENT": {
       "series_id": "LNS13327709",
       "label": "U-6 unemployment rate",
-      "latest_date": "2026-08-01",
-      "latest_value": 7.7,
-      "observations": 55,
+      "latest_date": "2026-09-01",
+      "latest_value": 7.6,
+      "observations": 56,
       "score": null,
       "status": null
     }
