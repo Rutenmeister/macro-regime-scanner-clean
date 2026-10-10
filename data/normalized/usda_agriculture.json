@@ -1,7 +1,7 @@
 {
   "source_id": "USDA_PUBLIC",
   "source_name": "USDA National Agricultural Statistics Service Quick Stats API",
-  "retrieved_at": "2026-10-03T02:19:40+00:00",
+  "retrieved_at": "2026-10-10T02:45:47+00:00",
   "latest_date": "2026",
   "observations": {
     "WHEAT_CONDITION": {
@@ -70,15 +70,15 @@
       "crop": "Corn",
       "input": "USDA production estimate",
       "latest_year": 2026,
-      "latest_value": 16012964000.0,
+      "latest_value": 16033944000.0,
       "previous_year": 2025,
       "previous_value": 70101290000.0,
       "unit": "BU",
-      "change_pct": -77.15739039894987,
+      "change_pct": -77.1274622763718,
       "score": 2,
       "status": "Strong support",
       "interpretation": "Production fell sharply year over year; smaller supply usually supports crop prices.",
-      "records_returned": 44
+      "records_returned": 45
     },
     "CORN_PROGRESS": {
       "id": "CORN_PROGRESS",
@@ -114,15 +114,15 @@
       "crop": "Soybeans",
       "input": "USDA production estimate",
       "latest_year": 2026,
-      "latest_value": 4534981000.0,
+      "latest_value": 4561605000.0,
       "previous_year": 2025,
       "previous_value": 43618961000.0,
       "unit": "BU",
-      "change_pct": -89.60318885174729,
+      "change_pct": -89.54215117595304,
       "score": 2,
       "status": "Strong support",
       "interpretation": "Production fell sharply year over year; smaller supply usually supports crop prices.",
-      "records_returned": 38
+      "records_returned": 39
     },
     "SOY_PROGRESS": {
       "id": "SOY_PROGRESS",
@@ -166,7 +166,7 @@
       "score": 2,
       "status": "Strong support",
       "interpretation": "Production fell sharply year over year; smaller supply usually supports crop prices.",
-      "records_returned": 237
+      "records_returned": 241
     },
     "COTTON_PROGRESS": {
       "id": "COTTON_PROGRESS",

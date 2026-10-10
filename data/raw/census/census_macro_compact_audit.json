@@ -1,6 +1,6 @@
 {
   "sourceId": "CENSUS_PUBLIC",
-  "retrievedAt": "2026-10-03T02:19:49.590866+00:00",
+  "retrievedAt": "2026-10-10T02:46:03.314613+00:00",
   "seriesAudit": [
     {
       "seriesId": "RSXFS",
@@ -84,12 +84,12 @@
       "fetchAttempts": [
         {
           "method": "fredgraph_csv",
-          "rows": 415
+          "rows": 416
         }
       ],
-      "rowsFetched": 415,
-      "latestPeriod": "2026-07-01",
-      "latestValue": -88576.0,
+      "rowsFetched": 416,
+      "latestPeriod": "2026-08-01",
+      "latestValue": -105572.0,
       "score": -2
     },
     {

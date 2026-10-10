@@ -1,62 +1,81 @@
 {
   "sourceId": "NOAA_NWS",
   "sourceName": "NOAA/National Weather Service public weather alerts",
-  "retrievedAt": "2026-10-03T02:19:50.237172+00:00",
+  "retrievedAt": "2026-10-10T02:46:04.603843+00:00",
   "endpoint": "https://api.weather.gov/alerts/active?status=actual&message_type=alert",
   "fetchAttempts": [
     {
       "endpoint": "https://api.weather.gov/alerts/active?status=actual&message_type=alert",
-      "features": 240
+      "features": 342
     }
   ],
   "categoryCounts": {
     "HEAT_STRESS": {
-      "count": 3,
-      "weighted": 6,
-      "sampleEvents": [
-        "Heat Advisory",
-        "Heat Advisory",
-        "Heat Advisory"
-      ]
+      "count": 0,
+      "weighted": 0,
+      "sampleEvents": []
     },
     "COLD_FREEZE_STRESS": {
-      "count": 2,
-      "weighted": 2,
+      "count": 4,
+      "weighted": 4,
       "sampleEvents": [
+        "Frost Advisory",
+        "Frost Advisory",
         "Frost Advisory",
         "Frost Advisory"
       ]
     },
     "WINTER_STORM_STRESS": {
-      "count": 0,
-      "weighted": 0,
-      "sampleEvents": []
-    },
-    "FLOOD_STRESS": {
-      "count": 16,
+      "count": 10,
       "weighted": 30,
       "sampleEvents": [
+        "Winter Storm Warning",
+        "Winter Storm Warning",
+        "Winter Storm Watch",
+        "Winter Storm Warning",
+        "Winter Storm Warning"
+      ]
+    },
+    "FLOOD_STRESS": {
+      "count": 54,
+      "weighted": 138,
+      "sampleEvents": [
         "Flood Advisory",
-        "Flood Warning",
-        "Coastal Flood Advisory",
-        "Coastal Flood Advisory",
+        "Flash Flood Warning",
+        "Flash Flood Warning",
+        "Flash Flood Warning",
         "Flood Advisory"
       ]
     },
     "SEVERE_CONVECTIVE_STRESS": {
-      "count": 0,
-      "weighted": 0,
-      "sampleEvents": []
+      "count": 5,
+      "weighted": 18,
+      "sampleEvents": [
+        "Severe Thunderstorm Warning",
+        "Severe Thunderstorm Warning",
+        "Tornado Watch",
+        "Tornado Watch",
+        "Tornado Watch"
+      ]
     },
     "TROPICAL_STORM_STRESS": {
-      "count": 0,
-      "weighted": 0,
-      "sampleEvents": []
+      "count": 3,
+      "weighted": 12,
+      "sampleEvents": [
+        "Hurricane Warning",
+        "Hurricane Warning",
+        "Hurricane Warning"
+      ]
     },
     "FIRE_WEATHER_STRESS": {
-      "count": 0,
-      "weighted": 0,
-      "sampleEvents": []
+      "count": 4,
+      "weighted": 12,
+      "sampleEvents": [
+        "Red Flag Warning",
+        "Red Flag Warning",
+        "Red Flag Warning",
+        "Red Flag Warning"
+      ]
     },
     "DROUGHT_STRESS": {
       "count": 0,
@@ -67,415 +86,464 @@
   "eventCountsTop": [
     [
       "Small Craft Advisory",
-      105
+      140
     ],
     [
       "Gale Warning",
-      104
+      26
     ],
     [
-      "Flood Warning",
+      "Flash Flood Warning",
+      22
+    ],
+    [
+      "Wind Advisory",
+      20
+    ],
+    [
+      "Flood Watch",
+      14
+    ],
+    [
+      "Tropical Cyclone Local Statement",
+      12
+    ],
+    [
+      "Air Quality Alert",
+      11
+    ],
+    [
+      "Gale Watch",
+      9
+    ],
+    [
+      "Winter Storm Warning",
+      9
+    ],
+    [
+      "Beach Hazards Statement",
+      8
+    ],
+    [
+      "Winter Weather Advisory",
+      7
+    ],
+    [
+      "High Surf Advisory",
       7
     ],
     [
       "Coastal Flood Advisory",
-      5
-    ],
-    [
-      "Storm Warning",
-      4
+      7
     ],
     [
       "Flood Advisory",
-      3
-    ],
-    [
-      "Heat Advisory",
-      3
+      5
     ],
     [
       "Rip Current Statement",
-      2
+      5
     ],
     [
-      "Wind Advisory",
-      2
+      "High Wind Warning",
+      4
     ],
     [
       "Frost Advisory",
-      2
+      4
+    ],
+    [
+      "Red Flag Warning",
+      4
+    ],
+    [
+      "Special Marine Warning",
+      3
+    ],
+    [
+      "Flood Warning",
+      3
+    ],
+    [
+      "Tornado Watch",
+      3
     ],
     [
       "Special Weather Statement",
-      1
+      3
     ],
     [
-      "Air Quality Alert",
-      1
+      "Hurricane Warning",
+      3
     ],
     [
-      "Coastal Flood Statement",
-      1
+      "Coastal Flood Warning",
+      3
+    ],
+    [
+      "Severe Thunderstorm Warning",
+      2
     ]
   ],
-  "totalActiveAlerts": 240,
-  "weightedActiveAlerts": 374,
+  "totalActiveAlerts": 342,
+  "weightedActiveAlerts": 587,
   "severityCounts": {
-    "Minor": 116,
-    "Severe": 11,
-    "Moderate": 112,
-    "Unknown": 1
+    "Minor": 163,
+    "Severe": 67,
+    "Moderate": 93,
+    "Extreme": 6,
+    "Unknown": 13
   },
   "sampleAlerts": [
     {
-      "event": "Small Craft Advisory",
+      "event": "Flood Advisory",
       "severity": "Minor",
-      "effective": "2026-10-02T22:01:00-04:00",
-      "area": "Manitou Island to Point Isabelle MI; Point Isabelle to Lower Entrance of Portage Canal MI; Portage Lake to Huron Island MI to Lower Entrance of Portage Canal To Huron Islands MI Including Keweenaw and Huron Bays; Huron Islands to Marquette ",
-      "headline": "Small Craft Advisory issued October 2 at 10:01PM EDT until October 4 at 8:00AM EDT by NWS Marquette MI"
+      "effective": "2026-10-09T22:42:00-04:00",
+      "area": "Clay, FL; Duval, FL; Nassau, FL; St. Johns, FL; Camden, GA",
+      "headline": "Flood Advisory issued October 9 at 10:42PM EDT until October 10 at 12:30AM EDT by NWS Jacksonville FL"
     },
     {
       "event": "Small Craft Advisory",
       "severity": "Minor",
-      "effective": "2026-10-02T22:01:00-04:00",
-      "area": "Marquette to Munising MI",
-      "headline": "Small Craft Advisory issued October 2 at 10:01PM EDT until October 4 at 8:00AM EDT by NWS Marquette MI"
+      "effective": "2026-10-09T22:36:00-04:00",
+      "area": "Holland to Grand Haven MI; Grand Haven to Whitehall MI; Whitehall to Pentwater MI; Pentwater to Manistee MI",
+      "headline": "Small Craft Advisory issued October 9 at 10:36PM EDT until October 11 at 5:00AM EDT by NWS Grand Rapids MI"
+    },
+    {
+      "event": "Flash Flood Warning",
+      "severity": "Severe",
+      "effective": "2026-10-09T22:34:00-04:00",
+      "area": "Duval, FL",
+      "headline": "Flash Flood Warning issued October 9 at 10:34PM EDT until October 9 at 11:30PM EDT by NWS Jacksonville FL"
+    },
+    {
+      "event": "Flash Flood Warning",
+      "severity": "Severe",
+      "effective": "2026-10-09T22:31:00-04:00",
+      "area": "Dale, AL; Geneva, AL; Henry, AL; Houston, AL",
+      "headline": "Flash Flood Warning issued October 9 at 10:31PM EDT until October 10 at 4:30AM EDT by NWS Tallahassee FL"
+    },
+    {
+      "event": "Flash Flood Warning",
+      "severity": "Severe",
+      "effective": "2026-10-09T21:26:00-05:00",
+      "area": "Conecuh, AL; Escambia, AL",
+      "headline": "Flash Flood Warning issued October 9 at 9:26PM CDT until October 10 at 12:30AM CDT by NWS Mobile AL"
     },
     {
       "event": "Flood Advisory",
       "severity": "Minor",
-      "effective": "2026-10-02T19:48:00-06:00",
-      "area": "Hamilton, KS",
-      "headline": "Flood Advisory issued October 2 at 7:48PM MDT until October 4 at 6:00PM MDT by NWS Dodge City KS"
+      "effective": "2026-10-10T12:20:00+10:00",
+      "area": "Guam, GU",
+      "headline": "Flood Advisory issued October 10 at 12:20PM ChST until October 10 at 2:15PM ChST by NWS Tiyan GU"
+    },
+    {
+      "event": "Severe Thunderstorm Warning",
+      "severity": "Severe",
+      "effective": "2026-10-09T22:20:00-04:00",
+      "area": "Dixie, FL; Taylor, FL",
+      "headline": "Severe Thunderstorm Warning issued October 9 at 10:20PM EDT until October 9 at 11:00PM EDT by NWS Tallahassee FL"
+    },
+    {
+      "event": "Severe Thunderstorm Warning",
+      "severity": "Severe",
+      "effective": "2026-10-09T22:13:00-04:00",
+      "area": "Levy, FL",
+      "headline": "Severe Thunderstorm Warning issued October 9 at 10:13PM EDT until October 9 at 11:00PM EDT by NWS Tampa Bay Ruskin FL"
+    },
+    {
+      "event": "Flash Flood Warning",
+      "severity": "Severe",
+      "effective": "2026-10-09T22:10:00-04:00",
+      "area": "Clay, FL; Duval, FL",
+      "headline": "Flash Flood Warning issued October 9 at 10:10PM EDT until October 10 at 12:15AM EDT by NWS Jacksonville FL"
+    },
+    {
+      "event": "Flash Flood Warning",
+      "severity": "Severe",
+      "effective": "2026-10-09T21:07:00-05:00",
+      "area": "Covington, AL",
+      "headline": "Flash Flood Warning issued October 9 at 9:07PM CDT until October 10 at 3:00AM CDT by NWS Mobile AL"
+    },
+    {
+      "event": "Flash Flood Warning",
+      "severity": "Severe",
+      "effective": "2026-10-09T22:06:00-04:00",
+      "area": "Coffee, AL",
+      "headline": "Flash Flood Warning issued October 9 at 10:06PM EDT until October 10 at 4:00AM EDT by NWS Tallahassee FL"
+    },
+    {
+      "event": "Special Marine Warning",
+      "severity": "Severe",
+      "effective": "2026-10-09T22:00:00-04:00",
+      "area": "Tampa Bay waters; Coastal waters from Tarpon Springs to Suwannee River FL out 20 NM; Coastal waters from Englewood to Tarpon Springs FL out 20 NM; Waters from Tarpon Springs to Suwannee River FL out 20 to 60 NM; Waters from Englewood to Tar",
+      "headline": "Special Marine Warning issued October 9 at 10:00PM EDT until October 9 at 11:30PM EDT by NWS Tampa Bay Ruskin FL"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-10-09T21:58:00-04:00",
+      "area": "Chesapeake Bay from New Point Comfort to Little Creek VA",
+      "headline": "Small Craft Advisory issued October 9 at 9:58PM EDT until October 11 at 7:00PM EDT by NWS Wakefield VA"
+    },
+    {
+      "event": "Gale Watch",
+      "severity": "Moderate",
+      "effective": "2026-10-09T21:58:00-04:00",
+      "area": "Coastal waters from NC VA border to Currituck Beach Light NC out 20 NM",
+      "headline": "Gale Watch issued October 9 at 9:58PM EDT until October 11 at 12:00PM EDT by NWS Wakefield VA"
+    },
+    {
+      "event": "Gale Watch",
+      "severity": "Moderate",
+      "effective": "2026-10-09T21:58:00-04:00",
+      "area": "Waters from NC VA border to Currituck Beach Light NC from 20 to 60 NM",
+      "headline": "Gale Watch issued October 9 at 9:58PM EDT until October 11 at 12:00PM EDT by NWS Wakefield VA"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-10-09T21:58:00-04:00",
+      "area": "Coastal waters from Parramore Island to Cape Charles Light VA out 20 NM; Coastal Waters from Cape Charles Light to Virginia-North Carolina border out 20 NM",
+      "headline": "Small Craft Advisory issued October 9 at 9:58PM EDT until October 11 at 4:00AM EDT by NWS Wakefield VA"
+    },
+    {
+      "event": "Gale Watch",
+      "severity": "Moderate",
+      "effective": "2026-10-09T21:58:00-04:00",
+      "area": "Chesapeake Bay from Little Creek VA to Cape Henry VA including the Chesapeake Bay Bridge Tunnel",
+      "headline": "Gale Watch issued October 9 at 9:58PM EDT until October 11 at 1:00PM EDT by NWS Wakefield VA"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-10-09T21:58:00-04:00",
+      "area": "James River from JRB to HRBT, Including the Elizabeth River",
+      "headline": "Small Craft Advisory issued October 9 at 9:58PM EDT until October 11 at 4:00PM EDT by NWS Wakefield VA"
+    },
+    {
+      "event": "Gale Watch",
+      "severity": "Moderate",
+      "effective": "2026-10-09T21:58:00-04:00",
+      "area": "Waters from Parramore Island VA to Cape Charles Light VA from 20 to 60 NM; Waters from Cape Charles Light to Virginia - North Carolina Border from 20 to 60 NM",
+      "headline": "Gale Watch issued October 9 at 9:58PM EDT until October 11 at 4:00PM EDT by NWS Wakefield VA"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-10-09T21:58:00-04:00",
+      "area": "Currituck Sound",
+      "headline": "Small Craft Advisory issued October 9 at 9:58PM EDT until October 11 at 4:00PM EDT by NWS Wakefield VA"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-10-09T21:58:00-04:00",
+      "area": "Chesapeake Bay from Little Creek VA to Cape Henry VA including the Chesapeake Bay Bridge Tunnel",
+      "headline": "Small Craft Advisory issued October 9 at 9:58PM EDT until October 11 at 4:00AM EDT by NWS Wakefield VA"
+    },
+    {
+      "event": "Gale Watch",
+      "severity": "Moderate",
+      "effective": "2026-10-09T21:58:00-04:00",
+      "area": "Coastal waters from Parramore Island to Cape Charles Light VA out 20 NM; Coastal Waters from Cape Charles Light to Virginia-North Carolina border out 20 NM",
+      "headline": "Gale Watch issued October 9 at 9:58PM EDT until October 11 at 4:00PM EDT by NWS Wakefield VA"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-10-09T21:58:00-04:00",
+      "area": "Coastal waters from NC VA border to Currituck Beach Light NC out 20 NM",
+      "headline": "Small Craft Advisory issued October 9 at 9:58PM EDT until October 11 at 12:00AM EDT by NWS Wakefield VA"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-10-09T21:58:00-04:00",
+      "area": "Chesapeake Bay from Smith Point to Windmill Point VA; Chesapeake Bay from Windmill Point to New Point Comfort VA",
+      "headline": "Small Craft Advisory issued October 9 at 9:58PM EDT until October 11 at 7:00PM EDT by NWS Wakefield VA"
+    },
+    {
+      "event": "Gale Watch",
+      "severity": "Moderate",
+      "effective": "2026-10-09T21:58:00-04:00",
+      "area": "Coastal waters from Fenwick Island DE to Chincoteague VA out 20 NM; Coastal waters from Chincoteague to Parramore Island VA out 20 NM; Waters from Fenwick Island DE to Chintoteague VA from 20 to 60 NM; Waters from Chincoteague VA to Parramo",
+      "headline": "Gale Watch issued October 9 at 9:58PM EDT until October 11 at 7:00PM EDT by NWS Wakefield VA"
+    },
+    {
+      "event": "Special Marine Warning",
+      "severity": "Severe",
+      "effective": "2026-10-09T21:58:00-04:00",
+      "area": "Coastal waters from Fernandina Beach to St. Augustine FL out 20 NM",
+      "headline": "Special Marine Warning issued October 9 at 9:58PM EDT until October 9 at 11:00PM EDT by NWS Jacksonville FL"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-10-09T21:58:00-04:00",
+      "area": "Rappahannock River from Urbanna to Windmill Point; York River; James River from Jamestown to the James River Bridge",
+      "headline": "Small Craft Advisory issued October 9 at 9:58PM EDT until October 11 at 4:00PM EDT by NWS Wakefield VA"
+    },
+    {
+      "event": "Flash Flood Warning",
+      "severity": "Severe",
+      "effective": "2026-10-09T20:57:00-05:00",
+      "area": "Covington, AL; Crenshaw, AL",
+      "headline": "Flash Flood Warning issued October 9 at 8:57PM CDT until October 10 at 12:00AM CDT by NWS Mobile AL"
+    },
+    {
+      "event": "Flood Advisory",
+      "severity": "Minor",
+      "effective": "2026-10-09T21:38:00-04:00",
+      "area": "Clay, FL; Duval, FL",
+      "headline": "Flood Advisory issued October 9 at 9:38PM EDT until October 9 at 11:45PM EDT by NWS Jacksonville FL"
+    },
+    {
+      "event": "Flash Flood Warning",
+      "severity": "Severe",
+      "effective": "2026-10-09T21:36:00-04:00",
+      "area": "Holmes, FL; Walton, FL",
+      "headline": "Flash Flood Warning issued October 9 at 9:36PM EDT until October 10 at 12:30AM EDT by NWS Tallahassee FL"
+    },
+    {
+      "event": "Dust Advisory",
+      "severity": "Moderate",
+      "effective": "2026-10-09T18:31:00-07:00",
+      "area": "Humboldt, NV",
+      "headline": "Dust Advisory issued October 9 at 6:31PM PDT until October 9 at 8:00PM PDT by NWS Elko NV"
     },
     {
       "event": "Flood Warning",
       "severity": "Severe",
-      "effective": "2026-10-02T19:47:00-06:00",
-      "area": "Socorro, NM",
-      "headline": "Flood Warning issued October 2 at 7:47PM MDT until October 4 at 12:00AM MDT by NWS Albuquerque NM"
+      "effective": "2026-10-09T21:27:00-04:00",
+      "area": "Walton, FL",
+      "headline": "Flood Warning issued October 9 at 9:27PM EDT until October 11 at 11:00AM EDT by NWS Tallahassee FL"
     },
     {
-      "event": "Rip Current Statement",
-      "severity": "Moderate",
-      "effective": "2026-10-02T20:39:00-05:00",
-      "area": "Mobile Coastal; Baldwin Coastal; Escambia Coastal; Santa Rosa Coastal; Okaloosa Coastal",
-      "headline": "Rip Current Statement issued October 2 at 8:39PM CDT until October 5 at 7:00PM CDT by NWS Mobile AL"
-    },
-    {
-      "event": "Coastal Flood Advisory",
-      "severity": "Minor",
-      "effective": "2026-10-02T20:39:00-05:00",
-      "area": "Mobile Central; Baldwin Central",
-      "headline": "Coastal Flood Advisory issued October 2 at 8:39PM CDT until October 3 at 8:00AM CDT by NWS Mobile AL"
-    },
-    {
-      "event": "Coastal Flood Advisory",
-      "severity": "Minor",
-      "effective": "2026-10-02T20:39:00-05:00",
-      "area": "Mobile Coastal; Baldwin Coastal; Escambia Coastal; Santa Rosa Coastal; Okaloosa Coastal",
-      "headline": "Coastal Flood Advisory issued October 2 at 8:39PM CDT until October 3 at 8:00AM CDT by NWS Mobile AL"
-    },
-    {
-      "event": "Flood Advisory",
-      "severity": "Minor",
-      "effective": "2026-10-02T20:06:00-05:00",
-      "area": "Okaloosa, FL",
-      "headline": "Flood Advisory issued October 2 at 8:06PM CDT until October 2 at 11:00PM CDT by NWS Mobile AL"
-    },
-    {
-      "event": "Coastal Flood Advisory",
-      "severity": "Minor",
-      "effective": "2026-10-02T19:09:00-05:00",
-      "area": "Southern Calcasieu; Southern Orange",
-      "headline": "Coastal Flood Advisory issued October 2 at 7:09PM CDT until October 3 at 11:00AM CDT by NWS Lake Charles LA"
-    },
-    {
-      "event": "Coastal Flood Advisory",
-      "severity": "Minor",
-      "effective": "2026-10-02T19:09:00-05:00",
-      "area": "West Cameron; East Cameron; Lower Vermilion; Lower Iberia; Lower St. Mary; Lower Jefferson",
-      "headline": "Coastal Flood Advisory issued October 2 at 7:09PM CDT until October 3 at 7:00AM CDT by NWS Lake Charles LA"
-    },
-    {
-      "event": "Gale Warning",
-      "severity": "Moderate",
-      "effective": "2026-10-02T15:25:00-08:00",
-      "area": "Shelikof Strait",
-      "headline": "Gale Warning issued October 2 at 3:25PM AKDT until October 3 at 5:00PM AKDT by NWS Anchorage AK"
-    },
-    {
-      "event": "Gale Warning",
-      "severity": "Moderate",
-      "effective": "2026-10-02T15:25:00-08:00",
-      "area": "Cape Cleare to Gore Point out to 15 NM",
-      "headline": "Gale Warning issued October 2 at 3:25PM AKDT until October 3 at 5:00PM AKDT by NWS Anchorage AK"
-    },
-    {
-      "event": "Gale Warning",
-      "severity": "Moderate",
-      "effective": "2026-10-02T15:25:00-08:00",
-      "area": "Chiniak Bay",
-      "headline": "Gale Warning issued October 2 at 3:25PM AKDT until October 3 at 5:00PM AKDT by NWS Anchorage AK"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-10-02T15:25:00-08:00",
-      "area": "Kachemak Bay",
-      "headline": "Small Craft Advisory issued October 2 at 3:25PM AKDT until October 3 at 5:00PM AKDT by NWS Anchorage AK"
-    },
-    {
-      "event": "Gale Warning",
-      "severity": "Moderate",
-      "effective": "2026-10-02T15:25:00-08:00",
-      "area": "Barren Islands East",
-      "headline": "Gale Warning issued October 2 at 3:25PM AKDT until October 3 at 5:00PM AKDT by NWS Anchorage AK"
-    },
-    {
-      "event": "Gale Warning",
-      "severity": "Moderate",
-      "effective": "2026-10-02T15:25:00-08:00",
-      "area": "Marmot Island to Sitkinak out to 15 NM",
-      "headline": "Gale Warning issued October 2 at 3:25PM AKDT until October 3 at 5:00PM AKDT by NWS Anchorage AK"
-    },
-    {
-      "event": "Gale Warning",
-      "severity": "Moderate",
-      "effective": "2026-10-02T15:25:00-08:00",
-      "area": "Marmot Island To Sitkinak from 15 to 85 NM",
-      "headline": "Gale Warning issued October 2 at 3:25PM AKDT until October 3 at 5:00PM AKDT by NWS Anchorage AK"
-    },
-    {
-      "event": "Gale Warning",
-      "severity": "Moderate",
-      "effective": "2026-10-02T15:25:00-08:00",
-      "area": "Gulf of Alaska Offshore North of 57N and West of 144W",
-      "headline": "Gale Warning issued October 2 at 3:25PM AKDT until October 3 at 5:00PM AKDT by NWS Anchorage AK"
-    },
-    {
-      "event": "Gale Warning",
-      "severity": "Moderate",
-      "effective": "2026-10-02T15:25:00-08:00",
-      "area": "Gulf of Alaska Offshore South of 57N North of 55N and West of 144W",
-      "headline": "Gale Warning issued October 2 at 3:25PM AKDT until October 3 at 5:00AM AKDT by NWS Anchorage AK"
-    },
-    {
-      "event": "Gale Warning",
-      "severity": "Moderate",
-      "effective": "2026-10-02T15:25:00-08:00",
-      "area": "Marmot Bay",
-      "headline": "Gale Warning issued October 2 at 3:25PM AKDT until October 3 at 5:00PM AKDT by NWS Anchorage AK"
-    },
-    {
-      "event": "Gale Warning",
-      "severity": "Moderate",
-      "effective": "2026-10-02T15:25:00-08:00",
-      "area": "Cape Cleare to Gore Point from 15 to 75 NM",
-      "headline": "Gale Warning issued October 2 at 3:25PM AKDT until October 3 at 5:00PM AKDT by NWS Anchorage AK"
-    },
-    {
-      "event": "Gale Warning",
-      "severity": "Moderate",
-      "effective": "2026-10-02T15:25:00-08:00",
-      "area": "Gore Point to Marmot Island from 15 to 80 NM",
-      "headline": "Gale Warning issued October 2 at 3:25PM AKDT until October 3 at 5:00PM AKDT by NWS Anchorage AK"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-10-02T15:25:00-08:00",
-      "area": "Valdez Arm",
-      "headline": "Small Craft Advisory issued October 2 at 3:25PM AKDT until October 3 at 5:00PM AKDT by NWS Anchorage AK"
-    },
-    {
-      "event": "Gale Warning",
-      "severity": "Moderate",
-      "effective": "2026-10-02T15:25:00-08:00",
-      "area": "Gravel Point to Cape Cleare out to 15 NM",
-      "headline": "Gale Warning issued October 2 at 3:25PM AKDT until October 4 at 5:00AM AKDT by NWS Anchorage AK"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-10-02T15:25:00-08:00",
-      "area": "Cook Inlet North Kalgin Island",
-      "headline": "Small Craft Advisory issued October 2 at 3:25PM AKDT until October 4 at 5:00AM AKDT by NWS Anchorage AK"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-10-02T15:25:00-08:00",
-      "area": "Southwest Prince William Sound",
-      "headline": "Small Craft Advisory issued October 2 at 3:25PM AKDT until October 4 at 5:00AM AKDT by NWS Anchorage AK"
-    },
-    {
-      "event": "Gale Warning",
-      "severity": "Moderate",
-      "effective": "2026-10-02T15:25:00-08:00",
-      "area": "Cape Suckling to Cape Cleare from 15 to 75 NM",
-      "headline": "Gale Warning issued October 2 at 3:25PM AKDT until October 4 at 5:00AM AKDT by NWS Anchorage AK"
-    },
-    {
-      "event": "Gale Warning",
-      "severity": "Moderate",
-      "effective": "2026-10-02T15:25:00-08:00",
-      "area": "West of Barren Islands Including Kamishak Bay",
-      "headline": "Gale Warning issued October 2 at 3:25PM AKDT until October 4 at 5:00AM AKDT by NWS Anchorage AK"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-10-02T15:25:00-08:00",
-      "area": "Valdez Narrows",
-      "headline": "Small Craft Advisory issued October 2 at 3:25PM AKDT until October 4 at 5:00AM AKDT by NWS Anchorage AK"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-10-02T15:25:00-08:00",
-      "area": "Northwest Prince William Sound",
-      "headline": "Small Craft Advisory issued October 2 at 3:25PM AKDT until October 4 at 5:00AM AKDT by NWS Anchorage AK"
-    },
-    {
-      "event": "Gale Warning",
-      "severity": "Moderate",
-      "effective": "2026-10-02T15:25:00-08:00",
-      "area": "Central and Eastern Prince William Sound",
-      "headline": "Gale Warning issued October 2 at 3:25PM AKDT until October 4 at 5:00AM AKDT by NWS Anchorage AK"
-    },
-    {
-      "event": "Gale Warning",
-      "severity": "Moderate",
-      "effective": "2026-10-02T15:25:00-08:00",
-      "area": "Cook Inlet Kalgin Island to Point Bede",
-      "headline": "Gale Warning issued October 2 at 3:25PM AKDT until October 4 at 5:00AM AKDT by NWS Anchorage AK"
-    },
-    {
-      "event": "Gale Warning",
-      "severity": "Moderate",
-      "effective": "2026-10-02T15:25:00-08:00",
-      "area": "Cape Suckling to Gravel Point out to 15 NM",
-      "headline": "Gale Warning issued October 2 at 3:25PM AKDT until October 4 at 5:00AM AKDT by NWS Anchorage AK"
-    },
-    {
-      "event": "Flood Advisory",
-      "severity": "Minor",
-      "effective": "2026-10-02T19:24:00-04:00",
-      "area": "Madison, FL; Brooks, GA; Colquitt, GA; Cook, GA; Lowndes, GA; Tift, GA; Worth, GA",
-      "headline": "Flood Advisory issued October 2 at 7:24PM EDT until October 2 at 10:30PM EDT by NWS Tallahassee FL"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-10-02T15:00:00-08:00",
-      "area": "Port Heiden to Nelson Lagoon out to 15 NM",
-      "headline": "Small Craft Advisory issued October 2 at 3:00PM AKDT until October 3 at 5:00AM AKDT by NWS Anchorage AK"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-10-02T15:00:00-08:00",
-      "area": "Bristol Bay from Cape Chichagof to Cape Pierce out to 15 NM",
-      "headline": "Small Craft Advisory issued October 2 at 3:00PM AKDT until October 3 at 5:00PM AKDT by NWS Anchorage AK"
-    },
-    {
-      "event": "Gale Warning",
-      "severity": "Moderate",
-      "effective": "2026-10-02T15:00:00-08:00",
-      "area": "Kiska to Attu Bering Side",
-      "headline": "Gale Warning issued October 2 at 3:00PM AKDT until October 3 at 5:00PM AKDT by NWS Anchorage AK"
-    },
-    {
-      "event": "Gale Warning",
-      "severity": "Moderate",
-      "effective": "2026-10-02T15:00:00-08:00",
-      "area": "Sitkinak to Castle Cape out to 15 NM",
-      "headline": "Gale Warning issued October 2 at 3:00PM AKDT until October 3 at 5:00PM AKDT by NWS Anchorage AK"
-    },
-    {
-      "event": "Storm Warning",
+      "event": "Flash Flood Warning",
       "severity": "Severe",
-      "effective": "2026-10-02T15:00:00-08:00",
-      "area": "Kiska to Attu Pacific Side",
-      "headline": "Storm Warning issued October 2 at 3:00PM AKDT until October 3 at 5:00PM AKDT by NWS Anchorage AK"
+      "effective": "2026-10-09T21:26:00-04:00",
+      "area": "Coffee, AL; Geneva, AL",
+      "headline": "Flash Flood Warning issued October 9 at 9:26PM EDT until October 10 at 3:30AM EDT by NWS Tallahassee FL"
     },
     {
-      "event": "Small Craft Advisory",
+      "event": "Flood Advisory",
       "severity": "Minor",
-      "effective": "2026-10-02T15:00:00-08:00",
-      "area": "Castle Cape to Cape Tolstoi out to 15 NM",
-      "headline": "Small Craft Advisory issued October 2 at 3:00PM AKDT until October 3 at 5:00PM AKDT by NWS Anchorage AK"
+      "effective": "2026-10-10T11:17:00+10:00",
+      "area": "Guam, GU",
+      "headline": "Flood Advisory issued October 10 at 11:17AM ChST until October 10 at 2:15PM ChST by NWS Tiyan GU"
     },
     {
-      "event": "Gale Warning",
-      "severity": "Moderate",
-      "effective": "2026-10-02T15:00:00-08:00",
-      "area": "Sitkinak to Castle Cape from 15 to 100 NM",
-      "headline": "Gale Warning issued October 2 at 3:00PM AKDT until October 3 at 5:00PM AKDT by NWS Anchorage AK"
+      "event": "Flash Flood Warning",
+      "severity": "Severe",
+      "effective": "2026-10-09T20:16:00-05:00",
+      "area": "Covington, AL; Escambia, AL",
+      "headline": "Flash Flood Warning issued October 9 at 8:16PM CDT until October 10 at 2:15AM CDT by NWS Mobile AL"
     },
     {
-      "event": "Small Craft Advisory",
+      "event": "Flood Warning",
+      "severity": "Severe",
+      "effective": "2026-10-09T21:07:00-04:00",
+      "area": "Leon, FL; Liberty, FL; Wakulla, FL",
+      "headline": "Flood Warning issued October 9 at 9:07PM EDT until October 12 at 8:00PM EDT by NWS Tallahassee FL"
+    },
+    {
+      "event": "Flood Warning",
+      "severity": "Severe",
+      "effective": "2026-10-09T21:05:00-04:00",
+      "area": "Grady, GA; Thomas, GA",
+      "headline": "Flood Warning issued October 9 at 9:05PM EDT until October 14 at 4:00PM EDT by NWS Tallahassee FL"
+    },
+    {
+      "event": "Flood Advisory",
       "severity": "Minor",
-      "effective": "2026-10-02T15:00:00-08:00",
-      "area": "Kuskokwim Delta from 15 to 80 NM",
-      "headline": "Small Craft Advisory issued October 2 at 3:00PM AKDT until October 3 at 5:00AM AKDT by NWS Anchorage AK"
+      "effective": "2026-10-09T21:01:00-04:00",
+      "area": "Clay, FL",
+      "headline": "Flood Advisory issued October 9 at 9:01PM EDT until October 9 at 11:00PM EDT by NWS Jacksonville FL"
     },
     {
-      "event": "Gale Warning",
+      "event": "Winter Weather Advisory",
       "severity": "Moderate",
-      "effective": "2026-10-02T15:00:00-08:00",
-      "area": "Seguam to Adak Pacific Side from 15 to 75 NM",
-      "headline": "Gale Warning issued October 2 at 3:00PM AKDT until October 4 at 5:00AM AKDT by NWS Anchorage AK"
+      "effective": "2026-10-09T19:00:00-06:00",
+      "area": "Northern Park; Judith Gap; Livingston Area; Beartooth Foothills; Northern Sweet Grass; Southern Wheatland",
+      "headline": "Winter Weather Advisory issued October 9 at 7:00PM MDT until October 12 at 12:00PM MDT by NWS Billings MT"
     },
     {
-      "event": "Gale Warning",
+      "event": "Winter Storm Warning",
+      "severity": "Severe",
+      "effective": "2026-10-09T19:00:00-06:00",
+      "area": "Melville Foothills",
+      "headline": "Winter Storm Warning issued October 9 at 7:00PM MDT until October 12 at 12:00PM MDT by NWS Billings MT"
+    },
+    {
+      "event": "Winter Storm Warning",
+      "severity": "Severe",
+      "effective": "2026-10-09T19:00:00-06:00",
+      "area": "Absaroka/Beartooth Mountains; Crazy Mountains",
+      "headline": "Winter Storm Warning issued October 9 at 7:00PM MDT until October 12 at 12:00PM MDT by NWS Billings MT"
+    },
+    {
+      "event": "Wind Advisory",
       "severity": "Moderate",
-      "effective": "2026-10-02T15:00:00-08:00",
-      "area": "Castle Cape to Cape Tolstoi from 15 to 100 NM",
-      "headline": "Gale Warning issued October 2 at 3:00PM AKDT until October 3 at 5:00AM AKDT by NWS Anchorage AK"
+      "effective": "2026-10-09T21:00:00-04:00",
+      "area": "Bell; Harlan; Letcher",
+      "headline": "Wind Advisory issued October 9 at 9:00PM EDT until October 11 at 5:00AM EDT by NWS Jackson KY"
     },
     {
-      "event": "Gale Warning",
+      "event": "Flash Flood Warning",
+      "severity": "Severe",
+      "effective": "2026-10-09T19:56:00-05:00",
+      "area": "Santa Rosa, FL",
+      "headline": "Flash Flood Warning issued October 9 at 7:56PM CDT until October 10 at 2:00AM CDT by NWS Mobile AL"
+    },
+    {
+      "event": "Tornado Watch",
+      "severity": "Extreme",
+      "effective": "2026-10-09T20:54:00-04:00",
+      "area": "Hamilton, FL; Suwannee, FL; Echols, GA",
+      "headline": "Tornado Watch issued October 9 at 8:54PM EDT until October 10 at 6:00AM EDT by NWS Jacksonville FL"
+    },
+    {
+      "event": "Tornado Watch",
+      "severity": "Extreme",
+      "effective": "2026-10-09T20:54:00-04:00",
+      "area": "Calhoun, FL; Dixie, FL; Franklin, FL; Gadsden, FL; Gulf, FL; Jackson, FL; Jefferson, FL; Lafayette, FL; Leon, FL; Liberty, FL; Madison, FL; Taylor, FL; Wakulla, FL; Brooks, GA; Decatur, GA; Grady, GA; Lowndes, GA; Seminole, GA; Thomas, GA",
+      "headline": "Tornado Watch issued October 9 at 8:54PM EDT until October 10 at 6:00AM EDT by NWS Tallahassee FL"
+    },
+    {
+      "event": "Tornado Watch",
+      "severity": "Extreme",
+      "effective": "2026-10-09T20:54:00-04:00",
+      "area": "Apalachee Bay or Coastal Waters From Keaton Beach to Ochlockonee River Fl out to 20 Nm; Coastal Waters From  Ochlockonee River to Apalachicola FL out to 20 Nm; Coastal waters from  Suwannee River to Keaton Beach out 20 NM",
+      "headline": "Tornado Watch issued October 9 at 8:54PM EDT until October 10 at 6:00AM EDT by NWS Tallahassee FL"
+    },
+    {
+      "event": "Special Weather Statement",
       "severity": "Moderate",
-      "effective": "2026-10-02T15:00:00-08:00",
-      "area": "Nikolski to Seguam Bering Side out to 15 NM",
-      "headline": "Gale Warning issued October 2 at 3:00PM AKDT until October 4 at 5:00AM AKDT by NWS Anchorage AK"
+      "effective": "2026-10-09T20:52:00-04:00",
+      "area": "Pike",
+      "headline": "Special Weather Statement issued October 9 at 8:52PM EDT by NWS Jackson KY"
     },
     {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-10-02T15:00:00-08:00",
-      "area": "Nelson Lagoon to Cape Sarichef out to 15 NM",
-      "headline": "Small Craft Advisory issued October 2 at 3:00PM AKDT until October 3 at 5:00AM AKDT by NWS Anchorage AK"
-    },
-    {
-      "event": "Gale Warning",
+      "event": "Special Weather Statement",
       "severity": "Moderate",
-      "effective": "2026-10-02T15:00:00-08:00",
-      "area": "Nikolski to Seguam Bering Side from 15 to 85 NM",
-      "headline": "Gale Warning issued October 2 at 3:00PM AKDT until October 4 at 5:00AM AKDT by NWS Anchorage AK"
+      "effective": "2026-10-09T20:52:00-04:00",
+      "area": "Fleming; Montgomery; Bath; Rowan; Estill; Powell; Menifee; Rockcastle; Jackson; Pulaski; Laurel; Wayne; McCreary; Whitley; Knox; Elliott; Morgan; Johnson; Wolfe; Magoffin; Floyd; Lee; Breathitt; Knott; Owsley; Perry; Clay; Leslie; Martin",
+      "headline": "Special Weather Statement issued October 9 at 8:52PM EDT by NWS Jackson KY"
     },
     {
-      "event": "Gale Warning",
-      "severity": "Moderate",
-      "effective": "2026-10-02T15:00:00-08:00",
-      "area": "Adak to Kiska Pacific Side",
-      "headline": "Gale Warning issued October 2 at 3:00PM AKDT until October 4 at 5:00AM AKDT by NWS Anchorage AK"
+      "event": "Flood Watch",
+      "severity": "Severe",
+      "effective": "2026-10-10T10:50:00+10:00",
+      "area": "Guam",
+      "headline": "Flood Watch issued October 10 at 10:50AM ChST until October 11 at 6:00AM ChST by NWS Tiyan GU"
     },
     {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-10-02T15:00:00-08:00",
-      "area": "Pribilof Islands Nearshore Waters",
-      "headline": "Small Craft Advisory issued October 2 at 3:00PM AKDT until October 4 at 5:00AM AKDT by NWS Anchorage AK"
-    },
-    {
-      "event": "Gale Warning",
-      "severity": "Moderate",
-      "effective": "2026-10-02T15:00:00-08:00",
-      "area": "Nikolski to Seguam Pacfic Side out to 15 NM",
-      "headline": "Gale Warning issued October 2 at 3:00PM AKDT until October 4 at 5:00AM AKDT by NWS Anchorage AK"
+      "event": "Flash Flood Warning",
+      "severity": "Severe",
+      "effective": "2026-10-09T20:50:00-04:00",
+      "area": "Jefferson, FL; Madison, FL; Taylor, FL",
+      "headline": "Flash Flood Warning issued October 9 at 8:50PM EDT until October 10 at 2:45AM EDT by NWS Tallahassee FL"
     }
   ]
 }

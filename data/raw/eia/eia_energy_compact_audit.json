@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-10-03T02:19:10+00:00",
+  "fetched_at": "2026-10-10T02:45:04+00:00",
   "source": "U.S. Energy Information Administration open data/API",
   "petroleum_series_requested": {
     "CRUDE_STOCKS": {
@@ -113,11 +113,11 @@
     "CUSHING_STOCKS": {
       "label": "Cushing, Oklahoma crude oil stocks",
       "series": "W_EPC0_SAX_YCUOK_MBBL",
-      "latest_period": "2026-09-25",
-      "previous_period": "2026-09-18",
-      "latest_value": 24301.0,
-      "weekly_change": 553.0,
-      "status": "Pressure"
+      "latest_period": "2026-10-02",
+      "previous_period": "2026-09-25",
+      "latest_value": 24745.0,
+      "weekly_change": 444.0,
+      "status": "Neutral"
     },
     "GASOLINE_STOCKS": {
       "label": "U.S. motor gasoline stocks",
@@ -140,64 +140,64 @@
     "REFINERY_UTILIZATION": {
       "label": "U.S. refinery utilization rate",
       "series": "WPULEUS3",
-      "latest_period": "2026-09-25",
-      "previous_period": "2026-09-18",
-      "latest_value": 92.5,
-      "weekly_change": -1.5,
-      "status": "Pressure"
+      "latest_period": "2026-10-02",
+      "previous_period": "2026-09-25",
+      "latest_value": 92.7,
+      "weekly_change": 0.20000000000000284,
+      "status": "Neutral"
     },
     "CRUDE_PRODUCTION": {
       "label": "U.S. field production of crude oil",
       "series": "WCRFPUS2",
-      "latest_period": "2026-09-25",
-      "previous_period": "2026-09-18",
-      "latest_value": 13955.0,
-      "weekly_change": 16.0,
+      "latest_period": "2026-10-02",
+      "previous_period": "2026-09-25",
+      "latest_value": 13979.0,
+      "weekly_change": 24.0,
       "status": "Neutral"
     },
     "CRUDE_IMPORTS": {
       "label": "U.S. crude oil imports",
       "series": "WCRIMUS2",
-      "latest_period": "2026-09-25",
-      "previous_period": "2026-09-18",
-      "latest_value": 5698.0,
-      "weekly_change": -179.0,
-      "status": "Neutral"
+      "latest_period": "2026-10-02",
+      "previous_period": "2026-09-25",
+      "latest_value": 6840.0,
+      "weekly_change": 1142.0,
+      "status": "Strong pressure"
     },
     "CRUDE_EXPORTS": {
       "label": "U.S. crude oil exports",
       "series": "WCREXUS2",
-      "latest_period": "2026-09-25",
-      "previous_period": "2026-09-18",
-      "latest_value": 3570.0,
-      "weekly_change": 289.0,
-      "status": "Support"
+      "latest_period": "2026-10-02",
+      "previous_period": "2026-09-25",
+      "latest_value": 4765.0,
+      "weekly_change": 1195.0,
+      "status": "Strong support"
     },
     "GASOLINE_PRODUCT_SUPPLIED": {
       "label": "U.S. finished motor gasoline product supplied",
       "series": "WGFUPUS2",
-      "latest_period": "2026-09-25",
-      "previous_period": "2026-09-18",
-      "latest_value": 8689.0,
-      "weekly_change": -158.0,
+      "latest_period": "2026-10-02",
+      "previous_period": "2026-09-25",
+      "latest_value": 8769.0,
+      "weekly_change": 80.0,
       "status": "Neutral"
     },
     "DISTILLATE_PRODUCT_SUPPLIED": {
       "label": "U.S. distillate fuel oil product supplied",
       "series": "WDIUPUS2",
-      "latest_period": "2026-09-25",
-      "previous_period": "2026-09-18",
-      "latest_value": 3948.0,
-      "weekly_change": -27.0,
-      "status": "Neutral"
+      "latest_period": "2026-10-02",
+      "previous_period": "2026-09-25",
+      "latest_value": 3650.0,
+      "weekly_change": -298.0,
+      "status": "Pressure"
     },
     "NATGAS_STORAGE": {
       "label": "Lower 48 working natural gas in underground storage",
       "series": "png.nw2_epg0_swo_r48_bcf.w",
-      "latest_period": "2026-09-25",
-      "previous_period": "2026-09-18",
-      "latest_value": 3415.0,
-      "weekly_change": 64.0,
+      "latest_period": "2026-10-02",
+      "previous_period": "2026-09-25",
+      "latest_value": 3500.0,
+      "weekly_change": 85.0,
       "status": "Neutral"
     }
   }
