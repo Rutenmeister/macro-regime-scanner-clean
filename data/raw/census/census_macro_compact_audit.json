@@ -1,6 +1,6 @@
 {
   "sourceId": "CENSUS_PUBLIC",
-  "retrievedAt": "2026-10-10T02:46:03.314613+00:00",
+  "retrievedAt": "2026-10-17T01:42:25.637656+00:00",
   "seriesAudit": [
     {
       "seriesId": "RSXFS",
@@ -9,13 +9,13 @@
       "fetchAttempts": [
         {
           "method": "fredgraph_csv",
-          "rows": 416
+          "rows": 417
         }
       ],
-      "rowsFetched": 416,
-      "latestPeriod": "2026-08-01",
-      "latestValue": 646347.0,
-      "score": 2
+      "rowsFetched": 417,
+      "latestPeriod": "2026-09-01",
+      "latestValue": 652115.0,
+      "score": 1
     },
     {
       "seriesId": "HOUST",
@@ -99,12 +99,12 @@
       "fetchAttempts": [
         {
           "method": "fredgraph_csv",
-          "rows": 415
+          "rows": 416
         }
       ],
-      "rowsFetched": 415,
-      "latestPeriod": "2026-07-01",
-      "latestValue": 2764708.0,
+      "rowsFetched": 416,
+      "latestPeriod": "2026-08-01",
+      "latestValue": 2818757.0,
       "score": 0
     }
   ],
@@ -113,7 +113,7 @@
       "id": "marts_retail_total",
       "endpoint": "https://api.census.gov/data/timeseries/eits/marts",
       "status": "ok",
-      "rowsFetched": 64
+      "rowsFetched": 66
     },
     {
       "id": "resconst_recent",
