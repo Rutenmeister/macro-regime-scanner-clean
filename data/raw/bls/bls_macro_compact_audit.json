@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-10-17T01:42:09+00:00",
+  "fetched_at": "2026-11-07T03:12:44+00:00",
   "source": "BLS public API v2",
   "series_requested": {
     "CPI_HEADLINE": {
@@ -172,45 +172,45 @@
     "UNEMPLOYMENT_RATE": {
       "series_id": "LNS14000000",
       "label": "Unemployment rate",
-      "latest_date": "2026-09-01",
-      "latest_value": 4.2,
-      "observations": 56,
-      "score": -1,
-      "status": "Pressure"
+      "latest_date": "2026-10-01",
+      "latest_value": 4.1,
+      "observations": 57,
+      "score": 0,
+      "status": "Neutral"
     },
     "NONFARM_PAYROLLS": {
       "series_id": "CES0000000001",
       "label": "Total nonfarm payroll employment",
-      "latest_date": "2026-09-01",
-      "latest_value": 159044.0,
-      "observations": 57,
-      "score": -1,
-      "status": "Pressure"
+      "latest_date": "2026-10-01",
+      "latest_value": 159293.0,
+      "observations": 58,
+      "score": 1,
+      "status": "Support"
     },
     "AVG_HOURLY_EARNINGS": {
       "series_id": "CES0500000003",
       "label": "Average hourly earnings private employees",
-      "latest_date": "2026-09-01",
-      "latest_value": 37.81,
-      "observations": 57,
+      "latest_date": "2026-10-01",
+      "latest_value": 38.0,
+      "observations": 58,
       "score": 0,
       "status": "Neutral"
     },
     "LABOR_FORCE_PARTICIPATION": {
       "series_id": "LNS11300000",
       "label": "Labor force participation rate",
-      "latest_date": "2026-09-01",
-      "latest_value": 61.8,
-      "observations": 56,
+      "latest_date": "2026-10-01",
+      "latest_value": 61.9,
+      "observations": 57,
       "score": null,
       "status": null
     },
     "U6_UNEMPLOYMENT": {
       "series_id": "LNS13327709",
       "label": "U-6 unemployment rate",
-      "latest_date": "2026-09-01",
-      "latest_value": 7.6,
-      "observations": 56,
+      "latest_date": "2026-10-01",
+      "latest_value": 7.9,
+      "observations": 57,
       "score": null,
       "status": null
     }

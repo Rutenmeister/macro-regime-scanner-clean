@@ -1,12 +1,12 @@
 {
   "sourceId": "NOAA_NWS",
   "sourceName": "NOAA/National Weather Service public weather alerts",
-  "retrievedAt": "2026-10-17T01:42:26.652170+00:00",
+  "retrievedAt": "2026-11-07T03:12:52.217988+00:00",
   "endpoint": "https://api.weather.gov/alerts/active?status=actual&message_type=alert",
   "fetchAttempts": [
     {
       "endpoint": "https://api.weather.gov/alerts/active?status=actual&message_type=alert",
-      "features": 280
+      "features": 264
     }
   ],
   "categoryCounts": {
@@ -16,14 +16,13 @@
       "sampleEvents": []
     },
     "COLD_FREEZE_STRESS": {
-      "count": 40,
-      "weighted": 104,
+      "count": 4,
+      "weighted": 4,
       "sampleEvents": [
-        "Freeze Warning",
-        "Freeze Warning",
-        "Freeze Watch",
-        "Freeze Watch",
-        "Freeze Warning"
+        "Frost Advisory",
+        "Frost Advisory",
+        "Frost Advisory",
+        "Frost Advisory"
       ]
     },
     "WINTER_STORM_STRESS": {
@@ -32,12 +31,14 @@
       "sampleEvents": []
     },
     "FLOOD_STRESS": {
-      "count": 3,
-      "weighted": 4,
+      "count": 9,
+      "weighted": 15,
       "sampleEvents": [
-        "Flood Advisory",
-        "Coastal Flood Watch",
-        "Flood Advisory"
+        "Coastal Flood Advisory",
+        "Coastal Flood Advisory",
+        "Coastal Flood Advisory",
+        "Coastal Flood Advisory",
+        "Flood Watch"
       ]
     },
     "SEVERE_CONVECTIVE_STRESS": {
@@ -46,21 +47,14 @@
       "sampleEvents": []
     },
     "TROPICAL_STORM_STRESS": {
-      "count": 1,
-      "weighted": 3,
-      "sampleEvents": [
-        "Tropical Storm Warning"
-      ]
+      "count": 0,
+      "weighted": 0,
+      "sampleEvents": []
     },
     "FIRE_WEATHER_STRESS": {
-      "count": 4,
-      "weighted": 12,
-      "sampleEvents": [
-        "Red Flag Warning",
-        "Red Flag Warning",
-        "Red Flag Warning",
-        "Red Flag Warning"
-      ]
+      "count": 0,
+      "weighted": 0,
+      "sampleEvents": []
     },
     "DROUGHT_STRESS": {
       "count": 0,
@@ -71,54 +65,38 @@
   "eventCountsTop": [
     [
       "Small Craft Advisory",
-      170
-    ],
-    [
-      "Freeze Warning",
-      18
+      185
     ],
     [
       "Gale Warning",
-      14
+      27
     ],
     [
-      "Freeze Watch",
-      14
+      "Heavy Freezing Spray Warning",
+      18
     ],
     [
-      "Gale Watch",
-      9
+      "Coastal Flood Advisory",
+      4
     ],
     [
       "Frost Advisory",
-      8
+      4
+    ],
+    [
+      "High Surf Advisory",
+      4
     ],
     [
       "Beach Hazards Statement",
-      6
-    ],
-    [
-      "Wind Advisory",
-      5
-    ],
-    [
-      "Red Flag Warning",
-      4
-    ],
-    [
-      "Air Quality Alert",
-      4
-    ],
-    [
-      "Rip Current Statement",
       3
     ],
     [
-      "Storm Watch",
+      "Storm Warning",
       3
     ],
     [
-      "Marine Weather Statement",
+      "Dense Fog Advisory",
       2
     ],
     [
@@ -126,409 +104,403 @@
       2
     ],
     [
-      "High Wind Warning",
+      "Hazardous Seas Watch",
       2
     ],
     [
-      "Brisk Wind Advisory",
+      "High Wind Watch",
       2
+    ],
+    [
+      "Flood Watch",
+      1
+    ],
+    [
+      "Flood Warning",
+      1
+    ],
+    [
+      "Flash Flood Warning",
+      1
+    ],
+    [
+      "Wind Advisory",
+      1
+    ],
+    [
+      "Lake Wind Advisory",
+      1
+    ],
+    [
+      "High Wind Warning",
+      1
+    ],
+    [
+      "Rip Current Statement",
+      1
     ],
     [
       "Special Weather Statement",
-      2
-    ],
-    [
-      "Blowing Dust Advisory",
-      2
-    ],
-    [
-      "Typhoon Warning",
-      1
-    ],
-    [
-      "Tropical Storm Warning",
-      1
-    ],
-    [
-      "Typhoon Watch",
-      1
-    ],
-    [
-      "Special Marine Warning",
-      1
-    ],
-    [
-      "Dust Advisory",
-      1
-    ],
-    [
-      "Coastal Flood Watch",
-      1
-    ],
-    [
-      "Hazardous Seas Warning",
       1
     ]
   ],
-  "totalActiveAlerts": 280,
-  "weightedActiveAlerts": 420,
+  "totalActiveAlerts": 264,
+  "weightedActiveAlerts": 356,
   "severityCounts": {
-    "Minor": 184,
-    "Moderate": 45,
-    "Extreme": 1,
-    "Severe": 46,
-    "Unknown": 4
+    "Minor": 199,
+    "Moderate": 38,
+    "Severe": 27
   },
   "sampleAlerts": [
     {
       "event": "Small Craft Advisory",
       "severity": "Minor",
-      "effective": "2026-10-16T17:17:00-08:00",
-      "area": "Marmot Island To Sitkinak from 15 to 85 NM",
-      "headline": "Small Craft Advisory issued October 16 at 5:17PM AKDT until October 18 at 5:00AM AKDT by NWS Anchorage AK"
+      "effective": "2026-11-06T22:07:00-05:00",
+      "area": "Grand Traverse Bay south of a line Grand Traverse Light to Norwood MI; Seul Choix Point to 5NM West of Mackinac Bridge; Norwood MI to 5NM West of Mackinac Bridge including Little Traverse Bay; Sleeping Bear Point to Grand Traverse Light MI;",
+      "headline": "The Small Craft Advisory has been cancelled."
     },
     {
       "event": "Small Craft Advisory",
       "severity": "Minor",
-      "effective": "2026-10-16T17:17:00-08:00",
-      "area": "Cape Cleare to Gore Point from 15 to 75 NM",
-      "headline": "Small Craft Advisory issued October 16 at 5:17PM AKDT until October 17 at 5:00PM AKDT by NWS Anchorage AK"
+      "effective": "2026-11-06T22:07:00-05:00",
+      "area": "Straits of Mackinac within 5 nm of Mackinac Bridge including Mackinac Island; 5NM East of Mackinac Bridge to Presque Isle Light MI including Bois Blanc Island",
+      "headline": "The Small Craft Advisory has been cancelled."
     },
     {
       "event": "Small Craft Advisory",
       "severity": "Minor",
-      "effective": "2026-10-16T17:17:00-08:00",
-      "area": "Cape Suckling to Gravel Point out to 15 NM",
-      "headline": "Small Craft Advisory issued October 16 at 5:17PM AKDT until October 17 at 5:00PM AKDT by NWS Anchorage AK"
+      "effective": "2026-11-06T22:07:00-05:00",
+      "area": "St Ignace to False Detour Channel",
+      "headline": "The Small Craft Advisory has been cancelled."
     },
     {
       "event": "Small Craft Advisory",
       "severity": "Minor",
-      "effective": "2026-10-16T17:17:00-08:00",
-      "area": "Gravel Point to Cape Cleare out to 15 NM",
-      "headline": "Small Craft Advisory issued October 16 at 5:17PM AKDT until October 17 at 5:00PM AKDT by NWS Anchorage AK"
+      "effective": "2026-11-06T22:07:00-05:00",
+      "area": "Presque Isle Light to Sturgeon Pt MI Including Thunder Bay National Marine Sanctuary; Sturgeon Pt to Alabaster MI",
+      "headline": "Small Craft Advisory issued November 6 at 10:07PM EST until November 7 at 7:00AM EST by NWS Gaylord MI"
     },
     {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-10-16T17:17:00-08:00",
-      "area": "Gore Point to Marmot Island from 15 to 80 NM",
-      "headline": "Small Craft Advisory issued October 16 at 5:17PM AKDT until October 18 at 5:00AM AKDT by NWS Anchorage AK"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-10-16T17:17:00-08:00",
-      "area": "Marmot Island to Sitkinak out to 15 NM",
-      "headline": "Small Craft Advisory issued October 16 at 5:17PM AKDT until October 18 at 5:00AM AKDT by NWS Anchorage AK"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-10-16T17:17:00-08:00",
-      "area": "West of Barren Islands Including Kamishak Bay",
-      "headline": "Small Craft Advisory issued October 16 at 5:17PM AKDT until October 18 at 5:00AM AKDT by NWS Anchorage AK"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-10-16T17:17:00-08:00",
-      "area": "Barren Islands East",
-      "headline": "Small Craft Advisory issued October 16 at 5:17PM AKDT until October 18 at 5:00AM AKDT by NWS Anchorage AK"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-10-16T17:17:00-08:00",
-      "area": "Cape Suckling to Cape Cleare from 15 to 75 NM",
-      "headline": "Small Craft Advisory issued October 16 at 5:17PM AKDT until October 18 at 5:00AM AKDT by NWS Anchorage AK"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-10-16T17:17:00-08:00",
-      "area": "Cape Cleare to Gore Point out to 15 NM",
-      "headline": "Small Craft Advisory issued October 16 at 5:17PM AKDT until October 17 at 5:00AM AKDT by NWS Anchorage AK"
-    },
-    {
-      "event": "Wind Advisory",
+      "event": "Dense Fog Advisory",
       "severity": "Moderate",
-      "effective": "2026-10-16T21:16:00-04:00",
-      "area": "Eastern Currituck; Virginia Beach",
-      "headline": "Wind Advisory issued October 16 at 9:16PM EDT until October 17 at 8:00PM EDT by NWS Wakefield VA"
+      "effective": "2026-11-06T21:02:00-06:00",
+      "area": "Eastern Sioux",
+      "headline": "Dense Fog Advisory issued November 6 at 9:02PM CST until November 7 at 2:00AM CST by NWS Bismarck ND"
     },
     {
-      "event": "Typhoon Warning",
-      "severity": "Extreme",
-      "effective": "2026-10-17T11:12:00+10:00",
-      "area": "Guam Coastal Waters; Rota Coastal Waters",
-      "headline": "Typhoon Warning issued October 17 at 11:12AM ChST by NWS Tiyan GU"
+      "event": "Beach Hazards Statement",
+      "severity": "Moderate",
+      "effective": "2026-11-06T18:31:00-08:00",
+      "area": "Coastal North Bay Including Point Reyes National Seashore; San Francisco Peninsula Coast; Northern Monterey Bay",
+      "headline": "Beach Hazards Statement issued November 6 at 6:31PM PST until November 9 at 10:00PM PST by NWS San Francisco CA"
     },
     {
-      "event": "Tropical Storm Warning",
-      "severity": "Severe",
-      "effective": "2026-10-17T11:12:00+10:00",
-      "area": "Tinian Coastal Waters; Saipan Coastal Waters",
-      "headline": "Tropical Storm Warning issued October 17 at 11:12AM ChST by NWS Tiyan GU"
+      "event": "Beach Hazards Statement",
+      "severity": "Moderate",
+      "effective": "2026-11-06T18:31:00-08:00",
+      "area": "Southern Monterey Bay and Big Sur Coast",
+      "headline": "Beach Hazards Statement issued November 6 at 6:31PM PST until November 9 at 10:00PM PST by NWS San Francisco CA"
     },
     {
-      "event": "Typhoon Watch",
-      "severity": "Severe",
-      "effective": "2026-10-17T11:12:00+10:00",
-      "area": "Tinian Coastal Waters; Saipan Coastal Waters",
-      "headline": "Typhoon Watch issued October 17 at 11:12AM ChST by NWS Tiyan GU"
-    },
-    {
-      "event": "Special Marine Warning",
-      "severity": "Severe",
-      "effective": "2026-10-16T21:11:00-04:00",
-      "area": "Tidal Potomac from Indian Head to Cobb Island MD; Tidal Potomac from Cobb Island MD to Smith Point VA",
-      "headline": "Special Marine Warning issued October 16 at 9:11PM EDT until October 16 at 10:15PM EDT by NWS Baltimore MD/Washington DC"
-    },
-    {
-      "event": "Red Flag Warning",
-      "severity": "Severe",
-      "effective": "2026-10-16T20:07:00-05:00",
-      "area": "Ashley; Chicot; Morehouse; West Carroll; East Carroll; Richland; Madison; Franklin; Catahoula; Tensas; Concordia; Bolivar; Sunflower; Leflore; Grenada; Carroll; Montgomery; Webster; Clay; Lowndes; Choctaw; Oktibbeha; Washington; Humphreys; ",
-      "headline": "Red Flag Warning issued October 16 at 8:07PM CDT until October 17 at 7:00PM CDT by NWS Jackson MS"
-    },
-    {
-      "event": "Marine Weather Statement",
+      "event": "Coastal Flood Advisory",
       "severity": "Minor",
-      "effective": "2026-10-16T17:06:00-08:00",
-      "area": "Glacier Bay; Southern Lynn Canal; Icy Strait; Cross Sound; Stephens Passage; Northern Chatham Strait; Southern Chatham Strait; Frederick Sound; Sumner Strait; Cape Decision to Cape Edgecumbe out to 15 NM; Cape Edgecumbe to Cape Spencer out ",
-      "headline": "Marine Weather Statement issued October 16 at 5:06PM AKDT by NWS Juneau AK"
+      "effective": "2026-11-06T18:31:00-08:00",
+      "area": "North Bay Interior Valleys; San Francisco Bay Shoreline",
+      "headline": "Coastal Flood Advisory issued November 6 at 6:31PM PST until November 13 at 4:00PM PST by NWS San Francisco CA"
     },
     {
-      "event": "Air Quality Alert",
-      "severity": "Unknown",
-      "effective": "2026-10-16T18:00:00-07:00",
-      "area": "Orange County Coastal; Orange County Inland",
-      "headline": "Air Quality Alert issued October 16 at 6:00PM PDT by NWS San Diego CA"
+      "event": "Coastal Flood Advisory",
+      "severity": "Minor",
+      "effective": "2026-11-06T18:31:00-08:00",
+      "area": "San Francisco",
+      "headline": "Coastal Flood Advisory issued November 6 at 6:31PM PST until November 13 at 4:00PM PST by NWS San Francisco CA"
+    },
+    {
+      "event": "Coastal Flood Advisory",
+      "severity": "Minor",
+      "effective": "2026-11-06T18:31:00-08:00",
+      "area": "Southern Monterey Bay and Big Sur Coast",
+      "headline": "Coastal Flood Advisory issued November 6 at 6:31PM PST until November 13 at 4:00PM PST by NWS San Francisco CA"
+    },
+    {
+      "event": "Coastal Flood Advisory",
+      "severity": "Minor",
+      "effective": "2026-11-06T18:31:00-08:00",
+      "area": "Coastal North Bay Including Point Reyes National Seashore; San Francisco Peninsula Coast; Northern Monterey Bay",
+      "headline": "Coastal Flood Advisory issued November 6 at 6:31PM PST until November 10 at 12:00PM PST by NWS San Francisco CA"
+    },
+    {
+      "event": "Beach Hazards Statement",
+      "severity": "Moderate",
+      "effective": "2026-11-06T18:31:00-08:00",
+      "area": "San Francisco",
+      "headline": "Beach Hazards Statement issued November 6 at 6:31PM PST until November 9 at 10:00PM PST by NWS San Francisco CA"
+    },
+    {
+      "event": "Flood Watch",
+      "severity": "Severe",
+      "effective": "2026-11-06T20:17:00-06:00",
+      "area": "La Salle; McMullen; Live Oak; Bee; Goliad; Webb; Duval; Jim Wells; Inland Kleberg; Inland Nueces; Inland San Patricio; Coastal Aransas; Inland Refugio; Coastal Kleberg; Coastal Nueces; Coastal San Patricio; Aransas Islands; Coastal Refugio;",
+      "headline": "Flood Watch issued November 6 at 8:17PM CST until November 9 at 12:00PM CST by NWS Corpus Christi TX"
+    },
+    {
+      "event": "Flood Warning",
+      "severity": "Severe",
+      "effective": "2026-11-06T20:39:00-05:00",
+      "area": "Bristol, MA; Plymouth, MA",
+      "headline": "Flood Warning issued November 6 at 8:39PM EST until November 6 at 10:45PM EST by NWS Boston/Norton MA"
     },
     {
       "event": "Flood Advisory",
       "severity": "Minor",
-      "effective": "2026-10-16T20:52:00-04:00",
-      "area": "Palm Beach, FL",
-      "headline": "Flood Advisory issued October 16 at 8:52PM EDT until October 16 at 10:45PM EDT by NWS Miami FL"
+      "effective": "2026-11-06T20:32:00-05:00",
+      "area": "Sarasota, FL",
+      "headline": "Flood Advisory issued November 6 at 8:32PM EST until November 8 at 7:00PM EST by NWS Tampa Bay Ruskin FL"
     },
     {
       "event": "Small Craft Advisory",
       "severity": "Minor",
-      "effective": "2026-10-16T16:47:00-08:00",
-      "area": "Southern Lynn Canal",
-      "headline": "Small Craft Advisory issued October 16 at 4:47PM AKDT until October 17 at 5:00PM AKDT by NWS Juneau AK"
+      "effective": "2026-11-06T15:49:00-09:00",
+      "area": "Southwest of Saint Lawrence Island from 15 to 100 NM",
+      "headline": "Small Craft Advisory issued November 6 at 3:49PM AKST until November 7 at 5:00PM AKST by NWS Fairbanks AK"
     },
     {
       "event": "Small Craft Advisory",
       "severity": "Minor",
-      "effective": "2026-10-16T16:47:00-08:00",
-      "area": "Northern Lynn Canal",
-      "headline": "Small Craft Advisory issued October 16 at 4:47PM AKDT until October 17 at 5:00PM AKDT by NWS Juneau AK"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-10-16T16:47:00-08:00",
-      "area": "Cross Sound",
-      "headline": "Small Craft Advisory issued October 16 at 4:47PM AKDT until October 17 at 5:00PM AKDT by NWS Juneau AK"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-10-16T16:47:00-08:00",
-      "area": "Stephens Passage",
-      "headline": "Small Craft Advisory issued October 16 at 4:47PM AKDT until October 17 at 5:00PM AKDT by NWS Juneau AK"
-    },
-    {
-      "event": "Beach Hazards Statement",
-      "severity": "Moderate",
-      "effective": "2026-10-16T20:46:00-04:00",
-      "area": "Hatteras Island",
-      "headline": "Beach Hazards Statement issued October 16 at 8:46PM EDT until October 17 at 8:00PM EDT by NWS Newport/Morehead City NC"
-    },
-    {
-      "event": "Beach Hazards Statement",
-      "severity": "Moderate",
-      "effective": "2026-10-16T20:46:00-04:00",
-      "area": "Northern Outer Banks",
-      "headline": "Beach Hazards Statement issued October 16 at 8:46PM EDT until October 17 at 8:00PM EDT by NWS Newport/Morehead City NC"
-    },
-    {
-      "event": "Beach Hazards Statement",
-      "severity": "Moderate",
-      "effective": "2026-10-16T20:46:00-04:00",
-      "area": "East Carteret",
-      "headline": "Beach Hazards Statement issued October 16 at 8:46PM EDT until October 17 at 8:00PM EDT by NWS Newport/Morehead City NC"
-    },
-    {
-      "event": "Beach Hazards Statement",
-      "severity": "Moderate",
-      "effective": "2026-10-16T20:46:00-04:00",
-      "area": "Ocracoke Island",
-      "headline": "Beach Hazards Statement issued October 16 at 8:46PM EDT until October 17 at 8:00PM EDT by NWS Newport/Morehead City NC"
-    },
-    {
-      "event": "Dust Advisory",
-      "severity": "Moderate",
-      "effective": "2026-10-16T17:23:00-07:00",
-      "area": "Cochise, AZ",
-      "headline": "Dust Advisory issued October 16 at 5:23PM MST until October 16 at 8:30PM MST by NWS Tucson AZ"
-    },
-    {
-      "event": "High Wind Warning",
-      "severity": "Severe",
-      "effective": "2026-10-16T18:06:00-06:00",
-      "area": "Eastern Toole and Liberty",
-      "headline": "High Wind Warning issued October 16 at 6:06PM MDT until October 18 at 12:00AM MDT by NWS Great Falls MT"
-    },
-    {
-      "event": "Marine Weather Statement",
-      "severity": "Minor",
-      "effective": "2026-10-16T16:04:00-08:00",
-      "area": "Cross Sound; Cape Decision to Cape Edgecumbe out to 15 NM; Cape Edgecumbe to Cape Spencer out to 15 NM; Cape Spencer to Cape Fairweather out to 15 NM",
-      "headline": "Marine Weather Statement issued October 16 at 4:04PM AKDT by NWS Juneau AK"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-10-16T15:49:00-08:00",
-      "area": "Cape Espenberg to Motherwood Point out to 10 NM",
-      "headline": "Small Craft Advisory issued October 16 at 3:49PM AKDT until October 17 at 5:00PM AKDT by NWS Fairbanks AK"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-10-16T15:49:00-08:00",
-      "area": "Kotzebue Sound greater than 10 NM",
-      "headline": "Small Craft Advisory issued October 16 at 3:49PM AKDT until October 17 at 5:00PM AKDT by NWS Fairbanks AK"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-10-16T15:49:00-08:00",
-      "area": "Wales to Cape Thompson greater than 15 NM",
-      "headline": "Small Craft Advisory issued October 16 at 3:49PM AKDT until October 17 at 5:00AM AKDT by NWS Fairbanks AK"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-10-16T15:49:00-08:00",
-      "area": "Wales to Cape Espenberg out to 15 NM",
-      "headline": "Small Craft Advisory issued October 16 at 3:49PM AKDT until October 17 at 5:00AM AKDT by NWS Fairbanks AK"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-10-16T15:49:00-08:00",
-      "area": "Moses Point to Sledge Island out to 15 NM",
-      "headline": "Small Craft Advisory issued October 16 at 3:49PM AKDT until October 17 at 5:00AM AKDT by NWS Fairbanks AK"
-    },
-    {
-      "event": "Brisk Wind Advisory",
-      "severity": "Minor",
-      "effective": "2026-10-16T15:48:00-08:00",
-      "area": "Point Franklin to Cape Halkett from 15 to 75 NM",
-      "headline": "Brisk Wind Advisory issued October 16 at 3:48PM AKDT until October 17 at 5:00AM AKDT by NWS Fairbanks AK"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-10-16T15:48:00-08:00",
-      "area": "Point Franklin to Cape Halkett out to 15 NM",
-      "headline": "Small Craft Advisory issued October 16 at 3:48PM AKDT until October 17 at 5:00AM AKDT by NWS Fairbanks AK"
-    },
-    {
-      "event": "Beach Hazards Statement",
-      "severity": "Moderate",
-      "effective": "2026-10-16T19:38:00-04:00",
-      "area": "Coastal New Hanover; Coastal Georgetown",
-      "headline": "Beach Hazards Statement issued October 16 at 7:38PM EDT until October 17 at 8:00PM EDT by NWS Wilmington NC"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-10-16T19:29:00-04:00",
-      "area": "Chesapeake Bay north of Pooles Island MD; Chesapeake Bay from Pooles Island to Sandy Point MD; Patapsco River including Baltimore Harbor; Chester River to Queenstown MD; Eastern Bay; Choptank River to Cambridge MD and the Little Choptank Ri",
-      "headline": "Small Craft Advisory issued October 16 at 7:29PM EDT until October 18 at 6:00AM EDT by NWS Baltimore MD/Washington DC"
-    },
-    {
-      "event": "Small Craft Advisory",
-      "severity": "Minor",
-      "effective": "2026-10-16T19:29:00-04:00",
-      "area": "Chesapeake Bay from Sandy Point to North Beach MD; Chesapeake Bay from North Beach to Drum Point MD; Chesapeake Bay from Drum Point MD to Smith Point VA; Tidal Potomac from Cobb Island MD to Smith Point VA; Tangier Sound and the inland wate",
-      "headline": "Small Craft Advisory issued October 16 at 7:29PM EDT until October 17 at 6:00AM EDT by NWS Baltimore MD/Washington DC"
+      "effective": "2026-11-06T15:49:00-09:00",
+      "area": "Cape Krusenstern to Cape Thompson out to 15 NM",
+      "headline": "Small Craft Advisory issued November 6 at 3:49PM AKST until November 7 at 5:00PM AKST by NWS Fairbanks AK"
     },
     {
       "event": "Gale Warning",
       "severity": "Moderate",
-      "effective": "2026-10-16T19:29:00-04:00",
-      "area": "Chesapeake Bay from Sandy Point to North Beach MD; Chesapeake Bay from North Beach to Drum Point MD; Chesapeake Bay from Drum Point MD to Smith Point VA; Tidal Potomac from Cobb Island MD to Smith Point VA; Tangier Sound and the inland wate",
-      "headline": "Gale Warning issued October 16 at 7:29PM EDT until October 18 at 6:00AM EDT by NWS Baltimore MD/Washington DC"
+      "effective": "2026-11-06T15:49:00-09:00",
+      "area": "Wales to Cape Thompson greater than 15 NM",
+      "headline": "Gale Warning issued November 6 at 3:49PM AKST until November 7 at 5:00PM AKST by NWS Fairbanks AK"
     },
     {
       "event": "Small Craft Advisory",
       "severity": "Minor",
-      "effective": "2026-10-16T19:29:00-04:00",
-      "area": "Tidal Potomac from Key Bridge to Indian Head MD; Tidal Potomac from Indian Head to Cobb Island MD",
-      "headline": "Small Craft Advisory issued October 16 at 7:29PM EDT until October 17 at 11:00PM EDT by NWS Baltimore MD/Washington DC"
+      "effective": "2026-11-06T15:48:00-09:00",
+      "area": "Point Franklin to Cape Halkett from 15 to 75 NM",
+      "headline": "Small Craft Advisory issued November 6 at 3:48PM AKST until November 7 at 5:00PM AKST by NWS Fairbanks AK"
+    },
+    {
+      "event": "Heavy Freezing Spray Warning",
+      "severity": "Severe",
+      "effective": "2026-11-06T15:48:00-09:00",
+      "area": "Cape Halkett to Flaxman Island from 15 to 80 NM",
+      "headline": "Heavy Freezing Spray Warning issued November 6 at 3:48PM AKST until November 7 at 5:00PM AKST by NWS Fairbanks AK"
+    },
+    {
+      "event": "Heavy Freezing Spray Warning",
+      "severity": "Severe",
+      "effective": "2026-11-06T15:48:00-09:00",
+      "area": "Flaxman Island to Demarcation Point out to 15 NM",
+      "headline": "Heavy Freezing Spray Warning issued November 6 at 3:48PM AKST until November 7 at 5:00PM AKST by NWS Fairbanks AK"
+    },
+    {
+      "event": "Heavy Freezing Spray Warning",
+      "severity": "Severe",
+      "effective": "2026-11-06T15:48:00-09:00",
+      "area": "Point Franklin to Cape Halkett from 15 to 75 NM",
+      "headline": "Heavy Freezing Spray Warning issued November 6 at 3:48PM AKST until November 7 at 5:00PM AKST by NWS Fairbanks AK"
+    },
+    {
+      "event": "Heavy Freezing Spray Warning",
+      "severity": "Severe",
+      "effective": "2026-11-06T15:48:00-09:00",
+      "area": "Cape Beaufort to Point Franklin from 15 to 85 NM",
+      "headline": "Heavy Freezing Spray Warning issued November 6 at 3:48PM AKST until November 7 at 5:00PM AKST by NWS Fairbanks AK"
     },
     {
       "event": "Small Craft Advisory",
       "severity": "Minor",
-      "effective": "2026-10-16T15:16:00-08:00",
-      "area": "Northern Lynn Canal",
-      "headline": "Small Craft Advisory issued October 16 at 3:16PM AKDT until October 18 at 1:00AM AKDT by NWS Juneau AK"
+      "effective": "2026-11-06T15:48:00-09:00",
+      "area": "Point Franklin to Cape Halkett out to 15 NM",
+      "headline": "Small Craft Advisory issued November 6 at 3:48PM AKST until November 7 at 5:00PM AKST by NWS Fairbanks AK"
+    },
+    {
+      "event": "Gale Warning",
+      "severity": "Moderate",
+      "effective": "2026-11-06T15:48:00-09:00",
+      "area": "Cape Thompson to Cape Beaufort out to 15 NM",
+      "headline": "Gale Warning issued November 6 at 3:48PM AKST until November 7 at 5:00PM AKST by NWS Fairbanks AK"
+    },
+    {
+      "event": "Gale Warning",
+      "severity": "Moderate",
+      "effective": "2026-11-06T15:48:00-09:00",
+      "area": "Cape Thompson to Cape Beaufort from 15 to 85 NM",
+      "headline": "Gale Warning issued November 6 at 3:48PM AKST until November 7 at 5:00PM AKST by NWS Fairbanks AK"
+    },
+    {
+      "event": "Heavy Freezing Spray Warning",
+      "severity": "Severe",
+      "effective": "2026-11-06T15:48:00-09:00",
+      "area": "Point Franklin to Cape Halkett out to 15 NM",
+      "headline": "Heavy Freezing Spray Warning issued November 6 at 3:48PM AKST until November 7 at 5:00PM AKST by NWS Fairbanks AK"
+    },
+    {
+      "event": "Heavy Freezing Spray Warning",
+      "severity": "Severe",
+      "effective": "2026-11-06T15:48:00-09:00",
+      "area": "Flaxman Island to Demarcation Point from 15 to 75 NM",
+      "headline": "Heavy Freezing Spray Warning issued November 6 at 3:48PM AKST until November 7 at 5:00PM AKST by NWS Fairbanks AK"
+    },
+    {
+      "event": "Heavy Freezing Spray Warning",
+      "severity": "Severe",
+      "effective": "2026-11-06T15:48:00-09:00",
+      "area": "Cape Halkett to Flaxman Island out to 15 NM",
+      "headline": "Heavy Freezing Spray Warning issued November 6 at 3:48PM AKST until November 7 at 5:00PM AKST by NWS Fairbanks AK"
+    },
+    {
+      "event": "Gale Warning",
+      "severity": "Moderate",
+      "effective": "2026-11-06T15:48:00-09:00",
+      "area": "Cape Beaufort to Point Franklin out to 15 NM",
+      "headline": "Gale Warning issued November 6 at 3:48PM AKST until November 7 at 5:00AM AKST by NWS Fairbanks AK"
+    },
+    {
+      "event": "Heavy Freezing Spray Warning",
+      "severity": "Severe",
+      "effective": "2026-11-06T15:48:00-09:00",
+      "area": "Cape Beaufort to Point Franklin out to 15 NM",
+      "headline": "Heavy Freezing Spray Warning issued November 6 at 3:48PM AKST until November 7 at 5:00AM AKST by NWS Fairbanks AK"
+    },
+    {
+      "event": "Heavy Freezing Spray Warning",
+      "severity": "Severe",
+      "effective": "2026-11-06T16:00:00-09:00",
+      "area": "Western US Arctic Offshore",
+      "headline": "Heavy Freezing Spray Warning issued November 6 at 4:00PM AKST until November 7 at 5:00PM AKST by NWS Fairbanks AK"
     },
     {
       "event": "Small Craft Advisory",
       "severity": "Minor",
-      "effective": "2026-10-16T15:16:00-08:00",
-      "area": "Stephens Passage",
-      "headline": "Small Craft Advisory issued October 16 at 3:16PM AKDT until October 17 at 6:00PM AKDT by NWS Juneau AK"
+      "effective": "2026-11-06T19:37:00-05:00",
+      "area": "Moriches Inlet NY to Montauk Point NY out 20 NM; Fire Island Inlet NY to Moriches Inlet NY out 20 NM",
+      "headline": "Small Craft Advisory issued November 6 at 7:37PM EST until November 7 at 2:00AM EST by NWS Upton NY"
+    },
+    {
+      "event": "Flash Flood Warning",
+      "severity": "Severe",
+      "effective": "2026-11-06T17:22:00-07:00",
+      "area": "Coconino, AZ; Yavapai, AZ",
+      "headline": "Flash Flood Warning issued November 6 at 5:22PM MST until November 6 at 11:15PM MST by NWS Flagstaff AZ"
     },
     {
       "event": "Small Craft Advisory",
       "severity": "Minor",
-      "effective": "2026-10-16T15:16:00-08:00",
-      "area": "Southern Lynn Canal",
-      "headline": "Small Craft Advisory issued October 16 at 3:16PM AKDT until October 18 at 1:00AM AKDT by NWS Juneau AK"
+      "effective": "2026-11-06T15:12:00-09:00",
+      "area": "Valdez Narrows",
+      "headline": "Small Craft Advisory issued November 6 at 3:12PM AKST until November 7 at 5:00AM AKST by NWS Anchorage AK"
     },
     {
       "event": "Small Craft Advisory",
       "severity": "Minor",
-      "effective": "2026-10-16T15:04:00-08:00",
-      "area": "Northern Lynn Canal",
-      "headline": "Small Craft Advisory issued October 16 at 3:04PM AKDT until October 17 at 5:00PM AKDT by NWS Juneau AK"
+      "effective": "2026-11-06T15:12:00-09:00",
+      "area": "Cape Suckling to Cape Cleare from 15 to 75 NM",
+      "headline": "Small Craft Advisory issued November 6 at 3:12PM AKST until November 8 at 5:00AM AKST by NWS Anchorage AK"
     },
     {
       "event": "Small Craft Advisory",
       "severity": "Minor",
-      "effective": "2026-10-16T15:04:00-08:00",
-      "area": "Stephens Passage",
-      "headline": "Small Craft Advisory issued October 16 at 3:04PM AKDT until October 17 at 5:00PM AKDT by NWS Juneau AK"
+      "effective": "2026-11-06T15:12:00-09:00",
+      "area": "Cape Cleare to Gore Point from 15 to 75 NM",
+      "headline": "Small Craft Advisory issued November 6 at 3:12PM AKST until November 8 at 5:00AM AKST by NWS Anchorage AK"
     },
     {
       "event": "Small Craft Advisory",
       "severity": "Minor",
-      "effective": "2026-10-16T15:04:00-08:00",
-      "area": "Southern Lynn Canal",
-      "headline": "Small Craft Advisory issued October 16 at 3:04PM AKDT until October 17 at 5:00PM AKDT by NWS Juneau AK"
+      "effective": "2026-11-06T15:12:00-09:00",
+      "area": "Gore Point to Marmot Island from 15 to 80 NM",
+      "headline": "Small Craft Advisory issued November 6 at 3:12PM AKST until November 8 at 5:00AM AKST by NWS Anchorage AK"
     },
     {
       "event": "Small Craft Advisory",
       "severity": "Minor",
-      "effective": "2026-10-16T15:04:00-08:00",
+      "effective": "2026-11-06T15:12:00-09:00",
+      "area": "Gravel Point to Cape Cleare out to 15 NM",
+      "headline": "Small Craft Advisory issued November 6 at 3:12PM AKST until November 8 at 5:00AM AKST by NWS Anchorage AK"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-11-06T15:12:00-09:00",
+      "area": "Cape Suckling to Gravel Point out to 15 NM",
+      "headline": "Small Craft Advisory issued November 6 at 3:12PM AKST until November 8 at 5:00AM AKST by NWS Anchorage AK"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-11-06T15:12:00-09:00",
+      "area": "Marmot Island To Sitkinak from 15 to 85 NM",
+      "headline": "Small Craft Advisory issued November 6 at 3:12PM AKST until November 7 at 5:00PM AKST by NWS Anchorage AK"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-11-06T15:12:00-09:00",
+      "area": "Marmot Island to Sitkinak out to 15 NM",
+      "headline": "Small Craft Advisory issued November 6 at 3:12PM AKST until November 7 at 5:00AM AKST by NWS Anchorage AK"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-11-06T15:12:00-09:00",
+      "area": "Cape Cleare to Gore Point out to 15 NM",
+      "headline": "Small Craft Advisory issued November 6 at 3:12PM AKST until November 7 at 5:00AM AKST by NWS Anchorage AK"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-11-06T15:12:00-09:00",
+      "area": "Barren Islands East",
+      "headline": "Small Craft Advisory issued November 6 at 3:12PM AKST until November 7 at 5:00AM AKST by NWS Anchorage AK"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-11-06T15:12:00-09:00",
+      "area": "West of Barren Islands Including Kamishak Bay",
+      "headline": "Small Craft Advisory issued November 6 at 3:12PM AKST until November 7 at 5:00AM AKST by NWS Anchorage AK"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-11-06T15:07:00-09:00",
+      "area": "Yakutat Bay",
+      "headline": "Small Craft Advisory issued November 6 at 3:07PM AKST until November 7 at 5:00PM AKST by NWS Juneau AK"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-11-06T15:05:00-09:00",
       "area": "Cross Sound",
-      "headline": "Small Craft Advisory issued October 16 at 3:04PM AKDT until October 17 at 5:00PM AKDT by NWS Juneau AK"
+      "headline": "Small Craft Advisory issued November 6 at 3:05PM AKST until November 7 at 5:00PM AKST by NWS Juneau AK"
     },
     {
       "event": "Small Craft Advisory",
       "severity": "Minor",
-      "effective": "2026-10-16T14:54:00-08:00",
-      "area": "Cape Spencer to Cape Fairweather out to 15 NM",
-      "headline": "Small Craft Advisory issued October 16 at 2:54PM AKDT until October 17 at 5:00PM AKDT by NWS Juneau AK"
+      "effective": "2026-11-06T15:05:00-09:00",
+      "area": "Southern Lynn Canal",
+      "headline": "Small Craft Advisory issued November 6 at 3:05PM AKST until November 7 at 5:00AM AKST by NWS Juneau AK"
+    },
+    {
+      "event": "Small Craft Advisory",
+      "severity": "Minor",
+      "effective": "2026-11-06T15:05:00-09:00",
+      "area": "Stephens Passage",
+      "headline": "Small Craft Advisory issued November 6 at 3:05PM AKST until November 7 at 5:00AM AKST by NWS Juneau AK"
+    },
+    {
+      "event": "Gale Warning",
+      "severity": "Moderate",
+      "effective": "2026-11-06T15:05:00-09:00",
+      "area": "Northern Lynn Canal",
+      "headline": "Gale Warning issued November 6 at 3:05PM AKST until November 7 at 5:00AM AKST by NWS Juneau AK"
     }
   ]
 }

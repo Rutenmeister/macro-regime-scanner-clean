@@ -1,12 +1,12 @@
 {
   "sourceId": "BEA_PUBLIC",
-  "retrievedAt": "2026-10-17T01:42:10.073160+00:00",
+  "retrievedAt": "2026-11-07T03:12:44.972582+00:00",
   "tables": [
     {
       "table": "T10101",
       "frequency": "Q",
       "label": "Real GDP growth",
-      "rowCount": 7925,
+      "rowCount": 7950,
       "status": "ok"
     },
     {
@@ -20,14 +20,14 @@
       "table": "T20306",
       "frequency": "Q",
       "label": "Real PCE growth",
-      "rowCount": 2496,
+      "rowCount": 2528,
       "status": "ok"
     },
     {
       "table": "T20600",
       "frequency": "M",
       "label": "Personal income and saving",
-      "rowCount": 34739,
+      "rowCount": 34782,
       "status": "ok"
     }
   ],

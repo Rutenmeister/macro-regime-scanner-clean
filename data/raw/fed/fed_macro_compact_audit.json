@@ -1,7 +1,7 @@
 {
   "schemaVersion": "0.28.1",
   "sourceId": "FED_FRED_SELECTED",
-  "retrievedAt": "2026-10-17T01:42:18.476288+00:00",
+  "retrievedAt": "2026-11-07T03:12:46.118075+00:00",
   "seriesAudits": [
     {
       "seriesId": "EFFR",
@@ -10,11 +10,11 @@
       "fetchAttempts": [
         {
           "method": "fredgraph_csv",
-          "rows": 6859
+          "rows": 6874
         }
       ],
-      "rowsFetched": 6859,
-      "latestPeriod": "2026-10-15",
+      "rowsFetched": 6874,
+      "latestPeriod": "2026-11-05",
       "latestValue": 3.88,
       "score": 1
     },
@@ -25,12 +25,12 @@
       "fetchAttempts": [
         {
           "method": "fredgraph_csv",
-          "rows": 1244
+          "rows": 1247
         }
       ],
-      "rowsFetched": 1244,
-      "latestPeriod": "2026-10-14",
-      "latestValue": 6755.639,
+      "rowsFetched": 1247,
+      "latestPeriod": "2026-11-04",
+      "latestValue": 6748.145,
       "score": 1
     },
     {
@@ -40,13 +40,13 @@
       "fetchAttempts": [
         {
           "method": "fredgraph_csv",
-          "rows": 1244
+          "rows": 1247
         }
       ],
-      "rowsFetched": 1244,
-      "latestPeriod": "2026-10-14",
-      "latestValue": 3022.14,
-      "score": -1
+      "rowsFetched": 1247,
+      "latestPeriod": "2026-11-04",
+      "latestValue": 2930.088,
+      "score": 1
     },
     {
       "seriesId": "RRPONTSYD",
@@ -55,13 +55,13 @@
       "fetchAttempts": [
         {
           "method": "fredgraph_csv",
-          "rows": 6181
+          "rows": 6196
         }
       ],
-      "rowsFetched": 6181,
-      "latestPeriod": "2026-10-16",
-      "latestValue": 0.1,
-      "score": 1
+      "rowsFetched": 6196,
+      "latestPeriod": "2026-11-06",
+      "latestValue": 0.15,
+      "score": -1
     },
     {
       "seriesId": "WTREGEN",
@@ -70,13 +70,13 @@
       "fetchAttempts": [
         {
           "method": "fredgraph_csv",
-          "rows": 1244
+          "rows": 1247
         }
       ],
-      "rowsFetched": 1244,
-      "latestPeriod": "2026-10-14",
-      "latestValue": 883.373,
-      "score": -1
+      "rowsFetched": 1247,
+      "latestPeriod": "2026-11-04",
+      "latestValue": 957.175,
+      "score": 1
     }
   ],
   "observationCount": 5

@@ -1,6 +1,6 @@
 {
   "sourceId": "CENSUS_PUBLIC",
-  "retrievedAt": "2026-10-17T01:42:25.637656+00:00",
+  "retrievedAt": "2026-11-07T03:12:51.655500+00:00",
   "seriesAudit": [
     {
       "seriesId": "RSXFS",
@@ -24,12 +24,12 @@
       "fetchAttempts": [
         {
           "method": "fredgraph_csv",
-          "rows": 812
+          "rows": 813
         }
       ],
-      "rowsFetched": 812,
-      "latestPeriod": "2026-08-01",
-      "latestValue": 1275.0,
+      "rowsFetched": 813,
+      "latestPeriod": "2026-09-01",
+      "latestValue": 1221.0,
       "score": -2
     },
     {
@@ -39,13 +39,13 @@
       "fetchAttempts": [
         {
           "method": "fredgraph_csv",
-          "rows": 800
+          "rows": 801
         }
       ],
-      "rowsFetched": 800,
-      "latestPeriod": "2026-08-01",
-      "latestValue": 1403.0,
-      "score": -2
+      "rowsFetched": 801,
+      "latestPeriod": "2026-09-01",
+      "latestValue": 1398.0,
+      "score": -1
     },
     {
       "seriesId": "HSN1F",
@@ -54,13 +54,13 @@
       "fetchAttempts": [
         {
           "method": "fredgraph_csv",
-          "rows": 764
+          "rows": 765
         }
       ],
-      "rowsFetched": 764,
-      "latestPeriod": "2026-08-01",
-      "latestValue": 684.0,
-      "score": 2
+      "rowsFetched": 765,
+      "latestPeriod": "2026-09-01",
+      "latestValue": 676.0,
+      "score": -1
     },
     {
       "seriesId": "DGORDER",
@@ -69,13 +69,13 @@
       "fetchAttempts": [
         {
           "method": "fredgraph_csv",
-          "rows": 415
+          "rows": 416
         }
       ],
-      "rowsFetched": 415,
-      "latestPeriod": "2026-08-01",
-      "latestValue": 338458.0,
-      "score": -1
+      "rowsFetched": 416,
+      "latestPeriod": "2026-09-01",
+      "latestValue": 345672.0,
+      "score": 2
     },
     {
       "seriesId": "BOPGSTB",
@@ -84,13 +84,13 @@
       "fetchAttempts": [
         {
           "method": "fredgraph_csv",
-          "rows": 416
+          "rows": 417
         }
       ],
-      "rowsFetched": 416,
-      "latestPeriod": "2026-08-01",
-      "latestValue": -105572.0,
-      "score": -2
+      "rowsFetched": 417,
+      "latestPeriod": "2026-09-01",
+      "latestValue": -105047.0,
+      "score": 1
     },
     {
       "seriesId": "BUSINV",
@@ -119,13 +119,13 @@
       "id": "resconst_recent",
       "endpoint": "https://api.census.gov/data/timeseries/eits/resconst",
       "status": "ok",
-      "rowsFetched": 5632
+      "rowsFetched": 5808
     },
     {
       "id": "advm3_recent",
       "endpoint": "https://api.census.gov/data/timeseries/eits/advm3",
       "status": "error",
-      "error": "HTTP Error 400: "
+      "error": "HTTP Error 400: Bad Request"
     }
   ],
   "observationCount": 7
