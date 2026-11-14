@@ -1,5 +1,5 @@
 {
-  "fetched_at": "2026-11-07T03:11:39+00:00",
+  "fetched_at": "2026-11-14T03:33:04+00:00",
   "source": "U.S. Energy Information Administration open data/API",
   "petroleum_series_requested": {
     "CRUDE_STOCKS": {
@@ -140,29 +140,29 @@
     "REFINERY_UTILIZATION": {
       "label": "U.S. refinery utilization rate",
       "series": "WPULEUS3",
-      "latest_period": "2026-10-30",
-      "previous_period": "2026-10-23",
-      "latest_value": 94.5,
-      "weekly_change": 1.7000000000000028,
-      "status": "Support"
+      "latest_period": "2026-11-06",
+      "previous_period": "2026-10-30",
+      "latest_value": 95.2,
+      "weekly_change": 0.7000000000000028,
+      "status": "Neutral"
     },
     "CRUDE_PRODUCTION": {
       "label": "U.S. field production of crude oil",
       "series": "WCRFPUS2",
-      "latest_period": "2026-10-30",
-      "previous_period": "2026-10-23",
-      "latest_value": 14003.0,
-      "weekly_change": 11.0,
+      "latest_period": "2026-11-06",
+      "previous_period": "2026-10-30",
+      "latest_value": 14013.0,
+      "weekly_change": 10.0,
       "status": "Neutral"
     },
     "CRUDE_IMPORTS": {
       "label": "U.S. crude oil imports",
       "series": "WCRIMUS2",
-      "latest_period": "2026-10-30",
-      "previous_period": "2026-10-23",
-      "latest_value": 6374.0,
-      "weekly_change": 0.0,
-      "status": "Neutral"
+      "latest_period": "2026-11-06",
+      "previous_period": "2026-10-30",
+      "latest_value": 6698.0,
+      "weekly_change": 324.0,
+      "status": "Pressure"
     },
     "CRUDE_EXPORTS": {
       "label": "U.S. crude oil exports",
@@ -194,10 +194,10 @@
     "NATGAS_STORAGE": {
       "label": "Lower 48 working natural gas in underground storage",
       "series": "png.nw2_epg0_swo_r48_bcf.w",
-      "latest_period": "2026-10-30",
-      "previous_period": "2026-10-23",
-      "latest_value": 3801.0,
-      "weekly_change": 77.0,
+      "latest_period": "2026-11-06",
+      "previous_period": "2026-10-30",
+      "latest_value": 3862.0,
+      "weekly_change": 61.0,
       "status": "Neutral"
     }
   }
