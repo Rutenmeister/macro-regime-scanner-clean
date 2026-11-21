@@ -1,7 +1,7 @@
 {
   "sourceId": "FINANCIAL_STRESS_FRED",
   "sourceName": "Federal Reserve / FRED credit and financial-stress public data",
-  "retrievedAt": "2026-11-14T03:38:49.568109+00:00",
+  "retrievedAt": "2026-11-21T04:16:39.661103+00:00",
   "series": {
     "HY_OAS": {
       "seriesId": "BAMLH0A0HYM2",
@@ -9,11 +9,11 @@
       "fetchAttempts": [
         {
           "method": "fredgraph_csv",
-          "rows": 793
+          "rows": 794
         }
       ],
       "status": "ok",
-      "latestDate": "2026-11-12"
+      "latestDate": "2026-11-19"
     },
     "IG_OAS": {
       "seriesId": "BAMLC0A0CM",
@@ -21,11 +21,11 @@
       "fetchAttempts": [
         {
           "method": "fredgraph_csv",
-          "rows": 793
+          "rows": 794
         }
       ],
       "status": "ok",
-      "latestDate": "2026-11-12"
+      "latestDate": "2026-11-19"
     },
     "BBB_OAS": {
       "seriesId": "BAMLC0A4CBBB",
@@ -33,11 +33,11 @@
       "fetchAttempts": [
         {
           "method": "fredgraph_csv",
-          "rows": 793
+          "rows": 794
         }
       ],
       "status": "ok",
-      "latestDate": "2026-11-12"
+      "latestDate": "2026-11-19"
     },
     "NFCI": {
       "seriesId": "NFCI",
@@ -45,11 +45,11 @@
       "fetchAttempts": [
         {
           "method": "fredgraph_csv",
-          "rows": 2914
+          "rows": 2915
         }
       ],
       "status": "ok",
-      "latestDate": "2026-11-06"
+      "latestDate": "2026-11-13"
     },
     "ANFCI": {
       "seriesId": "ANFCI",
@@ -57,11 +57,11 @@
       "fetchAttempts": [
         {
           "method": "fredgraph_csv",
-          "rows": 2914
+          "rows": 2915
         }
       ],
       "status": "ok",
-      "latestDate": "2026-11-06"
+      "latestDate": "2026-11-13"
     },
     "STLFSI4": {
       "seriesId": "STLFSI4",
@@ -69,11 +69,11 @@
       "fetchAttempts": [
         {
           "method": "fredgraph_csv",
-          "rows": 1715
+          "rows": 1716
         }
       ],
       "status": "ok",
-      "latestDate": "2026-11-06"
+      "latestDate": "2026-11-13"
     }
   },
   "observationCount": 6,
